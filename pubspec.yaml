@@ -16,6 +16,7 @@ dependencies:
   share: ^0.6.3+6
   font_awesome_flutter: ^8.5.0
   random_color: ^1.0.3
+  flutter_slidable: ^0.5.4
 
 dev_dependencies:
   pedantic: ^1.0.0

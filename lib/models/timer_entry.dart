@@ -15,20 +15,20 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
-class Timer extends Equatable {
+class TimerEntry extends Equatable {
   final int id;
   final String description;
   final int projectID;
   final DateTime startTime;
   final DateTime endTime;
 
-  Timer({@required this.id, @required this.description, @required this.projectID, @required this.startTime, @required this.endTime})
+  TimerEntry({@required this.id, @required this.description, @required this.projectID, @required this.startTime, @required this.endTime})
     : assert(id != null),
       assert(startTime != null);
 
   @override List<Object> get props => [id, description, projectID, startTime, endTime];
 
-  Timer.clone(Timer timer,
+  TimerEntry.clone(TimerEntry timer,
     {String description, int projectID, DateTime startTime, DateTime endTime})
     : this(
         id: timer.id,

@@ -14,22 +14,24 @@
 
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:timecop/data_providers/settings_provider.dart';
+import 'package:timecop/data_providers/data_provider.dart';
+import 'package:timecop/models/project.dart';
 import './bloc.dart';
 
-class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
-  final SettingsProvider settings;
-  SettingsBloc(this.settings);
+class ProjectsBloc extends Bloc<ProjectsEvent, ProjectsState> {
+  final DataProvider data;
+  ProjectsBloc(this.data);
 
   @override
-  SettingsState get initialState => SettingsState.initial();
+  ProjectsState get initialState => ProjectsState.initial();
 
   @override
-  Stream<SettingsState> mapEventToState(
-    SettingsEvent event,
+  Stream<ProjectsState> mapEventToState(
+    ProjectsEvent event,
   ) async* {
-    if(event is LoadSettingsFromRepository) {
-      yield SettingsState();
+    if(event is LoadProjects) {
+      List<Project> projects = await data.listProjects();
+      yield ProjectsState(projects);
     }
   }
 }

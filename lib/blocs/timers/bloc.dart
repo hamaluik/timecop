@@ -12,24 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:async';
-import 'package:bloc/bloc.dart';
-import 'package:timecop/data_providers/settings_provider.dart';
-import './bloc.dart';
-
-class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
-  final SettingsProvider settings;
-  SettingsBloc(this.settings);
-
-  @override
-  SettingsState get initialState => SettingsState.initial();
-
-  @override
-  Stream<SettingsState> mapEventToState(
-    SettingsEvent event,
-  ) async* {
-    if(event is LoadSettingsFromRepository) {
-      yield SettingsState();
-    }
-  }
-}
+export 'timers_bloc.dart';
+export 'timers_event.dart';
+export 'timers_state.dart';

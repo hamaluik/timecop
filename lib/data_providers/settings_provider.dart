@@ -12,24 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:async';
-import 'package:bloc/bloc.dart';
-import 'package:timecop/data_providers/settings_provider.dart';
-import './bloc.dart';
 
-class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
-  final SettingsProvider settings;
-  SettingsBloc(this.settings);
+import 'package:shared_preferences/shared_preferences.dart';
 
-  @override
-  SettingsState get initialState => SettingsState.initial();
+class SettingsProvider {
+  final SharedPreferences _prefs;
+  SettingsProvider(this._prefs)
+    : assert(_prefs != null);
 
-  @override
-  Stream<SettingsState> mapEventToState(
-    SettingsEvent event,
-  ) async* {
-    if(event is LoadSettingsFromRepository) {
-      yield SettingsState();
-    }
+  static Future<SettingsProvider> load() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return SettingsProvider(prefs);
   }
 }

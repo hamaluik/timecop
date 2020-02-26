@@ -12,24 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:async';
-import 'package:bloc/bloc.dart';
-import 'package:timecop/data_providers/settings_provider.dart';
-import './bloc.dart';
+import 'package:equatable/equatable.dart';
 
-class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
-  final SettingsProvider settings;
-  SettingsBloc(this.settings);
+abstract class ProjectsEvent extends Equatable {
+  const ProjectsEvent();
+}
 
-  @override
-  SettingsState get initialState => SettingsState.initial();
-
-  @override
-  Stream<SettingsState> mapEventToState(
-    SettingsEvent event,
-  ) async* {
-    if(event is LoadSettingsFromRepository) {
-      yield SettingsState();
-    }
-  }
+class LoadProjects extends ProjectsEvent {
+  @override List<Object> get props => [];
 }

@@ -18,10 +18,11 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
 import 'package:random_color/random_color.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:timecop/models/timer.dart';
+import 'package:timecop/data_providers/data_provider.dart';
+import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/models/project.dart';
 
-class DatabaseProvider {
+class DatabaseProvider extends DataProvider {
   final Database _db;
   final RandomColor _randomColour = RandomColor();
 
@@ -102,11 +103,11 @@ class DatabaseProvider {
   }
 
   /// the c in crud
-  Future<Timer> createTimer({String description, int projectID, DateTime startTime, DateTime endTime}) async {
+  Future<TimerEntry> createTimer({String description, int projectID, DateTime startTime, DateTime endTime}) async {
     int st = startTime?.millisecondsSinceEpoch ?? DateTime.now().millisecondsSinceEpoch;
     int et = endTime?.millisecondsSinceEpoch;
     int id = await _db.rawInsert("insert into timers(project_id, description, start_time, end_time) values(?, ?, ?, ?)", <dynamic>[projectID, description, st, et]);
-    return Timer(
+    return TimerEntry(
       id: id,
       description: description,
       projectID: projectID,
@@ -116,9 +117,9 @@ class DatabaseProvider {
   }
 
   /// the r in crud
-  Future<List<Timer>> listTimers() async {
+  Future<List<TimerEntry>> listTimers() async {
     List<Map<String, dynamic>> rawTimers = await _db.rawQuery("select id, project_id, description, start_time, end_time from timers");
-    return rawTimers.map((Map<String, dynamic> row) => Timer(
+    return rawTimers.map((Map<String, dynamic> row) => TimerEntry(
       id: row["id"] as int,
       projectID: row["project_id"] as int,
       description: row["description"] as String,
@@ -128,7 +129,7 @@ class DatabaseProvider {
   }
 
   /// the u in crud
-  Future<void> editTimer(Timer timer) async {
+  Future<void> editTimer(TimerEntry timer) async {
     assert(timer != null);
     int st = timer.startTime?.millisecondsSinceEpoch ?? DateTime.now().millisecondsSinceEpoch;
     int et = timer.endTime?.millisecondsSinceEpoch;
@@ -136,7 +137,7 @@ class DatabaseProvider {
   }
 
   /// the d in crud
-  Future<void> deleteTimer(Timer timer) async {
+  Future<void> deleteTimer(TimerEntry timer) async {
     assert(timer != null);
     await _db.rawDelete("delete from timers where id=?", <dynamic>[timer.id]);
   }

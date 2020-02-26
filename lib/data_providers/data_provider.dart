@@ -13,23 +13,16 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:timecop/models/project.dart';
+import 'package:timecop/models/timer_entry.dart';
 
-final ThemeData lightTheme = new ThemeData(
-  brightness: Brightness.light,
-  primarySwatch: Colors.indigo,
-  primaryColor: Colors.indigo[700],
-  primaryColorBrightness: Brightness.dark,
-  accentColor: Colors.grey[700],
-  accentColorBrightness: Brightness.dark,
-  fontFamily: 'PublicSans',
-);
-
-final ThemeData darkTheme = new ThemeData(
-  brightness: Brightness.dark,
-  primarySwatch: Colors.grey,
-  primaryColor: Colors.grey[900],
-  primaryColorBrightness: Brightness.dark,
-  accentColor: Colors.indigo[700],
-  accentColorBrightness: Brightness.dark,
-  fontFamily: 'PublicSans',
-);
+abstract class DataProvider {
+  Future<Project> createProject({@required String name, Color colour});
+  Future<List<Project>> listProjects();
+  Future<void> editProject(Project project);
+  Future<void> deleteProject(Project project);
+  Future<TimerEntry> createTimer({String description, int projectID, DateTime startTime, DateTime endTime});
+  Future<List<TimerEntry>> listTimers();
+  Future<void> editTimer(TimerEntry timer);
+  Future<void> deleteTimer(TimerEntry timer);
+}
