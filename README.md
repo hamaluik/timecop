@@ -1,6 +1,13 @@
-# timecop
-
-A time tracking app that respects your privacy and the gets the job done without being fancy.
+<h1 align="center">
+  Time Cop
+</h1>
+<div align="center">
+  A time tracking app that respects your privacy and the gets the job done without being fancy.
+</div>
+<br />
+<div align="center">
+  <img alt="GitHub" src="https://img.shields.io/github/license/hamaluik/timecop?style=flat-square">
+</div>
 
 ## User Stories
 
@@ -58,3 +65,212 @@ A time tracking app that respects your privacy and the gets the job done without
 * A reporting screen which gives you the same filtering options as exporting data in a spreadsheet but displays the results locally
     * As charts
     * As tables
+
+## Mockups
+
+(crudely drawn with http://asciiflow.com/)
+
+### Dashboard
+
+```
++-----------------------------------------------+
++-----------------------------------------------|
+| Time Cop                                || : ||
++-----------------------------------------------+
+|                                               |
+| Monday, Feb. 26                               |
+|                                               |
+|   Do the thing          My Project  01h38m29s |
+|                                               |
+|   Some other thing                  16h19m02s |
+|                                               |
+| Today                                         |
+|                                               |
+|   Get coffee with Joe                  16m00s |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
++-----------------------------------------------+
+| Running timers:                               |
+|                                               |
+|  Refactor the whatsit               05h38m01s |
+|                                               |
+|  Debug the whatsit proced...        00h16m27s |
+|                                               |
++--------------------------------------------+--+
+|| Enter task description    || Project   || > ||
+|-----------------------------------------------|
++-----------------------------------------------+
+```
+
+### Timer Editor
+
+```
++-----------------------------------------------+
++-----------------------------------------------+
+|                                               |
+| <  Edit Timer                                 |
+|                                               |
++-----------------------------------------------+
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|  +-----------------------------------------+  |
+|                                               |
+|    Description                                |
+|                                               |
+|                                               |
+|                                               |
+|  +-----------------------------------------+  |
+|                                               |
+|    Project                                    |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|  +-----------------------------------------+  |
+|                                               |
+|    Start Time                                 |
+|                                               |
+|                                               |
+|                                               |
+|  +-----------------------------------------+  |
+|                                               |
+|    End Time                                   |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                   +---+ +---+ |
+|                                   |   | |   | |
+|                                   | X | |  /| |
+|                                   |   | | v | |
+|                                   +---+ +---+ |
+|                                               |
++-----------------------------------------------+
+```
+
+### Projects List
+
+```
++-----------------------------------------------+
++-----------------------------------------------+
+|                                               |
+| <  Projects                                   |
+|                                               |
++-----------------------------------------------+
+|                                               |
+| ▓  My Cool Project                         >  |
+|                                               |
+|                                               |
+| ▒  That big corp that always pays late     >  |
+|                                               |
+|                                               |
+| ░  Myself                                  >  |
+|                                               |
+|                                               |
+|    * note: swipe to delete, but with          |
+|            confirmation dialogue              |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                        +---+  |
+|                                        |   |  |
+|                                        | + |  |
+|                                        |   |  |
+|                                        +---+  |
+|                                               |
++-----------------------------------------------+
+
+```
+
+### Project Editor
+
+```
++-----------------------------------------------+
++-----------------------------------------------+
+|                                               |
+| <  New Project / Edit Project                 |
+|                                               |
++-----------------------------------------------+
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|  +----------------------------------------+   |
+|                                               |
+|    Name                                       |
+|                                               |
+|                                               |
+|  +-----+                                      |
+|  |░░░░░|                                      |
+|  |░░░░░| Colour                               |
+|  |░░░░░|                                      |
+|  +-----+                                      |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                               |
+|                                   +---+ +---+ |
+|                                   |   | |   | |
+|                                   | X | |  /| |
+|                                   |   | | v | |
+|                                   +---+ +---+ |
+|                                               |
++-----------------------------------------------+
+```
