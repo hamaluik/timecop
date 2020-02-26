@@ -1,6 +1,6 @@
 # timecop
 
-A time tracking app that respects your privacy
+A time tracking app that respects your privacy and the gets the job done without being fancy.
 
 ## User Stories
 
