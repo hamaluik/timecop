@@ -1,0 +1,15 @@
+include:
+  - package:pedantic/analysis_options.yaml
+  - package:effective_dart/analysis_options.yaml
+
+analyzer:
+  exclude: [build/**]
+  strong-mode:
+    implicit-casts: false
+    implicit-dynamic: false
+
+linter:
+  rules:
+    - camel_case_types
+    - prefer_void_to_null
+    - void_checks

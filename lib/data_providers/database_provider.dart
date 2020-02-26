@@ -1,11 +1,29 @@
+// Copyright 2020 Kenton Hamaluik
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import 'dart:async';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
+import 'package:random_color/random_color.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:timecop/models/log_entry.dart';
+import 'package:timecop/models/timer.dart';
 import 'package:timecop/models/project.dart';
 
 class DatabaseProvider {
   final Database _db;
+  final RandomColor _randomColour = RandomColor();
 
   DatabaseProvider(this._db) : assert(_db != null);
 
@@ -17,18 +35,22 @@ class DatabaseProvider {
     await db.execute('''
       create table projects(
         id integer not null primary key autoincrement,
-        name text not null
+        name text not null,
+        colour int not null
       )
     ''');
     await db.execute('''
-      create table log_entries(
+      create table timers(
         id integer not null primary key autoincrement,
         project_id integer default null,
         description text not null,
-        start_time text not null,
-        end_time text default null,
+        start_time int not null,
+        end_time int default null,
         foreign key(project_id) references projects(id)
       )
+    ''');
+    await db.execute('''
+      create index timers_start_time on timers(start_time)
     ''');
   }
 
@@ -46,11 +68,76 @@ class DatabaseProvider {
     return repo;
   }
 
-  Future<int> insertProject(Project project) async {
-    throw Exception("unimplemented");
+  /// the c in crud
+  Future<Project> createProject({@required String name, Color colour}) async {
+    assert(name != null);
+    if(colour == null) {
+      colour = _randomColour.randomColor();
+    }
+
+    int id = await _db.rawInsert("insert into projects(name, colour) values(?, ?)", <dynamic>[name, colour.value]);
+    return Project(id: id, name: name, colour: colour);
   }
 
-  Future<int> insertLogEntry(LogEntry entry) async {
-    throw Exception("unimplemented");
+  /// the r in crud
+  Future<List<Project>> listProjects() async {
+    List<Map<String, dynamic>> rawProjects = await _db.rawQuery("select id, name, colour from projects");
+    return rawProjects.map((Map<String, dynamic> row) => Project(
+      id: row["id"] as int,
+      name: row["name"] as String,
+      colour: Color(row["colour"] as int
+    ))).toList();
+  }
+
+  /// the u in crud
+  Future<void> editProject(Project project) async {
+    assert(project != null);
+    await _db.rawUpdate("update projects set name=?, colour=? where id=?", <dynamic>[project.name, project.colour, project.id]);
+  }
+
+  /// the d in crud
+  Future<void> deleteProject(Project project) async {
+    assert(project != null);
+    await _db.rawDelete("delete from projects where id=?", <dynamic>[project.id]);
+  }
+
+  /// the c in crud
+  Future<Timer> createTimer({String description, int projectID, DateTime startTime, DateTime endTime}) async {
+    int st = startTime?.millisecondsSinceEpoch ?? DateTime.now().millisecondsSinceEpoch;
+    int et = endTime?.millisecondsSinceEpoch;
+    int id = await _db.rawInsert("insert into timers(project_id, description, start_time, end_time) values(?, ?, ?, ?)", <dynamic>[projectID, description, st, et]);
+    return Timer(
+      id: id,
+      description: description,
+      projectID: projectID,
+      startTime: startTime,
+      endTime: endTime
+    );
+  }
+
+  /// the r in crud
+  Future<List<Timer>> listTimers() async {
+    List<Map<String, dynamic>> rawTimers = await _db.rawQuery("select id, project_id, description, start_time, end_time from timers");
+    return rawTimers.map((Map<String, dynamic> row) => Timer(
+      id: row["id"] as int,
+      projectID: row["project_id"] as int,
+      description: row["description"] as String,
+      startTime: DateTime.fromMillisecondsSinceEpoch(row["start_time"] as int),
+      endTime: row["end_time"] != null ? DateTime.fromMillisecondsSinceEpoch(row["end_time"] as int) : null,
+    )).toList();
+  }
+
+  /// the u in crud
+  Future<void> editTimer(Timer timer) async {
+    assert(timer != null);
+    int st = timer.startTime?.millisecondsSinceEpoch ?? DateTime.now().millisecondsSinceEpoch;
+    int et = timer.endTime?.millisecondsSinceEpoch;
+    await _db.rawUpdate("update timers set project_id=?, description=?, start_time=?, end_time=? where id=?", <dynamic>[timer.projectID, timer.description, st, et, timer.id]);
+  }
+
+  /// the d in crud
+  Future<void> deleteTimer(Timer timer) async {
+    assert(timer != null);
+    await _db.rawDelete("delete from timers where id=?", <dynamic>[timer.id]);
   }
 }
