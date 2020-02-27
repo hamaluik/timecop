@@ -43,13 +43,6 @@ class RunningTimerRow extends StatelessWidget {
     return null;
   }
 
-  static String formatDuration(Duration d) {
-    return
-        d.inHours.toString().padLeft(2, "0") + "h"
-      + (d.inMinutes - (d.inHours * 60)).toString().padLeft(2, "0") + "m"
-      + (d.inSeconds - (d.inMinutes * 60)).toString().padLeft(2, "0") + "s";
-  }
-
   @override
   Widget build(BuildContext context) {
     return Slidable(
@@ -58,8 +51,39 @@ class RunningTimerRow extends StatelessWidget {
       child: ListTile(
         leading: ProjectColour(project: BlocProvider.of<ProjectsBloc>(context).getProjectByID(timer.projectID)),
         title: Text(formatDescription(timer.description), style: styleDescription(context, timer.description)),
-        trailing: Text(formatDuration(now.difference(timer.startTime)), style: TextStyle(fontFamily: "FiraMono")),
+        trailing: Text(timer.formatDuration(), style: TextStyle(fontFamily: "FiraMono")),
       ),
+      actions: <Widget>[
+        IconSlideAction(
+          color: Theme.of(context).errorColor,
+          foregroundColor: Theme.of(context).accentIconTheme.color,
+          icon: FontAwesomeIcons.trash,
+          onTap: () async {
+            bool delete = await showDialog(
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                title: const Text("Confirm Delete"),
+                content: Text("Are you sure you want to delete this timer?"),
+                actions: <Widget>[
+                  FlatButton(
+                    child: const Text("Cancel"),
+                    onPressed: () => Navigator.of(context).pop(false),
+                  ),
+                  FlatButton(
+                    child: const Text("Delete"),
+                    onPressed: () => Navigator.of(context).pop(true),
+                  ),
+                ],
+              )
+            );
+            if(delete) {
+              final TimersBloc timersBloc = BlocProvider.of<TimersBloc>(context);
+              assert(timersBloc != null);
+              timersBloc.add(DeleteTimer(timer));
+            }
+          },
+        )
+      ],
       secondaryActions: <Widget>[
         IconSlideAction(
           color: Theme.of(context).accentColor,

@@ -60,6 +60,7 @@ class ProjectsScreen extends StatelessWidget {
                         content: RichText(
                           textAlign: TextAlign.justify,
                           text: TextSpan(
+                            style: TextStyle(color: Theme.of(context).textTheme.body1.color),
                             children: <TextSpan>[
                               TextSpan(text: "Are you sure you want to delete “"),
                               TextSpan(text: "⬤ ", style: TextStyle(color: project.colour)),

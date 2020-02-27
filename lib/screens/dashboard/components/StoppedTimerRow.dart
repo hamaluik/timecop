@@ -42,12 +42,6 @@ class StoppedTimerRow extends StatelessWidget {
     return null;
   }
 
-  static String formatDuration(Duration d) {
-    return
-        d.inHours.toString().padLeft(2, "0") + "h"
-      + (d.inMinutes - (d.inHours * 60)).toString().padLeft(2, "0") + "m"
-      + (d.inSeconds - (d.inMinutes * 60)).toString().padLeft(2, "0") + "s";
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +53,7 @@ class StoppedTimerRow extends StatelessWidget {
       child: ListTile(
         leading: ProjectColour(project: BlocProvider.of<ProjectsBloc>(context).getProjectByID(timer.projectID)),
         title: Text(formatDescription(timer.description), style: styleDescription(context, timer.description)),
-        trailing: Text(formatDuration(timer.endTime.difference(timer.startTime)), style: TextStyle(fontFamily: "FiraMono")),
+        trailing: Text(timer.formatDuration(), style: TextStyle(fontFamily: "FiraMono")),
       ),
       actions: <Widget>[
         IconSlideAction(

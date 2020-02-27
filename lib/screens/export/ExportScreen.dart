@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ExportScreen extends StatelessWidget {
   const ExportScreen({Key key}) : super(key: key);
@@ -22,6 +23,9 @@ class ExportScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Export"),
+      ),
+      body: Center(
+        child: Icon(FontAwesomeIcons.hardHat, color: Theme.of(context).accentColor, size: 72)
       ),
     );
   }
