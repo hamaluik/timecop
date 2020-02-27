@@ -1,0 +1,110 @@
+// Copyright 2020 Kenton Hamaluik
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
+import 'package:timecop/blocs/projects/bloc.dart';
+import 'package:timecop/blocs/projects/projects_bloc.dart';
+import 'package:timecop/models/project.dart';
+
+class ProjectEditor extends StatefulWidget {
+  final Project project;
+  ProjectEditor({Key key, @required this.project}) : super(key: key);
+
+  @override
+  _ProjectEditorState createState() => _ProjectEditorState();
+}
+
+class _ProjectEditorState extends State<ProjectEditor> {
+  TextEditingController _nameController;
+  Color _colour;
+  FocusNode _focus;
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController(text: widget.project?.name);
+    _colour = widget.project?.colour ?? Colors.grey[50];
+    _focus = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _focus.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      child: Padding(
+        padding: EdgeInsets.all(16),
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            shrinkWrap: true,
+            children: <Widget>[
+              Text(
+                widget.project == null ? "Create New Project" : "Edit Project",
+                style: Theme.of(context).textTheme.title,
+              ),
+              TextFormField(
+                controller: _nameController,
+                validator: (String value) => value.trim().isEmpty ? "Please enter a name" : null,
+                decoration: InputDecoration(
+                  hintText: "Project Name",
+                ),
+              ),
+              MaterialColorPicker(
+                selectedColor: _colour,
+                shrinkWrap: true,
+                onColorChange: (Color colour) => _colour = colour,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  FlatButton(
+                    child: Text("Cancel"),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                  FlatButton(
+                    child: Text(widget.project == null ? "Create" : "Save"),
+                    onPressed: () async {
+                      bool valid = _formKey.currentState.validate();
+                      if(!valid) return;
+
+                      final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
+                      assert(projects != null);
+                      if(widget.project == null) {
+                        projects.add(CreateProject(_nameController.text.trim(), _colour));
+                      }
+                      else {
+                        Project p = Project.clone(widget.project, name: _nameController.text.trim(), colour: _colour);
+                        projects.add(EditProject(p));
+                      }
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
+      )
+    );
+  }
+}

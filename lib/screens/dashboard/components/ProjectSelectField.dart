@@ -14,12 +14,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
+import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
-
-import 'ProjectColour.dart';
 
 class ProjectSelectField extends StatefulWidget {
   ProjectSelectField({Key key}) : super(key: key);
@@ -31,44 +29,80 @@ class ProjectSelectField extends StatefulWidget {
 class _ProjectSelectFieldState extends State<ProjectSelectField> {
   @override
   Widget build(BuildContext context) {
+    final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
+    assert(bloc != null);
+    final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+    assert(projectsBloc != null);
     return BlocBuilder<ProjectsBloc, ProjectsState>(
-      builder: (BuildContext context, ProjectsState projectsState) => BlocBuilder<DashboardBloc, DashboardState>(
-        builder: (BuildContext context, DashboardState state) => DropdownButton(
-          underline: Container(),
-          elevation: 0,
-          onChanged: (Project newProject) {
-            final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
-            bloc.add(ProjectChangedEvent(newProject));
+      builder: (BuildContext context, ProjectsState projectsState) {
+        return BlocBuilder<DashboardBloc, DashboardState>(
+          bloc: bloc,
+          builder: (BuildContext context, DashboardState state) {
+            // detect if the project we had selected was deleted
+            if(state.newProject != null && projectsBloc.getProjectByID(state.newProject.id) == null) {
+              bloc.add(ProjectChangedEvent(null));
+              return DropdownButton(
+                value: bloc.state.newProject,
+                underline: Container(),
+                elevation: 0,
+                onChanged: (Project newProject) {
+                  bloc.add(ProjectChangedEvent(newProject));
+                },
+                items: <DropdownMenuItem<Project>>[
+                  DropdownMenuItem<Project>(
+                    child: Row(
+                      children: <Widget>[
+                        ProjectColour(project: null),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(4.0, 0, 0, 0),
+                          child: Text("(no project)", style: TextStyle(color: Theme.of(context).disabledColor)),
+                        ),
+                      ],
+                    ),
+                    value: null,
+                  )
+                ],
+              );
+            }
+
+            return DropdownButton(
+              value: bloc.state.newProject,
+              underline: Container(),
+              elevation: 0,
+              onChanged: (Project newProject) {
+                bloc.add(ProjectChangedEvent(newProject));
+              },
+              items: <DropdownMenuItem<Project>>[
+                DropdownMenuItem<Project>(
+                  child: Row(
+                    children: <Widget>[
+                      ProjectColour(project: null),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(4.0, 0, 0, 0),
+                        child: Text("(no project)", style: TextStyle(color: Theme.of(context).disabledColor)),
+                      ),
+                    ],
+                  ),
+                  value: null,
+                )
+              ].followedBy(projectsState.projects.map(
+                (Project project) => DropdownMenuItem<Project>(
+                  child: Row(
+                    children: <Widget>[
+                      ProjectColour(project: project,),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(4.0, 0, 0, 0),
+                        child: Text(project.name),
+                      ),
+                    ],
+                  ),
+                  value: project,
+                )
+              )).toList(),
+            );
           },
-          items: <DropdownMenuItem<Project>>[
-            DropdownMenuItem<Project>(
-              child: Row(
-                children: <Widget>[
-                  ProjectColour(project: null),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(4.0, 0, 0, 0),
-                    child: Text("(no project)", style: TextStyle(color: Theme.of(context).disabledColor)),
-                  ),
-                ],
-              ),
-              value: null,
-            )
-          ].followedBy(projectsState.projects.map(
-            (Project project) => DropdownMenuItem<Project>(
-              child: Row(
-                children: <Widget>[
-                  ProjectColour(project: project,),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(4.0, 0, 0, 0),
-                    child: Text(project.name),
-                  ),
-                ],
-              ),
-              value: project,
-            )
-          )).toList(),
-        ),
-      )
+        );
+      }
     );
   }
 }

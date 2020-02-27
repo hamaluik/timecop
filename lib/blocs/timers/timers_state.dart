@@ -31,4 +31,5 @@ class TimersState extends Equatable {
       : this(state.timers, DateTime.now());
 
   @override List<Object> get props => [timers, now];
+  @override bool get stringify => true;
 }

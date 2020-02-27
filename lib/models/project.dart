@@ -26,6 +26,7 @@ class Project extends Equatable {
       assert(colour != null);
 
   @override List<Object> get props => [id, name, colour];
+  @override bool get stringify => true;
 
   Project.clone(Project project,
     {String name, Color colour})

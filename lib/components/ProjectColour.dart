@@ -1,11 +1,11 @@
 // Copyright 2020 Kenton Hamaluik
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,8 +23,20 @@ class ProjectColour extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if(project == null) {
-      return Icon(FontAwesomeIcons.circle, size: 16, color: Theme.of(context).disabledColor);
+      return Icon(FontAwesomeIcons.circle, size: 24, color: Theme.of(context).disabledColor);
     }
-    return Icon(FontAwesomeIcons.solidCircle, size: 16, color: project.colour);
+    return Icon(FontAwesomeIcons.solidCircle, size: 24, color: project.colour);
+    //return Padding(
+    //  padding: EdgeInsets.all(8.0),
+    //  child: AspectRatio(
+    //    aspectRatio: 1.0,
+    //    child: Container(
+    //      decoration: BoxDecoration(
+    //        shape: BoxShape.circle,
+    //        color: project.colour,
+    //      ),
+    //    ),
+    //  )
+    //);
   }
 }

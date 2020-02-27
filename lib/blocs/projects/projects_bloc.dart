@@ -29,16 +29,42 @@ class ProjectsBloc extends Bloc<ProjectsEvent, ProjectsState> {
   Stream<ProjectsState> mapEventToState(
     ProjectsEvent event,
   ) async* {
-    if(event is LoadProjects) {
+    if (event is LoadProjects) {
       List<Project> projects = await data.listProjects();
+      yield ProjectsState(projects);
+    }
+    else if (event is CreateProject) {
+      Project newProject =
+          await data.createProject(name: event.name, colour: event.colour);
+      List<Project> projects =
+          state.projects.map((project) => Project.clone(project)).toList();
+      projects.add(newProject);
+      projects.sort((a, b) => a.name.compareTo(b.name));
+      yield ProjectsState(projects);
+    }
+    else if (event is EditProject) {
+      await data.editProject(event.project);
+      List<Project> projects = state.projects.map((project) {
+        if (project.id == event.project.id) return Project.clone(event.project);
+        return Project.clone(project);
+      }).toList();
+      projects.sort((a, b) => a.name.compareTo(b.name));
+      yield ProjectsState(projects);
+    }
+    else if (event is DeleteProject) {
+      await data.deleteProject(event.project);
+      List<Project> projects = state.projects
+          .where((p) => p.id != event.project.id)
+          .map((p) => Project.clone(p))
+          .toList();
       yield ProjectsState(projects);
     }
   }
 
   Project getProjectByID(int id) {
-    if(id == null) return null;
-    for(Project p in state.projects) {
-      if(p.id == id) return p;
+    if (id == null) return null;
+    for (Project p in state.projects) {
+      if (p.id == id) return p;
     }
     return null;
   }

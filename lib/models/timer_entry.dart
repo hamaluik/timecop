@@ -27,6 +27,7 @@ class TimerEntry extends Equatable {
       assert(startTime != null);
 
   @override List<Object> get props => [id, description, projectID, startTime, endTime];
+  @override bool get stringify => true;
 
   TimerEntry.clone(TimerEntry timer,
     {String description, int projectID, DateTime startTime, DateTime endTime})

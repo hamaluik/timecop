@@ -29,4 +29,5 @@ class ProjectsState extends Equatable {
       : this(state.projects);
 
   @override List<Object> get props => [projects];
+  @override bool get stringify => true;
 }

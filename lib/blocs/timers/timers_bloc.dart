@@ -29,31 +29,36 @@ class TimersBloc extends Bloc<TimersEvent, TimersState> {
   Stream<TimersState> mapEventToState(
     TimersEvent event,
   ) async* {
-    if(event is LoadTimers) {
+    if (event is LoadTimers) {
       List<TimerEntry> timers = await data.listTimers();
       yield TimersState(timers, DateTime.now());
     }
-    else if(event is CreateTimer) {
-      TimerEntry timer = await data.createTimer(description: event.description, projectID: event.project?.id);
-      List<TimerEntry> timers = state.timers;
+    else if (event is CreateTimer) {
+      TimerEntry timer = await data.createTimer(
+          description: event.description, projectID: event.project?.id);
+      List<TimerEntry> timers =
+          state.timers.map((t) => TimerEntry.clone(t)).toList();
       timers.add(timer);
       yield TimersState(timers, DateTime.now());
     }
-    else if(event is UpdateNow) {
+    else if (event is UpdateNow) {
       yield TimersState(state.timers, DateTime.now());
     }
-    else if(event is StopTimer) {
+    else if (event is StopTimer) {
       TimerEntry timer = TimerEntry.clone(event.timer, endTime: DateTime.now());
       await data.editTimer(timer);
       List<TimerEntry> timers = state.timers.map((t) {
-        if(t.id == timer.id) return timer;
-        return t;
+        if (t.id == timer.id) return TimerEntry.clone(timer);
+        return TimerEntry.clone(t);
       }).toList();
       yield TimersState(timers, DateTime.now());
     }
-    else if(event is DeleteTimer) {
+    else if (event is DeleteTimer) {
       await data.deleteTimer(event.timer);
-      List<TimerEntry> timers = state.timers.where((t) => t.id != event.timer.id).toList();
+      List<TimerEntry> timers = state.timers
+          .where((t) => t.id != event.timer.id)
+          .map((t) => TimerEntry.clone(t))
+          .toList();
       yield TimersState(timers, DateTime.now());
     }
   }

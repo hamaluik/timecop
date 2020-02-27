@@ -47,7 +47,7 @@ class DatabaseProvider extends DataProvider {
         description text not null,
         start_time int not null,
         end_time int default null,
-        foreign key(project_id) references projects(id)
+        foreign key(project_id) references projects(id) on delete set null
       )
     ''');
     await db.execute('''
@@ -82,18 +82,19 @@ class DatabaseProvider extends DataProvider {
 
   /// the r in crud
   Future<List<Project>> listProjects() async {
-    List<Map<String, dynamic>> rawProjects = await _db.rawQuery("select id, name, colour from projects");
+    List<Map<String, dynamic>> rawProjects = await _db.rawQuery("select id, name, colour from projects order by name asc");
     return rawProjects.map((Map<String, dynamic> row) => Project(
       id: row["id"] as int,
       name: row["name"] as String,
-      colour: Color(row["colour"] as int
-    ))).toList();
+      colour: Color(row["colour"] as int)))
+    .toList();
   }
 
   /// the u in crud
   Future<void> editProject(Project project) async {
     assert(project != null);
-    await _db.rawUpdate("update projects set name=?, colour=? where id=?", <dynamic>[project.name, project.colour, project.id]);
+    int rows = await _db.rawUpdate("update projects set name=?, colour=? where id=?", <dynamic>[project.name, project.colour.value, project.id]);
+    assert(rows == 1);
   }
 
   /// the d in crud
@@ -119,7 +120,7 @@ class DatabaseProvider extends DataProvider {
 
   /// the r in crud
   Future<List<TimerEntry>> listTimers() async {
-    List<Map<String, dynamic>> rawTimers = await _db.rawQuery("select id, project_id, description, start_time, end_time from timers");
+    List<Map<String, dynamic>> rawTimers = await _db.rawQuery("select id, project_id, description, start_time, end_time from timers order by start_time asc");
     return rawTimers.map((Map<String, dynamic> row) => TimerEntry(
       id: row["id"] as int,
       projectID: row["project_id"] as int,
