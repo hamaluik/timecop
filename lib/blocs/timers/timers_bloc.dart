@@ -31,13 +31,25 @@ class TimersBloc extends Bloc<TimersEvent, TimersState> {
   ) async* {
     if(event is LoadTimers) {
       List<TimerEntry> timers = await data.listTimers();
-      yield TimersState(timers);
+      yield TimersState(timers, DateTime.now());
     }
     else if(event is CreateTimer) {
       TimerEntry timer = await data.createTimer(description: event.description, projectID: event.project?.id);
       List<TimerEntry> timers = state.timers;
       timers.add(timer);
-      yield TimersState(timers);
+      yield TimersState(timers, DateTime.now());
+    }
+    else if(event is UpdateNow) {
+      yield TimersState(state.timers, DateTime.now());
+    }
+    else if(event is StopTimer) {
+      TimerEntry timer = TimerEntry.clone(event.timer, endTime: DateTime.now());
+      await data.editTimer(timer);
+      List<TimerEntry> timers = state.timers.map((t) {
+        if(t.id == timer.id) return timer;
+        return t;
+      }).toList();
+      yield TimersState(timers, DateTime.now());
     }
   }
 }

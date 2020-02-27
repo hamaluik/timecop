@@ -17,16 +17,18 @@ import 'package:timecop/models/timer_entry.dart';
 
 class TimersState extends Equatable {
   final List<TimerEntry> timers;
+  final DateTime now;
 
-  TimersState(this.timers)
-    : assert(timers != null);
+  TimersState(this.timers, this.now)
+    : assert(timers != null),
+      assert(now != null);
 
   static TimersState initial() {
-    return TimersState([]);
+    return TimersState([], DateTime.now());
   }
 
   TimersState.clone(TimersState state)
-      : this(state.timers);
+      : this(state.timers, DateTime.now());
 
-  @override List<Object> get props => [timers];
+  @override List<Object> get props => [timers, now];
 }

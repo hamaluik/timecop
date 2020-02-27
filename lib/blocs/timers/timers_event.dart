@@ -14,6 +14,7 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:timecop/models/project.dart';
+import 'package:timecop/models/timer_entry.dart';
 
 abstract class TimersEvent extends Equatable {
   const TimersEvent();
@@ -30,4 +31,16 @@ class CreateTimer extends TimersEvent {
   CreateTimer({this.description, this.project});
 
   @override List<Object> get props => [description, project];
+}
+
+class UpdateNow extends TimersEvent {
+  const UpdateNow();
+  @override List<Object> get props => [];
+}
+
+class StopTimer extends TimersEvent {
+  final TimerEntry timer;
+
+  StopTimer(this.timer);
+  @override List<Object> get props => [timer];
 }

@@ -79,3 +79,11 @@ flutter:
         - asset: fonts/PublicSans-BlackItalic.ttf
           weight: 900
           style: italic
+    - family: FiraMono
+      fonts:
+        - asset: fonts/FiraMono-Regular.ttf
+          weight: 400
+        - asset: fonts/FiraMono-Medium.ttf
+          weight: 500
+        - asset: fonts/FiraMono-Bold.ttf
+          weight: 700

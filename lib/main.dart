@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'dart:async';
+
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/settings/settings_event.dart';
@@ -65,11 +67,12 @@ class _TimeCopApp extends StatefulWidget {
   State<StatefulWidget> createState() => _TimeCopAppState();
 }
 
-class _TimeCopAppState extends State<_TimeCopApp>
-    with WidgetsBindingObserver {
+class _TimeCopAppState extends State<_TimeCopApp> with WidgetsBindingObserver {
+  Timer _updateTimersTimer;
 
   @override
   void initState() {
+    _updateTimersTimer = Timer.periodic(Duration(seconds: 1), (_) => BlocProvider.of<TimersBloc>(context).add(UpdateNow()));
     super.initState();
     WidgetsBinding.instance.addObserver(this);
 
@@ -81,6 +84,7 @@ class _TimeCopAppState extends State<_TimeCopApp>
 
   @override
   void dispose() {
+    _updateTimersTimer.cancel();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
