@@ -97,13 +97,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.2.0"
-  flutter_datetime_formfield:
+  flutter_datetime_picker:
     dependency: "direct main"
     description:
-      name: flutter_datetime_formfield
+      name: flutter_datetime_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.2"
+    version: "1.3.4"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:

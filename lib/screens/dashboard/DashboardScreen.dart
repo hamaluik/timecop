@@ -56,9 +56,8 @@ class DashboardScreen extends StatelessWidget {
           BlocProvider<DashboardBloc>(
             create: (_) => DashboardBloc(),
             child: Material(
-              elevation: 4.0,
+              elevation: 8.0,
               child: Container(
-                //color: Theme.of(context).highlightColor,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Row(

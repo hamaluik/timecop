@@ -79,7 +79,7 @@ class StoppedTimers extends StatelessWidget {
     return BlocBuilder<TimersBloc, TimersState>(
       builder: (BuildContext context, TimersState timersState) {
         return ListView(
-          shrinkWrap: true,
+          shrinkWrap: false,
           reverse: true,
           children: timersState.timers
             .where((timer) => timer.endTime != null)

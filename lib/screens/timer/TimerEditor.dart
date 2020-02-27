@@ -16,7 +16,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_datetime_formfield/flutter_datetime_formfield.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
@@ -43,6 +46,8 @@ class _TimerEditorState extends State<TimerEditor> {
   Timer _updateTimer;
   StreamController<DateTime> _updateTimerStreamController;
 
+  static DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy h:mma");
+
   @override
   void initState() {
     super.initState();
@@ -66,41 +71,21 @@ class _TimerEditorState extends State<TimerEditor> {
 
   @override
   Widget build(BuildContext context) {
-    Widget endTimePicker;
-    if(_endTime == null) {
-      endTimePicker = Container();
-    }
-    else {
-      endTimePicker = DateTimeFormField(
-        initialValue: _endTime,
-        firstDate: _startTime,
-        label: "End Time",
-        autovalidate: true,
-        validator: (DateTime dt) {
-          if(dt != null && dt.isBefore(_startTime)) {
-            return "End time must be after start time!";
-          }
-          return null;
-        },
-        onSaved: (DateTime dt) => _endTime = dt,
-      );
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Edit Timer"),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              BlocBuilder<ProjectsBloc, ProjectsState>(
-                builder: (BuildContext context, ProjectsState projectsState) => DropdownButton(
+      body: Form(
+        key: _formKey,
+        child: ListView(
+          //mainAxisAlignment: MainAxisAlignment.start,
+          //mainAxisSize: MainAxisSize.max,
+          //crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            BlocBuilder<ProjectsBloc, ProjectsState>(
+              builder: (BuildContext context, ProjectsState projectsState) => Padding(
+                padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
+                child: DropdownButton(
                   value: _project,
                   underline: Container(),
                   elevation: 0,
@@ -136,84 +121,105 @@ class _TimerEditorState extends State<TimerEditor> {
                       value: project,
                     )
                   )).toList(),
-                ),
+                )
               ),
-              TextFormField(
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+              child: TextFormField(
                 controller: _descriptionController,
                 decoration: InputDecoration(
                   labelText: "Description",
                   hintText: "What were you doing?",
                 ),
               ),
-              DateTimeFormField(
-                initialValue: _startTime,
-                label: "Start Time",
-                autovalidate: true,
-                validator: (DateTime dateTime) {
-                  if (dateTime == null) {
-                    return "Please choose a start time";
-                  }
-                  return null;
-                },
-                onSaved: (DateTime dt) => setState(() => _startTime = dt),
-              ),
-              endTimePicker,
-              StreamBuilder(
-                initialData: DateTime.now(),
-                stream: _updateTimerStreamController.stream,
-                builder: (BuildContext context, AsyncSnapshot<DateTime> snapshot) => ListTile(
-                  title: Text("Timer Duration"),
-                  trailing: Text(TimerEntry.formatDuration(
-                    _endTime == null
-                      ? snapshot.data.difference(_startTime)
-                      : _endTime.difference(_startTime)
-                  )),
-                ),
-              ),
-              SwitchListTile(
-                title: Text("Timer is stopped"),
-                value: _endTime != null,
-                activeColor: Theme.of(context).accentColor,
-                onChanged: (ended) {
-                  setState(() {
-                    _endTime = ended ? DateTime.now() : null;
-                  });
-                },
-              ),
-              Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  FlatButton(
-                    child: Text("Cancel"),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                  FlatButton(
-                    child: Text("Save"),
-                    onPressed: () async {
-                      bool valid = _formKey.currentState.validate();
-                      if(!valid) return;
-
-                      TimerEntry timer = TimerEntry(
-                        id: widget.timer.id,
-                        startTime: _startTime,
-                        endTime: _endTime,
-                        projectID: _project?.id,
-                        description: _descriptionController.text.trim(),
-                      );
-
-                      final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
-                      assert(timers != null);
-                      timers.add(EditTimer(timer));
-                      Navigator.of(context).pop();
-                    },
+            ),
+            ListTile(
+              title: Text("Start Time"),
+              trailing: Text(_dateFormat.format(_startTime)),
+              onTap: () async {
+                await DatePicker.showDateTimePicker(
+                  context,
+                  currentTime: _startTime,
+                  onChanged: (DateTime dt) => setState(() => _startTime = dt),
+                  theme: DatePickerTheme(
+                    cancelStyle: Theme.of(context).textTheme.button,
+                    doneStyle: Theme.of(context).textTheme.button,
+                    itemStyle: Theme.of(context).textTheme.body1,
+                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   )
-                ],
-              )
-            ],
-          ),
+                );
+              },
+            ),
+            Slidable(
+              actionPane: SlidableDrawerActionPane(),
+              actionExtentRatio: 0.15,
+              child: ListTile(
+                title: Text("End Time"),
+                trailing: Text(_endTime == null ? "—" : _dateFormat.format(_endTime)),
+                onTap: () async {
+                  await DatePicker.showDateTimePicker(
+                    context,
+                    currentTime: _endTime,
+                    minTime: _startTime,
+                    onChanged: (DateTime dt) => setState(() => _endTime = dt),
+                    theme: DatePickerTheme(
+                      cancelStyle: Theme.of(context).textTheme.button,
+                      doneStyle: Theme.of(context).textTheme.button,
+                      itemStyle: Theme.of(context).textTheme.body1,
+                      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                    )
+                  );
+                },
+              ),
+              secondaryActions: <Widget>[
+                IconSlideAction(
+                  color: Theme.of(context).accentColor,
+                  foregroundColor: Theme.of(context).accentIconTheme.color,
+                  icon: FontAwesomeIcons.solidPlayCircle,
+                  onTap: () {
+                    setState(() {
+                      _endTime = null;
+                    });
+                  },
+                )
+              ],
+            ),
+            StreamBuilder(
+              initialData: DateTime.now(),
+              stream: _updateTimerStreamController.stream,
+              builder: (BuildContext context, AsyncSnapshot<DateTime> snapshot) => ListTile(
+                title: Text("Duration"),
+                trailing: Text(TimerEntry.formatDuration(
+                  _endTime == null
+                    ? snapshot.data.difference(_startTime)
+                    : _endTime.difference(_startTime)
+                )),
+              ),
+            ),
+          ],
         ),
-      )
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(FontAwesomeIcons.solidSave),
+        onPressed: () async {
+          bool valid = _formKey.currentState.validate();
+          if(!valid) return;
+
+          TimerEntry timer = TimerEntry(
+            id: widget.timer.id,
+            startTime: _startTime,
+            endTime: _endTime,
+            projectID: _project?.id,
+            description: _descriptionController.text.trim(),
+          );
+
+          final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+          assert(timers != null);
+          timers.add(EditTimer(timer));
+          Navigator.of(context).pop();
+        },
+      ),
     );
   }
 }

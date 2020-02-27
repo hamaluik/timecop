@@ -31,30 +31,33 @@ class RunningTimers extends StatelessWidget {
           return Container();
         }
 
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Text(
-                    "Running Timers",
-                    style: TextStyle(
-                      color: Theme.of(context).accentColor,
-                      fontWeight: FontWeight.w800
-                    )
-                  ),
-                  Divider(),
-                ],
+        return Material(
+          elevation: 4,
+          color: Theme.of(context).bottomSheetTheme.backgroundColor,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Text(
+                      "Running Timers",
+                      style: TextStyle(
+                        color: Theme.of(context).accentColor,
+                        fontWeight: FontWeight.w800
+                      )
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ].followedBy(
-            runningTimers.map((timer) => RunningTimerRow(timer: timer, now: timersState.now))
-          ).toList(),
+            ].followedBy(
+              runningTimers.map((timer) => RunningTimerRow(timer: timer, now: timersState.now))
+            ).toList(),
+          ),
         );
       },
     );
