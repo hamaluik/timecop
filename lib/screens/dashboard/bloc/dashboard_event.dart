@@ -17,3 +17,9 @@ class ProjectChangedEvent extends DashboardEvent {
 
   @override List<Object> get props => [project];
 }
+
+class ResetFieldsEvent extends DashboardEvent {
+  const ResetFieldsEvent();
+
+  @override List<Object> get props => [];
+}

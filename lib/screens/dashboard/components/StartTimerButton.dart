@@ -13,17 +13,30 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:timecop/blocs/timers/bloc.dart';
+import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 
 class StartTimerButton extends StatelessWidget {
   const StartTimerButton({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: Icon(FontAwesomeIcons.play),
-      color: Theme.of(context).primaryIconTheme.color,
-      onPressed: () {},
+    final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
+    assert(bloc != null);
+    
+    return FloatingActionButton(
+      child: Icon(FontAwesomeIcons.play),
+      backgroundColor: Theme.of(context).accentColor,
+      foregroundColor: Theme.of(context).accentIconTheme.color,
+      onPressed: () {
+        final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+        assert(timers != null);
+
+        timers.add(CreateTimer(description: bloc.state.newDescription, project: bloc.state.newProject));
+        bloc.add(ResetFieldsEvent());
+      },
     );
   }
 }

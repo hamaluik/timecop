@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'package:equatable/equatable.dart';
+import 'package:timecop/models/project.dart';
 
 abstract class TimersEvent extends Equatable {
   const TimersEvent();
@@ -20,4 +21,13 @@ abstract class TimersEvent extends Equatable {
 
 class LoadTimers extends TimersEvent {
   @override List<Object> get props => [];
+}
+
+class CreateTimer extends TimersEvent {
+  final String description;
+  final Project project;
+
+  CreateTimer({this.description, this.project});
+
+  @override List<Object> get props => [description, project];
 }

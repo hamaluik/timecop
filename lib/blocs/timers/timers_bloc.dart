@@ -33,5 +33,11 @@ class TimersBloc extends Bloc<TimersEvent, TimersState> {
       List<TimerEntry> timers = await data.listTimers();
       yield TimersState(timers);
     }
+    else if(event is CreateTimer) {
+      TimerEntry timer = await data.createTimer(description: event.description, projectID: event.project?.id);
+      List<TimerEntry> timers = state.timers;
+      timers.add(timer);
+      yield TimersState(timers);
+    }
   }
 }

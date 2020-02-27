@@ -21,5 +21,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     else if(event is ProjectChangedEvent) {
       yield DashboardState(state.newDescription, event.project);
     }
+    else if(event is ResetFieldsEvent) {
+      yield DashboardState("", null);
+    }
   }
 }

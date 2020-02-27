@@ -39,19 +39,18 @@ class _DescriptionFieldState extends State<DescriptionField> {
   @override
   Widget build(BuildContext context) {
     final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
-    assert(bloc != null);
 
-    return Container(
-      child: TextField(
-        controller: _controller,
-          autocorrect: true,
-          style: TextStyle(color: Theme.of(context).primaryTextTheme.body1.color),
-          decoration: InputDecoration(
-            hintText: "What are you doing?",
-            hintStyle: TextStyle(color: Theme.of(context).primaryTextTheme.caption.color),
+    return BlocBuilder<DashboardBloc, DashboardState>(
+      builder: (BuildContext context, DashboardState state) => Container(
+        child: TextField(
+          controller: _controller,
+            autocorrect: true,
+            decoration: InputDecoration(
+              hintText: "What are you doing?",
+            ),
+            onChanged: (String description) => _updateDescription(bloc, description),
           ),
-          onChanged: (String description) => _updateDescription(bloc, description),
-        ),
+      )
     );
   }
 }

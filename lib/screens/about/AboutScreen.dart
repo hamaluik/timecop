@@ -16,6 +16,7 @@ import 'package:about/about.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({Key key}) : super(key: key);
@@ -41,6 +42,11 @@ class AboutScreen extends StatelessWidget {
           filename: 'CHANGELOG.md',
           title: Text('View Changelog'),
           icon: Icon(FontAwesomeIcons.boxes),
+        ),
+        ListTile(
+          leading: Icon(FontAwesomeIcons.code),
+          title: Text("Source Code"),
+          onTap: () => launch("https://github.com/hamaluik/timecop"),
         ),
         ListTile(
           leading: Icon(FontAwesomeIcons.scroll),

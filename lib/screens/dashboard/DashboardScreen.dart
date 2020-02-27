@@ -15,6 +15,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:timecop/screens/dashboard/components/ProjectSelectField.dart';
 import 'package:timecop/screens/dashboard/components/StartTimerButton.dart';
@@ -46,24 +47,58 @@ class DashboardScreen extends StatelessWidget {
               children: <Widget>[],
             )
           ),
+          BlocBuilder<TimersBloc, TimersState>(
+            builder: (BuildContext context, TimersState timersState) => Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
+                  child: Text(
+                    "Running Timers",
+                    style: TextStyle(
+                      color: Theme.of(context).accentColor,
+                      fontWeight: FontWeight.w800
+                    )
+                  ),
+                ),
+              ].followedBy(
+                timersState.timers
+                  .where((timer) => timer.endTime == null)
+                  .map((timer) => ListTile(
+                    title: Text(timer.description ?? "(no description)"),
+                    trailing: IconButton(
+                      icon: Icon(FontAwesomeIcons.solidStopCircle),
+                      onPressed: () {},
+                    ),
+                  ))
+              ).toList(),
+            ),
+          ),
           BlocProvider<DashboardBloc>(
             create: (_) => DashboardBloc(),
-            child: Container(
-              color: Theme.of(context).primaryColor,
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: DescriptionField(),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(4.0, 0, 4.0, 0),
-                      child: ProjectSelectField(),
-                    ),
-                    StartTimerButton(),
-                  ],
+            child: Material(
+              elevation: 4.0,
+              child: Container(
+                //color: Theme.of(context).primaryColor,
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Expanded(
+                        flex: 1,
+                        child: DescriptionField(),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(4.0, 0, 4.0, 0),
+                        child: ProjectSelectField(),
+                      ),
+                      StartTimerButton(),
+                    ],
+                  ),
                 ),
               ),
             )

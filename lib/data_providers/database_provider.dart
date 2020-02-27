@@ -105,13 +105,14 @@ class DatabaseProvider extends DataProvider {
   /// the c in crud
   Future<TimerEntry> createTimer({String description, int projectID, DateTime startTime, DateTime endTime}) async {
     int st = startTime?.millisecondsSinceEpoch ?? DateTime.now().millisecondsSinceEpoch;
+    assert(st != null);
     int et = endTime?.millisecondsSinceEpoch;
     int id = await _db.rawInsert("insert into timers(project_id, description, start_time, end_time) values(?, ?, ?, ?)", <dynamic>[projectID, description, st, et]);
     return TimerEntry(
       id: id,
       description: description,
       projectID: projectID,
-      startTime: startTime,
+      startTime: DateTime.fromMillisecondsSinceEpoch(st),
       endTime: endTime
     );
   }

@@ -16,10 +16,10 @@ import 'package:flutter/material.dart';
 
 final ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
-  primarySwatch: Colors.indigo,
-  primaryColor: Colors.indigo[900],
+  primarySwatch: Colors.cyan,
+  primaryColor: Colors.cyan[600],
   primaryColorBrightness: Brightness.dark,
-  accentColor: Colors.grey[900],
+  accentColor: Colors.pink[600],
   accentColorBrightness: Brightness.dark,
   fontFamily: 'PublicSans',
 );
@@ -29,7 +29,7 @@ final ThemeData darkTheme = ThemeData(
   primarySwatch: Colors.grey,
   primaryColor: Colors.grey[900],
   primaryColorBrightness: Brightness.dark,
-  accentColor: Colors.indigo[700],
+  accentColor: Colors.pink[600],
   accentColorBrightness: Brightness.dark,
   fontFamily: 'PublicSans',
 );
