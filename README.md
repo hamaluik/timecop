@@ -1,277 +1,48 @@
 <h1 align="center">
   Time Cop
+  <br>
+  <img alt="icon" width="128" height="128" src="icon.no-bg.pink.svg">
 </h1>
 <div align="center">
-  A time tracking app that respects your privacy and gets the job done without being fancy.
+  A time tracking app that respects your privacy and gets the job done without getting too fancy.
 </div>
 <br />
 <div align="center">
   <img alt="GitHub" src="https://img.shields.io/github/license/hamaluik/timecop?style=flat-square">
 </div>
 
-## User Stories
+## Motivation
 
-- [ ] App must be fully offline
-- [ ] Record time by starting a timer with a button
-    - [ ] Timers may (or may not) have descriptions
-    - [ ] Timers may (or may not) have a project
-    - [ ] Timers may be started with a missing description and/or project
-    - [ ] Timers may be started with a description and/or project pre-applied
-    - [ ] Timers must be manually stopped with a button
-    - [ ] Timers may be "resumed" by effectively cloning the project and description and starting from the current time
-- [ ] Multiple timers may be active at once
-- [ ] The user may specify a default project to pre-populate all new timers with
-- [ ] Timers can be created manually by specifying a start time
-    - [ ] Optionally, an end time may be specified to prevent the timer from running
-    - [ ] Optionally, a length of time may be specified to prevent the timer from running and also automatically calculate the end time
-- [ ] A “dashboard” screen will display:
-    - [ ] a list of the latest completed timers,
-    - [ ] the current running timers,
-    - [ ] an interface to start or create new timers
-- [ ] Timers may be edited (whether running or not). All data related to each timer may be changed:
-    - [ ] Start time
-    - [ ] End time
-    - [ ] Description
-    - [ ] Project
-- [ ] Timers may be deleted (whether running or not)
-    - [ ] A confirmation should be presented to the user to confirm the deletion
-- [ ] Projects can be created with a project name and a colour
-    - [ ] The colour will be pre-populated by the system, chosen to not intersect with any other project colours
-    - [ ] The colour can be set by the user before creating the project
-    - [ ] The project name must never be empty
-- [ ] Each project can be edited:
-    - [ ] The project name
-    - [ ] The project colour
-- [ ] Export database using native OS sharing
-- [ ] Export data as `csv` (or `xlsx`?) using native OS sharing
-    - [ ] Optionally filtered by:
-        1. Date
-        2. Project
-    - [ ] Optionally grouped by timer descriptions on a daily basis
-    - [ ] Export format should be able to include:
-        - [ ] Timer description
-        - [ ] Timer project
-        - [ ] Timer start time (RFC 3339)
-        - [ ] Timer end time (RFC 3339)
-        - [ ] Timer length in hours
-        - [ ] Timer length in minutes
-    - [ ] Export settings should be persisted and re-used as defaults
-- [ ] The list of open-source software should be included
-- [ ] Starting / stopping timers should be located at the bottom of the screen to facilitate one-handed operation
+I'd rather not do time-tracking at all, but since its a necessity for my work, it's either use an app or keep track of things manually (which I'm terrible at). There are many time tracking apps on the app stores (and I have tried several of them), but each of them has at least one pain point that eventually drives me off—some cost more money than I think they should,
+others have (what I consider) poorly designed interfaces, some are way too complicated, some don't export data easily, most require an internet connection, I have privacy concerns with a large number of them, etc, etc.
 
-### In Consideration
+Time tracking in and of itself is rather straightforward (hence all the apps on the app stores), so I figured “why not use this as an opportunity to practice mobile development and learn some new things?”. This app is the result of that question—its a useful tool that I use every day for work, but also a sample project to work off of and share with others.
 
-* An in-app-purchase should be available as a donation towards the development of the app.
-    * Perhaps tied to the ability to export data (either reports or the database)?
-* A reporting screen which gives you the same filtering options as exporting data in a spreadsheet but displays the results locally
-    * As charts
-    * As tables
+## Features
 
-## Mockups
+* Offline-only, mobile-only (iOS / Android)
+* Fully private—there is no tracking / spying / advertising / etc
+* Keep track of tasks with multiple parallel timers that can be started with the tap of a button
+* Associate timers with projects to group your work (or don't)
+* Start, stop, edit, and delete timers whenever with no fuss
+* Export data as a `.csv` file, filtered by timespans and projects
+* Export the app's database for full access to all of its data
+* Open source ([licensed under Apache-2.0](LICENSE))—fork away!
 
-(crudely drawn with http://asciiflow.com/)
+## Contributing
 
-### Dashboard
+I'm happy to take bug reports and pull requests if you want to help improve _Time Cop_, but I fundamentally want to keep this app relatively small and simple. If that's not for you, there's [plenty](https://toggl.com/) of [other](https://clockify.me/) [options](https://www.workpuls.com/) [out](https://www.manictime.com/) [there](https://trackabi.com/).
 
-```
-+-----------------------------------------------+
-+-----------------------------------------------|
-| Time Cop                                || : ||
-+-----------------------------------------------+
-|                                               |
-| Monday, Feb. 26                               |
-|                                               |
-|   Do the thing          My Project  01h38m29s |
-|                                               |
-|   Some other thing                  16h19m02s |
-|                                               |
-| Today                                         |
-|                                               |
-|   Get coffee with Joe                  16m00s |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-+-----------------------------------------------+
-| Running timers:                               |
-|                                               |
-|  Refactor the whatsit               05h38m01s |
-|                                               |
-|  Debug the whatsit proced...        00h16m27s |
-|                                               |
-+--------------------------------------------+--+
-|| Enter task description    || Project   || > ||
-|-----------------------------------------------|
-+-----------------------------------------------+
-```
+The app is created pretty much entirely in [Dart](https://dart.dev/) using [Flutter](https://flutter.dev/), and I tried to make heavy use of the [Bloc](https://bloclibrary.dev/#/) pattern.
 
-### Timer Editor
+Here are a few resources to get you started if this is your first Flutter project:
 
-```
-+-----------------------------------------------+
-+-----------------------------------------------+
-|                                               |
-| <  Edit Timer                                 |
-|                                               |
-+-----------------------------------------------+
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|  +-----------------------------------------+  |
-|                                               |
-|    Description                                |
-|                                               |
-|                                               |
-|                                               |
-|  +-----------------------------------------+  |
-|                                               |
-|    Project                                    |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|  +-----------------------------------------+  |
-|                                               |
-|    Start Time                                 |
-|                                               |
-|                                               |
-|                                               |
-|  +-----------------------------------------+  |
-|                                               |
-|    End Time                                   |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                   +---+ +---+ |
-|                                   |   | |   | |
-|                                   | X | |  /| |
-|                                   |   | | v | |
-|                                   +---+ +---+ |
-|                                               |
-+-----------------------------------------------+
-```
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-### Projects List
+For help getting started with Flutter, view its [online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
 
-```
-+-----------------------------------------------+
-+-----------------------------------------------+
-|                                               |
-| <  Projects                                   |
-|                                               |
-+-----------------------------------------------+
-|                                               |
-| ▓  My Cool Project                         >  |
-|                                               |
-|                                               |
-| ▒  That big corp that always pays late     >  |
-|                                               |
-|                                               |
-| ░  Myself                                  >  |
-|                                               |
-|                                               |
-|    * note: swipe to delete, but with          |
-|            confirmation dialogue              |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                        +---+  |
-|                                        |   |  |
-|                                        | + |  |
-|                                        |   |  |
-|                                        +---+  |
-|                                               |
-+-----------------------------------------------+
+## Todo
 
-```
-
-### Project Editor
-
-```
-+-----------------------------------------------+
-+-----------------------------------------------+
-|                                               |
-| <  New Project / Edit Project                 |
-|                                               |
-+-----------------------------------------------+
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|  +----------------------------------------+   |
-|                                               |
-|    Name                                       |
-|                                               |
-|                                               |
-|  +-----+                                      |
-|  |░░░░░|                                      |
-|  |░░░░░| Colour                               |
-|  |░░░░░|                                      |
-|  +-----+                                      |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                               |
-|                                   +---+ +---+ |
-|                                   |   | |   | |
-|                                   | X | |  /| |
-|                                   |   | | v | |
-|                                   +---+ +---+ |
-|                                               |
-+-----------------------------------------------+
-```
+A list of “user stories” (and I use that term very loosely) guiding the development of this app is available in [design/user-stories.md](design/user-stories.md); any unchecked boxes are outstanding items on the todo list!
