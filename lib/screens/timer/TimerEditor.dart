@@ -163,6 +163,7 @@ class _TimerEditorState extends State<TimerEditor> {
                     currentTime: _endTime,
                     minTime: _startTime,
                     onChanged: (DateTime dt) => setState(() => _endTime = dt),
+                    onConfirm: (DateTime dt) => setState(() => _endTime = dt),
                     theme: DatePickerTheme(
                       cancelStyle: Theme.of(context).textTheme.button,
                       doneStyle: Theme.of(context).textTheme.button,
@@ -172,18 +173,21 @@ class _TimerEditorState extends State<TimerEditor> {
                   );
                 },
               ),
-              secondaryActions: <Widget>[
-                IconSlideAction(
-                  color: Theme.of(context).accentColor,
-                  foregroundColor: Theme.of(context).accentIconTheme.color,
-                  icon: FontAwesomeIcons.solidPlayCircle,
-                  onTap: () {
-                    setState(() {
-                      _endTime = null;
-                    });
-                  },
-                )
-              ],
+              secondaryActions:
+                _endTime == null
+                  ? <Widget>[]
+                  : <Widget>[
+                    IconSlideAction(
+                      color: Theme.of(context).errorColor,
+                      foregroundColor: Theme.of(context).accentIconTheme.color,
+                      icon: FontAwesomeIcons.minusCircle,
+                      onTap: () {
+                        setState(() {
+                          _endTime = null;
+                        });
+                      },
+                    )
+                  ],
             ),
             StreamBuilder(
               initialData: DateTime.now(),

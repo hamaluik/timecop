@@ -30,6 +30,7 @@ class StartTimerButton extends StatelessWidget {
       child: Icon(FontAwesomeIcons.play),
       backgroundColor: Theme.of(context).accentColor,
       foregroundColor: Theme.of(context).accentIconTheme.color,
+      mini: true,
       onPressed: () {
         final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
         assert(timers != null);

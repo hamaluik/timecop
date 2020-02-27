@@ -28,7 +28,7 @@ class AboutScreen extends StatelessWidget {
       title: Text('About'),
       applicationVersion: 'v{{ version }}-{{ buildNumber }}',
       applicationDescription: Text(
-        'A time tracking app that respects your privacy and gets the job done without being fancy.',
+        'A time tracking app that respects your privacy and gets the job done without getting too fancy.',
         textAlign: TextAlign.justify,
       ),
       applicationIcon: SvgPicture.asset(
