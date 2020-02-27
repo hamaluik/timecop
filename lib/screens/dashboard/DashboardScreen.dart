@@ -14,13 +14,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:timecop/blocs/timers/bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:timecop/screens/dashboard/components/ProjectSelectField.dart';
 import 'package:timecop/screens/dashboard/components/RunningTimers.dart';
 import 'package:timecop/screens/dashboard/components/StartTimerButton.dart';
-import 'package:timecop/screens/dashboard/components/StoppedTimerRow.dart';
 import 'package:timecop/screens/dashboard/components/StoppedTimers.dart';
 
 import 'components/DescriptionField.dart';
@@ -33,7 +31,13 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(FontAwesomeIcons.hourglassHalf),
+        leading: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: SvgPicture.asset(
+            "icon.no-bg.pink.svg",
+            semanticsLabel: "Time Cop Logo",
+          )
+        ),
         title: Text("Time Cop"),
         actions: <Widget>[
           PopupMenu(),

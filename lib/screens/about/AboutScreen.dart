@@ -15,6 +15,7 @@
 import 'package:about/about.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -30,7 +31,11 @@ class AboutScreen extends StatelessWidget {
         'A time tracking app that respects your privacy and gets the job done without being fancy.',
         textAlign: TextAlign.justify,
       ),
-      applicationIcon: FlutterLogo(size: 100),
+      applicationIcon: SvgPicture.asset(
+        "icon.no-bg.pink.svg",
+        semanticsLabel: "Time Cop Logo",
+        height: 100,
+      ),
       applicationLegalese: 'Copyright © Kenton Hamaluik, {{ year }}',
       children: <Widget>[
         MarkdownPageListTile(

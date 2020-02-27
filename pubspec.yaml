@@ -18,18 +18,29 @@ dependencies:
   flutter_slidable: ^0.5.4
   about: ^1.0.5
   url_launcher: ^5.4.2
+  flutter_svg: ^0.17.1
 
 dev_dependencies:
   pedantic: ^1.0.0
   effective_dart: ^1.0.0
+  flutter_launcher_icons: ^0.7.4
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "icon.png"
+  adaptive_icon_background: "#37474F"
+  adaptive_icon_foreground: "icon_android_fg.png"
 
 flutter:
   uses-material-design: true
   assets:
     - README.md
     - CHANGELOG.md
+    - icon.no-bg.svg
+    - icon.no-bg.pink.svg
   fonts:
     - family: PublicSans
       fonts:
