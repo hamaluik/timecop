@@ -28,7 +28,7 @@ class PopupMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<MenuItem>(
-      icon: Icon(FontAwesomeIcons.caretDown),
+      icon: Icon(FontAwesomeIcons.dungeon),
       onSelected: (MenuItem item) {
         switch(item) {
           case MenuItem.projects:

@@ -32,9 +32,9 @@ class DashboardScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(12.0),
           child: SvgPicture.asset(
-            "icon.no-bg.pink.svg",
+            "icon.no-bg.svg",
             semanticsLabel: "Time Cop Logo",
           )
         ),

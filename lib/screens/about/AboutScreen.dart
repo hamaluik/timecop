@@ -40,12 +40,12 @@ class AboutScreen extends StatelessWidget {
       children: <Widget>[
         MarkdownPageListTile(
           filename: 'README.md',
-          title: Text('View Readme'),
+          title: Text('Readme'),
           icon: Icon(FontAwesomeIcons.readme),
         ),
         MarkdownPageListTile(
           filename: 'CHANGELOG.md',
-          title: Text('View Changelog'),
+          title: Text('Changelog'),
           icon: Icon(FontAwesomeIcons.boxes),
         ),
         ListTile(
