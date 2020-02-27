@@ -34,4 +34,12 @@ class ProjectsBloc extends Bloc<ProjectsEvent, ProjectsState> {
       yield ProjectsState(projects);
     }
   }
+
+  Project getProjectByID(int id) {
+    if(id == null) return null;
+    for(Project p in state.projects) {
+      if(p.id == id) return p;
+    }
+    return null;
+  }
 }

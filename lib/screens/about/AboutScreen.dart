@@ -25,9 +25,9 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AboutPage(
       title: Text('About'),
-      applicationVersion: 'Version {{ version }}, build #{{ buildNumber }}',
+      applicationVersion: 'v{{ version }}-{{ buildNumber }}',
       applicationDescription: Text(
-        'A time tracking app that respects your privacy and the gets the job done without being fancy.',
+        'A time tracking app that respects your privacy and gets the job done without being fancy.',
         textAlign: TextAlign.justify,
       ),
       applicationIcon: FlutterLogo(size: 100),
@@ -48,15 +48,8 @@ class AboutScreen extends StatelessWidget {
           title: Text("Source Code"),
           onTap: () => launch("https://github.com/hamaluik/timecop"),
         ),
-        ListTile(
-          leading: Icon(FontAwesomeIcons.scroll),
-          title: Text('View License'),
-          onTap: () {
-            // TODO: properly render the text of the LICENSE file
-          },
-        ),
         LicensesPageListTile(
-          icon: Icon(FontAwesomeIcons.glassCheers),
+          icon: Icon(FontAwesomeIcons.scroll),
         ),
       ],
     );

@@ -14,9 +14,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/models/timer_entry.dart';
+
+import 'ProjectColour.dart';
 
 class RunningTimerRow extends StatelessWidget {
   final TimerEntry timer;
@@ -33,6 +37,13 @@ class RunningTimerRow extends StatelessWidget {
     return description;
   }
 
+  static TextStyle styleDescription(BuildContext context, String description) {
+    if(description == null || description.trim().isEmpty) {
+      return TextStyle(color: Theme.of(context).disabledColor);
+    }
+    return null;
+  }
+
   static String formatDuration(Duration d) {
     return
         d.inHours.toString().padLeft(2, "0") + "h"
@@ -42,19 +53,20 @@ class RunningTimerRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Expanded(
-          flex: 1,
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
-            child: Text(formatDescription(timer.description)),
-          ),
-        ),
-        Text(formatDuration(now.difference(timer.startTime)), style: TextStyle(fontFamily: "FiraMono")),
-        IconButton(
-          icon: Icon(FontAwesomeIcons.solidStopCircle),
-          onPressed: () {
+    return Slidable(
+      actionPane: SlidableDrawerActionPane(),
+      actionExtentRatio: 0.15,
+      child: ListTile(
+        leading: ProjectColour(project: BlocProvider.of<ProjectsBloc>(context).getProjectByID(timer.projectID)),
+        title: Text(formatDescription(timer.description), style: styleDescription(context, timer.description)),
+        trailing: Text(formatDuration(now.difference(timer.startTime)), style: TextStyle(fontFamily: "FiraMono")),
+      ),
+      secondaryActions: <Widget>[
+        IconSlideAction(
+          color: Theme.of(context).accentColor,
+          foregroundColor: Theme.of(context).accentIconTheme.color,
+          icon: FontAwesomeIcons.solidStopCircle,
+          onTap: () {
             final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
             assert(timers != null);
             timers.add(StopTimer(timer));

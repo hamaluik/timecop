@@ -19,6 +19,8 @@ import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 
+import 'ProjectColour.dart';
+
 class ProjectSelectField extends StatefulWidget {
   ProjectSelectField({Key key}) : super(key: key);
 
@@ -32,6 +34,8 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
     return BlocBuilder<ProjectsBloc, ProjectsState>(
       builder: (BuildContext context, ProjectsState projectsState) => BlocBuilder<DashboardBloc, DashboardState>(
         builder: (BuildContext context, DashboardState state) => DropdownButton(
+          underline: Container(),
+          elevation: 0,
           onChanged: (Project newProject) {
             final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
             bloc.add(ProjectChangedEvent(newProject));
@@ -40,10 +44,10 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
             DropdownMenuItem<Project>(
               child: Row(
                 children: <Widget>[
-                  Icon(FontAwesomeIcons.circle, size: 16),
+                  ProjectColour(project: null),
                   Padding(
                     padding: EdgeInsets.fromLTRB(4.0, 0, 0, 0),
-                    child: Text("(no project)"),
+                    child: Text("(no project)", style: TextStyle(color: Theme.of(context).disabledColor)),
                   ),
                 ],
               ),
@@ -53,7 +57,7 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
             (Project project) => DropdownMenuItem<Project>(
               child: Row(
                 children: <Widget>[
-                  Icon(FontAwesomeIcons.solidCircle, size: 16, color: project.colour,),
+                  ProjectColour(project: project,),
                   Padding(
                     padding: EdgeInsets.fromLTRB(4.0, 0, 0, 0),
                     child: Text(project.name),

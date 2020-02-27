@@ -14,6 +14,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 
 class DescriptionField extends StatefulWidget {
@@ -32,10 +33,6 @@ class _DescriptionFieldState extends State<DescriptionField> {
     _controller = TextEditingController(text: BlocProvider.of<DashboardBloc>(context)?.state?.newDescription);
   }
 
-  void _updateDescription(DashboardBloc bloc, String description) {
-    bloc.add(DescriptionChangedEvent(description));
-  }
-
   @override
   Widget build(BuildContext context) {
     final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
@@ -48,7 +45,17 @@ class _DescriptionFieldState extends State<DescriptionField> {
             decoration: InputDecoration(
               hintText: "What are you doing?",
             ),
-            onChanged: (String description) => _updateDescription(bloc, description),
+            onChanged: (String description) => bloc.add(DescriptionChangedEvent(description)),
+            onSubmitted: (String description) {
+              _controller.clear();
+              FocusScope.of(context).unfocus();
+              bloc.add(DescriptionChangedEvent(description));
+
+              final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+              assert(timers != null);
+              timers.add(CreateTimer(description: bloc.state.newDescription, project: bloc.state.newProject));
+              bloc.add(ResetFieldsEvent());
+            },
           ),
       )
     );

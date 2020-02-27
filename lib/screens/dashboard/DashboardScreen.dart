@@ -21,6 +21,7 @@ import 'package:timecop/screens/dashboard/components/ProjectSelectField.dart';
 import 'package:timecop/screens/dashboard/components/RunningTimers.dart';
 import 'package:timecop/screens/dashboard/components/StartTimerButton.dart';
 import 'package:timecop/screens/dashboard/components/StoppedTimerRow.dart';
+import 'package:timecop/screens/dashboard/components/StoppedTimers.dart';
 
 import 'components/DescriptionField.dart';
 import 'components/PopupMenu.dart';
@@ -45,23 +46,7 @@ class DashboardScreen extends StatelessWidget {
         children: <Widget>[
           Expanded(
             flex: 1,
-            child: BlocBuilder<TimersBloc, TimersState>(
-              builder: (BuildContext context, TimersState timersState) => ListView(
-                children: <Widget>[
-                  Text(
-                    "Stopped Timers",
-                    style: TextStyle(
-                      color: Theme.of(context).accentColor,
-                      fontWeight: FontWeight.w800
-                    )
-                  ),
-                  Divider(),
-                ].followedBy(
-                  timersState.timers.where((timer) => timer.endTime != null)
-                  .map((timer) => StoppedTimerRow(timer: timer))
-                ).toList(),
-              ),
-            )
+            child: StoppedTimers(),
           ),
           RunningTimers(),
           BlocProvider<DashboardBloc>(
@@ -69,7 +54,7 @@ class DashboardScreen extends StatelessWidget {
             child: Material(
               elevation: 4.0,
               child: Container(
-                //color: Theme.of(context).primaryColor,
+                //color: Theme.of(context).highlightColor,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Row(

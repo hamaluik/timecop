@@ -51,5 +51,10 @@ class TimersBloc extends Bloc<TimersEvent, TimersState> {
       }).toList();
       yield TimersState(timers, DateTime.now());
     }
+    else if(event is DeleteTimer) {
+      await data.deleteTimer(event.timer);
+      List<TimerEntry> timers = state.timers.where((t) => t.id != event.timer.id).toList();
+      yield TimersState(timers, DateTime.now());
+    }
   }
 }

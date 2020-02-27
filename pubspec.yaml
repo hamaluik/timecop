@@ -30,7 +30,6 @@ flutter:
   assets:
     - README.md
     - CHANGELOG.md
-    - LICENSE
   fonts:
     - family: PublicSans
       fonts:

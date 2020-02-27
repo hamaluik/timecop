@@ -2,7 +2,7 @@
   Time Cop
 </h1>
 <div align="center">
-  A time tracking app that respects your privacy and the gets the job done without being fancy.
+  A time tracking app that respects your privacy and gets the job done without being fancy.
 </div>
 <br />
 <div align="center">
@@ -18,6 +18,7 @@
     - [ ] Timers may be started with a missing description and/or project
     - [ ] Timers may be started with a description and/or project pre-applied
     - [ ] Timers must be manually stopped with a button
+    - [ ] Timers may be "resumed" by effectively cloning the project and description and starting from the current time
 - [ ] Multiple timers may be active at once
 - [ ] The user may specify a default project to pre-populate all new timers with
 - [ ] Timers can be created manually by specifying a start time
