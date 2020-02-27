@@ -13,6 +13,9 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:timecop/blocs/projects/bloc.dart';
 
 class ProjectsScreen extends StatelessWidget {
   const ProjectsScreen({Key key}) : super(key: key);
@@ -22,6 +25,13 @@ class ProjectsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Projects"),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(FontAwesomeIcons.plus),
+        onPressed: () {
+          final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
+          assert(projects != null);
+        },
       ),
     );
   }

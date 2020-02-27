@@ -26,11 +26,22 @@ class DescriptionField extends StatefulWidget {
 
 class _DescriptionFieldState extends State<DescriptionField> {
   TextEditingController _controller;
+  FocusNode _focus;
 
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController(text: BlocProvider.of<DashboardBloc>(context)?.state?.newDescription);
+    final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
+    assert(bloc != null);
+    _controller = TextEditingController(text: bloc.state.newDescription);
+    _focus = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _focus.dispose();
+    super.dispose();
   }
 
   @override
@@ -38,26 +49,35 @@ class _DescriptionFieldState extends State<DescriptionField> {
     final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
 
     return BlocBuilder<DashboardBloc, DashboardState>(
-      builder: (BuildContext context, DashboardState state) => Container(
-        child: TextField(
-          controller: _controller,
-            autocorrect: true,
-            decoration: InputDecoration(
-              hintText: "What are you doing?",
-            ),
-            onChanged: (String description) => bloc.add(DescriptionChangedEvent(description)),
-            onSubmitted: (String description) {
-              _controller.clear();
-              FocusScope.of(context).unfocus();
-              bloc.add(DescriptionChangedEvent(description));
+      builder: (BuildContext context, DashboardState state) {
+        if(state.timerWasStarted) {
+          _controller.clear();
+          FocusScope.of(context).unfocus();
+          bloc.add(ResetEvent());
+        }
 
-              final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
-              assert(timers != null);
-              timers.add(CreateTimer(description: bloc.state.newDescription, project: bloc.state.newProject));
-              bloc.add(ResetFieldsEvent());
-            },
-          ),
-      )
+        return Container(
+          child: TextField(
+            focusNode: _focus,
+            controller: _controller,
+              autocorrect: true,
+              decoration: InputDecoration(
+                hintText: "What are you doing?",
+              ),
+              onChanged: (String description) => bloc.add(DescriptionChangedEvent(description)),
+              onSubmitted: (String description) {
+                //_controller.clear();
+                FocusScope.of(context).unfocus();
+                bloc.add(DescriptionChangedEvent(description));
+
+                //final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+                //assert(timers != null);
+                //timers.add(CreateTimer(description: bloc.state.newDescription, project: bloc.state.newProject));
+                //bloc.add(ResetFieldsEvent());
+              },
+            ),
+        );
+      }
     );
   }
 }

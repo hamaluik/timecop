@@ -25,7 +25,7 @@ class StartTimerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
     assert(bloc != null);
-    
+
     return FloatingActionButton(
       child: Icon(FontAwesomeIcons.play),
       backgroundColor: Theme.of(context).accentColor,
@@ -35,7 +35,7 @@ class StartTimerButton extends StatelessWidget {
         assert(timers != null);
 
         timers.add(CreateTimer(description: bloc.state.newDescription, project: bloc.state.newProject));
-        bloc.add(ResetFieldsEvent());
+        bloc.add(TimerWasStartedEvent());
       },
     );
   }

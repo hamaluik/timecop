@@ -9,20 +9,23 @@ part 'dashboard_state.dart';
 
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   @override
-  DashboardState get initialState => DashboardState("", null);
+  DashboardState get initialState => DashboardState("", null, false);
 
   @override
   Stream<DashboardState> mapEventToState(
     DashboardEvent event,
   ) async* {
     if(event is DescriptionChangedEvent) {
-      yield DashboardState(event.description, state.newProject);
+      yield DashboardState(event.description, state.newProject, false);
     }
     else if(event is ProjectChangedEvent) {
-      yield DashboardState(state.newDescription, event.project);
+      yield DashboardState(state.newDescription, event.project, false);
     }
-    else if(event is ResetFieldsEvent) {
-      yield DashboardState("", null);
+    else if(event is TimerWasStartedEvent) {
+      yield DashboardState("", null, true);
+    }
+    else if(event is ResetEvent) {
+      yield DashboardState("", null, false);
     }
   }
 }
