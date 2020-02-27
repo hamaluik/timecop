@@ -39,9 +39,7 @@ class TimerEntry extends Equatable {
         endTime: endTime ?? timer.endTime,
       );
 
-  String formatDuration() {
-    Duration d = (endTime ?? DateTime.now()).difference(startTime);
-
+  static String formatDuration(Duration d) {
     if(d.inHours > 0) {
       return
           d.inHours.toString() + "h "
@@ -56,5 +54,10 @@ class TimerEntry extends Equatable {
     else {
       return d.inSeconds.toString() + "s";
     }
+  }
+
+  String formatTime() {
+    Duration d = (endTime ?? DateTime.now()).difference(startTime);
+    return formatDuration(d);
   }
 }

@@ -20,6 +20,7 @@ import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/models/timer_entry.dart';
+import 'package:timecop/screens/timer/TimerEditor.dart';
 
 class RunningTimerRow extends StatelessWidget {
   final TimerEntry timer;
@@ -51,7 +52,11 @@ class RunningTimerRow extends StatelessWidget {
       child: ListTile(
         leading: ProjectColour(project: BlocProvider.of<ProjectsBloc>(context).getProjectByID(timer.projectID)),
         title: Text(formatDescription(timer.description), style: styleDescription(context, timer.description)),
-        trailing: Text(timer.formatDuration(), style: TextStyle(fontFamily: "FiraMono")),
+        trailing: Text(timer.formatTime(), style: TextStyle(fontFamily: "FiraMono")),
+        onTap: () => Navigator.of(context).push(MaterialPageRoute<TimerEditor>(
+          builder: (BuildContext context) => TimerEditor(timer: timer,),
+          fullscreenDialog: true,
+        ))
       ),
       actions: <Widget>[
         IconSlideAction(

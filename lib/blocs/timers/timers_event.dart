@@ -42,6 +42,12 @@ class StopTimer extends TimersEvent {
   @override List<Object> get props => [timer];
 }
 
+class EditTimer extends TimersEvent {
+  final TimerEntry timer;
+  EditTimer(this.timer);
+  @override List<Object> get props => [timer];
+}
+
 class DeleteTimer extends TimersEvent {
   final TimerEntry timer;
   DeleteTimer(this.timer);
