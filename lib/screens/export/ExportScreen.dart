@@ -14,22 +14,15 @@
 
 import 'package:flutter/material.dart';
 
-final ThemeData lightTheme = ThemeData(
-  brightness: Brightness.light,
-  primarySwatch: Colors.indigo,
-  primaryColor: Colors.indigo[900],
-  primaryColorBrightness: Brightness.dark,
-  accentColor: Colors.grey[900],
-  accentColorBrightness: Brightness.dark,
-  fontFamily: 'PublicSans',
-);
+class ExportScreen extends StatelessWidget {
+  const ExportScreen({Key key}) : super(key: key);
 
-final ThemeData darkTheme = ThemeData(
-  brightness: Brightness.dark,
-  primarySwatch: Colors.grey,
-  primaryColor: Colors.grey[900],
-  primaryColorBrightness: Brightness.dark,
-  accentColor: Colors.indigo[700],
-  accentColorBrightness: Brightness.dark,
-  fontFamily: 'PublicSans',
-);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Export"),
+      ),
+    );
+  }
+}

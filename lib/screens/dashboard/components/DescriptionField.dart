@@ -45,8 +45,10 @@ class _DescriptionFieldState extends State<DescriptionField> {
       child: TextField(
         controller: _controller,
           autocorrect: true,
+          style: TextStyle(color: Theme.of(context).primaryTextTheme.body1.color),
           decoration: InputDecoration(
             hintText: "What are you doing?",
+            hintStyle: TextStyle(color: Theme.of(context).primaryTextTheme.caption.color),
           ),
           onChanged: (String description) => _updateDescription(bloc, description),
         ),

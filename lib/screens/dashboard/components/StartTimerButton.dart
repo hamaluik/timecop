@@ -13,23 +13,17 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-final ThemeData lightTheme = ThemeData(
-  brightness: Brightness.light,
-  primarySwatch: Colors.indigo,
-  primaryColor: Colors.indigo[900],
-  primaryColorBrightness: Brightness.dark,
-  accentColor: Colors.grey[900],
-  accentColorBrightness: Brightness.dark,
-  fontFamily: 'PublicSans',
-);
+class StartTimerButton extends StatelessWidget {
+  const StartTimerButton({Key key}) : super(key: key);
 
-final ThemeData darkTheme = ThemeData(
-  brightness: Brightness.dark,
-  primarySwatch: Colors.grey,
-  primaryColor: Colors.grey[900],
-  primaryColorBrightness: Brightness.dark,
-  accentColor: Colors.indigo[700],
-  accentColorBrightness: Brightness.dark,
-  fontFamily: 'PublicSans',
-);
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(FontAwesomeIcons.play),
+      color: Theme.of(context).primaryIconTheme.color,
+      onPressed: () {},
+    );
+  }
+}

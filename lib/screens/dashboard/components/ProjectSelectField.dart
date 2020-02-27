@@ -14,22 +14,16 @@
 
 import 'package:flutter/material.dart';
 
-final ThemeData lightTheme = ThemeData(
-  brightness: Brightness.light,
-  primarySwatch: Colors.indigo,
-  primaryColor: Colors.indigo[900],
-  primaryColorBrightness: Brightness.dark,
-  accentColor: Colors.grey[900],
-  accentColorBrightness: Brightness.dark,
-  fontFamily: 'PublicSans',
-);
+class ProjectSelectField extends StatefulWidget {
+  ProjectSelectField({Key key}) : super(key: key);
 
-final ThemeData darkTheme = ThemeData(
-  brightness: Brightness.dark,
-  primarySwatch: Colors.grey,
-  primaryColor: Colors.grey[900],
-  primaryColorBrightness: Brightness.dark,
-  accentColor: Colors.indigo[700],
-  accentColorBrightness: Brightness.dark,
-  fontFamily: 'PublicSans',
-);
+  @override
+  _ProjectSelectFieldState createState() => _ProjectSelectFieldState();
+}
+
+class _ProjectSelectFieldState extends State<ProjectSelectField> {
+  @override
+  Widget build(BuildContext context) {
+    return Text("Project", style: TextStyle(color: Theme.of(context).primaryTextTheme.caption.color));
+  }
+}

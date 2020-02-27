@@ -17,7 +17,6 @@ import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/settings/settings_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/data_providers/data_provider.dart';
 import 'package:timecop/data_providers/database_provider.dart';
@@ -66,17 +65,13 @@ class _TimeCopApp extends StatefulWidget {
   State<StatefulWidget> createState() => _TimeCopAppState();
 }
 
-enum Screen { logs, projects, export, settings }
-
 class _TimeCopAppState extends State<_TimeCopApp>
     with WidgetsBindingObserver {
-  Screen _currentScreen;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _currentScreen = Screen.logs;
 
     // send commands to our top-level blocs to get them to initialize
     BlocProvider.of<SettingsBloc>(context).add(LoadSettingsFromRepository());
@@ -100,22 +95,6 @@ class _TimeCopAppState extends State<_TimeCopApp>
 
   @override
   Widget build(BuildContext context) {
-    Widget body;
-    switch(_currentScreen) {
-      case Screen.logs:
-        body = Container();
-        break;
-      case Screen.projects:
-        body = Container();
-        break;
-      case Screen.export:
-        body = Container();
-        break;
-      case Screen.settings:
-        body = Container();
-        break;
-    }
-
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<SettingsProvider>.value(value: widget.settings),

@@ -16,12 +16,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
+import 'package:timecop/screens/dashboard/components/ProjectSelectField.dart';
+import 'package:timecop/screens/dashboard/components/StartTimerButton.dart';
 
 import 'components/DescriptionField.dart';
-
-enum MenuItem {
-  projects, export, about,
-}
+import 'components/PopupMenu.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({Key key}) : super(key: key);
@@ -30,21 +29,10 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(FontAwesomeIcons.hourglassStart),
+        leading: Icon(FontAwesomeIcons.hourglassHalf),
         title: Text("Time Cop"),
         actions: <Widget>[
-          PopupMenuButton<MenuItem>(
-            icon: Icon(FontAwesomeIcons.caretDown),
-            onSelected: (MenuItem item) {},
-            itemBuilder: (BuildContext context) {
-              return [
-                PopupMenuItem(
-                  child: Text("Projects"),
-                  value: MenuItem.projects,
-                )
-              ];
-            },
-          )
+          PopupMenu(),
         ],
       ),
       body: Column(
@@ -72,13 +60,9 @@ class DashboardScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.fromLTRB(4.0, 0, 4.0, 0),
-                      child: Text("Project"),
+                      child: ProjectSelectField(),
                     ),
-                    IconButton(
-                      icon: Icon(FontAwesomeIcons.play),
-                      color: Theme.of(context).primaryIconTheme.color,
-                      onPressed: () {},
-                    )
+                    StartTimerButton(),
                   ],
                 ),
               ),
