@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
+import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 
@@ -55,7 +56,7 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
                         ProjectColour(project: null),
                         Padding(
                           padding: EdgeInsets.fromLTRB(4.0, 0, 0, 0),
-                          child: Text("(no project)", style: TextStyle(color: Theme.of(context).disabledColor)),
+                          child: Text(L10N.of(context).tr.noProject, style: TextStyle(color: Theme.of(context).disabledColor)),
                         ),
                       ],
                     ),
@@ -79,7 +80,7 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
                       ProjectColour(project: null),
                       Padding(
                         padding: EdgeInsets.fromLTRB(4.0, 0, 0, 0),
-                        child: Text("(no project)", style: TextStyle(color: Theme.of(context).disabledColor)),
+                        child: Text(L10N.of(context).tr.noProject, style: TextStyle(color: Theme.of(context).disabledColor)),
                       ),
                     ],
                   ),

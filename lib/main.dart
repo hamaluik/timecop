@@ -14,6 +14,7 @@
 
 import 'dart:async';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/settings/settings_event.dart';
@@ -23,13 +24,18 @@ import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/data_providers/data_provider.dart';
 import 'package:timecop/data_providers/database_provider.dart';
 import 'package:timecop/data_providers/settings_provider.dart';
+import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/dashboard/DashboardScreen.dart';
 import 'blocs/theme/bloc.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final SettingsProvider settings = await SettingsProvider.load();
   final DataProvider data = await DatabaseProvider.open();
+
+  // setup intl date formats
+  await initializeDateFormatting();
 
   assert(settings != null);
 
@@ -107,6 +113,25 @@ class _TimeCopAppState extends State<_TimeCopApp> with WidgetsBindingObserver {
         title: 'TimeCop',
         theme: BlocProvider.of<ThemeBloc>(context).state.theme,
         home: DashboardScreen(),
+        localizationsDelegates: [
+          L10N.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          const Locale('en'),
+          const Locale('fr'),
+          const Locale('de'),
+          const Locale('es'),
+          const Locale('hi'),
+          const Locale('id'),
+          const Locale('ja'),
+          const Locale('ko'),
+          const Locale('pt'),
+          const Locale('ru'),
+          const Locale('zh'),
+        ],
       )
     );
   }
