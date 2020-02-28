@@ -6,11 +6,15 @@ import 'l10n/messages_all.dart';
 class TimeCopLocalizations {
   TimeCopLocalizations(this.localeName);
 
+  static const LocalizationsDelegate<TimeCopLocalizations> delegate = _TimeCopLocalizationsDelegate();
+
   static Future<TimeCopLocalizations> load(Locale locale) async {
-    final String name = locale.countryCode.isEmpty ? locale.languageCode : locale.toString();
+    final String name = (locale.countryCode?.isEmpty ?? true) ? locale.languageCode : locale.toString();
     final String localeName = Intl.canonicalizedLocale(name);
 
-    return initializeMessages(localeName).then((_) {
+    print("loading messages for locale $localeName...");
+    return initializeMessages(localeName).then((bool success) {
+      print("success: $success");
       return TimeCopLocalizations(localeName);
     });
   }
@@ -103,12 +107,16 @@ String get about {
   }
 
   String get noProject {
-    return Intl.message(
+    print('getting (no project) string..');
+    print('localName: ' + localeName);
+    String msg = Intl.message(
       '(no project)',
       name: 'noProject',
       desc: '',
       args: [],
     );
+    print('got message: ' + msg);
+    return msg;
   }
 
   String get confirmDelete {
@@ -355,8 +363,8 @@ String get about {
   }
 }
 
-class TimeCopLocalizationsDelegate extends LocalizationsDelegate<TimeCopLocalizations> {
-  const TimeCopLocalizationsDelegate();
+class _TimeCopLocalizationsDelegate extends LocalizationsDelegate<TimeCopLocalizations> {
+  const _TimeCopLocalizationsDelegate();
 
   @override
   bool isSupported(Locale locale) => ['de', 'en', 'es', 'fr', 'hi', 'id', 'ja', 'ko', 'pt', 'ru', 'zh'].contains(locale.languageCode);
@@ -365,5 +373,5 @@ class TimeCopLocalizationsDelegate extends LocalizationsDelegate<TimeCopLocaliza
   Future<TimeCopLocalizations> load(Locale locale) => TimeCopLocalizations.load(locale);
 
   @override
-  bool shouldReload(TimeCopLocalizationsDelegate old) => false;
+  bool shouldReload(_TimeCopLocalizationsDelegate old) => false;
 }

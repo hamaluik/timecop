@@ -33,6 +33,10 @@ void main() async {
   final SettingsProvider settings = await SettingsProvider.load();
   final DataProvider data = await DatabaseProvider.open();
 
+  // load languages
+  await TimeCopLocalizations.delegate.load(Locale('en'));
+  await TimeCopLocalizations.delegate.load(Locale('fr'));
+
   assert(settings != null);
 
   runApp(MultiBlocProvider(
@@ -110,16 +114,16 @@ class _TimeCopAppState extends State<_TimeCopApp> with WidgetsBindingObserver {
         theme: BlocProvider.of<ThemeBloc>(context).state.theme,
         home: DashboardScreen(),
         localizationsDelegates: [
-          TimeCopLocalizationsDelegate(),
+          TimeCopLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: [
-          const Locale('de'),
           const Locale('en'),
-          const Locale('es'),
           const Locale('fr'),
+          const Locale('de'),
+          const Locale('es'),
           const Locale('hi'),
           const Locale('id'),
           const Locale('ja'),
@@ -128,6 +132,16 @@ class _TimeCopAppState extends State<_TimeCopApp> with WidgetsBindingObserver {
           const Locale('ru'),
           const Locale('zh'),
         ],
+        localeResolutionCallback: (Locale locale, Iterable<Locale> supportedLocales) {
+          for (Locale supportedLocale in supportedLocales) {
+            if(supportedLocale.languageCode == locale.languageCode) {
+              print('using supported locale: ' + supportedLocale.languageCode);
+              return supportedLocale;
+            }
+          }
+          print('using english fallback: ' + supportedLocales.first.languageCode);
+          return supportedLocales.first;
+        },
       )
     );
   }
