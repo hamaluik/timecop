@@ -37,5 +37,6 @@
     "endTime": "終了時間",
     "duration": "期間",
     "appName": "タイムコップ",
-    "logoSemantics": "タイムコップのロゴ"
+    "logoSemantics": "タイムコップのロゴ",
+    "noDescription": "（説明なし）"
 }

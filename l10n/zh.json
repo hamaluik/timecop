@@ -37,5 +37,6 @@
     "endTime": "时间结束",
     "duration": "持续时间",
     "appName": "时间警察",
-    "logoSemantics": "时间警察徽标"
+    "logoSemantics": "时间警察徽标",
+    "noDescription": "（没有说明）"
 }

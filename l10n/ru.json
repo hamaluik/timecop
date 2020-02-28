@@ -37,5 +37,6 @@
     "endTime": "Время окончания",
     "duration": "продолжительность",
     "appName": "Time Cop",
-    "logoSemantics": "Time Cop Logo"
+    "logoSemantics": "Time Cop Logo",
+    "noDescription": "(без описания)"
 }
