@@ -28,6 +28,7 @@ Time tracking in and of itself is rather straightforward (hence all the apps on 
 * Export data as a `.csv` file, filtered by timespans and projects
 * Export the app's database for full access to all of its data
 * Automatic light mode / dark mode based on your device settings
+* Localized in several languages (thanks to [Google Translate](https://cloud.google.com/translate)): English, Arabic, German, Spanish, French, Hindi, Indonesian, Japanese, Korean, Portuguese, Russian, Chinese (Simplified)
 * Open source ([licensed under Apache-2.0](LICENSE))—fork away!
 
 ## Screenshots
@@ -51,6 +52,10 @@ Here are a few resources to get you started if this is your first Flutter projec
 
 For help getting started with Flutter, view its [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+### Localizations
+
+All translations are [managed online](https://poeditor.com/join/project/AekdZsEyIg) using [POEditor.com](https://poeditor.com). Currently all translations (except English) were auto-translated by [Google Translate](https://cloud.google.com/translate). If you notice any incorrect strings, I would love to know about it so that it can be fixed asap. Similarly, if you want to add a language, please do!
 
 ## Todo
 

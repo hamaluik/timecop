@@ -86,7 +86,7 @@ class _ExportScreenState extends State<ExportScreen> {
                   L10N.of(context).tr.filter,
                   style: TextStyle(
                     color: Theme.of(context).accentColor,
-                    fontWeight: FontWeight.w800
+                    fontWeight: FontWeight.w700
                   )
                 ),
               ],
@@ -181,7 +181,7 @@ class _ExportScreenState extends State<ExportScreen> {
                         style: TextStyle(
                           color: Theme.of(context).accentColor,
                           fontSize: Theme.of(context).textTheme.body1.fontSize,
-                          fontWeight: FontWeight.w800
+                          fontWeight: FontWeight.w700
                         )
                       ),
                       trailing: Checkbox(

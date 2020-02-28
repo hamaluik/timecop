@@ -1,6 +1,6 @@
 name: timecop
 description: A time tracking app that respects your privacy
-version: 1.0.0+1
+version: 1.0.0+3
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -100,7 +100,3 @@ flutter:
       fonts:
         - asset: fonts/FiraMono-Regular.ttf
           weight: 400
-        - asset: fonts/FiraMono-Medium.ttf
-          weight: 500
-        - asset: fonts/FiraMono-Bold.ttf
-          weight: 700

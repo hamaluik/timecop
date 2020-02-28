@@ -39,7 +39,7 @@ class DayGrouping {
                 _dateFormat.format(date),
                 style: TextStyle(
                   color: Theme.of(context).accentColor,
-                  fontWeight: FontWeight.w800
+                  fontWeight: FontWeight.w700
                 )
               ),
               Divider(),

@@ -49,7 +49,7 @@ class RunningTimers extends StatelessWidget {
                       L10N.of(context).tr.runningTimers,
                       style: TextStyle(
                         color: Theme.of(context).accentColor,
-                        fontWeight: FontWeight.w800
+                        fontWeight: FontWeight.w700
                       )
                     ),
                   ],
