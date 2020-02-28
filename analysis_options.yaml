@@ -1,10 +1,11 @@
 include: package:pedantic/analysis_options.yaml
 
 analyzer:
-  exclude: [build/**]
-  strong-mode:
-    implicit-casts: false
-    implicit-dynamic: false
+  exclude:
+    - build/**
+#  strong-mode:
+#    implicit-casts: false
+#    implicit-dynamic: false
 
 linter:
   rules:

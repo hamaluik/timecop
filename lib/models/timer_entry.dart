@@ -42,17 +42,17 @@ class TimerEntry extends Equatable {
   static String formatDuration(Duration d) {
     if(d.inHours > 0) {
       return
-          d.inHours.toString() + "h "
-        + (d.inMinutes - (d.inHours * 60)).toString() + "m "
-        + (d.inSeconds - (d.inMinutes * 60)).toString() + "s";
+          d.inHours.toString() + ":"
+        + (d.inMinutes - (d.inHours * 60)).toString().padLeft(2, "0") + ":"
+        + (d.inSeconds - (d.inMinutes * 60)).toString().padLeft(2, "0");
     }
     else if(d.inMinutes > 0) {
       return
-          d.inMinutes.toString() + "m "
-        + (d.inSeconds - (d.inMinutes * 60)).toString() + "s";
+          d.inMinutes.toString() + ":"
+        + (d.inSeconds - (d.inMinutes * 60)).toString().padLeft(2, "0");
     }
     else {
-      return d.inSeconds.toString() + "s";
+      return d.inSeconds.toString();
     }
   }
 

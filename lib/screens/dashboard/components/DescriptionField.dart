@@ -14,6 +14,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 
 class DescriptionField extends StatefulWidget {
@@ -61,7 +62,7 @@ class _DescriptionFieldState extends State<DescriptionField> {
             controller: _controller,
               autocorrect: true,
               decoration: InputDecoration(
-                hintText: "What are you doing?",
+                hintText: TimeCopLocalizations.of(context).whatAreYouDoing,
               ),
               onChanged: (String description) => bloc.add(DescriptionChangedEvent(description)),
               onSubmitted: (String description) {

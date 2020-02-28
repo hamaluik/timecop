@@ -15,8 +15,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
+import 'package:timecop/l10n.dart';
 import 'package:timecop/models/timer_entry.dart';
-
 import 'RunningTimerRow.dart';
 
 class RunningTimers extends StatelessWidget {
@@ -45,7 +45,7 @@ class RunningTimers extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     Text(
-                      "Running Timers",
+                      TimeCopLocalizations.of(context).runningTimers,
                       style: TextStyle(
                         color: Theme.of(context).accentColor,
                         fontWeight: FontWeight.w800

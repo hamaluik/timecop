@@ -1,0 +1,225 @@
+{
+  "@@last_modified": "2020-02-28T00:02:59.784472",
+  "about": "About",
+  "@about": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "appDescription": "A time tracking app that respects your privacy and gets the job done without getting too fancy.",
+  "@appDescription": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "appLegalese": "Copyright © Kenton Hamaluik, 2020",
+  "@appLegalese": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "readme": "Readme",
+  "@readme": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "changeLog": "Change Log",
+  "@changeLog": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sourceCode": "Source Code",
+  "@sourceCode": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "whatAreYouDoing": "What are you doing?",
+  "@whatAreYouDoing": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "projects": "Projects",
+  "@projects": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "export": "Export",
+  "@export": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noProject": "(no project)",
+  "@noProject": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "confirmDelete": "Confirm Delete",
+  "@confirmDelete": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "deleteTimerConfirm": "Are you sure you want to delete this timer?",
+  "@deleteTimerConfirm": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "runningTimers": "Running Timers",
+  "@runningTimers": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "filter": "Filter",
+  "@filter": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "from": "From",
+  "@from": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "to": "To",
+  "@to": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "includeProjects": "Include Projects",
+  "@includeProjects": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "project": "Project",
+  "@project": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "description": "Description",
+  "@description": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "timeH": "Time (hours)",
+  "@timeH": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "createNewProject": "Create New Project",
+  "@createNewProject": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "editProject": "Edit Project",
+  "@editProject": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "pleaseEnterAName": "Please enter a name",
+  "@pleaseEnterAName": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "projectName": "Project Name",
+  "@projectName": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "create": "Create",
+  "@create": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "save": "Save",
+  "@save": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "areYouSureYouWantToDeletePrefix": "Are you sure you want to delete “",
+  "@areYouSureYouWantToDeletePrefix": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "areYouSureYouWantToDeletePostfix": "”?",
+  "@areYouSureYouWantToDeletePostfix": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "editTimer": "Edit Timer",
+  "@editTimer": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "whatWereYouDoing": "What were you doing?",
+  "@whatWereYouDoing": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "startTime": "Start Time",
+  "@startTime": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "endTime": "End Time",
+  "@endTime": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "duration": "Duration",
+  "@duration": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "appName": "Time Cop",
+  "@appName": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "logoSemantics": "Time Cop Logo",
+  "@logoSemantics": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  }
+}

@@ -15,6 +15,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:timecop/screens/dashboard/components/ProjectSelectField.dart';
 import 'package:timecop/screens/dashboard/components/RunningTimers.dart';
@@ -29,16 +30,19 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Locale myLocale = Localizations.localeOf(context);
+    print('my locale: ' + myLocale.languageCode);
+
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
           padding: EdgeInsets.all(12.0),
           child: SvgPicture.asset(
             "icon.no-bg.svg",
-            semanticsLabel: "Time Cop Logo",
+            semanticsLabel: TimeCopLocalizations.of(context).logoSemantics,
           )
         ),
-        title: Text("Time Cop"),
+        title: Text(TimeCopLocalizations.of(context).appName),
         actions: <Widget>[
           PopupMenu(),
         ],

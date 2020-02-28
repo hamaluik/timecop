@@ -17,6 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/blocs/projects/projects_bloc.dart';
+import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 
 class ProjectEditor extends StatefulWidget {
@@ -59,14 +60,14 @@ class _ProjectEditorState extends State<ProjectEditor> {
             shrinkWrap: true,
             children: <Widget>[
               Text(
-                widget.project == null ? "Create New Project" : "Edit Project",
+                widget.project == null ? TimeCopLocalizations.of(context).createNewProject : TimeCopLocalizations.of(context).editProject,
                 style: Theme.of(context).textTheme.title,
               ),
               TextFormField(
                 controller: _nameController,
-                validator: (String value) => value.trim().isEmpty ? "Please enter a name" : null,
+                validator: (String value) => value.trim().isEmpty ? TimeCopLocalizations.of(context).pleaseEnterAName : null,
                 decoration: InputDecoration(
-                  hintText: "Project Name",
+                  hintText: TimeCopLocalizations.of(context).projectName,
                 ),
               ),
               MaterialColorPicker(
@@ -78,11 +79,11 @@ class _ProjectEditorState extends State<ProjectEditor> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   FlatButton(
-                    child: Text("Cancel"),
+                    child: Text(TimeCopLocalizations.of(context).cancel),
                     onPressed: () => Navigator.of(context).pop(),
                   ),
                   FlatButton(
-                    child: Text(widget.project == null ? "Create" : "Save"),
+                    child: Text(widget.project == null ? TimeCopLocalizations.of(context).create : TimeCopLocalizations.of(context).save),
                     onPressed: () async {
                       bool valid = _formKey.currentState.validate();
                       if(!valid) return;

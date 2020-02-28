@@ -19,6 +19,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
+import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/screens/timer/TimerEditor.dart';
@@ -69,29 +70,15 @@ class StoppedTimerRow extends StatelessWidget {
             bool delete = await showDialog(
               context: context,
               builder: (BuildContext context) => AlertDialog(
-                title: const Text("Confirm Delete"),
-                content: Text("Are you sure you want to delete this timer?"),
-                // TODO: this doesn't show up for some reason?
-                /*content: SingleChildScrollView(
-                  child: RichText(
-                    text: TextSpan(
-                      children: <TextSpan>[
-                        TextSpan(text: "Are you "),
-                        TextSpan(text: "sure", style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(text: " you want to delete this timer?\n"),
-                        TextSpan(text: formatDescription(timer.description) + "\n", style: TextStyle(fontStyle: FontStyle.italic)),
-                        TextSpan(text: formatDuration(timer.endTime.difference(timer.startTime)), style: TextStyle(fontFamily: "FiraMono")),
-                      ]
-                    ),
-                  ),
-                ),*/
+                title: Text(TimeCopLocalizations.of(context).confirmDelete),
+                content: Text(TimeCopLocalizations.of(context).deleteTimerConfirm),
                 actions: <Widget>[
                   FlatButton(
-                    child: const Text("Cancel"),
+                    child: Text(TimeCopLocalizations.of(context).cancel),
                     onPressed: () => Navigator.of(context).pop(false),
                   ),
                   FlatButton(
-                    child: const Text("Delete"),
+                    child: Text(TimeCopLocalizations.of(context).delete),
                     onPressed: () => Navigator.of(context).pop(true),
                   ),
                 ],
