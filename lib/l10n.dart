@@ -14,8 +14,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:timecop/data_providers/l10n/l10n_en.dart';
-import 'package:timecop/data_providers/l10n/l10n_fr.dart';
+import 'package:timecop/data_providers/json_l10n_provider.dart';
 import 'package:timecop/data_providers/l10n_provider.dart';
 
 class L10N {
@@ -27,12 +26,9 @@ class L10N {
       assert(tr != null);
 
   static Future<L10N> load(Locale locale) async {
-    print('loading locale ${locale.toString()}');
     Intl.defaultLocale = locale.languageCode;
-    switch(locale.languageCode) {
-      case "fr": return L10N._internal(locale, L10nFr());
-      default: return L10N._internal(locale, L10nEn());
-    }
+    L10NProvider tr = await JSONL10NProvider.load(locale);
+    return L10N._internal(locale, tr);
   }
 
   static L10N of(BuildContext context) {

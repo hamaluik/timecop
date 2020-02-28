@@ -14,6 +14,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/about/AboutScreen.dart';
 import 'package:timecop/screens/export/ExportScreen.dart';
 import 'package:timecop/screens/projects/ProjectsScreen.dart';
@@ -53,21 +54,21 @@ class PopupMenu extends StatelessWidget {
           PopupMenuItem(
             child: ListTile(
               leading: Icon(FontAwesomeIcons.layerGroup),
-              title: Text("Projects"),
+              title: Text(L10N.of(context).tr.projects),
             ),
             value: MenuItem.projects,
           ),
           PopupMenuItem(
             child: ListTile(
               leading: Icon(FontAwesomeIcons.fileExport),
-              title: Text("Export"),
+              title: Text(L10N.of(context).tr.export),
             ),
             value: MenuItem.export,
           ),
           PopupMenuItem(
             child: ListTile(
               leading: Icon(FontAwesomeIcons.dna),
-              title: Text("About"),
+              title: Text(L10N.of(context).tr.about),
             ),
             value: MenuItem.about,
           ),

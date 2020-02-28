@@ -26,17 +26,5 @@ class ProjectColour extends StatelessWidget {
       return Icon(FontAwesomeIcons.circle, size: 24, color: Theme.of(context).disabledColor);
     }
     return Icon(FontAwesomeIcons.solidCircle, size: 24, color: project.colour);
-    //return Padding(
-    //  padding: EdgeInsets.all(8.0),
-    //  child: AspectRatio(
-    //    aspectRatio: 1.0,
-    //    child: Container(
-    //      decoration: BoxDecoration(
-    //        shape: BoxShape.circle,
-    //        color: project.colour,
-    //      ),
-    //    ),
-    //  )
-    //);
   }
 }

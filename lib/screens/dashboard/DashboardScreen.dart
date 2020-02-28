@@ -15,6 +15,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:timecop/screens/dashboard/components/ProjectSelectField.dart';
 import 'package:timecop/screens/dashboard/components/RunningTimers.dart';
@@ -35,10 +36,10 @@ class DashboardScreen extends StatelessWidget {
           padding: EdgeInsets.all(12.0),
           child: SvgPicture.asset(
             "icon.no-bg.svg",
-            semanticsLabel: "Time Cop Logo",
+            semanticsLabel: L10N.of(context).tr.logoSemantics,
           )
         ),
-        title: Text("Time Cop"),
+        title: Text(L10N.of(context).tr.appName),
         actions: <Widget>[
           PopupMenu(),
         ],

@@ -16,20 +16,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
-import 'package:timecop/l10n.dart';
 import 'package:timecop/models/timer_entry.dart';
 import 'StoppedTimerRow.dart';
 
 class DayGrouping {
   final DateTime date;
   List<TimerEntry> entries = [];
-  //static DateFormat _dateFormat = DateFormat('yMMMMd');
+  static DateFormat _dateFormat = DateFormat('yMMMMd');
 
   DayGrouping(this.date);
 
   Widget rows(BuildContext context) {
-    DateFormat _dateFormat = DateFormat('yMMMd', L10N.of(context).locale.toString());
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[

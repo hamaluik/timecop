@@ -27,15 +27,14 @@ import 'package:timecop/data_providers/settings_provider.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/dashboard/DashboardScreen.dart';
 import 'blocs/theme/bloc.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final SettingsProvider settings = await SettingsProvider.load();
   final DataProvider data = await DatabaseProvider.open();
 
-  // setup intl date formats
-  await initializeDateFormatting();
+  // setup intl date formats?
+  //await initializeDateFormatting();
 
   assert(settings != null);
 
@@ -110,7 +109,7 @@ class _TimeCopAppState extends State<_TimeCopApp> with WidgetsBindingObserver {
         RepositoryProvider<SettingsProvider>.value(value: widget.settings),
       ],
       child: MaterialApp(
-        title: 'TimeCop',
+        title: 'Time Cop',
         theme: BlocProvider.of<ThemeBloc>(context).state.theme,
         home: DashboardScreen(),
         localizationsDelegates: [

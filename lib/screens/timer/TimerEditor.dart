@@ -23,6 +23,7 @@ import 'package:intl/intl.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
+import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
 
@@ -73,7 +74,7 @@ class _TimerEditorState extends State<TimerEditor> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit Timer"),
+        title: Text(L10N.of(context).tr.editTimer),
       ),
       body: Form(
         key: _formKey,
@@ -101,7 +102,7 @@ class _TimerEditorState extends State<TimerEditor> {
                           ProjectColour(project: null),
                           Padding(
                             padding: EdgeInsets.fromLTRB(4.0, 0, 0, 0),
-                            child: Text("(no project)", style: TextStyle(color: Theme.of(context).disabledColor)),
+                            child: Text(L10N.of(context).tr.noProject, style: TextStyle(color: Theme.of(context).disabledColor)),
                           ),
                         ],
                       ),
@@ -129,13 +130,13 @@ class _TimerEditorState extends State<TimerEditor> {
               child: TextFormField(
                 controller: _descriptionController,
                 decoration: InputDecoration(
-                  labelText: "Description",
-                  hintText: "What were you doing?",
+                  labelText: L10N.of(context).tr.description,
+                  hintText: L10N.of(context).tr.whatWereYouDoing,
                 ),
               ),
             ),
             ListTile(
-              title: Text("Start Time"),
+              title: Text(L10N.of(context).tr.startTime),
               trailing: Text(_dateFormat.format(_startTime)),
               onTap: () async {
                 await DatePicker.showDateTimePicker(
@@ -155,7 +156,7 @@ class _TimerEditorState extends State<TimerEditor> {
               actionPane: SlidableDrawerActionPane(),
               actionExtentRatio: 0.15,
               child: ListTile(
-                title: Text("End Time"),
+                title: Text(L10N.of(context).tr.endTime),
                 trailing: Text(_endTime == null ? "—" : _dateFormat.format(_endTime)),
                 onTap: () async {
                   await DatePicker.showDateTimePicker(
@@ -193,7 +194,7 @@ class _TimerEditorState extends State<TimerEditor> {
               initialData: DateTime.now(),
               stream: _updateTimerStreamController.stream,
               builder: (BuildContext context, AsyncSnapshot<DateTime> snapshot) => ListTile(
-                title: Text("Duration"),
+                title: Text(L10N.of(context).tr.duration),
                 trailing: Text(TimerEntry.formatDuration(
                   _endTime == null
                     ? snapshot.data.difference(_startTime)

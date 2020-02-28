@@ -28,6 +28,7 @@ import 'package:timecop/blocs/projects/projects_bloc.dart';
 import 'package:timecop/blocs/projects/projects_state.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
+import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 
 class ExportScreen extends StatefulWidget {
@@ -43,10 +44,6 @@ class _ExportScreenState extends State<ExportScreen> {
   List<Project> selectedProjects = [];
   static DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
 
-  int countTimers() {
-
-  }
-
   @override
   void initState() {
     super.initState();
@@ -59,7 +56,7 @@ class _ExportScreenState extends State<ExportScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Export"),
+        title: Text(L10N.of(context).tr.export),
         actions: <Widget>[
           IconButton(
             icon: Icon(FontAwesomeIcons.database),
@@ -73,7 +70,7 @@ class _ExportScreenState extends State<ExportScreen> {
                 File copiedDB = await File(dbPath).copy(p.join(directory.path, "timecop.db"));
                 dbPath = copiedDB.path;
               }
-              await FlutterShare.shareFile(title: 'Time Cop Database (${_dateFormat.format(DateTime.now())})', filePath: dbPath);
+              await FlutterShare.shareFile(title: L10N.of(context).tr.timeCopDatabase(_dateFormat.format(DateTime.now())), filePath: dbPath);
             },
           )
         ],
@@ -86,7 +83,7 @@ class _ExportScreenState extends State<ExportScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Text(
-                  "Filter",
+                  L10N.of(context).tr.filter,
                   style: TextStyle(
                     color: Theme.of(context).accentColor,
                     fontWeight: FontWeight.w800
@@ -100,7 +97,7 @@ class _ExportScreenState extends State<ExportScreen> {
             actionExtentRatio: 0.15,
             child: ListTile(
               leading: Icon(FontAwesomeIcons.calendar),
-              title: Text("From"),
+              title: Text(L10N.of(context).tr.from),
               trailing: Text(_startDate == null ? "—" : _dateFormat.format(_startDate)),
               onTap: () async {
                 await DatePicker.showDatePicker(
@@ -138,7 +135,7 @@ class _ExportScreenState extends State<ExportScreen> {
             actionExtentRatio: 0.15,
             child: ListTile(
               leading: Icon(FontAwesomeIcons.calendar),
-              title: Text("To"),
+              title: Text(L10N.of(context).tr.to),
               trailing: Text(_endDate == null ? "—" : _dateFormat.format(_endDate)),
               onTap: () async {
                 await DatePicker.showDatePicker(
@@ -180,7 +177,7 @@ class _ExportScreenState extends State<ExportScreen> {
                   children: <Widget>[
                     ListTile(
                       title: Text(
-                        "Include Projects",
+                        L10N.of(context).tr.includeProjects,
                         style: TextStyle(
                           color: Theme.of(context).accentColor,
                           fontSize: Theme.of(context).textTheme.body1.fontSize,
@@ -218,7 +215,7 @@ class _ExportScreenState extends State<ExportScreen> {
                       child: ListView(
                         children: <Project>[null].followedBy(state.projects).map((project) => ListTile(
                           leading: ProjectColour(project: project,),
-                          title: Text(project?.name ?? "(no project)"),
+                          title: Text(project?.name ?? L10N.of(context).tr.noProject),
                           trailing: Checkbox(
                             value: selectedProjects.any((p) => p?.id == project?.id),
                             activeColor: Theme.of(context).accentColor,
@@ -258,7 +255,7 @@ class _ExportScreenState extends State<ExportScreen> {
           assert(projects != null);
 
           List<List<String>> data = <List<String>>[
-            <String>["Project", "Task", "Time (h)"],
+            <String>[L10N.of(context).tr.project, L10N.of(context).tr.description, L10N.of(context).tr.timeH],
           ]
           .followedBy(
             timers.state.timers
@@ -284,7 +281,7 @@ class _ExportScreenState extends State<ExportScreen> {
           final String localPath = '${directory.path}/timecop.csv';
           File file = File(localPath);
           await file.writeAsString(csv, flush: true);
-          await FlutterShare.shareFile(title: 'Time Cop Entries (${_dateFormat.format(DateTime.now())})', filePath: localPath);
+          await FlutterShare.shareFile(title: L10N.of(context).tr.timeCopEntries(_dateFormat.format(DateTime.now())), filePath: localPath);
         }
         ),
     );

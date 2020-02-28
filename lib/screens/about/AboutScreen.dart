@@ -17,6 +17,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:timecop/l10n.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -25,32 +26,32 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AboutPage(
-      title: Text('About'),
+      title: Text(L10N.of(context).tr.about),
       applicationVersion: 'v{{ version }}-{{ buildNumber }}',
       applicationDescription: Text(
-        'A time tracking app that respects your privacy and gets the job done without getting too fancy.',
+        L10N.of(context).tr.appDescription,
         textAlign: TextAlign.justify,
       ),
       applicationIcon: SvgPicture.asset(
         "icon.no-bg.pink.svg",
-        semanticsLabel: "Time Cop Logo",
+        semanticsLabel: L10N.of(context).tr.logoSemantics,
         height: 100,
       ),
-      applicationLegalese: 'Copyright © Kenton Hamaluik, {{ year }}',
+      applicationLegalese: L10N.of(context).tr.appLegalese,
       children: <Widget>[
         MarkdownPageListTile(
           filename: 'README.md',
-          title: Text('Readme'),
+          title: Text(L10N.of(context).tr.readme),
           icon: Icon(FontAwesomeIcons.readme),
         ),
         MarkdownPageListTile(
           filename: 'CHANGELOG.md',
-          title: Text('Changelog'),
+          title: Text(L10N.of(context).tr.changeLog),
           icon: Icon(FontAwesomeIcons.boxes),
         ),
         ListTile(
           leading: Icon(FontAwesomeIcons.code),
-          title: Text("Source Code"),
+          title: Text(L10N.of(context).tr.sourceCode),
           onTap: () => launch("https://github.com/hamaluik/timecop"),
         ),
         LicensesPageListTile(

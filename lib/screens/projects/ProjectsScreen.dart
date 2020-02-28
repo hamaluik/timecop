@@ -18,6 +18,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
+import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/projects/ProjectEditor.dart';
 
 class ProjectsScreen extends StatelessWidget {
@@ -30,7 +31,7 @@ class ProjectsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Projects"),
+        title: Text(L10N.of(context).tr.projects),
       ),
       body: BlocBuilder<ProjectsBloc, ProjectsState>(
         bloc: projectsBloc,
@@ -56,26 +57,26 @@ class ProjectsScreen extends StatelessWidget {
                     bool delete = await showDialog(
                       context: context,
                       builder: (BuildContext context) => AlertDialog(
-                        title: const Text("Confirm Delete"),
+                        title: Text(L10N.of(context).tr.confirmDelete),
                         content: RichText(
                           textAlign: TextAlign.justify,
                           text: TextSpan(
                             style: TextStyle(color: Theme.of(context).textTheme.body1.color),
                             children: <TextSpan>[
-                              TextSpan(text: "Are you sure you want to delete “"),
+                              TextSpan(text: L10N.of(context).tr.areYouSureYouWantToDeletePrefix),
                               TextSpan(text: "⬤ ", style: TextStyle(color: project.colour)),
                               TextSpan(text: project.name, style: TextStyle(fontStyle: FontStyle.italic)),
-                              TextSpan(text: "”?"),
+                              TextSpan(text: L10N.of(context).tr.areYouSureYouWantToDeletePostfix),
                             ]
                           )
                         ),
                         actions: <Widget>[
                           FlatButton(
-                            child: const Text("Cancel"),
+                            child: Text(L10N.of(context).tr.cancel),
                             onPressed: () => Navigator.of(context).pop(false),
                           ),
                           FlatButton(
-                            child: const Text("Delete"),
+                            child: Text(L10N.of(context).tr.delete),
                             onPressed: () => Navigator.of(context).pop(true),
                           ),
                         ],

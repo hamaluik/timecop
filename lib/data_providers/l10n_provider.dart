@@ -50,4 +50,7 @@ abstract class L10NProvider {
     String get to;
     String get whatAreYouDoing;
     String get whatWereYouDoing;
+    String get noDescription;
+    String timeCopDatabase(String date);
+    String timeCopEntries(String date);
 }

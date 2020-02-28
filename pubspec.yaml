@@ -47,6 +47,7 @@ flutter:
     - CHANGELOG.md
     - icon.no-bg.svg
     - icon.no-bg.pink.svg
+    - l10n/
   fonts:
     - family: PublicSans
       fonts:
