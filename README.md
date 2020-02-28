@@ -27,7 +27,16 @@ Time tracking in and of itself is rather straightforward (hence all the apps on 
 * Start, stop, edit, and delete timers whenever with no fuss
 * Export data as a `.csv` file, filtered by timespans and projects
 * Export the app's database for full access to all of its data
+* Automatic light mode / dark mode based on your device settings
 * Open source ([licensed under Apache-2.0](LICENSE))—fork away!
+
+## Screenshots
+
+<div align="center">
+    <img alt="Screenshot" src="screenshots/Screenshot_1582847801.png" height="480"> <img alt="Screenshot" src="screenshots/Screenshot_1582847812.png" height="480"> <img alt="Screenshot" src="screenshots/Screenshot_1582847819.png" height="480"> <img alt="Screenshot" src="screenshots/Screenshot_1582847837.png" height="480"> <img alt="Screenshot" src="screenshots/Screenshot_1582847866.png" height="480">
+</div>
+
+More screenshots are available in the [screenshots/](screenshots/) folder.
 
 ## Contributing
 
