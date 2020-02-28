@@ -51,51 +51,13 @@ flutter:
   fonts:
     - family: PublicSans
       fonts:
-        - asset: fonts/PublicSans-Thin.ttf
-          weight: 100
-        - asset: fonts/PublicSans-ThinItalic.ttf
-          weight: 100
-          style: italic
-        - asset: fonts/PublicSans-ExtraLight.ttf
-          weight: 200
-        - asset: fonts/PublicSans-ExtraLightItalic.ttf
-          weight: 200
-          style: italic
-        - asset: fonts/PublicSans-Light.ttf
-          weight: 300
-        - asset: fonts/PublicSans-LightItalic.ttf
-          weight: 300
-          style: italic
         - asset: fonts/PublicSans-Regular.ttf
           weight: 400
         - asset: fonts/PublicSans-Italic.ttf
           weight: 400
           style: italic
-        - asset: fonts/PublicSans-Medium.ttf
-          weight: 500
-        - asset: fonts/PublicSans-MediumItalic.ttf
-          weight: 500
-          style: italic
-        - asset: fonts/PublicSans-SemiBold.ttf
-          weight: 600
-        - asset: fonts/PublicSans-SemiBoldItalic.ttf
-          weight: 600
-          style: italic
         - asset: fonts/PublicSans-Bold.ttf
           weight: 700
-        - asset: fonts/PublicSans-BoldItalic.ttf
-          weight: 700
-          style: italic
-        - asset: fonts/PublicSans-ExtraBold.ttf
-          weight: 800
-        - asset: fonts/PublicSans-ExtraBoldItalic.ttf
-          weight: 800
-          style: italic
-        - asset: fonts/PublicSans-Black.ttf
-          weight: 900
-        - asset: fonts/PublicSans-BlackItalic.ttf
-          weight: 900
-          style: italic
     - family: FiraMono
       fonts:
         - asset: fonts/FiraMono-Regular.ttf
