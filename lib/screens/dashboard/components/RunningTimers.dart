@@ -32,6 +32,9 @@ class RunningTimers extends StatelessWidget {
           return Container();
         }
 
+        DateTime now = DateTime.now();
+        Duration runningTotal = Duration(seconds: runningTimers.fold(0, (int sum, TimerEntry t) => sum + now.difference(t.startTime).inSeconds));
+
         return Material(
           elevation: 4,
           color: Theme.of(context).bottomSheetTheme.backgroundColor,
@@ -45,12 +48,25 @@ class RunningTimers extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    Text(
-                      L10N.of(context).tr.runningTimers,
-                      style: TextStyle(
-                        color: Theme.of(context).accentColor,
-                        fontWeight: FontWeight.w700
-                      )
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        Text(
+                          L10N.of(context).tr.runningTimers,
+                          style: TextStyle(
+                            color: Theme.of(context).accentColor,
+                            fontWeight: FontWeight.w700
+                          )
+                        ),
+                        Text(
+                          TimerEntry.formatDuration(runningTotal),
+                          style: TextStyle(
+                            color: Theme.of(context).accentColor,
+                            fontFamily: "FiraMono",
+                          )
+                        )
+                      ],
                     ),
                     Divider(),
                   ],

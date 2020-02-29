@@ -27,7 +27,7 @@ class DayGrouping {
   DayGrouping(this.date);
 
   Widget rows(BuildContext context) {
-    double dailyHours = entries.fold(0, (int sum, TimerEntry t) => sum + t.endTime.difference(t.startTime).inSeconds).toDouble() / 3600.0;
+    Duration runningTotal = Duration(seconds: entries.fold(0, (int sum, TimerEntry t) => sum + t.endTime.difference(t.startTime).inSeconds));
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -49,9 +49,10 @@ class DayGrouping {
                     )
                   ),
                   Text(
-                    dailyHours.toStringAsFixed(1),
+                    TimerEntry.formatDuration(runningTotal),
                     style: TextStyle(
                       color: Theme.of(context).accentColor,
+                      fontFamily: "FiraMono",
                     )
                   )
                 ],
@@ -71,7 +72,7 @@ class StoppedTimers extends StatelessWidget {
   const StoppedTimers({Key key}) : super(key: key);
 
   static List<DayGrouping> groupDays(List<DayGrouping> days, TimerEntry timer) {
-    bool newDay = days.isEmpty|| timer.startTime.difference(days.last.date).inDays >= 1;
+    bool newDay = days.isEmpty|| timer.startTime.difference(days.last.date).inDays.abs() >= 1;
     if(newDay) {
       days.add(
         DayGrouping(
@@ -92,13 +93,13 @@ class StoppedTimers extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<TimersBloc, TimersState>(
       builder: (BuildContext context, TimersState timersState) {
-        return ListView(
-          shrinkWrap: false,
-          reverse: true,
-          children: timersState.timers
+        List<DayGrouping> days = timersState.timers.reversed
             .where((timer) => timer.endTime != null)
-            .fold(<DayGrouping>[], groupDays)
-            .map((DayGrouping day) => day.rows(context)).toList(),
+            .fold(<DayGrouping>[], groupDays);
+
+        return ListView.builder(
+          itemCount: days.length,
+          itemBuilder: (BuildContext context, int index) => days[index].rows(context),
         );
       },
     );

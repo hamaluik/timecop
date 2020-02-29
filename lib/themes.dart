@@ -22,7 +22,11 @@ final ThemeData lightTheme = ThemeData(
   accentColor: Colors.cyan[600],
   accentColorBrightness: Brightness.dark,
   fontFamily: 'PublicSans',
-  //scaffoldBackgroundColor: Colors.grey[200],
+  //scaffoldBackgroundColor: Colors.grey[100],
+  scaffoldBackgroundColor: Colors.white,
+  bottomSheetTheme: BottomSheetThemeData(
+    backgroundColor: Colors.blueGrey[50],
+  ),
 );
 
 final ThemeData darkTheme = ThemeData(
@@ -33,4 +37,8 @@ final ThemeData darkTheme = ThemeData(
   accentColor: Colors.cyan[600],
   accentColorBrightness: Brightness.dark,
   fontFamily: 'PublicSans',
+  scaffoldBackgroundColor: Colors.grey[800],
+  bottomSheetTheme: BottomSheetThemeData(
+    backgroundColor: Colors.grey[850],
+  ),
 );

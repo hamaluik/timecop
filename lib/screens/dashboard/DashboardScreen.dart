@@ -58,6 +58,7 @@ class DashboardScreen extends StatelessWidget {
             create: (_) => DashboardBloc(),
             child: Material(
               elevation: 8.0,
+              color: Theme.of(context).bottomSheetTheme.backgroundColor,
               child: Container(
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
