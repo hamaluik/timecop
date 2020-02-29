@@ -52,6 +52,7 @@ class RunningTimers extends StatelessWidget {
                         fontWeight: FontWeight.w700
                       )
                     ),
+                    Divider(),
                   ],
                 ),
               ),

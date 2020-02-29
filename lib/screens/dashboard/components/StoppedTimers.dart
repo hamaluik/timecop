@@ -27,6 +27,8 @@ class DayGrouping {
   DayGrouping(this.date);
 
   Widget rows(BuildContext context) {
+    double dailyHours = entries.fold(0, (int sum, TimerEntry t) => sum + t.endTime.difference(t.startTime).inSeconds).toDouble() / 3600.0;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -35,12 +37,24 @@ class DayGrouping {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Text(
-                _dateFormat.format(date),
-                style: TextStyle(
-                  color: Theme.of(context).accentColor,
-                  fontWeight: FontWeight.w700
-                )
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  Text(
+                    _dateFormat.format(date),
+                    style: TextStyle(
+                      color: Theme.of(context).accentColor,
+                      fontWeight: FontWeight.w700
+                    )
+                  ),
+                  Text(
+                    dailyHours.toStringAsFixed(1),
+                    style: TextStyle(
+                      color: Theme.of(context).accentColor,
+                    )
+                  )
+                ],
               ),
               Divider(),
             ],

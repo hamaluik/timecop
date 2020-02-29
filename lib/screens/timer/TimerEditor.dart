@@ -206,7 +206,18 @@ class _TimerEditorState extends State<TimerEditor> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(FontAwesomeIcons.solidSave),
+        child: Stack(
+          // shenanigans to properly centre the icon (font awesome glyphs are variable
+          // width but the library currently doesn't deal with that)
+          fit: StackFit.expand,
+          children: <Widget>[
+            Positioned(
+              top: 14,
+              left: 16,
+              child: Icon(FontAwesomeIcons.solidSave),
+            )
+          ],
+        ),
         onPressed: () async {
           bool valid = _formKey.currentState.validate();
           if(!valid) return;

@@ -129,7 +129,7 @@ class _TimeCopAppState extends State<_TimeCopApp> with WidgetsBindingObserver {
           const Locale('ko'),
           const Locale('pt'),
           const Locale('ru'),
-          const Locale('zh'),
+          const Locale('zh', 'CN'),
           const Locale('ar'),
         ],
       )

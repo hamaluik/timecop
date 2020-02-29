@@ -42,64 +42,49 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
             // detect if the project we had selected was deleted
             if(state.newProject != null && projectsBloc.getProjectByID(state.newProject.id) == null) {
               bloc.add(ProjectChangedEvent(null));
-              return DropdownButton(
-                value: bloc.state.newProject,
-                underline: Container(),
-                elevation: 0,
-                onChanged: (Project newProject) {
-                  bloc.add(ProjectChangedEvent(newProject));
-                },
-                items: <DropdownMenuItem<Project>>[
-                  DropdownMenuItem<Project>(
-                    child: Row(
-                      children: <Widget>[
-                        ProjectColour(project: null),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(4.0, 0, 0, 0),
-                          child: Text(L10N.of(context).tr.noProject, style: TextStyle(color: Theme.of(context).disabledColor)),
-                        ),
-                      ],
-                    ),
-                    value: null,
-                  )
-                ],
+              return IconButton(
+                alignment: Alignment.centerLeft,
+                icon: ProjectColour(project: null),
+                onPressed: null,
               );
             }
 
-            return DropdownButton(
-              value: bloc.state.newProject,
-              underline: Container(),
-              elevation: 0,
-              onChanged: (Project newProject) {
-                bloc.add(ProjectChangedEvent(newProject));
+            return IconButton(
+              alignment: Alignment.centerLeft,
+              icon: ProjectColour(project: state.newProject),
+              onPressed: () async {
+                Project chosenProject = await showDialog<Project>(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (BuildContext context) {
+
+                    return SimpleDialog(
+                      title: Text(L10N.of(context).tr.projects),
+                      contentPadding: EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 16.0),
+                      children: <Project>[null].followedBy(projectsState.projects).map(
+                        (Project p) => FlatButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(p);
+                          },
+                          child: Row(
+                            children: <Widget>[
+                              ProjectColour(project: p),
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+                                child: Text(
+                                  p?.name ?? L10N.of(context).tr.noProject,
+                                  style: TextStyle(color: p == null ? Theme.of(context).disabledColor : Theme.of(context).textTheme.body1.color)
+                                ),
+                              ),
+                            ],
+                          )
+                        )
+                      ).toList(),
+                    );
+                  }
+                );
+                bloc.add(ProjectChangedEvent(chosenProject));
               },
-              items: <DropdownMenuItem<Project>>[
-                DropdownMenuItem<Project>(
-                  child: Row(
-                    children: <Widget>[
-                      ProjectColour(project: null),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(4.0, 0, 0, 0),
-                        child: Text(L10N.of(context).tr.noProject, style: TextStyle(color: Theme.of(context).disabledColor)),
-                      ),
-                    ],
-                  ),
-                  value: null,
-                )
-              ].followedBy(projectsState.projects.map(
-                (Project project) => DropdownMenuItem<Project>(
-                  child: Row(
-                    children: <Widget>[
-                      ProjectColour(project: project,),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(4.0, 0, 0, 0),
-                        child: Text(project.name),
-                      ),
-                    ],
-                  ),
-                  value: project,
-                )
-              )).toList(),
             );
           },
         );

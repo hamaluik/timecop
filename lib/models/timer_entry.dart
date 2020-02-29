@@ -44,7 +44,7 @@ class TimerEntry extends Equatable {
       return
           d.inHours.toString() + ":"
         + (d.inMinutes - (d.inHours * 60)).toString().padLeft(2, "0") + ":"
-        + (d.inSeconds - (d.inMinutes * 60)).toString();
+        + (d.inSeconds - (d.inMinutes * 60)).toString().padLeft(2, "0");
     }
     else if(d.inMinutes > 0) {
       return
