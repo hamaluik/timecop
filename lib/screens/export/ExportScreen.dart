@@ -247,7 +247,18 @@ class _ExportScreenState extends State<ExportScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(FontAwesomeIcons.fileExport),
+        child: Stack(
+        // shenanigans to properly centre the icon (font awesome glyphs are variable
+        // width but the library currently doesn't deal with that)
+        fit: StackFit.expand,
+        children: <Widget>[
+          Positioned(
+            top: 15,
+            left: 19,
+            child: Icon(FontAwesomeIcons.fileExport),
+          )
+        ],
+      ),
         onPressed: () async {
           final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
           assert(timers != null);

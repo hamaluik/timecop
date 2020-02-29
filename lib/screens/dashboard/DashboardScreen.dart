@@ -63,9 +63,8 @@ class DashboardScreen extends StatelessWidget {
                   padding: EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                      ProjectSelectField(),
+                      //ProjectSelectField(),
                       Expanded(
                         flex: 1,
                         child: Padding(

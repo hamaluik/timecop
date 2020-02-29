@@ -33,7 +33,7 @@ class AboutScreen extends StatelessWidget {
         textAlign: TextAlign.justify,
       ),
       applicationIcon: SvgPicture.asset(
-        "icon.no-bg.pink.svg",
+        "icon.no-bg.cyan.svg",
         semanticsLabel: L10N.of(context).tr.logoSemantics,
         height: 100,
       ),

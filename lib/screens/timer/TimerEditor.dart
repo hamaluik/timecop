@@ -101,7 +101,7 @@ class _TimerEditorState extends State<TimerEditor> {
                         children: <Widget>[
                           ProjectColour(project: null),
                           Padding(
-                            padding: EdgeInsets.fromLTRB(4.0, 0, 0, 0),
+                            padding: EdgeInsets.fromLTRB(8.0, 0, 0, 0),
                             child: Text(L10N.of(context).tr.noProject, style: TextStyle(color: Theme.of(context).disabledColor)),
                           ),
                         ],
@@ -114,7 +114,7 @@ class _TimerEditorState extends State<TimerEditor> {
                         children: <Widget>[
                           ProjectColour(project: project,),
                           Padding(
-                            padding: EdgeInsets.fromLTRB(4.0, 0, 0, 0),
+                            padding: EdgeInsets.fromLTRB(8.0, 0, 0, 0),
                             child: Text(project.name),
                           ),
                         ],

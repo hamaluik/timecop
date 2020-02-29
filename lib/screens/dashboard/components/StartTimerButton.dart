@@ -27,10 +27,21 @@ class StartTimerButton extends StatelessWidget {
     assert(bloc != null);
 
     return FloatingActionButton(
-      child: Icon(FontAwesomeIcons.play),
+      child: Stack(
+        // shenanigans to properly centre the icon (font awesome glyphs are variable
+        // width but the library currently doesn't deal with that)
+        fit: StackFit.expand,
+        children: <Widget>[
+          Positioned(
+            top: 15,
+            left: 18,
+            child: Icon(FontAwesomeIcons.play),
+          )
+        ],
+      ),
       backgroundColor: Theme.of(context).accentColor,
       foregroundColor: Theme.of(context).accentIconTheme.color,
-      mini: true,
+      //mini: true,
       onPressed: () {
         final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
         assert(timers != null);

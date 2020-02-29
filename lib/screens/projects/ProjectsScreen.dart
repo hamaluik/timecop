@@ -93,7 +93,18 @@ class ProjectsScreen extends StatelessWidget {
         }
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(FontAwesomeIcons.plus),
+        child: Stack(
+          // shenanigans to properly centre the icon (font awesome glyphs are variable
+          // width but the library currently doesn't deal with that)
+          fit: StackFit.expand,
+          children: <Widget>[
+            Positioned(
+              top: 15,
+              left: 16,
+              child: Icon(FontAwesomeIcons.plus),
+            )
+          ],
+        ),
         onPressed: () => showDialog<void>(
           context: context,
           builder: (BuildContext context) => ProjectEditor(project: null,)
