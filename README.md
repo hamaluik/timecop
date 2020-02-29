@@ -1,7 +1,7 @@
 <h1 align="center">
   Time Cop
   <br>
-  <img alt="icon" width="128" height="128" src="icon.no-bg.pink.svg">
+  <img alt="icon" width="128" height="128" src="icon.no-bg.cyan.svg">
 </h1>
 <div align="center">
   A time tracking app that respects your privacy and gets the job done without getting too fancy.
@@ -33,10 +33,10 @@ Time tracking in and of itself is rather straightforward (hence all the apps on 
 ## Screenshots
 
 <div align="center">
-    <img alt="Screenshot" src="screenshots/Screenshot_1582847801.png" height="480"> <img alt="Screenshot" src="screenshots/Screenshot_1582847812.png" height="480"> <img alt="Screenshot" src="screenshots/Screenshot_1582847819.png" height="480"> <img alt="Screenshot" src="screenshots/Screenshot_1582847837.png" height="480"> <img alt="Screenshot" src="screenshots/Screenshot_1582847866.png" height="480">
+    <img alt="Screenshot" src="screenshots/android/Screenshot_1582952644.png" height="480"> <img alt="Screenshot" src="screenshots/android/Screenshot_1582952654.png" height="480"> <img alt="Screenshot" src="screenshots/android/Screenshot_1582952671.png" height="480"> <img alt="Screenshot" src="screenshots/android/Screenshot_1582952699.png" height="480"> <img alt="Screenshot" src="screenshots/android/Screenshot_1582952707.png" height="480">
 </div>
 
-More screenshots are available in the [screenshots/](screenshots/) folder.
+More screenshots (including dark-mode and localization demonstrations) are available in the [screenshots/](screenshots/) folder.
 
 ## Contributing
 

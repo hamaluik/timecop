@@ -60,7 +60,6 @@
     - [ ] Export settings should be persisted and re-used as defaults
 - [x] The list of open-source software should be included
 - [x] Starting / stopping timers should be located at the bottom of the screen to facilitate one-handed operation
-- [ ] Ability to import a previously exported database, overwriting what we currently have?
 
 ### In Consideration
 
@@ -69,3 +68,4 @@
 * A reporting screen which gives you the same filtering options as exporting data in a spreadsheet but displays the results locally
     * As charts
     * As tables
+* Ability to import a previously exported database, overwriting what we currently have
