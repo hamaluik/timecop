@@ -1,6 +1,6 @@
 name: timecop
 description: A time tracking app that respects your privacy and gets the job done without getting too fancy.
-version: 1.0.0+4
+version: 1.0.0+5
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -47,6 +47,8 @@ flutter:
     - CHANGELOG.md
     - icon.no-bg.svg
     - icon.no-bg.cyan.svg
+    - fonts/LICENSE-FiraMono.txt
+    - fonts/LICENSE-PublicSans.md
     - l10n/
   fonts:
     - family: PublicSans

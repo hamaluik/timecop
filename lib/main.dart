@@ -14,6 +14,7 @@
 
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
@@ -24,6 +25,7 @@ import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/data_providers/data_provider.dart';
 import 'package:timecop/data_providers/database_provider.dart';
 import 'package:timecop/data_providers/settings_provider.dart';
+import 'package:timecop/fontlicenses.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/dashboard/DashboardScreen.dart';
 import 'blocs/theme/bloc.dart';
@@ -35,6 +37,7 @@ void main() async {
 
   // setup intl date formats?
   //await initializeDateFormatting();
+  LicenseRegistry.addLicense(getFontLicenses);
 
   assert(settings != null);
 
