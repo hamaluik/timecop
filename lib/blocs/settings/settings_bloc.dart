@@ -29,7 +29,44 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     SettingsEvent event,
   ) async* {
     if(event is LoadSettingsFromRepository) {
-      yield SettingsState();
+      bool exportGroupTimers = await settings.getBool("exportGroupTimers") ?? state.exportGroupTimers;
+      bool exportIncludeProject = await settings.getBool("exportIncludeProject") ?? state.exportIncludeProject;
+      bool exportIncludeDescription = await settings.getBool("exportIncludeDescription") ?? state.exportIncludeDescription;
+      bool exportIncludeStartTime = await settings.getBool("exportIncludeStartTime") ?? state.exportIncludeStartTime;
+      bool exportIncludeEndTime = await settings.getBool("exportIncludeEndTime") ?? state.exportIncludeEndTime;
+      bool exportIncludeDurationHours = await settings.getBool("exportIncludeDurationHours") ?? state.exportIncludeDurationHours;
+      yield SettingsState(
+        exportGroupTimers: exportGroupTimers,
+        exportIncludeProject: exportIncludeProject,
+        exportIncludeDescription: exportIncludeDescription,
+        exportIncludeStartTime: exportIncludeStartTime,
+        exportIncludeEndTime: exportIncludeEndTime,
+        exportIncludeDurationHours: exportIncludeDurationHours,
+      );
+    }
+    else if(event is SetExportGroupTimers) {
+      await settings.setBool("exportGroupTimers", event.value);
+      yield SettingsState.clone(state, exportGroupTimers: event.value);
+    }
+    else if(event is SetExportIncludeProject) {
+      await settings.setBool("exportIncludeProject", event.value);
+      yield SettingsState.clone(state, exportIncludeProject: event.value);
+    }
+    else if(event is SetExportIncludeDescription) {
+      await settings.setBool("exportIncludeDescription", event.value);
+      yield SettingsState.clone(state, exportIncludeDescription: event.value);
+    }
+    else if(event is SetExportIncludeStartTime) {
+      await settings.setBool("exportIncludeStartTime", event.value);
+      yield SettingsState.clone(state, exportIncludeStartTime: event.value);
+    }
+    else if(event is SetExportIncludeEndTime) {
+      await settings.setBool("exportIncludeEndTime", event.value);
+      yield SettingsState.clone(state, exportIncludeEndTime: event.value);
+    }
+    else if(event is SetExportIncludeDurationHours) {
+      await settings.setBool("exportIncludeDurationHours", event.value);
+      yield SettingsState.clone(state, exportIncludeDurationHours: event.value);
     }
   }
 }

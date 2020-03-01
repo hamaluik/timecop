@@ -56,7 +56,6 @@
         - [ ] Timer start time (RFC 3339)
         - [ ] Timer end time (RFC 3339)
         - [x] Timer length in hours
-        - [ ] Timer length in minutes
     - [ ] Export settings should be persisted and re-used as defaults
 - [x] The list of open-source software should be included
 - [x] Starting / stopping timers should be located at the bottom of the screen to facilitate one-handed operation

@@ -12,10 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class SettingsProvider {
-  SettingsProvider();
+  final SharedPreferences _prefs;
+  SettingsProvider(this._prefs)
+    : assert(_prefs != null);
+
+  bool getBool(String key) => _prefs.getBool(key);
+  void setBool(String key, bool value) => _prefs.setBool(key, value);
 
   static Future<SettingsProvider> load() async {
-    return SettingsProvider();
+    return SettingsProvider(await SharedPreferences.getInstance());
   }
 }

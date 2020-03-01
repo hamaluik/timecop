@@ -21,3 +21,39 @@ abstract class SettingsEvent extends Equatable {
 class LoadSettingsFromRepository extends SettingsEvent {
   @override List<Object> get props => [];
 }
+
+class SetExportGroupTimers extends SettingsEvent {
+  final bool value;
+  const SetExportGroupTimers(this.value);
+  @override List<Object> get props => [value];
+}
+
+class SetExportIncludeProject extends SettingsEvent {
+  final bool value;
+  const SetExportIncludeProject(this.value);
+  @override List<Object> get props => [value];
+}
+
+class SetExportIncludeDescription extends SettingsEvent {
+  final bool value;
+  const SetExportIncludeDescription(this.value);
+  @override List<Object> get props => [value];
+}
+
+class SetExportIncludeStartTime extends SettingsEvent {
+  final bool value;
+  const SetExportIncludeStartTime(this.value);
+  @override List<Object> get props => [value];
+}
+
+class SetExportIncludeEndTime extends SettingsEvent {
+  final bool value;
+  const SetExportIncludeEndTime(this.value);
+  @override List<Object> get props => [value];
+}
+
+class SetExportIncludeDurationHours extends SettingsEvent {
+  final bool value;
+  const SetExportIncludeDurationHours(this.value);
+  @override List<Object> get props => [value];
+}
