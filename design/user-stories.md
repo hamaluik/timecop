@@ -49,14 +49,14 @@
     - [x] Optionally filtered by:
         1. Date
         2. Project
-    - [ ] Optionally grouped by timer descriptions on a daily basis
-    - [ ] Export format should be able to include:
+    - [x] Optionally grouped by timer descriptions on a daily basis
+    - [x] Export format should be able to include:
         - [x] Timer description
         - [x] Timer project
-        - [ ] Timer start time (RFC 3339)
-        - [ ] Timer end time (RFC 3339)
+        - [x] Timer start time (RFC 3339)
+        - [x] Timer end time (RFC 3339)
         - [x] Timer length in hours
-    - [ ] Export settings should be persisted and re-used as defaults
+    - [x] Export settings should be persisted and re-used as defaults
 - [x] The list of open-source software should be included
 - [x] Starting / stopping timers should be located at the bottom of the screen to facilitate one-handed operation
 

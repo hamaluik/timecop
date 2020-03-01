@@ -38,5 +38,8 @@
     "duration": "Duración",
     "appName": "Time Cop",
     "logoSemantics": "Logotipo de Time Cop",
-    "noDescription": "(Sin descripción)"
+    "noDescription": "(Sin descripción)",
+    "options": "Opciones",
+    "groupTimers": "Agrupe temporizadores similares por día",
+    "columns": "Columnas"
 }

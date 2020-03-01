@@ -38,5 +38,8 @@
     "duration": "Durée",
     "appName": "Time Cop",
     "logoSemantics": "Logo de Time Cop",
-    "noDescription": "(Pas de description)"
+    "noDescription": "(Pas de description)",
+    "options": "Les options",
+    "groupTimers": "Grouper des minuteries similaires par jour",
+    "columns": "Colonnes"
 }

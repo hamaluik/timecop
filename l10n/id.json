@@ -38,5 +38,8 @@
     "duration": "Durasi",
     "appName": "Time Cop",
     "logoSemantics": "Logo Time Cop",
-    "noDescription": "(tidak ada deskripsi)"
+    "noDescription": "(tidak ada deskripsi)",
+    "options": "Pilihan",
+    "groupTimers": "Pengatur Waktu Serupa Grup Per Hari",
+    "columns": "Kolom"
 }

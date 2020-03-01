@@ -25,19 +25,27 @@ import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:timecop/blocs/projects/projects_bloc.dart';
-import 'package:timecop/blocs/projects/projects_state.dart';
 import 'package:timecop/blocs/settings/bloc.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
+import 'package:timecop/models/timer_entry.dart';
 
 class ExportScreen extends StatefulWidget {
   ExportScreen({Key key}) : super(key: key);
 
   @override
   _ExportScreenState createState() => _ExportScreenState();
+}
+
+class DayGroup {
+  final DateTime date;
+  List<TimerEntry> timers = [];
+
+  DayGroup(this.date)
+  : assert(date != null);
 }
 
 class _ExportScreenState extends State<ExportScreen> {
@@ -84,7 +92,7 @@ class _ExportScreenState extends State<ExportScreen> {
       ),
       body: ListView(
         children: <Widget>[
-          Padding(
+          /*Padding(
             padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -107,7 +115,7 @@ class _ExportScreenState extends State<ExportScreen> {
               onChanged: (bool value) => settingsBloc.add(SetExportGroupTimers(value)),
               activeColor: Theme.of(context).accentColor,
             ),
-          ),
+          ),*/
           Padding(
             padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
             child: Column(
@@ -276,10 +284,10 @@ class _ExportScreenState extends State<ExportScreen> {
             ),
             trailing: Checkbox(
               tristate: true,
-              value: selectedProjects.isEmpty
-                ? false
-                : (selectedProjects.length == projectsBloc.state.projects.length
-                  ? true
+              value: selectedProjects.length == projectsBloc.state.projects.length + 1
+                ? true
+                : (selectedProjects.isEmpty
+                  ? false
                   : null),
               activeColor: Theme.of(context).accentColor,
               onChanged: (_) => setState(() {
@@ -359,6 +367,56 @@ class _ExportScreenState extends State<ExportScreen> {
           if(settingsBloc.state.exportIncludeDurationHours) {
             headers.add(L10N.of(context).tr.timeH);
           }
+
+          // TODO: this isn't working..
+          /*List<TimerEntry> filteredTimers;
+          if(settingsBloc.state.exportGroupTimers && !(settingsBloc.state.exportIncludeStartTime || settingsBloc.state.exportIncludeEndTime)) {
+            print("grouping timers...");
+            filteredTimers = 
+              timers.state.timers
+                .where((t) => t.endTime != null)
+                .where((t) => selectedProjects.any((p) => p?.id == t.projectID))
+                .map((t) => TimerEntry.clone(t))
+                .fold(<DayGroup>[], (List<DayGroup> days, TimerEntry t) {
+                  // find which day this timer belongs to
+                  DayGroup currentDay = days.firstWhere((DayGroup day) => (day.date.year == t.startTime.year && day.date.month == t.startTime.month && day.date.day == t.startTime.day));
+                  if(currentDay == null) {
+                    currentDay = DayGroup(t.startTime);
+                    days.add(currentDay);
+                  }
+
+                  // determine if there are any timers this day that match it
+                  TimerEntry match = currentDay.timers.firstWhere((TimerEntry et) => et.projectID == t.projectID && et.description == t.description);
+                  if(match != null) {
+                    // if it does match, just extend its end time
+                    currentDay.timers = currentDay.timers.map((TimerEntry et) {
+                      if(et.id == match.id) {
+                        return TimerEntry.clone(
+                          match,
+                          endTime: match.endTime.add((t.endTime.difference(t.startTime)))
+                        );
+                      }
+                      else {
+                        return et;
+                      }
+                    }).toList();
+                  }
+                  else {
+                    currentDay.timers.add(t);
+                  }
+
+                  return days;
+                })
+                .expand((DayGroup day) => day.timers)
+                .toList();
+          }
+          else {
+            filteredTimers = 
+              timers.state.timers
+                .where((t) => t.endTime != null)
+                .where((t) => selectedProjects.any((p) => p?.id == t.projectID))
+                .toList();
+          }*/
 
           List<List<String>> data = <List<String>>[headers]
           .followedBy(

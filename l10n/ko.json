@@ -38,5 +38,8 @@
     "duration": "지속",
     "appName": "타임 경찰",
     "logoSemantics": "타임 경찰 로고",
-    "noDescription": "(설명 없음)"
+    "noDescription": "(설명 없음)",
+    "options": "옵션",
+    "groupTimers": "하루에 비슷한 타이머 그룹화",
+    "columns": "열"
 }

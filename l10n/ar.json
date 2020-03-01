@@ -38,5 +38,8 @@
     "duration": "المدة الزمنية",
     "appName": "وقت الشرطي",
     "logoSemantics": "الوقت شرطي الشعار",
-    "noDescription": "(بدون وصف)"
+    "noDescription": "(بدون وصف)",
+    "options": "خيارات",
+    "groupTimers": "مجموعة توقيتات مماثلة في اليوم الواحد",
+    "columns": "أعمدة"
 }

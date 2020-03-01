@@ -38,5 +38,8 @@
     "duration": "期間",
     "appName": "タイムコップ",
     "logoSemantics": "タイムコップのロゴ",
-    "noDescription": "（説明なし）"
+    "noDescription": "（説明なし）",
+    "options": "オプション",
+    "groupTimers": "1日あたりの類似タイマーのグループ化",
+    "columns": "列"
 }

@@ -38,5 +38,8 @@
     "duration": "продолжительность",
     "appName": "Time Cop",
     "logoSemantics": "Time Cop Logo",
-    "noDescription": "(без описания)"
+    "noDescription": "(без описания)",
+    "options": "Параметры",
+    "groupTimers": "Группа похожих таймеров в день",
+    "columns": "Колонны"
 }

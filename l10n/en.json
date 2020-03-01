@@ -38,5 +38,8 @@
     "endTime": "End Time",
     "duration": "Duration",
     "appName": "Time Cop",
-    "logoSemantics": "Time Cop Logo"
+    "logoSemantics": "Time Cop Logo",
+    "options": "Options",
+    "groupTimers": "Group Similar Timers Per Day",
+    "columns": "Columns"
 }
