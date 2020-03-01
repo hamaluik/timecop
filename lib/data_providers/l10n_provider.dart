@@ -53,4 +53,7 @@ abstract class L10NProvider {
     String get noDescription;
     String timeCopDatabase(String date);
     String timeCopEntries(String date);
+    String get options;
+    String get groupTimers;
+    String get columns;
 }

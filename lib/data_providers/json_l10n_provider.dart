@@ -72,4 +72,7 @@ class JSONL10NProvider extends L10NProvider {
   @override String get whatWereYouDoing => _translations['whatWereYouDoing'] ?? "-whatWereYouDoing-";
   @override String timeCopDatabase(String date) => _translations['timeCopDatabase']?.replaceAll(r"{date}", date) ?? "-timeCopDatabase-";
   @override String timeCopEntries(String date) => _translations['timeCopEntries']?.replaceAll(r"{date}", date) ?? "-timeCopEntries-";
+  @override String get options => _translations['options'] ?? "-options-";
+  @override String get groupTimers => _translations['groupTimers'] ?? "-groupTimers-";
+  @override String get columns => _translations['columns'] ?? "-columns-";
 }

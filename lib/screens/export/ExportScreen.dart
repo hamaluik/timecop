@@ -26,6 +26,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:timecop/blocs/projects/projects_bloc.dart';
 import 'package:timecop/blocs/projects/projects_state.dart';
+import 'package:timecop/blocs/settings/bloc.dart';
+import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
@@ -54,6 +56,11 @@ class _ExportScreenState extends State<ExportScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
+    final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+
+    // TODO: break this into components or something so we don't have such a massively unmanagement build function
+
     return Scaffold(
       appBar: AppBar(
         title: Text(L10N.of(context).tr.export),
@@ -75,8 +82,32 @@ class _ExportScreenState extends State<ExportScreen> {
           )
         ],
       ),
-      body: Column(
+      body: ListView(
         children: <Widget>[
+          Padding(
+            padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Text(
+                  L10N.of(context).tr.options,
+                  style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                    fontWeight: FontWeight.w700
+                  )
+                ),
+              ],
+            ),
+          ),
+          BlocBuilder<SettingsBloc, SettingsState>(
+            bloc: settingsBloc,
+            builder: (BuildContext context, SettingsState settingsState) => SwitchListTile(
+              title: Text(L10N.of(context).tr.groupTimers),
+              value: settingsState.exportGroupTimers,
+              onChanged: (bool value) => settingsBloc.add(SetExportGroupTimers(value)),
+              activeColor: Theme.of(context).accentColor,
+            ),
+          ),
           Padding(
             padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
             child: Column(
@@ -98,7 +129,10 @@ class _ExportScreenState extends State<ExportScreen> {
             child: ListTile(
               leading: Icon(FontAwesomeIcons.calendar),
               title: Text(L10N.of(context).tr.from),
-              trailing: Text(_startDate == null ? "—" : _dateFormat.format(_startDate)),
+              trailing: Padding(
+                padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
+                child: Text(_startDate == null ? "—" : _dateFormat.format(_startDate)),
+              ),
               onTap: () async {
                 await DatePicker.showDatePicker(
                   context,
@@ -136,7 +170,10 @@ class _ExportScreenState extends State<ExportScreen> {
             child: ListTile(
               leading: Icon(FontAwesomeIcons.calendar),
               title: Text(L10N.of(context).tr.to),
-              trailing: Text(_endDate == null ? "—" : _dateFormat.format(_endDate)),
+              trailing: Padding(
+                padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
+                child: Text(_endDate == null ? "—" : _dateFormat.format(_endDate)),
+              ),
               onTap: () async {
                 await DatePicker.showDatePicker(
                   context,
@@ -168,83 +205,124 @@ class _ExportScreenState extends State<ExportScreen> {
                   )
                 ],
           ),
-          BlocBuilder<ProjectsBloc, ProjectsState>(
-            builder: (BuildContext context, ProjectsState state) {
-              return Expanded(
-                flex: 1,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    ListTile(
-                      title: Text(
-                        L10N.of(context).tr.includeProjects,
-                        style: TextStyle(
-                          color: Theme.of(context).accentColor,
-                          fontSize: Theme.of(context).textTheme.body1.fontSize,
-                          fontWeight: FontWeight.w700
-                        )
-                      ),
-                      trailing: Checkbox(
-                        tristate: true,
-                        value: selectedProjects.length == 1
-                          ? false
-                          : (selectedProjects.length == state.projects.length + 1
-                            ? true
-                            : null),
-                        activeColor: Theme.of(context).accentColor,
-                        onChanged: (_) => setState(() {
-                          if(selectedProjects.length == state.projects.length + 1) {
-                            selectedProjects.clear();
-                          }
-                          else {
-                            selectedProjects = <Project>[null].followedBy(state.projects.map((p) => Project.clone(p))).toList();
-                          }
-                        }),
-                      ),
-                      onTap: () => setState(() {
-                        if(selectedProjects.length == state.projects.length + 1) {
-                          selectedProjects.clear();
-                        }
-                        else {
-                          selectedProjects = <Project>[null].followedBy(state.projects.map((p) => Project.clone(p))).toList();
-                        }
-                      })
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: ListView(
-                        children: <Project>[null].followedBy(state.projects).map((project) => ListTile(
-                          leading: ProjectColour(project: project,),
-                          title: Text(project?.name ?? L10N.of(context).tr.noProject),
-                          trailing: Checkbox(
-                            value: selectedProjects.any((p) => p?.id == project?.id),
-                            activeColor: Theme.of(context).accentColor,
-                            onChanged: (_) => setState(() {
-                              if(selectedProjects.any((p) => p?.id == project?.id)) {
-                                selectedProjects.removeWhere((p) => p?.id == project?.id);
-                              }
-                              else {
-                                selectedProjects.add(project);
-                              }
-                            }),
-                          ),
-                          onTap: () => setState(() {
-                            if(selectedProjects.any((p) => p?.id == project?.id)) {
-                              selectedProjects.removeWhere((p) => p?.id == project?.id);
-                            }
-                            else {
-                              selectedProjects.add(project);
-                            }
-                          }),
-                        )).toList(),
-                      )
-                    )
-                  ],
-                )
-              );
-            }
+          Padding(
+            padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Text(
+                  L10N.of(context).tr.columns,
+                  style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                    fontWeight: FontWeight.w700
+                  )
+                ),
+              ],
+            ),
+          ),
+          BlocBuilder<SettingsBloc, SettingsState>(
+            bloc: settingsBloc,
+            builder: (BuildContext context, SettingsState settingsState) => SwitchListTile(
+              title: Text(L10N.of(context).tr.project),
+              value: settingsState.exportIncludeProject,
+              onChanged: (bool value) => settingsBloc.add(SetExportIncludeProject(value)),
+              activeColor: Theme.of(context).accentColor,
+            ),
+          ),
+          BlocBuilder<SettingsBloc, SettingsState>(
+            bloc: settingsBloc,
+            builder: (BuildContext context, SettingsState settingsState) => SwitchListTile(
+              title: Text(L10N.of(context).tr.description),
+              value: settingsState.exportIncludeDescription,
+              onChanged: (bool value) => settingsBloc.add(SetExportIncludeDescription(value)),
+              activeColor: Theme.of(context).accentColor,
+            ),
+          ),
+          BlocBuilder<SettingsBloc, SettingsState>(
+            bloc: settingsBloc,
+            builder: (BuildContext context, SettingsState settingsState) => SwitchListTile(
+              title: Text(L10N.of(context).tr.startTime),
+              value: settingsState.exportIncludeStartTime,
+              onChanged: (bool value) => settingsBloc.add(SetExportIncludeStartTime(value)),
+              activeColor: Theme.of(context).accentColor,
+            ),
+          ),
+          BlocBuilder<SettingsBloc, SettingsState>(
+            bloc: settingsBloc,
+            builder: (BuildContext context, SettingsState settingsState) => SwitchListTile(
+              title: Text(L10N.of(context).tr.endTime),
+              value: settingsState.exportIncludeEndTime,
+              onChanged: (bool value) => settingsBloc.add(SetExportIncludeEndTime(value)),
+              activeColor: Theme.of(context).accentColor,
+            ),
+          ),
+          BlocBuilder<SettingsBloc, SettingsState>(
+            bloc: settingsBloc,
+            builder: (BuildContext context, SettingsState settingsState) => SwitchListTile(
+              title: Text(L10N.of(context).tr.timeH),
+              value: settingsState.exportIncludeDurationHours,
+              onChanged: (bool value) => settingsBloc.add(SetExportIncludeDurationHours(value)),
+              activeColor: Theme.of(context).accentColor,
+            ),
+          ),
+          ListTile(
+            title: Text(
+              L10N.of(context).tr.includeProjects,
+              style: TextStyle(
+                color: Theme.of(context).accentColor,
+                fontSize: Theme.of(context).textTheme.body1.fontSize,
+                fontWeight: FontWeight.w700
+              )
+            ),
+            trailing: Checkbox(
+              tristate: true,
+              value: selectedProjects.isEmpty
+                ? false
+                : (selectedProjects.length == projectsBloc.state.projects.length
+                  ? true
+                  : null),
+              activeColor: Theme.of(context).accentColor,
+              onChanged: (_) => setState(() {
+                if(selectedProjects.length == projectsBloc.state.projects.length + 1) {
+                  selectedProjects.clear();
+                }
+                else {
+                  selectedProjects = <Project>[null].followedBy(projectsBloc.state.projects.map((p) => Project.clone(p))).toList();
+                }
+              }),
+            ),
+            onTap: () => setState(() {
+              if(selectedProjects.length == projectsBloc.state.projects.length + 1) {
+                selectedProjects.clear();
+              }
+              else {
+                selectedProjects = <Project>[null].followedBy(projectsBloc.state.projects.map((p) => Project.clone(p))).toList();
+              }
+            })
+          ),
+        ]
+        .followedBy(
+          <Project>[null].followedBy(projectsBloc.state.projects).map(
+            (project) => CheckboxListTile(
+              secondary: ProjectColour(project: project,),
+              title: Text(project?.name ?? L10N.of(context).tr.noProject),
+              value: selectedProjects.any((p) => p?.id == project?.id),
+              activeColor: Theme.of(context).accentColor,
+              onChanged: (_) => setState(() {
+                if(selectedProjects.any((p) => p?.id == project?.id)) {
+                  selectedProjects.removeWhere((p) => p?.id == project?.id);
+                }
+                else {
+                  selectedProjects.add(project);
+                }
+              }),
+            )
           )
-        ],
+        )
+        .followedBy([
+          ListTile(), // add some space so the FAB doesn't always overlap the bottom options
+        ])
+        .toList(),
       ),
       floatingActionButton: FloatingActionButton(
         child: Stack(
@@ -265,19 +343,48 @@ class _ExportScreenState extends State<ExportScreen> {
           final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
           assert(projects != null);
 
-          List<List<String>> data = <List<String>>[
-            <String>[L10N.of(context).tr.project, L10N.of(context).tr.description, L10N.of(context).tr.timeH],
-          ]
+          List<String> headers = [];
+          if(settingsBloc.state.exportIncludeProject) {
+            headers.add(L10N.of(context).tr.project);
+          }
+          if(settingsBloc.state.exportIncludeDescription) {
+            headers.add(L10N.of(context).tr.description);
+          }
+          if(settingsBloc.state.exportIncludeStartTime) {
+            headers.add(L10N.of(context).tr.startTime);
+          }
+          if(settingsBloc.state.exportIncludeEndTime) {
+            headers.add(L10N.of(context).tr.endTime);
+          }
+          if(settingsBloc.state.exportIncludeDurationHours) {
+            headers.add(L10N.of(context).tr.timeH);
+          }
+
+          List<List<String>> data = <List<String>>[headers]
           .followedBy(
             timers.state.timers
               .where((t) => t.endTime != null)
               .where((t) => selectedProjects.any((p) => p?.id == t.projectID))
               .map(
-                (timer) => <String>[
-                  projects.getProjectByID(timer.projectID)?.name ?? "",
-                  timer.description ?? "",
-                  (timer.endTime.difference(timer.startTime).inSeconds.toDouble() / 3600.0).toStringAsFixed(4),
-                ]
+                (timer) {
+                  List<String> row = [];
+                  if(settingsBloc.state.exportIncludeProject) {
+                    row.add(projects.getProjectByID(timer.projectID)?.name ?? "");
+                  }
+                  if(settingsBloc.state.exportIncludeDescription) {
+                    row.add(timer.description ?? "");
+                  }
+                  if(settingsBloc.state.exportIncludeStartTime) {
+                    row.add(timer.startTime.toUtc().toIso8601String());
+                  }
+                  if(settingsBloc.state.exportIncludeEndTime) {
+                    row.add(timer.endTime.toUtc().toIso8601String());
+                  }
+                  if(settingsBloc.state.exportIncludeDurationHours) {
+                    (timer.endTime.difference(timer.startTime).inSeconds.toDouble() / 3600.0).toStringAsFixed(4);
+                  }
+                  return row;
+                }
               )
           ).toList();
           String csv = ListToCsvConverter().convert(data);
@@ -294,7 +401,7 @@ class _ExportScreenState extends State<ExportScreen> {
           await file.writeAsString(csv, flush: true);
           await FlutterShare.shareFile(title: L10N.of(context).tr.timeCopEntries(_dateFormat.format(DateTime.now())), filePath: localPath);
         }
-        ),
+      ),
     );
   }
 }
