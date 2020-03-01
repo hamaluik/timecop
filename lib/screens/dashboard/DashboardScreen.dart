@@ -15,6 +15,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:timecop/blocs/projects/bloc.dart';
+import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:timecop/screens/dashboard/components/ProjectSelectField.dart';
@@ -30,6 +32,9 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+    final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
+
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
@@ -55,7 +60,7 @@ class DashboardScreen extends StatelessWidget {
           ),
           RunningTimers(),
           BlocProvider<DashboardBloc>(
-            create: (_) => DashboardBloc(),
+            create: (_) => DashboardBloc(projectsBloc, settingsBloc),
             child: Material(
               elevation: 8.0,
               color: Theme.of(context).bottomSheetTheme.backgroundColor,

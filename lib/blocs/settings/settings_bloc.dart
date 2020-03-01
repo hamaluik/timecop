@@ -35,6 +35,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       bool exportIncludeStartTime = await settings.getBool("exportIncludeStartTime") ?? state.exportIncludeStartTime;
       bool exportIncludeEndTime = await settings.getBool("exportIncludeEndTime") ?? state.exportIncludeEndTime;
       bool exportIncludeDurationHours = await settings.getBool("exportIncludeDurationHours") ?? state.exportIncludeDurationHours;
+      int defaultProjectID = await settings.getInt("defaultProjectID") ?? state.defaultProjectID;
       yield SettingsState(
         exportGroupTimers: exportGroupTimers,
         exportIncludeProject: exportIncludeProject,
@@ -42,6 +43,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         exportIncludeStartTime: exportIncludeStartTime,
         exportIncludeEndTime: exportIncludeEndTime,
         exportIncludeDurationHours: exportIncludeDurationHours,
+        defaultProjectID: defaultProjectID,
       );
     }
     else if(event is SetExportGroupTimers) {
@@ -67,6 +69,10 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     else if(event is SetExportIncludeDurationHours) {
       await settings.setBool("exportIncludeDurationHours", event.value);
       yield SettingsState.clone(state, exportIncludeDurationHours: event.value);
+    }
+    else if(event is SetDefaultProjectID) {
+      await settings.setInt("defaultProjectID", event.projectID ?? -1);
+      yield SettingsState.clone(state, defaultProjectID: event.projectID ?? -1);
     }
   }
 }

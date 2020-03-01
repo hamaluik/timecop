@@ -22,6 +22,7 @@ class SettingsState extends Equatable {
   final bool exportIncludeStartTime;
   final bool exportIncludeEndTime;
   final bool exportIncludeDurationHours;
+  final int defaultProjectID;
 
   SettingsState({
     @required this.exportGroupTimers,
@@ -30,12 +31,14 @@ class SettingsState extends Equatable {
     @required this.exportIncludeStartTime,
     @required this.exportIncludeEndTime,
     @required this.exportIncludeDurationHours,
+    @required this.defaultProjectID,
   })  : assert(exportGroupTimers != null),
         assert(exportIncludeProject != null),
         assert(exportIncludeDescription != null),
         assert(exportIncludeStartTime != null),
         assert(exportIncludeEndTime != null),
-        assert(exportIncludeDurationHours != null);
+        assert(exportIncludeDurationHours != null),
+        assert(defaultProjectID != null);
 
   static SettingsState initial() {
     return SettingsState(
@@ -45,6 +48,7 @@ class SettingsState extends Equatable {
       exportIncludeStartTime: false,
       exportIncludeEndTime: false,
       exportIncludeDurationHours: true,
+      defaultProjectID: -1,
     );
   }
 
@@ -54,7 +58,8 @@ class SettingsState extends Equatable {
       bool exportIncludeDescription,
       bool exportIncludeStartTime,
       bool exportIncludeEndTime,
-      bool exportIncludeDurationHours})
+      bool exportIncludeDurationHours,
+      int defaultProjectID})
       : this(
           exportGroupTimers: exportGroupTimers ?? project.exportGroupTimers,
           exportIncludeProject:
@@ -67,6 +72,8 @@ class SettingsState extends Equatable {
               exportIncludeEndTime ?? project.exportIncludeEndTime,
           exportIncludeDurationHours:
               exportIncludeDurationHours ?? project.exportIncludeDurationHours,
+          defaultProjectID:
+              defaultProjectID ?? project.defaultProjectID,
         );
 
   @override
@@ -76,6 +83,7 @@ class SettingsState extends Equatable {
         exportIncludeDescription,
         exportIncludeStartTime,
         exportIncludeEndTime,
-        exportIncludeDurationHours
+        exportIncludeDurationHours,
+        defaultProjectID,
       ];
 }

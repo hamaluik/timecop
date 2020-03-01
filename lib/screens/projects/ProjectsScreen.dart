@@ -17,6 +17,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
+import 'package:timecop/blocs/settings/bloc.dart';
+import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/projects/ProjectEditor.dart';
@@ -28,69 +30,94 @@ class ProjectsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
     assert(projectsBloc != null);
+    final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
+    assert(settingsBloc != null);
 
     return Scaffold(
       appBar: AppBar(
         title: Text(L10N.of(context).tr.projects),
       ),
-      body: BlocBuilder<ProjectsBloc, ProjectsState>(
-        bloc: projectsBloc,
-        builder: (BuildContext context, ProjectsState state) {
-          return ListView(
-            children: state.projects.map((project) => Slidable(
-              actionPane: SlidableDrawerActionPane(),
-              actionExtentRatio: 0.15,
-              child: ListTile(
-                leading: ProjectColour(project: project),
-                title: Text(project.name),
-                onTap: () => showDialog<void>(
-                  context: context,
-                  builder: (BuildContext context) => ProjectEditor(project: project,)
+      body: BlocBuilder<SettingsBloc, SettingsState>(
+        bloc: settingsBloc,
+        builder: (BuildContext context, SettingsState settingsState) => BlocBuilder<ProjectsBloc, ProjectsState>(
+          bloc: projectsBloc,
+          builder: (BuildContext context, ProjectsState state) {
+            return ListView(
+              children: state.projects.map((project) => Slidable(
+                actionPane: SlidableDrawerActionPane(),
+                actionExtentRatio: 0.15,
+                child: ListTile(
+                  leading: ProjectColour(project: project),
+                  title: Text(project.name),
+                  trailing: settingsState.defaultProjectID == project.id
+                    ? Icon(FontAwesomeIcons.thumbtack)
+                    : null,
+                  onTap: () => showDialog<void>(
+                    context: context,
+                    builder: (BuildContext context) => ProjectEditor(project: project,)
+                  ),
                 ),
-              ),
-              actions: <Widget>[
-                IconSlideAction(
-                  color: Theme.of(context).errorColor,
-                  foregroundColor: Theme.of(context).accentIconTheme.color,
-                  icon: FontAwesomeIcons.trash,
-                  onTap: () async {
-                    bool delete = await showDialog(
-                      context: context,
-                      builder: (BuildContext context) => AlertDialog(
-                        title: Text(L10N.of(context).tr.confirmDelete),
-                        content: RichText(
-                          textAlign: TextAlign.justify,
-                          text: TextSpan(
-                            style: TextStyle(color: Theme.of(context).textTheme.body1.color),
-                            children: <TextSpan>[
-                              TextSpan(text: L10N.of(context).tr.areYouSureYouWantToDeletePrefix),
-                              TextSpan(text: "⬤ ", style: TextStyle(color: project.colour)),
-                              TextSpan(text: project.name, style: TextStyle(fontStyle: FontStyle.italic)),
-                              TextSpan(text: L10N.of(context).tr.areYouSureYouWantToDeletePostfix),
-                            ]
-                          )
-                        ),
-                        actions: <Widget>[
-                          FlatButton(
-                            child: Text(L10N.of(context).tr.cancel),
-                            onPressed: () => Navigator.of(context).pop(false),
+                actions: <Widget>[
+                  IconSlideAction(
+                    color: Theme.of(context).errorColor,
+                    foregroundColor: Theme.of(context).accentIconTheme.color,
+                    icon: FontAwesomeIcons.trash,
+                    onTap: () async {
+                      bool delete = await showDialog(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: Text(L10N.of(context).tr.confirmDelete),
+                          content: RichText(
+                            textAlign: TextAlign.justify,
+                            text: TextSpan(
+                              style: TextStyle(color: Theme.of(context).textTheme.body1.color),
+                              children: <TextSpan>[
+                                TextSpan(text: L10N.of(context).tr.areYouSureYouWantToDeletePrefix),
+                                TextSpan(text: "⬤ ", style: TextStyle(color: project.colour)),
+                                TextSpan(text: project.name, style: TextStyle(fontStyle: FontStyle.italic)),
+                                TextSpan(text: L10N.of(context).tr.areYouSureYouWantToDeletePostfix),
+                              ]
+                            )
                           ),
-                          FlatButton(
-                            child: Text(L10N.of(context).tr.delete),
-                            onPressed: () => Navigator.of(context).pop(true),
-                          ),
-                        ],
-                      )
-                    );
-                    if(delete) {
-                      projectsBloc.add(DeleteProject(project));
+                          actions: <Widget>[
+                            FlatButton(
+                              child: Text(L10N.of(context).tr.cancel),
+                              onPressed: () => Navigator.of(context).pop(false),
+                            ),
+                            FlatButton(
+                              child: Text(L10N.of(context).tr.delete),
+                              onPressed: () => Navigator.of(context).pop(true),
+                            ),
+                          ],
+                        )
+                      );
+                      if(delete) {
+                        projectsBloc.add(DeleteProject(project));
+                      }
+                    },
+                  )
+                ],
+                secondaryActions: <Widget>[
+                  IconSlideAction(
+                    color:
+                      project.id == settingsState.defaultProjectID
+                        ? Theme.of(context).errorColor
+                        : Theme.of(context).accentColor,
+                    foregroundColor: Theme.of(context).accentIconTheme.color,
+                    icon: FontAwesomeIcons.thumbtack,
+                    onTap: () {
+                      settingsBloc.add(SetDefaultProjectID(
+                        project.id == settingsState.defaultProjectID
+                          ? null
+                          : project.id
+                      ));
                     }
-                  },
-                )
-              ],
-            )).toList(),
-          );
-        }
+                  )
+                ],
+              )).toList(),
+            );
+          }
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Stack(

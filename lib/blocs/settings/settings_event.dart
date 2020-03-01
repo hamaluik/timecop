@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'package:equatable/equatable.dart';
+import 'package:timecop/blocs/settings/bloc.dart';
 
 abstract class SettingsEvent extends Equatable {
   const SettingsEvent();
@@ -56,4 +57,10 @@ class SetExportIncludeDurationHours extends SettingsEvent {
   final bool value;
   const SetExportIncludeDurationHours(this.value);
   @override List<Object> get props => [value];
+}
+
+class SetDefaultProjectID extends SettingsEvent {
+  final int projectID;
+  const SetDefaultProjectID(this.projectID);
+  @override List<Object> get props => [projectID];
 }

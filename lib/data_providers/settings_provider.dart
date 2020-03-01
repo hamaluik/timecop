@@ -21,6 +21,8 @@ class SettingsProvider {
 
   bool getBool(String key) => _prefs.getBool(key);
   void setBool(String key, bool value) => _prefs.setBool(key, value);
+  int getInt(String key) => _prefs.getInt(key);
+  void setInt(String key, int value) => _prefs.setInt(key, value);
 
   static Future<SettingsProvider> load() async {
     return SettingsProvider(await SharedPreferences.getInstance());

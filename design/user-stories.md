@@ -25,7 +25,7 @@
     - [x] Timers must be manually stopped with a button
     - [x] Timers may be "resumed" by effectively cloning the project and description and starting from the current time
 - [x] Multiple timers may be active at once
-- [ ] The user may specify a default project to pre-populate all new timers with
+- [x] The user may specify a default project to pre-populate all new timers with
 - [x] A “dashboard” screen will display:
     - [x] a list of the latest completed timers,
     - [x] the current running timers,
@@ -49,7 +49,7 @@
     - [x] Optionally filtered by:
         1. Date
         2. Project
-    - [x] Optionally grouped by timer descriptions on a daily basis
+    - [ ] Optionally grouped by timer descriptions on a daily basis
     - [x] Export format should be able to include:
         - [x] Timer description
         - [x] Timer project
