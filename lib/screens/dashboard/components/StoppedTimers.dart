@@ -72,7 +72,7 @@ class StoppedTimers extends StatelessWidget {
   const StoppedTimers({Key key}) : super(key: key);
 
   static List<DayGrouping> groupDays(List<DayGrouping> days, TimerEntry timer) {
-    bool newDay = days.isEmpty|| timer.startTime.difference(days.last.date).inDays.abs() >= 1;
+    bool newDay = days.isEmpty|| !days.any((DayGrouping day) => day.date.year == timer.startTime.year && day.date.month == timer.startTime.month && day.date.day == timer.startTime.day);
     if(newDay) {
       days.add(
         DayGrouping(
@@ -84,7 +84,7 @@ class StoppedTimers extends StatelessWidget {
         )
       );
     }
-    days.last.entries.add(timer);
+    days.firstWhere((DayGrouping day) => day.date.year == timer.startTime.year && day.date.month == timer.startTime.month && day.date.day == timer.startTime.day).entries.add(timer);
 
     return days;
   }
