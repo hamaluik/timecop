@@ -25,7 +25,15 @@ class JSONL10NProvider extends L10NProvider {
     : assert(_translations != null);
 
   static Future<JSONL10NProvider> load(Locale locale) async {
-    String jsonString = await rootBundle.loadString("l10n/${locale.languageCode}.json");
+    String src = "l10n/${locale.languageCode}.json";
+    // special handling of zh-CN & zh-TW for now
+    if(locale.languageCode == "zh" && locale.countryCode == "CN") {
+      src = "l10n/zh-CN.json";
+    }
+    else if(locale.languageCode == "zh" && locale.countryCode == "TW") {
+      src = "l10n/zh-TW.json";
+    }
+    String jsonString = await rootBundle.loadString(src);
     dynamic rawJson = json.decode(jsonString);
     Map<String, dynamic> jsonMap = rawJson as Map<String, dynamic>;
     Map<String, String> strings = jsonMap.map((String key, dynamic value) => MapEntry(key, value.toString()));

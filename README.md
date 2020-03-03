@@ -27,7 +27,7 @@ Time tracking in and of itself is rather straightforward (hence all the apps on 
 * Export data as a `.csv` file, filtered by timespans and projects
 * Export the app's database for full access to all of its data
 * Automatic light mode / dark mode based on your device settings
-* Localized in several languages (thanks to [Google Translate](https://cloud.google.com/translate)): English, Arabic, German, Spanish, French, Hindi, Indonesian, Japanese, Korean, Portuguese, Russian, Chinese (Simplified)
+* Localized in several languages (thanks to [Google Translate](https://cloud.google.com/translate)): English, Arabic, German, Spanish, French, Hindi, Indonesian, Japanese, Korean, Portuguese, Russian, Chinese (Simplified), Chinese (Traditional)
 * Open source ([licensed under Apache-2.0](LICENSE))—fork away!
 
 ## Screenshots
