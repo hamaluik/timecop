@@ -33,7 +33,7 @@ Time tracking in and of itself is rather straightforward (hence all the apps on 
 ## Screenshots
 
 <div align="center">
-    <img alt="Screenshot" src="screenshots/android/Screenshot_1582952644.png" height="480"> <img alt="Screenshot" src="screenshots/android/Screenshot_1582952654.png" height="480"> <img alt="Screenshot" src="screenshots/android/Screenshot_1582952671.png" height="480"> <img alt="Screenshot" src="screenshots/android/Screenshot_1582952699.png" height="480"> <img alt="Screenshot" src="screenshots/android/Screenshot_1582952707.png" height="480">
+    <img alt="Screenshot" src="screenshots/android/Screenshot_1583197438.png" height="480"> <img alt="Screenshot" src="screenshots/android/Screenshot_1583197441.png" height="480"> <img alt="Screenshot" src="screenshots/android/Screenshot_1583197447.png" height="480"> <img alt="Screenshot" src="screenshots/android/Screenshot_1583197451.png" height="480"> <img alt="Screenshot" src="screenshots/android/Screenshot_1583197455.png" height="480">
 </div>
 
 More screenshots (including dark-mode and localization demonstrations) are available in the [screenshots/](screenshots/) folder.
