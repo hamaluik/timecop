@@ -439,7 +439,7 @@ class _ExportScreenState extends State<ExportScreen> {
                     row.add(timer.endTime.toUtc().toIso8601String());
                   }
                   if(settingsBloc.state.exportIncludeDurationHours) {
-                    (timer.endTime.difference(timer.startTime).inSeconds.toDouble() / 3600.0).toStringAsFixed(4);
+                    row.add((timer.endTime.difference(timer.startTime).inSeconds.toDouble() / 3600.0).toStringAsFixed(4));
                   }
                   return row;
                 }
