@@ -1,1 +1,1 @@
-{"version":1,"ops":[{"type":1,"author":{"id":"3c9b78c9ed12f67eb9a57ec68e143b54095985dd"},"timestamp":1583344866,"title":"Add time entry date as option for exporting CSV","message":"This should be distinct from `start time` as it is only the date the entry belongs to, not also the time.","files":null}]}
+{"version":1,"ops":[{"type":5,"author":{"id":"3c9b78c9ed12f67eb9a57ec68e143b54095985dd"},"timestamp":1583345381,"added":["enhancement"],"removed":null}]}
