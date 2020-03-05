@@ -29,6 +29,12 @@ class SetExportGroupTimers extends SettingsEvent {
   @override List<Object> get props => [value];
 }
 
+class SetExportIncludeDate extends SettingsEvent {
+  final bool value;
+  const SetExportIncludeDate(this.value);
+  @override List<Object> get props => [value];
+}
+
 class SetExportIncludeProject extends SettingsEvent {
   final bool value;
   const SetExportIncludeProject(this.value);

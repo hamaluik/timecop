@@ -17,6 +17,7 @@ import 'package:flutter/foundation.dart';
 
 class SettingsState extends Equatable {
   final bool exportGroupTimers;
+  final bool exportIncludeDate;
   final bool exportIncludeProject;
   final bool exportIncludeDescription;
   final bool exportIncludeStartTime;
@@ -26,6 +27,7 @@ class SettingsState extends Equatable {
 
   SettingsState({
     @required this.exportGroupTimers,
+    @required this.exportIncludeDate,
     @required this.exportIncludeProject,
     @required this.exportIncludeDescription,
     @required this.exportIncludeStartTime,
@@ -33,6 +35,7 @@ class SettingsState extends Equatable {
     @required this.exportIncludeDurationHours,
     @required this.defaultProjectID,
   })  : assert(exportGroupTimers != null),
+        assert(exportIncludeDate != null),
         assert(exportIncludeProject != null),
         assert(exportIncludeDescription != null),
         assert(exportIncludeStartTime != null),
@@ -43,6 +46,7 @@ class SettingsState extends Equatable {
   static SettingsState initial() {
     return SettingsState(
       exportGroupTimers: true,
+      exportIncludeDate: true,
       exportIncludeProject: true,
       exportIncludeDescription: true,
       exportIncludeStartTime: false,
@@ -54,6 +58,7 @@ class SettingsState extends Equatable {
 
   SettingsState.clone(SettingsState project,
       {bool exportGroupTimers,
+      bool exportIncludeDate,
       bool exportIncludeProject,
       bool exportIncludeDescription,
       bool exportIncludeStartTime,
@@ -62,6 +67,8 @@ class SettingsState extends Equatable {
       int defaultProjectID})
       : this(
           exportGroupTimers: exportGroupTimers ?? project.exportGroupTimers,
+          exportIncludeDate:
+              exportIncludeDate ?? project.exportIncludeDate,
           exportIncludeProject:
               exportIncludeProject ?? project.exportIncludeProject,
           exportIncludeDescription:
@@ -79,6 +86,7 @@ class SettingsState extends Equatable {
   @override
   List<Object> get props => [
         exportGroupTimers,
+        exportIncludeDate,
         exportIncludeProject,
         exportIncludeDescription,
         exportIncludeStartTime,

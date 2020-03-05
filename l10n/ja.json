@@ -41,5 +41,6 @@
     "noDescription": "（説明なし）",
     "options": "オプション",
     "groupTimers": "1日あたりの類似タイマーのグループ化",
-    "columns": "列"
+    "columns": "列",
+    "date": "日付"
 }

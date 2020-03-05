@@ -41,5 +41,6 @@
     "noDescription": "(설명 없음)",
     "options": "옵션",
     "groupTimers": "하루에 비슷한 타이머 그룹화",
-    "columns": "열"
+    "columns": "열",
+    "date": "데이트"
 }

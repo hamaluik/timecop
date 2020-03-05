@@ -41,5 +41,6 @@
     "logoSemantics": "Time Cop Logo",
     "options": "Options",
     "groupTimers": "Group Similar Timers Per Day",
-    "columns": "Columns"
+    "columns": "Columns",
+    "date": "Date"
 }

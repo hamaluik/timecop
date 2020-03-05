@@ -41,5 +41,6 @@
     "noDescription": "（没有说明）",
     "options": "选件",
     "groupTimers": "每天组类似计时器",
-    "columns": "列"
+    "columns": "列",
+    "date": "日期"
 }

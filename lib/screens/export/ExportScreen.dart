@@ -53,6 +53,7 @@ class _ExportScreenState extends State<ExportScreen> {
   DateTime _endDate;
   List<Project> selectedProjects = [];
   static DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
+  static DateFormat _exportDateFormat = DateFormat.yMd();
 
   @override
   void initState() {
@@ -231,6 +232,15 @@ class _ExportScreenState extends State<ExportScreen> {
           BlocBuilder<SettingsBloc, SettingsState>(
             bloc: settingsBloc,
             builder: (BuildContext context, SettingsState settingsState) => SwitchListTile(
+              title: Text(L10N.of(context).tr.date),
+              value: settingsState.exportIncludeDate,
+              onChanged: (bool value) => settingsBloc.add(SetExportIncludeDate(value)),
+              activeColor: Theme.of(context).accentColor,
+            ),
+          ),
+          BlocBuilder<SettingsBloc, SettingsState>(
+            bloc: settingsBloc,
+            builder: (BuildContext context, SettingsState settingsState) => SwitchListTile(
               title: Text(L10N.of(context).tr.project),
               value: settingsState.exportIncludeProject,
               onChanged: (bool value) => settingsBloc.add(SetExportIncludeProject(value)),
@@ -352,6 +362,9 @@ class _ExportScreenState extends State<ExportScreen> {
           assert(projects != null);
 
           List<String> headers = [];
+          if(settingsBloc.state.exportIncludeDate) {
+            headers.add(L10N.of(context).tr.date);
+          }
           if(settingsBloc.state.exportIncludeProject) {
             headers.add(L10N.of(context).tr.project);
           }
@@ -426,6 +439,9 @@ class _ExportScreenState extends State<ExportScreen> {
               .map(
                 (timer) {
                   List<String> row = [];
+                  if(settingsBloc.state.exportIncludeDate) {
+                    row.add(_exportDateFormat.format(timer.startTime));
+                  }
                   if(settingsBloc.state.exportIncludeProject) {
                     row.add(projects.getProjectByID(timer.projectID)?.name ?? "");
                   }

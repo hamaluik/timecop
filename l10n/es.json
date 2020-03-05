@@ -41,5 +41,6 @@
     "noDescription": "(Sin descripción)",
     "options": "Opciones",
     "groupTimers": "Agrupe temporizadores similares por día",
-    "columns": "Columnas"
+    "columns": "Columnas",
+    "date": "Fecha"
 }

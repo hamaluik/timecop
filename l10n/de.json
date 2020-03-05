@@ -41,5 +41,6 @@
     "noDescription": "(Keine Beschreibung)",
     "options": "Optionen",
     "groupTimers": "Gruppieren Sie ähnliche Timer pro Tag",
-    "columns": "Säulen"
+    "columns": "Säulen",
+    "date": "Datum"
 }

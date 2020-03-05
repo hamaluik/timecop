@@ -41,5 +41,6 @@
     "noDescription": "(Pas de description)",
     "options": "Les options",
     "groupTimers": "Grouper des minuteries similaires par jour",
-    "columns": "Colonnes"
+    "columns": "Colonnes",
+    "date": "Date"
 }

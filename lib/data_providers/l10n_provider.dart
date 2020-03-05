@@ -56,4 +56,5 @@ abstract class L10NProvider {
     String get options;
     String get groupTimers;
     String get columns;
+    String get date;
 }

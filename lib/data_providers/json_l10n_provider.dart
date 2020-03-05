@@ -83,4 +83,5 @@ class JSONL10NProvider extends L10NProvider {
   @override String get options => _translations['options'] ?? "-options-";
   @override String get groupTimers => _translations['groupTimers'] ?? "-groupTimers-";
   @override String get columns => _translations['columns'] ?? "-columns-";
+  @override String get date => _translations['date'] ?? "-date-";
 }
