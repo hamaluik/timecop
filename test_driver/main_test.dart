@@ -16,7 +16,9 @@ void main() {
     });
 
     test('take a screenshot', () async {
-      await screenshot(driver, config, '0');
+      SerializableFinder fab = find.byType("FloatingActionButton");
+      await driver.waitFor(fab);
+      await screenshot(driver, config, 'dashboard');
     }, timeout: Timeout(Duration(seconds: 120)));
   });
 }

@@ -4,12 +4,22 @@ tests:
   - test_driver/main.dart
 
 # Interim location of screenshots from tests before processing
-staging: /tmp/screenshots
+staging: ./tmp/screenshots
 
 # A list of locales supported in app
 locales:
-  - en-CA
+  - en
   - fr
+  - de
+  - es
+  - hi
+  - ja
+  - ko
+  - pt
+  - ru
+  - zh-CN
+  - zh-TW
+  - ar
 
 # A list of devices to run tests on
 devices:

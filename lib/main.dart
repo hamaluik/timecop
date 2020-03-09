@@ -28,93 +28,63 @@ import 'package:timecop/data_providers/settings_provider.dart';
 import 'package:timecop/fontlicenses.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/dashboard/DashboardScreen.dart';
-import 'blocs/theme/bloc.dart';
+import 'package:timecop/themes.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  final SettingsProvider settings = await SettingsProvider.load();
-  final DataProvider data = await DatabaseProvider.open();
-
-  // setup intl date formats?
-  //await initializeDateFormatting();
-  LicenseRegistry.addLicense(getFontLicenses);
-
-  assert(settings != null);
-
-  runApp(MultiBlocProvider(
-    providers: [
-      BlocProvider<ThemeBloc>(
-        create: (_) => ThemeBloc(),
-      ),
-      BlocProvider<SettingsBloc>(
-        create: (_) => SettingsBloc(settings),
-      ),
-      BlocProvider<TimersBloc>(
-        create: (_) => TimersBloc(data),
-      ),
-      BlocProvider<ProjectsBloc>(
-        create: (_) => ProjectsBloc(data),
-      ),
-    ],
-    child: BlocBuilder<ThemeBloc, ThemeState>(
-      builder: (context, state) =>
-          TimeCopApp(settings: settings),
-    ),
-  ));
+  runApp(TimeCopApp());
 }
 
-/// TimeCop app is stateful so it can listen to platform brightness changes
-/// using `WidgetsBindingObserver`
 class TimeCopApp extends StatefulWidget {
-  final SettingsProvider settings;
-  const TimeCopApp({Key key, @required this.settings})
-      : assert(settings != null),
-        super(key: key);
+  const TimeCopApp({Key key})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _TimeCopAppState();
 }
 
-class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
+class _TimeCopAppState extends State<TimeCopApp> {
   Timer _updateTimersTimer;
+  SettingsProvider _settings;
+  DataProvider _data;
+  TimersBloc _timers;
 
   @override
   void initState() {
-    _updateTimersTimer = Timer.periodic(Duration(seconds: 1), (_) => BlocProvider.of<TimersBloc>(context).add(UpdateNow()));
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
+    SettingsProvider.load().then((SettingsProvider s) {
+      setState(() {
+        _settings = s;
+      });
+    });
+    DatabaseProvider.open().then((DataProvider d) {
+      setState(() {
+        _data = d;
+      });
+    });
 
-    // send commands to our top-level blocs to get them to initialize
-    BlocProvider.of<SettingsBloc>(context).add(LoadSettingsFromRepository());
-    BlocProvider.of<TimersBloc>(context).add(LoadTimers());
-    BlocProvider.of<ProjectsBloc>(context).add(LoadProjects());
+    LicenseRegistry.addLicense(getFontLicenses);
+
+    _updateTimersTimer = Timer.periodic(Duration(seconds: 1), (_) {
+      if(_timers != null) {
+        _timers.add(UpdateNow());
+      }
+    });
+    super.initState();
   }
 
   @override
   void dispose() {
     _updateTimersTimer.cancel();
-    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
   @override
-  void didChangePlatformBrightness() {
-    final Brightness brightness =
-        WidgetsBinding.instance.window.platformBrightness;
-    BlocProvider.of<ThemeBloc>(context)
-        .add(BrightnessChanged(brightness: brightness));
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MultiRepositoryProvider(
-      providers: [
-        RepositoryProvider<SettingsProvider>.value(value: widget.settings),
-      ],
-      child: MaterialApp(
+    if(_settings == null || _data == null) {
+      return MaterialApp(
         title: 'Time Cop',
-        theme: BlocProvider.of<ThemeBloc>(context).state.theme,
-        home: DashboardScreen(),
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        home: Container(),
         localizationsDelegates: [
           L10N.delegate,
           GlobalMaterialLocalizations.delegate,
@@ -136,7 +106,61 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
           const Locale('zh', 'TW'),
           const Locale('ar'),
         ],
-      )
+      );
+    }
+
+    return MaterialApp(
+      title: 'Time Cop',
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider<SettingsBloc>(
+            create: (_) {
+              SettingsBloc bloc = SettingsBloc(_settings);
+              bloc.add(LoadSettingsFromRepository());
+              return bloc;
+            },
+          ),
+          BlocProvider<TimersBloc>(
+            create: (_) {
+              TimersBloc bloc = TimersBloc(_data);
+              bloc.add(LoadTimers());
+              _timers = bloc;
+              return bloc;
+            },
+          ),
+          BlocProvider<ProjectsBloc>(
+            create: (_) {
+              ProjectsBloc bloc = ProjectsBloc(_data);
+              bloc.add(LoadProjects());
+              return bloc;
+            },
+          ),
+        ],
+        child: DashboardScreen(),
+      ),
+      localizationsDelegates: [
+        L10N.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en'),
+        const Locale('fr'),
+        const Locale('de'),
+        const Locale('es'),
+        const Locale('hi'),
+        const Locale('id'),
+        const Locale('ja'),
+        const Locale('ko'),
+        const Locale('pt'),
+        const Locale('ru'),
+        const Locale('zh', 'CN'),
+        const Locale('zh', 'TW'),
+        const Locale('ar'),
+      ],
     );
   }
 }
