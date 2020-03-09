@@ -58,16 +58,16 @@ void main() async {
     ],
     child: BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, state) =>
-          _TimeCopApp(settings: settings),
+          TimeCopApp(settings: settings),
     ),
   ));
 }
 
 /// TimeCop app is stateful so it can listen to platform brightness changes
 /// using `WidgetsBindingObserver`
-class _TimeCopApp extends StatefulWidget {
+class TimeCopApp extends StatefulWidget {
   final SettingsProvider settings;
-  const _TimeCopApp({Key key, @required this.settings})
+  const TimeCopApp({Key key, @required this.settings})
       : assert(settings != null),
         super(key: key);
 
@@ -75,7 +75,7 @@ class _TimeCopApp extends StatefulWidget {
   State<StatefulWidget> createState() => _TimeCopAppState();
 }
 
-class _TimeCopAppState extends State<_TimeCopApp> with WidgetsBindingObserver {
+class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
   Timer _updateTimersTimer;
 
   @override
