@@ -26,6 +26,7 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AboutPage(
+      key: Key("aboutPage"),
       title: Text(L10N.of(context).tr.about),
       applicationVersion: 'v{{ version }}-{{ buildNumber }}',
       applicationDescription: Text(

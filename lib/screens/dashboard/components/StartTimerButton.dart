@@ -27,6 +27,7 @@ class StartTimerButton extends StatelessWidget {
     assert(bloc != null);
 
     return FloatingActionButton(
+      key: Key("startTimerButton"),
       child: Stack(
         // shenanigans to properly centre the icon (font awesome glyphs are variable
         // width but the library currently doesn't deal with that)

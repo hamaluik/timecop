@@ -343,6 +343,7 @@ class _ExportScreenState extends State<ExportScreen> {
         .toList(),
       ),
       floatingActionButton: FloatingActionButton(
+        key: Key("exportFAB"),
         child: Stack(
         // shenanigans to properly centre the icon (font awesome glyphs are variable
         // width but the library currently doesn't deal with that)
@@ -385,7 +386,7 @@ class _ExportScreenState extends State<ExportScreen> {
           /*List<TimerEntry> filteredTimers;
           if(settingsBloc.state.exportGroupTimers && !(settingsBloc.state.exportIncludeStartTime || settingsBloc.state.exportIncludeEndTime)) {
             print("grouping timers...");
-            filteredTimers = 
+            filteredTimers =
               timers.state.timers
                 .where((t) => t.endTime != null)
                 .where((t) => selectedProjects.any((p) => p?.id == t.projectID))
@@ -424,7 +425,7 @@ class _ExportScreenState extends State<ExportScreen> {
                 .toList();
           }
           else {
-            filteredTimers = 
+            filteredTimers =
               timers.state.timers
                 .where((t) => t.endTime != null)
                 .where((t) => selectedProjects.any((p) => p?.id == t.projectID))

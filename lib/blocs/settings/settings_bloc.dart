@@ -48,6 +48,18 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         defaultProjectID: defaultProjectID,
       );
     }
+    else if(event is FactoryResetSettings) {
+      SettingsState factorySettings = SettingsState.initial();
+      await settings.setBool("exportGroupTimers", factorySettings.exportGroupTimers);
+      await settings.setBool("exportIncludeDate", factorySettings.exportIncludeProject);
+      await settings.setBool("exportIncludeProject", factorySettings.exportIncludeDate);
+      await settings.setBool("exportIncludeDescription", factorySettings.exportIncludeDescription);
+      await settings.setBool("exportIncludeStartTime", factorySettings.exportIncludeStartTime);
+      await settings.setBool("exportIncludeEndTime", factorySettings.exportIncludeEndTime);
+      await settings.setBool("exportIncludeDurationHours", factorySettings.exportIncludeDurationHours);
+      await settings.setInt("defaultProjectID", factorySettings.defaultProjectID);
+      yield factorySettings;
+    }
     else if(event is SetExportGroupTimers) {
       await settings.setBool("exportGroupTimers", event.value);
       yield SettingsState.clone(state, exportGroupTimers: event.value);

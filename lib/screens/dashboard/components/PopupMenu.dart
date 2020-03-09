@@ -29,6 +29,7 @@ class PopupMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<MenuItem>(
+      key: Key("menuButton"),
       icon: Icon(FontAwesomeIcons.dungeon),
       onSelected: (MenuItem item) {
         switch(item) {
@@ -52,6 +53,7 @@ class PopupMenu extends StatelessWidget {
       itemBuilder: (BuildContext context) {
         return [
           PopupMenuItem(
+            key: Key("menuProjects"),
             child: ListTile(
               leading: Icon(FontAwesomeIcons.layerGroup),
               title: Text(L10N.of(context).tr.projects),
@@ -59,6 +61,7 @@ class PopupMenu extends StatelessWidget {
             value: MenuItem.projects,
           ),
           PopupMenuItem(
+            key: Key("menuExport"),
             child: ListTile(
               leading: Icon(FontAwesomeIcons.fileExport),
               title: Text(L10N.of(context).tr.export),
@@ -66,6 +69,7 @@ class PopupMenu extends StatelessWidget {
             value: MenuItem.export,
           ),
           PopupMenuItem(
+            key: Key("menuAbout"),
             child: ListTile(
               leading: Icon(FontAwesomeIcons.dna),
               title: Text(L10N.of(context).tr.about),

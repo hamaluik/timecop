@@ -25,6 +25,7 @@ import 'package:timecop/models/project.dart';
 class DatabaseProvider extends DataProvider {
   final Database _db;
   final RandomColor _randomColour = RandomColor();
+  static const int DB_VERSION = 1;
 
   DatabaseProvider(this._db) : assert(_db != null);
 
@@ -51,7 +52,7 @@ class DatabaseProvider extends DataProvider {
       )
     ''');
     await db.execute('''
-      create index timers_start_time on timers(start_time)
+      create index if not exists timers_start_time on timers(start_time)
     ''');
   }
 
@@ -63,10 +64,49 @@ class DatabaseProvider extends DataProvider {
 
     // open the database
     Database db = await openDatabase(path,
-        onConfigure: _onConfigure, onCreate: _onCreate, version: 1);
+        onConfigure: _onConfigure, onCreate: _onCreate, version: DB_VERSION);
     DatabaseProvider repo = DatabaseProvider(db);
 
     return repo;
+  }
+
+  Future<void> factoryReset() async {
+    await _db.execute("drop table projects");
+    await _db.execute("drop table timers");
+    await _onCreate(_db, DB_VERSION);
+  }
+
+  Future<void> insertDemoData() async {
+    Project p1 = await createProject(name: "Cool App XYZ", colour: Colors.cyan[600]);
+    Project p2 = await createProject(name: "Administration", colour: Colors.pink[600]);
+    await createTimer(
+      description: "Wireframing",
+      projectID: p1.id,
+      startTime: DateTime.now().subtract(Duration(days: 2, hours: 9, minutes: 22)),
+      endTime: DateTime.now().subtract(Duration(days: 2))
+    );
+    await createTimer(
+      description: "Mockups",
+      projectID: p1.id,
+      startTime: DateTime.now().subtract(Duration(days: 1, hours: 7, minutes: 9)),
+      endTime: DateTime.now().subtract(Duration(days: 1))
+    );
+    await createTimer(
+      description: "Client Meeting",
+      projectID: p2.id,
+      startTime: DateTime.now().subtract(Duration(days: 1, hours: 0, minutes: 42)),
+      endTime: DateTime.now().subtract(Duration(days: 1))
+    );
+    await createTimer(
+      description: "UI Layout",
+      projectID: p1.id,
+      startTime: DateTime.now().subtract(Duration(hours: 2, minutes: 10))
+    );
+    await createTimer(
+      description: "Coffee",
+      projectID: p2.id,
+      startTime: DateTime.now().subtract(Duration(minutes: 3))
+    );
   }
 
   /// the c in crud

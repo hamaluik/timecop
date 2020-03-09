@@ -7,5 +7,5 @@ import 'package:flutter_driver/driver_extension.dart';
 Future<void> main() async {
   enableFlutterDriverExtension();
   WidgetsApp.debugAllowBannerOverride = false; // remove debug banner
-  runApp(TimeCopApp());
+  runApp(TimeCopApp(testMode: true,));
 }
