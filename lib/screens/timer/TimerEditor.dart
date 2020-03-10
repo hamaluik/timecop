@@ -206,6 +206,7 @@ class _TimerEditorState extends State<TimerEditor> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        key: Key("saveDetails"),
         child: Stack(
           // shenanigans to properly centre the icon (font awesome glyphs are variable
           // width but the library currently doesn't deal with that)

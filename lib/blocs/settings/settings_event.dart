@@ -13,17 +13,12 @@
 // limitations under the License.
 
 import 'package:equatable/equatable.dart';
-import 'package:timecop/blocs/settings/bloc.dart';
 
 abstract class SettingsEvent extends Equatable {
   const SettingsEvent();
 }
 
 class LoadSettingsFromRepository extends SettingsEvent {
-  @override List<Object> get props => [];
-}
-
-class FactoryResetSettings extends SettingsEvent {
   @override List<Object> get props => [];
 }
 

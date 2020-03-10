@@ -25,19 +25,46 @@ import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/data_providers/data_provider.dart';
 import 'package:timecop/data_providers/database_provider.dart';
 import 'package:timecop/data_providers/settings_provider.dart';
+import 'package:timecop/data_providers/shared_prefs_settings_provider.dart';
 import 'package:timecop/fontlicenses.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/dashboard/DashboardScreen.dart';
 import 'package:timecop/themes.dart';
 
-void main() async {
-  runApp(TimeCopApp(testMode: false));
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final SettingsProvider settings = await SharedPrefsSettingsProvider.load();
+  final DataProvider data = await DatabaseProvider.open();
+  await runMain(settings, data);
+}
+
+Future<void> runMain(SettingsProvider settings, DataProvider data) async {
+  // setup intl date formats?
+  //await initializeDateFormatting();
+  LicenseRegistry.addLicense(getFontLicenses);
+
+  assert(settings != null);
+
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider<SettingsBloc>(
+        create: (_) => SettingsBloc(settings),
+      ),
+      BlocProvider<TimersBloc>(
+        create: (_) => TimersBloc(data),
+      ),
+      BlocProvider<ProjectsBloc>(
+        create: (_) => ProjectsBloc(data),
+      ),
+    ],
+    child: TimeCopApp(settings: settings),
+  ));
 }
 
 class TimeCopApp extends StatefulWidget {
-  final bool testMode;
-  const TimeCopApp({Key key, @required this.testMode})
-      : assert(testMode != null),
+  final SettingsProvider settings;
+  const TimeCopApp({Key key, @required this.settings})
+      : assert(settings != null),
         super(key: key);
 
   @override
@@ -46,32 +73,16 @@ class TimeCopApp extends StatefulWidget {
 
 class _TimeCopAppState extends State<TimeCopApp> {
   Timer _updateTimersTimer;
-  SettingsProvider _settings;
-  DataProvider _data;
-  TimersBloc _timers;
 
   @override
   void initState() {
-    SettingsProvider.load().then((SettingsProvider s) {
-      setState(() => _settings = s);
-    });
-    DatabaseProvider.open().then((DatabaseProvider d) async {
-      if(widget.testMode) {
-        await d.factoryReset();
-        await d.insertDemoData();
-      }
-
-      setState(() => _data = d);
-    });
-
-    LicenseRegistry.addLicense(getFontLicenses);
-
-    _updateTimersTimer = Timer.periodic(Duration(seconds: 1), (_) {
-      if(_timers != null) {
-        _timers.add(UpdateNow());
-      }
-    });
+    _updateTimersTimer = Timer.periodic(Duration(seconds: 1), (_) => BlocProvider.of<TimersBloc>(context).add(UpdateNow()));
     super.initState();
+
+    // send commands to our top-level blocs to get them to initialize
+    BlocProvider.of<SettingsBloc>(context).add(LoadSettingsFromRepository());
+    BlocProvider.of<TimersBloc>(context).add(LoadTimers());
+    BlocProvider.of<ProjectsBloc>(context).add(LoadProjects());
   }
 
   @override
@@ -82,65 +93,9 @@ class _TimeCopAppState extends State<TimeCopApp> {
 
   @override
   Widget build(BuildContext context) {
-    if(_settings == null || _data == null) {
-      return MaterialApp(
-        title: 'Time Cop',
-        theme: lightTheme,
-        darkTheme: darkTheme,
-        home: Container(),
-        localizationsDelegates: [
-          L10N.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: [
-          const Locale('en'),
-          const Locale('fr'),
-          const Locale('de'),
-          const Locale('es'),
-          const Locale('hi'),
-          const Locale('id'),
-          const Locale('ja'),
-          const Locale('ko'),
-          const Locale('pt'),
-          const Locale('ru'),
-          const Locale('zh', 'CN'),
-          const Locale('zh', 'TW'),
-          const Locale('ar'),
-        ],
-      );
-    }
-
-    return MultiBlocProvider(
+    return MultiRepositoryProvider(
       providers: [
-        BlocProvider<SettingsBloc>(
-          create: (_) {
-            SettingsBloc bloc = SettingsBloc(_settings);
-            if(widget.testMode) {
-              bloc.add(FactoryResetSettings());
-            }
-            else {
-              bloc.add(LoadSettingsFromRepository());
-            }
-            return bloc;
-          },
-        ),
-        BlocProvider<TimersBloc>(
-          create: (_) {
-            TimersBloc bloc = TimersBloc(_data);
-            bloc.add(LoadTimers());
-            _timers = bloc;
-            return bloc;
-          },
-        ),
-        BlocProvider<ProjectsBloc>(
-          create: (_) {
-            ProjectsBloc bloc = ProjectsBloc(_data);
-            bloc.add(LoadProjects());
-            return bloc;
-          },
-        ),
+        RepositoryProvider<SettingsProvider>.value(value: widget.settings),
       ],
       child: MaterialApp(
         title: 'Time Cop',
@@ -168,7 +123,7 @@ class _TimeCopAppState extends State<TimeCopApp> {
           const Locale('zh', 'TW'),
           const Locale('ar'),
         ],
-      ),
+      )
     );
   }
 }

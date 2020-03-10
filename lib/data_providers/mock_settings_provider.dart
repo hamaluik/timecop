@@ -12,9 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-abstract class SettingsProvider {
-  bool getBool(String key);
-  void setBool(String key, bool value);
-  int getInt(String key);
-  void setInt(String key, int value);
+import 'package:timecop/data_providers/settings_provider.dart';
+
+class MockSettingsProvider extends SettingsProvider {
+  Map<String, dynamic> values;
+
+  MockSettingsProvider() {
+    values = Map<String, dynamic>();
+  }
+
+  @override
+  bool getBool(String key) => values.containsKey(key) ? values[key] as bool : true;
+  void setBool(String key, bool value) => values[key] = value;
+  int getInt(String key) => values.containsKey(key) ? values[key] as int : -1;
+  void setInt(String key, int value) => values[key] = value;
 }
