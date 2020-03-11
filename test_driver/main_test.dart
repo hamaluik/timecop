@@ -16,52 +16,47 @@ void main() {
     });
 
     test('take screenshots', () async {
-      //await driver.waitUntilFirstFrameRasterized();
-      //await driver.waitUntilNoTransientCallbacks();
-
       // take a screenshot of the dashboard
       SerializableFinder startTimerButton = find.byValueKey("startTimerButton");
-      //SerializableFinder timerEdit = find.byType("StoppedTimerRow");
-      //SerializableFinder menuButton = find.byValueKey("menuButton");
-      //SerializableFinder menuProjects = find.byValueKey("menuProjects");
-      //SerializableFinder addProject = find.byValueKey("addProject");
-      //SerializableFinder saveDetails = find.byValueKey("saveDetails");
-      //SerializableFinder closeButton = find.byType("CloseButton");
-      //SerializableFinder backButton = find.byType("BackButton");
-      //SerializableFinder menuExport = find.byValueKey("menuExport");
-      //SerializableFinder menuAbout = find.byValueKey("menuAbout");
-      //SerializableFinder exportFAB = find.byValueKey("exportFAB");
-      //SerializableFinder aboutPage = find.byValueKey("aboutPage");
 
       await driver.waitFor(startTimerButton);
-      //await driver.waitUntilNoTransientCallbacks();
       await screenshot(driver, config, 'dashboard');
 
       // then the timer details page
-      /*await driver.waitFor(timerEdit);
+      String mockupsText = await driver.requestData("mockups");
+      SerializableFinder timerEdit = find.text(mockupsText);
+      await driver.waitFor(timerEdit);
       await driver.tap(timerEdit);
+      SerializableFinder saveDetails = find.byValueKey("saveDetails");
       await driver.waitFor(saveDetails);
       await driver.waitUntilNoTransientCallbacks();
       await screenshot(driver, config, 'editor');
 
       // then the projects page
+      SerializableFinder closeButton = find.byType("CloseButton");
       await driver.waitFor(closeButton);
       await driver.tap(closeButton);
+      SerializableFinder menuButton = find.byValueKey("menuButton");
       await driver.waitFor(menuButton);
       await driver.tap(menuButton);
+      SerializableFinder menuProjects = find.byValueKey("menuProjects");
       await driver.waitFor(menuProjects);
       await driver.tap(menuProjects);
+      SerializableFinder addProject = find.byValueKey("addProject");
       await driver.waitFor(addProject);
       await driver.waitUntilNoTransientCallbacks();
       await screenshot(driver, config, 'projects');
 
       // then the export page
+      SerializableFinder backButton = find.byType("BackButton");
       await driver.waitFor(backButton);
       await driver.tap(backButton);
       await driver.waitFor(menuButton);
       await driver.tap(menuButton);
+      SerializableFinder menuExport = find.byValueKey("menuExport");
       await driver.waitFor(menuExport);
       await driver.tap(menuExport);
+      SerializableFinder exportFAB = find.byValueKey("exportFAB");
       await driver.waitFor(exportFAB);
       await driver.waitUntilNoTransientCallbacks();
       await screenshot(driver, config, 'export');
@@ -71,11 +66,13 @@ void main() {
       await driver.tap(backButton);
       await driver.waitFor(menuButton);
       await driver.tap(menuButton);
+      SerializableFinder menuAbout = find.byValueKey("menuAbout");
       await driver.waitFor(menuAbout);
       await driver.tap(menuAbout);
+      SerializableFinder aboutPage = find.byValueKey("aboutPage");
       await driver.waitFor(aboutPage);
       await driver.waitUntilNoTransientCallbacks();
-      await screenshot(driver, config, 'about');*/
+      await screenshot(driver, config, 'about');
     }, timeout: Timeout(Duration(seconds: 30)));
   });
 }
