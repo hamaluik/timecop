@@ -33,7 +33,7 @@ Time tracking in and of itself is rather straightforward (hence all the apps on 
 ## Screenshots
 
 <div align="center">
-    <img alt="Screenshot" src="screenshots/android/Screenshot_1583197438.png" height="480"> <img alt="Screenshot" src="screenshots/android/Screenshot_1583197441.png" height="480"> <img alt="Screenshot" src="screenshots/android/Screenshot_1583197447.png" height="480"> <img alt="Screenshot" src="screenshots/android/Screenshot_1583197451.png" height="480"> <img alt="Screenshot" src="screenshots/android/Screenshot_1583197455.png" height="480">
+    <img alt="Screenshot" src="screenshots/android/dark/en/Nexus 5X-Portrait-dashboard.jpg" height="480"> <img alt="Screenshot" src="screenshots/android/dark/en/Nexus 5X-Portrait-editor.jpg" height="480"> <img alt="Screenshot" src="screenshots/android/dark/en/Nexus 5X-Portrait-projects.jpg" height="480"> <img alt="Screenshot" src="screenshots/android/dark/en/Nexus 5X-Portrait-export.jpg" height="480"> <img alt="Screenshot" src="screenshots/android/dark/en/Nexus 5X-Portrait-about.jpg" height="480">
 </div>
 
 More screenshots (including dark-mode and localization demonstrations) are available in the [screenshots/](screenshots/) folder.
