@@ -42,5 +42,6 @@
     "options": "Параметры",
     "groupTimers": "Группа похожих таймеров в день",
     "columns": "Колонны",
-    "date": "Дата"
+    "date": "Дата",
+    "projectDescription": "Описание Проекта"
 }

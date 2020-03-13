@@ -42,5 +42,6 @@
     "options": "Pilihan",
     "groupTimers": "Pengatur Waktu Serupa Grup Per Hari",
     "columns": "Kolom",
-    "date": "Tanggal"
+    "date": "Tanggal",
+    "projectDescription": "Deskripsi Proyek"
 }

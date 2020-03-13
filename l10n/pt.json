@@ -42,5 +42,6 @@
     "options": "Opções",
     "groupTimers": "Agrupar temporizadores semelhantes por dia",
     "columns": "Colunas",
-    "date": "Encontro"
+    "date": "Encontro",
+    "projectDescription": "Descrição do Projeto"
 }

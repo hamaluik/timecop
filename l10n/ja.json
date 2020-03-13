@@ -42,5 +42,6 @@
     "options": "オプション",
     "groupTimers": "1日あたりの類似タイマーのグループ化",
     "columns": "列",
-    "date": "日付"
+    "date": "日付",
+    "projectDescription": "プロジェクトの説明"
 }

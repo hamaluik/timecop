@@ -42,5 +42,6 @@
     "options": "Les options",
     "groupTimers": "Grouper des minuteries similaires par jour",
     "columns": "Colonnes",
-    "date": "Date"
+    "date": "Date",
+    "projectDescription": "Description du projet"
 }
