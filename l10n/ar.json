@@ -42,5 +42,6 @@
     "options": "خيارات",
     "groupTimers": "مجموعة توقيتات مماثلة في اليوم الواحد",
     "columns": "أعمدة",
-    "date": "تاريخ"
+    "date": "تاريخ",
+    "projectDescription": "وصف المشروع"
 }

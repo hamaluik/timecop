@@ -42,5 +42,6 @@
     "options": "選件",
     "groupTimers": "每天組類似計時器",
     "columns": "列",
-    "date": "日期"
+    "date": "日期",
+    "projectDescription": "項目簡介"
 }
