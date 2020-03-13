@@ -54,6 +54,7 @@ class _ExportScreenState extends State<ExportScreen> {
   List<Project> selectedProjects = [];
   static DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
   static DateFormat _exportDateFormat = DateFormat.yMd();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -71,6 +72,7 @@ class _ExportScreenState extends State<ExportScreen> {
     // TODO: break this into components or something so we don't have such a massively unmanagement build function
 
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text(L10N.of(context).tr.export),
         actions: <Widget>[
@@ -80,13 +82,24 @@ class _ExportScreenState extends State<ExportScreen> {
               var databasesPath = await getDatabasesPath();
               var dbPath = p.join(databasesPath, 'timecop.db');
 
-              // on android, copy it somewhere where it can be shared
-              if (Platform.isAndroid) {
-                Directory directory = await getExternalStorageDirectory();
-                File copiedDB = await File(dbPath).copy(p.join(directory.path, "timecop.db"));
-                dbPath = copiedDB.path;
+              try {
+                // on android, copy it somewhere where it can be shared
+                if (Platform.isAndroid) {
+                  Directory directory = await getExternalStorageDirectory();
+                  File copiedDB = await File(dbPath).copy(p.join(directory.path, "timecop.db"));
+                  dbPath = copiedDB.path;
+                }
+                await FlutterShare.shareFile(title: L10N.of(context).tr.timeCopDatabase(_dateFormat.format(DateTime.now())), filePath: dbPath);
               }
-              await FlutterShare.shareFile(title: L10N.of(context).tr.timeCopDatabase(_dateFormat.format(DateTime.now())), filePath: dbPath);
+              on Exception catch (e) {
+                _scaffoldKey.currentState.showSnackBar(
+                  SnackBar(
+                    backgroundColor: Theme.of(context).errorColor,
+                    content: Text(e.toString(), style: TextStyle(color: Colors.white),),
+                    duration: Duration(seconds: 5),
+                  )
+                );
+              }
             },
           )
         ],

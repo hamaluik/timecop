@@ -38,6 +38,14 @@ Future<void> main() async {
   await runMain(settings, data);
 }
 
+//import 'data_providers/mock_data_provider.dart';
+//import 'data_providers/mock_settings_provider.dart';
+//Future<void> main() async {
+//  final SettingsProvider settings = MockSettingsProvider();
+//  final DataProvider data = MockDataProvider(Locale.fromSubtags(languageCode: "en"));
+//  await runMain(settings, data);
+//}
+
 Future<void> runMain(SettingsProvider settings, DataProvider data) async {
   // setup intl date formats?
   //await initializeDateFormatting();
