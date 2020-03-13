@@ -272,6 +272,15 @@ class _ExportScreenState extends State<ExportScreen> {
           BlocBuilder<SettingsBloc, SettingsState>(
             bloc: settingsBloc,
             builder: (BuildContext context, SettingsState settingsState) => SwitchListTile(
+              title: Text(L10N.of(context).tr.projectDescription),
+              value: settingsState.exportIncludeProjectDescription,
+              onChanged: (bool value) => settingsBloc.add(SetExportIncludeProjectDescription(value)),
+              activeColor: Theme.of(context).accentColor,
+            ),
+          ),
+          BlocBuilder<SettingsBloc, SettingsState>(
+            bloc: settingsBloc,
+            builder: (BuildContext context, SettingsState settingsState) => SwitchListTile(
               title: Text(L10N.of(context).tr.startTime),
               value: settingsState.exportIncludeStartTime,
               onChanged: (bool value) => settingsBloc.add(SetExportIncludeStartTime(value)),
@@ -445,8 +454,8 @@ class _ExportScreenState extends State<ExportScreen> {
                 .toList();
           }*/
 
-          print('start date: ' + (_startDate == null ? "null" : _startDate.toUtc().toIso8601String()));
-          print('end date: ' + (_endDate == null ? "null" : _endDate.toUtc().toIso8601String()));
+          //print('start date: ' + (_startDate == null ? "null" : _startDate.toUtc().toIso8601String()));
+          //print('end date: ' + (_endDate == null ? "null" : _endDate.toUtc().toIso8601String()));
 
           List<List<String>> data = <List<String>>[headers]
           .followedBy(
@@ -466,6 +475,9 @@ class _ExportScreenState extends State<ExportScreen> {
                   }
                   if(settingsBloc.state.exportIncludeDescription) {
                     row.add(timer.description ?? "");
+                  }
+                  if(settingsBloc.state.exportIncludeProjectDescription) {
+                    row.add((projects.getProjectByID(timer.projectID)?.name ?? "") + ": " + (timer.description ?? ""));
                   }
                   if(settingsBloc.state.exportIncludeStartTime) {
                     row.add(timer.startTime.toUtc().toIso8601String());

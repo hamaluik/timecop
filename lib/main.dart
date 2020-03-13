@@ -23,14 +23,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/data_providers/data_provider.dart';
-import 'package:timecop/data_providers/database_provider.dart';
 import 'package:timecop/data_providers/settings_provider.dart';
-import 'package:timecop/data_providers/shared_prefs_settings_provider.dart';
 import 'package:timecop/fontlicenses.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/dashboard/DashboardScreen.dart';
 import 'package:timecop/themes.dart';
 
+import 'package:timecop/data_providers/database_provider.dart';
+import 'package:timecop/data_providers/shared_prefs_settings_provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final SettingsProvider settings = await SharedPrefsSettingsProvider.load();

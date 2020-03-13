@@ -42,5 +42,6 @@
     "options": "Options",
     "groupTimers": "Group Similar Timers Per Day",
     "columns": "Columns",
-    "date": "Date"
+    "date": "Date",
+    "projectDescription": "Project: Description"
 }

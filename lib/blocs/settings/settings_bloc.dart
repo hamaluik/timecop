@@ -33,6 +33,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       bool exportIncludeProject = await settings.getBool("exportIncludeProject") ?? state.exportIncludeProject;
       bool exportIncludeDate = await settings.getBool("exportIncludeDate") ?? state.exportIncludeDate;
       bool exportIncludeDescription = await settings.getBool("exportIncludeDescription") ?? state.exportIncludeDescription;
+      bool exportIncludeProjectDescription = await settings.getBool("exportIncludeProjectDescription") ?? state.exportIncludeProjectDescription;
       bool exportIncludeStartTime = await settings.getBool("exportIncludeStartTime") ?? state.exportIncludeStartTime;
       bool exportIncludeEndTime = await settings.getBool("exportIncludeEndTime") ?? state.exportIncludeEndTime;
       bool exportIncludeDurationHours = await settings.getBool("exportIncludeDurationHours") ?? state.exportIncludeDurationHours;
@@ -42,6 +43,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         exportIncludeDate: exportIncludeDate,
         exportIncludeProject: exportIncludeProject,
         exportIncludeDescription: exportIncludeDescription,
+        exportIncludeProjectDescription: exportIncludeProjectDescription,
         exportIncludeStartTime: exportIncludeStartTime,
         exportIncludeEndTime: exportIncludeEndTime,
         exportIncludeDurationHours: exportIncludeDurationHours,
@@ -63,6 +65,10 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     else if(event is SetExportIncludeDescription) {
       await settings.setBool("exportIncludeDescription", event.value);
       yield SettingsState.clone(state, exportIncludeDescription: event.value);
+    }
+    else if(event is SetExportIncludeProjectDescription) {
+      await settings.setBool("exportIncludeProjectDescription", event.value);
+      yield SettingsState.clone(state, exportIncludeProjectDescription: event.value);
     }
     else if(event is SetExportIncludeStartTime) {
       await settings.setBool("exportIncludeStartTime", event.value);

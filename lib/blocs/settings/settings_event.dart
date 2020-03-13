@@ -46,6 +46,12 @@ class SetExportIncludeDescription extends SettingsEvent {
   @override List<Object> get props => [value];
 }
 
+class SetExportIncludeProjectDescription extends SettingsEvent {
+  final bool value;
+  const SetExportIncludeProjectDescription(this.value);
+  @override List<Object> get props => [value];
+}
+
 class SetExportIncludeStartTime extends SettingsEvent {
   final bool value;
   const SetExportIncludeStartTime(this.value);
