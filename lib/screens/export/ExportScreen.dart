@@ -159,8 +159,8 @@ class _ExportScreenState extends State<ExportScreen> {
                 await DatePicker.showDatePicker(
                   context,
                   currentTime: _startDate,
-                  onChanged: (DateTime dt) => setState(() => _startDate = dt),
-                  onConfirm: (DateTime dt) => setState(() => _startDate = dt),
+                  onChanged: (DateTime dt) => setState(() => _startDate = DateTime(dt.year, dt.month, dt.day)),
+                  onConfirm: (DateTime dt) => setState(() => _startDate = DateTime(dt.year, dt.month, dt.day)),
                   theme: DatePickerTheme(
                     cancelStyle: Theme.of(context).textTheme.button,
                     doneStyle: Theme.of(context).textTheme.button,
@@ -200,8 +200,8 @@ class _ExportScreenState extends State<ExportScreen> {
                 await DatePicker.showDatePicker(
                   context,
                   currentTime: _endDate,
-                  onChanged: (DateTime dt) => setState(() => _endDate = dt),
-                  onConfirm: (DateTime dt) => setState(() => _endDate = dt),
+                  onChanged: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
+                  onConfirm: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
                   theme: DatePickerTheme(
                     cancelStyle: Theme.of(context).textTheme.button,
                     doneStyle: Theme.of(context).textTheme.button,
@@ -445,11 +445,16 @@ class _ExportScreenState extends State<ExportScreen> {
                 .toList();
           }*/
 
+          print('start date: ' + (_startDate == null ? "null" : _startDate.toUtc().toIso8601String()));
+          print('end date: ' + (_endDate == null ? "null" : _endDate.toUtc().toIso8601String()));
+
           List<List<String>> data = <List<String>>[headers]
           .followedBy(
             timers.state.timers
               .where((t) => t.endTime != null)
               .where((t) => selectedProjects.any((p) => p?.id == t.projectID))
+              .where((t) => _startDate == null ? true : t.startTime.isAfter(_startDate))
+              .where((t) => _endDate == null ? true : t.endTime.isBefore(_endDate))
               .map(
                 (timer) {
                   List<String> row = [];
@@ -476,6 +481,8 @@ class _ExportScreenState extends State<ExportScreen> {
               )
           ).toList();
           String csv = ListToCsvConverter().convert(data);
+          //print('CSV:');
+          //print(csv);
 
           Directory directory;
           if (Platform.isAndroid) {
