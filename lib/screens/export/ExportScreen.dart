@@ -394,6 +394,9 @@ class _ExportScreenState extends State<ExportScreen> {
           if(settingsBloc.state.exportIncludeDescription) {
             headers.add(L10N.of(context).tr.description);
           }
+          if(settingsBloc.state.exportIncludeProjectDescription) {
+            headers.add(L10N.of(context).tr.projectDescription);
+          }
           if(settingsBloc.state.exportIncludeStartTime) {
             headers.add(L10N.of(context).tr.startTime);
           }
