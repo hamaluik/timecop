@@ -18,9 +18,10 @@ import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/about/AboutScreen.dart';
 import 'package:timecop/screens/export/ExportScreen.dart';
 import 'package:timecop/screens/projects/ProjectsScreen.dart';
+import 'package:timecop/screens/reports/ReportsScreen.dart';
 
 enum MenuItem {
-  projects, export, about,
+  projects, reports, export, about,
 }
 
 class PopupMenu extends StatelessWidget {
@@ -36,6 +37,11 @@ class PopupMenu extends StatelessWidget {
           case MenuItem.projects:
             Navigator.of(context).push(MaterialPageRoute<ProjectsScreen>(
               builder: (BuildContext _context) => ProjectsScreen(),
+            ));
+            break;
+          case MenuItem.reports:
+            Navigator.of(context).push(MaterialPageRoute<ReportsScreen>(
+              builder: (BuildContext _context) => ReportsScreen(),
             ));
             break;
           case MenuItem.export:
@@ -59,6 +65,14 @@ class PopupMenu extends StatelessWidget {
               title: Text(L10N.of(context).tr.projects),
             ),
             value: MenuItem.projects,
+          ),
+          PopupMenuItem(
+            key: Key("menuReports"),
+            child: ListTile(
+              leading: Icon(FontAwesomeIcons.chartPie),
+              title: Text(L10N.of(context).tr.reports),
+            ),
+            value: MenuItem.reports,
           ),
           PopupMenuItem(
             key: Key("menuExport"),

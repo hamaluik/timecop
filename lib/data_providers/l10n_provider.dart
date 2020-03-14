@@ -57,4 +57,5 @@ abstract class L10NProvider {
     String get columns;
     String get date;
     String get combinedProjectDescription;
+    String get reports;
 }
