@@ -1,0 +1,88 @@
+deleteTimerConfirm = هل أنت متأكد أنك تريد حذف هذا المؤقت؟
+
+endTime = وقت النهاية
+
+cancel = إلغاء
+
+description = وصف
+
+sourceCode = مصدر الرمز
+
+confirmDelete = تأكيد الحذف
+
+combinedProjectDescription = وصف المشروع
+
+noProject = (لا يوجد مشروع)
+
+create = خلق
+
+editTimer = تحرير الموقت
+
+timeCopEntries = إدخالات شرطي الوقت ({ $date })
+
+from = من عند
+
+logoSemantics = شعار الوقت الشرطي
+
+changeLog = سجل التغيير
+
+readme = الملف التمهيدي
+
+editProject = تحرير المشروع
+
+project = مشروع
+
+runningTimers = تشغيل المؤقتات
+
+delete = حذف
+
+projects = المشاريع
+
+columns = الأعمدة
+
+filter = منقي
+
+projectName = اسم المشروع
+
+save = حفظ
+
+includeProjects = تضمين المشاريع
+
+export = تصدير
+
+startTime = وقت البدء
+
+options = خيارات
+
+pleaseEnterAName = الرجاء إدخال اسم
+
+about = حول
+
+createNewProject = إنشاء مشروع جديد
+
+groupTimers = قم بتجميع الموقتات المماثلة في اليوم
+
+appDescription = تطبيق تتبع الوقت الذي يحترم خصوصيتك وينجز المهمة دون أن يتوهم.
+
+appLegalese = حقوق النشر © Kenton Hamaluik، 2020
+
+timeH = الوقت (ساعات)
+
+timeCopDatabase = قاعدة بيانات شرطي الوقت ({ $date })
+
+date = تاريخ
+
+noDescription = (بدون وصف)
+
+whatWereYouDoing = ماذا كنتم تفعلون؟
+
+appName = شرطي الوقت
+
+areYouSureYouWantToDelete = هل أنت متأكد أنك تريد حذف هذا المشروع؟
+
+to = إلى
+
+duration = المدة الزمنية
+
+whatAreYouDoing = ماذا تفعل؟
+

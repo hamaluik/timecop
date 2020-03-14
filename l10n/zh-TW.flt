@@ -1,0 +1,88 @@
+endTime = 時間結束
+
+about = 關於
+
+appName = 時間警察
+
+whatWereYouDoing = 你在做什麼？
+
+runningTimers = 運行計時器
+
+sourceCode = 源代碼
+
+confirmDelete = 確認刪除
+
+appDescription = 時間跟踪應用程序尊重您的隱私並在不花哨的情況下完成工作。
+
+timeCopEntries = 時間警察條目（{ $date }）
+
+timeH = 時間（小時）
+
+editProject = 編輯專案
+
+create = 創建
+
+save = 保存
+
+duration = 持續時間
+
+cancel = 取消
+
+projectName = 項目名
+
+from = 從
+
+whatAreYouDoing = 你在做什麼？
+
+includeProjects = 包括項目
+
+combinedProjectDescription = 項目簡介
+
+noDescription = （沒有說明）
+
+filter = 過濾
+
+date = 日期
+
+columns = 列
+
+pleaseEnterAName = 請輸入一個名字
+
+groupTimers = 每天組類似計時器
+
+logoSemantics = 時間警察徽標
+
+project = 項目
+
+timeCopDatabase = 時間警察數據庫（{ $date }）
+
+options = 選件
+
+deleteTimerConfirm = 您確定要刪除此計時器嗎？
+
+areYouSureYouWantToDelete = 您確定要刪除此項目嗎？
+
+description = 描述
+
+startTime = 開始時間
+
+noProject = （無項目）
+
+appLegalese = 版權所有©Kenton Hamaluik，2020年
+
+projects = 專案
+
+editTimer = 編輯計時器
+
+changeLog = 變更記錄
+
+export = 出口
+
+createNewProject = 建立新專案
+
+delete = 刪除
+
+readme = 自述文件
+
+to = 至
+

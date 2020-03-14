@@ -17,8 +17,7 @@ abstract class L10NProvider {
     String get appDescription;
     String get appLegalese;
     String get appName;
-    String get areYouSureYouWantToDeletePostfix;
-    String get areYouSureYouWantToDeletePrefix;
+    String get areYouSureYouWantToDelete;
     String get cancel;
     String get changeLog;
     String get confirmDelete;
@@ -57,5 +56,5 @@ abstract class L10NProvider {
     String get groupTimers;
     String get columns;
     String get date;
-    String get projectDescription;
+    String get combinedProjectDescription;
 }

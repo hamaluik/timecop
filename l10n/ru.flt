@@ -1,0 +1,88 @@
+filter = Фильтр
+
+endTime = Время окончания
+
+appLegalese = Copyright © Кентон Хамалук, 2020
+
+groupTimers = Группировать похожие таймеры в день
+
+editProject = Редактировать проект
+
+description = Описание
+
+save = Сохранить
+
+date = Дата
+
+noProject = (нет проекта)
+
+sourceCode = Исходный код
+
+whatAreYouDoing = Что делаешь?
+
+projects = проектов
+
+cancel = Отмена
+
+changeLog = Журнал изменений
+
+noDescription = (без описания)
+
+readme = Прочти меня
+
+whatWereYouDoing = Что ты делал?
+
+logoSemantics = Time Cop Logo
+
+from = Из
+
+columns = Колонны
+
+project = проект
+
+timeH = Время (часы)
+
+create = Создайте
+
+areYouSureYouWantToDelete = Вы уверены, что хотите удалить этот проект?
+
+about = Около
+
+projectName = название проекта
+
+confirmDelete = Подтвердите удаление
+
+timeCopDatabase = База данных Time Cop ({ $date })
+
+startTime = Начальное время
+
+appDescription = Приложение для отслеживания времени, которое уважает вашу конфиденциальность и выполняет работу, не становясь слишком модным.
+
+options = Параметры
+
+duration = продолжительность
+
+combinedProjectDescription = Описание Проекта
+
+editTimer = Редактировать таймер
+
+createNewProject = Создать новый проект
+
+timeCopEntries = Записи временного полицейского ({ $date })
+
+runningTimers = Таймеры бега
+
+to = к
+
+export = экспорт
+
+pleaseEnterAName = Пожалуйста, введите имя
+
+deleteTimerConfirm = Вы уверены, что хотите удалить этот таймер?
+
+appName = Time Cop
+
+delete = удалять
+
+includeProjects = Включить проекты
+

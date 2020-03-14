@@ -72,10 +72,9 @@ class ProjectsScreen extends StatelessWidget {
                             text: TextSpan(
                               style: TextStyle(color: Theme.of(context).textTheme.body1.color),
                               children: <TextSpan>[
-                                TextSpan(text: L10N.of(context).tr.areYouSureYouWantToDeletePrefix),
+                                TextSpan(text: L10N.of(context).tr.areYouSureYouWantToDelete + "\n\n"),
                                 TextSpan(text: "⬤ ", style: TextStyle(color: project.colour)),
                                 TextSpan(text: project.name, style: TextStyle(fontStyle: FontStyle.italic)),
-                                TextSpan(text: L10N.of(context).tr.areYouSureYouWantToDeletePostfix),
                               ]
                             )
                           ),

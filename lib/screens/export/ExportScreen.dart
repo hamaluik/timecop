@@ -272,7 +272,7 @@ class _ExportScreenState extends State<ExportScreen> {
           BlocBuilder<SettingsBloc, SettingsState>(
             bloc: settingsBloc,
             builder: (BuildContext context, SettingsState settingsState) => SwitchListTile(
-              title: Text(L10N.of(context).tr.projectDescription),
+              title: Text(L10N.of(context).tr.combinedProjectDescription),
               value: settingsState.exportIncludeProjectDescription,
               onChanged: (bool value) => settingsBloc.add(SetExportIncludeProjectDescription(value)),
               activeColor: Theme.of(context).accentColor,
@@ -395,7 +395,7 @@ class _ExportScreenState extends State<ExportScreen> {
             headers.add(L10N.of(context).tr.description);
           }
           if(settingsBloc.state.exportIncludeProjectDescription) {
-            headers.add(L10N.of(context).tr.projectDescription);
+            headers.add(L10N.of(context).tr.combinedProjectDescription);
           }
           if(settingsBloc.state.exportIncludeStartTime) {
             headers.add(L10N.of(context).tr.startTime);

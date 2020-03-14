@@ -54,7 +54,7 @@ samples, guidance on mobile development, and a full API reference.
 
 ### Localizations
 
-All translations are [managed online](https://poeditor.com/join/project/AekdZsEyIg) using [POEditor.com](https://poeditor.com). Currently all translations (except English) were auto-translated by [Google Translate](https://cloud.google.com/translate). If you notice any incorrect strings, I would love to know about it so that it can be fixed asap. Similarly, if you want to add a language, please do!
+Translations are handled using [Project Fluent](https://projectfluent.org/). Currently all translations (except English) were auto-translated by [Google Translate](https://cloud.google.com/translate) using my [Translate Tool](https://github.com/hamaluik/translatetool). If you notice any incorrect strings, I would love to know about it so that it can be fixed asap. Similarly, if you want to add a language, please do!
 
 ## Todo
 

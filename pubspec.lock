@@ -127,6 +127,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.1.0"
+  fluent:
+    dependency: "direct main"
+    description:
+      name: fluent
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1+2"
   flutter:
     dependency: "direct main"
     description: flutter

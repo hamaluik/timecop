@@ -1,0 +1,88 @@
+projects = Proyek
+
+noProject = (tidak ada proyek)
+
+save = Menyimpan
+
+appDescription = Aplikasi pelacakan waktu yang menghormati privasi Anda dan menyelesaikan pekerjaan tanpa menjadi terlalu mewah.
+
+options = Pilihan
+
+columns = Kolom
+
+confirmDelete = Konfirmasikan Hapus
+
+noDescription = (tidak ada deskripsi)
+
+filter = Saring
+
+areYouSureYouWantToDelete = Anda yakin ingin menghapus proyek ini?
+
+from = Dari
+
+pleaseEnterAName = Silakan masukkan nama
+
+projectName = Nama Proyek
+
+delete = Menghapus
+
+appLegalese = Hak Cipta © Kenton Hamaluik, 2020
+
+appName = Time Cop
+
+endTime = Akhir waktu
+
+cancel = Membatalkan
+
+createNewProject = Buat Proyek Baru
+
+runningTimers = Pengatur Waktu Berlari
+
+editTimer = Edit Timer
+
+whatWereYouDoing = Apa yang kamu lakukan?
+
+readme = Baca aku
+
+about = Tentang
+
+duration = Durasi
+
+includeProjects = Sertakan Proyek
+
+project = Proyek
+
+logoSemantics = Logo Time Cop
+
+timeCopDatabase = Database Time Cop ({ $date })
+
+startTime = Waktu mulai
+
+timeCopEntries = Entri Cop Waktu ({ $date })
+
+date = Tanggal
+
+timeH = Waktu (jam)
+
+whatAreYouDoing = Apa yang sedang kamu lakukan?
+
+sourceCode = Kode sumber
+
+create = Membuat
+
+to = Untuk
+
+groupTimers = Pengatur Waktu Serupa Grup Per Hari
+
+combinedProjectDescription = Deskripsi Proyek
+
+deleteTimerConfirm = Anda yakin ingin menghapus penghitung waktu ini?
+
+changeLog = Ubah Log
+
+editProject = Edit Proyek
+
+export = Ekspor
+
+description = Deskripsi
+

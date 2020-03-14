@@ -14,7 +14,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:timecop/data_providers/json_l10n_provider.dart';
+import 'package:timecop/data_providers/fluent_l10n_provider.dart';
 import 'package:timecop/data_providers/l10n_provider.dart';
 
 class L10N {
@@ -27,7 +27,7 @@ class L10N {
 
   static Future<L10N> load(Locale locale) async {
     Intl.defaultLocale = locale.languageCode;
-    L10NProvider tr = await JSONL10NProvider.load(locale);
+    L10NProvider tr = await FluentL10NProvider.load(locale);
     return L10N._internal(locale, tr);
   }
 

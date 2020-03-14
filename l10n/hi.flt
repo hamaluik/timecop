@@ -1,0 +1,88 @@
+groupTimers = प्रति दिन समूह समान टाइमर
+
+changeLog = लॉग बदलें
+
+readme = रीडमी
+
+whatWereYouDoing = तुम क्या कर रहे थे?
+
+logoSemantics = टाइम कॉप लोगो
+
+delete = हटाएं
+
+projects = परियोजनाओं
+
+appName = समय कॉप
+
+runningTimers = रनिंग टाइमर
+
+editProject = प्रोजेक्ट संपादित करें
+
+date = दिनांक
+
+timeH = समय (घंटे)
+
+projectName = परियोजना का नाम
+
+areYouSureYouWantToDelete = क्या आप वाकई इस प्रोजेक्ट को हटाना चाहते हैं?
+
+noDescription = (कोई विवरण नहीं)
+
+save = सहेजें
+
+noProject = (कोई परियोजना नहीं)
+
+cancel = रद्द करना
+
+endTime = अंतिम समय
+
+timeCopEntries = समय कॉप प्रविष्टियाँ ({ $date })
+
+columns = कॉलम
+
+project = परियोजना
+
+confirmDelete = हटाने की पुष्टि करें
+
+combinedProjectDescription = परियोजना विवरण
+
+createNewProject = नया प्रोजेक्ट बनाएं
+
+duration = अवधि
+
+create = सृजन करना
+
+startTime = समय शुरू
+
+export = निर्यात
+
+options = विकल्प
+
+to = सेवा
+
+editTimer = टाइमर संपादित करें
+
+deleteTimerConfirm = क्या आप वाकई इस टाइमर को हटाना चाहते हैं?
+
+filter = फ़िल्टर
+
+appDescription = एक समय ट्रैकिंग ऐप जो आपकी गोपनीयता का सम्मान करता है और बहुत अधिक कल्पना किए बिना काम पूरा करता है।
+
+timeCopDatabase = टाइम कॉप डेटाबेस ({ $date })
+
+pleaseEnterAName = कृपया एक नाम दर्ज करें
+
+whatAreYouDoing = तुम क्या कर रहे हो?
+
+appLegalese = कॉपीराइट © केंटन हामालिक, 2020
+
+about = के बारे में
+
+description = विवरण
+
+from = से
+
+sourceCode = सोर्स कोड
+
+includeProjects = परियोजनाओं को शामिल करें
+
