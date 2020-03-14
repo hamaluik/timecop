@@ -130,179 +130,154 @@ class _ExportScreenState extends State<ExportScreen> {
               activeColor: Theme.of(context).accentColor,
             ),
           ),*/
-          Padding(
-            padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+          ExpansionTile(
+            title: Text(
+              L10N.of(context).tr.filter,
+              style: TextStyle(
+                color: Theme.of(context).accentColor,
+                fontWeight: FontWeight.w700
+              )
+            ),
+            initiallyExpanded: true,
+            children: <Widget>[
+              Slidable(
+                actionPane: SlidableDrawerActionPane(),
+                actionExtentRatio: 0.15,
+                child: ListTile(
+                  leading: Icon(FontAwesomeIcons.calendar),
+                  title: Text(L10N.of(context).tr.from),
+                  trailing: Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
+                    child: Text(_startDate == null ? "—" : _dateFormat.format(_startDate)),
+                  ),
+                  onTap: () async {
+                    await DatePicker.showDatePicker(
+                      context,
+                      currentTime: _startDate,
+                      onChanged: (DateTime dt) => setState(() => _startDate = DateTime(dt.year, dt.month, dt.day)),
+                      onConfirm: (DateTime dt) => setState(() => _startDate = DateTime(dt.year, dt.month, dt.day)),
+                      theme: DatePickerTheme(
+                        cancelStyle: Theme.of(context).textTheme.button,
+                        doneStyle: Theme.of(context).textTheme.button,
+                        itemStyle: Theme.of(context).textTheme.body1,
+                        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                      )
+                    );
+                  },
+                ),
+                secondaryActions:
+                  _startDate == null
+                    ? <Widget>[]
+                    : <Widget>[
+                      IconSlideAction(
+                        color: Theme.of(context).errorColor,
+                        foregroundColor: Theme.of(context).accentIconTheme.color,
+                        icon: FontAwesomeIcons.minusCircle,
+                        onTap: () {
+                          setState(() {
+                            _startDate = null;
+                          });
+                        },
+                      )
+                    ],
+              ),
+              Slidable(
+                actionPane: SlidableDrawerActionPane(),
+                actionExtentRatio: 0.15,
+                child: ListTile(
+                  leading: Icon(FontAwesomeIcons.calendar),
+                  title: Text(L10N.of(context).tr.to),
+                  trailing: Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
+                    child: Text(_endDate == null ? "—" : _dateFormat.format(_endDate)),
+                  ),
+                  onTap: () async {
+                    await DatePicker.showDatePicker(
+                      context,
+                      currentTime: _endDate,
+                      onChanged: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
+                      onConfirm: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
+                      theme: DatePickerTheme(
+                        cancelStyle: Theme.of(context).textTheme.button,
+                        doneStyle: Theme.of(context).textTheme.button,
+                        itemStyle: Theme.of(context).textTheme.body1,
+                        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                      )
+                    );
+                  },
+                ),
+                secondaryActions:
+                  _endDate == null
+                    ? <Widget>[]
+                    : <Widget>[
+                      IconSlideAction(
+                        color: Theme.of(context).errorColor,
+                        foregroundColor: Theme.of(context).accentIconTheme.color,
+                        icon: FontAwesomeIcons.minusCircle,
+                        onTap: () {
+                          setState(() {
+                            _endDate = null;
+                          });
+                        },
+                      )
+                    ],
+              ),
+            ],
+          ),
+          BlocBuilder<SettingsBloc, SettingsState>(
+            bloc: settingsBloc,
+            builder: (BuildContext context, SettingsState settingsState) => ExpansionTile(
+              title: Text(
+                L10N.of(context).tr.columns,
+                style: TextStyle(
+                  color: Theme.of(context).accentColor,
+                  fontWeight: FontWeight.w700
+                )
+              ),
               children: <Widget>[
-                Text(
-                  L10N.of(context).tr.filter,
-                  style: TextStyle(
-                    color: Theme.of(context).accentColor,
-                    fontWeight: FontWeight.w700
-                  )
+                SwitchListTile(
+                  title: Text(L10N.of(context).tr.date),
+                  value: settingsState.exportIncludeDate,
+                  onChanged: (bool value) => settingsBloc.add(SetExportIncludeDate(value)),
+                  activeColor: Theme.of(context).accentColor,
+                ),
+                SwitchListTile(
+                  title: Text(L10N.of(context).tr.project),
+                  value: settingsState.exportIncludeProject,
+                  onChanged: (bool value) => settingsBloc.add(SetExportIncludeProject(value)),
+                  activeColor: Theme.of(context).accentColor,
+                ),
+                SwitchListTile(
+                  title: Text(L10N.of(context).tr.description),
+                  value: settingsState.exportIncludeDescription,
+                  onChanged: (bool value) => settingsBloc.add(SetExportIncludeDescription(value)),
+                  activeColor: Theme.of(context).accentColor,
+                ),
+                SwitchListTile(
+                  title: Text(L10N.of(context).tr.combinedProjectDescription),
+                  value: settingsState.exportIncludeProjectDescription,
+                  onChanged: (bool value) => settingsBloc.add(SetExportIncludeProjectDescription(value)),
+                  activeColor: Theme.of(context).accentColor,
+                ),
+                SwitchListTile(
+                  title: Text(L10N.of(context).tr.startTime),
+                  value: settingsState.exportIncludeStartTime,
+                  onChanged: (bool value) => settingsBloc.add(SetExportIncludeStartTime(value)),
+                  activeColor: Theme.of(context).accentColor,
+                ),
+                SwitchListTile(
+                  title: Text(L10N.of(context).tr.endTime),
+                  value: settingsState.exportIncludeEndTime,
+                  onChanged: (bool value) => settingsBloc.add(SetExportIncludeEndTime(value)),
+                  activeColor: Theme.of(context).accentColor,
+                ),
+                SwitchListTile(
+                  title: Text(L10N.of(context).tr.timeH),
+                  value: settingsState.exportIncludeDurationHours,
+                  onChanged: (bool value) => settingsBloc.add(SetExportIncludeDurationHours(value)),
+                  activeColor: Theme.of(context).accentColor,
                 ),
               ],
-            ),
-          ),
-          Slidable(
-            actionPane: SlidableDrawerActionPane(),
-            actionExtentRatio: 0.15,
-            child: ListTile(
-              leading: Icon(FontAwesomeIcons.calendar),
-              title: Text(L10N.of(context).tr.from),
-              trailing: Padding(
-                padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
-                child: Text(_startDate == null ? "—" : _dateFormat.format(_startDate)),
-              ),
-              onTap: () async {
-                await DatePicker.showDatePicker(
-                  context,
-                  currentTime: _startDate,
-                  onChanged: (DateTime dt) => setState(() => _startDate = DateTime(dt.year, dt.month, dt.day)),
-                  onConfirm: (DateTime dt) => setState(() => _startDate = DateTime(dt.year, dt.month, dt.day)),
-                  theme: DatePickerTheme(
-                    cancelStyle: Theme.of(context).textTheme.button,
-                    doneStyle: Theme.of(context).textTheme.button,
-                    itemStyle: Theme.of(context).textTheme.body1,
-                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                  )
-                );
-              },
-            ),
-            secondaryActions:
-              _startDate == null
-                ? <Widget>[]
-                : <Widget>[
-                  IconSlideAction(
-                    color: Theme.of(context).errorColor,
-                    foregroundColor: Theme.of(context).accentIconTheme.color,
-                    icon: FontAwesomeIcons.minusCircle,
-                    onTap: () {
-                      setState(() {
-                        _startDate = null;
-                      });
-                    },
-                  )
-                ],
-          ),
-          Slidable(
-            actionPane: SlidableDrawerActionPane(),
-            actionExtentRatio: 0.15,
-            child: ListTile(
-              leading: Icon(FontAwesomeIcons.calendar),
-              title: Text(L10N.of(context).tr.to),
-              trailing: Padding(
-                padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
-                child: Text(_endDate == null ? "—" : _dateFormat.format(_endDate)),
-              ),
-              onTap: () async {
-                await DatePicker.showDatePicker(
-                  context,
-                  currentTime: _endDate,
-                  onChanged: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
-                  onConfirm: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
-                  theme: DatePickerTheme(
-                    cancelStyle: Theme.of(context).textTheme.button,
-                    doneStyle: Theme.of(context).textTheme.button,
-                    itemStyle: Theme.of(context).textTheme.body1,
-                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                  )
-                );
-              },
-            ),
-            secondaryActions:
-              _endDate == null
-                ? <Widget>[]
-                : <Widget>[
-                  IconSlideAction(
-                    color: Theme.of(context).errorColor,
-                    foregroundColor: Theme.of(context).accentIconTheme.color,
-                    icon: FontAwesomeIcons.minusCircle,
-                    onTap: () {
-                      setState(() {
-                        _endDate = null;
-                      });
-                    },
-                  )
-                ],
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Text(
-                  L10N.of(context).tr.columns,
-                  style: TextStyle(
-                    color: Theme.of(context).accentColor,
-                    fontWeight: FontWeight.w700
-                  )
-                ),
-              ],
-            ),
-          ),
-          BlocBuilder<SettingsBloc, SettingsState>(
-            bloc: settingsBloc,
-            builder: (BuildContext context, SettingsState settingsState) => SwitchListTile(
-              title: Text(L10N.of(context).tr.date),
-              value: settingsState.exportIncludeDate,
-              onChanged: (bool value) => settingsBloc.add(SetExportIncludeDate(value)),
-              activeColor: Theme.of(context).accentColor,
-            ),
-          ),
-          BlocBuilder<SettingsBloc, SettingsState>(
-            bloc: settingsBloc,
-            builder: (BuildContext context, SettingsState settingsState) => SwitchListTile(
-              title: Text(L10N.of(context).tr.project),
-              value: settingsState.exportIncludeProject,
-              onChanged: (bool value) => settingsBloc.add(SetExportIncludeProject(value)),
-              activeColor: Theme.of(context).accentColor,
-            ),
-          ),
-          BlocBuilder<SettingsBloc, SettingsState>(
-            bloc: settingsBloc,
-            builder: (BuildContext context, SettingsState settingsState) => SwitchListTile(
-              title: Text(L10N.of(context).tr.description),
-              value: settingsState.exportIncludeDescription,
-              onChanged: (bool value) => settingsBloc.add(SetExportIncludeDescription(value)),
-              activeColor: Theme.of(context).accentColor,
-            ),
-          ),
-          BlocBuilder<SettingsBloc, SettingsState>(
-            bloc: settingsBloc,
-            builder: (BuildContext context, SettingsState settingsState) => SwitchListTile(
-              title: Text(L10N.of(context).tr.combinedProjectDescription),
-              value: settingsState.exportIncludeProjectDescription,
-              onChanged: (bool value) => settingsBloc.add(SetExportIncludeProjectDescription(value)),
-              activeColor: Theme.of(context).accentColor,
-            ),
-          ),
-          BlocBuilder<SettingsBloc, SettingsState>(
-            bloc: settingsBloc,
-            builder: (BuildContext context, SettingsState settingsState) => SwitchListTile(
-              title: Text(L10N.of(context).tr.startTime),
-              value: settingsState.exportIncludeStartTime,
-              onChanged: (bool value) => settingsBloc.add(SetExportIncludeStartTime(value)),
-              activeColor: Theme.of(context).accentColor,
-            ),
-          ),
-          BlocBuilder<SettingsBloc, SettingsState>(
-            bloc: settingsBloc,
-            builder: (BuildContext context, SettingsState settingsState) => SwitchListTile(
-              title: Text(L10N.of(context).tr.endTime),
-              value: settingsState.exportIncludeEndTime,
-              onChanged: (bool value) => settingsBloc.add(SetExportIncludeEndTime(value)),
-              activeColor: Theme.of(context).accentColor,
-            ),
-          ),
-          BlocBuilder<SettingsBloc, SettingsState>(
-            bloc: settingsBloc,
-            builder: (BuildContext context, SettingsState settingsState) => SwitchListTile(
-              title: Text(L10N.of(context).tr.timeH),
-              value: settingsState.exportIncludeDurationHours,
-              onChanged: (bool value) => settingsBloc.add(SetExportIncludeDurationHours(value)),
-              activeColor: Theme.of(context).accentColor,
             ),
           ),
           ListTile(
