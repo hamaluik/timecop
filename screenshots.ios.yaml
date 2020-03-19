@@ -1,0 +1,42 @@
+# Screen capture tests
+# Note: flutter driver expects a pair of files eg, main.dart and main_test.dart
+tests:
+  - test_driver/main.dart
+
+# Interim location of screenshots from tests before processing
+staging: ./tmp/screenshots
+
+# A list of locales supported in app
+locales:
+  - en
+  - fr
+  - de
+  - es
+  - hi
+  - id
+  - ja
+  - ko
+  - pt
+  - ru
+  - zh-CN
+  - zh-TW
+  - ar
+
+# A list of devices to run tests on
+devices:
+  ios:
+#    iPhone Xs Max:
+#      orientation:
+#        - Portrait
+#    iPhone 8 Plus:
+#      orientation:
+#        - Portrait
+#    iPad Pro (12.9-inch) (3rd generation):
+#      orientation:
+#        - Portrait
+    iPad Pro (12.9-inch) (2nd generation):
+      orientation:
+        - Portrait
+
+# Frame screenshots
+frame: true

@@ -20,7 +20,7 @@ void main() {
       SerializableFinder startTimerButton = find.byValueKey("startTimerButton");
 
       await driver.waitFor(startTimerButton);
-      await screenshot(driver, config, 'dashboard');
+      await screenshot(driver, config, '01 dashboard');
 
       // then the timer details page
       String mockupsText = await driver.requestData("mockups");
@@ -30,7 +30,7 @@ void main() {
       SerializableFinder saveDetails = find.byValueKey("saveDetails");
       await driver.waitFor(saveDetails);
       await driver.waitUntilNoTransientCallbacks();
-      await screenshot(driver, config, 'editor');
+      await screenshot(driver, config, '02 editor');
 
       // then the projects page
       SerializableFinder closeButton = find.byType("CloseButton");
@@ -45,7 +45,7 @@ void main() {
       SerializableFinder addProject = find.byValueKey("addProject");
       await driver.waitFor(addProject);
       await driver.waitUntilNoTransientCallbacks();
-      await screenshot(driver, config, 'projects');
+      await screenshot(driver, config, '03 projects');
 
       // then the export page
       SerializableFinder backButton = find.byType("BackButton");
@@ -59,7 +59,7 @@ void main() {
       SerializableFinder exportFAB = find.byValueKey("exportFAB");
       await driver.waitFor(exportFAB);
       await driver.waitUntilNoTransientCallbacks();
-      await screenshot(driver, config, 'export');
+      await screenshot(driver, config, '04 export');
 
       // then the about page
       await driver.waitFor(backButton);
@@ -72,7 +72,7 @@ void main() {
       SerializableFinder aboutPage = find.byValueKey("aboutPage");
       await driver.waitFor(aboutPage);
       await driver.waitUntilNoTransientCallbacks();
-      await screenshot(driver, config, 'about');
+      await screenshot(driver, config, '05 about');
     }, timeout: Timeout(Duration(seconds: 30)));
   });
 }
