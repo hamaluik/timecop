@@ -14,23 +14,14 @@
 
 import 'dart:collection';
 
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
+import 'package:timecop/models/project_description_pair.dart';
 import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/screens/dashboard/components/GroupedStoppedTimersRow.dart';
 import 'StoppedTimerRow.dart';
-
-class ProjectDescriptionPair extends Equatable {
-  final int project;
-  final String description;
-
-  ProjectDescriptionPair(this.project, this.description);
-
-  @override List<Object> get props => [project, description];
-}
 
 class DayGrouping {
   final DateTime date;

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'dart:collection';
 import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'package:flutter_share/flutter_share.dart';
@@ -31,6 +32,7 @@ import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
+import 'package:timecop/models/project_description_pair.dart';
 import 'package:timecop/models/timer_entry.dart';
 
 class ExportScreen extends StatefulWidget {
@@ -54,7 +56,7 @@ class _ExportScreenState extends State<ExportScreen> {
   List<Project> selectedProjects = [];
   static DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
   static DateFormat _exportDateFormat = DateFormat.yMd();
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -106,30 +108,6 @@ class _ExportScreenState extends State<ExportScreen> {
       ),
       body: ListView(
         children: <Widget>[
-          /*Padding(
-            padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Text(
-                  L10N.of(context).tr.options,
-                  style: TextStyle(
-                    color: Theme.of(context).accentColor,
-                    fontWeight: FontWeight.w700
-                  )
-                ),
-              ],
-            ),
-          ),
-          BlocBuilder<SettingsBloc, SettingsState>(
-            bloc: settingsBloc,
-            builder: (BuildContext context, SettingsState settingsState) => SwitchListTile(
-              title: Text(L10N.of(context).tr.groupTimers),
-              value: settingsState.exportGroupTimers,
-              onChanged: (bool value) => settingsBloc.add(SetExportGroupTimers(value)),
-              activeColor: Theme.of(context).accentColor,
-            ),
-          ),*/
           ExpansionTile(
             title: Text(
               L10N.of(context).tr.filter,
@@ -331,41 +309,26 @@ class _ExportScreenState extends State<ExportScreen> {
               )
             ).toList(),
           ),
-          /*ListTile(
+          ExpansionTile(
             title: Text(
-              L10N.of(context).tr.includeProjects,
+              L10N.of(context).tr.options,
               style: TextStyle(
                 color: Theme.of(context).accentColor,
-                fontSize: Theme.of(context).textTheme.body1.fontSize,
                 fontWeight: FontWeight.w700
               )
             ),
-            trailing: Checkbox(
-              tristate: true,
-              value: selectedProjects.length == projectsBloc.state.projects.length + 1
-                ? true
-                : (selectedProjects.isEmpty
-                  ? false
-                  : null),
-              activeColor: Theme.of(context).accentColor,
-              onChanged: (_) => setState(() {
-                if(selectedProjects.length == projectsBloc.state.projects.length + 1) {
-                  selectedProjects.clear();
-                }
-                else {
-                  selectedProjects = <Project>[null].followedBy(projectsBloc.state.projects.map((p) => Project.clone(p))).toList();
-                }
-              }),
-            ),
-            onTap: () => setState(() {
-              if(selectedProjects.length == projectsBloc.state.projects.length + 1) {
-                selectedProjects.clear();
-              }
-              else {
-                selectedProjects = <Project>[null].followedBy(projectsBloc.state.projects.map((p) => Project.clone(p))).toList();
-              }
-            })
-          ),*/
+            children: <Widget>[
+              BlocBuilder<SettingsBloc, SettingsState>(
+                bloc: settingsBloc,
+                builder: (BuildContext context, SettingsState settingsState) => SwitchListTile(
+                  title: Text(L10N.of(context).tr.groupTimers),
+                  value: settingsState.exportGroupTimers,
+                  onChanged: (bool value) => settingsBloc.add(SetExportGroupTimers(value)),
+                  activeColor: Theme.of(context).accentColor,
+                ),
+              )
+            ],
+          ),
         ]
         .toList(),
       ),
@@ -412,66 +375,54 @@ class _ExportScreenState extends State<ExportScreen> {
             headers.add(L10N.of(context).tr.timeH);
           }
 
-          // TODO: this isn't working..
-          /*List<TimerEntry> filteredTimers;
+          List<TimerEntry> filteredTimers = timers.state.timers
+            .where((t) => t.endTime != null)
+            .where((t) => selectedProjects.any((p) => p?.id == t.projectID))
+            .where((t) => _startDate == null ? true : t.startTime.isAfter(_startDate))
+            .where((t) => _endDate == null ? true : t.endTime.isBefore(_endDate))
+            .toList();
+          filteredTimers.sort((a, b) => a.startTime.compareTo(b.startTime));
+
+          // group similar timers if that's what you're in to
           if(settingsBloc.state.exportGroupTimers && !(settingsBloc.state.exportIncludeStartTime || settingsBloc.state.exportIncludeEndTime)) {
-            print("grouping timers...");
             filteredTimers =
               timers.state.timers
                 .where((t) => t.endTime != null)
                 .where((t) => selectedProjects.any((p) => p?.id == t.projectID))
-                .map((t) => TimerEntry.clone(t))
-                .fold(<DayGroup>[], (List<DayGroup> days, TimerEntry t) {
-                  // find which day this timer belongs to
-                  DayGroup currentDay = days.firstWhere((DayGroup day) => (day.date.year == t.startTime.year && day.date.month == t.startTime.month && day.date.day == t.startTime.day));
-                  if(currentDay == null) {
-                    currentDay = DayGroup(t.startTime);
-                    days.add(currentDay);
-                  }
-
-                  // determine if there are any timers this day that match it
-                  TimerEntry match = currentDay.timers.firstWhere((TimerEntry et) => et.projectID == t.projectID && et.description == t.description);
-                  if(match != null) {
-                    // if it does match, just extend its end time
-                    currentDay.timers = currentDay.timers.map((TimerEntry et) {
-                      if(et.id == match.id) {
-                        return TimerEntry.clone(
-                          match,
-                          endTime: match.endTime.add((t.endTime.difference(t.startTime)))
-                        );
-                      }
-                      else {
-                        return et;
-                      }
-                    }).toList();
-                  }
-                  else {
-                    currentDay.timers.add(t);
-                  }
-
-                  return days;
-                })
-                .expand((DayGroup day) => day.timers)
+                .where((t) => _startDate == null ? true : t.startTime.isAfter(_startDate))
+                .where((t) => _endDate == null ? true : t.endTime.isBefore(_endDate))
                 .toList();
+            filteredTimers.sort((a, b) => a.startTime.compareTo(b.startTime));
+
+            // now start grouping those suckers
+            LinkedHashMap<String, LinkedHashMap<ProjectDescriptionPair, List<TimerEntry>>> derp = LinkedHashMap();
+            for(TimerEntry timer in filteredTimers) {
+              String date = _exportDateFormat.format(timer.startTime);
+              LinkedHashMap<ProjectDescriptionPair, List<TimerEntry>> pairedEntries = derp.putIfAbsent(date, () => LinkedHashMap());
+              List<TimerEntry> pairedList = pairedEntries.putIfAbsent(ProjectDescriptionPair(timer.projectID, timer.description), () => <TimerEntry>[]);
+              pairedList.add(timer);
+            }
+
+            // ok, now they're grouped based on date, then combined project + description pairs
+            // time to get them back into a flat list
+            filteredTimers = derp.values.expand((LinkedHashMap<ProjectDescriptionPair, List<TimerEntry>> pairedEntries) {
+              return pairedEntries.values.map((List<TimerEntry> groupedEntries) {
+                assert(groupedEntries.isNotEmpty);
+
+                // not a grouped entry
+                if(groupedEntries.length == 1) return groupedEntries[0];
+
+                // yes a group entry, build a dummy timer entry
+                Duration totalTime = groupedEntries.fold(Duration(), (Duration d, TimerEntry t) => d + t.endTime.difference(t.startTime));
+                return TimerEntry.clone(groupedEntries[0], endTime: groupedEntries[0].startTime.add(totalTime));
+              });
+            })
+            .toList();
           }
-          else {
-            filteredTimers =
-              timers.state.timers
-                .where((t) => t.endTime != null)
-                .where((t) => selectedProjects.any((p) => p?.id == t.projectID))
-                .toList();
-          }*/
-
-          //print('start date: ' + (_startDate == null ? "null" : _startDate.toUtc().toIso8601String()));
-          //print('end date: ' + (_endDate == null ? "null" : _endDate.toUtc().toIso8601String()));
 
           List<List<String>> data = <List<String>>[headers]
           .followedBy(
-            timers.state.timers
-              .where((t) => t.endTime != null)
-              .where((t) => selectedProjects.any((p) => p?.id == t.projectID))
-              .where((t) => _startDate == null ? true : t.startTime.isAfter(_startDate))
-              .where((t) => _endDate == null ? true : t.endTime.isBefore(_endDate))
+            filteredTimers
               .map(
                 (timer) {
                   List<String> row = [];
@@ -501,8 +452,8 @@ class _ExportScreenState extends State<ExportScreen> {
               )
           ).toList();
           String csv = ListToCsvConverter().convert(data);
-          //print('CSV:');
-          //print(csv);
+          print('CSV:');
+          print(csv);
 
           Directory directory;
           if (Platform.isAndroid) {

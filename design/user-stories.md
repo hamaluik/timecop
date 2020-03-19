@@ -49,7 +49,7 @@
     - [x] Optionally filtered by:
         1. Date
         2. Project
-    - [ ] Optionally grouped by timer descriptions on a daily basis
+    - [x] Optionally grouped by timer descriptions on a daily basis
     - [x] Export format should be able to include:
         - [x] Timer description
         - [x] Timer project
