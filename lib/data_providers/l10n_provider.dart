@@ -33,7 +33,6 @@ abstract class L10NProvider {
     String get export;
     String get filter;
     String get from;
-    String get includeProjects;
     String get logoSemantics;
     String get noProject;
     String get pleaseEnterAName;

@@ -280,7 +280,58 @@ class _ExportScreenState extends State<ExportScreen> {
               ],
             ),
           ),
-          ListTile(
+          ExpansionTile(
+            title: Text(
+              L10N.of(context).tr.projects,
+              style: TextStyle(
+                color: Theme.of(context).accentColor,
+                fontWeight: FontWeight.w700
+              )
+            ),
+            children: <Widget>[
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  RaisedButton(
+                    child: Text("Select None"),
+                    onPressed: () {
+                      setState(() {
+                        selectedProjects.clear();
+                      });
+                    },
+                  ),
+                  RaisedButton(
+                    child: Text("Select All"),
+                    onPressed: () {
+                      setState(() {
+                        selectedProjects = <Project>[null].followedBy(projectsBloc.state.projects.map((p) => Project.clone(p))).toList();
+                      });
+                    },
+                  ),
+                ],
+              )
+            ].followedBy(
+              <Project>[null].followedBy(projectsBloc.state.projects).map(
+                (project) => CheckboxListTile(
+                  secondary: ProjectColour(project: project,),
+                  title: Text(project?.name ?? L10N.of(context).tr.noProject),
+                  value: selectedProjects.any((p) => p?.id == project?.id),
+                  activeColor: Theme.of(context).accentColor,
+                  onChanged: (_) => setState(() {
+                    if(selectedProjects.any((p) => p?.id == project?.id)) {
+                      selectedProjects.removeWhere((p) => p?.id == project?.id);
+                    }
+                    else {
+                      selectedProjects.add(project);
+                    }
+                  }),
+                )
+              )
+            ).toList(),
+          ),
+          /*ListTile(
             title: Text(
               L10N.of(context).tr.includeProjects,
               style: TextStyle(
@@ -314,29 +365,8 @@ class _ExportScreenState extends State<ExportScreen> {
                 selectedProjects = <Project>[null].followedBy(projectsBloc.state.projects.map((p) => Project.clone(p))).toList();
               }
             })
-          ),
+          ),*/
         ]
-        .followedBy(
-          <Project>[null].followedBy(projectsBloc.state.projects).map(
-            (project) => CheckboxListTile(
-              secondary: ProjectColour(project: project,),
-              title: Text(project?.name ?? L10N.of(context).tr.noProject),
-              value: selectedProjects.any((p) => p?.id == project?.id),
-              activeColor: Theme.of(context).accentColor,
-              onChanged: (_) => setState(() {
-                if(selectedProjects.any((p) => p?.id == project?.id)) {
-                  selectedProjects.removeWhere((p) => p?.id == project?.id);
-                }
-                else {
-                  selectedProjects.add(project);
-                }
-              }),
-            )
-          )
-        )
-        .followedBy([
-          ListTile(), // add some space so the FAB doesn't always overlap the bottom options
-        ])
         .toList(),
       ),
       floatingActionButton: FloatingActionButton(

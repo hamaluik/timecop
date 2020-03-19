@@ -1,90 +1,90 @@
-timeCopEntries = 타임 경찰 출품작 ({ $date })
-
-noDescription = (설명 없음)
-
-projects = 프로젝트
-
-deleteTimerConfirm = 이 타이머를 삭제 하시겠습니까?
-
-delete = 지우다
+duration = 지속
 
 appLegalese = 저작권 © Kenton Hamaluik, 2020
 
-sourceCode = 소스 코드
-
-options = 옵션
-
-timeH = 시간 (시간)
-
-create = 창조하다
-
-groupTimers = 하루에 비슷한 타이머 그룹화
-
-logoSemantics = 타임 경찰 로고
-
-whatAreYouDoing = 뭐하는거야?
-
-changeLog = 변경 로그
-
-startTime = 시작 시간
-
-combinedProjectDescription = 프로젝트 설명
-
-includeProjects = 프로젝트 포함
-
-cancel = 취소
-
-createNewProject = 새 프로젝트 만들기
-
-endTime = 종료 시간
-
-from = 에서
-
-save = 저장
-
-filter = 필터
+pleaseEnterAName = 이름을 입력하십시오
 
 description = 기술
 
-duration = 지속
-
-timeCopDatabase = 타임 경찰 데이터베이스 ({ $date })
-
-about = 약
-
-confirmDelete = 삭제 확인
-
-projectName = 프로젝트 이름
-
-readme = 읽어보기
-
-appDescription = 개인 정보를 존중하고 너무 화려하지 않고 작업을 수행하는 시간 추적 앱.
-
-columns = 열
-
-noProject = (프로젝트 없음)
-
-whatWereYouDoing = 뭐하고 있었어?
-
-pleaseEnterAName = 이름을 입력하십시오
-
-project = 계획
-
-areYouSureYouWantToDelete = 이 프로젝트를 삭제 하시겠습니까?
-
-export = 수출
-
-editTimer = 타이머 편집
-
 appName = 타임 경찰
-
-editProject = 프로젝트 편집
-
-groupedTimers = { $description } ({ $count } 타이머)
-
-to = 에
 
 date = 데이트
 
+deleteTimerConfirm = 이 타이머를 삭제 하시겠습니까?
+
+endTime = 종료 시간
+
+noProject = (프로젝트 없음)
+
+from = 에서
+
+delete = 지우다
+
+readme = 읽어보기
+
+projectName = 프로젝트 이름
+
+options = 옵션
+
+includeProjects = 프로젝트 포함
+
+areYouSureYouWantToDelete = 이 프로젝트를 삭제 하시겠습니까?
+
+whatAreYouDoing = 뭐하는거야?
+
+editTimer = 타이머 편집
+
+project = 계획
+
+groupTimers = 하루에 비슷한 타이머 그룹화
+
+filter = 필터
+
 runningTimers = 타이머 실행
+
+timeCopEntries = 타임 경찰 출품작 ({ $date })
+
+editProject = 프로젝트 편집
+
+columns = 열
+
+timeCopDatabase = 타임 경찰 데이터베이스 ({ $date })
+
+combinedProjectDescription = 결합 된 프로젝트 및 설명
+
+about = 약
+
+timeH = 시간 (시간)
+
+appDescription = 개인 정보를 존중하고 너무 화려하지 않고 작업을 수행하는 시간 추적 앱.
+
+to = 에
+
+save = 저장
+
+create = 창조하다
+
+whatWereYouDoing = 뭐하고 있었어?
+
+export = 수출
+
+createNewProject = 새 프로젝트 만들기
+
+confirmDelete = 삭제 확인
+
+sourceCode = 소스 코드
+
+startTime = 시작 시간
+
+groupedTimers = { $description } ({ $count } 타이머)
+
+logoSemantics = 타임 경찰 로고
+
+noDescription = (설명 없음)
+
+cancel = 취소
+
+changeLog = 변경 로그
+
+projects = 프로젝트
 

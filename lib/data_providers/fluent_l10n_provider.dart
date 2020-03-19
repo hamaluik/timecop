@@ -61,7 +61,6 @@ class FluentL10NProvider extends L10NProvider {
   String get export => _bundle.format("export", errors: _errors);
   String get filter => _bundle.format("filter", errors: _errors);
   String get from => _bundle.format("from", errors: _errors);
-  String get includeProjects => _bundle.format("includeProjects", errors: _errors);
   String get logoSemantics => _bundle.format("logoSemantics", errors: _errors);
   String get noProject => _bundle.format("noProject", errors: _errors);
   String get pleaseEnterAName => _bundle.format("pleaseEnterAName", errors: _errors);

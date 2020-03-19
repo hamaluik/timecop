@@ -1,90 +1,90 @@
-startTime = 開始時間
-
-readme = 自述文件
-
-date = 日期
-
 editProject = 編輯專案
-
-runningTimers = 運行計時器
-
-noDescription = （沒有說明）
-
-to = 至
-
-projects = 專案
-
-changeLog = 變更記錄
-
-logoSemantics = 時間警察徽標
-
-groupedTimers = { $description }（{ $count }個計時器）
-
-editTimer = 編輯計時器
-
-description = 描述
-
-whatWereYouDoing = 你在做什麼？
-
-delete = 刪除
-
-columns = 列
-
-whatAreYouDoing = 你在做什麼？
-
-cancel = 取消
 
 timeH = 時間（小時）
 
-from = 從
-
-export = 出口
-
-appName = 時間警察
-
-about = 關於
-
-project = 項目
-
-timeCopDatabase = 時間警察數據庫（{ $date }）
+logoSemantics = 時間警察徽標
 
 appDescription = 時間跟踪應用程序尊重您的隱私並在不花哨的情況下完成工作。
 
-areYouSureYouWantToDelete = 您確定要刪除此項目嗎？
+cancel = 取消
 
-appLegalese = 版權所有©Kenton Hamaluik，2020年
+whatAreYouDoing = 你在做什麼？
 
-timeCopEntries = 時間警察條目（{ $date }）
-
-deleteTimerConfirm = 您確定要刪除此計時器嗎？
-
-endTime = 時間結束
-
-create = 創建
-
-groupTimers = 每天組類似計時器
-
-pleaseEnterAName = 請輸入一個名字
-
-noProject = （無項目）
-
-duration = 持續時間
-
-confirmDelete = 確認刪除
-
-options = 選件
-
-projectName = 項目名
-
-filter = 過濾
-
-save = 保存
-
-includeProjects = 包括項目
-
-createNewProject = 建立新專案
+projects = 專案
 
 sourceCode = 源代碼
 
-combinedProjectDescription = 項目簡介
+from = 從
+
+project = 項目
+
+about = 關於
+
+to = 至
+
+createNewProject = 建立新專案
+
+pleaseEnterAName = 請輸入一個名字
+
+includeProjects = 包括項目
+
+areYouSureYouWantToDelete = 您確定要刪除此項目嗎？
+
+timeCopEntries = 時間警察條目（{ $date }）
+
+runningTimers = 運行計時器
+
+confirmDelete = 確認刪除
+
+timeCopDatabase = 時間警察數據庫（{ $date }）
+
+save = 保存
+
+readme = 自述文件
+
+export = 出口
+
+delete = 刪除
+
+combinedProjectDescription = 組合項目和說明
+
+create = 創建
+
+appName = 時間警察
+
+projectName = 項目名
+
+endTime = 時間結束
+
+date = 日期
+
+options = 選件
+
+noProject = （無項目）
+
+description = 描述
+
+columns = 列
+
+appLegalese = 版權所有©Kenton Hamaluik，2020年
+
+groupTimers = 每天組類似計時器
+
+editTimer = 編輯計時器
+
+whatWereYouDoing = 你在做什麼？
+
+groupedTimers = { $description }（{ $count }個計時器）
+
+noDescription = （沒有說明）
+
+filter = 過濾
+
+duration = 持續時間
+
+startTime = 開始時間
+
+deleteTimerConfirm = 您確定要刪除此計時器嗎？
+
+changeLog = 變更記錄
 
