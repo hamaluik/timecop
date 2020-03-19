@@ -6,4 +6,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.1.0+12] - 2020-03-19
+### Added
+* Automatically group similar timers on the dashboard view within each day
+* Option to group similar timers on a day-by-day basis when exporting
+
+### Changed
+* Changed UI of selecting which projects to filter by when exporting to be in line
+  with the other sections on the export page
+
+## [1.0.0+11] - 2020-03-14
+### Added
+* Ability to start / stop / create / edit / delete timers
+* Ability to create / edit / delete projects
+* Ability to export database file
+* Ability to export csv of filtered data
+
 [Unreleased]: https://github.com/hamaluik/timecop/compare/223213...HEAD
+[1.1.0+12]: https://github.com/hamaluik/timecop/compare/v1.0.0+11...v1.1.0+12
+[1.0.0+11]: https://github.com/hamaluik/timecop/compare/223213...v1.0.0+11
