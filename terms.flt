@@ -85,3 +85,5 @@ columns = Columns
 date = Date
 
 combinedProjectDescription = Project: Description
+
+groupedTimers = { $description } ({ $count } timers)

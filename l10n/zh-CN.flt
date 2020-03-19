@@ -1,88 +1,90 @@
-timeCopEntries = 时间警察条目（{ $date }）
-
-confirmDelete = 确认删除
+date = 日期
 
 areYouSureYouWantToDelete = 您确定要删除此项目吗？
 
-pleaseEnterAName = 请输入一个名字
-
-delete = 删除
-
-columns = 列
-
-export = 出口
-
-changeLog = 变更记录
-
-editProject = 编辑专案
-
-cancel = 取消
-
-whatAreYouDoing = 你在做什么？
-
-sourceCode = 源代码
-
 projects = 专案
-
-save = 保存
-
-appName = 时间警察
-
-about = 关于
-
-combinedProjectDescription = 项目简介
-
-duration = 持续时间
 
 groupTimers = 每天组类似计时器
 
-includeProjects = 包括项目
+appName = 时间警察
+
+delete = 删除
+
+from = 从
+
+noDescription = （没有说明）
+
+create = 创建
+
+startTime = 开始时间
+
+noProject = （无项目）
+
+changeLog = 变更记录
+
+appLegalese = 版权所有©Kenton Hamaluik，2020年
+
+duration = 持续时间
 
 to = 至
 
-editTimer = 编辑计时器
+logoSemantics = 时间警察徽标
 
-options = 选件
+whatAreYouDoing = 你在做什么？
 
-deleteTimerConfirm = 您确定要删除此计时器吗？
+cancel = 取消
 
-project = 项目
+timeCopEntries = 时间警察条目（{ $date }）
+
+filter = 过滤
+
+export = 出口
+
+projectName = 项目名
+
+confirmDelete = 确认删除
+
+sourceCode = 源代码
+
+includeProjects = 包括项目
+
+createNewProject = 建立新专案
+
+whatWereYouDoing = 你在做什么？
+
+appDescription = 时间跟踪应用程序尊重您的隐私并在不花哨的情况下完成工作。
 
 runningTimers = 运行计时器
 
 timeCopDatabase = 时间警察数据库（{ $date }）
 
-logoSemantics = 时间警察徽标
+about = 关于
+
+combinedProjectDescription = 项目简介
+
+pleaseEnterAName = 请输入一个名字
+
+editTimer = 编辑计时器
 
 readme = 自述文件
 
-from = 从
+editProject = 编辑专案
 
-endTime = 时间结束
+timeH = 时间（小时）
 
-noProject = （无项目）
+project = 项目
 
-noDescription = （没有说明）
+save = 保存
 
-projectName = 项目名
+groupedTimers = { $description }（{ $count }个计时器）
 
-create = 创建
-
-filter = 过滤
-
-startTime = 开始时间
+columns = 列
 
 description = 描述
 
-date = 日期
+options = 选件
 
-appLegalese = 版权所有©Kenton Hamaluik，2020年
+endTime = 时间结束
 
-createNewProject = 建立新专案
-
-appDescription = 时间跟踪应用程序尊重您的隐私并在不花哨的情况下完成工作。
-
-whatWereYouDoing = 你在做什么？
-
-timeH = 时间（小时）
+deleteTimerConfirm = 您确定要删除此计时器吗？
 

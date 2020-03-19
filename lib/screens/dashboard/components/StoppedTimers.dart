@@ -12,12 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'dart:collection';
+
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/models/timer_entry.dart';
+import 'package:timecop/screens/dashboard/components/GroupedStoppedTimersRow.dart';
 import 'StoppedTimerRow.dart';
+
+class ProjectDescriptionPair extends Equatable {
+  final int project;
+  final String description;
+
+  ProjectDescriptionPair(this.project, this.description);
+
+  @override List<Object> get props => [project, description];
+}
 
 class DayGrouping {
   final DateTime date;
@@ -28,6 +41,17 @@ class DayGrouping {
 
   Widget rows(BuildContext context) {
     Duration runningTotal = Duration(seconds: entries.fold(0, (int sum, TimerEntry t) => sum + t.endTime.difference(t.startTime).inSeconds));
+
+    LinkedHashMap<ProjectDescriptionPair, List<TimerEntry>> pairedEntries = LinkedHashMap();
+    for(TimerEntry entry in entries) {
+      ProjectDescriptionPair pair = ProjectDescriptionPair(entry.projectID, entry.description);
+      if(pairedEntries.containsKey(pair)) {
+        pairedEntries[pair].add(entry);
+      }
+      else {
+        pairedEntries[pair] = <TimerEntry>[entry];
+      }
+    }
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -62,7 +86,14 @@ class DayGrouping {
           ),
         ),
       ].followedBy(
-        entries.map((timer) => StoppedTimerRow(timer: timer))
+        pairedEntries.values.map((timers) {
+          if(timers.length > 1) {
+            return GroupedStoppedTimersRow(timers: timers);
+          }
+          else {
+            return StoppedTimerRow(timer: timers[0]);
+          }
+        })
       ).toList(),
     );
   }

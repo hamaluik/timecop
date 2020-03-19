@@ -1,88 +1,90 @@
-timeH = 時間（時間）
+editProject = プロジェクトを編集
 
 save = セーブ
 
-createNewProject = 新しいプロジェクトを作成
+duration = 期間
 
-deleteTimerConfirm = このタイマーを削除してもよろしいですか？
-
-timeCopEntries = タイムコップエントリ（{ $date }）
-
-pleaseEnterAName = 名前を入力してください
-
-endTime = 終了時間
-
-projectName = プロジェクト名
-
-logoSemantics = タイムコップのロゴ
-
-editProject = プロジェクトを編集
-
-export = 書き出す
-
-combinedProjectDescription = プロジェクトの説明
-
-filter = フィルタ
-
-noProject = （プロジェクトなし）
-
-to = に
-
-timeCopDatabase = タイムコップデータベース（{ $date }）
+delete = 削除
 
 columns = 列
 
-whatAreYouDoing = 何してるの？
-
-confirmDelete = 削除を確認
-
-changeLog = 変更ログ
-
-date = 日付
-
-readme = Readme
-
-whatWereYouDoing = 何してた？
-
-noDescription = （説明なし）
-
-create = 作成する
-
-areYouSureYouWantToDelete = このプロジェクトを削除してもよろしいですか？
-
-from = から
-
 about = 約
 
+editTimer = タイマーを編集
+
+groupTimers = 1日あたりの類似タイマーのグループ化
+
 appDescription = あなたのプライバシーを尊重し、凝りすぎずに仕事を終わらせる時間追跡アプリ。
-
-project = 事業
-
-projects = プロジェクト
-
-delete = 削除
 
 includeProjects = プロジェクトを含める
 
 appLegalese = Copyright©Kenton Hamaluik、2020
 
+filter = フィルタ
+
+to = に
+
+noProject = （プロジェクトなし）
+
+confirmDelete = 削除を確認
+
+endTime = 終了時間
+
+whatWereYouDoing = 何してた？
+
+pleaseEnterAName = 名前を入力してください
+
+timeCopDatabase = タイムコップデータベース（{ $date }）
+
+create = 作成する
+
+combinedProjectDescription = プロジェクトの説明
+
+groupedTimers = { $description }（{ $count }タイマー）
+
+deleteTimerConfirm = このタイマーを削除してもよろしいですか？
+
+timeH = 時間（時間）
+
+whatAreYouDoing = 何してるの？
+
+timeCopEntries = タイムコップエントリ（{ $date }）
+
+createNewProject = 新しいプロジェクトを作成
+
 startTime = 始まる時間
 
-sourceCode = ソースコード
+projects = プロジェクト
 
-groupTimers = 1日あたりの類似タイマーのグループ化
+readme = Readme
 
 options = オプション
 
-appName = タイムコップ
+runningTimers = タイマーの実行
 
-editTimer = タイマーを編集
+project = 事業
+
+projectName = プロジェクト名
+
+from = から
+
+date = 日付
+
+logoSemantics = タイムコップのロゴ
+
+export = 書き出す
+
+sourceCode = ソースコード
 
 description = 説明
 
+noDescription = （説明なし）
+
+changeLog = 変更ログ
+
+appName = タイムコップ
+
 cancel = キャンセル
 
-runningTimers = タイマーの実行
-
-duration = 期間
+areYouSureYouWantToDelete = このプロジェクトを削除してもよろしいですか？
 

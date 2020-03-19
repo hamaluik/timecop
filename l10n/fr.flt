@@ -1,88 +1,90 @@
-deleteTimerConfirm = Voulez-vous vraiment supprimer cette minuterie?
-
-projects = Projets
-
-about = Sur
-
-timeH = Temps (heures)
-
-export = Exportation
-
-sourceCode = Code source
+areYouSureYouWantToDelete = Voulez-vous vraiment supprimer ce projet?
 
 description = La description
-
-whatWereYouDoing = Que faisiez-vous?
-
-save = sauvegarder
-
-changeLog = Journal des modifications
-
-columns = Colonnes
-
-pleaseEnterAName = Veuillez saisir un nom
-
-timeCopDatabase = Base de données Time Cop ({ $date })
-
-includeProjects = Inclure des projets
-
-readme = Lisezmoi
-
-createNewProject = Créer un nouveau projet
-
-runningTimers = Minuteurs de course
-
-whatAreYouDoing = Que faites-vous?
-
-delete = Supprimer
 
 project = Projet
 
 confirmDelete = Confirmation de la suppression
 
+changeLog = Journal des modifications
+
+includeProjects = Inclure des projets
+
+columns = Colonnes
+
+logoSemantics = Logo de Time Cop
+
+save = sauvegarder
+
+combinedProjectDescription = Description du projet
+
+pleaseEnterAName = Veuillez saisir un nom
+
+timeH = Temps (heures)
+
+endTime = Heure de fin
+
+groupedTimers = { $description } ({ $count } minuteries)
+
+options = Les options
+
+createNewProject = Créer un nouveau projet
+
+deleteTimerConfirm = Voulez-vous vraiment supprimer cette minuterie?
+
+appDescription = Une application de suivi du temps qui respecte votre vie privée et fait le travail sans trop de fantaisie.
+
 editProject = Modifier le projet
-
-to = À
-
-noDescription = (Pas de description)
-
-appName = Time Cop
-
-date = Date
-
-appLegalese = Copyright © Kenton Hamaluik, 2020
-
-from = De
 
 create = Créer
 
 duration = Durée
 
-editTimer = Modifier la minuterie
-
-timeCopEntries = Entrées Time Cop ({ $date })
-
-endTime = Heure de fin
-
-groupTimers = Grouper des minuteries similaires par jour
-
-areYouSureYouWantToDelete = Voulez-vous vraiment supprimer ce projet?
-
-startTime = Heure de début
-
-options = Les options
-
-combinedProjectDescription = Description du projet
-
-noProject = (pas de projet)
-
-cancel = Annuler
+noDescription = (Pas de description)
 
 projectName = nom du projet
 
-logoSemantics = Logo de Time Cop
+projects = Projets
 
-appDescription = Une application de suivi du temps qui respecte votre vie privée et fait le travail sans trop de fantaisie.
+groupTimers = Grouper des minuteries similaires par jour
+
+whatWereYouDoing = Que faisiez-vous?
+
+startTime = Heure de début
+
+readme = Lisezmoi
+
+from = De
+
+editTimer = Modifier la minuterie
+
+sourceCode = Code source
+
+noProject = (pas de projet)
+
+appLegalese = Copyright © Kenton Hamaluik, 2020
 
 filter = Filtre
+
+export = Exportation
+
+appName = Time Cop
+
+delete = Supprimer
+
+to = À
+
+about = Sur
+
+runningTimers = Minuteurs de course
+
+timeCopDatabase = Base de données Time Cop ({ $date })
+
+cancel = Annuler
+
+date = Date
+
+timeCopEntries = Entrées Time Cop ({ $date })
+
+whatAreYouDoing = Que faites-vous?
 
