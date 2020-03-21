@@ -58,6 +58,7 @@ class _DescriptionFieldState extends State<DescriptionField> {
 
         return Container(
           child: TextField(
+            key: Key("descriptionField"),
             focusNode: _focus,
             controller: _controller,
               autocorrect: true,

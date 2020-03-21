@@ -17,9 +17,9 @@ void main() {
 
     test('take screenshots', () async {
       // take a screenshot of the dashboard
-      SerializableFinder startTimerButton = find.byValueKey("startTimerButton");
+      SerializableFinder descriptionField = find.byValueKey("descriptionField");
 
-      await driver.waitFor(startTimerButton);
+      await driver.waitFor(descriptionField);
       await screenshot(driver, config, '01 dashboard');
 
       // then the timer details page

@@ -1,6 +1,6 @@
 name: timecop
 description: A time tracking app that respects your privacy and gets the job done without getting too fancy.
-version: 1.1.0+12
+version: 1.2.0+13
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -27,6 +27,7 @@ dependencies:
   path_provider: ^1.6.1
   shared_preferences: ^0.5.6+2
   fluent: ^1.0.1+2
+  flutter_speed_dial: ^1.2.5
 
 dev_dependencies:
   pedantic: ^1.0.0

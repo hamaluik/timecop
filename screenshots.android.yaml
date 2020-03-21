@@ -30,4 +30,4 @@ devices:
         - Portrait
 
 # Frame screenshots
-frame: true
+frame: false

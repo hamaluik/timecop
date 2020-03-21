@@ -25,18 +25,17 @@ locales:
 # A list of devices to run tests on
 devices:
   ios:
-#    iPhone Xs Max:
-#      orientation:
-#        - Portrait
-#    iPhone 8 Plus:
-#      orientation:
-#        - Portrait
-#    iPad Pro (12.9-inch) (3rd generation):
-#      orientation:
-#        - Portrait
+    iPhone Xs Max:
+      orientation:
+        - Portrait
+    iPhone 8 Plus:
+      orientation:
+        - Portrait
+    iPad Pro (12.9-inch) (3rd generation):
+      orientation:
+        - Portrait
     iPad Pro (12.9-inch) (2nd generation):
       orientation:
         - Portrait
 
-# Frame screenshots
-frame: true
+frame: false

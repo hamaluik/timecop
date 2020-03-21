@@ -72,5 +72,19 @@ class TimersBloc extends Bloc<TimersEvent, TimersState> {
           .toList();
       yield TimersState(timers, DateTime.now());
     }
+    else if(event is StopAllTimers) {
+      List<Future<TimerEntry>> timerEdits = state.timers.map((t) async {
+        if (t.endTime == null) {
+          TimerEntry timer = TimerEntry.clone(t, endTime: DateTime.now());
+          await data.editTimer(timer);
+          return timer;
+        }
+        return TimerEntry.clone(t);
+      }).toList();
+
+      List<TimerEntry> timers = await Future.wait(timerEdits);
+      timers.sort((a, b) => a.startTime.compareTo(b.startTime));
+      yield TimersState(timers, DateTime.now());
+    }
   }
 }

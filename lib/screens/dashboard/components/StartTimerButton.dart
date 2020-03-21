@@ -14,42 +14,107 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 
-class StartTimerButton extends StatelessWidget {
-  const StartTimerButton({Key key}) : super(key: key);
+class StartTimerButton extends StatefulWidget {
+  StartTimerButton({Key key}) : super(key: key);
+
+  @override
+  _StartTimerButtonState createState() => _StartTimerButtonState();
+}
+
+class _StartTimerButtonState extends State<StartTimerButton> {
+  bool _speedDialOpened;
+
+  @override
+  void initState() { 
+    super.initState();
+    _speedDialOpened = false;
+  }
 
   @override
   Widget build(BuildContext context) {
     final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
     assert(bloc != null);
 
-    return FloatingActionButton(
-      key: Key("startTimerButton"),
-      child: Stack(
-        // shenanigans to properly centre the icon (font awesome glyphs are variable
-        // width but the library currently doesn't deal with that)
-        fit: StackFit.expand,
-        children: <Widget>[
-          Positioned(
-            top: 15,
-            left: 18,
-            child: Icon(FontAwesomeIcons.play),
-          )
-        ],
-      ),
-      backgroundColor: Theme.of(context).accentColor,
-      foregroundColor: Theme.of(context).accentIconTheme.color,
-      //mini: true,
-      onPressed: () {
-        final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
-        assert(timers != null);
+    return BlocBuilder<TimersBloc, TimersState>(
+      builder: (BuildContext context, TimersState timersState) {
+        if(timersState.timers.where((t) => t.endTime == null).isEmpty) {
+          return FloatingActionButton(
+            key: Key("startTimerButton"),
+            child: Stack(
+              // shenanigans to properly centre the icon (font awesome glyphs are variable
+              // width but the library currently doesn't deal with that)
+              fit: StackFit.expand,
+              children: <Widget>[
+                Positioned(
+                  top: 15,
+                  left: 18,
+                  child: Icon(FontAwesomeIcons.play),
+                )
+              ],
+            ),
+            backgroundColor: Theme.of(context).accentColor,
+            foregroundColor: Theme.of(context).accentIconTheme.color,
+            onPressed: () {
+              final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+              assert(timers != null);
 
-        timers.add(CreateTimer(description: bloc.state.newDescription, project: bloc.state.newProject));
-        bloc.add(TimerWasStartedEvent());
-      },
+              timers.add(CreateTimer(description: bloc.state.newDescription, project: bloc.state.newProject));
+              bloc.add(TimerWasStartedEvent());
+            },
+          );
+        }
+        else {
+          return SpeedDial(
+            marginRight: 14,
+            overlayColor: Theme.of(context).scaffoldBackgroundColor,
+            backgroundColor: _speedDialOpened ? Theme.of(context).disabledColor : Theme.of(context).accentColor,
+            foregroundColor: Theme.of(context).accentIconTheme.color,
+            onOpen: () => setState(() => _speedDialOpened = true),
+            onClose: () => setState(() => _speedDialOpened = false),
+            child: Stack(
+              // shenanigans to properly centre the icon (font awesome glyphs are variable
+              // width but the library currently doesn't deal with that)
+              fit: StackFit.expand,
+              children: <Widget>[
+                Positioned(
+                  top: 15,
+                  left: 16,
+                  child: Icon(FontAwesomeIcons.stopwatch),
+                )
+              ],
+            ),
+            children: <SpeedDialChild>[
+              SpeedDialChild(
+                child: Icon(FontAwesomeIcons.plus),
+                backgroundColor: Theme.of(context).accentColor,
+                foregroundColor: Theme.of(context).accentIconTheme.color,
+                onTap: () {
+                  final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+                  assert(timers != null);
+
+                  timers.add(CreateTimer(description: bloc.state.newDescription, project: bloc.state.newProject));
+                  bloc.add(TimerWasStartedEvent());
+                },
+              ),
+              SpeedDialChild(
+                child: Icon(FontAwesomeIcons.stop),
+                backgroundColor: Colors.pink[600],
+                foregroundColor: Theme.of(context).accentIconTheme.color,
+                onTap: () {
+                  final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+                  assert(timers != null);
+                  timers.add(StopAllTimers());
+                },
+              ),
+            ],
+          );
+        }
+      }
     );
   }
 }

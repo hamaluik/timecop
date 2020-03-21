@@ -76,20 +76,9 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow> with 
           }
         });
       },
-      leading: Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          ProjectColour(
-            project: BlocProvider.of<ProjectsBloc>(context)
-                      .getProjectByID(widget.timers[0].projectID)
-          ),
-          Container(width: 8),
-          RotationTransition(
-            turns: _iconTurns,
-            child: const Icon(FontAwesomeIcons.chevronDown),
-          ),
-        ],
+      leading: ProjectColour(
+        project: BlocProvider.of<ProjectsBloc>(context)
+                  .getProjectByID(widget.timers[0].projectID)
       ),
       title: Text(
         L10N.of(context).tr.groupedTimersDescription(
@@ -98,14 +87,25 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow> with 
         ),
         style: styleDescription(context, widget.timers[0].description)
       ),
-      trailing: Text(
-        TimerEntry.formatDuration(
-          widget.timers.fold(
-            Duration(),
-            (Duration sum, TimerEntry timer) => sum + timer.endTime.difference(timer.startTime)
-          )
-        ),
-        style: TextStyle(fontFamily: "FiraMono")
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          RotationTransition(
+            turns: _iconTurns,
+            child: const Icon(Icons.expand_more),
+          ),
+          Container(width: 8),
+          Text(
+            TimerEntry.formatDuration(
+              widget.timers.fold(
+                Duration(),
+                (Duration sum, TimerEntry timer) => sum + timer.endTime.difference(timer.startTime)
+              )
+            ),
+            style: TextStyle(fontFamily: "FiraMono")
+          ),
+        ],
       ),
       children: widget.timers.map((timer) => StoppedTimerRow(timer: timer)).toList(),
     );

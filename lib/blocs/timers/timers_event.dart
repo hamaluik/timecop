@@ -53,3 +53,8 @@ class DeleteTimer extends TimersEvent {
   DeleteTimer(this.timer);
   @override List<Object> get props => [timer];
 }
+
+class StopAllTimers extends TimersEvent {
+  const StopAllTimers();
+  @override List<Object> get props => [];
+}

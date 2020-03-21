@@ -35,58 +35,64 @@ class DashboardScreen extends StatelessWidget {
     final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
     final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: EdgeInsets.all(12.0),
-          child: SvgPicture.asset(
-            "icon.no-bg.svg",
-            semanticsLabel: L10N.of(context).tr.logoSemantics,
-          )
-        ),
-        title: Text(L10N.of(context).tr.appName),
-        actions: <Widget>[
-          PopupMenu(),
-        ],
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: StoppedTimers(),
+    return 
+      BlocProvider<DashboardBloc>(
+        create: (_) => DashboardBloc(projectsBloc, settingsBloc),
+        child: Scaffold(
+          appBar: AppBar(
+            leading: Padding(
+              padding: EdgeInsets.all(12.0),
+              child: SvgPicture.asset(
+                "icon.no-bg.svg",
+                semanticsLabel: L10N.of(context).tr.logoSemantics,
+              )
+            ),
+            title: Text(L10N.of(context).tr.appName),
+            actions: <Widget>[
+              PopupMenu(),
+            ],
           ),
-          RunningTimers(),
-          BlocProvider<DashboardBloc>(
-            create: (_) => DashboardBloc(projectsBloc, settingsBloc),
-            child: Material(
-              elevation: 8.0,
-              color: Theme.of(context).bottomSheetTheme.backgroundColor,
-              child: Container(
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      ProjectSelectField(),
-                      Expanded(
-                        flex: 1,
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(4.0, 0, 4.0, 0),
-                          child: DescriptionField(),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: StoppedTimers(),
+              ),
+              RunningTimers(),
+              Material(
+                elevation: 8.0,
+                color: Theme.of(context).bottomSheetTheme.backgroundColor,
+                child: Container(
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      //crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        ProjectSelectField(),
+                        Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(4.0, 0, 4.0, 0),
+                            child: DescriptionField(),
+                          ),
                         ),
-                      ),
-                      StartTimerButton(),
-                    ],
+                        Container(
+                          width: 72,
+                          height: 72,
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            )
-          )
-        ],
-      )
-    );
+              )
+            ],
+          ),
+          floatingActionButton: StartTimerButton(),
+        )
+      );
   }
 }
