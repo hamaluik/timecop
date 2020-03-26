@@ -1,90 +1,90 @@
+editProject = Edit Project
+
 groupTimers = Group Similar Timers Per Day
-
-readme = Readme
-
-projectName = Project Name
-
-includeProjects = Include Projects
-
-groupedTimers = { $description } ({ $count } timers)
-
-whatAreYouDoing = What are you doing?
-
-cancel = Cancel
-
-areYouSureYouWantToDelete = Are you sure you want to delete this project?
-
-timeCopDatabase = Time Cop Database ({ $date })
-
-changeLog = Change Log
-
-endTime = End Time
 
 save = Save
 
-timeH = Time (hours)
+projects = Projects
 
-runningTimers = Running Timers
+delete = Delete
 
-pleaseEnterAName = Please enter a name
-
-logoSemantics = Time Cop Logo
-
-editProject = Edit Project
+options = Options
 
 about = About
 
-delete = Delete
+runningTimers = Running Timers
+
+projectName = Project Name
+
+appLegalese = Copyright © Kenton Hamaluik, 2020
+
+areYouSureYouWantToDelete = Are you sure you want to delete this project?
+
+endTime = End Time
+
+whatAreYouDoing = What are you doing?
+
+confirmDelete = Confirm Delete
+
+noDescription = (no description)
+
+create = Create
+
+groupedTimers = { $description } ({ $count } timers)
+
+logoSemantics = Time Cop Logo
+
+changeLog = Change Log
 
 appDescription = A time tracking app that respects your privacy and gets the job done without getting too fancy.
 
 sourceCode = Source Code
 
-project = Project
-
-export = Export
-
-create = Create
-
 filter = Filter
 
 from = From
 
-confirmDelete = Confirm Delete
+combinedProjectDescription = Combined Project & Description
 
-appLegalese = Copyright © Kenton Hamaluik, 2020
-
-noProject = (no project)
-
-to = To
-
-columns = Columns
-
-appName = Time Cop
-
-options = Options
-
-noDescription = (no description)
+timeCopDatabase = Time Cop Database ({ $date })
 
 whatWereYouDoing = What were you doing?
 
-projects = Projects
-
-date = Date
-
 createNewProject = Create New Project
+
+readme = Readme
 
 editTimer = Edit Timer
 
-combinedProjectDescription = Combined Project & Description
+includeProjects = Include Projects
 
-startTime = Start Time
+export = Export
+
+date = Date
+
+pleaseEnterAName = Please enter a name
+
+deleteTimerConfirm = Are you sure you want to delete this timer?
 
 timeCopEntries = Time Cop Entries ({ $date })
 
-description = Description
+appName = Time Cop
+
+to = To
 
 duration = Duration
 
-deleteTimerConfirm = Are you sure you want to delete this timer?
+project = Project
+
+description = Description
+
+startTime = Start Time
+
+noProject = (no project)
+
+timeH = Time (hours)
+
+cancel = Cancel
+
+columns = Columns
 

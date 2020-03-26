@@ -1,90 +1,90 @@
-createNewProject = नया प्रोजेक्ट बनाएं
-
-timeCopEntries = समय कॉप प्रविष्टियाँ ({ $date })
-
-startTime = समय शुरू
-
-delete = हटाएं
-
-endTime = अंतिम समय
-
-options = विकल्प
-
-projectName = परियोजना का नाम
-
-timeH = समय (घंटे)
-
-whatAreYouDoing = तुम क्या कर रहे हो?
-
-from = से
-
-readme = रीडमी
-
-noDescription = (कोई विवरण नहीं)
-
-appLegalese = कॉपीराइट © केंटन हामालिक, 2020
-
-includeProjects = परियोजनाओं को शामिल करें
-
-project = परियोजना
-
-groupedTimers = { $description } ({ $count } टाइमर)
-
-logoSemantics = टाइम कॉप लोगो
-
-projects = परियोजनाओं
-
-columns = कॉलम
-
-description = विवरण
-
-appName = समय कॉप
-
-create = सृजन करना
-
-appDescription = एक समय ट्रैकिंग ऐप जो आपकी गोपनीयता का सम्मान करता है और बहुत अधिक कल्पना किए बिना काम पूरा करता है।
-
-groupTimers = प्रति दिन समूह समान टाइमर
-
-editTimer = टाइमर संपादित करें
-
-pleaseEnterAName = कृपया एक नाम दर्ज करें
-
-to = सेवा
-
-deleteTimerConfirm = क्या आप वाकई इस टाइमर को हटाना चाहते हैं?
-
-runningTimers = रनिंग टाइमर
-
-editProject = प्रोजेक्ट संपादित करें
-
-confirmDelete = हटाने की पुष्टि करें
-
 whatWereYouDoing = तुम क्या कर रहे थे?
+
+filter = फ़िल्टर
 
 save = सहेजें
 
 about = के बारे में
 
+appName = समय कॉप
+
+options = विकल्प
+
+from = से
+
+groupTimers = प्रति दिन समूह समान टाइमर
+
+description = विवरण
+
+to = सेवा
+
+projects = परियोजनाओं
+
+logoSemantics = टाइम कॉप लोगो
+
+projectName = परियोजना का नाम
+
+editTimer = टाइमर संपादित करें
+
 noProject = (कोई परियोजना नहीं)
-
-filter = फ़िल्टर
-
-timeCopDatabase = टाइम कॉप डेटाबेस ({ $date })
-
-duration = अवधि
-
-date = दिनांक
-
-changeLog = लॉग बदलें
-
-areYouSureYouWantToDelete = क्या आप वाकई इस प्रोजेक्ट को हटाना चाहते हैं?
 
 cancel = रद्द करना
 
+timeH = समय (घंटे)
+
+runningTimers = रनिंग टाइमर
+
+startTime = समय शुरू
+
 sourceCode = सोर्स कोड
+
+date = दिनांक
+
+pleaseEnterAName = कृपया एक नाम दर्ज करें
+
+appDescription = एक समय ट्रैकिंग ऐप जो आपकी गोपनीयता का सम्मान करता है और बहुत अधिक कल्पना किए बिना काम पूरा करता है।
+
+changeLog = लॉग बदलें
+
+noDescription = (कोई विवरण नहीं)
+
+endTime = अंतिम समय
+
+timeCopEntries = समय कॉप प्रविष्टियाँ ({ $date })
+
+groupedTimers = { $description } ({ $count } टाइमर)
+
+duration = अवधि
+
+confirmDelete = हटाने की पुष्टि करें
+
+areYouSureYouWantToDelete = क्या आप वाकई इस प्रोजेक्ट को हटाना चाहते हैं?
+
+project = परियोजना
+
+createNewProject = नया प्रोजेक्ट बनाएं
 
 combinedProjectDescription = संयुक्त परियोजना और विवरण
 
+includeProjects = परियोजनाओं को शामिल करें
+
+delete = हटाएं
+
+whatAreYouDoing = तुम क्या कर रहे हो?
+
+create = सृजन करना
+
+deleteTimerConfirm = क्या आप वाकई इस टाइमर को हटाना चाहते हैं?
+
+columns = कॉलम
+
+editProject = प्रोजेक्ट संपादित करें
+
 export = निर्यात
+
+timeCopDatabase = टाइम कॉप डेटाबेस ({ $date })
+
+appLegalese = कॉपीराइट © केंटन हामालिक, 2020
+
+readme = रीडमी
 

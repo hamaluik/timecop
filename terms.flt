@@ -83,5 +83,3 @@ columns = Columns
 date = Date
 
 combinedProjectDescription = Combined Project & Description
-
-groupedTimers = { $description } ({ $count } timers)

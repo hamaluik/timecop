@@ -56,5 +56,4 @@ abstract class L10NProvider {
     String get columns;
     String get date;
     String get combinedProjectDescription;
-    String groupedTimersDescription(String description, int count);
 }

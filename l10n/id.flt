@@ -1,90 +1,90 @@
-whatWereYouDoing = Apa yang kamu lakukan?
+groupTimers = Pengatur Waktu Serupa Grup Per Hari
+
+filter = Saring
+
+from = Dari
+
+timeH = Waktu (jam)
+
+includeProjects = Sertakan Proyek
+
+startTime = Waktu mulai
+
+duration = Durasi
+
+appName = Time Cop
+
+projectName = Nama Proyek
+
+timeCopEntries = Entri Cop Waktu ({ $date })
+
+combinedProjectDescription = Proyek & Deskripsi Gabungan
+
+appDescription = Aplikasi pelacakan waktu yang menghormati privasi Anda dan menyelesaikan pekerjaan tanpa menjadi terlalu mewah.
+
+readme = Baca aku
+
+pleaseEnterAName = Silakan masukkan nama
+
+createNewProject = Buat Proyek Baru
 
 save = Menyimpan
 
-projectName = Nama Proyek
+groupedTimers = { $description } ({ $count } timer)
+
+changeLog = Ubah Log
+
+options = Pilihan
+
+runningTimers = Pengatur Waktu Berlari
+
+whatAreYouDoing = Apa yang sedang kamu lakukan?
+
+about = Tentang
+
+export = Ekspor
+
+projects = Proyek
+
+noDescription = (tidak ada deskripsi)
+
+project = Proyek
+
+logoSemantics = Logo Time Cop
+
+create = Membuat
+
+noProject = (tidak ada proyek)
+
+columns = Kolom
+
+whatWereYouDoing = Apa yang kamu lakukan?
+
+to = Untuk
+
+deleteTimerConfirm = Anda yakin ingin menghapus penghitung waktu ini?
+
+editTimer = Edit Timer
+
+cancel = Membatalkan
+
+timeCopDatabase = Database Time Cop ({ $date })
+
+areYouSureYouWantToDelete = Anda yakin ingin menghapus proyek ini?
+
+sourceCode = Kode sumber
+
+editProject = Edit Proyek
+
+description = Deskripsi
 
 confirmDelete = Konfirmasikan Hapus
 
 endTime = Akhir waktu
 
-timeCopEntries = Entri Cop Waktu ({ $date })
-
-duration = Durasi
-
-options = Pilihan
-
-about = Tentang
-
-projects = Proyek
-
-appDescription = Aplikasi pelacakan waktu yang menghormati privasi Anda dan menyelesaikan pekerjaan tanpa menjadi terlalu mewah.
-
-groupTimers = Pengatur Waktu Serupa Grup Per Hari
+date = Tanggal
 
 appLegalese = Hak Cipta © Kenton Hamaluik, 2020
 
-readme = Baca aku
-
-startTime = Waktu mulai
-
-groupedTimers = { $description } ({ $count } timer)
-
-create = Membuat
-
-runningTimers = Pengatur Waktu Berlari
-
-timeH = Waktu (jam)
-
 delete = Menghapus
-
-editTimer = Edit Timer
-
-combinedProjectDescription = Proyek & Deskripsi Gabungan
-
-columns = Kolom
-
-includeProjects = Sertakan Proyek
-
-project = Proyek
-
-description = Deskripsi
-
-sourceCode = Kode sumber
-
-export = Ekspor
-
-to = Untuk
-
-noProject = (tidak ada proyek)
-
-deleteTimerConfirm = Anda yakin ingin menghapus penghitung waktu ini?
-
-appName = Time Cop
-
-logoSemantics = Logo Time Cop
-
-areYouSureYouWantToDelete = Anda yakin ingin menghapus proyek ini?
-
-filter = Saring
-
-date = Tanggal
-
-whatAreYouDoing = Apa yang sedang kamu lakukan?
-
-editProject = Edit Proyek
-
-timeCopDatabase = Database Time Cop ({ $date })
-
-createNewProject = Buat Proyek Baru
-
-from = Dari
-
-cancel = Membatalkan
-
-pleaseEnterAName = Silakan masukkan nama
-
-noDescription = (tidak ada deskripsi)
-
-changeLog = Ubah Log
 
