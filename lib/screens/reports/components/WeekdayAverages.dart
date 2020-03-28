@@ -19,16 +19,22 @@ import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/models/timer_entry.dart';
 
 class WeekdayAverages extends StatelessWidget {
-  const WeekdayAverages({Key key}) : super(key: key);
+  final DateTime startDate;
+  final DateTime endDate;
+  final List<double> _daysData;
 
-  @override
-  Widget build(BuildContext context) {
+  static List<double> calculateDaysData(BuildContext context, DateTime startDate, DateTime endDate) {
     final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
 
     DateTime firstDate = DateTime.now();
     DateTime lastDate = DateTime(1970);
     List<double> daySums = <double>[0, 0, 0, 0, 0, 0, 0];
-    for(TimerEntry timer in timers.state.timers.where((timer) => timer.endTime != null)) {
+    for(
+      TimerEntry timer in timers.state.timers
+        .where((timer) => timer.endTime != null)
+        .where((timer) => startDate != null ? timer.startTime.isAfter(startDate) : true)
+        .where((timer) => endDate != null ? timer.startTime.isBefore(endDate) : true)
+    ) {
       double hours = timer.endTime.difference(timer.startTime).inSeconds.toDouble() / 3600.0;
       int weekday = timer.startTime.weekday;
       if(weekday == 7) weekday = 0;
@@ -48,79 +54,82 @@ class WeekdayAverages extends StatelessWidget {
         daySums[i] /= totalDays.toDouble();
       }
     }
+
+    return daySums;
+  }
+
+  WeekdayAverages(BuildContext context, {Key key, @required this.startDate, @required this.endDate})
+    : this._daysData = calculateDaysData(context, startDate, endDate),
+    super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     
-    return AspectRatio(
-      aspectRatio: 1,
-      child: Card(
-        color: Theme.of(context).bottomSheetTheme.backgroundColor,
-        elevation: 4,
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Expanded(
-                child: BarChart(
-                  BarChartData(
-                    alignment: BarChartAlignment.spaceAround,
-                    borderData: FlBorderData(
-                      show: false,
-                    ),
-                    gridData: FlGridData(
-                      show: true,
-                    ),
-                    titlesData: FlTitlesData(
-                      show: true,
-                      leftTitles: SideTitles(
-                        showTitles: true,
-                        textStyle: Theme.of(context).textTheme.body1,
-                      ),
-                      bottomTitles: SideTitles(
-                        showTitles: true,
-                        textStyle: Theme.of(context).textTheme.body1,
-                        getTitles: (double value) {
-                          switch (value.toInt()) {
-                            case 0:
-                              return 'S';
-                            case 1:
-                              return 'M';
-                            case 2:
-                              return 'T';
-                            case 3:
-                              return 'W';
-                            case 4:
-                              return 'T';
-                            case 5:
-                              return 'F';
-                            case 6:
-                              return 'S';
-                            default:
-                              return '';
-                          }
-                        }
-                      )
-                    ),
-                    barGroups: List.generate(7, (i) => i)
-                      .map((day) => BarChartGroupData(
-                        x: day,
-                        barRods: <BarChartRodData>[
-                          BarChartRodData(
-                            color: Theme.of(context).accentColor,
-                            width: 22,
-                            y: daySums[day],
-                          )
-                        ]
-                      ))
-                      .toList()
+    return Padding(
+      padding: EdgeInsets.fromLTRB(16, 16, 16, 40),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Expanded(
+            child: BarChart(
+              BarChartData(
+                alignment: BarChartAlignment.spaceAround,
+                borderData: FlBorderData(
+                  show: false,
+                ),
+                gridData: FlGridData(
+                  show: true,
+                ),
+                titlesData: FlTitlesData(
+                  show: true,
+                  leftTitles: SideTitles(
+                    showTitles: true,
+                    textStyle: Theme.of(context).textTheme.body1,
+                  ),
+                  bottomTitles: SideTitles(
+                    showTitles: true,
+                    textStyle: Theme.of(context).textTheme.body1,
+                    getTitles: (double value) {
+                      switch (value.toInt()) {
+                        case 0:
+                          return 'S';
+                        case 1:
+                          return 'M';
+                        case 2:
+                          return 'T';
+                        case 3:
+                          return 'W';
+                        case 4:
+                          return 'T';
+                        case 5:
+                          return 'F';
+                        case 6:
+                          return 'S';
+                        default:
+                          return '';
+                      }
+                    }
                   )
                 ),
-              ),
-              Container(height: 16,),
-              Text("Average Daily Hours", style: Theme.of(context).textTheme.title, textAlign: TextAlign.center,),
-            ],
-          )
-        ),
-      ),
+                barGroups: List.generate(7, (i) => i)
+                  .map((day) => BarChartGroupData(
+                    x: day,
+                    barRods: <BarChartRodData>[
+                      BarChartRodData(
+                        color: Theme.of(context).accentColor,
+                        width: 22,
+                        y: _daysData[day],
+                      )
+                    ]
+                  ))
+                  .toList()
+              )
+            ),
+          ),
+          Container(height: 16,),
+          Text("Average Daily Hours", style: Theme.of(context).textTheme.title, textAlign: TextAlign.center,),
+        ],
+      )
     );
   }
 }
