@@ -19,6 +19,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:timecop/l10n.dart';
+import 'package:timecop/screens/reports/components/ProjectBreakdown.dart';
 import 'package:timecop/screens/reports/components/WeekdayAverages.dart';
 
 class ReportsScreen extends StatefulWidget {
@@ -45,21 +46,22 @@ class _ReportsScreenState extends State<ReportsScreen> {
         children: <Widget>[
           Expanded(
             child: Swiper(
-              itemBuilder: (BuildContext context, int index){
+              itemBuilder: (BuildContext context, int index) {
                 switch(index) {
                   case 0: return WeekdayAverages(
                     context,
                     startDate: _startDate,
                     endDate: _endDate,
                   );
+                  case 1: return ProjectBreakdown(
+                    context: context,
+                    startDate: _startDate,
+                    endDate: _endDate,
+                  );
                 }
-                return WeekdayAverages(
-                  context,
-                  startDate: _startDate,
-                  endDate: _endDate,
-                );
+                return Container();
               },
-              itemCount: 3,
+              itemCount: 2,
               pagination: SwiperPagination(
                 builder: DotSwiperPaginationBuilder(
                   color: Theme.of(context).disabledColor,

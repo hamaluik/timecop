@@ -4,16 +4,16 @@ Project Description
 
 ### Todo
 
-- [ ] Chart: Pie chart of per-project hours for the selected time period  
 - [ ] Chart: Bar chart of daily hours for the selected time period (scroll on the x-axis?)  
 
 ### In Progress
 
-- [ ] Reports page with multiple charts  
-- [ ] Chart: Bar chart of weekday-averages for the selected time period  
 
 ### Done ✓
 
+- [x] Chart: Pie chart of per-project hours for the selected time period  
+- [x] Chart: Bar chart of weekday-averages for the selected time period  
+- [x] Reports page with multiple charts  
 - [x] App must be fully offline  
 - [x] Record time by starting a timer with a button  
 - [x] Timers may (or may not) have descriptions  

@@ -1,94 +1,98 @@
-nHours = { $hours } 時間
-
-save = セーブ
+appDescription = あなたのプライバシーを尊重し、凝りすぎずに仕事を終わらせる時間追跡アプリ。
 
 options = オプション
 
-noProject = （プロジェクトなし）
-
-logoSemantics = タイムコップのロゴ
-
-confirmDelete = 削除を確認
-
-editProject = プロジェクトを編集
-
-filter = フィルタ
-
-createNewProject = 新しいプロジェクトを作成
-
-appLegalese = Copyright©Kenton Hamaluik、2020
+endTime = 終了時間
 
 date = 日付
 
-groupedTimers = { $description }（{ $count }タイマー）
+noDescription = （説明なし）
 
-duration = 期間
-
-timeCopDatabase = タイムコップデータベース（{ $date }）
-
-appDescription = あなたのプライバシーを尊重し、凝りすぎずに仕事を終わらせる時間追跡アプリ。
-
-endTime = 終了時間
-
-changeLog = 変更ログ
-
-projects = プロジェクト
-
-from = から
-
-description = 説明
-
-runningTimers = タイマーの実行
-
-timeCopEntries = タイムコップエントリ（{ $date }）
-
-projectName = プロジェクト名
-
-about = 約
-
-to = に
-
-appName = タイムコップ
-
-groupTimers = 1日あたりの類似タイマーのグループ化
-
-deleteTimerConfirm = このタイマーを削除してもよろしいですか？
-
-startTime = 始まる時間
-
-export = 書き出す
+whatWereYouDoing = 何してた？
 
 combinedProjectDescription = プロジェクトと説明の組み合わせ
 
-editTimer = タイマーを編集
-
-project = 事業
-
-timeH = 時間（時間）
-
-columns = 列
-
-pleaseEnterAName = 名前を入力してください
-
-noDescription = （説明なし）
+createNewProject = 新しいプロジェクトを作成
 
 whatAreYouDoing = 何してるの？
 
+editProject = プロジェクトを編集
+
+about = 約
+
+groupTimers = 1日あたりの類似タイマーのグループ化
+
+reports = 報告書
+
+timeCopEntries = タイムコップエントリ（{ $date }）
+
+editTimer = タイマーを編集
+
+readme = Readme
+
+confirmDelete = 削除を確認
+
 cancel = キャンセル
+
+project = 事業
+
+timeCopDatabase = タイムコップデータベース（{ $date }）
+
+duration = 期間
+
+groupedTimers = { $description }（{ $count }タイマー）
+
+projectName = プロジェクト名
+
+projects = プロジェクト
 
 delete = 削除
 
-whatWereYouDoing = 何してた？
+averageDailyHours = 1日の平均時間
+
+totalProjectShare = 総プロジェクトシェア
+
+to = に
+
+areYouSureYouWantToDelete = このプロジェクトを削除してもよろしいですか？
+
+startTime = 始まる時間
+
+includeProjects = プロジェクトを含める
+
+appName = タイムコップ
 
 create = 作成する
 
 sourceCode = ソースコード
 
-areYouSureYouWantToDelete = このプロジェクトを削除してもよろしいですか？
+export = 書き出す
 
-includeProjects = プロジェクトを含める
+description = 説明
 
-readme = Readme
+runningTimers = タイマーの実行
 
-reports = 報告書
+deleteTimerConfirm = このタイマーを削除してもよろしいですか？
+
+timeH = 時間（時間）
+
+logoSemantics = タイムコップのロゴ
+
+pleaseEnterAName = 名前を入力してください
+
+changeLog = 変更ログ
+
+from = から
+
+columns = 列
+
+filter = フィルタ
+
+nHours = { $hours } 時間
+
+appLegalese = Copyright©Kenton Hamaluik、2020
+
+save = セーブ
+
+noProject = （プロジェクトなし）
 

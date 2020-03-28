@@ -86,4 +86,8 @@ combinedProjectDescription = Combined Project & Description
 
 reports = Reports
 
-nHours = {$hours} hours
+nHours = {$hours} hours
+
+averageDailyHours = Average Daily Hours
+
+totalProjectShare = Total Project Share

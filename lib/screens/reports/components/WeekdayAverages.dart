@@ -144,7 +144,7 @@ class WeekdayAverages extends StatelessWidget {
             ),
           ),
           Container(height: 16,),
-          Text("Average Daily Hours", style: Theme.of(context).textTheme.title, textAlign: TextAlign.center,),
+          Text(L10N.of(context).tr.averageDailyHours, style: Theme.of(context).textTheme.title, textAlign: TextAlign.center,),
         ],
       )
     );

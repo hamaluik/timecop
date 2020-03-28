@@ -1,94 +1,98 @@
-duration = 지속
-
-reports = 보고서
-
-appName = 타임 경찰
-
-confirmDelete = 삭제 확인
-
-editTimer = 타이머 편집
-
-readme = 읽어보기
-
-timeH = 시간 (시간)
-
-groupedTimers = { $description } ({ $count } 타이머)
-
-includeProjects = 프로젝트 포함
+startTime = 시작 시간
 
 pleaseEnterAName = 이름을 입력하십시오
 
-noProject = (프로젝트 없음)
+cancel = 취소
 
-project = 계획
+combinedProjectDescription = 결합 된 프로젝트 및 설명
 
 whatWereYouDoing = 뭐하고 있었어?
 
-date = 데이트
-
-projectName = 프로젝트 이름
-
-logoSemantics = 타임 경찰 로고
-
-appDescription = 개인 정보를 존중하고 너무 화려하지 않고 작업을 수행하는 시간 추적 앱.
-
-options = 옵션
-
-deleteTimerConfirm = 이 타이머를 삭제 하시겠습니까?
-
 whatAreYouDoing = 뭐하는거야?
-
-timeCopEntries = 타임 경찰 출품작 ({ $date })
-
-sourceCode = 소스 코드
-
-to = 에
-
-description = 기술
 
 projects = 프로젝트
 
-createNewProject = 새 프로젝트 만들기
+export = 수출
+
+appLegalese = 저작권 © Kenton Hamaluik, 2020
+
+sourceCode = 소스 코드
+
+appName = 타임 경찰
+
+create = 창조하다
+
+deleteTimerConfirm = 이 타이머를 삭제 하시겠습니까?
+
+confirmDelete = 삭제 확인
+
+groupTimers = 하루에 비슷한 타이머 그룹화
+
+timeCopDatabase = 타임 경찰 데이터베이스 ({ $date })
+
+logoSemantics = 타임 경찰 로고
+
+to = 에
+
+timeH = 시간 (시간)
+
+from = 에서
+
+readme = 읽어보기
+
+about = 약
+
+groupedTimers = { $description } ({ $count } 타이머)
 
 endTime = 종료 시간
 
-delete = 지우다
+appDescription = 개인 정보를 존중하고 너무 화려하지 않고 작업을 수행하는 시간 추적 앱.
 
-from = 에서
+project = 계획
+
+noDescription = (설명 없음)
+
+noProject = (프로젝트 없음)
+
+editProject = 프로젝트 편집
+
+duration = 지속
+
+changeLog = 변경 로그
+
+delete = 지우다
 
 filter = 필터
 
 nHours = { $hours } 시간
 
-about = 약
+areYouSureYouWantToDelete = 이 프로젝트를 삭제 하시겠습니까?
 
-appLegalese = 저작권 © Kenton Hamaluik, 2020
-
-groupTimers = 하루에 비슷한 타이머 그룹화
-
-save = 저장
-
-editProject = 프로젝트 편집
-
-export = 수출
-
-startTime = 시작 시간
-
-noDescription = (설명 없음)
-
-changeLog = 변경 로그
-
-cancel = 취소
-
-columns = 열
+reports = 보고서
 
 runningTimers = 타이머 실행
 
-areYouSureYouWantToDelete = 이 프로젝트를 삭제 하시겠습니까?
+save = 저장
 
-combinedProjectDescription = 결합 된 프로젝트 및 설명
+includeProjects = 프로젝트 포함
 
-create = 창조하다
+editTimer = 타이머 편집
 
-timeCopDatabase = 타임 경찰 데이터베이스 ({ $date })
+projectName = 프로젝트 이름
+
+columns = 열
+
+options = 옵션
+
+description = 기술
+
+date = 데이트
+
+createNewProject = 새 프로젝트 만들기
+
+averageDailyHours = 평균 일일 시간
+
+timeCopEntries = 타임 경찰 출품작 ({ $date })
+
+totalProjectShare = 총 프로젝트 점유율
 
