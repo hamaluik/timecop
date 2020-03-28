@@ -24,7 +24,7 @@ class WeekdayAverages extends StatelessWidget {
   final DateTime endDate;
   final List<double> _daysData;
 
-  static List<double> calculateDaysData(BuildContext context, DateTime startDate, DateTime endDate) {
+  static List<double> calculateData(BuildContext context, DateTime startDate, DateTime endDate) {
     final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
 
     DateTime firstDate = DateTime.now();
@@ -60,7 +60,7 @@ class WeekdayAverages extends StatelessWidget {
   }
 
   WeekdayAverages(BuildContext context, {Key key, @required this.startDate, @required this.endDate})
-    : this._daysData = calculateDaysData(context, startDate, endDate),
+    : this._daysData = calculateData(context, startDate, endDate),
     super(key: key);
 
   @override

@@ -88,4 +88,5 @@ class FluentL10NProvider extends L10NProvider {
   String nHours(String hours) => _bundle.format("nHours", args: <String, dynamic>{"hours": hours}, errors: _errors);
   String get averageDailyHours => _bundle.format("averageDailyHours", errors: _errors) ?? "averageDailyHours";
   String get totalProjectShare => _bundle.format("totalProjectShare", errors: _errors) ?? "totalProjectShare";
+  String get weeklyHours => _bundle.format("weeklyHours", errors: _errors) ?? "weeklyHours";
 }

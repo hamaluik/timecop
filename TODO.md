@@ -4,13 +4,13 @@ Project Description
 
 ### Todo
 
-- [ ] Chart: Bar chart of daily hours for the selected time period (scroll on the x-axis?)  
 
 ### In Progress
 
 
 ### Done ✓
 
+- [x] Chart: Line chart of hours per week over time  
 - [x] Chart: Pie chart of per-project hours for the selected time period  
 - [x] Chart: Bar chart of weekday-averages for the selected time period  
 - [x] Reports page with multiple charts  

@@ -40,7 +40,7 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
   final LinkedHashMap<int, double> _projectHours;
   int _touchedIndex = -1;
 
-  static LinkedHashMap<int, double> calcualteData(BuildContext context, DateTime startDate, DateTime endDate) {
+  static LinkedHashMap<int, double> calculateData(BuildContext context, DateTime startDate, DateTime endDate) {
     final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
 
     LinkedHashMap<int, double> projectHours = LinkedHashMap();
@@ -61,7 +61,7 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
   }
 
   _ProjectBreakdownState(BuildContext context, this.startDate, this.endDate, {Key key})
-    : this._projectHours = calcualteData(context, startDate, endDate);
+    : this._projectHours = calculateData(context, startDate, endDate);
 
   @override
   void initState() { 

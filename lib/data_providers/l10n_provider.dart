@@ -60,4 +60,5 @@ abstract class L10NProvider {
     String nHours(String hours);
     String get averageDailyHours;
     String get totalProjectShare;
+    String get weeklyHours;
 }

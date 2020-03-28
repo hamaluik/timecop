@@ -1,98 +1,100 @@
-groupTimers = Group Similar Timers Per Day
-
-readme = Readme
-
-save = Save
-
-delete = Delete
-
-to = To
-
-combinedProjectDescription = Combined Project & Description
-
-project = Project
-
-areYouSureYouWantToDelete = Are you sure you want to delete this project?
-
-endTime = End Time
-
-noProject = (no project)
-
-projectName = Project Name
-
-description = Description
-
-confirmDelete = Confirm Delete
-
-duration = Duration
-
-appLegalese = Copyright © Kenton Hamaluik, 2020
-
-logoSemantics = Time Cop Logo
-
-createNewProject = Create New Project
-
-deleteTimerConfirm = Are you sure you want to delete this timer?
-
-runningTimers = Running Timers
-
-timeCopDatabase = Time Cop Database ({ $date })
-
-whatAreYouDoing = What are you doing?
-
-editProject = Edit Project
-
-date = Date
-
-timeH = Time (hours)
-
-appDescription = A time tracking app that respects your privacy and gets the job done without getting too fancy.
-
-changeLog = Change Log
-
-filter = Filter
-
 averageDailyHours = Average Daily Hours
-
-from = From
-
-sourceCode = Source Code
-
-columns = Columns
-
-totalProjectShare = Total Project Share
-
-editTimer = Edit Timer
-
-cancel = Cancel
-
-appName = Time Cop
-
-create = Create
 
 timeCopEntries = Time Cop Entries ({ $date })
 
-groupedTimers = { $description } ({ $count } timers)
-
-includeProjects = Include Projects
-
-whatWereYouDoing = What were you doing?
-
-startTime = Start Time
-
-nHours = { $hours } hours
-
-noDescription = (no description)
-
-about = About
-
-projects = Projects
-
-export = Export
-
-reports = Reports
+groupTimers = Group Similar Timers Per Day
 
 options = Options
 
+weeklyHours = Weekly Hours
+
+nHours = { $hours } hours
+
+whatWereYouDoing = What were you doing?
+
+to = To
+
+from = From
+
+delete = Delete
+
+duration = Duration
+
+save = Save
+
+deleteTimerConfirm = Are you sure you want to delete this timer?
+
+project = Project
+
+noDescription = (no description)
+
+projects = Projects
+
+reports = Reports
+
+endTime = End Time
+
+changeLog = Change Log
+
+confirmDelete = Confirm Delete
+
+appName = Time Cop
+
+logoSemantics = Time Cop Logo
+
+about = About
+
+appDescription = A time tracking app that respects your privacy and gets the job done without getting too fancy.
+
+projectName = Project Name
+
+areYouSureYouWantToDelete = Are you sure you want to delete this project?
+
+includeProjects = Include Projects
+
+create = Create
+
+filter = Filter
+
+startTime = Start Time
+
+runningTimers = Running Timers
+
+readme = Readme
+
+export = Export
+
 pleaseEnterAName = Please enter a name
+
+columns = Columns
+
+description = Description
+
+date = Date
+
+sourceCode = Source Code
+
+appLegalese = Copyright © Kenton Hamaluik, 2020
+
+cancel = Cancel
+
+editTimer = Edit Timer
+
+whatAreYouDoing = What are you doing?
+
+noProject = (no project)
+
+timeH = Time (hours)
+
+timeCopDatabase = Time Cop Database ({ $date })
+
+combinedProjectDescription = Combined Project & Description
+
+createNewProject = Create New Project
+
+groupedTimers = { $description } ({ $count } timers)
+
+totalProjectShare = Total Project Share
+
+editProject = Edit Project
 

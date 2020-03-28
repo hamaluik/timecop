@@ -1,98 +1,100 @@
-appDescription = あなたのプライバシーを尊重し、凝りすぎずに仕事を終わらせる時間追跡アプリ。
-
-options = オプション
-
-endTime = 終了時間
-
-date = 日付
+cancel = キャンセル
 
 noDescription = （説明なし）
 
-whatWereYouDoing = 何してた？
+nHours = { $hours } 時間
 
-combinedProjectDescription = プロジェクトと説明の組み合わせ
-
-createNewProject = 新しいプロジェクトを作成
-
-whatAreYouDoing = 何してるの？
-
-editProject = プロジェクトを編集
-
-about = 約
-
-groupTimers = 1日あたりの類似タイマーのグループ化
-
-reports = 報告書
-
-timeCopEntries = タイムコップエントリ（{ $date }）
-
-editTimer = タイマーを編集
-
-readme = Readme
-
-confirmDelete = 削除を確認
-
-cancel = キャンセル
-
-project = 事業
-
-timeCopDatabase = タイムコップデータベース（{ $date }）
-
-duration = 期間
-
-groupedTimers = { $description }（{ $count }タイマー）
-
-projectName = プロジェクト名
-
-projects = プロジェクト
-
-delete = 削除
-
-averageDailyHours = 1日の平均時間
-
-totalProjectShare = 総プロジェクトシェア
-
-to = に
-
-areYouSureYouWantToDelete = このプロジェクトを削除してもよろしいですか？
+weeklyHours = 毎週の時間
 
 startTime = 始まる時間
 
+timeCopEntries = タイムコップエントリ（{ $date }）
+
+projects = プロジェクト
+
+to = に
+
+options = オプション
+
+from = から
+
+about = 約
+
+areYouSureYouWantToDelete = このプロジェクトを削除してもよろしいですか？
+
+groupTimers = 1日あたりの類似タイマーのグループ化
+
 includeProjects = プロジェクトを含める
+
+whatWereYouDoing = 何してた？
+
+project = 事業
+
+description = 説明
+
+confirmDelete = 削除を確認
+
+date = 日付
+
+appDescription = あなたのプライバシーを尊重し、凝りすぎずに仕事を終わらせる時間追跡アプリ。
+
+runningTimers = タイマーの実行
+
+save = セーブ
+
+export = 書き出す
+
+timeH = 時間（時間）
+
+readme = Readme
+
+editProject = プロジェクトを編集
+
+groupedTimers = { $description }（{ $count }タイマー）
+
+noProject = （プロジェクトなし）
+
+totalProjectShare = 総プロジェクトシェア
+
+averageDailyHours = 1日の平均時間
+
+endTime = 終了時間
+
+combinedProjectDescription = プロジェクトと説明の組み合わせ
+
+sourceCode = ソースコード
+
+whatAreYouDoing = 何してるの？
+
+delete = 削除
+
+filter = フィルタ
+
+reports = 報告書
+
+createNewProject = 新しいプロジェクトを作成
+
+deleteTimerConfirm = このタイマーを削除してもよろしいですか？
+
+editTimer = タイマーを編集
+
+changeLog = 変更ログ
+
+projectName = プロジェクト名
+
+columns = 列
+
+appLegalese = Copyright©Kenton Hamaluik、2020
 
 appName = タイムコップ
 
 create = 作成する
 
-sourceCode = ソースコード
-
-export = 書き出す
-
-description = 説明
-
-runningTimers = タイマーの実行
-
-deleteTimerConfirm = このタイマーを削除してもよろしいですか？
-
-timeH = 時間（時間）
-
-logoSemantics = タイムコップのロゴ
+timeCopDatabase = タイムコップデータベース（{ $date }）
 
 pleaseEnterAName = 名前を入力してください
 
-changeLog = 変更ログ
+duration = 期間
 
-from = から
-
-columns = 列
-
-filter = フィルタ
-
-nHours = { $hours } 時間
-
-appLegalese = Copyright©Kenton Hamaluik、2020
-
-save = セーブ
-
-noProject = （プロジェクトなし）
+logoSemantics = タイムコップのロゴ
 
