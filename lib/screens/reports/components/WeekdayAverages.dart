@@ -18,6 +18,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/timer_entry.dart';
+import 'package:timecop/models/start_of_week.dart';
 
 class WeekdayAverages extends StatelessWidget {
   final DateTime startDate;
@@ -47,12 +48,17 @@ class WeekdayAverages extends StatelessWidget {
         lastDate = timer.startTime;
       }
     }
+
+    // adjust first date and last date to match the start and end of the week
+    firstDate = firstDate.startOfWeek();
+    lastDate = lastDate.startOfWeek().add(Duration(days: 7));
+
     int totalDays = DateTime(lastDate.year, lastDate.month, lastDate.day)
       .difference(DateTime(firstDate.year, firstDate.month, firstDate.day))
       .inDays;
     if(totalDays > 0) {
       for(int i = 0; i < 7; i++) {
-        daySums[i] /= totalDays.toDouble();
+        daySums[i] /= totalDays.toDouble() / 7.0;
       }
     }
 

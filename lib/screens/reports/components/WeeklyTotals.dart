@@ -25,6 +25,7 @@ import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
+import 'package:timecop/models/start_of_week.dart';
 
 class WeeklyTotals extends StatefulWidget {
   final BuildContext context;
@@ -50,6 +51,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
     if(firstDate == null) {
       firstDate = timers.state.timers.map((timer) => timer.startTime).fold(DateTime.now(), (DateTime a, DateTime b) => a.isBefore(b) ? a : b);
     }
+    firstDate = firstDate.startOfWeek();
 
     LinkedHashMap<int, LinkedHashMap<int, double>> projectWeeklyHours = LinkedHashMap();
     for(
@@ -80,6 +82,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
       final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
       firstDate = timers.state.timers.map((timer) => timer.startTime).fold(DateTime.now(), (DateTime a, DateTime b) => a.isBefore(b) ? a : b);
     }
+    firstDate = firstDate.startOfWeek();
 
     double maxY = _projectWeeklyHours
       .values
