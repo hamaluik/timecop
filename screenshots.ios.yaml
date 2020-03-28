@@ -28,14 +28,14 @@ devices:
     iPhone Xs Max:
       orientation:
         - Portrait
-    iPhone 8 Plus:
-      orientation:
-        - Portrait
-    iPad Pro (12.9-inch) (3rd generation):
-      orientation:
-        - Portrait
-    iPad Pro (12.9-inch) (2nd generation):
-      orientation:
-        - Portrait
+#    iPhone 8 Plus:
+#      orientation:
+#        - Portrait
+#    iPad Pro (12.9-inch) (3rd generation):
+#      orientation:
+#        - Portrait
+#    iPad Pro (12.9-inch) (2nd generation):
+#      orientation:
+#        - Portrait
 
 frame: false
