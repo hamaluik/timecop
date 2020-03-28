@@ -50,7 +50,6 @@ class _ReportsScreenState extends State<ReportsScreen> {
               itemBuilder: (BuildContext context, int index) {
                 switch(index) {
                   case 0: return ProjectBreakdown(
-                    context: context,
                     startDate: _startDate,
                     endDate: _endDate,
                   );

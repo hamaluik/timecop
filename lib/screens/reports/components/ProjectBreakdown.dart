@@ -25,19 +25,15 @@ import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
 
 class ProjectBreakdown extends StatefulWidget {
-  final BuildContext context;
   final DateTime startDate;
   final DateTime endDate;
-  ProjectBreakdown({Key key, @required this.context, @required this.startDate, @required this.endDate}) : super(key: key);
+  ProjectBreakdown({Key key, @required this.startDate, @required this.endDate}) : super(key: key);
 
   @override
-  _ProjectBreakdownState createState() => _ProjectBreakdownState(context, startDate, endDate);
+  _ProjectBreakdownState createState() => _ProjectBreakdownState();
 }
 
 class _ProjectBreakdownState extends State<ProjectBreakdown> {
-  final DateTime startDate;
-  final DateTime endDate;
-  final LinkedHashMap<int, double> _projectHours;
   int _touchedIndex = -1;
 
   static LinkedHashMap<int, double> calculateData(BuildContext context, DateTime startDate, DateTime endDate) {
@@ -60,9 +56,6 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
     return projectHours;
   }
 
-  _ProjectBreakdownState(BuildContext context, this.startDate, this.endDate, {Key key})
-    : this._projectHours = calculateData(context, startDate, endDate);
-
   @override
   void initState() { 
     super.initState();
@@ -73,10 +66,10 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
   Widget build(BuildContext context) {
     final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
 
+    LinkedHashMap<int, double> _projectHours = calculateData(context, widget.startDate, widget.endDate);
     if(_projectHours.isEmpty) {
       return Container();
     }
-
     final double totalHours = _projectHours.values.fold(0.0, (double sum, double v) => sum + v);
     
     return Padding(

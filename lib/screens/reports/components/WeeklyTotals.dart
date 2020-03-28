@@ -34,14 +34,10 @@ class WeeklyTotals extends StatefulWidget {
   WeeklyTotals({Key key, @required this.context, @required this.startDate, @required this.endDate}) : super(key: key);
 
   @override
-  _WeeklyTotalsState createState() => _WeeklyTotalsState(context, startDate, endDate);
+  _WeeklyTotalsState createState() => _WeeklyTotalsState();
 }
 
 class _WeeklyTotalsState extends State<WeeklyTotals> {
-  final DateTime startDate;
-  final DateTime endDate;
-  final LinkedHashMap<int, LinkedHashMap<int, double>> _projectWeeklyHours;
-
   static DateFormat _dateFormat = DateFormat.MMMd();
 
   static LinkedHashMap<int, LinkedHashMap<int, double>> calculateData(BuildContext context, DateTime startDate, DateTime endDate) {
@@ -70,20 +66,18 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
 
     return projectWeeklyHours;
   }
-
-  _WeeklyTotalsState(BuildContext context, this.startDate, this.endDate, {Key key})
-    : this._projectWeeklyHours = calculateData(context, startDate, endDate);
     
   @override
   Widget build(BuildContext context) {
     final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
-    DateTime firstDate = startDate;
+    DateTime firstDate = widget.startDate;
     if(firstDate == null) {
       final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
       firstDate = timers.state.timers.map((timer) => timer.startTime).fold(DateTime.now(), (DateTime a, DateTime b) => a.isBefore(b) ? a : b);
     }
     firstDate = firstDate.startOfWeek();
 
+    LinkedHashMap<int, LinkedHashMap<int, double>> _projectWeeklyHours = calculateData(context, widget.startDate, widget.endDate);
     double maxY = _projectWeeklyHours
       .values
       .fold(0, (double omax, LinkedHashMap<int, double> weeks) =>
