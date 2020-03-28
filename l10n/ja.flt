@@ -1,90 +1,100 @@
-groupedTimers = { $description }（{ $count }タイマー）
+cancel = キャンセル
 
-save = セーブ
+noDescription = （説明なし）
 
-combinedProjectDescription = プロジェクトと説明の組み合わせ
+nHours = { $hours } 時間
 
-projects = プロジェクト
+weeklyHours = 毎週の時間
 
 startTime = 始まる時間
 
-whatAreYouDoing = 何してるの？
+timeCopEntries = タイムコップエントリ（{ $date }）
 
-description = 説明
+projects = プロジェクト
 
-sourceCode = ソースコード
-
-runningTimers = タイマーの実行
-
-logoSemantics = タイムコップのロゴ
-
-about = 約
-
-cancel = キャンセル
-
-duration = 期間
-
-endTime = 終了時間
-
-appName = タイムコップ
-
-from = から
-
-readme = Readme
-
-delete = 削除
-
-editProject = プロジェクトを編集
+to = に
 
 options = オプション
 
-create = 作成する
+from = から
 
-changeLog = 変更ログ
+about = 約
 
-filter = フィルタ
+areYouSureYouWantToDelete = このプロジェクトを削除してもよろしいですか？
 
-timeH = 時間（時間）
-
-timeCopDatabase = タイムコップデータベース（{ $date }）
-
-noProject = （プロジェクトなし）
-
-confirmDelete = 削除を確認
-
-timeCopEntries = タイムコップエントリ（{ $date }）
+groupTimers = 1日あたりの類似タイマーのグループ化
 
 includeProjects = プロジェクトを含める
-
-appDescription = あなたのプライバシーを尊重し、凝りすぎずに仕事を終わらせる時間追跡アプリ。
 
 whatWereYouDoing = 何してた？
 
 project = 事業
 
-appLegalese = Copyright©Kenton Hamaluik、2020
+description = 説明
 
-pleaseEnterAName = 名前を入力してください
-
-projectName = プロジェクト名
-
-to = に
+confirmDelete = 削除を確認
 
 date = 日付
 
-editTimer = タイマーを編集
+appDescription = あなたのプライバシーを尊重し、凝りすぎずに仕事を終わらせる時間追跡アプリ。
 
-noDescription = （説明なし）
+runningTimers = タイマーの実行
 
-columns = 列
-
-groupTimers = 1日あたりの類似タイマーのグループ化
-
-deleteTimerConfirm = このタイマーを削除してもよろしいですか？
+save = セーブ
 
 export = 書き出す
 
-areYouSureYouWantToDelete = このプロジェクトを削除してもよろしいですか？
+timeH = 時間（時間）
+
+readme = Readme
+
+editProject = プロジェクトを編集
+
+groupedTimers = { $description }（{ $count }タイマー）
+
+noProject = （プロジェクトなし）
+
+totalProjectShare = 総プロジェクトシェア
+
+averageDailyHours = 1日の平均時間
+
+endTime = 終了時間
+
+combinedProjectDescription = プロジェクトと説明の組み合わせ
+
+sourceCode = ソースコード
+
+whatAreYouDoing = 何してるの？
+
+delete = 削除
+
+filter = フィルタ
+
+reports = 報告書
 
 createNewProject = 新しいプロジェクトを作成
+
+deleteTimerConfirm = このタイマーを削除してもよろしいですか？
+
+editTimer = タイマーを編集
+
+changeLog = 変更ログ
+
+projectName = プロジェクト名
+
+columns = 列
+
+appLegalese = Copyright©Kenton Hamaluik、2020
+
+appName = タイムコップ
+
+create = 作成する
+
+timeCopDatabase = タイムコップデータベース（{ $date }）
+
+pleaseEnterAName = 名前を入力してください
+
+duration = 期間
+
+logoSemantics = タイムコップのロゴ
 

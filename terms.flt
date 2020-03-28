@@ -84,4 +84,12 @@ date = Date
 
 combinedProjectDescription = Combined Project & Description
 
-groupedTimers = { $description } ({ $count } timers)
+reports = Reports
+
+nHours = {$hours} hours
+
+averageDailyHours = Average Daily Hours
+
+totalProjectShare = Total Project Share
+
+weeklyHours = Weekly Hours

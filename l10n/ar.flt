@@ -1,90 +1,100 @@
-noProject = (لا يوجد مشروع)
-
-whatWereYouDoing = ماذا كنتم تفعلون؟
-
-options = خيارات
+endTime = وقت النهاية
 
 combinedProjectDescription = الجمع بين المشروع والوصف
 
-groupTimers = قم بتجميع الموقتات المماثلة في اليوم
-
-from = من عند
-
-editTimer = تحرير الموقت
-
-changeLog = سجل التغيير
-
-save = حفظ
-
-noDescription = (بدون وصف)
-
-appName = شرطي الوقت
-
-confirmDelete = تأكيد الحذف
-
-includeProjects = تضمين المشاريع
-
-duration = المدة الزمنية
-
-appDescription = تطبيق تتبع الوقت الذي يحترم خصوصيتك وينجز المهمة دون أن يتوهم.
-
-create = خلق
+projectName = اسم المشروع
 
 appLegalese = حقوق النشر © Kenton Hamaluik، 2020
 
-groupedTimers = { $description } ({ $count } مؤقتات)
+about = حول
 
-projects = المشاريع
-
-createNewProject = إنشاء مشروع جديد
+whatWereYouDoing = ماذا كنتم تفعلون؟
 
 pleaseEnterAName = الرجاء إدخال اسم
 
-endTime = وقت النهاية
+from = من عند
 
-startTime = وقت البدء
+totalProjectShare = إجمالي حصة المشروع
 
-delete = حذف
-
-description = وصف
-
-timeCopDatabase = قاعدة بيانات شرطي الوقت ({ $date })
-
-logoSemantics = شعار الوقت الشرطي
-
-timeH = الوقت (ساعات)
-
-about = حول
-
-cancel = إلغاء
-
-areYouSureYouWantToDelete = هل أنت متأكد أنك تريد حذف هذا المشروع؟
-
-editProject = تحرير المشروع
-
-export = تصدير
-
-runningTimers = تشغيل المؤقتات
-
-whatAreYouDoing = ماذا تفعل؟
+nHours = { $hours } ساعة
 
 readme = الملف التمهيدي
 
-sourceCode = مصدر الرمز
+appDescription = تطبيق تتبع الوقت الذي يحترم خصوصيتك وينجز المهمة دون أن يتوهم.
+
+logoSemantics = شعار الوقت الشرطي
 
 filter = منقي
 
-columns = الأعمدة
+delete = حذف
 
-to = إلى
+editTimer = تحرير الموقت
 
-project = مشروع
+averageDailyHours = متوسط ساعات العمل اليومية
+
+createNewProject = إنشاء مشروع جديد
+
+projects = المشاريع
+
+weeklyHours = ساعات العمل الأسبوعية
+
+export = تصدير
+
+duration = المدة الزمنية
+
+options = خيارات
+
+noProject = (لا يوجد مشروع)
 
 date = تاريخ
 
+startTime = وقت البدء
+
+editProject = تحرير المشروع
+
+project = مشروع
+
 timeCopEntries = إدخالات شرطي الوقت ({ $date })
 
-projectName = اسم المشروع
+create = خلق
+
+areYouSureYouWantToDelete = هل أنت متأكد أنك تريد حذف هذا المشروع؟
+
+groupTimers = قم بتجميع الموقتات المماثلة في اليوم
+
+appName = شرطي الوقت
+
+changeLog = سجل التغيير
+
+description = وصف
+
+whatAreYouDoing = ماذا تفعل؟
 
 deleteTimerConfirm = هل أنت متأكد أنك تريد حذف هذا المؤقت؟
+
+runningTimers = تشغيل المؤقتات
+
+noDescription = (بدون وصف)
+
+timeCopDatabase = قاعدة بيانات شرطي الوقت ({ $date })
+
+save = حفظ
+
+groupedTimers = { $description } ({ $count } مؤقتات)
+
+includeProjects = تضمين المشاريع
+
+cancel = إلغاء
+
+columns = الأعمدة
+
+timeH = الوقت (ساعات)
+
+to = إلى
+
+sourceCode = مصدر الرمز
+
+confirmDelete = تأكيد الحذف
+
+reports = التقارير
 

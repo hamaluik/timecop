@@ -14,7 +14,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
@@ -81,10 +80,7 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow> with 
                   .getProjectByID(widget.timers[0].projectID)
       ),
       title: Text(
-        L10N.of(context).tr.groupedTimersDescription(
-          formatDescription(context, widget.timers[0].description),
-          widget.timers.length
-        ),
+        formatDescription(context, widget.timers[0].description),
         style: styleDescription(context, widget.timers[0].description)
       ),
       trailing: Row(

@@ -7,3 +7,4 @@ gradle-wrapper.jar
 GeneratedPluginRegistrant.java
 /key.properties
 /fastlane
+/*.json

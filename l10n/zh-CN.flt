@@ -1,90 +1,100 @@
-confirmDelete = 确认删除
-
-filter = 过滤
+options = 选件
 
 combinedProjectDescription = 组合项目和说明
 
-logoSemantics = 时间警察徽标
-
-create = 创建
-
-projects = 专案
-
-timeCopDatabase = 时间警察数据库（{ $date }）
-
-noDescription = （没有说明）
-
-export = 出口
-
-to = 至
-
-deleteTimerConfirm = 您确定要删除此计时器吗？
-
-groupedTimers = { $description }（{ $count }个计时器）
-
-cancel = 取消
-
-appName = 时间警察
-
-editTimer = 编辑计时器
-
-areYouSureYouWantToDelete = 您确定要删除此项目吗？
-
-createNewProject = 建立新专案
-
-changeLog = 变更记录
-
-includeProjects = 包括项目
-
-from = 从
-
-options = 选件
+appLegalese = 版权所有©Kenton Hamaluik，2020年
 
 delete = 删除
 
-endTime = 时间结束
+sourceCode = 源代码
 
-columns = 列
+whatWereYouDoing = 你在做什么？
+
+noProject = （无项目）
+
+projectName = 项目名
+
+editTimer = 编辑计时器
 
 editProject = 编辑专案
+
+weeklyHours = 每周营业时间
+
+averageDailyHours = 平均每日时数
+
+about = 关于
+
+changeLog = 变更记录
+
+timeCopDatabase = 时间警察数据库（{ $date }）
+
+pleaseEnterAName = 请输入一个名字
 
 duration = 持续时间
 
 groupTimers = 每天组类似计时器
 
-project = 项目
+whatAreYouDoing = 你在做什么？
 
-appLegalese = 版权所有©Kenton Hamaluik，2020年
+columns = 列
 
-readme = 自述文件
-
-save = 保存
-
-about = 关于
-
-timeH = 时间（小时）
-
-appDescription = 时间跟踪应用程序尊重您的隐私并在不花哨的情况下完成工作。
-
-pleaseEnterAName = 请输入一个名字
-
-startTime = 开始时间
-
-projectName = 项目名
-
-whatWereYouDoing = 你在做什么？
-
-date = 日期
-
-description = 描述
-
-runningTimers = 运行计时器
-
-noProject = （无项目）
-
-sourceCode = 源代码
+create = 创建
 
 timeCopEntries = 时间警察条目（{ $date }）
 
-whatAreYouDoing = 你在做什么？
+appDescription = 时间跟踪应用程序尊重您的隐私并在不花哨的情况下完成工作。
+
+project = 项目
+
+confirmDelete = 确认删除
+
+areYouSureYouWantToDelete = 您确定要删除此项目吗？
+
+from = 从
+
+timeH = 时间（小时）
+
+totalProjectShare = 项目总份额
+
+startTime = 开始时间
+
+createNewProject = 建立新专案
+
+filter = 过滤
+
+groupedTimers = { $description }（{ $count }个计时器）
+
+deleteTimerConfirm = 您确定要删除此计时器吗？
+
+cancel = 取消
+
+includeProjects = 包括项目
+
+to = 至
+
+readme = 自述文件
+
+runningTimers = 运行计时器
+
+reports = 报告书
+
+projects = 专案
+
+noDescription = （没有说明）
+
+description = 描述
+
+nHours = { $hours } 小时
+
+date = 日期
+
+save = 保存
+
+endTime = 时间结束
+
+export = 出口
+
+logoSemantics = 时间警察徽标
+
+appName = 时间警察
 

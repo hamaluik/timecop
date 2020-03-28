@@ -1,90 +1,100 @@
+weeklyHours = Horas semanais
+
+startTime = Hora de início
+
+combinedProjectDescription = Projeto combinado e descrição
+
+whatWereYouDoing = O que você estava fazendo?
+
+averageDailyHours = Média de horas diárias
+
+timeCopDatabase = Banco de dados Time Cop ({ $date })
+
+confirmDelete = Confirmar exclusão
+
+noProject = (nenhum projeto)
+
+export = Exportação
+
+noDescription = (sem descrição)
+
+columns = Colunas
+
+delete = Excluir
+
+project = Projeto
+
+nHours = { $hours } horas
+
 to = Para
 
-endTime = Fim do tempo
+timeH = Tempo (horas)
+
+includeProjects = Incluir Projetos
+
+runningTimers = Temporizadores
+
+editTimer = Editar temporizador
+
+duration = Duração
+
+reports = Relatórios
+
+deleteTimerConfirm = Tem certeza de que deseja excluir este temporizador?
+
+readme = Leia-me
+
+appName = Time Cop
 
 createNewProject = Criar novo projeto
 
-cancel = Cancelar
+timeCopEntries = Entradas de registro de horas ({ $date })
+
+areYouSureYouWantToDelete = Tem certeza de que deseja excluir este projeto?
+
+options = Opções
+
+whatAreYouDoing = O que você está fazendo?
+
+appLegalese = Direitos autorais © Kenton Hamaluik, 2020
+
+from = A partir de
+
+pleaseEnterAName = Por favor insira um nome
+
+filter = Filtro
+
+groupTimers = Agrupar temporizadores semelhantes por dia
+
+description = Descrição
+
+date = Encontro
+
+logoSemantics = Time Cop Logo
+
+save = Salve 
+
+sourceCode = Código fonte
 
 projects = Projetos
 
 about = Sobre
 
-whatAreYouDoing = O que você está fazendo?
-
-appName = Time Cop
-
-groupedTimers = { $description } ({ $count } temporizadores)
-
-runningTimers = Temporizadores
-
-noProject = (nenhum projeto)
-
-timeH = Tempo (horas)
-
-projectName = Nome do Projeto
-
-whatWereYouDoing = O que você estava fazendo?
-
-appDescription = Um aplicativo de rastreamento de tempo que respeita sua privacidade e faz o trabalho sem ser muito sofisticado.
-
-filter = Filtro
-
-readme = Leia-me
-
-delete = Excluir
-
-startTime = Hora de início
-
-sourceCode = Código fonte
-
-deleteTimerConfirm = Tem certeza de que deseja excluir este temporizador?
-
-timeCopDatabase = Banco de dados Time Cop ({ $date })
-
-logoSemantics = Time Cop Logo
-
-groupTimers = Agrupar temporizadores semelhantes por dia
-
-date = Encontro
-
-timeCopEntries = Entradas de registro de horas ({ $date })
-
-export = Exportação
-
-save = Salve 
-
-from = A partir de
-
-duration = Duração
-
-description = Descrição
-
-columns = Colunas
-
-changeLog = Log de alterações
-
-combinedProjectDescription = Projeto combinado e descrição
-
-noDescription = (sem descrição)
-
-pleaseEnterAName = Por favor insira um nome
-
-areYouSureYouWantToDelete = Tem certeza de que deseja excluir este projeto?
-
-editTimer = Editar temporizador
+totalProjectShare = Participação total do projeto
 
 editProject = Editar Projeto
 
-appLegalese = Direitos autorais © Kenton Hamaluik, 2020
+changeLog = Log de alterações
 
-project = Projeto
+cancel = Cancelar
 
-options = Opções
+projectName = Nome do Projeto
 
-includeProjects = Incluir Projetos
+groupedTimers = { $description } ({ $count } temporizadores)
 
-confirmDelete = Confirmar exclusão
+appDescription = Um aplicativo de rastreamento de tempo que respeita sua privacidade e faz o trabalho sem ser muito sofisticado.
 
 create = Crio
+
+endTime = Fim do tempo
 

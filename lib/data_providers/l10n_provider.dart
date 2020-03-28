@@ -56,5 +56,9 @@ abstract class L10NProvider {
     String get columns;
     String get date;
     String get combinedProjectDescription;
-    String groupedTimersDescription(String description, int count);
+    String get reports;
+    String nHours(String hours);
+    String get averageDailyHours;
+    String get totalProjectShare;
+    String get weeklyHours;
 }

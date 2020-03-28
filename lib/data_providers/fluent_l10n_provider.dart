@@ -84,5 +84,9 @@ class FluentL10NProvider extends L10NProvider {
   String get columns => _bundle.format("columns", errors: _errors);
   String get date => _bundle.format("date", errors: _errors);
   String get combinedProjectDescription => _bundle.format("combinedProjectDescription", errors: _errors);
-  String groupedTimersDescription(String description, int count) => _bundle.format("groupedTimers", args: <String, dynamic>{"description": description, "count": count}, errors: _errors);
+  String get reports => _bundle.format("reports", errors: _errors) ?? "reports";
+  String nHours(String hours) => _bundle.format("nHours", args: <String, dynamic>{"hours": hours}, errors: _errors);
+  String get averageDailyHours => _bundle.format("averageDailyHours", errors: _errors) ?? "averageDailyHours";
+  String get totalProjectShare => _bundle.format("totalProjectShare", errors: _errors) ?? "totalProjectShare";
+  String get weeklyHours => _bundle.format("weeklyHours", errors: _errors) ?? "weeklyHours";
 }
