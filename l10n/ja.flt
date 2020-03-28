@@ -1,90 +1,94 @@
-from = から
-
-whatWereYouDoing = 何してた？
-
-areYouSureYouWantToDelete = このプロジェクトを削除してもよろしいですか？
-
-project = 事業
-
-export = 書き出す
+nHours = { $hours } 時間
 
 save = セーブ
 
-whatAreYouDoing = 何してるの？
+options = オプション
 
-readme = Readme
+noProject = （プロジェクトなし）
 
-groupedTimers = { $description }（{ $count }タイマー）
+logoSemantics = タイムコップのロゴ
 
-description = 説明
+confirmDelete = 削除を確認
 
-includeProjects = プロジェクトを含める
-
-create = 作成する
-
-changeLog = 変更ログ
+editProject = プロジェクトを編集
 
 filter = フィルタ
 
-columns = 列
+createNewProject = 新しいプロジェクトを作成
+
+appLegalese = Copyright©Kenton Hamaluik、2020
+
+date = 日付
+
+groupedTimers = { $description }（{ $count }タイマー）
+
+duration = 期間
+
+timeCopDatabase = タイムコップデータベース（{ $date }）
+
+appDescription = あなたのプライバシーを尊重し、凝りすぎずに仕事を終わらせる時間追跡アプリ。
+
+endTime = 終了時間
+
+changeLog = 変更ログ
+
+projects = プロジェクト
+
+from = から
+
+description = 説明
+
+runningTimers = タイマーの実行
+
+timeCopEntries = タイムコップエントリ（{ $date }）
+
+projectName = プロジェクト名
+
+about = 約
+
+to = に
 
 appName = タイムコップ
 
-editProject = プロジェクトを編集
+groupTimers = 1日あたりの類似タイマーのグループ化
+
+deleteTimerConfirm = このタイマーを削除してもよろしいですか？
+
+startTime = 始まる時間
+
+export = 書き出す
+
+combinedProjectDescription = プロジェクトと説明の組み合わせ
+
+editTimer = タイマーを編集
+
+project = 事業
+
+timeH = 時間（時間）
+
+columns = 列
+
+pleaseEnterAName = 名前を入力してください
+
+noDescription = （説明なし）
+
+whatAreYouDoing = 何してるの？
 
 cancel = キャンセル
 
 delete = 削除
 
-noProject = （プロジェクトなし）
+whatWereYouDoing = 何してた？
 
-groupTimers = 1日あたりの類似タイマーのグループ化
-
-projects = プロジェクト
-
-pleaseEnterAName = 名前を入力してください
-
-combinedProjectDescription = プロジェクトと説明の組み合わせ
-
-deleteTimerConfirm = このタイマーを削除してもよろしいですか？
-
-to = に
-
-logoSemantics = タイムコップのロゴ
-
-appDescription = あなたのプライバシーを尊重し、凝りすぎずに仕事を終わらせる時間追跡アプリ。
-
-confirmDelete = 削除を確認
-
-timeH = 時間（時間）
-
-runningTimers = タイマーの実行
-
-duration = 期間
-
-noDescription = （説明なし）
-
-projectName = プロジェクト名
-
-timeCopEntries = タイムコップエントリ（{ $date }）
-
-editTimer = タイマーを編集
-
-createNewProject = 新しいプロジェクトを作成
-
-about = 約
-
-options = オプション
-
-appLegalese = Copyright©Kenton Hamaluik、2020
-
-timeCopDatabase = タイムコップデータベース（{ $date }）
-
-startTime = 始まる時間
-
-endTime = 終了時間
-
-date = 日付
+create = 作成する
 
 sourceCode = ソースコード
+
+areYouSureYouWantToDelete = このプロジェクトを削除してもよろしいですか？
+
+includeProjects = プロジェクトを含める
+
+readme = Readme
+
+reports = 報告書
 

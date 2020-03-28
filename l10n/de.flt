@@ -1,90 +1,94 @@
-createNewProject = Neues Projekt erstellen
-
-changeLog = Änderungsprotokoll
-
-deleteTimerConfirm = Möchten Sie diesen Timer wirklich löschen?
-
-whatAreYouDoing = Was tust du?
-
-confirmDelete = Löschen bestätigen
-
-includeProjects = Projekte einschließen
-
-projects = Projekte
-
-groupTimers = Gruppieren Sie ähnliche Timer pro Tag
-
 combinedProjectDescription = Kombiniertes Projekt & Beschreibung
-
-readme = Liesmich
-
-timeCopDatabase = Time Cop-Datenbank ({ $date })
-
-noDescription = (Keine Beschreibung)
 
 editProject = Projekt bearbeiten
 
-projectName = Projektname
-
-whatWereYouDoing = Was hast du gemacht?
+includeProjects = Projekte einschließen
 
 startTime = Startzeit
 
-timeCopEntries = Time Cop-Einträge ({ $date })
-
-noProject = (kein Projekt)
-
-cancel = Stornieren
-
 columns = Säulen
-
-runningTimers = Timer ausführen
-
-create = Erstellen
-
-export = Export
-
-appDescription = Eine Zeiterfassungs-App, die Ihre Privatsphäre respektiert und die Arbeit erledigt, ohne zu ausgefallen zu werden.
-
-about = Über
-
-logoSemantics = Time Cop Logo
-
-appLegalese = Copyright © Kenton Hamaluik, 2020
-
-endTime = Endzeit
-
-date = Datum
-
-save = speichern
-
-pleaseEnterAName = Bitte geben Sie einen Namen ein
-
-project = Projekt
-
-from = Von
-
-editTimer = Timer bearbeiten
-
-timeH = Zeit (Stunden)
-
-delete = Löschen
-
-options = Optionen
-
-to = Zu
-
-description = Beschreibung
-
-filter = Filter
-
-appName = Time Cop
-
-areYouSureYouWantToDelete = Möchten Sie dieses Projekt wirklich löschen?
 
 duration = Dauer
 
+timeH = Zeit (Stunden)
+
+about = Über
+
+save = speichern
+
+timeCopDatabase = Time Cop-Datenbank ({ $date })
+
+project = Projekt
+
+appDescription = Eine Zeiterfassungs-App, die Ihre Privatsphäre respektiert und die Arbeit erledigt, ohne zu ausgefallen zu werden.
+
+delete = Löschen
+
+editTimer = Timer bearbeiten
+
+date = Datum
+
+options = Optionen
+
+timeCopEntries = Time Cop-Einträge ({ $date })
+
+filter = Filter
+
+confirmDelete = Löschen bestätigen
+
+areYouSureYouWantToDelete = Möchten Sie dieses Projekt wirklich löschen?
+
 sourceCode = Quellcode
 
+create = Erstellen
+
+appName = Time Cop
+
+logoSemantics = Time Cop Logo
+
+noDescription = (Keine Beschreibung)
+
+changeLog = Änderungsprotokoll
+
+cancel = Stornieren
+
+nHours = { $hours } Std
+
+whatAreYouDoing = Was tust du?
+
+readme = Liesmich
+
+pleaseEnterAName = Bitte geben Sie einen Namen ein
+
+deleteTimerConfirm = Möchten Sie diesen Timer wirklich löschen?
+
+endTime = Endzeit
+
+projectName = Projektname
+
 groupedTimers = { $description } ({ $count } Timer)
+
+whatWereYouDoing = Was hast du gemacht?
+
+appLegalese = Copyright © Kenton Hamaluik, 2020
+
+from = Von
+
+projects = Projekte
+
+description = Beschreibung
+
+runningTimers = Timer ausführen
+
+export = Export
+
+noProject = (kein Projekt)
+
+reports = Berichte
+
+groupTimers = Gruppieren Sie ähnliche Timer pro Tag
+
+to = Zu
+
+createNewProject = Neues Projekt erstellen
 

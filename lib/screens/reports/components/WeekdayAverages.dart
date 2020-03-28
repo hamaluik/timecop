@@ -16,6 +16,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
+import 'package:timecop/l10n.dart';
 import 'package:timecop/models/timer_entry.dart';
 
 class WeekdayAverages extends StatelessWidget {
@@ -74,6 +75,22 @@ class WeekdayAverages extends StatelessWidget {
             child: BarChart(
               BarChartData(
                 alignment: BarChartAlignment.spaceAround,
+                barTouchData: BarTouchData(
+                  enabled: true,
+                  touchTooltipData: BarTouchTooltipData(
+                    fitInsideTheChart: true,
+                    tooltipBgColor: Theme.of(context).cardColor,
+                    getTooltipItem: (
+                      BarChartGroupData group,
+                      int groupIndex,
+                      BarChartRodData rod,
+                      int rodIndex)
+                        => BarTooltipItem(
+                          L10N.of(context).tr.nHours(rod.y.toStringAsFixed(1)),
+                          Theme.of(context).textTheme.body1
+                        )
+                  )
+                ),
                 borderData: FlBorderData(
                   show: false,
                 ),

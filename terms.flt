@@ -85,3 +85,5 @@ date = Date
 combinedProjectDescription = Combined Project & Description
 
 reports = Reports
+
+nHours = {$hours} hours

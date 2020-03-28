@@ -1,90 +1,94 @@
-editTimer = 编辑计时器
-
-date = 日期
-
-save = 保存
-
-pleaseEnterAName = 请输入一个名字
-
-delete = 删除
-
-filter = 过滤
-
-deleteTimerConfirm = 您确定要删除此计时器吗？
-
-appDescription = 时间跟踪应用程序尊重您的隐私并在不花哨的情况下完成工作。
-
-timeH = 时间（小时）
-
-from = 从
-
-projectName = 项目名
-
-changeLog = 变更记录
-
-description = 描述
-
-noDescription = （没有说明）
-
-appLegalese = 版权所有©Kenton Hamaluik，2020年
-
-confirmDelete = 确认删除
-
-groupTimers = 每天组类似计时器
-
-appName = 时间警察
-
-createNewProject = 建立新专案
-
-export = 出口
-
-whatAreYouDoing = 你在做什么？
-
-create = 创建
-
-editProject = 编辑专案
-
-runningTimers = 运行计时器
-
-timeCopDatabase = 时间警察数据库（{ $date }）
-
-areYouSureYouWantToDelete = 您确定要删除此项目吗？
-
-startTime = 开始时间
-
-about = 关于
-
-duration = 持续时间
-
-readme = 自述文件
-
-projects = 专案
-
-to = 至
-
-whatWereYouDoing = 你在做什么？
-
-endTime = 时间结束
-
-cancel = 取消
-
-logoSemantics = 时间警察徽标
-
-columns = 列
-
-project = 项目
+groupedTimers = { $description }（{ $count }个计时器）
 
 includeProjects = 包括项目
 
+combinedProjectDescription = 组合项目和说明
+
+groupTimers = 每天组类似计时器
+
+timeCopDatabase = 时间警察数据库（{ $date }）
+
+about = 关于
+
+noDescription = （没有说明）
+
+timeCopEntries = 时间警察条目（{ $date }）
+
+appName = 时间警察
+
+areYouSureYouWantToDelete = 您确定要删除此项目吗？
+
+project = 项目
+
+description = 描述
+
+startTime = 开始时间
+
+cancel = 取消
+
+columns = 列
+
+whatWereYouDoing = 你在做什么？
+
+runningTimers = 运行计时器
+
+readme = 自述文件
+
+logoSemantics = 时间警察徽标
+
+from = 从
+
+appDescription = 时间跟踪应用程序尊重您的隐私并在不花哨的情况下完成工作。
+
+filter = 过滤
+
+createNewProject = 建立新专案
+
+projectName = 项目名
+
+export = 出口
+
+projects = 专案
+
 options = 选件
 
-groupedTimers = { $description }（{ $count }个计时器）
+to = 至
 
-noProject = （无项目）
+whatAreYouDoing = 你在做什么？
 
-combinedProjectDescription = 组合项目和说明
+timeH = 时间（小时）
+
+reports = 报告书
+
+date = 日期
+
+nHours = { $hours } 小时
+
+editProject = 编辑专案
+
+pleaseEnterAName = 请输入一个名字
+
+changeLog = 变更记录
+
+editTimer = 编辑计时器
+
+confirmDelete = 确认删除
+
+delete = 删除
 
 sourceCode = 源代码
 
-timeCopEntries = 时间警察条目（{ $date }）
+deleteTimerConfirm = 您确定要删除此计时器吗？
+
+save = 保存
+
+duration = 持续时间
+
+appLegalese = 版权所有©Kenton Hamaluik，2020年
+
+noProject = （无项目）
+
+create = 创建
+
+endTime = 时间结束
 

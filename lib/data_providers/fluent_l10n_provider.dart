@@ -85,4 +85,5 @@ class FluentL10NProvider extends L10NProvider {
   String get date => _bundle.format("date", errors: _errors);
   String get combinedProjectDescription => _bundle.format("combinedProjectDescription", errors: _errors);
   String get reports => _bundle.format("reports", errors: _errors) ?? "reports";
+  String nHours(String hours) => _bundle.format("nHours", args: <String, dynamic>{"hours": hours}, errors: _errors);
 }

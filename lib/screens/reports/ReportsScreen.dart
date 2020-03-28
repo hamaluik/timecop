@@ -69,87 +69,99 @@ class _ReportsScreenState extends State<ReportsScreen> {
               control: SwiperControl(iconPrevious: null, iconNext: null),
             ),
           ),
-          Slidable(
-            actionPane: SlidableDrawerActionPane(),
-            actionExtentRatio: 0.15,
-            child: ListTile(
-              leading: Icon(FontAwesomeIcons.calendar),
-              title: Text(L10N.of(context).tr.from),
-              trailing: Padding(
-                padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
-                child: Text(_startDate == null ? "—" : _dateFormat.format(_startDate)),
-              ),
-              onTap: () async {
-                await DatePicker.showDatePicker(
-                  context,
-                  currentTime: _startDate,
-                  onChanged: (DateTime dt) => setState(() => _startDate = DateTime(dt.year, dt.month, dt.day)),
-                  onConfirm: (DateTime dt) => setState(() => _startDate = DateTime(dt.year, dt.month, dt.day)),
-                  theme: DatePickerTheme(
-                    cancelStyle: Theme.of(context).textTheme.button,
-                    doneStyle: Theme.of(context).textTheme.button,
-                    itemStyle: Theme.of(context).textTheme.body1,
-                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                  )
-                );
-              },
+          ExpansionTile(
+            title: Text(
+              L10N.of(context).tr.filter,
+              style: TextStyle(
+                color: Theme.of(context).accentColor,
+                fontWeight: FontWeight.w700
+              )
             ),
-            secondaryActions:
-              _startDate == null
-                ? <Widget>[]
-                : <Widget>[
-                  IconSlideAction(
-                    color: Theme.of(context).errorColor,
-                    foregroundColor: Theme.of(context).accentIconTheme.color,
-                    icon: FontAwesomeIcons.minusCircle,
-                    onTap: () {
-                      setState(() {
-                        _startDate = null;
-                      });
-                    },
-                  )
-                ],
-          ),
-          Slidable(
-            actionPane: SlidableDrawerActionPane(),
-            actionExtentRatio: 0.15,
-            child: ListTile(
-              leading: Icon(FontAwesomeIcons.calendar),
-              title: Text(L10N.of(context).tr.to),
-              trailing: Padding(
-                padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
-                child: Text(_endDate == null ? "—" : _dateFormat.format(_endDate)),
+            initiallyExpanded: false,
+            children: <Widget>[
+              Slidable(
+                actionPane: SlidableDrawerActionPane(),
+                actionExtentRatio: 0.15,
+                child: ListTile(
+                  leading: Icon(FontAwesomeIcons.calendar),
+                  title: Text(L10N.of(context).tr.from),
+                  trailing: Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
+                    child: Text(_startDate == null ? "—" : _dateFormat.format(_startDate)),
+                  ),
+                  onTap: () async {
+                    await DatePicker.showDatePicker(
+                      context,
+                      currentTime: _startDate,
+                      onChanged: (DateTime dt) => setState(() => _startDate = DateTime(dt.year, dt.month, dt.day)),
+                      onConfirm: (DateTime dt) => setState(() => _startDate = DateTime(dt.year, dt.month, dt.day)),
+                      theme: DatePickerTheme(
+                        cancelStyle: Theme.of(context).textTheme.button,
+                        doneStyle: Theme.of(context).textTheme.button,
+                        itemStyle: Theme.of(context).textTheme.body1,
+                        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                      )
+                    );
+                  },
+                ),
+                secondaryActions:
+                  _startDate == null
+                    ? <Widget>[]
+                    : <Widget>[
+                      IconSlideAction(
+                        color: Theme.of(context).errorColor,
+                        foregroundColor: Theme.of(context).accentIconTheme.color,
+                        icon: FontAwesomeIcons.minusCircle,
+                        onTap: () {
+                          setState(() {
+                            _startDate = null;
+                          });
+                        },
+                      )
+                    ],
               ),
-              onTap: () async {
-                await DatePicker.showDatePicker(
-                  context,
-                  currentTime: _endDate,
-                  onChanged: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
-                  onConfirm: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
-                  theme: DatePickerTheme(
-                    cancelStyle: Theme.of(context).textTheme.button,
-                    doneStyle: Theme.of(context).textTheme.button,
-                    itemStyle: Theme.of(context).textTheme.body1,
-                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                  )
-                );
-              },
-            ),
-            secondaryActions:
-              _endDate == null
-                ? <Widget>[]
-                : <Widget>[
-                  IconSlideAction(
-                    color: Theme.of(context).errorColor,
-                    foregroundColor: Theme.of(context).accentIconTheme.color,
-                    icon: FontAwesomeIcons.minusCircle,
-                    onTap: () {
-                      setState(() {
-                        _endDate = null;
-                      });
-                    },
-                  )
-                ],
+              Slidable(
+                actionPane: SlidableDrawerActionPane(),
+                actionExtentRatio: 0.15,
+                child: ListTile(
+                  leading: Icon(FontAwesomeIcons.calendar),
+                  title: Text(L10N.of(context).tr.to),
+                  trailing: Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
+                    child: Text(_endDate == null ? "—" : _dateFormat.format(_endDate)),
+                  ),
+                  onTap: () async {
+                    await DatePicker.showDatePicker(
+                      context,
+                      currentTime: _endDate,
+                      onChanged: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
+                      onConfirm: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
+                      theme: DatePickerTheme(
+                        cancelStyle: Theme.of(context).textTheme.button,
+                        doneStyle: Theme.of(context).textTheme.button,
+                        itemStyle: Theme.of(context).textTheme.body1,
+                        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                      )
+                    );
+                  },
+                ),
+                secondaryActions:
+                  _endDate == null
+                    ? <Widget>[]
+                    : <Widget>[
+                      IconSlideAction(
+                        color: Theme.of(context).errorColor,
+                        foregroundColor: Theme.of(context).accentIconTheme.color,
+                        icon: FontAwesomeIcons.minusCircle,
+                        onTap: () {
+                          setState(() {
+                            _endDate = null;
+                          });
+                        },
+                      )
+                    ],
+              ),
+            ],
           ),
         ],
       )
