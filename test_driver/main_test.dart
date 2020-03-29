@@ -61,13 +61,17 @@ void main() {
       await driver.waitFor(projectBreakdown);
       await screenshot(driver, config, '04a projectBreakdown');
 
-      await driver.scroll(projectBreakdown, -300, 0, Duration(milliseconds: 500));
+      // Arabic reverses the swiping direction, so take that into account
+      String direction = await driver.requestData("direction");
+      double d = direction == "ltr" ? -300 : 300;
+
+      await driver.scroll(projectBreakdown, d, 0, Duration(milliseconds: 500));
       SerializableFinder weeklyTotals = find.byValueKey("weeklyTotals");
       await driver.waitFor(weeklyTotals);
       await driver.waitUntilNoTransientCallbacks();
       await screenshot(driver, config, '04b weeklyTotals');
 
-      await driver.scroll(weeklyTotals, -300, 0, Duration(milliseconds: 500));
+      await driver.scroll(weeklyTotals, d, 0, Duration(milliseconds: 500));
       SerializableFinder weekdayAverages = find.byValueKey("weekdayAverages");
       await driver.waitFor(weekdayAverages);
       await driver.waitUntilNoTransientCallbacks();

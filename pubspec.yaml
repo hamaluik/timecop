@@ -27,7 +27,8 @@ dependencies:
   path_provider: ^1.6.1
   shared_preferences: ^0.5.6+2
   fluent: ^1.0.1+2
-  flutter_speed_dial: ^1.2.5
+  #flutter_speed_dial: ^1.2.5
+  flutter_speed_dial_material_design: ^1.1.1
   fl_chart: ^0.8.3
   flutter_swiper: ^1.1.6
 

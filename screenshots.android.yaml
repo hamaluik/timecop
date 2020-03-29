@@ -8,19 +8,19 @@ staging: ./tmp/screenshots
 
 # A list of locales supported in app
 locales:
-  - en-CA
-  - fr-FR
-  - de-DE
-  - es-ES
+  - ar
+  - en
+  - fr
+  - de
+  - es
   - hi
-  - id
+#  - id # not working for some reason
   - ja
   - ko
-  - pt-PT
+  - pt
   - ru
-  - zh-Hans
-  - zh-Hant
-  - ar-SA
+  - zh-CN
+  - zh-TW
 
 # A list of devices to run tests on
 devices:

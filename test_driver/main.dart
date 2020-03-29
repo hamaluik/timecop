@@ -9,14 +9,25 @@ import 'package:flutter_driver/driver_extension.dart';
 import 'dart:ui' as ui;
 
 Future<void> main() async {
-  enableFlutterDriverExtension(handler: (String text) async {
-    String localeKey = ui.window.locale.languageCode;
+  enableFlutterDriverExtension(handler: (String query) async {
+    /*String localeKey = ui.window.locale.languageCode;
     if(ui.window.locale.languageCode == "zh") {
       localeKey += "-" + ui.window.locale.countryCode;
     }
     String translated = MockDataProvider.l10n[localeKey][text];
     assert(translated != null);
-    return translated;
+    return translated;*/
+    if(query == "direction") {
+      if(ui.window.locale.languageCode == "ar") {
+        return "rtl";
+      }
+      else {
+        return "ltr";
+      }
+    }
+    else {
+      return null;
+    }
   });
   WidgetsApp.debugAllowBannerOverride = false; // remove debug banner
 
