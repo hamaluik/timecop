@@ -16,113 +16,114 @@ import 'package:flutter/material.dart';
 import 'package:timecop/data_providers/data_provider.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
+import 'dart:math';
 
 class MockDataProvider extends DataProvider {
   String localeKey;
   static final Map<String, Map<String, String>> l10n = {
     "ar": {
-      "mockups": "نموذج تجريبي",
-      "wireframing": "السقالات",
-      "client-meeting": "اجتماع العملاء",
-      "administration": "الادارة",
-      "ui-layout": "تخطيط واجهة المستخدم",
-      "coffee": "قهوة",
+"ui-layout": "تخطيط واجهة المستخدم",
+"administration": "الادارة",
+"coffee": "قهوة",
+"mockups": "نموذج تجريبي",
+"app-development": "تطوير التطبيق",
+
     },
     "de": {
-      "client-meeting": "Kundenbesprechung",
-      "administration": "Verwaltung",
-      "mockups": "Modelle",
-      "ui-layout": "UI-Layout",
-      "coffee": "Kaffee",
-      "wireframing": "Gerüst",
+"app-development": "App-Entwicklung",
+"administration": "Verwaltung",
+"coffee": "Kaffee",
+"ui-layout": "UI-Layout",
+"mockups": "Modelle",
+
     },
     "en": {
-      "administration": "Administration",
-      "wireframing": "Scaffolding",
-      "mockups": "Mockups",
-      "client-meeting": "Client meeting",
-      "ui-layout": "UI Layout",
-      "coffee": "Coffee",
+"administration": "Administration",
+"mockups": "Mockups",
+"ui-layout": "UI Layout",
+"coffee": "Coffee",
+"app-development": "App development"
+
     },
     "es": {
-      "mockups": "Maquetas",
-      "administration": "Administración",
-      "wireframing": "Andamio",
-      "client-meeting": "Reunión del cliente",
-      "ui-layout": "Diseño de interfaz de usuario",
-      "coffee": "café",
+"administration": "Administración",
+"ui-layout": "Diseño de interfaz de usuario",
+"app-development": "Desarrollo de aplicaciones",
+"coffee": "café",
+"mockups": "Maquetas",
+
     },
     "fr": {
-      "coffee": "café",
-      "ui-layout": "Disposition de l'interface utilisateur",
-      "client-meeting": "Réunion client",
-      "mockups": "Maquettes",
-      "administration": "Administration",
-      "wireframing": "Échafaudage",
+"ui-layout": "Disposition de l'interface utilisateur",
+"coffee": "café",
+"administration": "Administration",
+"mockups": "Maquettes",
+"app-development": "Développement d'applications",
+
     },
     "hi": {
-      "coffee": "कॉफ़ी",
-      "wireframing": "मचान",
-      "mockups": "मॉक-अप",
-      "ui-layout": "यूआई लेआउट",
-      "administration": "शासन प्रबंध",
-      "client-meeting": "ग्राहक बैठक",
+"mockups": "मॉक-अप",
+"coffee": "कॉफ़ी",
+"ui-layout": "यूआई लेआउट",
+"administration": "शासन प्रबंध",
+"app-development": "अनुप्रयोग विकास",
+
     },
     "id": {
-      "ui-layout": "Layout UI",
-      "wireframing": "Perancah",
-      "mockups": "Maket",
-      "client-meeting": "Pertemuan klien",
-      "coffee": "kopi",
-      "administration": "Administrasi",
+"app-development": "Pengembangan aplikasi",
+"coffee": "kopi",
+"ui-layout": "Layout UI",
+"mockups": "Maket",
+"administration": "Administrasi",
+
     },
     "ja": {
-      "client-meeting": "クライアントミーティング",
-      "wireframing": "足場",
-      "coffee": "コーヒー",
-      "ui-layout": "UIレイアウト",
-      "administration": "運営管理",
-      "mockups": "モックアップ",
+"ui-layout": "UIレイアウト",
+"mockups": "モックアップ",
+"app-development": "アプリ開発",
+"administration": "行政",
+"coffee": "コーヒー",
+
     },
     "ko": {
-      "coffee": "커피",
-      "wireframing": "와이어 프레임",
-      "administration": "관리",
-      "client-meeting": "고객 회의",
-      "ui-layout": "UI 레이아웃",
-      "mockups": "발판",
+"app-development": "앱 개발",
+"coffee": "커피",
+"mockups": "모형",
+"ui-layout": "UI 레이아웃",
+"administration": "관리",
+
     },
     "pt": {
-      "client-meeting": "Reunião do cliente",
-      "mockups": "Maquetes",
-      "coffee": "Café",
-      "ui-layout": "Layout da interface do usuário",
-      "wireframing": "Andaimes",
-      "administration": "Administração",
+"coffee": "Café",
+"mockups": "Maquetes",
+"ui-layout": "Layout da interface do usuário",
+"app-development": "Desenvolvimento de aplicativos",
+"administration": "Administração",
+
     },
     "ru": {
-      "wireframing": "подмости",
-      "mockups": "Макеты",
-      "client-meeting": "Встреча с клиентом",
-      "ui-layout": "Макет пользовательского интерфейса",
-      "administration": "администрация",
-      "coffee": "Кофе",
+"mockups": "Макеты",
+"coffee": "Кофе",
+"app-development": "Разработка приложений",
+"ui-layout": "Макет пользовательского интерфейса",
+"administration": "администрация",
+
     },
     "zh-CN": {
-      "administration": "管理",
-      "ui-layout": "UI布局",
-      "mockups": "样机",
-      "wireframing": "脚手架",
-      "client-meeting": "客户会议",
-      "coffee": "咖啡",
+"ui-layout": "UI布局",
+"administration": "管理",
+"coffee": "咖啡",
+"mockups": "样机",
+"app-development": "应用程式开发",
+
     },
     "zh-TW": {
-      "wireframing": "腳手架",
-      "ui-layout": "UI佈局",
-      "client-meeting": "客戶會議",
-      "mockups": "樣機",
-      "coffee": "咖啡",
-      "administration": "管理",
+"administration": "管理",
+"mockups": "樣機",
+"app-development": "應用程式開發",
+"coffee": "咖啡",
+"ui-layout": "UI佈局",
+
     },
   };
 
@@ -140,43 +141,74 @@ class MockDataProvider extends DataProvider {
     ];
   }
   Future<List<TimerEntry>> listTimers() async {
-    return <TimerEntry>[
+    int tid = 1;
+    Random rand = Random(42);
+
+    // start with running timers
+    List<TimerEntry> entries = [
       TimerEntry(
-        id: 1,
-        description: l10n[localeKey]["wireframing"],
-        projectID: 1,
-        startTime: DateTime.now().subtract(Duration(days: 2, hours: 9, minutes: 22, seconds: 9)),
-        endTime: DateTime.now().subtract(Duration(days: 2)),
-      ),
-      TimerEntry(
-        id: 2,
-        description: l10n[localeKey]["mockups"],
-        projectID: 1,
-        startTime: DateTime.now().subtract(Duration(days: 1, hours: 7, minutes: 9, seconds: 31)),
-        endTime: DateTime.now().subtract(Duration(days: 1))
-      ),
-      TimerEntry(
-        id: 3,
-        description: l10n[localeKey]["client-meeting"],
-        projectID: 2,
-        startTime: DateTime.now().subtract(Duration(days: 1, hours: 0, minutes: 42, seconds: 17)),
-        endTime: DateTime.now().subtract(Duration(days: 1))
-      ),
-      TimerEntry(
-        id: 4,
+        id: tid++,
         description: l10n[localeKey]["ui-layout"],
         projectID: 1,
         startTime: DateTime.now().subtract(Duration(hours: 2, minutes: 10, seconds: 1)),
         endTime: null,
       ),
       TimerEntry(
-        id: 5,
+        id: tid++,
         description: l10n[localeKey]["coffee"],
         projectID: 2,
         startTime: DateTime.now().subtract(Duration(minutes: 3, seconds: 14)),
         endTime: null,
       ),
     ];
+
+    // add some fake March stuff
+    for(int w = 0; w < 4; w++) {
+      for(int d = 0; d < 5; d++) {
+        String descriptionKey;
+        double r = rand.nextDouble();
+        if(r <= 0.2) { descriptionKey = 'mockups'; }
+        else if(r <= 0.5) { descriptionKey = 'ui-layout'; }
+        else { descriptionKey = 'app-development'; }
+
+        entries.add(TimerEntry(
+          id: tid++,
+          description: l10n[localeKey][descriptionKey],
+          projectID: 1,
+          startTime: DateTime(
+            2020, 3, (w * 7) + d + 2,
+            rand.nextInt(3) + 8,
+            rand.nextInt(60),
+            rand.nextInt(60),
+          ),
+          endTime: DateTime(
+            2020, 3, (w * 7) + d + 2,
+            rand.nextInt(3) + 13,
+            rand.nextInt(60),
+            rand.nextInt(60),
+          ),
+        ));
+
+        entries.add(TimerEntry(
+          id: tid++,
+          description: l10n[localeKey]['administration'],
+          projectID: 2,
+          startTime: DateTime(
+            2020, 3, (w * 7) + d + 2,
+            14,
+            rand.nextInt(30),
+            rand.nextInt(60),
+          ),
+          endTime: DateTime(
+            2020, 3, (w * 7) + d + 2,
+            15,
+            rand.nextInt(30),
+            rand.nextInt(60),
+          ),
+        ));
+      }
+    }
+    return entries;
   }
 
   Future<Project> createProject({@required String name, Color colour}) async {

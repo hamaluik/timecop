@@ -14,7 +14,9 @@ Future<void> main() async {
     if(ui.window.locale.languageCode == "zh") {
       localeKey += "-" + ui.window.locale.countryCode;
     }
-    return MockDataProvider.l10n[localeKey][text];
+    String translated = MockDataProvider.l10n[localeKey][text];
+    assert(translated != null);
+    return translated;
   });
   WidgetsApp.debugAllowBannerOverride = false; // remove debug banner
 

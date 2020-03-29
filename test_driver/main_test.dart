@@ -23,8 +23,9 @@ void main() {
       await screenshot(driver, config, '01 dashboard');
 
       // then the timer details page
-      String mockupsText = await driver.requestData("mockups");
-      SerializableFinder timerEdit = find.text(mockupsText);
+      //String appDevelopmentText = await driver.requestData("app-development");
+      //SerializableFinder timerEdit = find.text(appDevelopmentText);
+      SerializableFinder timerEdit = find.byValueKey("stoppedTimer-42");
       await driver.waitFor(timerEdit);
       await driver.tap(timerEdit);
       SerializableFinder saveDetails = find.byValueKey("saveDetails");

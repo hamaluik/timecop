@@ -53,6 +53,7 @@ class StoppedTimerRow extends StatelessWidget {
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.15,
       child: ListTile(
+        key: Key("stoppedTimer-" + timer.id.toString()),
         leading: ProjectColour(project: BlocProvider.of<ProjectsBloc>(context).getProjectByID(timer.projectID)),
         title: Text(formatDescription(context, timer.description), style: styleDescription(context, timer.description)),
         trailing: Text(timer.formatTime(), style: TextStyle(fontFamily: "FiraMono")),

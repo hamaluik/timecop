@@ -19,7 +19,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
-import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
@@ -53,7 +52,6 @@ class WeekdayAverages extends StatelessWidget {
       int weekday = timer.startTime.weekday;
       if(weekday == 7) weekday = 0;
 
-      //daySums[weekday] += hours;
       daySums[weekday].update(timer.projectID, (double sum) => sum + hours, ifAbsent: () => hours);
 
       if(timer.startTime.isBefore(firstDate)) {
@@ -74,7 +72,6 @@ class WeekdayAverages extends StatelessWidget {
     double totalWeeks = totalDays.toDouble() / 7.0;
     if(totalDays > 0) {
       for(int i = 0; i < 7; i++) {
-        //daySums[i] /= totalDays.toDouble() / 7.0;
         daySums[i].updateAll((int _project, double sum) => sum / totalWeeks);
       }
     }
@@ -175,6 +172,11 @@ class WeekdayAverages extends StatelessWidget {
                         width: 22,
                         y: _daysData[day].entries.fold(0.0, (double sum, MapEntry<int, double> entry) => sum + entry.value),
                         rodStackItem: _buildDayStack(day, projects),
+                        //backDrawRodData: BackgroundBarChartRodData(
+                        //  color: Theme.of(context).chipTheme.backgroundColor,
+                        //  show: true,
+                        //  y: maxY,
+                        //)
                       )
                     ]
                   ))

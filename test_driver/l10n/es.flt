@@ -1,12 +1,10 @@
-mockups = Maquetas
-
-coffee = café
-
-wireframing = Andamio
-
-client-meeting = Reunión del cliente
+administration = Administración
 
 ui-layout = Diseño de interfaz de usuario
 
-administration = Administración
+app-development = Desarrollo de aplicaciones
+
+coffee = café
+
+mockups = Maquetas
 
