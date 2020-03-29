@@ -1,6 +1,6 @@
 name: timecop
 description: A time tracking app that respects your privacy and gets the job done without getting too fancy.
-version: 1.3.1+18
+version: 1.3.2+19
 
 environment:
   sdk: ">=2.6.0 <3.0.0"
