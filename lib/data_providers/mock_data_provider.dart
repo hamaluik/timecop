@@ -217,11 +217,12 @@ class MockDataProvider extends DataProvider {
   Future<void> editProject(Project project) async {}
   Future<void> deleteProject(Project project) async {}
   Future<TimerEntry> createTimer({String description, int projectID, DateTime startTime, DateTime endTime}) async {
+    DateTime st = startTime ?? DateTime.now();
     return TimerEntry(
       id: -1,
       description: description,
       projectID: projectID,
-      startTime: startTime,
+      startTime: st,
       endTime: endTime,
     );
   }

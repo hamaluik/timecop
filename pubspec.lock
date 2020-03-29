@@ -212,13 +212,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.5.4"
-  flutter_speed_dial_material_design:
-    dependency: "direct main"
-    description:
-      name: flutter_speed_dial_material_design
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.1"
   flutter_svg:
     dependency: "direct main"
     description:
