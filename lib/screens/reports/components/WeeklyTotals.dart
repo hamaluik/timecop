@@ -27,6 +27,8 @@ import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/models/start_of_week.dart';
 
+import 'Legend.dart';
+
 class WeeklyTotals extends StatefulWidget {
   final BuildContext context;
   final DateTime startDate;
@@ -91,6 +93,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
+            key: Key("weeklyTotals"),
             child: LineChart(
               LineChartData(
                 minY: 0,
@@ -172,20 +175,8 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
               )
             ),
           ),
-          Wrap(
-            alignment: WrapAlignment.center,
-            children: _projectWeeklyHours
-              .entries
-              .map(
-                (entry) {
-                  Project project = projects.state.projects.firstWhere((project) => project.id == entry.key);
-                  return Chip(
-                    avatar: ProjectColour(project: project,),
-                    label: Text(project.name),
-                  );
-                }
-              )
-              .toList(),
+          Legend(
+            projects: _projectWeeklyHours.keys.map((id) => projects.state.projects.firstWhere((p) => p.id == id))
           ),
           Container(height: 16,),
           Text(L10N.of(context).tr.weeklyHours, style: Theme.of(context).textTheme.title, textAlign: TextAlign.center,),

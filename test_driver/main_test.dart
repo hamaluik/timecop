@@ -47,8 +47,32 @@ void main() {
       await driver.waitUntilNoTransientCallbacks();
       await screenshot(driver, config, '03 projects');
 
-      // then the export page
+      // then reports pages
       SerializableFinder backButton = find.byType("BackButton");
+      await driver.waitFor(backButton);
+      await driver.tap(backButton);
+      await driver.waitFor(menuButton);
+      await driver.tap(menuButton);
+      SerializableFinder menuReports = find.byValueKey("menuReports");
+      await driver.waitFor(menuReports);
+      await driver.tap(menuReports);
+      SerializableFinder projectBreakdown = find.byValueKey("projectBreakdown");
+      await driver.waitFor(projectBreakdown);
+      await screenshot(driver, config, '04a projectBreakdown');
+
+      await driver.scroll(projectBreakdown, -300, 0, Duration(milliseconds: 500));
+      SerializableFinder weeklyTotals = find.byValueKey("weeklyTotals");
+      await driver.waitFor(weeklyTotals);
+      await driver.waitUntilNoTransientCallbacks();
+      await screenshot(driver, config, '04b weeklyTotals');
+
+      await driver.scroll(weeklyTotals, -300, 0, Duration(milliseconds: 500));
+      SerializableFinder weekdayAverages = find.byValueKey("weekdayAverages");
+      await driver.waitFor(weekdayAverages);
+      await driver.waitUntilNoTransientCallbacks();
+      await screenshot(driver, config, '04c weekdayAverages');
+
+      // then the export page
       await driver.waitFor(backButton);
       await driver.tap(backButton);
       await driver.waitFor(menuButton);
@@ -56,23 +80,11 @@ void main() {
       SerializableFinder menuExport = find.byValueKey("menuExport");
       await driver.waitFor(menuExport);
       await driver.tap(menuExport);
-      SerializableFinder exportFAB = find.byValueKey("exportFAB");
-      await driver.waitFor(exportFAB);
+      SerializableFinder optionColumns = find.byValueKey("optionColumns");
+      await driver.waitFor(optionColumns);
+      await driver.tap(optionColumns);
       await driver.waitUntilNoTransientCallbacks();
-      await screenshot(driver, config, '04 export');
-
-      // then the about page
-      await driver.waitFor(backButton);
-      await driver.tap(backButton);
-      await driver.waitFor(menuButton);
-      await driver.tap(menuButton);
-      SerializableFinder menuAbout = find.byValueKey("menuAbout");
-      await driver.waitFor(menuAbout);
-      await driver.tap(menuAbout);
-      SerializableFinder aboutPage = find.byValueKey("aboutPage");
-      await driver.waitFor(aboutPage);
-      await driver.waitUntilNoTransientCallbacks();
-      await screenshot(driver, config, '05 about');
+      await screenshot(driver, config, '05 export');
     }, timeout: Timeout(Duration(seconds: 30)));
   });
 }

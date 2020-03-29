@@ -26,6 +26,8 @@ import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/models/start_of_week.dart';
 import 'dart:math';
 
+import 'Legend.dart';
+
 class WeekdayAverages extends StatelessWidget {
   final DateTime startDate;
   final DateTime endDate;
@@ -106,6 +108,7 @@ class WeekdayAverages extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
+            key: Key("weekdayAverages"),
             child: BarChart(
               BarChartData(
                 alignment: BarChartAlignment.spaceAround,
@@ -179,18 +182,8 @@ class WeekdayAverages extends StatelessWidget {
               )
             ),
           ),
-          Wrap(
-            alignment: WrapAlignment.center,
-            children: projects.state.projects
-              .map(
-                (project) {
-                  return Chip(
-                    avatar: ProjectColour(project: project,),
-                    label: Text(project.name),
-                  );
-                }
-              )
-              .toList(),
+          Legend(
+            projects: projects.state.projects
           ),
           Container(height: 16,),
           Text(L10N.of(context).tr.averageDailyHours, style: Theme.of(context).textTheme.title, textAlign: TextAlign.center,),

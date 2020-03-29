@@ -205,6 +205,7 @@ class _ExportScreenState extends State<ExportScreen> {
           BlocBuilder<SettingsBloc, SettingsState>(
             bloc: settingsBloc,
             builder: (BuildContext context, SettingsState settingsState) => ExpansionTile(
+              key: Key("optionColumns"),
               title: Text(
                 L10N.of(context).tr.columns,
                 style: TextStyle(

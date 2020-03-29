@@ -23,6 +23,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/data_providers/data_provider.dart';
+import 'package:timecop/data_providers/mock_settings_provider.dart';
 import 'package:timecop/data_providers/settings_provider.dart';
 import 'package:timecop/fontlicenses.dart';
 import 'package:timecop/l10n.dart';
@@ -107,7 +108,7 @@ class _TimeCopAppState extends State<TimeCopApp> {
       ],
       child: MaterialApp(
         title: 'Time Cop',
-        theme: lightTheme,
+        theme: widget.settings is MockSettingsProvider ? darkTheme : lightTheme, // use dark theme for screenshots and testing
         darkTheme: darkTheme,
         home: DashboardScreen(),
         localizationsDelegates: [

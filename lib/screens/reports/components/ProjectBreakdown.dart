@@ -24,6 +24,8 @@ import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
 
+import 'Legend.dart';
+
 class ProjectBreakdown extends StatefulWidget {
   final DateTime startDate;
   final DateTime endDate;
@@ -79,6 +81,7 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
         children: <Widget>[
           Expanded(
             child: AspectRatio(
+              key: Key("projectBreakdown"),
               aspectRatio: 1,
               child: PieChart(
                 PieChartData(
@@ -110,20 +113,8 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
               ),
             ),
           ),
-          Wrap(
-            alignment: WrapAlignment.center,
-            children: _projectHours
-              .entries
-              .map(
-                (entry) {
-                  Project project = projects.state.projects.firstWhere((project) => project.id == entry.key);
-                  return Chip(
-                    avatar: ProjectColour(project: project,),
-                    label: Text(project.name),
-                  );
-                }
-              )
-              .toList(),
+          Legend(
+            projects: _projectHours.keys.map((id) => projects.state.projects.firstWhere((p) => p.id == id))
           ),
           Container(height: 16,),
           Text(L10N.of(context).tr.totalProjectShare, style: Theme.of(context).textTheme.title, textAlign: TextAlign.center,),
