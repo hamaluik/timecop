@@ -179,7 +179,9 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
           Container(height: 16,),
           Text(L10N.of(context).tr.weeklyHours, style: Theme.of(context).textTheme.title, textAlign: TextAlign.center,),
           Legend(
-            projects: widget.selectedProjects
+            projects: widget
+              .selectedProjects
+              .where((project) => _projectWeeklyHours.keys.any((id) => project?.id == id))
           ),
         ],
       )

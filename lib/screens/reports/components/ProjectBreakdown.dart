@@ -119,7 +119,9 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
           Container(height: 16,),
           Text(L10N.of(context).tr.totalProjectShare, style: Theme.of(context).textTheme.title, textAlign: TextAlign.center,),
           Legend(
-            projects: widget.selectedProjects
+            projects: widget
+              .selectedProjects
+              .where((project) => _projectHours.keys.any((id) => project?.id == id))
           ),
         ],
       )

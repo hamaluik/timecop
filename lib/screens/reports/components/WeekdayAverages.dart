@@ -190,6 +190,12 @@ class WeekdayAverages extends StatelessWidget {
           Text(L10N.of(context).tr.averageDailyHours, style: Theme.of(context).textTheme.title, textAlign: TextAlign.center,),
           Legend(
             projects: selectedProjects
+              .where((project) => _daysData
+                .entries
+                .any((MapEntry<int, LinkedHashMap<int, double>> derp) =>
+                  derp.value.keys.any((id) => project?.id == id)
+                )
+              )
           ),
         ],
       )
