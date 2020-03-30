@@ -28,7 +28,10 @@ import 'Legend.dart';
 class ProjectBreakdown extends StatefulWidget {
   final DateTime startDate;
   final DateTime endDate;
-  ProjectBreakdown({Key key, @required this.startDate, @required this.endDate}) : super(key: key);
+  final List<Project> selectedProjects;
+  ProjectBreakdown({Key key, @required this.startDate, @required this.endDate, @required this.selectedProjects})
+    : assert(selectedProjects != null),
+      super(key: key);
 
   @override
   _ProjectBreakdownState createState() => _ProjectBreakdownState();
@@ -37,13 +40,14 @@ class ProjectBreakdown extends StatefulWidget {
 class _ProjectBreakdownState extends State<ProjectBreakdown> {
   int _touchedIndex = -1;
 
-  static LinkedHashMap<int, double> calculateData(BuildContext context, DateTime startDate, DateTime endDate) {
+  static LinkedHashMap<int, double> calculateData(BuildContext context, DateTime startDate, DateTime endDate, List<Project> selectedProjects) {
     final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
 
     LinkedHashMap<int, double> projectHours = LinkedHashMap();
     for(
       TimerEntry timer in timers.state.timers
         .where((timer) => timer.endTime != null)
+        .where((timer) => selectedProjects.any((p) => p?.id == timer.projectID))
         .where((timer) => startDate != null ? timer.startTime.isAfter(startDate) : true)
         .where((timer) => endDate != null ? timer.startTime.isBefore(endDate) : true)
     ) {
@@ -67,7 +71,7 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
   Widget build(BuildContext context) {
     final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
 
-    LinkedHashMap<int, double> _projectHours = calculateData(context, widget.startDate, widget.endDate);
+    LinkedHashMap<int, double> _projectHours = calculateData(context, widget.startDate, widget.endDate, widget.selectedProjects);
     if(_projectHours.isEmpty) {
       return Container();
     }
@@ -112,11 +116,11 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
               ),
             ),
           ),
-          Legend(
-            projects: _projectHours.keys.map((id) => projects.state.projects.firstWhere((p) => p.id == id, orElse: () => null))
-          ),
           Container(height: 16,),
           Text(L10N.of(context).tr.totalProjectShare, style: Theme.of(context).textTheme.title, textAlign: TextAlign.center,),
+          Legend(
+            projects: widget.selectedProjects
+          ),
         ],
       )
     );

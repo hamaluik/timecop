@@ -46,6 +46,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
     final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
     assert(projects != null);
     selectedProjects = <Project>[null].followedBy(projects.state.projects.map((p) => Project.clone(p))).toList();
+    _startDate = DateTime.now().subtract(Duration(days: 30));
   }
 
   @override
@@ -67,16 +68,18 @@ class _ReportsScreenState extends State<ReportsScreen> {
                   case 0: return ProjectBreakdown(
                     startDate: _startDate,
                     endDate: _endDate,
+                    selectedProjects: selectedProjects,
                   );
                   case 1: return WeeklyTotals(
-                    context: context,
                     startDate: _startDate,
                     endDate: _endDate,
+                    selectedProjects: selectedProjects,
                   );
                   case 2: return WeekdayAverages(
                     context,
                     startDate: _startDate,
                     endDate: _endDate,
+                    selectedProjects: selectedProjects,
                   );
                 }
                 return Container();
@@ -91,150 +94,156 @@ class _ReportsScreenState extends State<ReportsScreen> {
               control: SwiperControl(iconPrevious: null, iconNext: null),
             ),
           ),
-          ExpansionTile(
-            title: Text(
-              L10N.of(context).tr.filter,
-              style: TextStyle(
-                color: Theme.of(context).accentColor,
-                fontWeight: FontWeight.w700
-              )
-            ),
-            initiallyExpanded: false,
+          ListView(
+            shrinkWrap: true,
             children: <Widget>[
-              Slidable(
-                actionPane: SlidableDrawerActionPane(),
-                actionExtentRatio: 0.15,
-                child: ListTile(
-                  leading: Icon(FontAwesomeIcons.calendar),
-                  title: Text(L10N.of(context).tr.from),
-                  trailing: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
-                    child: Text(_startDate == null ? "—" : _dateFormat.format(_startDate)),
-                  ),
-                  onTap: () async {
-                    await DatePicker.showDatePicker(
-                      context,
-                      currentTime: _startDate,
-                      onChanged: (DateTime dt) => setState(() => _startDate = DateTime(dt.year, dt.month, dt.day)),
-                      onConfirm: (DateTime dt) => setState(() => _startDate = DateTime(dt.year, dt.month, dt.day)),
-                      theme: DatePickerTheme(
-                        cancelStyle: Theme.of(context).textTheme.button,
-                        doneStyle: Theme.of(context).textTheme.button,
-                        itemStyle: Theme.of(context).textTheme.body1,
-                        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                      )
-                    );
-                  },
+              ExpansionTile(
+                title: Text(
+                  L10N.of(context).tr.filter,
+                  style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                    fontWeight: FontWeight.w700
+                  )
                 ),
-                secondaryActions:
-                  _startDate == null
-                    ? <Widget>[]
-                    : <Widget>[
-                      IconSlideAction(
-                        color: Theme.of(context).errorColor,
-                        foregroundColor: Theme.of(context).accentIconTheme.color,
-                        icon: FontAwesomeIcons.minusCircle,
-                        onTap: () {
-                          setState(() {
-                            _startDate = null;
-                          });
-                        },
-                      )
-                    ],
-              ),
-              Slidable(
-                actionPane: SlidableDrawerActionPane(),
-                actionExtentRatio: 0.15,
-                child: ListTile(
-                  leading: Icon(FontAwesomeIcons.calendar),
-                  title: Text(L10N.of(context).tr.to),
-                  trailing: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
-                    child: Text(_endDate == null ? "—" : _dateFormat.format(_endDate)),
-                  ),
-                  onTap: () async {
-                    await DatePicker.showDatePicker(
-                      context,
-                      currentTime: _endDate,
-                      onChanged: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
-                      onConfirm: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
-                      theme: DatePickerTheme(
-                        cancelStyle: Theme.of(context).textTheme.button,
-                        doneStyle: Theme.of(context).textTheme.button,
-                        itemStyle: Theme.of(context).textTheme.body1,
-                        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                      )
-                    );
-                  },
-                ),
-                secondaryActions:
-                  _endDate == null
-                    ? <Widget>[]
-                    : <Widget>[
-                      IconSlideAction(
-                        color: Theme.of(context).errorColor,
-                        foregroundColor: Theme.of(context).accentIconTheme.color,
-                        icon: FontAwesomeIcons.minusCircle,
-                        onTap: () {
-                          setState(() {
-                            _endDate = null;
-                          });
-                        },
-                      )
-                    ],
-              ),
-            ],
-          ),ExpansionTile(
-            title: Text(
-              L10N.of(context).tr.projects,
-              style: TextStyle(
-                color: Theme.of(context).accentColor,
-                fontWeight: FontWeight.w700
-              )
-            ),
-            children: <Widget>[
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                mainAxisSize: MainAxisSize.max,
+                initiallyExpanded: false,
                 children: <Widget>[
-                  RaisedButton(
-                    child: Text("Select None"),
-                    onPressed: () {
-                      setState(() {
-                        selectedProjects.clear();
-                      });
-                    },
+                  Slidable(
+                    actionPane: SlidableDrawerActionPane(),
+                    actionExtentRatio: 0.15,
+                    child: ListTile(
+                      leading: Icon(FontAwesomeIcons.calendar),
+                      title: Text(L10N.of(context).tr.from),
+                      trailing: Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
+                        child: Text(_startDate == null ? "—" : _dateFormat.format(_startDate)),
+                      ),
+                      onTap: () async {
+                        await DatePicker.showDatePicker(
+                          context,
+                          currentTime: _startDate,
+                          onChanged: (DateTime dt) => setState(() => _startDate = DateTime(dt.year, dt.month, dt.day)),
+                          onConfirm: (DateTime dt) => setState(() => _startDate = DateTime(dt.year, dt.month, dt.day)),
+                          theme: DatePickerTheme(
+                            cancelStyle: Theme.of(context).textTheme.button,
+                            doneStyle: Theme.of(context).textTheme.button,
+                            itemStyle: Theme.of(context).textTheme.body1,
+                            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                          )
+                        );
+                      },
+                    ),
+                    secondaryActions:
+                      _startDate == null
+                        ? <Widget>[]
+                        : <Widget>[
+                          IconSlideAction(
+                            color: Theme.of(context).errorColor,
+                            foregroundColor: Theme.of(context).accentIconTheme.color,
+                            icon: FontAwesomeIcons.minusCircle,
+                            onTap: () {
+                              setState(() {
+                                _startDate = null;
+                              });
+                            },
+                          )
+                        ],
                   ),
-                  RaisedButton(
-                    child: Text("Select All"),
-                    onPressed: () {
-                      setState(() {
-                        selectedProjects = <Project>[null].followedBy(projectsBloc.state.projects.map((p) => Project.clone(p))).toList();
-                      });
-                    },
+                  Slidable(
+                    actionPane: SlidableDrawerActionPane(),
+                    actionExtentRatio: 0.15,
+                    child: ListTile(
+                      leading: Icon(FontAwesomeIcons.calendar),
+                      title: Text(L10N.of(context).tr.to),
+                      trailing: Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
+                        child: Text(_endDate == null ? "—" : _dateFormat.format(_endDate)),
+                      ),
+                      onTap: () async {
+                        await DatePicker.showDatePicker(
+                          context,
+                          currentTime: _endDate,
+                          onChanged: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
+                          onConfirm: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
+                          theme: DatePickerTheme(
+                            cancelStyle: Theme.of(context).textTheme.button,
+                            doneStyle: Theme.of(context).textTheme.button,
+                            itemStyle: Theme.of(context).textTheme.body1,
+                            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                          )
+                        );
+                      },
+                    ),
+                    secondaryActions:
+                      _endDate == null
+                        ? <Widget>[]
+                        : <Widget>[
+                          IconSlideAction(
+                            color: Theme.of(context).errorColor,
+                            foregroundColor: Theme.of(context).accentIconTheme.color,
+                            icon: FontAwesomeIcons.minusCircle,
+                            onTap: () {
+                              setState(() {
+                                _endDate = null;
+                              });
+                            },
+                          )
+                        ],
                   ),
                 ],
-              )
-            ].followedBy(
-              <Project>[null].followedBy(projectsBloc.state.projects).map(
-                (project) => CheckboxListTile(
-                  secondary: ProjectColour(project: project,),
-                  title: Text(project?.name ?? L10N.of(context).tr.noProject),
-                  value: selectedProjects.any((p) => p?.id == project?.id),
-                  activeColor: Theme.of(context).accentColor,
-                  onChanged: (_) => setState(() {
-                    if(selectedProjects.any((p) => p?.id == project?.id)) {
-                      selectedProjects.removeWhere((p) => p?.id == project?.id);
-                    }
-                    else {
-                      selectedProjects.add(project);
-                    }
-                  }),
-                )
-              )
-            ).toList(),
-          ),
+              ),
+              ExpansionTile(
+                title: Text(
+                  L10N.of(context).tr.projects,
+                  style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                    fontWeight: FontWeight.w700
+                  )
+                ),
+                children: <Widget>[
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      RaisedButton(
+                        child: Text("Select None"),
+                        onPressed: () {
+                          setState(() {
+                            selectedProjects.clear();
+                          });
+                        },
+                      ),
+                      RaisedButton(
+                        child: Text("Select All"),
+                        onPressed: () {
+                          setState(() {
+                            selectedProjects = <Project>[null].followedBy(projectsBloc.state.projects.map((p) => Project.clone(p))).toList();
+                          });
+                        },
+                      ),
+                    ],
+                  )
+                ].followedBy(
+                  <Project>[null].followedBy(projectsBloc.state.projects).map(
+                    (project) => CheckboxListTile(
+                      secondary: ProjectColour(project: project,),
+                      title: Text(project?.name ?? L10N.of(context).tr.noProject),
+                      value: selectedProjects.any((p) => p?.id == project?.id),
+                      activeColor: Theme.of(context).accentColor,
+                      onChanged: (_) => setState(() {
+                        if(selectedProjects.any((p) => p?.id == project?.id)) {
+                          selectedProjects.removeWhere((p) => p?.id == project?.id);
+                        }
+                        else {
+                          selectedProjects.add(project);
+                        }
+                      }),
+                    )
+                  )
+                ).toList(),
+              ),
+            ],
+          )
         ],
       )
     );

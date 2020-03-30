@@ -13,18 +13,34 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/models/project.dart';
 
 class ProjectColour extends StatelessWidget {
+  static const double SIZE = 22;
   final Project project;
-  const ProjectColour({Key key, this.project}) : super(key: key);
+  final bool mini;
+  const ProjectColour({Key key, this.project, this.mini}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if(project == null) {
-      return Icon(FontAwesomeIcons.circle, size: 24, color: Theme.of(context).disabledColor);
-    }
-    return Icon(FontAwesomeIcons.solidCircle, size: 24, color: project.colour);
+    bool m = mini ?? false;
+    double scale = m ? 0.75 : 1.0;
+
+    return Container(
+      key: Key("pc-${project?.id}-m"),
+      width: SIZE * scale,
+      height: SIZE * scale,
+      decoration: BoxDecoration(
+        color: project?.colour ?? Colors.transparent,
+        //borderRadius: BorderRadius.circular(SIZE * 0.5 * scale),
+        border: project == null
+          ? Border.all(
+              color: Theme.of(context).disabledColor,
+              width: 3.0,
+            )
+          : null,
+        shape: BoxShape.circle,
+      ),
+    );
   }
 }

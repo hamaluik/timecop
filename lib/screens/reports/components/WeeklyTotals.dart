@@ -29,10 +29,12 @@ import 'package:timecop/models/start_of_week.dart';
 import 'Legend.dart';
 
 class WeeklyTotals extends StatefulWidget {
-  final BuildContext context;
   final DateTime startDate;
   final DateTime endDate;
-  WeeklyTotals({Key key, @required this.context, @required this.startDate, @required this.endDate}) : super(key: key);
+  final List<Project> selectedProjects;
+  WeeklyTotals({Key key, @required this.startDate, @required this.endDate, @required this.selectedProjects})
+    : assert(selectedProjects != null),
+      super(key: key);
 
   @override
   _WeeklyTotalsState createState() => _WeeklyTotalsState();
@@ -174,11 +176,11 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
               )
             ),
           ),
-          Legend(
-            projects: _projectWeeklyHours.keys.map((id) => projects.state.projects.firstWhere((p) => p.id == id, orElse: () => null))
-          ),
           Container(height: 16,),
           Text(L10N.of(context).tr.weeklyHours, style: Theme.of(context).textTheme.title, textAlign: TextAlign.center,),
+          Legend(
+            projects: widget.selectedProjects
+          ),
         ],
       )
     );

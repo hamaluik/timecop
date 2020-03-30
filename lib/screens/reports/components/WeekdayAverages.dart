@@ -30,9 +30,10 @@ import 'Legend.dart';
 class WeekdayAverages extends StatelessWidget {
   final DateTime startDate;
   final DateTime endDate;
+  final List<Project> selectedProjects;
   final LinkedHashMap<int, LinkedHashMap<int, double>> _daysData;
 
-  static LinkedHashMap<int, LinkedHashMap<int, double>> calculateData(BuildContext context, DateTime startDate, DateTime endDate) {
+  static LinkedHashMap<int, LinkedHashMap<int, double>> calculateData(BuildContext context, DateTime startDate, DateTime endDate, List<Project> selectedProjects) {
     final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
 
     DateTime firstDate = DateTime.now();
@@ -79,9 +80,10 @@ class WeekdayAverages extends StatelessWidget {
     return daySums;
   }
 
-  WeekdayAverages(BuildContext context, {Key key, @required this.startDate, @required this.endDate})
-    : this._daysData = calculateData(context, startDate, endDate),
-    super(key: key);
+  WeekdayAverages(BuildContext context, {Key key, @required this.startDate, @required this.endDate, @required this.selectedProjects})
+    : assert(selectedProjects != null),
+      this._daysData = calculateData(context, startDate, endDate, selectedProjects),
+      super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -184,11 +186,11 @@ class WeekdayAverages extends StatelessWidget {
               )
             ),
           ),
-          Legend(
-            projects: projects.state.projects.followedBy(<Project>[null])
-          ),
           Container(height: 16,),
           Text(L10N.of(context).tr.averageDailyHours, style: Theme.of(context).textTheme.title, textAlign: TextAlign.center,),
+          Legend(
+            projects: selectedProjects
+          ),
         ],
       )
     );

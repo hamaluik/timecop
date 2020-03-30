@@ -33,10 +33,12 @@ class Legend extends StatelessWidget {
         .map(
           (project) =>
             Chip(
-              avatar: ProjectColour(project: project,),
+              avatar: ProjectColour(project: project, mini: true),
               label: Text(
                 project?.name ?? L10N.of(context).tr.noProject,
-                style: Theme.of(context).textTheme.body1
+                style: TextStyle(
+                  fontSize: Theme.of(context).textTheme.body1.fontSize * 0.75,
+                )
               ),
             )
         )
