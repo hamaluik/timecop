@@ -10,13 +10,6 @@ import 'dart:ui' as ui;
 
 Future<void> main() async {
   enableFlutterDriverExtension(handler: (String query) async {
-    /*String localeKey = ui.window.locale.languageCode;
-    if(ui.window.locale.languageCode == "zh") {
-      localeKey += "-" + ui.window.locale.countryCode;
-    }
-    String translated = MockDataProvider.l10n[localeKey][text];
-    assert(translated != null);
-    return translated;*/
     if(query == "direction") {
       if(ui.window.locale.languageCode == "ar") {
         return "rtl";
