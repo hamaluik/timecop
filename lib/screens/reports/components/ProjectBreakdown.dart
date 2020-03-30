@@ -99,10 +99,10 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
                   }),
                   sections: List.generate(_projectHours.length, (int index) {
                     MapEntry<int, double> entry = _projectHours.entries.elementAt(index);
-                    Project project = projects.state.projects.firstWhere((project) => project.id == entry.key);
+                    Project project = projects.state.projects.firstWhere((project) => project?.id == entry.key, orElse: () => null);
                     return PieChartSectionData(
                       value: entry.value,
-                      color: project.colour,
+                      color: project?.colour ?? Theme.of(context).disabledColor,
                       title: _touchedIndex == index ? L10N.of(context).tr.nHours(entry.value.toStringAsFixed(1)) + "\n(${(100.0 * entry.value / totalHours).toStringAsFixed(0)} %)" : "",
                       titleStyle: Theme.of(context).textTheme.body1,
                       radius: _touchedIndex == index ? 80 : 60,
@@ -113,7 +113,7 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
             ),
           ),
           Legend(
-            projects: _projectHours.keys.map((id) => projects.state.projects.firstWhere((p) => p.id == id))
+            projects: _projectHours.keys.map((id) => projects.state.projects.firstWhere((p) => p.id == id, orElse: () => null))
           ),
           Container(height: 16,),
           Text(L10N.of(context).tr.totalProjectShare, style: Theme.of(context).textTheme.title, textAlign: TextAlign.center,),

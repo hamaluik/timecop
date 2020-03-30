@@ -84,7 +84,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
       .fold(0, (double omax, LinkedHashMap<int, double> weeks) =>
         max(omax, weeks.values.fold(0, (double omax, double v) => max(omax, v)))
       );
-    maxY = ((maxY ~/ 10) + 1) * 10.0;
+    maxY = ((maxY ~/ 5) + 1) * 5.0 + 5.0;
 
     return Padding(
       padding: EdgeInsets.fromLTRB(16, 16, 16, 40),
@@ -153,13 +153,13 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                 lineBarsData: _projectWeeklyHours
                   .entries
                   .map((entry) {
-                    Project project = projects.state.projects.firstWhere((project) => project.id == entry.key);
+                    Project project = projects.state.projects.firstWhere((project) => project.id == entry.key, orElse: () => null);
                     return LineChartBarData(
-                      colors: <Color>[project.colour],
+                      colors: <Color>[project?.colour ?? Theme.of(context).disabledColor],
                       isCurved: true,
                       barWidth: 4,
                       dotData: FlDotData(
-                        dotColor: project.colour,
+                        dotColor: project?.colour ?? Theme.of(context).disabledColor,
                       ),
                       spots: entry
                         .value
@@ -175,7 +175,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
             ),
           ),
           Legend(
-            projects: _projectWeeklyHours.keys.map((id) => projects.state.projects.firstWhere((p) => p.id == id))
+            projects: _projectWeeklyHours.keys.map((id) => projects.state.projects.firstWhere((p) => p.id == id, orElse: () => null))
           ),
           Container(height: 16,),
           Text(L10N.of(context).tr.weeklyHours, style: Theme.of(context).textTheme.title, textAlign: TextAlign.center,),

@@ -14,6 +14,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:timecop/components/ProjectColour.dart';
+import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 
 class Legend extends StatelessWidget {
@@ -34,7 +35,7 @@ class Legend extends StatelessWidget {
             Chip(
               avatar: ProjectColour(project: project,),
               label: Text(
-                project.name,
+                project?.name ?? L10N.of(context).tr.noProject,
                 style: Theme.of(context).textTheme.body1
               ),
             )

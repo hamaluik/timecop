@@ -13,12 +13,16 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:timecop/blocs/projects/bloc.dart';
+import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
+import 'package:timecop/models/project.dart';
 import 'package:timecop/screens/reports/components/ProjectBreakdown.dart';
 import 'package:timecop/screens/reports/components/WeekdayAverages.dart';
 import 'package:timecop/screens/reports/components/WeeklyTotals.dart';
@@ -34,9 +38,20 @@ class _ReportsScreenState extends State<ReportsScreen> {
   DateTime _startDate;
   DateTime _endDate;
   static DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
+  List<Project> selectedProjects = [];
+
+  @override
+  void initState() {
+    super.initState();
+    final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
+    assert(projects != null);
+    selectedProjects = <Project>[null].followedBy(projects.state.projects.map((p) => Project.clone(p))).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+    
     return Scaffold(
       appBar: AppBar(
         title: Text(L10N.of(context).tr.reports),
@@ -169,6 +184,56 @@ class _ReportsScreenState extends State<ReportsScreen> {
                     ],
               ),
             ],
+          ),ExpansionTile(
+            title: Text(
+              L10N.of(context).tr.projects,
+              style: TextStyle(
+                color: Theme.of(context).accentColor,
+                fontWeight: FontWeight.w700
+              )
+            ),
+            children: <Widget>[
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  RaisedButton(
+                    child: Text("Select None"),
+                    onPressed: () {
+                      setState(() {
+                        selectedProjects.clear();
+                      });
+                    },
+                  ),
+                  RaisedButton(
+                    child: Text("Select All"),
+                    onPressed: () {
+                      setState(() {
+                        selectedProjects = <Project>[null].followedBy(projectsBloc.state.projects.map((p) => Project.clone(p))).toList();
+                      });
+                    },
+                  ),
+                ],
+              )
+            ].followedBy(
+              <Project>[null].followedBy(projectsBloc.state.projects).map(
+                (project) => CheckboxListTile(
+                  secondary: ProjectColour(project: project,),
+                  title: Text(project?.name ?? L10N.of(context).tr.noProject),
+                  value: selectedProjects.any((p) => p?.id == project?.id),
+                  activeColor: Theme.of(context).accentColor,
+                  onChanged: (_) => setState(() {
+                    if(selectedProjects.any((p) => p?.id == project?.id)) {
+                      selectedProjects.removeWhere((p) => p?.id == project?.id);
+                    }
+                    else {
+                      selectedProjects.add(project);
+                    }
+                  }),
+                )
+              )
+            ).toList(),
           ),
         ],
       )

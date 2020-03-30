@@ -97,7 +97,7 @@ class WeekdayAverages extends StatelessWidget {
             .fold(0.0, (isum, v) => max(isum, v))
         )
       );
-    maxY = ((maxY ~/ 5) + 1) * 5.0;
+    maxY = ((maxY ~/ 2) + 1) * 2.0 + 2.0;
     
     return Padding(
       padding: EdgeInsets.fromLTRB(16, 16, 16, 40),
@@ -171,7 +171,7 @@ class WeekdayAverages extends StatelessWidget {
                         color: Theme.of(context).disabledColor,
                         width: 22,
                         y: _daysData[day].entries.fold(0.0, (double sum, MapEntry<int, double> entry) => sum + entry.value),
-                        rodStackItem: _buildDayStack(day, projects),
+                        rodStackItem: _buildDayStack(context, day, projects),
                         //backDrawRodData: BackgroundBarChartRodData(
                         //  color: Theme.of(context).chipTheme.backgroundColor,
                         //  show: true,
@@ -185,7 +185,7 @@ class WeekdayAverages extends StatelessWidget {
             ),
           ),
           Legend(
-            projects: projects.state.projects
+            projects: projects.state.projects.followedBy(<Project>[null])
           ),
           Container(height: 16,),
           Text(L10N.of(context).tr.averageDailyHours, style: Theme.of(context).textTheme.title, textAlign: TextAlign.center,),
@@ -194,7 +194,7 @@ class WeekdayAverages extends StatelessWidget {
     );
   }
 
-  List<BarChartRodStackItem> _buildDayStack(int day, ProjectsBloc projects) {
+  List<BarChartRodStackItem> _buildDayStack(BuildContext context, int day, ProjectsBloc projects) {
     double runningY = 0;
 
     // sort the stack from largest to smallest
@@ -202,7 +202,7 @@ class WeekdayAverages extends StatelessWidget {
       _daysData[day]
       .entries
       .map((entry) {
-        Project project = projects.state.projects.firstWhere((project) => project.id == entry.key);
+        Project project = projects.state.projects.firstWhere((project) => project.id == entry.key, orElse: () => null);
         return <dynamic>[project, entry.value];
       })
       .toList();
@@ -219,7 +219,7 @@ class WeekdayAverages extends StatelessWidget {
         return BarChartRodStackItem(
           runningY,
           runningY += value,
-          project.colour
+          project?.colour ?? Theme.of(context).disabledColor
         );
       })
       .toList();
