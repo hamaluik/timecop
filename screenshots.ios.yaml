@@ -18,8 +18,8 @@ locales:
   - ko
   - pt-PT
   - ru
-  - zh-Hans
-  - zh-Hant
+  - zh-CN
+  - zh-TW
   - ar-SA
 
 # A list of devices to run tests on
