@@ -46,6 +46,7 @@ class WeekdayAverages extends StatelessWidget {
     for(
       TimerEntry timer in timers.state.timers
         .where((timer) => timer.endTime != null)
+        .where((timer) => selectedProjects.any((p) => p?.id == timer.projectID))
         .where((timer) => startDate != null ? timer.startTime.isAfter(startDate) : true)
         .where((timer) => endDate != null ? timer.startTime.isBefore(endDate) : true)
     ) {
