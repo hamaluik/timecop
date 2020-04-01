@@ -1,0 +1,99 @@
+averageDailyHours = Media Ore giornaliere 
+
+timeCopEntries = Registrazioni Time Cop ({ $date })
+
+groupTimers = Raggruppa Timer Simili per giorno
+
+options = Opzioni
+
+weeklyHours = Ore Settimanali
+
+nHours = { $hours } ore
+
+whatWereYouDoing = Che cosa stiamo facendo?
+
+to = A
+
+from = Da
+
+delete = Cancella
+
+duration = Durata
+
+save = Salva
+
+deleteTimerConfirm = Sei sicuro di voler cancelare questo timer?
+
+project = Progetto
+
+noDescription = (nessuna descrizione)
+
+projects = Progetti
+
+reports = Rapporti
+
+endTime = Fine del tempo
+
+changeLog = Registro modifiche
+
+confirmDelete = Conferma Cancelazione
+
+appName = Time Cop
+
+logoSemantics = Logo Time Cop
+
+about = Riguardo a
+
+appDescription = Un'applicazione di monitoraggio del tempo che rispetta la tua privacy e fa il suo lavoro senza diventare troppo sofisticata.
+
+projectName = Nome del Progetto
+
+areYouSureYouWantToDelete = Sei sicuro di voler cancellare questo progetto?
+
+includeProjects = Includi Progetti
+
+create = Crea
+
+filter = Filtra
+
+startTime = Inizia timer
+
+runningTimers = Timer in esecuzione
+
+readme = Leggimi
+
+export = Esporta
+
+pleaseEnterAName = Per favore, inserisci un nome
+
+columns = Colonne
+
+description = Descrizione
+
+date = Data
+
+sourceCode = Codice sorgente
+
+appLegalese = Copyright © Kenton Hamaluik, 2020
+
+cancel = Cancella
+
+editTimer = Modifica timer
+
+whatAreYouDoing = Che cosa stai facendo?
+
+noProject = (nessun progetto)
+
+timeH =  Time (hours)
+
+timeCopDatabase = Database di Time Cop ({ $date })
+
+combinedProjectDescription = Progetto e descrizione combinati
+
+createNewProject = Crea nuovo progetto
+
+groupedTimers = { $description } ({ $count } timer)
+
+totalProjectShare = Quota Totale Progetto
+
+editProject = Modifica progetto
