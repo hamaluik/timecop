@@ -1,100 +1,102 @@
+projects = 프로젝트
+
+includeProjects = 프로젝트 포함
+
 export = 수출
+
+whatWereYouDoing = 뭐하고 있었어?
+
+editTimer = 타이머 편집
+
+combinedProjectDescription = 결합 된 프로젝트 및 설명
+
+delete = 지우다
+
+to = 에
+
+logoSemantics = 타임 경찰 로고
+
+weeklyHours = 주간 시간
+
+timeH = 시간 (시간)
+
+deleteTimerConfirm = 이 타이머를 삭제 하시겠습니까?
+
+sourceCode = 소스 코드
+
+about = 약
+
+options = 옵션
+
+noDescription = (설명 없음)
+
+runningTimers = 타이머 실행
+
+totalProjectShare = 총 프로젝트 점유율
+
+project = 계획
+
+description = 기술
+
+changeLog = 변경 로그
+
+averageDailyHours = 평균 일일 시간
+
+startTime = 시작 시간
+
+columns = 열
+
+areYouSureYouWantToDelete = 이 프로젝트를 삭제 하시겠습니까?
+
+contributors = 기고자
+
+filter = 필터
+
+pleaseEnterAName = 이름을 입력하십시오
+
+whatAreYouDoing = 뭐하는거야?
+
+createNewProject = 새 프로젝트 만들기
+
+appDescription = 개인 정보를 존중하고 너무 화려하지 않고 작업을 수행하는 시간 추적 앱.
 
 timeCopDatabase = 타임 경찰 데이터베이스 ({ $date })
 
-nHours = { $hours } 시간
+cancel = 취소
 
-date = 데이트
+confirmDelete = 삭제 확인
+
+noProject = (프로젝트 없음)
+
+appLegalese = 저작권 © Kenton Hamaluik, 2020
 
 save = 저장
+
+timeCopEntries = 타임 경찰 출품작 ({ $date })
+
+appName = 타임 경찰
+
+projectName = 프로젝트 이름
+
+duration = 지속
+
+reports = 보고서
+
+from = 에서
+
+readme = 읽어보기
+
+endTime = 종료 시간
+
+create = 창조하다
+
+groupTimers = 하루에 비슷한 타이머 그룹화
 
 editProject = 프로젝트 편집
 
 groupedTimers = { $description } ({ $count } 타이머)
 
-description = 기술
+date = 데이트
 
-from = 에서
-
-timeH = 시간 (시간)
-
-appName = 타임 경찰
-
-combinedProjectDescription = 결합 된 프로젝트 및 설명
-
-startTime = 시작 시간
-
-whatWereYouDoing = 뭐하고 있었어?
-
-timeCopEntries = 타임 경찰 출품작 ({ $date })
-
-reports = 보고서
-
-confirmDelete = 삭제 확인
-
-logoSemantics = 타임 경찰 로고
-
-to = 에
-
-weeklyHours = 주간 시간
-
-deleteTimerConfirm = 이 타이머를 삭제 하시겠습니까?
-
-projects = 프로젝트
-
-includeProjects = 프로젝트 포함
-
-averageDailyHours = 평균 일일 시간
-
-create = 창조하다
-
-pleaseEnterAName = 이름을 입력하십시오
-
-about = 약
-
-appDescription = 개인 정보를 존중하고 너무 화려하지 않고 작업을 수행하는 시간 추적 앱.
-
-filter = 필터
-
-endTime = 종료 시간
-
-sourceCode = 소스 코드
-
-whatAreYouDoing = 뭐하는거야?
-
-runningTimers = 타이머 실행
-
-groupTimers = 하루에 비슷한 타이머 그룹화
-
-cancel = 취소
-
-project = 계획
-
-createNewProject = 새 프로젝트 만들기
-
-changeLog = 변경 로그
-
-appLegalese = 저작권 © Kenton Hamaluik, 2020
-
-readme = 읽어보기
-
-areYouSureYouWantToDelete = 이 프로젝트를 삭제 하시겠습니까?
-
-columns = 열
-
-noDescription = (설명 없음)
-
-totalProjectShare = 총 프로젝트 점유율
-
-noProject = (프로젝트 없음)
-
-delete = 지우다
-
-duration = 지속
-
-projectName = 프로젝트 이름
-
-options = 옵션
-
-editTimer = 타이머 편집
+nHours = { $hours } 시간
 

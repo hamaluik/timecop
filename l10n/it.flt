@@ -97,3 +97,5 @@ groupedTimers = { $description } ({ $count } timer)
 totalProjectShare = Quota Totale Progetto
 
 editProject = Modifica progetto
+
+contributors = Contributori

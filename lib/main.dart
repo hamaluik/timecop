@@ -131,6 +131,7 @@ class _TimeCopAppState extends State<TimeCopApp> {
           const Locale('zh', 'CN'),
           const Locale('zh', 'TW'),
           const Locale('ar'),
+          const Locale('it'),
         ],
       )
     );

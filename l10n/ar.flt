@@ -1,100 +1,102 @@
-endTime = وقت النهاية
-
-combinedProjectDescription = الجمع بين المشروع والوصف
-
-projectName = اسم المشروع
-
-appLegalese = حقوق النشر © Kenton Hamaluik، 2020
-
-about = حول
-
-whatWereYouDoing = ماذا كنتم تفعلون؟
-
-pleaseEnterAName = الرجاء إدخال اسم
-
-from = من عند
-
-totalProjectShare = إجمالي حصة المشروع
-
-nHours = { $hours } ساعة
-
-readme = الملف التمهيدي
-
-appDescription = تطبيق تتبع الوقت الذي يحترم خصوصيتك وينجز المهمة دون أن يتوهم.
-
-logoSemantics = شعار الوقت الشرطي
-
-filter = منقي
-
-delete = حذف
-
-editTimer = تحرير الموقت
-
-averageDailyHours = متوسط ساعات العمل اليومية
-
-createNewProject = إنشاء مشروع جديد
-
 projects = المشاريع
-
-weeklyHours = ساعات العمل الأسبوعية
-
-export = تصدير
-
-duration = المدة الزمنية
-
-options = خيارات
-
-noProject = (لا يوجد مشروع)
-
-date = تاريخ
-
-startTime = وقت البدء
-
-editProject = تحرير المشروع
-
-project = مشروع
-
-timeCopEntries = إدخالات شرطي الوقت ({ $date })
-
-create = خلق
-
-areYouSureYouWantToDelete = هل أنت متأكد أنك تريد حذف هذا المشروع؟
-
-groupTimers = قم بتجميع الموقتات المماثلة في اليوم
-
-appName = شرطي الوقت
-
-changeLog = سجل التغيير
-
-description = وصف
 
 whatAreYouDoing = ماذا تفعل؟
 
+sourceCode = مصدر الرمز
+
+filter = منقي
+
 deleteTimerConfirm = هل أنت متأكد أنك تريد حذف هذا المؤقت؟
-
-runningTimers = تشغيل المؤقتات
-
-noDescription = (بدون وصف)
-
-timeCopDatabase = قاعدة بيانات شرطي الوقت ({ $date })
-
-save = حفظ
-
-groupedTimers = { $description } ({ $count } مؤقتات)
-
-includeProjects = تضمين المشاريع
 
 cancel = إلغاء
 
-columns = الأعمدة
+create = خلق
 
-timeH = الوقت (ساعات)
+groupedTimers = { $description } ({ $count } مؤقتات)
 
-to = إلى
+logoSemantics = شعار الوقت الشرطي
 
-sourceCode = مصدر الرمز
+createNewProject = إنشاء مشروع جديد
+
+timeCopEntries = إدخالات شرطي الوقت ({ $date })
+
+delete = حذف
+
+timeCopDatabase = قاعدة بيانات شرطي الوقت ({ $date })
+
+duration = المدة الزمنية
+
+runningTimers = تشغيل المؤقتات
+
+project = مشروع
+
+changeLog = سجل التغيير
+
+averageDailyHours = متوسط ساعات العمل اليومية
+
+appName = شرطي الوقت
 
 confirmDelete = تأكيد الحذف
 
+export = تصدير
+
+description = وصف
+
+to = إلى
+
+readme = الملف التمهيدي
+
+about = حول
+
+nHours = { $hours } ساعة
+
+startTime = وقت البدء
+
+pleaseEnterAName = الرجاء إدخال اسم
+
+appDescription = تطبيق تتبع الوقت الذي يحترم خصوصيتك وينجز المهمة دون أن يتوهم.
+
+noDescription = (بدون وصف)
+
+from = من عند
+
+editProject = تحرير المشروع
+
+contributors = المساهمون
+
+date = تاريخ
+
+timeH = الوقت (ساعات)
+
+endTime = وقت النهاية
+
+areYouSureYouWantToDelete = هل أنت متأكد أنك تريد حذف هذا المشروع؟
+
+combinedProjectDescription = الجمع بين المشروع والوصف
+
+appLegalese = حقوق النشر © Kenton Hamaluik، 2020
+
+includeProjects = تضمين المشاريع
+
+groupTimers = قم بتجميع الموقتات المماثلة في اليوم
+
+whatWereYouDoing = ماذا كنتم تفعلون؟
+
+noProject = (لا يوجد مشروع)
+
+weeklyHours = ساعات العمل الأسبوعية
+
+editTimer = تحرير الموقت
+
+projectName = اسم المشروع
+
 reports = التقارير
+
+save = حفظ
+
+columns = الأعمدة
+
+options = خيارات
+
+totalProjectShare = إجمالي حصة المشروع
 

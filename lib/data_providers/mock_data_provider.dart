@@ -125,6 +125,13 @@ class MockDataProvider extends DataProvider {
 "ui-layout": "UI佈局",
 
     },
+    "it": {
+      "app-development": "Sviluppo di app",
+      "coffee": "caffè",
+      "ui-layout": "Layout dell'interfaccia utente",
+      "administration": "Amministrazione",
+      "mockups": "Mockups",
+    }
   };
 
   MockDataProvider(Locale locale) {

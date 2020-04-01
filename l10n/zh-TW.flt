@@ -1,100 +1,102 @@
-whatAreYouDoing = 你在做什麼？
+projects = 專案
 
-confirmDelete = 確認刪除
-
-averageDailyHours = 平均每日時數
-
-editProject = 編輯專案
-
-timeCopEntries = 時間警察條目（{ $date }）
-
-timeH = 時間（小時）
-
-whatWereYouDoing = 你在做什麼？
+project = 項目
 
 editTimer = 編輯計時器
 
-projectName = 項目名
+sourceCode = 源代碼
+
+appLegalese = 版權所有©Kenton Hamaluik，2020年
+
+createNewProject = 建立新專案
+
+date = 日期
+
+editProject = 編輯專案
+
+confirmDelete = 確認刪除
+
+pleaseEnterAName = 請輸入一個名字
+
+groupedTimers = { $description }（{ $count }個計時器）
+
+delete = 刪除
+
+noDescription = （沒有說明）
+
+groupTimers = 每天組類似計時器
+
+startTime = 開始時間
+
+contributors = 貢獻者
+
+averageDailyHours = 平均每日時數
+
+export = 出口
+
+filter = 過濾
+
+whatAreYouDoing = 你在做什麼？
 
 endTime = 時間結束
 
-projects = 專案
+timeCopEntries = 時間警察條目（{ $date }）
 
-delete = 刪除
+options = 選件
+
+logoSemantics = 時間警察徽標
+
+create = 創建
+
+totalProjectShare = 項目總份額
+
+noProject = （無項目）
+
+whatWereYouDoing = 你在做什麼？
+
+changeLog = 變更記錄
+
+includeProjects = 包括項目
+
+readme = 自述文件
+
+timeH = 時間（小時）
+
+reports = 報告書
+
+weeklyHours = 每週營業時間
+
+appDescription = 時間跟踪應用程序尊重您的隱私並在不花哨的情況下完成工作。
+
+appName = 時間警察
+
+save = 保存
+
+cancel = 取消
+
+from = 從
+
+nHours = { $hours } 小時
+
+about = 關於
+
+to = 至
+
+columns = 列
+
+runningTimers = 運行計時器
+
+combinedProjectDescription = 組合項目和說明
+
+timeCopDatabase = 時間警察數據庫（{ $date }）
+
+description = 描述
+
+duration = 持續時間
+
+projectName = 項目名
 
 areYouSureYouWantToDelete = 您確定要刪除此項目嗎？
 
 deleteTimerConfirm = 您確定要刪除此計時器嗎？
-
-project = 項目
-
-appLegalese = 版權所有©Kenton Hamaluik，2020年
-
-appName = 時間警察
-
-groupTimers = 每天組類似計時器
-
-combinedProjectDescription = 組合項目和說明
-
-from = 從
-
-groupedTimers = { $description }（{ $count }個計時器）
-
-date = 日期
-
-weeklyHours = 每週營業時間
-
-duration = 持續時間
-
-nHours = { $hours } 小時
-
-appDescription = 時間跟踪應用程序尊重您的隱私並在不花哨的情況下完成工作。
-
-sourceCode = 源代碼
-
-runningTimers = 運行計時器
-
-columns = 列
-
-pleaseEnterAName = 請輸入一個名字
-
-save = 保存
-
-about = 關於
-
-timeCopDatabase = 時間警察數據庫（{ $date }）
-
-noProject = （無項目）
-
-totalProjectShare = 項目總份額
-
-cancel = 取消
-
-reports = 報告書
-
-readme = 自述文件
-
-create = 創建
-
-noDescription = （沒有說明）
-
-options = 選件
-
-createNewProject = 建立新專案
-
-startTime = 開始時間
-
-filter = 過濾
-
-changeLog = 變更記錄
-
-logoSemantics = 時間警察徽標
-
-includeProjects = 包括項目
-
-export = 出口
-
-to = 至
-
-description = 描述
 
