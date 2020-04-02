@@ -14,11 +14,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
+import 'package:timecop/screens/dashboard/components/FilterButton.dart';
 import 'package:timecop/screens/dashboard/components/ProjectSelectField.dart';
 import 'package:timecop/screens/dashboard/components/RunningTimers.dart';
 import 'package:timecop/screens/dashboard/components/StartTimerButton.dart';
@@ -40,13 +40,7 @@ class DashboardScreen extends StatelessWidget {
         create: (_) => DashboardBloc(projectsBloc, settingsBloc),
         child: Scaffold(
           appBar: AppBar(
-            leading: Padding(
-              padding: EdgeInsets.all(12.0),
-              child: SvgPicture.asset(
-                "icon.no-bg.svg",
-                semanticsLabel: L10N.of(context).tr.logoSemantics,
-              )
-            ),
+            leading: FilterButton(),
             title: Text(L10N.of(context).tr.appName),
             actions: <Widget>[
               PopupMenu(),
