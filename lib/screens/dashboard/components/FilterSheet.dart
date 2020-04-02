@@ -13,126 +13,166 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:timecop/blocs/projects/projects_bloc.dart';
+import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
+import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 
-class FilterSheet extends StatefulWidget {
-  FilterSheet({Key key}) : super(key: key);
-
-  @override
-  _FilterSheetState createState() => _FilterSheetState();
-}
-
-class _FilterSheetState extends State<FilterSheet> {
-  DateTime _startDate;
-  DateTime _endDate;
+class FilterSheet extends StatelessWidget {
   static DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
-  List<Project> selectedProjects = [];
+  const FilterSheet({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
-      children: <Widget>[
-          ExpansionTile(
-            title: Text(
-              L10N.of(context).tr.filter,
-              style: TextStyle(
-                color: Theme.of(context).accentColor,
-                fontWeight: FontWeight.w700
-              )
-            ),
-            initiallyExpanded: true,
-            children: <Widget>[
-              Slidable(
-                actionPane: SlidableDrawerActionPane(),
-                actionExtentRatio: 0.15,
-                child: ListTile(
-                  leading: Icon(FontAwesomeIcons.calendar),
-                  title: Text(L10N.of(context).tr.from),
-                  trailing: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
-                    child: Text(_startDate == null ? "—" : _dateFormat.format(_startDate)),
-                  ),
-                  onTap: () async {
-                    await DatePicker.showDatePicker(
-                      context,
-                      currentTime: _startDate,
-                      onChanged: (DateTime dt) => setState(() => _startDate = DateTime(dt.year, dt.month, dt.day)),
-                      onConfirm: (DateTime dt) => setState(() => _startDate = DateTime(dt.year, dt.month, dt.day)),
-                      theme: DatePickerTheme(
-                        cancelStyle: Theme.of(context).textTheme.button,
-                        doneStyle: Theme.of(context).textTheme.button,
-                        itemStyle: Theme.of(context).textTheme.body1,
-                        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                      )
-                    );
-                  },
+    final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+    final DashboardBloc dashboard = BlocProvider.of<DashboardBloc>(context);
+    
+    return BlocBuilder<DashboardBloc, DashboardState>(
+      bloc: dashboard,
+      builder: (BuildContext context, DashboardState state) {
+        return ListView(
+          shrinkWrap: true,
+          children: <Widget>[
+              ExpansionTile(
+                title: Text(
+                  L10N.of(context).tr.filter,
+                  style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                    fontWeight: FontWeight.w700
+                  )
                 ),
-                secondaryActions:
-                  _startDate == null
-                    ? <Widget>[]
-                    : <Widget>[
-                      IconSlideAction(
-                        color: Theme.of(context).errorColor,
-                        foregroundColor: Theme.of(context).accentIconTheme.color,
-                        icon: FontAwesomeIcons.minusCircle,
-                        onTap: () {
-                          setState(() {
-                            _startDate = null;
-                          });
-                        },
-                      )
-                    ],
-              ),
-              Slidable(
-                actionPane: SlidableDrawerActionPane(),
-                actionExtentRatio: 0.15,
-                child: ListTile(
-                  leading: Icon(FontAwesomeIcons.calendar),
-                  title: Text(L10N.of(context).tr.to),
-                  trailing: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
-                    child: Text(_endDate == null ? "—" : _dateFormat.format(_endDate)),
+                initiallyExpanded: true,
+                children: <Widget>[
+                  Slidable(
+                    actionPane: SlidableDrawerActionPane(),
+                    actionExtentRatio: 0.15,
+                    child: ListTile(
+                      leading: Icon(FontAwesomeIcons.calendar),
+                      title: Text(L10N.of(context).tr.from),
+                      trailing: Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
+                        child: Text(state.filterStart == null ? "—" : _dateFormat.format(state.filterStart)),
+                      ),
+                      onTap: () async {
+                        await DatePicker.showDatePicker(
+                          context,
+                          currentTime: state.filterStart,
+                          onChanged: (DateTime dt) => dashboard.add(FilterStartChangedEvent(DateTime(dt.year, dt.month, dt.day))),
+                          onConfirm: (DateTime dt) => dashboard.add(FilterStartChangedEvent(DateTime(dt.year, dt.month, dt.day))),
+                          theme: DatePickerTheme(
+                            cancelStyle: Theme.of(context).textTheme.button,
+                            doneStyle: Theme.of(context).textTheme.button,
+                            itemStyle: Theme.of(context).textTheme.body1,
+                            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                          )
+                        );
+                      },
+                    ),
+                    secondaryActions:
+                      state.filterStart == null
+                        ? <Widget>[]
+                        : <Widget>[
+                          IconSlideAction(
+                            color: Theme.of(context).errorColor,
+                            foregroundColor: Theme.of(context).accentIconTheme.color,
+                            icon: FontAwesomeIcons.minusCircle,
+                            onTap: () => dashboard.add(FilterStartChangedEvent(null)),
+                          )
+                        ],
                   ),
-                  onTap: () async {
-                    await DatePicker.showDatePicker(
-                      context,
-                      currentTime: _endDate,
-                      onChanged: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
-                      onConfirm: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
-                      theme: DatePickerTheme(
-                        cancelStyle: Theme.of(context).textTheme.button,
-                        doneStyle: Theme.of(context).textTheme.button,
-                        itemStyle: Theme.of(context).textTheme.body1,
-                        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                      )
-                    );
-                  },
-                ),
-                secondaryActions:
-                  _endDate == null
-                    ? <Widget>[]
-                    : <Widget>[
-                      IconSlideAction(
-                        color: Theme.of(context).errorColor,
-                        foregroundColor: Theme.of(context).accentIconTheme.color,
-                        icon: FontAwesomeIcons.minusCircle,
-                        onTap: () {
-                          setState(() {
-                            _endDate = null;
-                          });
-                        },
-                      )
-                    ],
+                  Slidable(
+                    actionPane: SlidableDrawerActionPane(),
+                    actionExtentRatio: 0.15,
+                    child: ListTile(
+                      leading: Icon(FontAwesomeIcons.calendar),
+                      title: Text(L10N.of(context).tr.to),
+                      trailing: Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
+                        child: Text(state.filterEnd == null ? "—" : _dateFormat.format(state.filterEnd)),
+                      ),
+                      onTap: () async {
+                        await DatePicker.showDatePicker(
+                          context,
+                          currentTime: state.filterEnd,
+                          onChanged: (DateTime dt) => dashboard.add(FilterEndChangedEvent(DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999))),
+                          onConfirm: (DateTime dt) => dashboard.add(FilterEndChangedEvent(DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999))),
+                          theme: DatePickerTheme(
+                            cancelStyle: Theme.of(context).textTheme.button,
+                            doneStyle: Theme.of(context).textTheme.button,
+                            itemStyle: Theme.of(context).textTheme.body1,
+                            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                          )
+                        );
+                      },
+                    ),
+                    secondaryActions:
+                      state.filterEnd == null
+                        ? <Widget>[]
+                        : <Widget>[
+                          IconSlideAction(
+                            color: Theme.of(context).errorColor,
+                            foregroundColor: Theme.of(context).accentIconTheme.color,
+                            icon: FontAwesomeIcons.minusCircle,
+                            onTap: () => dashboard.add(FilterEndChangedEvent(null)),
+                          )
+                        ],
+                  ),
+                ],
               ),
-            ],
-          ),
-      ],
+              ExpansionTile(
+                title: Text(
+                  L10N.of(context).tr.projects,
+                  style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                    fontWeight: FontWeight.w700
+                  )
+                ),
+                children: <Widget>[
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      RaisedButton(
+                        child: Text("Select None"),
+                        onPressed: () => dashboard.add(FilterProjectsChangedEvent(<int>[])),
+                      ),
+                      RaisedButton(
+                        child: Text("Select All"),
+                        onPressed: () => dashboard.add(FilterProjectsChangedEvent(<int>[null].followedBy(projectsBloc.state.projects.map((p) => p.id)).toList())),
+                      ),
+                    ],
+                  ),
+                ].followedBy(
+                  <Project>[null].followedBy(projectsBloc.state.projects).map(
+                    (project) => CheckboxListTile(
+                      secondary: ProjectColour(project: project,),
+                      title: Text(project?.name ?? L10N.of(context).tr.noProject),
+                      value: state.filterProjects.any((p) => p == project?.id),
+                      activeColor: Theme.of(context).accentColor,
+                      onChanged: (_) {
+                        List<int> selectedProjects = state.filterProjects.map((p) => p).toList();
+                        if(state.filterProjects.any((p) => p == project?.id)) {
+                          selectedProjects.removeWhere((p) => p == project?.id);
+                        }
+                        else {
+                          selectedProjects.add(project.id);
+                        }
+                        dashboard.add(FilterProjectsChangedEvent(selectedProjects));
+                      },
+                    )
+                  )
+                ).toList(),
+              ),
+          ],
+        );
+      },
     );
   }
 }

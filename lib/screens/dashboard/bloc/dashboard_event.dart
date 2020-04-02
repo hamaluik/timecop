@@ -25,3 +25,21 @@ class TimerWasStartedEvent extends DashboardEvent {
   const TimerWasStartedEvent();
   @override List<Object> get props => [];
 }
+
+class FilterStartChangedEvent extends DashboardEvent {
+  final DateTime filterStart;
+  const FilterStartChangedEvent(this.filterStart);
+  @override List<Object> get props => [filterStart];
+}
+
+class FilterEndChangedEvent extends DashboardEvent {
+  final DateTime filterEnd;
+  const FilterEndChangedEvent(this.filterEnd);
+  @override List<Object> get props => [filterEnd];
+}
+
+class FilterProjectsChangedEvent extends DashboardEvent {
+  final List<int> projects;
+  const FilterProjectsChangedEvent(this.projects);
+  @override List<Object> get props => [projects];
+}
