@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+
+## [1.4.0+23] - 2020-03-02
 ### Added
 * Italian translation thanks to @danielpetrica and @Pomettini
 * Added ability to swipe-to-resume on the parent of grouped timers (thanks [cl3misch](https://news.ycombinator.com/item?id=22750635) on HN!)
@@ -37,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Ability to export csv of filtered data
 
 [Unreleased]: https://github.com/hamaluik/timecop/compare/v1.3.3+22...HEAD
+[1.4.0+23]: https://github.com/hamaluik/timecop/compare/v1.3.3+22...v1.4.0+23
 [1.3.3+22]: https://github.com/hamaluik/timecop/compare/v1.2.0+14...v1.3.3+22
 [1.2.0+14]: https://github.com/hamaluik/timecop/compare/v1.1.0+12...v1.2.0+14
 [1.1.0+12]: https://github.com/hamaluik/timecop/compare/v1.0.0+11...v1.1.0+12
