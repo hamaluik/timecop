@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 ### Added
-* Italian translation thanks to @danielpetrica
+* Italian translation thanks to @danielpetrica and @Pomettini
 * Added ability to swipe-to-resume on the parent of grouped timers (thanks [cl3misch](https://news.ycombinator.com/item?id=22750635) on HN!)
 
 ## [1.3.3+22] - 2020-03-30

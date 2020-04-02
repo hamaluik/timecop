@@ -3,3 +3,4 @@ Time Cop started as a personal project of Kenton Hamaluik ([@hamaluik](https://g
 | Name | GitHub |
 |:-|:-|
 | Petrica Andrei-Daniel | [@danielpetrica](https://github.com/danielpetrica) |
+| Giorgio Pomettini | [@Pomettini](https://github.com/Pomettini) |
