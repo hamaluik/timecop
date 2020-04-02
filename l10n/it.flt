@@ -22,7 +22,7 @@ duration = Durata
 
 save = Salva
 
-deleteTimerConfirm = Sei sicuro di voler cancelare questo timer?
+deleteTimerConfirm = Sei sicuro di voler cancellare questo timer?
 
 project = Progetto
 
@@ -36,7 +36,7 @@ endTime = Fine del tempo
 
 changeLog = Registro modifiche
 
-confirmDelete = Conferma Cancelazione
+confirmDelete = Conferma Cancellazione
 
 appName = Time Cop
 
