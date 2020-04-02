@@ -14,9 +14,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
+import 'package:timecop/blocs/timers/bloc.dart';
+import 'package:timecop/blocs/timers/timers_bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
+import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/screens/dashboard/components/StoppedTimerRow.dart';
 
@@ -63,47 +68,66 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow> with 
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionTile(
-      onExpansionChanged: (expanded) {
-        setState(() {
-          _expanded = expanded;
-          if(_expanded) {
-            _controller.forward();
-          }
-          else {
-            _controller.reverse();
-          }
-        });
-      },
-      leading: ProjectColour(
-        project: BlocProvider.of<ProjectsBloc>(context)
-                  .getProjectByID(widget.timers[0].projectID)
-      ),
-      title: Text(
-        formatDescription(context, widget.timers[0].description),
-        style: styleDescription(context, widget.timers[0].description)
-      ),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          RotationTransition(
-            turns: _iconTurns,
-            child: const Icon(Icons.expand_more),
-          ),
-          Container(width: 8),
-          Text(
-            TimerEntry.formatDuration(
-              widget.timers.fold(
-                Duration(),
-                (Duration sum, TimerEntry timer) => sum + timer.endTime.difference(timer.startTime)
-              )
+    return Slidable(
+      actionPane: SlidableDrawerActionPane(),
+      actionExtentRatio: 0.15,
+      child: ExpansionTile(
+        onExpansionChanged: (expanded) {
+          setState(() {
+            _expanded = expanded;
+            if(_expanded) {
+              _controller.forward();
+            }
+            else {
+              _controller.reverse();
+            }
+          });
+        },
+        leading: ProjectColour(
+          project: BlocProvider.of<ProjectsBloc>(context)
+                    .getProjectByID(widget.timers[0].projectID)
+        ),
+        title: Text(
+          formatDescription(context, widget.timers[0].description),
+          style: styleDescription(context, widget.timers[0].description)
+        ),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            RotationTransition(
+              turns: _iconTurns,
+              child: const Icon(Icons.expand_more),
             ),
-            style: TextStyle(fontFamily: "FiraMono")
-          ),
-        ],
+            Container(width: 8),
+            Text(
+              TimerEntry.formatDuration(
+                widget.timers.fold(
+                  Duration(),
+                  (Duration sum, TimerEntry timer) => sum + timer.endTime.difference(timer.startTime)
+                )
+              ),
+              style: TextStyle(fontFamily: "FiraMono")
+            ),
+          ],
+        ),
+        children: widget.timers.map((timer) => StoppedTimerRow(timer: timer)).toList(),
       ),
-      children: widget.timers.map((timer) => StoppedTimerRow(timer: timer)).toList(),
+      secondaryActions: <Widget>[
+        IconSlideAction(
+          color: Theme.of(context).accentColor,
+          foregroundColor: Theme.of(context).accentIconTheme.color,
+          icon: FontAwesomeIcons.play,
+          onTap: () {
+              final TimersBloc timersBloc = BlocProvider.of<TimersBloc>(context);
+              assert(timersBloc != null);
+              final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+              assert(projectsBloc != null);
+              Project project = projectsBloc.getProjectByID(widget.timers.first?.projectID);
+              timersBloc.add(CreateTimer(description: widget.timers.first?.description ?? "", project: project));
+          }
+        )
+      ],
     );
   }
 }
