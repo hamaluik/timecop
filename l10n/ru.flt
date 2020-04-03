@@ -1,6 +1,6 @@
 description = Описание
 
-columns = Колонны
+columns = Колонки
 
 timeCopEntries = Записи временного полицейского ({ $date })
 
@@ -8,7 +8,7 @@ timeCopDatabase = База данных Time Cop ({ $date })
 
 sourceCode = Исходный код
 
-about = Около
+about = О
 
 cancel = Отмена
 
@@ -26,7 +26,7 @@ to = к
 
 createNewProject = Создать новый проект
 
-appLegalese = Copyright © Кентон Хамалук, 2020
+appLegalese = Правообладатель © Кентон Хамалук, 2020
 
 averageDailyHours = Среднесуточные часы
 
@@ -34,7 +34,7 @@ runningTimers = Таймеры бега
 
 export = экспорт
 
-create = Создайте
+create = Создать
 
 reports = Отчеты
 
