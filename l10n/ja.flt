@@ -1,102 +1,98 @@
-create = 作成する
+about = 約
 
-nHours = { $hours } 時間
+appDescription = あなたのプライバシーを尊重し、凝りすぎずに仕事を終わらせる時間追跡アプリ。
 
-changeLog = 変更ログ
+appLegalese = Copyright©ケントン・ハマルイク、2020
 
-appName = タイムコップ
+readme = Readme
 
-options = オプション
-
-projectName = プロジェクト名
-
-groupTimers = 1日あたりの類似タイマーのグループ化
-
-endTime = 終了時間
-
-whatAreYouDoing = 何してるの？
-
-confirmDelete = 削除を確認
-
-from = から
-
-save = セーブ
-
-areYouSureYouWantToDelete = このプロジェクトを削除してもよろしいですか？
-
-startTime = 始まる時間
-
-logoSemantics = タイムコップのロゴ
-
-export = 書き出す
+changeLog = ログを変更
 
 sourceCode = ソースコード
 
-delete = 削除
-
-contributors = 貢献者
-
-reports = 報告書
-
-noProject = （プロジェクトなし）
-
-combinedProjectDescription = プロジェクトと説明の組み合わせ
-
-project = 事業
-
-runningTimers = タイマーの実行
-
-weeklyHours = 毎週の時間
+whatAreYouDoing = 何してるの？
 
 projects = プロジェクト
 
+export = 書き出す
+
+noProject = （プロジェクトなし）
+
+confirmDelete = 削除を確認
+
 deleteTimerConfirm = このタイマーを削除してもよろしいですか？
-
-pleaseEnterAName = 名前を入力してください
-
-includeProjects = プロジェクトを含める
-
-to = に
-
-noDescription = （説明なし）
-
-columns = 列
 
 cancel = キャンセル
 
-groupedTimers = { $description }（{ $count }タイマー）
+delete = 削除する
+
+runningTimers = タイマーの実行
+
+timeCopDatabase = タイムコップデータベース（{ $date }）
 
 filter = フィルタ
 
-description = 説明
+from = から
+
+to = に
+
+project = 事業
+
+description = 説明文
+
+timeH = 時間（時間）
+
+timeCopEntries = タイムコップエントリー（{ $date }）
 
 createNewProject = 新しいプロジェクトを作成
 
 editProject = プロジェクトを編集
 
+pleaseEnterAName = 名前を入力してください
+
+projectName = プロジェクト名
+
+create = 作成する
+
+save = 保存する
+
+areYouSureYouWantToDelete = このプロジェクトを削除してもよろしいですか？
+
 editTimer = タイマーを編集
 
-date = 日付
+whatWereYouDoing = 何してたの？
 
-timeCopEntries = タイムコップエントリ（{ $date }）
+startTime = 始まる時間
 
-appDescription = あなたのプライバシーを尊重し、凝りすぎずに仕事を終わらせる時間追跡アプリ。
-
-whatWereYouDoing = 何してた？
-
-readme = Readme
-
-about = 約
-
-totalProjectShare = 総プロジェクトシェア
-
-timeH = 時間（時間）
-
-timeCopDatabase = タイムコップデータベース（{ $date }）
-
-appLegalese = Copyright©Kenton Hamaluik、2020
+endTime = 終了時間
 
 duration = 期間
 
+appName = タイムコップ
+
+logoSemantics = タイムコップロゴ
+
+noDescription = （説明なし）
+
+options = オプション
+
+groupTimers = 1日あたりの類似したタイマーのグループ化
+
+columns = カラム
+
+date = 日付
+
+combinedProjectDescription = 組み合わせたプロジェクトと説明
+
+reports = 報告書
+
+nHours = { $hours } 時間
+
 averageDailyHours = 1日の平均時間
+
+totalProjectShare = 総プロジェクトシェア
+
+weeklyHours = 毎週の時間
+
+contributors = 貢献者
 

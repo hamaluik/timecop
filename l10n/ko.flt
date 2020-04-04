@@ -1,102 +1,98 @@
-projects = 프로젝트
+about = 약
 
-includeProjects = 프로젝트 포함
+appDescription = 개인 정보를 존중하고 너무 화려하지 않고 작업을 수행하는 시간 추적 앱.
 
-export = 수출
+appLegalese = 저작권 © Kenton Hamaluik, 2020
 
-whatWereYouDoing = 뭐하고 있었어?
+readme = 읽어보기
 
-editTimer = 타이머 편집
-
-combinedProjectDescription = 결합 된 프로젝트 및 설명
-
-delete = 지우다
-
-to = 에
-
-logoSemantics = 타임 경찰 로고
-
-weeklyHours = 주간 시간
-
-timeH = 시간 (시간)
-
-deleteTimerConfirm = 이 타이머를 삭제 하시겠습니까?
+changeLog = 변경 로그
 
 sourceCode = 소스 코드
 
-about = 약
+whatAreYouDoing = 뭐하는거야?
 
-options = 옵션
+projects = 프로젝트
 
-noDescription = (설명 없음)
+export = 수출
+
+noProject = (프로젝트 없음)
+
+confirmDelete = 삭제 확인
+
+deleteTimerConfirm = 이 타이머를 삭제 하시겠습니까?
+
+cancel = 취소
+
+delete = 지우다
 
 runningTimers = 타이머 실행
 
-totalProjectShare = 총 프로젝트 점유율
+timeCopDatabase = 타임 경찰 데이터베이스 ({ $date })
+
+filter = 필터
+
+from = 에서
+
+to = 에
 
 project = 계획
 
 description = 기술
 
-changeLog = 변경 로그
-
-averageDailyHours = 평균 일일 시간
-
-startTime = 시작 시간
-
-columns = 열
-
-areYouSureYouWantToDelete = 이 프로젝트를 삭제 하시겠습니까?
-
-contributors = 기고자
-
-filter = 필터
-
-pleaseEnterAName = 이름을 입력하십시오
-
-whatAreYouDoing = 뭐하는거야?
-
-createNewProject = 새 프로젝트 만들기
-
-appDescription = 개인 정보를 존중하고 너무 화려하지 않고 작업을 수행하는 시간 추적 앱.
-
-timeCopDatabase = 타임 경찰 데이터베이스 ({ $date })
-
-cancel = 취소
-
-confirmDelete = 삭제 확인
-
-noProject = (프로젝트 없음)
-
-appLegalese = 저작권 © Kenton Hamaluik, 2020
-
-save = 저장
+timeH = 시간 (시간)
 
 timeCopEntries = 타임 경찰 출품작 ({ $date })
 
-appName = 타임 경찰
-
-projectName = 프로젝트 이름
-
-duration = 지속
-
-reports = 보고서
-
-from = 에서
-
-readme = 읽어보기
-
-endTime = 종료 시간
-
-create = 창조하다
-
-groupTimers = 하루에 비슷한 타이머 그룹화
+createNewProject = 새 프로젝트 만들기
 
 editProject = 프로젝트 편집
 
-groupedTimers = { $description } ({ $count } 타이머)
+pleaseEnterAName = 이름을 입력하십시오
+
+projectName = 프로젝트 이름
+
+create = 창조하다
+
+save = 저장
+
+areYouSureYouWantToDelete = 이 프로젝트를 삭제 하시겠습니까?
+
+editTimer = 타이머 편집
+
+whatWereYouDoing = 뭐하고 있었어?
+
+startTime = 시작 시간
+
+endTime = 종료 시간
+
+duration = 지속
+
+appName = 타임 경찰
+
+logoSemantics = 타임 경찰 로고
+
+noDescription = (설명 없음)
+
+options = 옵션
+
+groupTimers = 하루에 비슷한 타이머 그룹화
+
+columns = 열
 
 date = 데이트
 
+combinedProjectDescription = 결합 된 프로젝트 및 설명
+
+reports = 보고서
+
 nHours = { $hours } 시간
+
+averageDailyHours = 평균 일일 시간
+
+totalProjectShare = 총 프로젝트 점유율
+
+weeklyHours = 주간 시간
+
+contributors = 기고자
 

@@ -1,102 +1,98 @@
-noDescription = （没有说明）
-
-readme = 自述文件
-
-startTime = 开始时间
-
-description = 描述
-
-whatWereYouDoing = 你在做什么？
-
-appName = 时间警察
-
-editTimer = 编辑计时器
-
-reports = 报告书
-
-options = 选件
-
-editProject = 编辑专案
-
-sourceCode = 源代码
-
-columns = 列
-
-project = 项目
-
-export = 出口
-
-cancel = 取消
-
-averageDailyHours = 平均每日时数
-
-projectName = 项目名
-
-timeH = 时间（小时）
-
-contributors = 贡献者
-
-weeklyHours = 每周营业时间
-
-whatAreYouDoing = 你在做什么？
-
-create = 创建
-
-duration = 持续时间
-
-logoSemantics = 时间警察徽标
-
 about = 关于
-
-projects = 专案
-
-from = 从
-
-delete = 删除
-
-filter = 过滤
-
-includeProjects = 包括项目
-
-timeCopEntries = 时间警察条目（{ $date }）
-
-noProject = （无项目）
-
-save = 保存
-
-deleteTimerConfirm = 您确定要删除此计时器吗？
-
-nHours = { $hours } 小时
-
-createNewProject = 建立新专案
-
-date = 日期
 
 appDescription = 时间跟踪应用程序尊重您的隐私并在不花哨的情况下完成工作。
 
-timeCopDatabase = 时间警察数据库（{ $date }）
+appLegalese = 版权所有©Kenton Hamaluik，2020年
 
-endTime = 时间结束
-
-groupTimers = 每天组类似计时器
+readme = 自述文件
 
 changeLog = 变更记录
 
-appLegalese = 版权所有©Kenton Hamaluik，2020年
+sourceCode = 源代码
 
-to = 至
+whatAreYouDoing = 你在做什么？
+
+projects = 专案
+
+export = 出口
+
+noProject = （无项目）
 
 confirmDelete = 确认删除
 
-pleaseEnterAName = 请输入一个名字
+deleteTimerConfirm = 您确定要删除此计时器吗？
+
+cancel = 取消
+
+delete = 删除
 
 runningTimers = 运行计时器
 
-totalProjectShare = 项目总份额
+timeCopDatabase = 时间警察数据库（{ $date }）
+
+filter = 过滤
+
+from = 从
+
+to = 至
+
+project = 项目
+
+description = 描述
+
+timeH = 时间（小时）
+
+timeCopEntries = 时间警察条目（{ $date }）
+
+createNewProject = 建立新专案
+
+editProject = 编辑专案
+
+pleaseEnterAName = 请输入一个名字
+
+projectName = 项目名称
+
+create = 创建
+
+save = 保存
 
 areYouSureYouWantToDelete = 您确定要删除此项目吗？
 
+editTimer = 编辑计时器
+
+whatWereYouDoing = 你在做什么？
+
+startTime = 开始时间
+
+endTime = 时间结束
+
+duration = 持续时间
+
+appName = 时间警察
+
+logoSemantics = 时间警察徽标
+
+noDescription = （没有说明）
+
+options = 选件
+
+groupTimers = 每天组类似计时器
+
+columns = 列
+
+date = 日期
+
 combinedProjectDescription = 组合项目和说明
 
-groupedTimers = { $description }（{ $count }个计时器）
+reports = 报告书
+
+nHours = { $hours } 小时
+
+averageDailyHours = 平均每日时数
+
+totalProjectShare = 项目总份额
+
+weeklyHours = 每周营业时间
+
+contributors = 贡献者
 

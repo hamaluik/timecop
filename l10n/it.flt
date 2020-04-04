@@ -1,101 +1,147 @@
-averageDailyHours = Media Ore giornaliere 
-
-timeCopEntries = Registrazioni Time Cop ({ $date })
-
-groupTimers = Raggruppa Timer Simili per giorno
-
-options = Opzioni
-
-weeklyHours = Ore Settimanali
-
-nHours = { $hours } ore
-
-whatWereYouDoing = Che cosa stiamo facendo?
-
-to = A
-
-from = Da
-
-delete = Cancella
-
-duration = Durata
-
-save = Salva
-
-deleteTimerConfirm = Sei sicuro di voler cancellare questo timer?
-
-project = Progetto
-
-noDescription = (nessuna descrizione)
-
-projects = Progetti
-
-reports = Rapporti
-
-endTime = Fine del tempo
-
-changeLog = Registro modifiche
-
-confirmDelete = Conferma Cancellazione
-
-appName = Time Cop
-
-logoSemantics = Logo Time Cop
-
+# tt-hand-translated
 about = Riguardo a
 
+# tt-hand-translated
 appDescription = Un'applicazione di monitoraggio del tempo che rispetta la tua privacy e fa il suo lavoro senza diventare troppo sofisticata.
 
-projectName = Nome del Progetto
-
-areYouSureYouWantToDelete = Sei sicuro di voler cancellare questo progetto?
-
-includeProjects = Includi Progetti
-
-create = Crea
-
-filter = Filtra
-
-startTime = Inizia timer
-
-runningTimers = Timer in esecuzione
-
-readme = Leggimi
-
-export = Esporta
-
-pleaseEnterAName = Per favore, inserisci un nome
-
-columns = Colonne
-
-description = Descrizione
-
-date = Data
-
-sourceCode = Codice sorgente
-
+# tt-hand-translated
 appLegalese = Copyright © Kenton Hamaluik, 2020
 
-cancel = Cancella
+# tt-hand-translated
+readme = Leggimi
 
-editTimer = Modifica timer
+# tt-hand-translated
+changeLog = Registro modifiche
 
+# tt-hand-translated
+sourceCode = Codice sorgente
+
+# tt-hand-translated
 whatAreYouDoing = Che cosa stai facendo?
 
+# tt-hand-translated
+projects = Progetti
+
+# tt-hand-translated
+export = Esporta
+
+# tt-hand-translated
 noProject = (nessun progetto)
 
-timeH =  Time (hours)
+# tt-hand-translated
+confirmDelete = Conferma Cancellazione
 
+# tt-hand-translated
+deleteTimerConfirm = Sei sicuro di voler cancellare questo timer?
+
+# tt-hand-translated
+cancel = Cancella
+
+# tt-hand-translated
+delete = Cancella
+
+# tt-hand-translated
+runningTimers = Timer in esecuzione
+
+# tt-hand-translated
 timeCopDatabase = Database di Time Cop ({ $date })
 
-combinedProjectDescription = Progetto e descrizione combinati
+# tt-hand-translated
+filter = Filtra
 
+# tt-hand-translated
+from = Da
+
+# tt-hand-translated
+to = A
+
+# tt-hand-translated
+project = Progetto
+
+# tt-hand-translated
+description = Descrizione
+
+# tt-hand-translated
+timeH = Time (hours)
+
+# tt-hand-translated
+timeCopEntries = Registrazioni Time Cop ({ $date })
+
+# tt-hand-translated
 createNewProject = Crea nuovo progetto
 
-groupedTimers = { $description } ({ $count } timer)
-
-totalProjectShare = Quota Totale Progetto
-
+# tt-hand-translated
 editProject = Modifica progetto
 
+# tt-hand-translated
+pleaseEnterAName = Per favore, inserisci un nome
+
+# tt-hand-translated
+projectName = Nome del Progetto
+
+# tt-hand-translated
+create = Crea
+
+# tt-hand-translated
+save = Salva
+
+# tt-hand-translated
+areYouSureYouWantToDelete = Sei sicuro di voler cancellare questo progetto?
+
+# tt-hand-translated
+editTimer = Modifica timer
+
+# tt-hand-translated
+whatWereYouDoing = Che cosa stiamo facendo?
+
+# tt-hand-translated
+startTime = Inizia timer
+
+# tt-hand-translated
+endTime = Fine del tempo
+
+# tt-hand-translated
+duration = Durata
+
+# tt-hand-translated
+appName = Time Cop
+
+# tt-hand-translated
+logoSemantics = Logo Time Cop
+
+# tt-hand-translated
+noDescription = (nessuna descrizione)
+
+# tt-hand-translated
+options = Opzioni
+
+# tt-hand-translated
+groupTimers = Raggruppa Timer Simili per giorno
+
+# tt-hand-translated
+columns = Colonne
+
+# tt-hand-translated
+date = Data
+
+# tt-hand-translated
+combinedProjectDescription = Progetto e descrizione combinati
+
+# tt-hand-translated
+reports = Rapporti
+
+# tt-hand-translated
+nHours = { $hours } ore
+
+# tt-hand-translated
+averageDailyHours = Media Ore giornaliere
+
+# tt-hand-translated
+totalProjectShare = Quota Totale Progetto
+
+# tt-hand-translated
+weeklyHours = Ore Settimanali
+
+# tt-hand-translated
 contributors = Contributori
+
