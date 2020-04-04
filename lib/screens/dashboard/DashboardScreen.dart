@@ -16,16 +16,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
-import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
-import 'package:timecop/screens/dashboard/components/FilterButton.dart';
+import 'package:timecop/screens/dashboard/components/DescriptionField.dart';
 import 'package:timecop/screens/dashboard/components/ProjectSelectField.dart';
 import 'package:timecop/screens/dashboard/components/RunningTimers.dart';
 import 'package:timecop/screens/dashboard/components/StartTimerButton.dart';
 import 'package:timecop/screens/dashboard/components/StoppedTimers.dart';
-
-import 'components/DescriptionField.dart';
-import 'components/PopupMenu.dart';
+import 'package:timecop/screens/dashboard/components/TopBar.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({Key key}) : super(key: key);
@@ -39,13 +36,7 @@ class DashboardScreen extends StatelessWidget {
       BlocProvider<DashboardBloc>(
         create: (_) => DashboardBloc(projectsBloc, settingsBloc),
         child: Scaffold(
-          appBar: AppBar(
-            leading: FilterButton(),
-            title: Text(L10N.of(context).tr.appName),
-            actions: <Widget>[
-              PopupMenu(),
-            ],
-          ),
+          appBar: TopBar(),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.stretch,

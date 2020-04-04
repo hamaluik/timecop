@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/about/AboutScreen.dart';
@@ -31,7 +32,11 @@ class PopupMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopupMenuButton<MenuItem>(
       key: Key("menuButton"),
-      icon: Icon(FontAwesomeIcons.dungeon),
+      icon: SvgPicture.asset(
+        "icon.no-bg.svg",
+        height: 30,
+        semanticsLabel: L10N.of(context).tr.logoSemantics,
+      ),
       onSelected: (MenuItem item) {
         switch(item) {
           case MenuItem.projects:
