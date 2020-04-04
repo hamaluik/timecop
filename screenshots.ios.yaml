@@ -12,6 +12,7 @@ locales:
   - fr-FR
   - de-DE
   - es-ES
+  - it
   - hi
   - id
   - ja
@@ -31,11 +32,11 @@ devices:
     iPhone 8 Plus:
       orientation:
         - Portrait
-#    iPad Pro (12.9-inch) (3rd generation):
-#      orientation:
-#        - Portrait
-#    iPad Pro (12.9-inch) (2nd generation):
-#      orientation:
-#        - Portrait
+    iPad Pro (12.9-inch) (3rd generation):
+      orientation:
+        - Portrait
+    iPad Pro (12.9-inch) (2nd generation):
+      orientation:
+        - Portrait
 
 frame: false
