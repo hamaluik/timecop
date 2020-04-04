@@ -13,7 +13,9 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:timecop/screens/dashboard/components/FilterSheet.dart';
 
 class FilterButton extends StatelessWidget {
@@ -21,11 +23,12 @@ class FilterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
     return IconButton(
       icon: Icon(FontAwesomeIcons.filter),
       onPressed: () => showModalBottomSheet<void>(
-        builder: (BuildContext context) => FilterSheet(),
         context: context,
+        builder: (BuildContext context) => FilterSheet(dashboardBloc: bloc,),
       ),
     );
   }

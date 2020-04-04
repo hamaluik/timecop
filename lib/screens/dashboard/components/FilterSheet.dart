@@ -25,16 +25,18 @@ import 'package:timecop/models/project.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 
 class FilterSheet extends StatelessWidget {
+  final DashboardBloc dashboardBloc;
   static DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
-  const FilterSheet({Key key}) : super(key: key);
+  const FilterSheet({Key key, @required this.dashboardBloc})
+    : assert(dashboardBloc != null),
+      super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
-    final DashboardBloc dashboard = BlocProvider.of<DashboardBloc>(context);
     
     return BlocBuilder<DashboardBloc, DashboardState>(
-      bloc: dashboard,
+      bloc: dashboardBloc,
       builder: (BuildContext context, DashboardState state) {
         return ListView(
           shrinkWrap: true,
@@ -63,8 +65,8 @@ class FilterSheet extends StatelessWidget {
                         await DatePicker.showDatePicker(
                           context,
                           currentTime: state.filterStart,
-                          onChanged: (DateTime dt) => dashboard.add(FilterStartChangedEvent(DateTime(dt.year, dt.month, dt.day))),
-                          onConfirm: (DateTime dt) => dashboard.add(FilterStartChangedEvent(DateTime(dt.year, dt.month, dt.day))),
+                          onChanged: (DateTime dt) => dashboardBloc.add(FilterStartChangedEvent(DateTime(dt.year, dt.month, dt.day))),
+                          onConfirm: (DateTime dt) => dashboardBloc.add(FilterStartChangedEvent(DateTime(dt.year, dt.month, dt.day))),
                           theme: DatePickerTheme(
                             cancelStyle: Theme.of(context).textTheme.button,
                             doneStyle: Theme.of(context).textTheme.button,
@@ -82,7 +84,7 @@ class FilterSheet extends StatelessWidget {
                             color: Theme.of(context).errorColor,
                             foregroundColor: Theme.of(context).accentIconTheme.color,
                             icon: FontAwesomeIcons.minusCircle,
-                            onTap: () => dashboard.add(FilterStartChangedEvent(null)),
+                            onTap: () => dashboardBloc.add(FilterStartChangedEvent(null)),
                           )
                         ],
                   ),
@@ -100,8 +102,8 @@ class FilterSheet extends StatelessWidget {
                         await DatePicker.showDatePicker(
                           context,
                           currentTime: state.filterEnd,
-                          onChanged: (DateTime dt) => dashboard.add(FilterEndChangedEvent(DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999))),
-                          onConfirm: (DateTime dt) => dashboard.add(FilterEndChangedEvent(DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999))),
+                          onChanged: (DateTime dt) => dashboardBloc.add(FilterEndChangedEvent(DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999))),
+                          onConfirm: (DateTime dt) => dashboardBloc.add(FilterEndChangedEvent(DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999))),
                           theme: DatePickerTheme(
                             cancelStyle: Theme.of(context).textTheme.button,
                             doneStyle: Theme.of(context).textTheme.button,
@@ -119,7 +121,7 @@ class FilterSheet extends StatelessWidget {
                             color: Theme.of(context).errorColor,
                             foregroundColor: Theme.of(context).accentIconTheme.color,
                             icon: FontAwesomeIcons.minusCircle,
-                            onTap: () => dashboard.add(FilterEndChangedEvent(null)),
+                            onTap: () => dashboardBloc.add(FilterEndChangedEvent(null)),
                           )
                         ],
                   ),
@@ -141,11 +143,11 @@ class FilterSheet extends StatelessWidget {
                     children: <Widget>[
                       RaisedButton(
                         child: Text("Select None"),
-                        onPressed: () => dashboard.add(FilterProjectsChangedEvent(<int>[])),
+                        onPressed: () => dashboardBloc.add(FilterProjectsChangedEvent(<int>[null].followedBy(projectsBloc.state.projects.map((p) => p.id)).toList())),
                       ),
                       RaisedButton(
                         child: Text("Select All"),
-                        onPressed: () => dashboard.add(FilterProjectsChangedEvent(<int>[null].followedBy(projectsBloc.state.projects.map((p) => p.id)).toList())),
+                        onPressed: () => dashboardBloc.add(FilterProjectsChangedEvent(<int>[])),
                       ),
                     ],
                   ),
@@ -154,17 +156,17 @@ class FilterSheet extends StatelessWidget {
                     (project) => CheckboxListTile(
                       secondary: ProjectColour(project: project,),
                       title: Text(project?.name ?? L10N.of(context).tr.noProject),
-                      value: state.filterProjects.any((p) => p == project?.id),
+                      value: !state.hiddenProjects.any((p) => p == project?.id),
                       activeColor: Theme.of(context).accentColor,
                       onChanged: (_) {
-                        List<int> selectedProjects = state.filterProjects.map((p) => p).toList();
-                        if(state.filterProjects.any((p) => p == project?.id)) {
-                          selectedProjects.removeWhere((p) => p == project?.id);
+                        List<int> hiddenProjects = state.hiddenProjects.map((p) => p).toList();
+                        if(state.hiddenProjects.any((p) => p == project?.id)) {
+                          hiddenProjects.removeWhere((p) => p == project?.id);
                         }
                         else {
-                          selectedProjects.add(project.id);
+                          hiddenProjects.add(project.id);
                         }
-                        dashboard.add(FilterProjectsChangedEvent(selectedProjects));
+                        dashboardBloc.add(FilterProjectsChangedEvent(hiddenProjects));
                       },
                     )
                   )

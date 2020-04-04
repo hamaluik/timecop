@@ -45,25 +45,35 @@ class _TopBarState extends State<TopBar> {
     _searchController = TextEditingController(text: "");
   }
 
+  @override
+  void dispose() { 
+    _searchFocusNode.dispose();
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void cancelSearch() {
+    setState(() => _searching = false);
+    DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
+    bloc.add(SearchChangedEvent(null));
+  }
+
   Widget searchBar(BuildContext context) {
     DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
 
     return Form(
       key: _searchFormKey,
       child: TextFormField(
-        focusNode: _searchFocusNode,
         controller: _searchController,
         onChanged: (search) {
           bloc.add(SearchChangedEvent(search));
         },
         decoration: InputDecoration(
+          prefixIcon: Icon(FontAwesomeIcons.search),
           suffixIcon: IconButton(
+            color: Theme.of(context).backgroundColor,
             icon: Icon(FontAwesomeIcons.timesCircle),
-            onPressed: () {
-              setState(() => _searching = false);
-              DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
-              bloc.add(SearchChangedEvent(null));
-            },
+            onPressed: cancelSearch,
           )
         ),
       )
@@ -75,7 +85,12 @@ class _TopBarState extends State<TopBar> {
     final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
 
     return AppBar(
-      leading: _searching ? Icon(FontAwesomeIcons.search) : PopupMenu(),
+      leading: _searching
+        ? IconButton(
+            icon: Icon(FontAwesomeIcons.chevronLeft),
+            onPressed: cancelSearch,
+        )
+        : PopupMenu(),
       title: _searching ? searchBar(context) : Text(L10N.of(context).tr.appName),
       actions:
         !_searching

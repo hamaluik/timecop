@@ -52,6 +52,12 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow> with 
     _iconTurns = _controller.drive(_halfTween.chain(_easeInTween));
   }
 
+  @override
+  void dispose() { 
+    _controller.dispose();
+    super.dispose();
+  }
+
   static String formatDescription(BuildContext context, String description) {
     if (description == null || description.trim().isEmpty) {
       return L10N.of(context).tr.noDescription;
