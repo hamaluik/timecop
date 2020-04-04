@@ -20,6 +20,7 @@ import 'package:intl/intl.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/models/project_description_pair.dart';
 import 'package:timecop/models/timer_entry.dart';
+import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:timecop/screens/dashboard/components/GroupedStoppedTimersRow.dart';
 import 'StoppedTimerRow.dart';
 
@@ -115,13 +116,23 @@ class StoppedTimers extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<TimersBloc, TimersState>(
       builder: (BuildContext context, TimersState timersState) {
-        List<DayGrouping> days = timersState.timers.reversed
-            .where((timer) => timer.endTime != null)
-            .fold(<DayGrouping>[], groupDays);
+        return BlocBuilder<DashboardBloc, DashboardState>(
+          builder: (BuildContext context, DashboardState dashboardState) {
+            var timers = timersState.timers.reversed
+              .where((timer) => timer.endTime != null);
+            if(dashboardState.searchString != null) {
+              print('search string: ${dashboardState.searchString}');
+              timers = timers
+                .where((timer) => timer.description?.toLowerCase()?.startsWith(dashboardState.searchString.toLowerCase()) ?? true);
+            }
 
-        return ListView.builder(
-          itemCount: days.length,
-          itemBuilder: (BuildContext context, int index) => days[index].rows(context),
+            List<DayGrouping> days = timers.fold(<DayGrouping>[], groupDays);
+
+            return ListView.builder(
+              itemCount: days.length,
+              itemBuilder: (BuildContext context, int index) => days[index].rows(context),
+            );
+          },
         );
       },
     );

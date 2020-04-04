@@ -13,8 +13,10 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/l10n.dart';
+import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:timecop/screens/dashboard/components/FilterButton.dart';
 import 'package:timecop/screens/dashboard/components/PopupMenu.dart';
 
@@ -30,6 +32,7 @@ class TopBar extends StatefulWidget implements PreferredSizeWidget {
 
 class _TopBarState extends State<TopBar> {
   final _searchFormKey = GlobalKey<FormState>();
+  TextEditingController _searchController;
   bool _searching;
 
   FocusNode _searchFocusNode;
@@ -39,16 +42,28 @@ class _TopBarState extends State<TopBar> {
     super.initState();
     _searching = false;
     _searchFocusNode = FocusNode(debugLabel: "search-focus");
+    _searchController = TextEditingController(text: "");
   }
 
   Widget searchBar(BuildContext context) {
+    DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
+
     return Form(
       key: _searchFormKey,
       child: TextFormField(
+        focusNode: _searchFocusNode,
+        controller: _searchController,
+        onChanged: (search) {
+          bloc.add(SearchChangedEvent(search));
+        },
         decoration: InputDecoration(
           suffixIcon: IconButton(
             icon: Icon(FontAwesomeIcons.timesCircle),
-            onPressed: () => setState(() => _searching = false),
+            onPressed: () {
+              setState(() => _searching = false);
+              DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
+              bloc.add(SearchChangedEvent(null));
+            },
           )
         ),
       )
@@ -57,6 +72,8 @@ class _TopBarState extends State<TopBar> {
 
   @override
   Widget build(BuildContext context) {
+    final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
+
     return AppBar(
       leading: _searching ? Icon(FontAwesomeIcons.search) : PopupMenu(),
       title: _searching ? searchBar(context) : Text(L10N.of(context).tr.appName),
@@ -66,7 +83,10 @@ class _TopBarState extends State<TopBar> {
             IconButton(
               icon: Icon(FontAwesomeIcons.search),
               onPressed: () {
+                _searchController.text = "";
+                bloc.add(SearchChangedEvent(""));
                 setState(() => _searching = true);
+                _searchFocusNode.requestFocus();
               },
             ),
             FilterButton(),

@@ -7,6 +7,10 @@ class DashboardState extends Equatable {
   final DateTime filterStart;
   final DateTime filterEnd;
   final List<int> filterProjects;
+  final String searchString;
+
+  @override
+  bool get stringify => true;
 
   const DashboardState(
       this.newDescription,
@@ -14,18 +18,22 @@ class DashboardState extends Equatable {
       this.timerWasStarted,
       this.filterStart,
       this.filterEnd,
-      this.filterProjects)
+      this.filterProjects,
+      this.searchString)
       : assert(newDescription != null),
         assert(timerWasStarted != null),
         assert(filterProjects != null);
 
-  DashboardState.clone(DashboardState state, {
+  DashboardState.clone(
+    DashboardState state,
+    DateTime filterStart,
+    DateTime filterEnd,
+    String searchString,
+  {
     String newDescription,
     Project newProject,
     bool timerWasStarted,
-    DateTime filterStart,
-    DateTime filterEnd,
-    List<int> filterProjects
+    List<int> filterProjects,
   })
     : this(
         newDescription ?? state.newDescription,
@@ -34,8 +42,9 @@ class DashboardState extends Equatable {
         filterStart,
         filterEnd,
         filterProjects ?? state.filterProjects,
+        searchString
       );
 
   @override
-  List<Object> get props => [newDescription, newProject, timerWasStarted, filterStart, filterEnd, filterProjects];
+  List<Object> get props => [newDescription, newProject, timerWasStarted, filterStart, filterEnd, filterProjects, searchString];
 }

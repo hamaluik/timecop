@@ -43,3 +43,9 @@ class FilterProjectsChangedEvent extends DashboardEvent {
   const FilterProjectsChangedEvent(this.projects);
   @override List<Object> get props => [projects];
 }
+
+class SearchChangedEvent extends DashboardEvent {
+  final String search;
+  const SearchChangedEvent(this.search);
+  @override List<Object> get props => [search];
+}
