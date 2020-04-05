@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [Unreleased]
 ### Added
 * Added ability to search for timers in the dashboard
 * Added ability to filter timers by time and project in the dashboard
@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Fixed some Russian translations thanks to @4name
 * Marked hand-translated translations as such so the automatic translator doesn't touch them
 * Normalized order of translations across all languages
+
+### Fixed
+* Fixed negative duration timers by adjusting timer ends accordingly
 
 ## [1.4.0+23] - 2020-03-02
 ### Added
