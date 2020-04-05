@@ -14,7 +14,7 @@
 
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:timecop/data_providers/data_provider.dart';
+import 'package:timecop/data_providers/data/data_provider.dart';
 import 'package:timecop/models/project.dart';
 import './bloc.dart';
 

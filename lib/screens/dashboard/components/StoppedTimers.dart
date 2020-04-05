@@ -20,6 +20,7 @@ import 'package:intl/intl.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/models/project_description_pair.dart';
 import 'package:timecop/models/timer_entry.dart';
+import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:timecop/screens/dashboard/components/GroupedStoppedTimersRow.dart';
 import 'StoppedTimerRow.dart';
 
@@ -115,13 +116,54 @@ class StoppedTimers extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<TimersBloc, TimersState>(
       builder: (BuildContext context, TimersState timersState) {
-        List<DayGrouping> days = timersState.timers.reversed
-            .where((timer) => timer.endTime != null)
-            .fold(<DayGrouping>[], groupDays);
+        return BlocBuilder<DashboardBloc, DashboardState>(
+          builder: (BuildContext context, DashboardState dashboardState) {
+            // start our list of timers
+            var timers = timersState.timers.reversed
+              .where((timer) => timer.endTime != null);
 
-        return ListView.builder(
-          itemCount: days.length,
-          itemBuilder: (BuildContext context, int index) => days[index].rows(context),
+            // filter based on filters
+            if(dashboardState.filterStart != null) {
+              timers = timers.where((timer) => timer.startTime.isAfter(dashboardState.filterStart));
+            }
+            if(dashboardState.filterEnd != null) {
+              timers = timers.where((timer) => timer.startTime.isBefore(dashboardState.filterEnd));
+            }
+            
+            // filter based on selected projects
+            timers = timers.where((t) => !dashboardState.hiddenProjects.any((p) => p == t.projectID));
+
+            // filter based on search
+            if(dashboardState.searchString != null) {
+              timers = timers
+                .where((timer) {
+                  // allow searching using a regex if surrounded by `/` and `/`
+                  if(dashboardState.searchString.length > 2 && dashboardState.searchString.startsWith("/") && dashboardState.searchString.endsWith("/")) {
+                    return timer
+                      .description
+                      ?.contains(
+                        RegExp(
+                          dashboardState.searchString.substring(
+                            1,
+                            dashboardState.searchString.length - 1
+                          )
+                        )
+                      )
+                      ?? true;
+                  }
+                  else {
+                    return timer.description?.toLowerCase()?.contains(dashboardState.searchString.toLowerCase()) ?? true;
+                  }
+                });
+            }
+
+            List<DayGrouping> days = timers.fold(<DayGrouping>[], groupDays);
+
+            return ListView.builder(
+              itemCount: days.length,
+              itemBuilder: (BuildContext context, int index) => days[index].rows(context),
+            );
+          },
         );
       },
     );

@@ -38,6 +38,12 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial> with TickerPr
   }
 
   @override
+  void dispose() { 
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
     assert(bloc != null);

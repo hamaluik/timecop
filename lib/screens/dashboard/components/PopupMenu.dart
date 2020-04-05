@@ -13,15 +13,17 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/about/AboutScreen.dart';
 import 'package:timecop/screens/export/ExportScreen.dart';
 import 'package:timecop/screens/projects/ProjectsScreen.dart';
 import 'package:timecop/screens/reports/ReportsScreen.dart';
+import 'package:timecop/screens/settings/SettingsScreen.dart';
 
 enum MenuItem {
-  projects, reports, export, about,
+  projects, reports, export, settings, about,
 }
 
 class PopupMenu extends StatelessWidget {
@@ -31,7 +33,12 @@ class PopupMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopupMenuButton<MenuItem>(
       key: Key("menuButton"),
-      icon: Icon(FontAwesomeIcons.dungeon),
+      icon: SvgPicture.asset(
+        "icon.no-bg.svg",
+        height: 30,
+        semanticsLabel: L10N.of(context).tr.logoSemantics,
+      ),
+      color: Theme.of(context).scaffoldBackgroundColor,
       onSelected: (MenuItem item) {
         switch(item) {
           case MenuItem.projects:
@@ -47,6 +54,11 @@ class PopupMenu extends StatelessWidget {
           case MenuItem.export:
             Navigator.of(context).push(MaterialPageRoute<ExportScreen>(
               builder: (BuildContext _context) => ExportScreen(),
+            ));
+            break;
+          case MenuItem.settings:
+            Navigator.of(context).push(MaterialPageRoute<SettingsScreen>(
+              builder: (BuildContext _context) => SettingsScreen(),
             ));
             break;
           case MenuItem.about:
@@ -81,6 +93,14 @@ class PopupMenu extends StatelessWidget {
               title: Text(L10N.of(context).tr.export),
             ),
             value: MenuItem.export,
+          ),
+          PopupMenuItem(
+            key: Key("menuSettings"),
+            child: ListTile(
+              leading: Icon(FontAwesomeIcons.screwdriver),
+              title: Text(L10N.of(context).tr.settings),
+            ),
+            value: MenuItem.settings,
           ),
           PopupMenuItem(
             key: Key("menuAbout"),

@@ -31,7 +31,6 @@ class ProjectEditor extends StatefulWidget {
 class _ProjectEditorState extends State<ProjectEditor> {
   TextEditingController _nameController;
   Color _colour;
-  FocusNode _focus;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -39,13 +38,11 @@ class _ProjectEditorState extends State<ProjectEditor> {
     super.initState();
     _nameController = TextEditingController(text: widget.project?.name);
     _colour = widget.project?.colour ?? Colors.grey[50];
-    _focus = FocusNode();
   }
 
   @override
   void dispose() {
     _nameController.dispose();
-    _focus.dispose();
     super.dispose();
   }
 

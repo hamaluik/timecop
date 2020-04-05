@@ -17,6 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/timer_entry.dart';
+import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 
 import 'RunningTimerRow.dart';
 
@@ -25,57 +26,65 @@ class RunningTimers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TimersBloc, TimersState>(
-      builder: (BuildContext context, TimersState timersState) {
-        List<TimerEntry> runningTimers = timersState.timers.where((timer) => timer.endTime == null).toList();
-        if(runningTimers.isEmpty) {
+    return BlocBuilder<DashboardBloc, DashboardState>(
+      builder: (BuildContext context, DashboardState dashboardState) {
+        if(dashboardState.searchString != null) {
           return Container();
         }
 
-        DateTime now = DateTime.now();
-        Duration runningTotal = Duration(seconds: runningTimers.fold(0, (int sum, TimerEntry t) => sum + now.difference(t.startTime).inSeconds));
+        return BlocBuilder<TimersBloc, TimersState>(
+          builder: (BuildContext context, TimersState timersState) {
+            List<TimerEntry> runningTimers = timersState.timers.where((timer) => timer.endTime == null).toList();
+            if(runningTimers.isEmpty) {
+              return Container();
+            }
 
-        return Material(
-          elevation: 4,
-          color: Theme.of(context).bottomSheetTheme.backgroundColor,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      mainAxisSize: MainAxisSize.max,
+            DateTime now = DateTime.now();
+            Duration runningTotal = Duration(seconds: runningTimers.fold(0, (int sum, TimerEntry t) => sum + now.difference(t.startTime).inSeconds));
+
+            return Material(
+              elevation: 4,
+              color: Theme.of(context).bottomSheetTheme.backgroundColor,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        Text(
-                          L10N.of(context).tr.runningTimers,
-                          style: TextStyle(
-                            color: Theme.of(context).accentColor,
-                            fontWeight: FontWeight.w700
-                          )
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Text(
+                              L10N.of(context).tr.runningTimers,
+                              style: TextStyle(
+                                color: Theme.of(context).accentColor,
+                                fontWeight: FontWeight.w700
+                              )
+                            ),
+                            Text(
+                              TimerEntry.formatDuration(runningTotal),
+                              style: TextStyle(
+                                color: Theme.of(context).accentColor,
+                                fontFamily: "FiraMono",
+                              )
+                            )
+                          ],
                         ),
-                        Text(
-                          TimerEntry.formatDuration(runningTotal),
-                          style: TextStyle(
-                            color: Theme.of(context).accentColor,
-                            fontFamily: "FiraMono",
-                          )
-                        )
+                        Divider(),
                       ],
                     ),
-                    Divider(),
-                  ],
-                ),
+                  ),
+                ].followedBy(
+                  runningTimers.map((timer) => RunningTimerRow(timer: timer, now: timersState.now))
+                ).toList(),
               ),
-            ].followedBy(
-              runningTimers.map((timer) => RunningTimerRow(timer: timer, now: timersState.now))
-            ).toList(),
-          ),
+            );
+          },
         );
       },
     );

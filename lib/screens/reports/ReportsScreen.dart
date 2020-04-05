@@ -26,6 +26,7 @@ import 'package:timecop/models/project.dart';
 import 'package:timecop/screens/reports/components/ProjectBreakdown.dart';
 import 'package:timecop/screens/reports/components/WeekdayAverages.dart';
 import 'package:timecop/screens/reports/components/WeeklyTotals.dart';
+import 'package:timecop/models/clone_time.dart';
 
 class ReportsScreen extends StatefulWidget {
   ReportsScreen({Key key}) : super(key: key);
@@ -37,6 +38,8 @@ class ReportsScreen extends StatefulWidget {
 class _ReportsScreenState extends State<ReportsScreen> {
   DateTime _startDate;
   DateTime _endDate;
+  DateTime _oldStartDate;
+  DateTime _oldEndDate;
   static DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
   List<Project> selectedProjects = [];
 
@@ -47,6 +50,16 @@ class _ReportsScreenState extends State<ReportsScreen> {
     assert(projects != null);
     selectedProjects = <Project>[null].followedBy(projects.state.projects.map((p) => Project.clone(p))).toList();
     _startDate = DateTime.now().subtract(Duration(days: 30));
+  }
+
+  void setStartDate(DateTime dt) {
+    assert(dt != null);
+    setState(() {
+      _startDate = dt;
+      if(_endDate != null && _startDate.isAfter(_endDate)){
+        _endDate = _startDate.add(Duration(hours: 23, minutes: 59, seconds: 59, milliseconds: 999));
+      }
+    });
   }
 
   @override
@@ -115,11 +128,13 @@ class _ReportsScreenState extends State<ReportsScreen> {
                     child: Text(_startDate == null ? "—" : _dateFormat.format(_startDate)),
                   ),
                   onTap: () async {
-                    await DatePicker.showDatePicker(
+                    _oldStartDate = _startDate.clone();
+                    _oldEndDate = _endDate.clone();
+                    DateTime newStartDate = await DatePicker.showDatePicker(
                       context,
                       currentTime: _startDate,
-                      onChanged: (DateTime dt) => setState(() => _startDate = DateTime(dt.year, dt.month, dt.day)),
-                      onConfirm: (DateTime dt) => setState(() => _startDate = DateTime(dt.year, dt.month, dt.day)),
+                      onChanged: (DateTime dt) => setStartDate(DateTime(dt.year, dt.month, dt.day)),
+                      onConfirm: (DateTime dt) => setStartDate(DateTime(dt.year, dt.month, dt.day)),
                       theme: DatePickerTheme(
                         cancelStyle: Theme.of(context).textTheme.button,
                         doneStyle: Theme.of(context).textTheme.button,
@@ -127,6 +142,14 @@ class _ReportsScreenState extends State<ReportsScreen> {
                         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                       )
                     );
+
+                    // if the user cancelled, this should be null
+                    if(newStartDate == null) {
+                      setState(() {
+                        _startDate = _oldStartDate;
+                        _endDate = _oldEndDate;
+                      });
+                    }
                   },
                 ),
                 secondaryActions:
@@ -156,9 +179,11 @@ class _ReportsScreenState extends State<ReportsScreen> {
                     child: Text(_endDate == null ? "—" : _dateFormat.format(_endDate)),
                   ),
                   onTap: () async {
-                    await DatePicker.showDatePicker(
+                    _oldEndDate = _endDate.clone();
+                    DateTime newEndDate = await DatePicker.showDatePicker(
                       context,
                       currentTime: _endDate,
+                      minTime: _startDate,
                       onChanged: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
                       onConfirm: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
                       theme: DatePickerTheme(
@@ -168,6 +193,13 @@ class _ReportsScreenState extends State<ReportsScreen> {
                         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                       )
                     );
+
+                    // if the user cancelled, this should be null
+                    if(newEndDate == null) {
+                      setState(() {
+                        _endDate = _oldEndDate;
+                      });
+                    }
                   },
                 ),
                 secondaryActions:

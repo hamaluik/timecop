@@ -21,31 +21,32 @@ import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/settings/settings_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:timecop/blocs/theme/theme_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
-import 'package:timecop/data_providers/data_provider.dart';
-import 'package:timecop/data_providers/mock_settings_provider.dart';
-import 'package:timecop/data_providers/settings_provider.dart';
+import 'package:timecop/data_providers/data/data_provider.dart';
+import 'package:timecop/data_providers/settings/settings_provider.dart';
 import 'package:timecop/fontlicenses.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/dashboard/DashboardScreen.dart';
 import 'package:timecop/themes.dart';
 
-import 'package:timecop/data_providers/database_provider.dart';
-import 'package:timecop/data_providers/shared_prefs_settings_provider.dart';
+/*import 'package:timecop/data_providers/data/database_provider.dart';
+import 'package:timecop/data_providers/settings/shared_prefs_settings_provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final SettingsProvider settings = await SharedPrefsSettingsProvider.load();
   final DataProvider data = await DatabaseProvider.open();
   await runMain(settings, data);
-}
+}*/
 
-/*import 'data_providers/mock_data_provider.dart';
-import 'data_providers/mock_settings_provider.dart';
+
+import 'package:timecop/data_providers/data/mock_data_provider.dart';
+import 'package:timecop/data_providers/settings/mock_settings_provider.dart';
 Future<void> main() async {
   final SettingsProvider settings = MockSettingsProvider();
   final DataProvider data = MockDataProvider(Locale.fromSubtags(languageCode: "en"));
   await runMain(settings, data);
-}*/
+}
 
 Future<void> runMain(SettingsProvider settings, DataProvider data) async {
   // setup intl date formats?
@@ -56,6 +57,9 @@ Future<void> runMain(SettingsProvider settings, DataProvider data) async {
 
   runApp(MultiBlocProvider(
     providers: [
+      BlocProvider<ThemeBloc>(
+        create: (_) => ThemeBloc(settings),
+      ),
       BlocProvider<SettingsBloc>(
         create: (_) => SettingsBloc(settings),
       ),
@@ -80,24 +84,36 @@ class TimeCopApp extends StatefulWidget {
   State<StatefulWidget> createState() => _TimeCopAppState();
 }
 
-class _TimeCopAppState extends State<TimeCopApp> {
+class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
   Timer _updateTimersTimer;
+  Brightness brightness;
 
   @override
   void initState() {
     _updateTimersTimer = Timer.periodic(Duration(seconds: 1), (_) => BlocProvider.of<TimersBloc>(context).add(UpdateNow()));
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    brightness = WidgetsBinding.instance.window.platformBrightness;
 
     // send commands to our top-level blocs to get them to initialize
     BlocProvider.of<SettingsBloc>(context).add(LoadSettingsFromRepository());
     BlocProvider.of<TimersBloc>(context).add(LoadTimers());
     BlocProvider.of<ProjectsBloc>(context).add(LoadProjects());
+    BlocProvider.of<ThemeBloc>(context).add(LoadThemeEvent());
   }
 
   @override
   void dispose() {
     _updateTimersTimer.cancel();
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
+  }
+
+  @override
+  void didChangePlatformBrightness() {
+    print("platform brightness changed: ");
+    print(WidgetsBinding.instance.window.platformBrightness.toString());
+    setState(() => brightness = WidgetsBinding.instance.window.platformBrightness);
   }
 
   @override
@@ -106,33 +122,37 @@ class _TimeCopAppState extends State<TimeCopApp> {
       providers: [
         RepositoryProvider<SettingsProvider>.value(value: widget.settings),
       ],
-      child: MaterialApp(
-        title: 'Time Cop',
-        theme: widget.settings is MockSettingsProvider ? darkTheme : lightTheme, // use dark theme for screenshots and testing
-        darkTheme: darkTheme,
-        home: DashboardScreen(),
-        localizationsDelegates: [
-          L10N.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: [
-          const Locale('en'),
-          const Locale('fr'),
-          const Locale('de'),
-          const Locale('es'),
-          const Locale('hi'),
-          const Locale('id'),
-          const Locale('ja'),
-          const Locale('ko'),
-          const Locale('pt'),
-          const Locale('ru'),
-          const Locale('zh', 'CN'),
-          const Locale('zh', 'TW'),
-          const Locale('ar'),
-          const Locale('it'),
-        ],
+      child: BlocBuilder<ThemeBloc, ThemeState>(
+        builder: (BuildContext context, ThemeState themeState) {
+          print('Building material app with theme: ${themeState.theme}');
+          return MaterialApp(
+            title: 'Time Cop',
+            home: DashboardScreen(),
+            theme: themeState.themeData ?? (brightness == Brightness.dark ? darkTheme : lightTheme),
+            localizationsDelegates: [
+              L10N.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: [
+              const Locale('en'),
+              const Locale('fr'),
+              const Locale('de'),
+              const Locale('es'),
+              const Locale('hi'),
+              const Locale('id'),
+              const Locale('ja'),
+              const Locale('ko'),
+              const Locale('pt'),
+              const Locale('ru'),
+              const Locale('zh', 'CN'),
+              const Locale('zh', 'TW'),
+              const Locale('ar'),
+              const Locale('it'),
+            ],
+          );
+        }
       )
     );
   }

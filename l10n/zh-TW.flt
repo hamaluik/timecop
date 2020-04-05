@@ -1,98 +1,110 @@
-about = 關於
+about = About
 
-appDescription = 時間跟踪應用程序尊重您的隱私並在不花哨的情況下完成工作。
+appDescription = A time tracking app that respects your privacy and gets the job done without getting too fancy.
 
-appLegalese = 版權所有©Kenton Hamaluik，2020年
+appLegalese = Copyright © Kenton Hamaluik, 2020
 
-readme = 自述文件
+readme = Readme
 
-changeLog = 變更記錄
+changeLog = Change Log
 
-sourceCode = 源代碼
+sourceCode = Source Code
 
-whatAreYouDoing = 你在做什麼？
+whatAreYouDoing = What are you doing?
 
-projects = 專案
+projects = Projects
 
-export = 出口
+export = Export
 
-noProject = （無項目）
+noProject = (no project)
 
-confirmDelete = 確認刪除
+confirmDelete = Confirm Delete
 
-deleteTimerConfirm = 您確定要刪除此計時器嗎？
+deleteTimerConfirm = Are you sure you want to delete this timer?
 
-cancel = 取消
+cancel = Cancel
 
-delete = 刪除
+delete = Delete
 
-runningTimers = 運行計時器
+runningTimers = Running Timers
 
-timeCopDatabase = 時間警察數據庫（{ $date }）
+timeCopDatabase = Time Cop Database ({ $date })
 
-filter = 過濾
+filter = Filter
 
-from = 從
+from = From
 
-to = 至
+to = To
 
-project = 項目
+project = Project
 
-description = 描述
+description = Description
 
-timeH = 時間（小時）
+timeH = Time (hours)
 
-timeCopEntries = 時間警察條目（{ $date }）
+timeCopEntries = Time Cop Entries ({ $date })
 
-createNewProject = 建立新專案
+createNewProject = Create New Project
 
-editProject = 編輯專案
+editProject = Edit Project
 
-pleaseEnterAName = 請輸入一個名字
+pleaseEnterAName = Please enter a name
 
-projectName = 項目名稱
+projectName = Project Name
 
-create = 創建
+create = Create
 
-save = 保存
+save = Save
 
-areYouSureYouWantToDelete = 您確定要刪除此項目嗎？
+areYouSureYouWantToDelete = Are you sure you want to delete this project?
 
-editTimer = 編輯計時器
+editTimer = Edit Timer
 
-whatWereYouDoing = 你在做什麼？
+whatWereYouDoing = What were you doing?
 
-startTime = 開始時間
+startTime = Start Time
 
-endTime = 時間結束
+endTime = End Time
 
-duration = 持續時間
+duration = Duration
 
-appName = 時間警察
+appName = Time Cop
 
-logoSemantics = 時間警察徽標
+logoSemantics = Time Cop Logo
 
-noDescription = （沒有說明）
+noDescription = (no description)
 
-options = 選件
+options = Options
 
-groupTimers = 每天組類似計時器
+groupTimers = Group Similar Timers Per Day
 
-columns = 列
+columns = Columns
 
-date = 日期
+date = Date
 
-combinedProjectDescription = 組合項目和說明
+combinedProjectDescription = Combined Project & Description
 
-reports = 報告書
+reports = Reports
 
-nHours = { $hours } 小時
+nHours = { $hours } hours
 
-averageDailyHours = 平均每日時數
+averageDailyHours = Average Daily Hours
 
-totalProjectShare = 項目總份額
+totalProjectShare = Total Project Share
 
-weeklyHours = 每週營業時間
+weeklyHours = Weekly Hours
 
-contributors = 貢獻者
+contributors = Contributors
+
+settings = 設定值
+
+theme = 主題
+
+auto = 汽車
+
+light = 光
+
+dark = 暗
+
+black = 黑色
 

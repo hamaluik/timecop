@@ -1,98 +1,110 @@
-about = حول
+about = About
 
-appDescription = تطبيق تتبع الوقت الذي يحترم خصوصيتك وينجز المهمة دون أن يتوهم.
+appDescription = A time tracking app that respects your privacy and gets the job done without getting too fancy.
 
-appLegalese = حقوق النشر © Kenton Hamaluik، 2020
+appLegalese = Copyright © Kenton Hamaluik, 2020
 
-readme = الملف التمهيدي
+readme = Readme
 
-changeLog = سجل التغيير
+changeLog = Change Log
 
-sourceCode = مصدر الرمز
+sourceCode = Source Code
 
-whatAreYouDoing = ماذا تفعل؟
+whatAreYouDoing = What are you doing?
 
-projects = المشاريع
+projects = Projects
 
-export = تصدير
+export = Export
 
-noProject = (لا يوجد مشروع)
+noProject = (no project)
 
-confirmDelete = تأكيد الحذف
+confirmDelete = Confirm Delete
 
-deleteTimerConfirm = هل أنت متأكد أنك تريد حذف هذا المؤقت؟
+deleteTimerConfirm = Are you sure you want to delete this timer?
 
-cancel = إلغاء
+cancel = Cancel
 
-delete = حذف
+delete = Delete
 
-runningTimers = تشغيل المؤقتات
+runningTimers = Running Timers
 
-timeCopDatabase = قاعدة بيانات شرطي الوقت ({ $date })
+timeCopDatabase = Time Cop Database ({ $date })
 
-filter = منقي
+filter = Filter
 
-from = من عند
+from = From
 
-to = إلى
+to = To
 
-project = مشروع
+project = Project
 
-description = وصف
+description = Description
 
-timeH = الوقت (ساعات)
+timeH = Time (hours)
 
-timeCopEntries = إدخالات شرطي الوقت ({ $date })
+timeCopEntries = Time Cop Entries ({ $date })
 
-createNewProject = إنشاء مشروع جديد
+createNewProject = Create New Project
 
-editProject = تحرير المشروع
+editProject = Edit Project
 
-pleaseEnterAName = الرجاء إدخال اسم
+pleaseEnterAName = Please enter a name
 
-projectName = اسم المشروع
+projectName = Project Name
 
-create = خلق
+create = Create
 
-save = حفظ
+save = Save
 
-areYouSureYouWantToDelete = هل أنت متأكد أنك تريد حذف هذا المشروع؟
+areYouSureYouWantToDelete = Are you sure you want to delete this project?
 
-editTimer = تحرير الموقت
+editTimer = Edit Timer
 
-whatWereYouDoing = ماذا كنتم تفعلون؟
+whatWereYouDoing = What were you doing?
 
-startTime = وقت البدء
+startTime = Start Time
 
-endTime = وقت النهاية
+endTime = End Time
 
-duration = المدة الزمنية
+duration = Duration
 
-appName = شرطي الوقت
+appName = Time Cop
 
-logoSemantics = شعار الوقت الشرطي
+logoSemantics = Time Cop Logo
 
-noDescription = (بدون وصف)
+noDescription = (no description)
 
-options = خيارات
+options = Options
 
-groupTimers = قم بتجميع الموقتات المماثلة في اليوم
+groupTimers = Group Similar Timers Per Day
 
-columns = الأعمدة
+columns = Columns
 
-date = تاريخ
+date = Date
 
-combinedProjectDescription = الجمع بين المشروع والوصف
+combinedProjectDescription = Combined Project & Description
 
-reports = التقارير
+reports = Reports
 
-nHours = { $hours } ساعة
+nHours = { $hours } hours
 
-averageDailyHours = متوسط ساعات العمل اليومية
+averageDailyHours = Average Daily Hours
 
-totalProjectShare = إجمالي حصة المشروع
+totalProjectShare = Total Project Share
 
-weeklyHours = ساعات العمل الأسبوعية
+weeklyHours = Weekly Hours
 
-contributors = المساهمون
+contributors = Contributors
+
+settings = الإعدادات
+
+theme = موضوع
+
+auto = تلقاءي
+
+light = ضوء
+
+dark = داكن
+
+black = أسود
 

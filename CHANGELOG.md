@@ -4,7 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [Unreleased]
+### Added
+* Added ability to search for timers in the dashboard
+* Added ability to filter timers by time and project in the dashboard
+* Added a settings screen
+* Added ability to change the theme manually
+
+### Changed
+* Moved the menu button to be under the Time Cop logo on the left side, to make room for the search and filter buttons
+* Fixed some Russian translations thanks to @4name
+* Marked hand-translated translations as such so the automatic translator doesn't touch them
+* Normalized order of translations across all languages
+
+### Fixed
+* Fixed negative duration timers by adjusting timer ends accordingly
 
 ## [1.4.0+23] - 2020-03-02
 ### Added
@@ -38,7 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Ability to export database file
 * Ability to export csv of filtered data
 
-[Unreleased]: https://github.com/hamaluik/timecop/compare/v1.3.3+22...HEAD
+[Unreleased]: https://github.com/hamaluik/timecop/compare/v1.4.0+23...HEAD
 [1.4.0+23]: https://github.com/hamaluik/timecop/compare/v1.3.3+22...v1.4.0+23
 [1.3.3+22]: https://github.com/hamaluik/timecop/compare/v1.2.0+14...v1.3.3+22
 [1.2.0+14]: https://github.com/hamaluik/timecop/compare/v1.1.0+12...v1.2.0+14

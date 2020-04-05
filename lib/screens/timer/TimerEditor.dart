@@ -26,6 +26,7 @@ import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
+import 'package:timecop/models/clone_time.dart';
 
 class TimerEditor extends StatefulWidget {
   final TimerEntry timer;
@@ -39,8 +40,13 @@ class TimerEditor extends StatefulWidget {
 
 class _TimerEditorState extends State<TimerEditor> {
   TextEditingController _descriptionController;
+
   DateTime _startTime;
   DateTime _endTime;
+
+  DateTime _oldStartTime;
+  DateTime _oldEndTime;
+
   Project _project;
   FocusNode _descriptionFocus;
   final _formKey = GlobalKey<FormState>();
@@ -70,6 +76,18 @@ class _TimerEditorState extends State<TimerEditor> {
     super.dispose();
   }
 
+  void setStartTime(DateTime dt) {
+    assert(dt != null);
+    setState(() {
+      // adjust the end time to keep a constant duration if we would somehow make the time negative
+      if(_oldEndTime != null && dt.isAfter(_oldStartTime)) {
+        Duration d = _oldEndTime.difference(_oldStartTime);
+        _endTime = dt.add(d);
+      }
+      _startTime = dt;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,9 +97,6 @@ class _TimerEditorState extends State<TimerEditor> {
       body: Form(
         key: _formKey,
         child: ListView(
-          //mainAxisAlignment: MainAxisAlignment.start,
-          //mainAxisSize: MainAxisSize.max,
-          //crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             BlocBuilder<ProjectsBloc, ProjectsState>(
               builder: (BuildContext context, ProjectsState projectsState) => Padding(
@@ -135,22 +150,50 @@ class _TimerEditorState extends State<TimerEditor> {
                 ),
               ),
             ),
-            ListTile(
-              title: Text(L10N.of(context).tr.startTime),
-              trailing: Text(_dateFormat.format(_startTime)),
-              onTap: () async {
-                await DatePicker.showDateTimePicker(
-                  context,
-                  currentTime: _startTime,
-                  onChanged: (DateTime dt) => setState(() => _startTime = dt),
-                  theme: DatePickerTheme(
-                    cancelStyle: Theme.of(context).textTheme.button,
-                    doneStyle: Theme.of(context).textTheme.button,
-                    itemStyle: Theme.of(context).textTheme.body1,
-                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                  )
-                );
-              },
+            Slidable(
+              actionPane: SlidableDrawerActionPane(),
+              actionExtentRatio: 0.15,
+              child: ListTile(
+                title: Text(L10N.of(context).tr.startTime),
+                trailing: Text(_dateFormat.format(_startTime)),
+                onTap: () async {
+                  _oldStartTime = _startTime.clone();
+                  _oldEndTime = _endTime.clone();
+                  DateTime newStartTime = await DatePicker.showDateTimePicker(
+                    context,
+                    currentTime: _startTime,
+                    maxTime: _endTime == null ? DateTime.now() : null,
+                    onChanged: (DateTime dt) => setStartTime(dt),
+                    onConfirm: (DateTime dt) => setStartTime(dt),
+                    theme: DatePickerTheme(
+                      cancelStyle: Theme.of(context).textTheme.button,
+                      doneStyle: Theme.of(context).textTheme.button,
+                      itemStyle: Theme.of(context).textTheme.body1,
+                      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                    )
+                  );
+
+                  // if the user cancelled, this should be null
+                  if(newStartTime == null) {
+                    setState(() {
+                      _startTime = _oldStartTime;
+                      _endTime = _oldEndTime;
+                    });
+                  }
+                },
+              ),
+              secondaryActions: <Widget>[
+                IconSlideAction(
+                  color: Theme.of(context).accentColor,
+                  foregroundColor: Theme.of(context).accentIconTheme.color,
+                  icon: FontAwesomeIcons.clock,
+                  onTap: () {
+                    _oldStartTime = _startTime;
+                    _oldEndTime = _endTime;
+                    setStartTime(DateTime.now());
+                  },
+                ),
+              ],
             ),
             Slidable(
               actionPane: SlidableDrawerActionPane(),
@@ -159,7 +202,8 @@ class _TimerEditorState extends State<TimerEditor> {
                 title: Text(L10N.of(context).tr.endTime),
                 trailing: Text(_endTime == null ? "—" : _dateFormat.format(_endTime)),
                 onTap: () async {
-                  await DatePicker.showDateTimePicker(
+                _oldEndTime = _endTime.clone();
+                DateTime newEndTime = await DatePicker.showDateTimePicker(
                     context,
                     currentTime: _endTime,
                     minTime: _startTime,
@@ -172,12 +216,32 @@ class _TimerEditorState extends State<TimerEditor> {
                       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                     )
                   );
+
+                  // if the user cancelled, this should be null
+                  if(newEndTime == null) {
+                    setState(() {
+                      _endTime = _oldEndTime;
+                    });
+                  }
                 },
               ),
               secondaryActions:
                 _endTime == null
-                  ? <Widget>[]
+                  ? <Widget>[
+                    IconSlideAction(
+                      color: Theme.of(context).accentColor,
+                      foregroundColor: Theme.of(context).accentIconTheme.color,
+                      icon: FontAwesomeIcons.clock,
+                      onTap: () => setState(() => _endTime = DateTime.now()),
+                    ),
+                  ]
                   : <Widget>[
+                    IconSlideAction(
+                      color: Theme.of(context).accentColor,
+                      foregroundColor: Theme.of(context).accentIconTheme.color,
+                      icon: FontAwesomeIcons.clock,
+                      onTap: () => setState(() => _endTime = DateTime.now()),
+                    ),
                     IconSlideAction(
                       color: Theme.of(context).errorColor,
                       foregroundColor: Theme.of(context).accentIconTheme.color,

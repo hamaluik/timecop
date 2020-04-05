@@ -1,98 +1,110 @@
-about = 약
+about = About
 
-appDescription = 개인 정보를 존중하고 너무 화려하지 않고 작업을 수행하는 시간 추적 앱.
+appDescription = A time tracking app that respects your privacy and gets the job done without getting too fancy.
 
-appLegalese = 저작권 © Kenton Hamaluik, 2020
+appLegalese = Copyright © Kenton Hamaluik, 2020
 
-readme = 읽어보기
+readme = Readme
 
-changeLog = 변경 로그
+changeLog = Change Log
 
-sourceCode = 소스 코드
+sourceCode = Source Code
 
-whatAreYouDoing = 뭐하는거야?
+whatAreYouDoing = What are you doing?
 
-projects = 프로젝트
+projects = Projects
 
-export = 수출
+export = Export
 
-noProject = (프로젝트 없음)
+noProject = (no project)
 
-confirmDelete = 삭제 확인
+confirmDelete = Confirm Delete
 
-deleteTimerConfirm = 이 타이머를 삭제 하시겠습니까?
+deleteTimerConfirm = Are you sure you want to delete this timer?
 
-cancel = 취소
+cancel = Cancel
 
-delete = 지우다
+delete = Delete
 
-runningTimers = 타이머 실행
+runningTimers = Running Timers
 
-timeCopDatabase = 타임 경찰 데이터베이스 ({ $date })
+timeCopDatabase = Time Cop Database ({ $date })
 
-filter = 필터
+filter = Filter
 
-from = 에서
+from = From
 
-to = 에
+to = To
 
-project = 계획
+project = Project
 
-description = 기술
+description = Description
 
-timeH = 시간 (시간)
+timeH = Time (hours)
 
-timeCopEntries = 타임 경찰 출품작 ({ $date })
+timeCopEntries = Time Cop Entries ({ $date })
 
-createNewProject = 새 프로젝트 만들기
+createNewProject = Create New Project
 
-editProject = 프로젝트 편집
+editProject = Edit Project
 
-pleaseEnterAName = 이름을 입력하십시오
+pleaseEnterAName = Please enter a name
 
-projectName = 프로젝트 이름
+projectName = Project Name
 
-create = 창조하다
+create = Create
 
-save = 저장
+save = Save
 
-areYouSureYouWantToDelete = 이 프로젝트를 삭제 하시겠습니까?
+areYouSureYouWantToDelete = Are you sure you want to delete this project?
 
-editTimer = 타이머 편집
+editTimer = Edit Timer
 
-whatWereYouDoing = 뭐하고 있었어?
+whatWereYouDoing = What were you doing?
 
-startTime = 시작 시간
+startTime = Start Time
 
-endTime = 종료 시간
+endTime = End Time
 
-duration = 지속
+duration = Duration
 
-appName = 타임 경찰
+appName = Time Cop
 
-logoSemantics = 타임 경찰 로고
+logoSemantics = Time Cop Logo
 
-noDescription = (설명 없음)
+noDescription = (no description)
 
-options = 옵션
+options = Options
 
-groupTimers = 하루에 비슷한 타이머 그룹화
+groupTimers = Group Similar Timers Per Day
 
-columns = 열
+columns = Columns
 
-date = 데이트
+date = Date
 
-combinedProjectDescription = 결합 된 프로젝트 및 설명
+combinedProjectDescription = Combined Project & Description
 
-reports = 보고서
+reports = Reports
 
-nHours = { $hours } 시간
+nHours = { $hours } hours
 
-averageDailyHours = 평균 일일 시간
+averageDailyHours = Average Daily Hours
 
-totalProjectShare = 총 프로젝트 점유율
+totalProjectShare = Total Project Share
 
-weeklyHours = 주간 시간
+weeklyHours = Weekly Hours
 
-contributors = 기고자
+contributors = Contributors
+
+settings = 설정
+
+theme = 테마
+
+auto = 자동
+
+light = 빛
+
+dark = 어두운
+
+black = 검은
 

@@ -62,4 +62,10 @@ abstract class L10NProvider {
     String get totalProjectShare;
     String get weeklyHours;
     String get contributors;
+    String get settings;
+    String get theme;
+    String get auto;
+    String get light;
+    String get dark;
+    String get black;
 }

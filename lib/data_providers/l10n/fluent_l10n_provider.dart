@@ -15,7 +15,7 @@
 import 'package:fluent/fluent.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:timecop/data_providers/l10n_provider.dart';
+import 'package:timecop/data_providers/l10n/l10n_provider.dart';
 
 class FluentL10NProvider extends L10NProvider {
   final FluentBundle _bundle;
@@ -90,4 +90,10 @@ class FluentL10NProvider extends L10NProvider {
   String get totalProjectShare => _bundle.format("totalProjectShare", errors: _errors) ?? "totalProjectShare";
   String get weeklyHours => _bundle.format("weeklyHours", errors: _errors) ?? "weeklyHours";
   String get contributors => _bundle.format("contributors", errors: _errors) ?? "contributors";
+  String get settings => _bundle.format("settings", errors: _errors) ?? "settings";
+  String get theme => _bundle.format("theme", errors: _errors) ?? "theme";
+  String get auto => _bundle.format("auto", errors: _errors) ?? "auto";
+  String get light => _bundle.format("light", errors: _errors) ?? "light";
+  String get dark => _bundle.format("dark", errors: _errors) ?? "dark";
+  String get black => _bundle.format("black", errors: _errors) ?? "black";
 }
