@@ -1,98 +1,110 @@
-about = Tentang
+about = About
 
-appDescription = Aplikasi pelacakan waktu yang menghormati privasi Anda dan menyelesaikan pekerjaan tanpa menjadi terlalu mewah.
+appDescription = A time tracking app that respects your privacy and gets the job done without getting too fancy.
 
-appLegalese = Hak Cipta © Kenton Hamaluik, 2020
+appLegalese = Copyright © Kenton Hamaluik, 2020
 
-readme = Baca aku
+readme = Readme
 
-changeLog = Ubah Log
+changeLog = Change Log
 
-sourceCode = Kode sumber
+sourceCode = Source Code
 
-whatAreYouDoing = Apa yang sedang kamu lakukan?
+whatAreYouDoing = What are you doing?
 
-projects = Proyek
+projects = Projects
 
-export = Ekspor
+export = Export
 
-noProject = (tidak ada proyek)
+noProject = (no project)
 
-confirmDelete = Konfirmasikan Hapus
+confirmDelete = Confirm Delete
 
-deleteTimerConfirm = Anda yakin ingin menghapus penghitung waktu ini?
+deleteTimerConfirm = Are you sure you want to delete this timer?
 
-cancel = Membatalkan
+cancel = Cancel
 
-delete = Menghapus
+delete = Delete
 
-runningTimers = Pengatur Waktu Berlari
+runningTimers = Running Timers
 
-timeCopDatabase = Database Time Cop ({ $date })
+timeCopDatabase = Time Cop Database ({ $date })
 
-filter = Saring
+filter = Filter
 
-from = Dari
+from = From
 
-to = Untuk
+to = To
 
-project = Proyek
+project = Project
 
-description = Deskripsi
+description = Description
 
-timeH = Waktu (jam)
+timeH = Time (hours)
 
-timeCopEntries = Entri Cop Waktu ({ $date })
+timeCopEntries = Time Cop Entries ({ $date })
 
-createNewProject = Buat Proyek Baru
+createNewProject = Create New Project
 
-editProject = Edit Proyek
+editProject = Edit Project
 
-pleaseEnterAName = Silakan masukkan nama
+pleaseEnterAName = Please enter a name
 
-projectName = Nama Proyek
+projectName = Project Name
 
-create = Membuat
+create = Create
 
-save = Menyimpan
+save = Save
 
-areYouSureYouWantToDelete = Anda yakin ingin menghapus proyek ini?
+areYouSureYouWantToDelete = Are you sure you want to delete this project?
 
 editTimer = Edit Timer
 
-whatWereYouDoing = Apa yang kamu lakukan?
+whatWereYouDoing = What were you doing?
 
-startTime = Waktu mulai
+startTime = Start Time
 
-endTime = Akhir waktu
+endTime = End Time
 
-duration = Durasi
+duration = Duration
 
 appName = Time Cop
 
-logoSemantics = Logo Time Cop
+logoSemantics = Time Cop Logo
 
-noDescription = (tidak ada deskripsi)
+noDescription = (no description)
 
-options = Pilihan
+options = Options
 
-groupTimers = Pengatur Waktu Serupa Grup Per Hari
+groupTimers = Group Similar Timers Per Day
 
-columns = Kolom
+columns = Columns
 
-date = Tanggal
+date = Date
 
-combinedProjectDescription = Proyek &amp; Deskripsi Gabungan
+combinedProjectDescription = Combined Project & Description
 
-reports = Laporan
+reports = Reports
 
-nHours = { $hours } jam
+nHours = { $hours } hours
 
-averageDailyHours = Rata-rata Jam Harian
+averageDailyHours = Average Daily Hours
 
-totalProjectShare = Total Pangsa Proyek
+totalProjectShare = Total Project Share
 
-weeklyHours = Jam Mingguan
+weeklyHours = Weekly Hours
 
-contributors = Kontributor
+contributors = Contributors
+
+settings = Pengaturan
+
+theme = Tema
+
+auto = Mobil
+
+light = Cahaya
+
+dark = Gelap
+
+black = Hitam
 

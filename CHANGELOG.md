@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 * Added ability to search for timers in the dashboard
 * Added ability to filter timers by time and project in the dashboard
+* Added a settings screen
+* Added ability to change the theme manually
 
 ### Changed
 * Moved the menu button to be under the Time Cop logo on the left side, to make room for the search and filter buttons

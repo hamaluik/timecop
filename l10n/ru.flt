@@ -1,102 +1,114 @@
 # tt-hand-translated
 about = О
 
-appDescription = Приложение для отслеживания времени, которое уважает вашу конфиденциальность и выполняет работу, не становясь слишком модным.
+appDescription = A time tracking app that respects your privacy and gets the job done without getting too fancy.
 
 # tt-hand-translated
 appLegalese = Правообладатель © Кентон Хамалук, 2020
 
-readme = Прочти меня
+readme = Readme
 
-changeLog = Журнал изменений
+changeLog = Change Log
 
-sourceCode = Исходный код
+sourceCode = Source Code
 
-whatAreYouDoing = Что ты делаешь?
+whatAreYouDoing = What are you doing?
 
-projects = проектов
+projects = Projects
 
-export = экспорт
+export = Export
 
-noProject = (нет проекта)
+noProject = (no project)
 
-confirmDelete = Подтвердите удаление
+confirmDelete = Confirm Delete
 
-deleteTimerConfirm = Вы уверены, что хотите удалить этот таймер?
+deleteTimerConfirm = Are you sure you want to delete this timer?
 
-cancel = отменить
+cancel = Cancel
 
-delete = удалять
+delete = Delete
 
-runningTimers = Таймеры бега
+runningTimers = Running Timers
 
-timeCopDatabase = База данных Time Cop ({ $date })
+timeCopDatabase = Time Cop Database ({ $date })
 
-filter = Фильтр
+filter = Filter
 
-from = От
+from = From
 
-to = к
+to = To
 
-project = проект
+project = Project
 
-description = Описание
+description = Description
 
-timeH = Время (часы)
+timeH = Time (hours)
 
-timeCopEntries = Записи временного полицейского ({ $date })
+timeCopEntries = Time Cop Entries ({ $date })
 
-createNewProject = Создать новый проект
+createNewProject = Create New Project
 
-editProject = Редактировать проект
+editProject = Edit Project
 
-pleaseEnterAName = Пожалуйста, введите имя
+pleaseEnterAName = Please enter a name
 
-projectName = название проекта
+projectName = Project Name
 
 # tt-hand-translated
 create = Создать
 
-save = Сохранить
+save = Save
 
-areYouSureYouWantToDelete = Вы уверены, что хотите удалить этот проект?
+areYouSureYouWantToDelete = Are you sure you want to delete this project?
 
-editTimer = Редактировать таймер
+editTimer = Edit Timer
 
-whatWereYouDoing = Что ты делал?
+whatWereYouDoing = What were you doing?
 
-startTime = Время начала
+startTime = Start Time
 
-endTime = Время окончания
+endTime = End Time
 
-duration = продолжительность
+duration = Duration
 
 appName = Time Cop
 
 logoSemantics = Time Cop Logo
 
-noDescription = (нет описания)
+noDescription = (no description)
 
-options = Параметры
+options = Options
 
-groupTimers = Группа похожих таймеров в день
+groupTimers = Group Similar Timers Per Day
 
 # tt-hand-translated
 columns = Колонки
 
-date = Дата
+date = Date
 
-combinedProjectDescription = Совместный проект и описание
+combinedProjectDescription = Combined Project & Description
 
-reports = Отчеты
+reports = Reports
 
-nHours = { $hours } часов
+nHours = { $hours } hours
 
-averageDailyHours = Среднесуточные часы
+averageDailyHours = Average Daily Hours
 
-totalProjectShare = Общая доля проекта
+totalProjectShare = Total Project Share
 
-weeklyHours = Еженедельные часы
+weeklyHours = Weekly Hours
 
-contributors = Авторы
+contributors = Contributors
+
+settings = настройки
+
+theme = тема
+
+auto = Авто
+
+light = Свет
+
+dark = Темно
+
+black = черный
 

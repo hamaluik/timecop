@@ -1,98 +1,110 @@
-about = 約
+about = About
 
-appDescription = あなたのプライバシーを尊重し、凝りすぎずに仕事を終わらせる時間追跡アプリ。
+appDescription = A time tracking app that respects your privacy and gets the job done without getting too fancy.
 
-appLegalese = Copyright©ケントン・ハマルイク、2020
+appLegalese = Copyright © Kenton Hamaluik, 2020
 
 readme = Readme
 
-changeLog = ログを変更
+changeLog = Change Log
 
-sourceCode = ソースコード
+sourceCode = Source Code
 
-whatAreYouDoing = 何してるの？
+whatAreYouDoing = What are you doing?
 
-projects = プロジェクト
+projects = Projects
 
-export = 書き出す
+export = Export
 
-noProject = （プロジェクトなし）
+noProject = (no project)
 
-confirmDelete = 削除を確認
+confirmDelete = Confirm Delete
 
-deleteTimerConfirm = このタイマーを削除してもよろしいですか？
+deleteTimerConfirm = Are you sure you want to delete this timer?
 
-cancel = キャンセル
+cancel = Cancel
 
-delete = 削除する
+delete = Delete
 
-runningTimers = タイマーの実行
+runningTimers = Running Timers
 
-timeCopDatabase = タイムコップデータベース（{ $date }）
+timeCopDatabase = Time Cop Database ({ $date })
 
-filter = フィルタ
+filter = Filter
 
-from = から
+from = From
 
-to = に
+to = To
 
-project = 事業
+project = Project
 
-description = 説明文
+description = Description
 
-timeH = 時間（時間）
+timeH = Time (hours)
 
-timeCopEntries = タイムコップエントリー（{ $date }）
+timeCopEntries = Time Cop Entries ({ $date })
 
-createNewProject = 新しいプロジェクトを作成
+createNewProject = Create New Project
 
-editProject = プロジェクトを編集
+editProject = Edit Project
 
-pleaseEnterAName = 名前を入力してください
+pleaseEnterAName = Please enter a name
 
-projectName = プロジェクト名
+projectName = Project Name
 
-create = 作成する
+create = Create
 
-save = 保存する
+save = Save
 
-areYouSureYouWantToDelete = このプロジェクトを削除してもよろしいですか？
+areYouSureYouWantToDelete = Are you sure you want to delete this project?
 
-editTimer = タイマーを編集
+editTimer = Edit Timer
 
-whatWereYouDoing = 何してたの？
+whatWereYouDoing = What were you doing?
 
-startTime = 始まる時間
+startTime = Start Time
 
-endTime = 終了時間
+endTime = End Time
 
-duration = 期間
+duration = Duration
 
-appName = タイムコップ
+appName = Time Cop
 
-logoSemantics = タイムコップロゴ
+logoSemantics = Time Cop Logo
 
-noDescription = （説明なし）
+noDescription = (no description)
 
-options = オプション
+options = Options
 
-groupTimers = 1日あたりの類似したタイマーのグループ化
+groupTimers = Group Similar Timers Per Day
 
-columns = カラム
+columns = Columns
 
-date = 日付
+date = Date
 
-combinedProjectDescription = 組み合わせたプロジェクトと説明
+combinedProjectDescription = Combined Project & Description
 
-reports = 報告書
+reports = Reports
 
-nHours = { $hours } 時間
+nHours = { $hours } hours
 
-averageDailyHours = 1日の平均時間
+averageDailyHours = Average Daily Hours
 
-totalProjectShare = 総プロジェクトシェア
+totalProjectShare = Total Project Share
 
-weeklyHours = 毎週の時間
+weeklyHours = Weekly Hours
 
-contributors = 貢献者
+contributors = Contributors
+
+settings = 設定
+
+theme = テーマ
+
+auto = 自動
+
+light = 光
+
+dark = 闇
+
+black = ブラック
 

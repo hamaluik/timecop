@@ -1,98 +1,110 @@
-about = Über
+about = About
 
-appDescription = Eine Zeiterfassungs-App, die Ihre Privatsphäre respektiert und die Arbeit erledigt, ohne zu ausgefallen zu werden.
+appDescription = A time tracking app that respects your privacy and gets the job done without getting too fancy.
 
 appLegalese = Copyright © Kenton Hamaluik, 2020
 
-readme = Liesmich
+readme = Readme
 
-changeLog = Änderungsprotokoll
+changeLog = Change Log
 
-sourceCode = Quellcode
+sourceCode = Source Code
 
-whatAreYouDoing = Was tun Sie?
+whatAreYouDoing = What are you doing?
 
-projects = Projekte
+projects = Projects
 
 export = Export
 
-noProject = (kein Projekt)
+noProject = (no project)
 
-confirmDelete = Löschen bestätigen
+confirmDelete = Confirm Delete
 
-deleteTimerConfirm = Möchten Sie diesen Timer wirklich löschen?
+deleteTimerConfirm = Are you sure you want to delete this timer?
 
-cancel = Stornieren
+cancel = Cancel
 
-delete = Löschen
+delete = Delete
 
-runningTimers = Timer ausführen
+runningTimers = Running Timers
 
-timeCopDatabase = Time Cop-Datenbank ({ $date })
+timeCopDatabase = Time Cop Database ({ $date })
 
 filter = Filter
 
-from = Von
+from = From
 
-to = Zu
+to = To
 
-project = Projekt
+project = Project
 
-description = Beschreibung
+description = Description
 
-timeH = Zeit (Stunden)
+timeH = Time (hours)
 
-timeCopEntries = Time Cop-Einträge ({ $date })
+timeCopEntries = Time Cop Entries ({ $date })
 
-createNewProject = Neues Projekt erstellen
+createNewProject = Create New Project
 
-editProject = Projekt bearbeiten
+editProject = Edit Project
 
-pleaseEnterAName = Bitte geben Sie einen Namen ein
+pleaseEnterAName = Please enter a name
 
-projectName = Projektname
+projectName = Project Name
 
-create = Erstellen
+create = Create
 
-save = speichern
+save = Save
 
-areYouSureYouWantToDelete = Möchten Sie dieses Projekt wirklich löschen?
+areYouSureYouWantToDelete = Are you sure you want to delete this project?
 
-editTimer = Timer bearbeiten
+editTimer = Edit Timer
 
-whatWereYouDoing = Was hast du gemacht?
+whatWereYouDoing = What were you doing?
 
-startTime = Startzeit
+startTime = Start Time
 
-endTime = Endzeit
+endTime = End Time
 
-duration = Dauer
+duration = Duration
 
 appName = Time Cop
 
 logoSemantics = Time Cop Logo
 
-noDescription = (Keine Beschreibung)
+noDescription = (no description)
 
-options = Optionen
+options = Options
 
-groupTimers = Gruppieren Sie ähnliche Timer pro Tag
+groupTimers = Group Similar Timers Per Day
 
-columns = Säulen
+columns = Columns
 
-date = Datum
+date = Date
 
-combinedProjectDescription = Kombiniertes Projekt &amp; Beschreibung
+combinedProjectDescription = Combined Project & Description
 
-reports = Berichte
+reports = Reports
 
-nHours = { $hours } Std
+nHours = { $hours } hours
 
-averageDailyHours = Durchschnittliche tägliche Stunden
+averageDailyHours = Average Daily Hours
 
-totalProjectShare = Gesamtprojektanteil
+totalProjectShare = Total Project Share
 
-weeklyHours = Wöchentliche Stunden
+weeklyHours = Weekly Hours
 
-contributors = Mitwirkende
+contributors = Contributors
+
+settings = die Einstellungen
+
+theme = Thema
+
+auto = Auto
+
+light = Licht
+
+dark = Dunkel
+
+black = Schwarz
 
