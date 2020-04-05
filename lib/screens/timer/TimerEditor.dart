@@ -71,6 +71,14 @@ class _TimerEditorState extends State<TimerEditor> {
   }
 
   @override
+  void setStartTime(DateTime dt) {
+    setState(() { _startTime = dt; });
+    if(_startTime.isAfter(_endTime)){
+      setState(() { _endTime = _startTime; });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -142,7 +150,8 @@ class _TimerEditorState extends State<TimerEditor> {
                 await DatePicker.showDateTimePicker(
                   context,
                   currentTime: _startTime,
-                  onChanged: (DateTime dt) => setState(() => _startTime = dt),
+//                  onChanged: (DateTime dt) => setStartTime(dt),
+                  onConfirm: (DateTime dt) => setStartTime(dt),
                   theme: DatePickerTheme(
                     cancelStyle: Theme.of(context).textTheme.button,
                     doneStyle: Theme.of(context).textTheme.button,
@@ -163,7 +172,7 @@ class _TimerEditorState extends State<TimerEditor> {
                     context,
                     currentTime: _endTime,
                     minTime: _startTime,
-                    onChanged: (DateTime dt) => setState(() => _endTime = dt),
+//                    onChanged: (DateTime dt) => setState(() => _endTime = dt),
                     onConfirm: (DateTime dt) => setState(() => _endTime = dt),
                     theme: DatePickerTheme(
                       cancelStyle: Theme.of(context).textTheme.button,
