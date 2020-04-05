@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timecop/models/theme_type.dart';
 import 'settings_provider.dart';
 
 class SharedPrefsSettingsProvider extends SettingsProvider {
@@ -20,12 +21,30 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
   SharedPrefsSettingsProvider(this._prefs)
     : assert(_prefs != null);
 
+  @override
   bool getBool(String key) => _prefs.getBool(key);
+
+  @override
   void setBool(String key, bool value) => _prefs.setBool(key, value);
+
+  @override
   int getInt(String key) => _prefs.getInt(key);
+
+  @override
   void setInt(String key, int value) => _prefs.setInt(key, value);
 
   static Future<SharedPrefsSettingsProvider> load() async {
     return SharedPrefsSettingsProvider(await SharedPreferences.getInstance());
+  }
+
+  @override
+  ThemeType getTheme() {
+    String t = _prefs.getString("theme");
+    return themeFromString(t) ?? ThemeType.auto;
+  }
+
+  @override
+  void setTheme(ThemeType theme) {
+    _prefs.setString("theme", theme.stringify);
   }
 }

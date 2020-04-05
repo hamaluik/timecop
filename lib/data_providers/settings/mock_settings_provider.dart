@@ -13,17 +13,32 @@
 // limitations under the License.
 
 import 'package:timecop/data_providers/settings/settings_provider.dart';
+import 'package:timecop/models/theme_type.dart';
 
 class MockSettingsProvider extends SettingsProvider {
   Map<String, dynamic> values;
+  ThemeType theme;
 
   MockSettingsProvider() {
     values = Map<String, dynamic>();
+    theme = ThemeType.auto;
   }
 
   @override
   bool getBool(String key) => values.containsKey(key) ? values[key] as bool : true;
+
+  @override
   void setBool(String key, bool value) => values[key] = value;
+
+  @override
   int getInt(String key) => values.containsKey(key) ? values[key] as int : -1;
+
+  @override
   void setInt(String key, int value) => values[key] = value;
+
+  @override
+  ThemeType getTheme() => theme;
+
+  @override
+  void setTheme(ThemeType t) => theme = t;
 }
