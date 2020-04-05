@@ -15,7 +15,7 @@
 import 'package:fluent/fluent.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:timecop/data_providers/l10n_provider.dart';
+import 'package:timecop/data_providers/l10n/l10n_provider.dart';
 
 class FluentL10NProvider extends L10NProvider {
   final FluentBundle _bundle;

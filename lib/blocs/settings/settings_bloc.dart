@@ -14,7 +14,7 @@
 
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:timecop/data_providers/settings_provider.dart';
+import 'package:timecop/data_providers/settings/settings_provider.dart';
 import './bloc.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
