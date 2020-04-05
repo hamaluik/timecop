@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'package:flutter/cupertino.dart';
+import 'package:timecop/l10n.dart';
+
 enum ThemeType { auto, light, dark, black }
 
 ThemeType themeFromString(String type) {
@@ -32,6 +35,16 @@ extension ThemeTypeStr on ThemeType {
       case ThemeType.light: return "light";
       case ThemeType.dark: return "dark";
       case ThemeType.black: return "black";
+    }
+    return null;
+  }
+
+  String display(BuildContext context) {
+    switch(this) {
+      case ThemeType.auto: return L10N.of(context).tr.auto;
+      case ThemeType.light: return L10N.of(context).tr.light;
+      case ThemeType.dark: return L10N.of(context).tr.dark;
+      case ThemeType.black: return L10N.of(context).tr.black;
     }
     return null;
   }

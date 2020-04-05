@@ -24,5 +24,9 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     if(event is LoadThemeEvent) {
       yield ThemeState(settings.getTheme());
     }
+    else if(event is ChangeThemeEvent) {
+      settings.setTheme(event.theme);
+      yield ThemeState(event.theme);
+    }
   }
 }

@@ -1,0 +1,101 @@
+// Copyright 2020 Kenton Hamaluik
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+//     http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:timecop/blocs/theme/theme_bloc.dart';
+import 'package:timecop/l10n.dart';
+import 'package:timecop/models/theme_type.dart';
+
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeBloc themeBloc = BlocProvider.of<ThemeBloc>(context);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(L10N.of(context).tr.settings),
+      ),
+      body: Column(
+        children: <Widget>[
+          BlocBuilder<ThemeBloc, ThemeState>(
+            bloc: themeBloc,
+            builder: (BuildContext context, ThemeState state) {
+              return ListTile(
+                title: Text(L10N.of(context).tr.theme),
+                subtitle: Text(state.theme.display(context)),
+                trailing: Icon(FontAwesomeIcons.chevronRight, color: Theme.of(context).accentColor),
+                leading: Icon(FontAwesomeIcons.palette),
+                onTap: () async {
+                  ThemeType oldTheme = state.theme;
+                  ThemeType newTheme = await showModalBottomSheet<ThemeType>(
+                    context: context,
+                    builder: (context) => Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        RadioListTile<ThemeType>(
+                          title: Text(L10N.of(context).tr.auto),
+                          value: ThemeType.auto,
+                          groupValue: state.theme,
+                          onChanged: (ThemeType type) {
+                            themeBloc.add(ChangeThemeEvent(type));
+                            Navigator.pop(context, type);
+                          },
+                        ),
+                        RadioListTile<ThemeType>(
+                          title: Text(L10N.of(context).tr.light),
+                          value: ThemeType.light,
+                          groupValue: state.theme,
+                          onChanged: (ThemeType type) {
+                            themeBloc.add(ChangeThemeEvent(type));
+                            Navigator.pop(context, type);
+                          },
+                        ),
+                        RadioListTile<ThemeType>(
+                          title: Text(L10N.of(context).tr.dark),
+                          value: ThemeType.dark,
+                          groupValue: state.theme,
+                          onChanged: (ThemeType type) {
+                            themeBloc.add(ChangeThemeEvent(type));
+                            Navigator.pop(context, type);
+                          },
+                        ),
+                        RadioListTile<ThemeType>(
+                          title: Text(L10N.of(context).tr.black),
+                          value: ThemeType.black,
+                          groupValue: state.theme,
+                          onChanged: (ThemeType type) {
+                            themeBloc.add(ChangeThemeEvent(type));
+                            Navigator.pop(context, type);
+                          },
+                        ),
+                      ],
+                    )
+                  );
+
+                  if(newTheme == null) {
+                    themeBloc.add(ChangeThemeEvent(oldTheme));
+                  }
+                },
+              );
+            }
+          )
+        ],
+      )
+    );
+  }
+}

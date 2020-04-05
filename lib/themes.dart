@@ -42,3 +42,17 @@ final ThemeData darkTheme = ThemeData(
     backgroundColor: Colors.grey[850],
   ),
 );
+
+final ThemeData blackTheme = ThemeData(
+  brightness: Brightness.dark,
+  primarySwatch: Colors.grey,
+  primaryColor: Colors.black,
+  primaryColorBrightness: Brightness.dark,
+  accentColor: Colors.cyan[600],
+  accentColorBrightness: Brightness.dark,
+  fontFamily: 'PublicSans',
+  scaffoldBackgroundColor: Colors.black,
+  bottomSheetTheme: BottomSheetThemeData(
+    backgroundColor: Colors.black,
+  ),
+);

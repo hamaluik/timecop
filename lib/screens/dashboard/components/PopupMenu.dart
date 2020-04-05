@@ -20,9 +20,10 @@ import 'package:timecop/screens/about/AboutScreen.dart';
 import 'package:timecop/screens/export/ExportScreen.dart';
 import 'package:timecop/screens/projects/ProjectsScreen.dart';
 import 'package:timecop/screens/reports/ReportsScreen.dart';
+import 'package:timecop/screens/settings/SettingsScreen.dart';
 
 enum MenuItem {
-  projects, reports, export, about,
+  projects, reports, export, settings, about,
 }
 
 class PopupMenu extends StatelessWidget {
@@ -37,6 +38,7 @@ class PopupMenu extends StatelessWidget {
         height: 30,
         semanticsLabel: L10N.of(context).tr.logoSemantics,
       ),
+      color: Theme.of(context).scaffoldBackgroundColor,
       onSelected: (MenuItem item) {
         switch(item) {
           case MenuItem.projects:
@@ -52,6 +54,11 @@ class PopupMenu extends StatelessWidget {
           case MenuItem.export:
             Navigator.of(context).push(MaterialPageRoute<ExportScreen>(
               builder: (BuildContext _context) => ExportScreen(),
+            ));
+            break;
+          case MenuItem.settings:
+            Navigator.of(context).push(MaterialPageRoute<SettingsScreen>(
+              builder: (BuildContext _context) => SettingsScreen(),
             ));
             break;
           case MenuItem.about:
@@ -86,6 +93,14 @@ class PopupMenu extends StatelessWidget {
               title: Text(L10N.of(context).tr.export),
             ),
             value: MenuItem.export,
+          ),
+          PopupMenuItem(
+            key: Key("menuSettings"),
+            child: ListTile(
+              leading: Icon(FontAwesomeIcons.screwdriver),
+              title: Text(L10N.of(context).tr.settings),
+            ),
+            value: MenuItem.settings,
           ),
           PopupMenuItem(
             key: Key("menuAbout"),

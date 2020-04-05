@@ -10,8 +10,8 @@ class ThemeState extends Equatable {
       case ThemeType.auto: return null;
       case ThemeType.light: return lightTheme;
       case ThemeType.dark: return darkTheme;
-      case ThemeType.black: return darkTheme; // TODO: create a black theme
+      case ThemeType.black: return blackTheme;
     }
-    return darkTheme;
+    return null;
   }
 }
