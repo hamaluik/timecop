@@ -28,7 +28,7 @@ class AboutScreen extends StatelessWidget {
     return AboutPage(
       key: Key("aboutPage"),
       title: Text(L10N.of(context).tr.about),
-      applicationVersion: 'v{{ version }}-{{ buildNumber }}',
+      applicationVersion: 'v{{ version }}+{{ buildNumber }}',
       applicationDescription: Text(
         L10N.of(context).tr.appDescription,
         textAlign: TextAlign.justify,
