@@ -16,13 +16,13 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/models/project_description_pair.dart';
 import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
+import 'package:timecop/screens/dashboard/components/CollapsibleDayGrouping.dart';
 import 'package:timecop/screens/dashboard/components/GroupedStoppedTimersRow.dart';
 import 'StoppedTimerRow.dart';
 
@@ -64,32 +64,10 @@ class DayGrouping {
     .expand((l) => l);
 
     if(settingsBloc.state.collapseDays) {
-      return ExpansionTile(
-        initiallyExpanded: DateTime.now().difference(date).inDays.abs() <= 1,
-        title: Text(
-          _dateFormat.format(date),
-          style: TextStyle(
-            color: Theme.of(context).accentColor,
-            fontWeight: FontWeight.w700,
-            fontSize: Theme.of(context).textTheme.body1.fontSize,
-          )
-        ),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            const Icon(Icons.expand_more),
-            Container(width: 8),
-            Text(
-              TimerEntry.formatDuration(runningTotal),
-              style: TextStyle(
-                color: Theme.of(context).accentColor,
-                fontFamily: "FiraMono",
-              )
-            ),
-          ],
-        ),
-        children: theDaysTimers.toList(),
+      return CollapsibleDayGrouping(
+        date: date,
+        totalTime: runningTotal,
+        children: theDaysTimers,
       );
     }
     else {
