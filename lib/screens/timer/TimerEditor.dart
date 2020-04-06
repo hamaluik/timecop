@@ -18,9 +18,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
+import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
@@ -90,6 +92,9 @@ class _TimerEditorState extends State<TimerEditor> {
 
   @override
   Widget build(BuildContext context) {
+    final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
+    final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(L10N.of(context).tr.editTimer),
@@ -142,13 +147,43 @@ class _TimerEditorState extends State<TimerEditor> {
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
-              child: TextFormField(
-                controller: _descriptionController,
-                decoration: InputDecoration(
-                  labelText: L10N.of(context).tr.description,
-                  hintText: L10N.of(context).tr.whatWereYouDoing,
-                ),
-              ),
+              child:
+                settingsBloc.state.autocompleteDescription
+                  ? TypeAheadField<String>(
+                      direction: AxisDirection.down,
+                      textFieldConfiguration: TextFieldConfiguration<String>(
+                        controller: _descriptionController,
+                        autocorrect: true,
+                        decoration: InputDecoration(
+                          labelText: L10N.of(context).tr.description,
+                          hintText: L10N.of(context).tr.whatWereYouDoing,
+                        ),
+                      ),
+                      itemBuilder: (BuildContext context, String desc) =>
+                        ListTile(
+                          title: Text(desc)
+                        ),
+                      onSuggestionSelected: (String description) => _descriptionController.text = description,
+                      suggestionsCallback: (pattern) async {
+                        if(pattern.length < 2) return [];
+
+                        List<String> descriptions = timers.state.timers
+                          .where((timer) => timer.description != null)
+                          .where((timer) => timer.description.toLowerCase().contains(pattern.toLowerCase()) ?? false)
+                          .map((timer) => timer.description)
+                          .toSet()
+                          .toList();
+                        return descriptions;
+                      },
+                    )
+                  : TextFormField(
+                      controller: _descriptionController,
+                      autocorrect: true,
+                      decoration: InputDecoration(
+                        labelText: L10N.of(context).tr.description,
+                        hintText: L10N.of(context).tr.whatWereYouDoing,
+                      ),
+                    ),
             ),
             Slidable(
               actionPane: SlidableDrawerActionPane(),
@@ -295,7 +330,6 @@ class _TimerEditorState extends State<TimerEditor> {
             description: _descriptionController.text.trim(),
           );
 
-          final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
           assert(timers != null);
           timers.add(EditTimer(timer));
           Navigator.of(context).pop();
