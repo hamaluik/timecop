@@ -16,6 +16,7 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
@@ -47,55 +48,86 @@ class DayGrouping {
       }
     }
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Padding(
-          padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  Text(
-                    _dateFormat.format(date),
-                    style: TextStyle(
-                      color: Theme.of(context).accentColor,
-                      fontWeight: FontWeight.w700
-                    )
-                  ),
-                  Text(
-                    TimerEntry.formatDuration(runningTotal),
-                    style: TextStyle(
-                      color: Theme.of(context).accentColor,
-                      fontFamily: "FiraMono",
-                    )
-                  )
-                ],
-              ),
-              Divider(),
-            ],
-          ),
+    Iterable<Widget> theDaysTimers = pairedEntries.values.map((timers) {
+      if(settingsBloc.state.groupTimers) {
+        if(timers.length > 1) {
+          return <Widget>[GroupedStoppedTimersRow(timers: timers)];
+        }
+        else {
+          return <Widget>[StoppedTimerRow(timer: timers[0])];
+        }
+      }
+      else {
+        return timers.map((t) => StoppedTimerRow(timer: t)).toList();
+      }
+    })
+    .expand((l) => l);
+
+    if(settingsBloc.state.collapseDays) {
+      return ExpansionTile(
+        initiallyExpanded: DateTime.now().difference(date).inDays.abs() <= 1,
+        title: Text(
+          _dateFormat.format(date),
+          style: TextStyle(
+            color: Theme.of(context).accentColor,
+            fontWeight: FontWeight.w700,
+            fontSize: Theme.of(context).textTheme.body1.fontSize,
+          )
         ),
-      ].followedBy(
-        pairedEntries.values.map((timers) {
-          if(settingsBloc.state.groupTimers) {
-            if(timers.length > 1) {
-              return <Widget>[GroupedStoppedTimersRow(timers: timers)];
-            }
-            else {
-              return <Widget>[StoppedTimerRow(timer: timers[0])];
-            }
-          }
-          else {
-            return timers.map((t) => StoppedTimerRow(timer: t)).toList();
-          }
-        })
-        .expand((l) => l)
-      ).toList(),
-    );
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            const Icon(Icons.expand_more),
+            Container(width: 8),
+            Text(
+              TimerEntry.formatDuration(runningTotal),
+              style: TextStyle(
+                color: Theme.of(context).accentColor,
+                fontFamily: "FiraMono",
+              )
+            ),
+          ],
+        ),
+        children: theDaysTimers.toList(),
+      );
+    }
+    else {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    Text(
+                      _dateFormat.format(date),
+                      style: TextStyle(
+                        color: Theme.of(context).accentColor,
+                        fontWeight: FontWeight.w700
+                      )
+                    ),
+                    Text(
+                      TimerEntry.formatDuration(runningTotal),
+                      style: TextStyle(
+                        color: Theme.of(context).accentColor,
+                        fontFamily: "FiraMono",
+                      )
+                    )
+                  ],
+                ),
+                Divider(),
+              ],
+            ),
+          ),
+        ].followedBy(theDaysTimers).toList(),
+      );
+    }
   }
 }
 

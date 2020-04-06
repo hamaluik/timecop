@@ -67,7 +67,7 @@ class SettingsState extends Equatable {
       exportIncludeDurationHours: true,
       defaultProjectID: -1,
       groupTimers: true,
-      collapseDays: true,
+      collapseDays: false,
       autocompleteDescription: true,
     );
   }
