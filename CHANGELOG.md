@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added a settings screen
 * Added ability to change the theme manually
 * Added ability to change the language manually
+* Added autocomplete on timer description fields
+* Added ability to collapse days
+* Added settings to control autocomplete, day collapsing, timer grouping
 
 ### Changed
 * Moved the menu button to be under the Time Cop logo on the left side, to make room for the search and filter buttons
