@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'package:flutter/widgets.dart';
 import 'package:timecop/models/theme_type.dart';
 
 abstract class SettingsProvider {
@@ -22,4 +23,7 @@ abstract class SettingsProvider {
 
   ThemeType getTheme();
   void setTheme(ThemeType theme);
+
+  Locale getLocale();
+  void setLocale(Locale locale);
 }

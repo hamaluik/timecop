@@ -12,12 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'package:flutter/rendering.dart';
 import 'package:timecop/data_providers/settings/settings_provider.dart';
 import 'package:timecop/models/theme_type.dart';
 
 class MockSettingsProvider extends SettingsProvider {
   Map<String, dynamic> values;
   ThemeType theme;
+  Locale locale;
 
   MockSettingsProvider() {
     values = Map<String, dynamic>();
@@ -41,4 +43,10 @@ class MockSettingsProvider extends SettingsProvider {
 
   @override
   void setTheme(ThemeType t) => theme = t;
+
+  @override
+  Locale getLocale() => locale;
+
+  @override
+  void setLocale(Locale l) => locale = l;
 }

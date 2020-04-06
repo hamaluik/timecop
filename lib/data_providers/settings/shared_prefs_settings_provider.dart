@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timecop/models/theme_type.dart';
 import 'settings_provider.dart';
@@ -46,5 +47,24 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
   @override
   void setTheme(ThemeType theme) {
     _prefs.setString("theme", theme.stringify);
+  }
+
+  @override
+  Locale getLocale() {
+    String languageCode = _prefs.getString("languageCode");
+    if(languageCode == null) {
+      return null;
+    }
+    String countryCode = _prefs.getString("countryCode");
+    return Locale.fromSubtags(
+      languageCode: languageCode,
+      countryCode: countryCode
+    );
+  }
+
+  @override
+  void setLocale(Locale locale) {
+    _prefs.setString("languageCode", locale.languageCode);
+    _prefs.setString("countryCode", locale.countryCode);
   }
 }

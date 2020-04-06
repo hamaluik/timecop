@@ -100,10 +100,13 @@ settings = Settings
 
 theme = Theme
 
-auto = Auto
+auto = Automatic
 
 light = Light
 
 dark = Dark
 
 black = Black
+
+# tt-lang-name
+langName = English
