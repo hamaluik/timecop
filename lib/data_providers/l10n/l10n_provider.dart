@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'package:flutter/widgets.dart';
+
 abstract class L10NProvider {
     String get about;
     String get appDescription;
@@ -68,4 +70,6 @@ abstract class L10NProvider {
     String get light;
     String get dark;
     String get black;
+    String langName(Locale locale);
+    String get language;
 }

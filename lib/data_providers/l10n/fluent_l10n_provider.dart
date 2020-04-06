@@ -96,4 +96,32 @@ class FluentL10NProvider extends L10NProvider {
   String get light => _bundle.format("light", errors: _errors) ?? "light";
   String get dark => _bundle.format("dark", errors: _errors) ?? "dark";
   String get black => _bundle.format("black", errors: _errors) ?? "black";
+  String langName(Locale locale) {
+    if(locale == null) {
+      return auto;
+    }
+    switch(locale.languageCode) {
+      case "ar": return "العربية";
+      case "de": return "Deutsch";
+      case "en": return "English";
+      case "es": return "Español";
+      case "fr": return "Français";
+      case "hi": return "हिन्दी";
+      case "id": return "Indonesia";
+      case "it": return "Italiano";
+      case "ja": return "日本語";
+      case "ko": return "한국어";
+      case "pt": return "Português";
+      case "ru": return "русский";
+      case "zh": {
+        switch(locale.countryCode) {
+          case "CN": return "中文（简体）";
+          case "TW": return "中文（繁體）";
+          default: return "中文";
+        }
+      }
+    }
+    return "<lang name>";
+  }
+  String get language => _bundle.format("language", errors: _errors) ?? "language";
 }

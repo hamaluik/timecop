@@ -110,3 +110,5 @@ black = Black
 
 # tt-lang-name
 langName = English
+
+language = Language

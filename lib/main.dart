@@ -16,6 +16,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:timecop/blocs/locale/locale_bloc.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/settings/settings_event.dart';
@@ -59,6 +60,9 @@ Future<void> runMain(SettingsProvider settings, DataProvider data) async {
       BlocProvider<ThemeBloc>(
         create: (_) => ThemeBloc(settings),
       ),
+      BlocProvider<LocaleBloc>(
+        create: (_) => LocaleBloc(settings),
+      ),
       BlocProvider<SettingsBloc>(
         create: (_) => SettingsBloc(settings),
       ),
@@ -99,6 +103,7 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
     BlocProvider.of<TimersBloc>(context).add(LoadTimers());
     BlocProvider.of<ProjectsBloc>(context).add(LoadProjects());
     BlocProvider.of<ThemeBloc>(context).add(LoadThemeEvent());
+    BlocProvider.of<LocaleBloc>(context).add(LoadLocaleEvent());
   }
 
   @override
@@ -110,7 +115,6 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
 
   @override
   void didChangePlatformBrightness() {
-    print("platform brightness changed: ");
     print(WidgetsBinding.instance.window.platformBrightness.toString());
     setState(() => brightness = WidgetsBinding.instance.window.platformBrightness);
   }
@@ -122,36 +126,38 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
         RepositoryProvider<SettingsProvider>.value(value: widget.settings),
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
-        builder: (BuildContext context, ThemeState themeState) {
-          print('Building material app with theme: ${themeState.theme}');
-          return MaterialApp(
-            title: 'Time Cop',
-            home: DashboardScreen(),
-            theme: themeState.themeData ?? (brightness == Brightness.dark ? darkTheme : lightTheme),
-            localizationsDelegates: [
-              L10N.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: [
-              const Locale('en'),
-              const Locale('fr'),
-              const Locale('de'),
-              const Locale('es'),
-              const Locale('hi'),
-              const Locale('id'),
-              const Locale('ja'),
-              const Locale('ko'),
-              const Locale('pt'),
-              const Locale('ru'),
-              const Locale('zh', 'CN'),
-              const Locale('zh', 'TW'),
-              const Locale('ar'),
-              const Locale('it'),
-            ],
-          );
-        }
+        builder: (BuildContext context, ThemeState themeState) =>
+          BlocBuilder<LocaleBloc, LocaleState>(
+            builder: (BuildContext context, LocaleState localeState) =>
+              MaterialApp(
+                title: 'Time Cop',
+                home: DashboardScreen(),
+                theme: themeState.themeData ?? (brightness == Brightness.dark ? darkTheme : lightTheme),
+                localizationsDelegates: [
+                  L10N.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                locale: localeState.locale,
+                supportedLocales: [
+                  const Locale('en'),
+                  const Locale('fr'),
+                  const Locale('de'),
+                  const Locale('es'),
+                  const Locale('hi'),
+                  const Locale('id'),
+                  const Locale('ja'),
+                  const Locale('ko'),
+                  const Locale('pt'),
+                  const Locale('ru'),
+                  const Locale('zh', 'CN'),
+                  const Locale('zh', 'TW'),
+                  const Locale('ar'),
+                  const Locale('it'),
+                ],
+              ),
+          )
       )
     );
   }

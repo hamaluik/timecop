@@ -14,10 +14,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:timecop/blocs/locale/locale_bloc.dart';
 import 'package:timecop/blocs/theme/theme_bloc.dart';
 import 'package:timecop/l10n.dart';
-import 'package:timecop/models/theme_type.dart';
+
+import 'components/locale_options.dart';
+import 'components/theme_options.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key key}) : super(key: key);
@@ -25,6 +27,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeBloc themeBloc = BlocProvider.of<ThemeBloc>(context);
+    final LocaleBloc localeBloc = BlocProvider.of<LocaleBloc>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -32,68 +35,12 @@ class SettingsScreen extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
-          BlocBuilder<ThemeBloc, ThemeState>(
+          ThemeOptions(
             bloc: themeBloc,
-            builder: (BuildContext context, ThemeState state) {
-              return ListTile(
-                title: Text(L10N.of(context).tr.theme),
-                subtitle: Text(state.theme.display(context)),
-                trailing: Icon(FontAwesomeIcons.chevronRight, color: Theme.of(context).accentColor),
-                leading: Icon(FontAwesomeIcons.palette),
-                onTap: () async {
-                  ThemeType oldTheme = state.theme;
-                  ThemeType newTheme = await showModalBottomSheet<ThemeType>(
-                    context: context,
-                    builder: (context) => Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        RadioListTile<ThemeType>(
-                          title: Text(L10N.of(context).tr.auto),
-                          value: ThemeType.auto,
-                          groupValue: state.theme,
-                          onChanged: (ThemeType type) {
-                            themeBloc.add(ChangeThemeEvent(type));
-                            Navigator.pop(context, type);
-                          },
-                        ),
-                        RadioListTile<ThemeType>(
-                          title: Text(L10N.of(context).tr.light),
-                          value: ThemeType.light,
-                          groupValue: state.theme,
-                          onChanged: (ThemeType type) {
-                            themeBloc.add(ChangeThemeEvent(type));
-                            Navigator.pop(context, type);
-                          },
-                        ),
-                        RadioListTile<ThemeType>(
-                          title: Text(L10N.of(context).tr.dark),
-                          value: ThemeType.dark,
-                          groupValue: state.theme,
-                          onChanged: (ThemeType type) {
-                            themeBloc.add(ChangeThemeEvent(type));
-                            Navigator.pop(context, type);
-                          },
-                        ),
-                        RadioListTile<ThemeType>(
-                          title: Text(L10N.of(context).tr.black),
-                          value: ThemeType.black,
-                          groupValue: state.theme,
-                          onChanged: (ThemeType type) {
-                            themeBloc.add(ChangeThemeEvent(type));
-                            Navigator.pop(context, type);
-                          },
-                        ),
-                      ],
-                    )
-                  );
-
-                  if(newTheme == null) {
-                    themeBloc.add(ChangeThemeEvent(oldTheme));
-                  }
-                },
-              );
-            }
-          )
+          ),
+          LocaleOptions(
+            bloc: localeBloc,
+          ),
         ],
       )
     );

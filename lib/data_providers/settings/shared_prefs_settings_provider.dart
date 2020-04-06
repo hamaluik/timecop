@@ -64,7 +64,7 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
 
   @override
   void setLocale(Locale locale) {
-    _prefs.setString("languageCode", locale.languageCode);
-    _prefs.setString("countryCode", locale.countryCode);
+    _prefs.setString("languageCode", locale?.languageCode);
+    _prefs.setString("countryCode", locale?.countryCode);
   }
 }
