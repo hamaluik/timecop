@@ -116,3 +116,9 @@ langName = русский
 
 language = язык
 
+automaticLanguage = Автоматически ({ $langName })
+
+collapseDays = Свернуть Дни
+
+autocompleteDescription = Автозаполнение описаний
+

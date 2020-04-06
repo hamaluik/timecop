@@ -112,3 +112,9 @@ langName = 日本語
 
 language = 言語
 
+automaticLanguage = 自動（{ $langName }）
+
+collapseDays = 崩壊日
+
+autocompleteDescription = オートコンプリートの説明
+

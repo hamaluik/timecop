@@ -112,3 +112,9 @@ langName = Indonesia
 
 language = Bahasa
 
+automaticLanguage = Otomatis ({ $langName })
+
+collapseDays = Tutup Hari
+
+autocompleteDescription = Deskripsi Pelengkapan Otomatis
+

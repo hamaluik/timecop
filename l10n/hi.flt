@@ -112,3 +112,9 @@ langName = हिन्दी
 
 language = भाषा: हिन्दी
 
+automaticLanguage = स्वचालित ({ $langName })
+
+collapseDays = पतन के दिन
+
+autocompleteDescription = स्वत: पूर्ण विवरण
+

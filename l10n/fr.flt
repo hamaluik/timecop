@@ -112,3 +112,9 @@ langName = Français
 
 language = Langue
 
+automaticLanguage = Automatique ({ $langName })
+
+collapseDays = Collapse Days
+
+autocompleteDescription = Descriptions de saisie semi-automatique
+

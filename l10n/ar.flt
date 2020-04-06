@@ -112,3 +112,9 @@ langName = العربية
 
 language = لغة
 
+automaticLanguage = تلقائي ({ $langName })
+
+collapseDays = أيام الانهيار
+
+autocompleteDescription = أوصاف الإكمال التلقائي
+

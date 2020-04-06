@@ -72,4 +72,7 @@ abstract class L10NProvider {
     String get black;
     String langName(Locale locale);
     String get language;
+    String get automaticLanguage;
+    String get collapseDays;
+    String get autocompleteDescription;
 }

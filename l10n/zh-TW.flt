@@ -112,3 +112,9 @@ langName = 中文（繁體）
 
 language = 語言
 
+automaticLanguage = 自動（{ $langName }）
+
+collapseDays = 崩潰天數
+
+autocompleteDescription = 自動完成說明
+

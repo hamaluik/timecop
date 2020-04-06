@@ -112,3 +112,9 @@ langName = English
 
 language = Language
 
+automaticLanguage = Automatic ({ $langName })
+
+collapseDays = Collapse Days
+
+autocompleteDescription = Autocomplete Descriptions
+

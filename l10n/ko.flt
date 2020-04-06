@@ -112,3 +112,9 @@ langName = 한국어
 
 language = 언어
 
+automaticLanguage = 자동적 인 ({ $langName })
+
+collapseDays = 일 축소
+
+autocompleteDescription = 자동 완성 설명
+

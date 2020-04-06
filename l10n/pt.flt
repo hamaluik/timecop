@@ -112,3 +112,9 @@ langName = Português
 
 language = Língua
 
+automaticLanguage = Automático ({ $langName })
+
+collapseDays = Dias de recolhimento
+
+autocompleteDescription = Descrições de preenchimento automático
+

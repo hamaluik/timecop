@@ -15,6 +15,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timecop/blocs/locale/locale_bloc.dart';
+import 'package:timecop/blocs/settings/bloc.dart';
 import 'package:timecop/blocs/theme/theme_bloc.dart';
 import 'package:timecop/l10n.dart';
 
@@ -28,18 +29,49 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeBloc themeBloc = BlocProvider.of<ThemeBloc>(context);
     final LocaleBloc localeBloc = BlocProvider.of<LocaleBloc>(context);
+    final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
 
     return Scaffold(
       appBar: AppBar(
         title: Text(L10N.of(context).tr.settings),
       ),
-      body: Column(
+      body: ListView(
         children: <Widget>[
           ThemeOptions(
             bloc: themeBloc,
           ),
           LocaleOptions(
             bloc: localeBloc,
+          ),
+          BlocBuilder<SettingsBloc, SettingsState>(
+            bloc: settingsBloc,
+            builder: (BuildContext context, SettingsState settings) =>
+              SwitchListTile(
+                title: Text(L10N.of(context).tr.groupTimers),
+                value: settings.groupTimers,
+                onChanged: (bool value) => settingsBloc.add(SetBoolValueEvent(groupTimers: value)),
+                activeColor: Theme.of(context).accentColor,
+              ),
+          ),
+          BlocBuilder<SettingsBloc, SettingsState>(
+            bloc: settingsBloc,
+            builder: (BuildContext context, SettingsState settings) =>
+              SwitchListTile(
+                title: Text(L10N.of(context).tr.collapseDays),
+                value: settings.collapseDays,
+                onChanged: (bool value) => settingsBloc.add(SetBoolValueEvent(collapseDays: value)),
+                activeColor: Theme.of(context).accentColor,
+              ),
+          ),
+          BlocBuilder<SettingsBloc, SettingsState>(
+            bloc: settingsBloc,
+            builder: (BuildContext context, SettingsState settings) =>
+              SwitchListTile(
+                title: Text(L10N.of(context).tr.autocompleteDescription),
+                value: settings.autocompleteDescription,
+                onChanged: (bool value) => settingsBloc.add(SetBoolValueEvent(autocompleteDescription: value)),
+                activeColor: Theme.of(context).accentColor,
+              ),
           ),
         ],
       )

@@ -112,3 +112,9 @@ langName = Deutsch
 
 language = Sprache
 
+automaticLanguage = Automatisch ({ $langName })
+
+collapseDays = Tage reduzieren
+
+autocompleteDescription = Beschreibungen der automatischen Vervollständigung
+

@@ -17,6 +17,7 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/models/project_description_pair.dart';
 import 'package:timecop/models/timer_entry.dart';
@@ -32,6 +33,7 @@ class DayGrouping {
   DayGrouping(this.date);
 
   Widget rows(BuildContext context) {
+    final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
     Duration runningTotal = Duration(seconds: entries.fold(0, (int sum, TimerEntry t) => sum + t.endTime.difference(t.startTime).inSeconds));
 
     LinkedHashMap<ProjectDescriptionPair, List<TimerEntry>> pairedEntries = LinkedHashMap();
@@ -79,13 +81,19 @@ class DayGrouping {
         ),
       ].followedBy(
         pairedEntries.values.map((timers) {
-          if(timers.length > 1) {
-            return GroupedStoppedTimersRow(timers: timers);
+          if(settingsBloc.state.groupTimers) {
+            if(timers.length > 1) {
+              return <Widget>[GroupedStoppedTimersRow(timers: timers)];
+            }
+            else {
+              return <Widget>[StoppedTimerRow(timer: timers[0])];
+            }
           }
           else {
-            return StoppedTimerRow(timer: timers[0]);
+            return timers.map((t) => StoppedTimerRow(timer: t)).toList();
           }
         })
+        .expand((l) => l)
       ).toList(),
     );
   }

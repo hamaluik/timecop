@@ -31,7 +31,7 @@ class LocaleOptions extends StatelessWidget {
       builder: (BuildContext context, LocaleState state) {
         return ListTile(
           title: Text(L10N.of(context).tr.language),
-          subtitle: Text(L10N.of(context).tr.langName(null)),
+          subtitle: Text(L10N.of(context).tr.automaticLanguage),
           trailing: Icon(L10N.of(context).rtl ? FontAwesomeIcons.chevronLeft : FontAwesomeIcons.chevronRight),
           leading: Icon(FontAwesomeIcons.language),
           onTap: () async {
@@ -41,7 +41,7 @@ class LocaleOptions extends StatelessWidget {
                 shrinkWrap: true,
                 children: <Widget>[
                   RadioListTile<Locale>(
-                    title: Text(L10N.of(context).tr.auto),
+                    title: Text(L10N.of(context).tr.automaticLanguage),
                     value: null,
                     groupValue: state.locale,
                     onChanged: (Locale type) {

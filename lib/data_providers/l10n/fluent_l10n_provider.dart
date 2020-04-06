@@ -124,4 +124,10 @@ class FluentL10NProvider extends L10NProvider {
     return "<lang name>";
   }
   String get language => _bundle.format("language", errors: _errors) ?? "language";
+  String get automaticLanguage {
+    String langName = _bundle.format("langName", errors: _errors) ?? "langName";
+    return _bundle.format("automaticLanguage", args: <String, dynamic>{"langName": langName}, errors: _errors);
+  }
+  String get collapseDays => _bundle.format("collapseDays", errors: _errors) ?? "collapseDays";
+  String get autocompleteDescription => _bundle.format("autocompleteDescription", errors: _errors) ?? "autocompleteDescription";
 }
