@@ -1,110 +1,98 @@
-about = About
+about = के बारे में
 
-appDescription = A time tracking app that respects your privacy and gets the job done without getting too fancy.
+appDescription = एक समय ट्रैकिंग ऐप जो आपकी गोपनीयता का सम्मान करता है और बहुत अधिक कल्पना किए बिना काम पूरा करता है।
 
-appLegalese = Copyright © Kenton Hamaluik, 2020
+appLegalese = कॉपीराइट © केंटन हामालिक, 2020
 
-readme = Readme
+readme = रीडमी
 
-changeLog = Change Log
+changeLog = लॉग बदलें
 
-sourceCode = Source Code
+sourceCode = सोर्स कोड
 
-whatAreYouDoing = What are you doing?
+whatAreYouDoing = तुम क्या कर रहे हो?
 
-projects = Projects
+projects = परियोजनाओं
 
-export = Export
+export = निर्यात
 
-noProject = (no project)
+noProject = (कोई परियोजना नहीं)
 
-confirmDelete = Confirm Delete
+confirmDelete = हटाने की पुष्टि करें
 
-deleteTimerConfirm = Are you sure you want to delete this timer?
+deleteTimerConfirm = क्या आप वाकई इस टाइमर को हटाना चाहते हैं?
 
-cancel = Cancel
+cancel = रद्द करना
 
-delete = Delete
+delete = हटाएं
 
-runningTimers = Running Timers
+runningTimers = रनिंग टाइमर
 
-timeCopDatabase = Time Cop Database ({ $date })
+timeCopDatabase = टाइम कॉप डेटाबेस ({ $date })
 
-filter = Filter
+filter = फ़िल्टर
 
-from = From
+from = से
 
-to = To
+to = सेवा
 
-project = Project
+project = परियोजना
 
-description = Description
+description = विवरण
 
-timeH = Time (hours)
+timeH = समय (घंटे)
 
-timeCopEntries = Time Cop Entries ({ $date })
+timeCopEntries = समय कॉप प्रविष्टियाँ ({ $date })
 
-createNewProject = Create New Project
+createNewProject = नया प्रोजेक्ट बनाएं
 
-editProject = Edit Project
+editProject = प्रोजेक्ट संपादित करें
 
-pleaseEnterAName = Please enter a name
+pleaseEnterAName = कृपया एक नाम दर्ज करें
 
-projectName = Project Name
+projectName = परियोजना का नाम
 
-create = Create
+create = सृजन करना
 
-save = Save
+save = सहेजें
 
-areYouSureYouWantToDelete = Are you sure you want to delete this project?
+areYouSureYouWantToDelete = क्या आप वाकई इस प्रोजेक्ट को हटाना चाहते हैं?
 
-editTimer = Edit Timer
+editTimer = टाइमर संपादित करें
 
-whatWereYouDoing = What were you doing?
+whatWereYouDoing = तुम क्या कर रहे थे?
 
-startTime = Start Time
+startTime = समय शुरू
 
-endTime = End Time
+endTime = अंतिम समय
 
-duration = Duration
+duration = समयांतराल
 
-appName = Time Cop
+appName = समय कॉप
 
-logoSemantics = Time Cop Logo
+logoSemantics = टाइम कॉप लोगो
 
-noDescription = (no description)
+noDescription = (कोई विवरण नहीं)
 
-options = Options
+options = विकल्प
 
-groupTimers = Group Similar Timers Per Day
+groupTimers = प्रति दिन समूह समान टाइमर
 
-columns = Columns
+columns = कॉलम
 
-date = Date
+date = तारीख
 
-combinedProjectDescription = Combined Project & Description
+combinedProjectDescription = संयुक्त परियोजना और विवरण
 
-reports = Reports
+reports = रिपोर्ट
 
-nHours = { $hours } hours
+nHours = { $hours } घंटे
 
-averageDailyHours = Average Daily Hours
+averageDailyHours = औसत दैनिक घंटे
 
-totalProjectShare = Total Project Share
+totalProjectShare = कुल परियोजना हिस्सा
 
-weeklyHours = Weekly Hours
+weeklyHours = साप्ताहिक घंटे
 
-contributors = Contributors
-
-settings = समायोजन
-
-theme = विषय
-
-auto = ऑटो
-
-light = रोशनी
-
-dark = अंधेरा
-
-black = काली
+contributors = योगदानकर्ता
 
