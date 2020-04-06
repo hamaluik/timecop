@@ -16,9 +16,28 @@ void main() {
     });
 
     test('take screenshots', () async {
-      // take a screenshot of the dashboard
       SerializableFinder descriptionField = find.byValueKey("descriptionField");
 
+      // start by switching to the dark theme
+      SerializableFinder menuButton = find.byValueKey("menuButton");
+      await driver.waitFor(menuButton);
+      await driver.tap(menuButton);
+      SerializableFinder menuSettings = find.byValueKey("menuSettings");
+      await driver.waitFor(menuSettings);
+      await driver.tap(menuSettings);
+      SerializableFinder themeOption = find.byValueKey("themeOption");
+      await driver.waitFor(themeOption);
+      await driver.tap(themeOption);
+      SerializableFinder themeDark = find.byValueKey("themeDark");
+      await driver.waitFor(themeDark);
+      await driver.tap(themeDark);
+      await driver.waitUntilNoTransientCallbacks();
+      await screenshot(driver, config, '05 settings');
+      SerializableFinder backButton = find.byType("BackButton");
+      await driver.waitFor(backButton);
+      await driver.tap(backButton);
+
+      // take a screenshot of the dashboard
       await driver.waitFor(descriptionField);
       await screenshot(driver, config, '01 dashboard');
 
@@ -37,7 +56,6 @@ void main() {
       SerializableFinder closeButton = find.byType("CloseButton");
       await driver.waitFor(closeButton);
       await driver.tap(closeButton);
-      SerializableFinder menuButton = find.byValueKey("menuButton");
       await driver.waitFor(menuButton);
       await driver.tap(menuButton);
       SerializableFinder menuProjects = find.byValueKey("menuProjects");
@@ -49,7 +67,6 @@ void main() {
       await screenshot(driver, config, '03 projects');
 
       // then reports pages
-      SerializableFinder backButton = find.byType("BackButton");
       await driver.waitFor(backButton);
       await driver.tap(backButton);
       await driver.waitFor(menuButton);

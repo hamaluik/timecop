@@ -31,6 +31,7 @@ class ThemeOptions extends StatelessWidget {
       bloc: bloc,
       builder: (BuildContext context, ThemeState state) {
         return ListTile(
+          key: Key("themeOption"),
           title: Text(L10N.of(context).tr.theme),
           subtitle: Text(state.theme.display(context)),
           trailing: Icon(L10N.of(context).rtl ? FontAwesomeIcons.chevronLeft : FontAwesomeIcons.chevronRight),
@@ -43,24 +44,28 @@ class ThemeOptions extends StatelessWidget {
                 shrinkWrap: true,
                 children: <Widget>[
                   RadioListTile<ThemeType>(
+                    key: Key("themeAuto"),
                     title: Text(L10N.of(context).tr.auto),
                     value: ThemeType.auto,
                     groupValue: state.theme,
                     onChanged: (ThemeType type) => Navigator.pop(context, type),
                   ),
                   RadioListTile<ThemeType>(
+                    key: Key("themeLight"),
                     title: Text(L10N.of(context).tr.light),
                     value: ThemeType.light,
                     groupValue: state.theme,
                     onChanged: (ThemeType type) => Navigator.pop(context, type),
                   ),
                   RadioListTile<ThemeType>(
+                    key: Key("themeDark"),
                     title: Text(L10N.of(context).tr.dark),
                     value: ThemeType.dark,
                     groupValue: state.theme,
                     onChanged: (ThemeType type) => Navigator.pop(context, type),
                   ),
                   RadioListTile<ThemeType>(
+                    key: Key("themeBlack"),
                     title: Text(L10N.of(context).tr.black),
                     value: ThemeType.black,
                     groupValue: state.theme,
