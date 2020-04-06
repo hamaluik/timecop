@@ -38,6 +38,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       bool exportIncludeEndTime = await settings.getBool("exportIncludeEndTime") ?? state.exportIncludeEndTime;
       bool exportIncludeDurationHours = await settings.getBool("exportIncludeDurationHours") ?? state.exportIncludeDurationHours;
       int defaultProjectID = await settings.getInt("defaultProjectID") ?? state.defaultProjectID;
+      bool groupTimers = await settings.getBool("groupTimers") ?? state.groupTimers;
+      bool collapseDays = await settings.getBool("collapseDays") ?? state.collapseDays;
+      bool autocompleteDescription = await settings.getBool("autocompleteDescription") ?? state.autocompleteDescription;
       yield SettingsState(
         exportGroupTimers: exportGroupTimers,
         exportIncludeDate: exportIncludeDate,
@@ -48,9 +51,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         exportIncludeEndTime: exportIncludeEndTime,
         exportIncludeDurationHours: exportIncludeDurationHours,
         defaultProjectID: defaultProjectID,
+        groupTimers: groupTimers,
+        collapseDays: collapseDays,
+        autocompleteDescription: autocompleteDescription,
       );
     }
-    else if(event is SetExportGroupTimers) {
+    /*else if(event is SetExportGroupTimers) {
       await settings.setBool("exportGroupTimers", event.value);
       yield SettingsState.clone(state, exportGroupTimers: event.value);
     }
@@ -81,10 +87,58 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     else if(event is SetExportIncludeDurationHours) {
       await settings.setBool("exportIncludeDurationHours", event.value);
       yield SettingsState.clone(state, exportIncludeDurationHours: event.value);
-    }
+    }*/
     else if(event is SetDefaultProjectID) {
       await settings.setInt("defaultProjectID", event.projectID ?? -1);
       yield SettingsState.clone(state, defaultProjectID: event.projectID ?? -1);
+    }
+    else if(event is SetBoolValueEvent) {
+      if(event.exportGroupTimers != null) {
+        await settings.setBool("exportGroupTimers", event.exportGroupTimers);
+      }
+      if(event.exportIncludeDate != null) {
+        await settings.setBool("exportIncludeDate", event.exportIncludeDate);
+      }
+      if(event.exportIncludeProject != null) {
+        await settings.setBool("exportIncludeProject", event.exportIncludeProject);
+      }
+      if(event.exportIncludeDescription != null) {
+        await settings.setBool("exportIncludeDescription", event.exportIncludeDescription);
+      }
+      if(event.exportIncludeProjectDescription != null) {
+        await settings.setBool("exportIncludeProjectDescription", event.exportIncludeProjectDescription);
+      }
+      if(event.exportIncludeStartTime != null) {
+        await settings.setBool("exportIncludeStartTime", event.exportIncludeStartTime);
+      }
+      if(event.exportIncludeEndTime != null) {
+        await settings.setBool("exportIncludeEndTime", event.exportIncludeEndTime);
+      }
+      if(event.exportIncludeDurationHours != null) {
+        await settings.setBool("exportIncludeDurationHours", event.exportIncludeDurationHours);
+      }
+      if(event.groupTimers != null) {
+        await settings.setBool("groupTimers", event.groupTimers);
+      }
+      if(event.collapseDays != null) {
+        await settings.setBool("collapseDays", event.collapseDays);
+      }
+      if(event.autocompleteDescription != null) {
+        await settings.setBool("autocompleteDescription", event.autocompleteDescription);
+      }
+      yield SettingsState.clone(state,
+        exportGroupTimers: event.exportGroupTimers,
+        exportIncludeDate: event.exportIncludeDate,
+        exportIncludeProject: event.exportIncludeProject,
+        exportIncludeDescription: event.exportIncludeDescription,
+        exportIncludeProjectDescription: event.exportIncludeProjectDescription,
+        exportIncludeStartTime: event.exportIncludeStartTime,
+        exportIncludeEndTime: event.exportIncludeEndTime,
+        exportIncludeDurationHours: event.exportIncludeDurationHours,
+        groupTimers: event.groupTimers,
+        collapseDays: event.collapseDays,
+        autocompleteDescription: event.autocompleteDescription,
+      );
     }
   }
 }

@@ -14,8 +14,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:timecop/blocs/settings/settings_bloc.dart';
+import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class DescriptionField extends StatefulWidget {
   DescriptionField({Key key}) : super(key: key);
@@ -47,6 +50,8 @@ class _DescriptionFieldState extends State<DescriptionField> {
   @override
   Widget build(BuildContext context) {
     final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
+    final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+    final SettingsBloc settings = BlocProvider.of<SettingsBloc>(context);
 
     return BlocBuilder<DashboardBloc, DashboardState>(
       builder: (BuildContext context, DashboardState state) {
@@ -56,22 +61,59 @@ class _DescriptionFieldState extends State<DescriptionField> {
           bloc.add(ResetEvent());
         }
 
-        return Container(
-          child: TextField(
+        if(settings.state.autocompleteDescription) {
+          return TypeAheadField<String>(
+            direction: AxisDirection.up,
+            textFieldConfiguration: TextFieldConfiguration<String>(
+              focusNode: _focus,
+              controller: _controller,
+              autocorrect: true,
+              decoration: InputDecoration(
+                hintText: L10N.of(context).tr.whatAreYouDoing
+              ),
+              onChanged: (dynamic description) => bloc.add(DescriptionChangedEvent(description as String)),
+              onSubmitted: (dynamic description) {
+                _focus.unfocus();
+                bloc.add(DescriptionChangedEvent(description as String));
+              }
+            ),
+            itemBuilder: (BuildContext context, String desc) =>
+              ListTile(
+                title: Text(desc)
+              ),
+            onSuggestionSelected: (String description) {
+              _controller.text = description;
+              bloc.add(DescriptionChangedEvent(description));
+            },
+            suggestionsCallback: (pattern) async {
+              if(pattern.length < 2) return [];
+
+              List<String> descriptions = timers.state.timers
+                .where((timer) => timer.description != null)
+                .where((timer) => timer.description.toLowerCase().contains(pattern.toLowerCase()) ?? false)
+                .map((timer) => timer.description)
+                .toSet()
+                .toList();
+              return descriptions;
+            },
+          );
+        }
+        else {
+          return TextField(
             key: Key("descriptionField"),
             focusNode: _focus,
             controller: _controller,
-              autocorrect: true,
-              decoration: InputDecoration(
-                hintText: L10N.of(context).tr.whatAreYouDoing,
-              ),
-              onChanged: (String description) => bloc.add(DescriptionChangedEvent(description)),
-              onSubmitted: (String description) {
-                _focus.unfocus();
-                bloc.add(DescriptionChangedEvent(description));
-              },
+            autocorrect: true,
+            decoration: InputDecoration(
+              hintText: L10N.of(context).tr.whatAreYouDoing,
             ),
-        );
+            onChanged: (String description) => bloc.add(DescriptionChangedEvent(description)),
+            onSubmitted: (String description) {
+              _focus.unfocus();
+              bloc.add(DescriptionChangedEvent(description));
+            },
+          );
+        }
       }
     );
   }

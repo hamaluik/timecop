@@ -25,6 +25,9 @@ class SettingsState extends Equatable {
   final bool exportIncludeEndTime;
   final bool exportIncludeDurationHours;
   final int defaultProjectID;
+  final bool groupTimers;
+  final bool collapseDays;
+  final bool autocompleteDescription;
 
   SettingsState({
     @required this.exportGroupTimers,
@@ -36,6 +39,9 @@ class SettingsState extends Equatable {
     @required this.exportIncludeEndTime,
     @required this.exportIncludeDurationHours,
     @required this.defaultProjectID,
+    @required this.groupTimers,
+    @required this.collapseDays,
+    @required this.autocompleteDescription,
   })  : assert(exportGroupTimers != null),
         assert(exportIncludeDate != null),
         assert(exportIncludeProject != null),
@@ -44,7 +50,10 @@ class SettingsState extends Equatable {
         assert(exportIncludeStartTime != null),
         assert(exportIncludeEndTime != null),
         assert(exportIncludeDurationHours != null),
-        assert(defaultProjectID != null);
+        assert(defaultProjectID != null),
+        assert(groupTimers != null),
+        assert(collapseDays != null),
+        assert(autocompleteDescription != null);
 
   static SettingsState initial() {
     return SettingsState(
@@ -57,19 +66,26 @@ class SettingsState extends Equatable {
       exportIncludeEndTime: false,
       exportIncludeDurationHours: true,
       defaultProjectID: -1,
+      groupTimers: true,
+      collapseDays: true,
+      autocompleteDescription: true,
     );
   }
 
-  SettingsState.clone(SettingsState project,
-      {bool exportGroupTimers,
-      bool exportIncludeDate,
-      bool exportIncludeProject,
-      bool exportIncludeDescription,
-      bool exportIncludeProjectDescription,
-      bool exportIncludeStartTime,
-      bool exportIncludeEndTime,
-      bool exportIncludeDurationHours,
-      int defaultProjectID})
+  SettingsState.clone(SettingsState project, {
+    bool exportGroupTimers,
+    bool exportIncludeDate,
+    bool exportIncludeProject,
+    bool exportIncludeDescription,
+    bool exportIncludeProjectDescription,
+    bool exportIncludeStartTime,
+    bool exportIncludeEndTime,
+    bool exportIncludeDurationHours,
+    int defaultProjectID,
+    bool groupTimers,
+    bool collapseDays,
+    bool autocompleteDescription,
+    })
       : this(
           exportGroupTimers: exportGroupTimers ?? project.exportGroupTimers,
           exportIncludeDate:
@@ -88,6 +104,12 @@ class SettingsState extends Equatable {
               exportIncludeDurationHours ?? project.exportIncludeDurationHours,
           defaultProjectID:
               defaultProjectID ?? project.defaultProjectID,
+          groupTimers:
+              groupTimers ?? project.groupTimers,
+          collapseDays:
+              collapseDays ?? project.collapseDays,
+          autocompleteDescription:
+              autocompleteDescription ?? project.autocompleteDescription,
         );
 
   @override
@@ -101,5 +123,8 @@ class SettingsState extends Equatable {
         exportIncludeEndTime,
         exportIncludeDurationHours,
         defaultProjectID,
+        groupTimers,
+        collapseDays,
+        autocompleteDescription,
       ];
 }

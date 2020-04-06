@@ -22,7 +22,7 @@ class LoadSettingsFromRepository extends SettingsEvent {
   @override List<Object> get props => [];
 }
 
-class SetExportGroupTimers extends SettingsEvent {
+/*class SetExportGroupTimers extends SettingsEvent {
   final bool value;
   const SetExportGroupTimers(this.value);
   @override List<Object> get props => [value];
@@ -68,10 +68,28 @@ class SetExportIncludeDurationHours extends SettingsEvent {
   final bool value;
   const SetExportIncludeDurationHours(this.value);
   @override List<Object> get props => [value];
-}
+}*/
 
 class SetDefaultProjectID extends SettingsEvent {
   final int projectID;
   const SetDefaultProjectID(this.projectID);
   @override List<Object> get props => [projectID];
+}
+
+class SetBoolValueEvent extends SettingsEvent {
+  final bool exportGroupTimers;
+  final bool exportIncludeDate;
+  final bool exportIncludeProject;
+  final bool exportIncludeDescription;
+  final bool exportIncludeProjectDescription;
+  final bool exportIncludeStartTime;
+  final bool exportIncludeEndTime;
+  final bool exportIncludeDurationHours;
+  final bool groupTimers;
+  final bool collapseDays;
+  final bool autocompleteDescription;
+
+  const SetBoolValueEvent({this.exportGroupTimers, this.exportIncludeDate, this.exportIncludeProject, this.exportIncludeDescription, this.exportIncludeProjectDescription, this.exportIncludeStartTime, this.exportIncludeEndTime, this.exportIncludeDurationHours, this.groupTimers, this.collapseDays, this.autocompleteDescription});
+
+  @override List<Object> get props => [exportGroupTimers, exportIncludeDate, exportIncludeProject, exportIncludeDescription, exportIncludeProjectDescription, exportIncludeStartTime, exportIncludeEndTime, exportIncludeDurationHours, groupTimers, collapseDays, autocompleteDescription];
 }
