@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+
+## [1.5.0] - 2020-04-07
 ### Added
 * Added ability to search for timers in the dashboard
 * Added ability to filter timers by time and project in the dashboard
@@ -14,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Added autocomplete on timer description fields
 * Added ability to collapse days
 * Added settings to control autocomplete, day collapsing, timer grouping
+* Added a time table report, listing per-project time sums
 
 ### Changed
 * Moved the menu button to be under the Time Cop logo on the left side, to make room for the search and filter buttons
@@ -56,7 +60,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Ability to export database file
 * Ability to export csv of filtered data
 
-[Unreleased]: https://github.com/hamaluik/timecop/compare/v1.4.0+23...HEAD
+[Unreleased]: https://github.com/hamaluik/timecop/compare/v1.5.0...HEAD
+[1.5.0]: https://github.com/hamaluik/timecop/compare/v1.4.0+23...v1.5.0
 [1.4.0+23]: https://github.com/hamaluik/timecop/compare/v1.3.3+22...v1.4.0+23
 [1.3.3+22]: https://github.com/hamaluik/timecop/compare/v1.2.0+14...v1.3.3+22
 [1.2.0+14]: https://github.com/hamaluik/timecop/compare/v1.1.0+12...v1.2.0+14
