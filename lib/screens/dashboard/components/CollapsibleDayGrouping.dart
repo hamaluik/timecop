@@ -42,7 +42,7 @@ class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping> with Si
   @override
   void initState() { 
     super.initState();
-    _expanded = false;
+    _expanded = DateTime.now().difference(widget.date).inDays.abs() <= 1;
     _controller = AnimationController(
       duration: Duration(milliseconds: 200),
       vsync: this,

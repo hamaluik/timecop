@@ -25,6 +25,7 @@ Future<void> main() async {
   WidgetsApp.debugAllowBannerOverride = false; // remove debug banner
 
   final SettingsProvider settings = MockSettingsProvider();
+  settings.setBool("collapseDays", false);
   final DataProvider data = MockDataProvider(ui.window.locale);
   return runMain(settings, data);
 }

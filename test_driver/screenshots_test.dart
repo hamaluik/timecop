@@ -16,7 +16,7 @@ void main() {
     });
 
     test('take screenshots', () async {
-      SerializableFinder descriptionField = find.byValueKey("descriptionField");
+      SerializableFinder startTimerButton = find.byType("StartTimerButton");
 
       // start by switching to the dark theme
       SerializableFinder menuButton = find.byValueKey("menuButton");
@@ -38,7 +38,7 @@ void main() {
       await driver.tap(backButton);
 
       // take a screenshot of the dashboard
-      await driver.waitFor(descriptionField);
+      await driver.waitFor(startTimerButton);
       await screenshot(driver, config, '01 dashboard');
 
       // then the timer details page
