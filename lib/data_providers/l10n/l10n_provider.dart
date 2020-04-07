@@ -75,4 +75,6 @@ abstract class L10NProvider {
     String get automaticLanguage;
     String get collapseDays;
     String get autocompleteDescription;
+    String get hours;
+    String get total;
 }

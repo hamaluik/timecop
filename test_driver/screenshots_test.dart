@@ -94,6 +94,12 @@ void main() {
       await driver.waitUntilNoTransientCallbacks();
       await screenshot(driver, config, '04c weekdayAverages');
 
+      await driver.scroll(weekdayAverages, d, 0, Duration(milliseconds: 500));
+      SerializableFinder timeTable = find.byValueKey("timeTable");
+      await driver.waitFor(timeTable);
+      await driver.waitUntilNoTransientCallbacks();
+      await screenshot(driver, config, '04d timeTable');
+
       // then the export page
       await driver.waitFor(backButton);
       await driver.tap(backButton);

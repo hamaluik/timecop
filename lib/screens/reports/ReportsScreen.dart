@@ -24,6 +24,7 @@ import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/screens/reports/components/ProjectBreakdown.dart';
+import 'package:timecop/screens/reports/components/TimeTable.dart';
 import 'package:timecop/screens/reports/components/WeekdayAverages.dart';
 import 'package:timecop/screens/reports/components/WeeklyTotals.dart';
 import 'package:timecop/models/clone_time.dart';
@@ -94,10 +95,15 @@ class _ReportsScreenState extends State<ReportsScreen> {
                     endDate: _endDate,
                     selectedProjects: selectedProjects,
                   );
+                  case 3: return TimeTable(
+                    startDate: _startDate,
+                    endDate: _endDate,
+                    selectedProjects: selectedProjects,
+                  );
                 }
                 return Container();
               },
-              itemCount: 3,
+              itemCount: 4,
               pagination: SwiperPagination(
                 builder: DotSwiperPaginationBuilder(
                   color: Theme.of(context).disabledColor,

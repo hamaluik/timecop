@@ -118,3 +118,7 @@ automaticLanguage = Automatic ({ $langName })
 collapseDays = Collapse Days
 
 autocompleteDescription = Autocomplete Descriptions
+
+hours = Hours
+
+total = Total

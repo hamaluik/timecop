@@ -130,4 +130,6 @@ class FluentL10NProvider extends L10NProvider {
   }
   String get collapseDays => _bundle.format("collapseDays", errors: _errors) ?? "collapseDays";
   String get autocompleteDescription => _bundle.format("autocompleteDescription", errors: _errors) ?? "autocompleteDescription";
+  String get hours => _bundle.format("hours", errors: _errors) ?? "hours";
+  String get total => _bundle.format("total", errors: _errors) ?? "total";
 }
