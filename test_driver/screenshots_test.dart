@@ -32,7 +32,7 @@ void main() {
       await driver.waitFor(themeDark);
       await driver.tap(themeDark);
       await driver.waitUntilNoTransientCallbacks();
-      await screenshot(driver, config, '05 settings');
+      await screenshot(driver, config, '06 settings');
       SerializableFinder backButton = find.byType("BackButton");
       await driver.waitFor(backButton);
       await driver.tap(backButton);
@@ -79,7 +79,7 @@ void main() {
       await screenshot(driver, config, '04a projectBreakdown');
 
       // Arabic reverses the swiping direction, so take that into account
-      String direction = await driver.requestData("direction");
+      /*String direction = await driver.requestData("direction");
       double d = direction == "ltr" ? -300 : 300;
 
       await driver.scroll(projectBreakdown, d, 0, Duration(milliseconds: 500));
@@ -98,7 +98,7 @@ void main() {
       SerializableFinder timeTable = find.byValueKey("timeTable");
       await driver.waitFor(timeTable);
       await driver.waitUntilNoTransientCallbacks();
-      await screenshot(driver, config, '04d timeTable');
+      await screenshot(driver, config, '04d timeTable');*/
 
       // then the export page
       await driver.waitFor(backButton);
@@ -113,6 +113,6 @@ void main() {
       await driver.tap(optionColumns);
       await driver.waitUntilNoTransientCallbacks();
       await screenshot(driver, config, '05 export');
-    }, timeout: Timeout(Duration(seconds: 30)));
+    }, timeout: Timeout(Duration(seconds: 60)));
   });
 }
