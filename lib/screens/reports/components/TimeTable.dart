@@ -63,7 +63,7 @@ class TimeTable extends StatelessWidget {
                 flex: 3,
                 child: Text(
                   L10N.of(context).tr.project,
-                  style: Theme.of(context).textTheme.display1
+                  style: Theme.of(context).textTheme.title
                 ),
               ),
               Expanded(
@@ -71,7 +71,7 @@ class TimeTable extends StatelessWidget {
                 child: Text(
                   L10N.of(context).tr.hours,
                   textAlign: TextAlign.right,
-                  style: Theme.of(context).textTheme.display1
+                  style: Theme.of(context).textTheme.title
                 ),
               ),
             ],
