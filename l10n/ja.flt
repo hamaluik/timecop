@@ -1,12 +1,12 @@
-about = 約
+about = 概要
 
-appDescription = あなたのプライバシーを尊重し、凝りすぎずに仕事を終わらせる時間追跡アプリ。
+appDescription = あなたのプライバシーを尊重しながら完了した仕事を追跡する、派手過ぎない時間追跡アプリ。
 
-appLegalese = Copyright©ケントン・ハマルイク、2020
+appLegalese = Copyright © Kenton Hamaluik, 2020
 
 readme = Readme
 
-changeLog = ログを変更
+changeLog = 変更ログ
 
 sourceCode = ソースコード
 
@@ -14,35 +14,35 @@ whatAreYouDoing = 何してるの？
 
 projects = プロジェクト
 
-export = 書き出す
+export = 書き出し
 
 noProject = （プロジェクトなし）
 
 confirmDelete = 削除を確認
 
-deleteTimerConfirm = このタイマーを削除してもよろしいですか？
+deleteTimerConfirm = このタイマーを削除しますか？
 
 cancel = キャンセル
 
-delete = 削除する
+delete = 削除
 
-runningTimers = タイマーの実行
+runningTimers = 計測中のタイマー
 
-timeCopDatabase = タイムコップデータベース（{ $date }）
+timeCopDatabase = TimeCopデータベース（{ $date }）
 
 filter = フィルタ
 
-from = から
+from = フィルタ開始日
 
-to = に
+to = フィルタ終了日
 
-project = 事業
+project = プロジェクト
 
 description = 説明文
 
-timeH = 時間（時間）
+timeH = 期間（時間）
 
-timeCopEntries = タイムコップエントリー（{ $date }）
+timeCopEntries = TimeCopエントリー（{ $date }）
 
 createNewProject = 新しいプロジェクトを作成
 
@@ -52,47 +52,47 @@ pleaseEnterAName = 名前を入力してください
 
 projectName = プロジェクト名
 
-create = 作成する
+create = 作成
 
-save = 保存する
+save = 保存
 
-areYouSureYouWantToDelete = このプロジェクトを削除してもよろしいですか？
+areYouSureYouWantToDelete = このプロジェクトを削除しますか？
 
 editTimer = タイマーを編集
 
 whatWereYouDoing = 何してたの？
 
-startTime = 始まる時間
+startTime = 開始時間
 
 endTime = 終了時間
 
 duration = 期間
 
-appName = タイムコップ
+appName = TimeCop
 
-logoSemantics = タイムコップロゴ
+logoSemantics = TimeCopロゴ
 
 noDescription = （説明なし）
 
 options = オプション
 
-groupTimers = 1日あたりの類似したタイマーのグループ化
+groupTimers = 1日毎の類似タイマーのグループ化
 
 columns = カラム
 
 date = 日付
 
-combinedProjectDescription = 組み合わせたプロジェクトと説明
+combinedProjectDescription = 組み合わせたプロジェクトとその説明
 
-reports = 報告書
+reports = 活動レポート
 
 nHours = { $hours } 時間
 
 averageDailyHours = 1日の平均時間
 
-totalProjectShare = 総プロジェクトシェア
+totalProjectShare = プロジェクト全体のシェア
 
-weeklyHours = 毎週の時間
+weeklyHours = 週間の時間
 
 contributors = 貢献者
 
@@ -102,9 +102,9 @@ theme = テーマ
 
 auto = 自動
 
-light = 光
+light = ライト
 
-dark = 闇
+dark = ダーク
 
 black = ブラック
 
@@ -116,7 +116,7 @@ automaticLanguage = 自動（{ $langName }）
 
 collapseDays = 崩壊日
 
-autocompleteDescription = オートコンプリートの説明
+autocompleteDescription = 入力欄の説明
 
 hours = 時間
 
