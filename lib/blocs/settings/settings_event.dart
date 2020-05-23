@@ -19,7 +19,8 @@ abstract class SettingsEvent extends Equatable {
 }
 
 class LoadSettingsFromRepository extends SettingsEvent {
-  @override List<Object> get props => [];
+  @override
+  List<Object> get props => [];
 }
 
 /*class SetExportGroupTimers extends SettingsEvent {
@@ -73,7 +74,8 @@ class SetExportIncludeDurationHours extends SettingsEvent {
 class SetDefaultProjectID extends SettingsEvent {
   final int projectID;
   const SetDefaultProjectID(this.projectID);
-  @override List<Object> get props => [projectID];
+  @override
+  List<Object> get props => [projectID];
 }
 
 class SetBoolValueEvent extends SettingsEvent {
@@ -88,8 +90,35 @@ class SetBoolValueEvent extends SettingsEvent {
   final bool groupTimers;
   final bool collapseDays;
   final bool autocompleteDescription;
+  final bool defaultFilterStartDateToMonday;
 
-  const SetBoolValueEvent({this.exportGroupTimers, this.exportIncludeDate, this.exportIncludeProject, this.exportIncludeDescription, this.exportIncludeProjectDescription, this.exportIncludeStartTime, this.exportIncludeEndTime, this.exportIncludeDurationHours, this.groupTimers, this.collapseDays, this.autocompleteDescription});
+  const SetBoolValueEvent(
+      {this.exportGroupTimers,
+      this.exportIncludeDate,
+      this.exportIncludeProject,
+      this.exportIncludeDescription,
+      this.exportIncludeProjectDescription,
+      this.exportIncludeStartTime,
+      this.exportIncludeEndTime,
+      this.exportIncludeDurationHours,
+      this.groupTimers,
+      this.collapseDays,
+      this.autocompleteDescription,
+      this.defaultFilterStartDateToMonday});
 
-  @override List<Object> get props => [exportGroupTimers, exportIncludeDate, exportIncludeProject, exportIncludeDescription, exportIncludeProjectDescription, exportIncludeStartTime, exportIncludeEndTime, exportIncludeDurationHours, groupTimers, collapseDays, autocompleteDescription];
+  @override
+  List<Object> get props => [
+        exportGroupTimers,
+        exportIncludeDate,
+        exportIncludeProject,
+        exportIncludeDescription,
+        exportIncludeProjectDescription,
+        exportIncludeStartTime,
+        exportIncludeEndTime,
+        exportIncludeDurationHours,
+        groupTimers,
+        collapseDays,
+        autocompleteDescription,
+        defaultFilterStartDateToMonday
+      ];
 }
