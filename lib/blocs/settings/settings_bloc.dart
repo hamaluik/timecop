@@ -185,13 +185,24 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     }
   }
 
+  /**
+   * return the start date for a date filter with time set to 00:00:00.000.
+   * If setting defaultFilterStartDateToMonday is true, then return Monday of
+   * the current week (week starts on Monday). Otherwise, return 30 days prior to
+   * today.
+   */
   DateTime getFilterStartDate() {
+    DateTime now = DateTime.now();
+    DateTime todayZerothHour =
+        DateTime(now.year, now.month, now.day, 0, 0, 0, 0, 0);
+    DateTime startDate;
     if (state.defaultFilterStartDateToMonday) {
       var dayOfWeek = 1; // Monday=1, Tuesday=2...
-      DateTime date = DateTime.now();
-      return date.subtract(Duration(days: date.weekday - dayOfWeek));
+      startDate = todayZerothHour
+          .subtract(Duration(days: todayZerothHour.weekday - dayOfWeek));
     } else {
-      return DateTime.now().subtract(Duration(days: 30));
+      startDate = todayZerothHour.subtract(Duration(days: 30));
     }
+    return startDate;
   }
 }
