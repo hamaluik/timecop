@@ -29,6 +29,7 @@ class SettingsState extends Equatable {
   final bool collapseDays;
   final bool autocompleteDescription;
   final bool defaultFilterStartDateToMonday;
+  final bool allowMultipleActiveTimers;
 
   SettingsState({
     @required this.exportGroupTimers,
@@ -44,6 +45,7 @@ class SettingsState extends Equatable {
     @required this.collapseDays,
     @required this.autocompleteDescription,
     @required this.defaultFilterStartDateToMonday,
+    @required this.allowMultipleActiveTimers,
   })  : assert(exportGroupTimers != null),
         assert(exportIncludeDate != null),
         assert(exportIncludeProject != null),
@@ -56,7 +58,8 @@ class SettingsState extends Equatable {
         assert(groupTimers != null),
         assert(collapseDays != null),
         assert(autocompleteDescription != null),
-        assert(defaultFilterStartDateToMonday != null);
+        assert(defaultFilterStartDateToMonday != null),
+        assert(allowMultipleActiveTimers != null);
 
   static SettingsState initial() {
     return SettingsState(
@@ -73,6 +76,7 @@ class SettingsState extends Equatable {
       collapseDays: false,
       autocompleteDescription: true,
       defaultFilterStartDateToMonday: true,
+      allowMultipleActiveTimers: true,
     );
   }
 
@@ -91,6 +95,7 @@ class SettingsState extends Equatable {
     bool collapseDays,
     bool autocompleteDescription,
     bool defaultFilterStartDateToMonday,
+    bool allowMultipleActiveTimers,
   }) : this(
           exportGroupTimers: exportGroupTimers ?? project.exportGroupTimers,
           exportIncludeDate: exportIncludeDate ?? project.exportIncludeDate,
@@ -113,6 +118,8 @@ class SettingsState extends Equatable {
               autocompleteDescription ?? project.autocompleteDescription,
           defaultFilterStartDateToMonday: defaultFilterStartDateToMonday ??
               project.defaultFilterStartDateToMonday,
+          allowMultipleActiveTimers:
+              allowMultipleActiveTimers ?? project.allowMultipleActiveTimers,
         );
 
   @override
@@ -130,5 +137,6 @@ class SettingsState extends Equatable {
         collapseDays,
         autocompleteDescription,
         defaultFilterStartDateToMonday,
+        allowMultipleActiveTimers,
       ];
 }

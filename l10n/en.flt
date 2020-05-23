@@ -120,6 +120,8 @@ autocompleteDescription = Autocomplete Descriptions
 
 defaultFilterStartDateToMonday = Default Filter Start Date to Monday
 
+allowMultipleActiveTimers = Allow Multiple Active Timers
+
 hours = Hours
 
 total = Total

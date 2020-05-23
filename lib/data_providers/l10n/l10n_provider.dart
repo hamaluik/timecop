@@ -76,6 +76,7 @@ abstract class L10NProvider {
   String get collapseDays;
   String get autocompleteDescription;
   String get defaultFilterStartDateToMonday;
+  String get allowMultipleActiveTimers;
   String get hours;
   String get total;
 }

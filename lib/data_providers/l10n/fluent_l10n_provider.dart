@@ -172,6 +172,9 @@ class FluentL10NProvider extends L10NProvider {
   String get defaultFilterStartDateToMonday =>
       _bundle.format("defaultFilterStartDateToMonday", errors: _errors) ??
       "defaultFilterStartDateToMonday";
+  String get allowMultipleActiveTimers =>
+      _bundle.format("allowMultipleActiveTimers", errors: _errors) ??
+      "allowMultipleActiveTimers";
   String get hours => _bundle.format("hours", errors: _errors) ?? "hours";
   String get total => _bundle.format("total", errors: _errors) ?? "total";
 }

@@ -63,6 +63,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       bool defaultFilterStartDateToMonday =
           await settings.getBool("defaultFilterStartDateToMonday") ??
               state.defaultFilterStartDateToMonday;
+      bool allowMultipleActiveTimers =
+          await settings.getBool("allowMultipleActiveTimers") ??
+              state.allowMultipleActiveTimers;
       yield SettingsState(
           exportGroupTimers: exportGroupTimers,
           exportIncludeDate: exportIncludeDate,
@@ -76,7 +79,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           groupTimers: groupTimers,
           collapseDays: collapseDays,
           autocompleteDescription: autocompleteDescription,
-          defaultFilterStartDateToMonday: defaultFilterStartDateToMonday);
+          defaultFilterStartDateToMonday: defaultFilterStartDateToMonday,
+          allowMultipleActiveTimers: allowMultipleActiveTimers);
     }
     /*else if(event is SetExportGroupTimers) {
       await settings.setBool("exportGroupTimers", event.value);
@@ -158,6 +162,10 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         await settings.setBool("defaultFilterStartDateToMonday",
             event.defaultFilterStartDateToMonday);
       }
+      if (event.allowMultipleActiveTimers != null) {
+        await settings.setBool(
+            "allowMultipleActiveTimers", event.allowMultipleActiveTimers);
+      }
       yield SettingsState.clone(
         state,
         exportGroupTimers: event.exportGroupTimers,
@@ -172,6 +180,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         collapseDays: event.collapseDays,
         autocompleteDescription: event.autocompleteDescription,
         defaultFilterStartDateToMonday: event.defaultFilterStartDateToMonday,
+        allowMultipleActiveTimers: event.allowMultipleActiveTimers,
       );
     }
   }

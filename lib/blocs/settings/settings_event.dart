@@ -91,6 +91,7 @@ class SetBoolValueEvent extends SettingsEvent {
   final bool collapseDays;
   final bool autocompleteDescription;
   final bool defaultFilterStartDateToMonday;
+  final bool allowMultipleActiveTimers;
 
   const SetBoolValueEvent(
       {this.exportGroupTimers,
@@ -104,7 +105,8 @@ class SetBoolValueEvent extends SettingsEvent {
       this.groupTimers,
       this.collapseDays,
       this.autocompleteDescription,
-      this.defaultFilterStartDateToMonday});
+      this.defaultFilterStartDateToMonday,
+      this.allowMultipleActiveTimers});
 
   @override
   List<Object> get props => [
@@ -119,6 +121,7 @@ class SetBoolValueEvent extends SettingsEvent {
         groupTimers,
         collapseDays,
         autocompleteDescription,
-        defaultFilterStartDateToMonday
+        defaultFilterStartDateToMonday,
+        allowMultipleActiveTimers
       ];
 }
