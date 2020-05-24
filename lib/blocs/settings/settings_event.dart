@@ -93,6 +93,7 @@ class SetBoolValueEvent extends SettingsEvent {
   final bool exportGroupTimers;
   final bool exportIncludeDate;
   final bool exportIncludeProject;
+  final bool exportIncludeWorkType;
   final bool exportIncludeDescription;
   final bool exportIncludeProjectDescription;
   final bool exportIncludeStartTime;
@@ -109,6 +110,7 @@ class SetBoolValueEvent extends SettingsEvent {
       {this.exportGroupTimers,
       this.exportIncludeDate,
       this.exportIncludeProject,
+      this.exportIncludeWorkType,
       this.exportIncludeDescription,
       this.exportIncludeProjectDescription,
       this.exportIncludeStartTime,
@@ -126,6 +128,7 @@ class SetBoolValueEvent extends SettingsEvent {
         exportGroupTimers,
         exportIncludeDate,
         exportIncludeProject,
+        exportIncludeWorkType,
         exportIncludeDescription,
         exportIncludeProjectDescription,
         exportIncludeStartTime,

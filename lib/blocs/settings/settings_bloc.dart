@@ -37,6 +37,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       bool exportIncludeProject =
           await settings.getBool("exportIncludeProject") ??
               state.exportIncludeProject;
+      bool exportIncludeWorkType =
+          await settings.getBool("exportIncludeWorkType") ??
+              state.exportIncludeWorkType;
       bool exportIncludeDate = await settings.getBool("exportIncludeDate") ??
           state.exportIncludeDate;
       bool exportIncludeDescription =
@@ -78,6 +81,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           exportGroupTimers: exportGroupTimers,
           exportIncludeDate: exportIncludeDate,
           exportIncludeProject: exportIncludeProject,
+          exportIncludeWorkType: exportIncludeWorkType,
           exportIncludeDescription: exportIncludeDescription,
           exportIncludeProjectDescription: exportIncludeProjectDescription,
           exportIncludeStartTime: exportIncludeStartTime,
@@ -142,6 +146,10 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         await settings.setBool(
             "exportIncludeProject", event.exportIncludeProject);
       }
+      if (event.exportIncludeWorkType != null) {
+        await settings.setBool(
+            "exportIncludeWorkType", event.exportIncludeWorkType);
+      }
       if (event.exportIncludeDescription != null) {
         await settings.setBool(
             "exportIncludeDescription", event.exportIncludeDescription);
@@ -189,6 +197,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         exportGroupTimers: event.exportGroupTimers,
         exportIncludeDate: event.exportIncludeDate,
         exportIncludeProject: event.exportIncludeProject,
+        exportIncludeWorkType: event.exportIncludeWorkType,
         exportIncludeDescription: event.exportIncludeDescription,
         exportIncludeProjectDescription: event.exportIncludeProjectDescription,
         exportIncludeStartTime: event.exportIncludeStartTime,

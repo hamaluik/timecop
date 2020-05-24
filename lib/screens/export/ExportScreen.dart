@@ -29,6 +29,7 @@ import 'package:timecop/blocs/projects/projects_bloc.dart';
 import 'package:timecop/blocs/settings/bloc.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
+import 'package:timecop/blocs/work_types/work_types_bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
@@ -241,6 +242,13 @@ class _ExportScreenState extends State<ExportScreen> {
                   activeColor: Theme.of(context).accentColor,
                 ),
                 SwitchListTile(
+                  title: Text(L10N.of(context).tr.workType),
+                  value: settingsState.exportIncludeWorkType,
+                  onChanged: (bool value) => settingsBloc
+                      .add(SetBoolValueEvent(exportIncludeWorkType: value)),
+                  activeColor: Theme.of(context).accentColor,
+                ),
+                SwitchListTile(
                   title: Text(L10N.of(context).tr.description),
                   value: settingsState.exportIncludeDescription,
                   onChanged: (bool value) => settingsBloc
@@ -375,12 +383,19 @@ class _ExportScreenState extends State<ExportScreen> {
                 BlocProvider.of<ProjectsBloc>(context);
             assert(projects != null);
 
+            final WorkTypesBloc workTypes =
+                BlocProvider.of<WorkTypesBloc>(context);
+            assert(workTypes != null);
+
             List<String> headers = [];
             if (settingsBloc.state.exportIncludeDate) {
               headers.add(L10N.of(context).tr.date);
             }
             if (settingsBloc.state.exportIncludeProject) {
               headers.add(L10N.of(context).tr.project);
+            }
+            if (settingsBloc.state.exportIncludeWorkType) {
+              headers.add(L10N.of(context).tr.workType);
             }
             if (settingsBloc.state.exportIncludeDescription) {
               headers.add(L10N.of(context).tr.description);
@@ -468,6 +483,10 @@ class _ExportScreenState extends State<ExportScreen> {
               }
               if (settingsBloc.state.exportIncludeProject) {
                 row.add(projects.getProjectByID(timer.projectID)?.name ?? "");
+              }
+              if (settingsBloc.state.exportIncludeWorkType) {
+                row.add(
+                    workTypes.getWorkTypeByID(timer.workTypeID)?.name ?? "");
               }
               if (settingsBloc.state.exportIncludeDescription) {
                 row.add(timer.description ?? "");

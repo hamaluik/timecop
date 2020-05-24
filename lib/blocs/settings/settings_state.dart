@@ -19,6 +19,7 @@ class SettingsState extends Equatable {
   final bool exportGroupTimers;
   final bool exportIncludeDate;
   final bool exportIncludeProject;
+  final bool exportIncludeWorkType;
   final bool exportIncludeDescription;
   final bool exportIncludeProjectDescription;
   final bool exportIncludeStartTime;
@@ -37,6 +38,7 @@ class SettingsState extends Equatable {
     @required this.exportGroupTimers,
     @required this.exportIncludeDate,
     @required this.exportIncludeProject,
+    @required this.exportIncludeWorkType,
     @required this.exportIncludeDescription,
     @required this.exportIncludeProjectDescription,
     @required this.exportIncludeStartTime,
@@ -53,6 +55,7 @@ class SettingsState extends Equatable {
   })  : assert(exportGroupTimers != null),
         assert(exportIncludeDate != null),
         assert(exportIncludeProject != null),
+        assert(exportIncludeWorkType != null),
         assert(exportIncludeDescription != null),
         assert(exportIncludeProjectDescription != null),
         assert(exportIncludeStartTime != null),
@@ -72,6 +75,7 @@ class SettingsState extends Equatable {
       exportGroupTimers: true,
       exportIncludeDate: true,
       exportIncludeProject: true,
+      exportIncludeWorkType: true,
       exportIncludeDescription: true,
       exportIncludeProjectDescription: false,
       exportIncludeStartTime: false,
@@ -93,6 +97,7 @@ class SettingsState extends Equatable {
     bool exportGroupTimers,
     bool exportIncludeDate,
     bool exportIncludeProject,
+    bool exportIncludeWorkType,
     bool exportIncludeDescription,
     bool exportIncludeProjectDescription,
     bool exportIncludeStartTime,
@@ -111,6 +116,8 @@ class SettingsState extends Equatable {
           exportIncludeDate: exportIncludeDate ?? project.exportIncludeDate,
           exportIncludeProject:
               exportIncludeProject ?? project.exportIncludeProject,
+          exportIncludeWorkType:
+              exportIncludeWorkType ?? project.exportIncludeWorkType,
           exportIncludeDescription:
               exportIncludeDescription ?? project.exportIncludeDescription,
           exportIncludeProjectDescription: exportIncludeProjectDescription ??
@@ -140,6 +147,7 @@ class SettingsState extends Equatable {
         exportGroupTimers,
         exportIncludeDate,
         exportIncludeProject,
+        exportIncludeWorkType,
         exportIncludeDescription,
         exportIncludeProjectDescription,
         exportIncludeStartTime,

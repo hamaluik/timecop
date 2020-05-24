@@ -42,6 +42,8 @@ to = To
 
 project = Project
 
+workType = Work Type
+
 description = Description
 
 timeH = Time (hours)
