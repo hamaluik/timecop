@@ -118,12 +118,12 @@ class _ReportsScreenState extends State<ReportsScreen> {
             ),
             ExpansionTile(
               title: Text(
-                L10N.of(context).tr.filter,
+                  L10N.of(context).tr.filter,
                   style: TextStyle(
                       color: Theme.of(context).accentColor,
                       fontWeight: FontWeight.w700
-                  )
-                ),
+                    )
+                  ),
               initiallyExpanded: false,
               children: <Widget>[
                 Slidable(
@@ -193,8 +193,8 @@ class _ReportsScreenState extends State<ReportsScreen> {
                           context,
                           currentTime: _endDate,
                           minTime: _startDate,
-                          onChanged: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
-                          onConfirm: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
+                          onChanged: (DateTime dt) => setState(() => _endDate = DateTime( dt.year, dt.month, dt.day, 23, 59, 59, 999)),
+                          onConfirm: (DateTime dt) => setState(() => _endDate = DateTime( dt.year, dt.month, dt.day, 23, 59, 59, 999)),
                           theme: DatePickerTheme(
                             cancelStyle: Theme.of(context).textTheme.button,
                             doneStyle: Theme.of(context).textTheme.button,
@@ -235,8 +235,8 @@ class _ReportsScreenState extends State<ReportsScreen> {
                   style: TextStyle(
                       color: Theme.of(context).accentColor,
                       fontWeight: FontWeight.w700
-                 )
-               ),
+                    )
+                  ),
               children: <Widget>[
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -289,6 +289,6 @@ class _ReportsScreenState extends State<ReportsScreen> {
             ),
           ],
         )
-       );
+      );
   }
 }

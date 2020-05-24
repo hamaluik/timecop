@@ -56,7 +56,7 @@ create = Crear
 
 save = Salvar
 
-areYouSureYouWantToDelete = ¿Estás seguro de que deseas eliminar este proyecto?
+areYouSureYouWantToDeleteProject = ¿Estás seguro de que deseas eliminar este proyecto?
 
 editTimer = Editar temporizador
 

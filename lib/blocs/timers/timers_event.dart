@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'package:equatable/equatable.dart';
+import 'package:timecop/models/WorkType.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
 
@@ -27,8 +28,9 @@ class LoadTimers extends TimersEvent {
 class CreateTimer extends TimersEvent {
   final String description;
   final Project project;
-  CreateTimer({this.description, this.project});
-  @override List<Object> get props => [description, project];
+  final WorkType workType;
+  CreateTimer({this.description, this.project, this.workType});
+  @override List<Object> get props => [description, project, workType];
 }
 
 class UpdateNow extends TimersEvent {

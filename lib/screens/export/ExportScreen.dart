@@ -32,7 +32,7 @@ import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
-import 'package:timecop/models/project_description_pair.dart';
+import 'package:timecop/models/timer_group.dart';
 import 'package:timecop/models/timer_entry.dart';
 
 class ExportScreen extends StatefulWidget {
@@ -46,7 +46,7 @@ class DayGroup {
   final DateTime date;
   List<TimerEntry> timers = [];
 
-  DayGroup(this.date)
+  DayGroup(this.date) 
   : assert(date != null);
 }
 
@@ -95,13 +95,13 @@ class _ExportScreenState extends State<ExportScreen> {
                   dbPath = copiedDB.path;
                 }
                 await FlutterShare.shareFile(title: L10N.of(context).tr.timeCopDatabase(_dateFormat.format(DateTime.now())), filePath: dbPath);
-              } 
-              on Exception catch (e) {
+              }
+               on Exception catch (e) {
                 _scaffoldKey.currentState.showSnackBar(
                   SnackBar(
-                    backgroundColor: Theme.of(context).errorColor,
-                    content: Text(e.toString(), style: TextStyle(color: Colors.white),),
-                    duration: Duration(seconds: 5),
+                  backgroundColor: Theme.of(context).errorColor,
+                  content: Text(e.toString(), style: TextStyle(color: Colors.white),),
+                  duration: Duration(seconds: 5),
                 )
                );
               }
@@ -113,11 +113,11 @@ class _ExportScreenState extends State<ExportScreen> {
         children: <Widget>[
           ExpansionTile(
             title: Text(
-              L10N.of(context).tr.filter,
+                L10N.of(context).tr.filter,
                 style: TextStyle(
                     color: Theme.of(context).accentColor,
                     fontWeight: FontWeight.w700
-              )
+               )
             ),
             initiallyExpanded: true,
             children: <Widget>[
@@ -133,21 +133,21 @@ class _ExportScreenState extends State<ExportScreen> {
                   ),
                   onTap: () async {
                     await DatePicker.showDatePicker(
-                      context,
-                      currentTime: _startDate,
-                      onChanged: (DateTime dt) => setState(() => _startDate = DateTime(dt.year, dt.month, dt.day)),
-                      onConfirm: (DateTime dt) => setState(() => _startDate = DateTime(dt.year, dt.month, dt.day)),
+                        context,
+                        currentTime: _startDate,
+                        onChanged: (DateTime dt) => setState(() => _startDate = DateTime(dt.year, dt.month, dt.day)),
+                        onConfirm: (DateTime dt) => setState(() => _startDate = DateTime(dt.year, dt.month, dt.day)),
                         theme: DatePickerTheme(
                           cancelStyle: Theme.of(context).textTheme.button,
                           doneStyle: Theme.of(context).textTheme.button,
                           itemStyle: Theme.of(context).textTheme.body1,
                           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                         )
-                      );
+                     );
                   },
                 ),
                 secondaryActions:
-                  _startDate == null
+                    _startDate == null
                     ? <Widget>[]
                     : <Widget>[
                         IconSlideAction(
@@ -174,10 +174,10 @@ class _ExportScreenState extends State<ExportScreen> {
                   ),
                   onTap: () async {
                     await DatePicker.showDatePicker(
-                      context,
-                      currentTime: _endDate,
-                      onChanged: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
-                      onConfirm: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
+                        context,
+                        currentTime: _endDate,
+                        onChanged: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
+                        onConfirm: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
                         theme: DatePickerTheme(
                           cancelStyle: Theme.of(context).textTheme.button,
                           doneStyle: Theme.of(context).textTheme.button,
@@ -214,8 +214,8 @@ class _ExportScreenState extends State<ExportScreen> {
                   style: TextStyle(
                       color: Theme.of(context).accentColor,
                       fontWeight: FontWeight.w700
-                  )
-                ),
+                      )
+                    ),
               children: <Widget>[
                 SwitchListTile(
                   title: Text(L10N.of(context).tr.date),
@@ -264,12 +264,12 @@ class _ExportScreenState extends State<ExportScreen> {
           ),
           ExpansionTile(
             title: Text(
-              L10N.of(context).tr.projects,
+                L10N.of(context).tr.projects,
                 style: TextStyle(
                     color: Theme.of(context).accentColor,
                     fontWeight: FontWeight.w700
-                )
-              ),
+                  )
+                ),
             children: <Widget>[
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -315,12 +315,12 @@ class _ExportScreenState extends State<ExportScreen> {
           ),
           ExpansionTile(
             title: Text(
-              L10N.of(context).tr.options,
+                L10N.of(context).tr.options,
                 style: TextStyle(
                     color: Theme.of(context).accentColor,
                     fontWeight: FontWeight.w700
-              )
-             ),
+                  )
+                ),
             children: <Widget>[
               BlocBuilder<SettingsBloc, SettingsState>(
                 bloc: settingsBloc,
@@ -399,17 +399,17 @@ class _ExportScreenState extends State<ExportScreen> {
               filteredTimers.sort((a, b) => a.startTime.compareTo(b.startTime));
 
               // now start grouping those suckers
-              LinkedHashMap<String, LinkedHashMap<ProjectDescriptionPair, List<TimerEntry>>> derp = LinkedHashMap();
+              LinkedHashMap<String, LinkedHashMap<TimerGroup, List<TimerEntry>>> derp = LinkedHashMap();
               for (TimerEntry timer in filteredTimers) {
                 String date = _exportDateFormat.format(timer.startTime);
-                LinkedHashMap<ProjectDescriptionPair, List<TimerEntry>> pairedEntries = derp.putIfAbsent(date, () => LinkedHashMap());
-                List<TimerEntry> pairedList = pairedEntries.putIfAbsent(ProjectDescriptionPair(timer.projectID, timer.description), () => <TimerEntry>[]);
+                LinkedHashMap<TimerGroup, List<TimerEntry>> pairedEntries = derp.putIfAbsent(date, () => LinkedHashMap());
+                List<TimerEntry> pairedList = pairedEntries.putIfAbsent(TimerGroup( timer.projectID, timer.workTypeID, timer.description), () => <TimerEntry>[]);
                 pairedList.add(timer);
               }
 
               // ok, now they're grouped based on date, then combined project + description pairs
               // time to get them back into a flat list
-              filteredTimers = derp.values.expand((LinkedHashMap<ProjectDescriptionPair, List<TimerEntry>> pairedEntries) {
+              filteredTimers = derp.values.expand((LinkedHashMap<TimerGroup, List<TimerEntry>> pairedEntries) {
                 return pairedEntries.values.map((List<TimerEntry> groupedEntries) {
                   assert(groupedEntries.isNotEmpty);
 
@@ -417,7 +417,7 @@ class _ExportScreenState extends State<ExportScreen> {
                   if (groupedEntries.length == 1) return groupedEntries[0];
 
                   // yes a group entry, build a dummy timer entry
-                  Duration totalTime = groupedEntries.fold(Duration(), (Duration d, TimerEntry t) => d + t.endTime.difference(t.startTime));
+                  Duration totalTime = groupedEntries.fold(Duration(),(Duration d, TimerEntry t) => d + t.endTime.difference(t.startTime));
                   return TimerEntry.clone(groupedEntries[0], endTime: groupedEntries[0].startTime.add(totalTime));
                 });
               })
@@ -425,10 +425,10 @@ class _ExportScreenState extends State<ExportScreen> {
             }
 
             List<List<String>> data = <List<String>>[headers]
-            .followedBy(
-              filteredTimers
-                .map(
-                  (timer) {
+                  .followedBy(
+                    filteredTimers
+                    .map(
+                      (timer) {
               List<String> row = [];
               if (settingsBloc.state.exportIncludeDate) {
                 row.add(_exportDateFormat.format(timer.startTime));
@@ -449,12 +449,12 @@ class _ExportScreenState extends State<ExportScreen> {
                 row.add(timer.endTime.toUtc().toIso8601String());
               }
               if (settingsBloc.state.exportIncludeDurationHours) {
-                row.add((timer.endTime.difference(timer.startTime).inSeconds.toDouble() / 3600.0).toStringAsFixed(4));
+                row.add((timer.endTime.difference(timer.startTime).inSeconds.toDouble() /3600.0).toStringAsFixed(4));
               }
               return row;
             }
-           )
-          ).toList();
+            )
+            ).toList();
             String csv = ListToCsvConverter().convert(data);
             print('CSV:');
             print(csv);
@@ -462,7 +462,7 @@ class _ExportScreenState extends State<ExportScreen> {
             Directory directory;
             if (Platform.isAndroid) {
               directory = await getExternalStorageDirectory();
-            } 
+            }
             else {
               directory = await getApplicationDocumentsDirectory();
             }

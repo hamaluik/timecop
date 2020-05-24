@@ -16,6 +16,12 @@ class ProjectChangedEvent extends DashboardEvent {
   @override List<Object> get props => [project];
 }
 
+class WorkTypeChangedEvent extends DashboardEvent {
+  final WorkType workType;
+  const WorkTypeChangedEvent(this.workType);
+  @override List<Object> get props => [workType];
+}
+
 class ResetEvent extends DashboardEvent {
   const ResetEvent();
   @override List<Object> get props => [];

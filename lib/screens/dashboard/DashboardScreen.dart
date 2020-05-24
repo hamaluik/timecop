@@ -16,9 +16,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
+import 'package:timecop/blocs/work_types/work_types_bloc.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:timecop/screens/dashboard/components/DescriptionField.dart';
 import 'package:timecop/screens/dashboard/components/ProjectSelectField.dart';
+import 'package:timecop/screens/dashboard/components/WorkTypeSelectField.dart';
 import 'package:timecop/screens/dashboard/components/RunningTimers.dart';
 import 'package:timecop/screens/dashboard/components/StartTimerButton.dart';
 import 'package:timecop/screens/dashboard/components/StoppedTimers.dart';
@@ -30,11 +32,12 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+    final WorkTypesBloc workTypesBloc = BlocProvider.of<WorkTypesBloc>(context);
     final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
 
     return 
-      BlocProvider<DashboardBloc>(
-        create: (_) => DashboardBloc(projectsBloc, settingsBloc),
+       BlocProvider<DashboardBloc>(
+        create: (_) => DashboardBloc(projectsBloc, workTypesBloc, settingsBloc),
         child: Scaffold(
           appBar: TopBar(),
           body: Column(
@@ -59,11 +62,15 @@ class DashboardScreen extends StatelessWidget {
                       children: <Widget>[
                         ProjectSelectField(),
                         Expanded(
-                          flex: 1,
+                          flex: 3,
                           child: Padding(
                             padding: EdgeInsets.fromLTRB(4.0, 0, 4.0, 0),
                             child: DescriptionField(),
                           ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: WorkTypeSelectField(),
                         ),
                         Container(
                           width: 72,

@@ -56,7 +56,7 @@ create = 作成
 
 save = 保存
 
-areYouSureYouWantToDelete = このプロジェクトを削除しますか？
+areYouSureYouWantToDeleteProject = このプロジェクトを削除しますか？
 
 editTimer = タイマーを編集
 

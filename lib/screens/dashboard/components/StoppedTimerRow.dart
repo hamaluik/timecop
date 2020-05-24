@@ -19,11 +19,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
+import 'package:timecop/blocs/work_types/work_types_bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
+import 'package:timecop/models/WorkType.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/screens/timer/TimerEditor.dart';
+
+import 'TimerTileBuilder.dart';
 
 class StoppedTimerRow extends StatelessWidget {
   final TimerEntry timer;
@@ -31,38 +35,27 @@ class StoppedTimerRow extends StatelessWidget {
       : assert(timer != null),
         super(key: key);
 
-  static String formatDescription(BuildContext context, String description) {
-    if (description == null || description.trim().isEmpty) {
-      return L10N.of(context).tr.noDescription;
-    }
-    return description;
-  }
-
-  static TextStyle styleDescription(BuildContext context, String description) {
-    if (description == null || description.trim().isEmpty) {
-      return TextStyle(color: Theme.of(context).disabledColor);
-    }
-    return null;
-  }
-
-
   @override
   Widget build(BuildContext context) {
     assert(timer.endTime != null);
+
+    final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
+    final TimerTileBuilder timerTileBuilder = TimerTileBuilder(context);
 
     return Slidable(
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.15,
       child: ListTile(
           key: Key("stoppedTimer-" + timer.id.toString()),
-          leading: ProjectColour(project: BlocProvider.of<ProjectsBloc>(context).getProjectByID(timer.projectID)),
-          title: Text(formatDescription(context, timer.description), style: styleDescription(context, timer.description)),
+          leading: ProjectColour(project: projects.getProjectByID(timer.projectID)),
+          title: timerTileBuilder.getTitleWidget(timer),
+          subtitle: timerTileBuilder.getSubTitleWidget(timer),
           trailing: Text(timer.formatTime(), style: TextStyle(fontFamily: "FiraMono")),
           onTap: () => Navigator.of(context).push(MaterialPageRoute<TimerEditor>(
                 builder: (BuildContext context) => TimerEditor( timer: timer,),
                 fullscreenDialog: true,
               ))
-          ),
+           ),
       actions: <Widget>[
         IconSlideAction(
           color: Theme.of(context).errorColor,
@@ -85,7 +78,7 @@ class StoppedTimerRow extends StatelessWidget {
                         ),
                       ],
                     )
-                  );
+                );
             if (delete) {
               final TimersBloc timersBloc = BlocProvider.of<TimersBloc>(context);
               assert(timersBloc != null);
@@ -106,12 +99,16 @@ class StoppedTimerRow extends StatelessWidget {
               assert(projectsBloc != null);
               Project project = projectsBloc.getProjectByID(timer.projectID);
 
+              final WorkTypesBloc workTypesBloc = BlocProvider.of<WorkTypesBloc>(context);
+              assert(workTypesBloc != null);
+              WorkType workType = workTypesBloc.getWorkTypeByID(timer.workTypeID);
+
               final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
               if (!settingsBloc.state.allowMultipleActiveTimers) {
                 timersBloc.add(StopAllTimers());
               }
 
-              timersBloc.add(CreateTimer( description: timer.description, project: project));
+              timersBloc.add(CreateTimer( description: timer.description, project: project, workType: workType));
             }
           )
       ],

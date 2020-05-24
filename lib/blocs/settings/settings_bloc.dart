@@ -38,11 +38,13 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       bool exportIncludeEndTime = await settings.getBool("exportIncludeEndTime") ?? state.exportIncludeEndTime;
       bool exportIncludeDurationHours = await settings.getBool("exportIncludeDurationHours") ?? state.exportIncludeDurationHours;
       int defaultProjectID = await settings.getInt("defaultProjectID") ?? state.defaultProjectID;
+      int defaultWorkTypeID = await settings.getInt("defaultWorkTypeID") ?? state.defaultWorkTypeID;
       bool groupTimers = await settings.getBool("groupTimers") ?? state.groupTimers;
       bool collapseDays = await settings.getBool("collapseDays") ?? state.collapseDays;
       bool autocompleteDescription = await settings.getBool("autocompleteDescription") ?? state.autocompleteDescription;
       bool defaultFilterStartDateToMonday = await settings.getBool("defaultFilterStartDateToMonday") ?? state.defaultFilterStartDateToMonday;
       bool allowMultipleActiveTimers = await settings.getBool("allowMultipleActiveTimers") ?? state.allowMultipleActiveTimers;
+      bool displayProjectNameInTimer = await settings.getBool("displayProjectNameInTimer") ?? state.displayProjectNameInTimer;
       yield SettingsState(
           exportGroupTimers: exportGroupTimers,
           exportIncludeDate: exportIncludeDate,
@@ -53,11 +55,13 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           exportIncludeEndTime: exportIncludeEndTime,
           exportIncludeDurationHours: exportIncludeDurationHours,
           defaultProjectID: defaultProjectID,
+          defaultWorkTypeID: defaultWorkTypeID,
           groupTimers: groupTimers,
           collapseDays: collapseDays,
           autocompleteDescription: autocompleteDescription,
           defaultFilterStartDateToMonday: defaultFilterStartDateToMonday,
-          allowMultipleActiveTimers: allowMultipleActiveTimers);
+          allowMultipleActiveTimers: allowMultipleActiveTimers,
+          displayProjectNameInTimer: displayProjectNameInTimer);
     }
     /*else if(event is SetExportGroupTimers) {
       await settings.setBool("exportGroupTimers", event.value);
@@ -94,6 +98,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     else if (event is SetDefaultProjectID) {
       await settings.setInt("defaultProjectID", event.projectID ?? -1);
       yield SettingsState.clone(state, defaultProjectID: event.projectID ?? -1);
+    } else if (event is SetDefaultWorkTypeID) {
+      await settings.setInt("defaultWorkTypeID", event.workTypeID ?? -1);
+      yield SettingsState.clone(state, defaultWorkTypeID: event.workTypeID ?? -1);
     } else if (event is SetBoolValueEvent) {
       if (event.exportGroupTimers != null) {
         await settings.setBool("exportGroupTimers", event.exportGroupTimers);
@@ -134,6 +141,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       if (event.allowMultipleActiveTimers != null) {
         await settings.setBool("allowMultipleActiveTimers", event.allowMultipleActiveTimers);
       }
+      if (event.displayProjectNameInTimer != null) {
+        await settings.setBool("displayProjectNameInTimer", event.displayProjectNameInTimer);
+      }
       yield SettingsState.clone(
         state,
         exportGroupTimers: event.exportGroupTimers,
@@ -149,6 +159,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         autocompleteDescription: event.autocompleteDescription,
         defaultFilterStartDateToMonday: event.defaultFilterStartDateToMonday,
         allowMultipleActiveTimers: event.allowMultipleActiveTimers,
+        displayProjectNameInTimer: event.displayProjectNameInTimer,
       );
     }
   }

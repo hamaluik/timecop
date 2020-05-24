@@ -50,8 +50,8 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial> with TickerPr
 
     // adapted from https://stackoverflow.com/a/46480722
     return Column(
-      mainAxisSize: MainAxisSize.min, 
-      children: <Widget>[
+       mainAxisSize: MainAxisSize.min, 
+       children: <Widget>[
       Container(
         height: 70.0,
         width: 56.0,
@@ -60,10 +60,10 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial> with TickerPr
           scale: CurvedAnimation(
             parent: _controller,
             curve: Interval(
-              0.0, 
-              1.0, 
-              curve: Curves.easeOut
-            ),
+                0.0, 
+                1.0, 
+                curve: Curves.easeOut
+             ),
           ),
           child: FloatingActionButton(
             heroTag: null,
@@ -86,7 +86,7 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial> with TickerPr
               _controller.reverse();
               final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
               assert(timers != null);
-              timers.add(CreateTimer( description: bloc.state.newDescription, project: bloc.state.newProject));
+              timers.add(CreateTimer( description: bloc.state.newDescription, project: bloc.state.newProject, workType: bloc.state.newWorkType));
               bloc.add(TimerWasStartedEvent());
             },
           ),
@@ -100,10 +100,10 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial> with TickerPr
           scale: CurvedAnimation(
             parent: _controller,
             curve: Interval(
-              0.0,
-              0.75,
-              curve: Curves.easeOut
-            ),
+                0.0, 
+                0.75, 
+                curve: Curves.easeOut
+             ),
           ),
           child: FloatingActionButton(
             heroTag: null,

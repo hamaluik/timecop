@@ -21,9 +21,10 @@ import 'package:timecop/screens/export/ExportScreen.dart';
 import 'package:timecop/screens/projects/ProjectsScreen.dart';
 import 'package:timecop/screens/reports/ReportsScreen.dart';
 import 'package:timecop/screens/settings/SettingsScreen.dart';
+import 'package:timecop/screens/workTypes/WorkTypesScreen.dart';
 
 enum MenuItem {
-  projects, reports, export, settings, about,
+  projects, workTypes, reports, export, settings, about,
 }
 
 class PopupMenu extends StatelessWidget {
@@ -40,10 +41,15 @@ class PopupMenu extends StatelessWidget {
       ),
       color: Theme.of(context).scaffoldBackgroundColor,
       onSelected: (MenuItem item) {
-        switch(item) {
+        switch (item) {
           case MenuItem.projects:
             Navigator.of(context).push(MaterialPageRoute<ProjectsScreen>(
               builder: (BuildContext _context) => ProjectsScreen(),
+            ));
+            break;
+          case MenuItem.workTypes:
+            Navigator.of(context).push(MaterialPageRoute<WorkTypesScreen>(
+              builder: (BuildContext _context) => WorkTypesScreen(),
             ));
             break;
           case MenuItem.reports:
@@ -77,6 +83,14 @@ class PopupMenu extends StatelessWidget {
               title: Text(L10N.of(context).tr.projects),
             ),
             value: MenuItem.projects,
+          ),
+          PopupMenuItem(
+            key: Key("menuWorkTypes"),
+            child: ListTile(
+              leading: Icon(FontAwesomeIcons.hardHat),
+              title: Text(L10N.of(context).tr.workTypes),
+            ),
+            value: MenuItem.workTypes,
           ),
           PopupMenuItem(
             key: Key("menuReports"),

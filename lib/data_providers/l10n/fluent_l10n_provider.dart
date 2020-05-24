@@ -31,7 +31,7 @@ class FluentL10NProvider extends L10NProvider {
     // special handling of zh-CN & zh-TW for now
     if (locale.languageCode == "zh" && locale.countryCode == "CN") {
       src = "l10n/zh-CN.flt";
-    }
+    } 
     else if (locale.languageCode == "zh" && locale.countryCode == "TW") {
       src = "l10n/zh-TW.flt";
     }
@@ -45,17 +45,20 @@ class FluentL10NProvider extends L10NProvider {
   String get appDescription => _bundle.format("appDescription", errors: _errors);
   String get appLegalese => _bundle.format("appLegalese", errors: _errors);
   String get appName => _bundle.format("appName", errors: _errors);
-  String get areYouSureYouWantToDelete => _bundle.format("areYouSureYouWantToDelete", errors: _errors);
+  String get areYouSureYouWantToDeleteProject => _bundle.format("areYouSureYouWantToDeleteProject", errors: _errors);
+  String get areYouSureYouWantToDeleteWorkType => _bundle.format("areYouSureYouWantToDeleteWorkType", errors: _errors);
   String get cancel => _bundle.format("cancel", errors: _errors);
   String get changeLog => _bundle.format("changeLog", errors: _errors);
   String get confirmDelete => _bundle.format("confirmDelete", errors: _errors);
   String get create => _bundle.format("create", errors: _errors);
   String get createNewProject => _bundle.format("createNewProject", errors: _errors);
+  String get createNewWorkType => _bundle.format("createNewWorkType", errors: _errors);
   String get delete => _bundle.format("delete", errors: _errors);
   String get deleteTimerConfirm => _bundle.format("deleteTimerConfirm", errors: _errors);
   String get description => _bundle.format("description", errors: _errors);
   String get duration => _bundle.format("duration", errors: _errors);
   String get editProject => _bundle.format("editProject", errors: _errors);
+  String get editWorkType => _bundle.format("editWorkType", errors: _errors);
   String get editTimer => _bundle.format("editTimer", errors: _errors);
   String get endTime => _bundle.format("endTime", errors: _errors);
   String get export => _bundle.format("export", errors: _errors);
@@ -63,10 +66,14 @@ class FluentL10NProvider extends L10NProvider {
   String get from => _bundle.format("from", errors: _errors);
   String get logoSemantics => _bundle.format("logoSemantics", errors: _errors);
   String get noProject => _bundle.format("noProject", errors: _errors);
+  String get noWorkType => _bundle.format("noWorkType", errors: _errors);
   String get pleaseEnterAName => _bundle.format("pleaseEnterAName", errors: _errors);
   String get project => _bundle.format("project", errors: _errors);
+  String get workType => _bundle.format("workType", errors: _errors);
   String get projectName => _bundle.format("projectName", errors: _errors);
+  String get workTypeName => _bundle.format("workTypeName", errors: _errors);
   String get projects => _bundle.format("projects", errors: _errors);
+  String get workTypes => _bundle.format("workTypes", errors: _errors);
   String get readme => _bundle.format("readme", errors: _errors);
   String get runningTimers => _bundle.format("runningTimers", errors: _errors);
   String get save => _bundle.format("save", errors: _errors);
@@ -132,6 +139,7 @@ class FluentL10NProvider extends L10NProvider {
   String get autocompleteDescription => _bundle.format("autocompleteDescription", errors: _errors) ?? "autocompleteDescription";
   String get defaultFilterStartDateToMonday => _bundle.format("defaultFilterStartDateToMonday", errors: _errors) ?? "defaultFilterStartDateToMonday";
   String get allowMultipleActiveTimers => _bundle.format("allowMultipleActiveTimers", errors: _errors) ?? "allowMultipleActiveTimers";
+  String get displayProjectNameInTimer => _bundle.format("displayProjectNameInTimer", errors: _errors) ?? "displayProjectNameInTimer";
   String get hours => _bundle.format("hours", errors: _errors) ?? "hours";
   String get total => _bundle.format("total", errors: _errors) ?? "total";
 }

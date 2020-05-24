@@ -78,6 +78,13 @@ class SetDefaultProjectID extends SettingsEvent {
   List<Object> get props => [projectID];
 }
 
+class SetDefaultWorkTypeID extends SettingsEvent {
+  final int workTypeID;
+  const SetDefaultWorkTypeID(this.workTypeID);
+  @override
+  List<Object> get props => [workTypeID];
+}
+
 class SetBoolValueEvent extends SettingsEvent {
   final bool exportGroupTimers;
   final bool exportIncludeDate;
@@ -92,6 +99,7 @@ class SetBoolValueEvent extends SettingsEvent {
   final bool autocompleteDescription;
   final bool defaultFilterStartDateToMonday;
   final bool allowMultipleActiveTimers;
+  final bool displayProjectNameInTimer;
 
   const SetBoolValueEvent(
       {this.exportGroupTimers,
@@ -106,7 +114,8 @@ class SetBoolValueEvent extends SettingsEvent {
       this.collapseDays,
       this.autocompleteDescription,
       this.defaultFilterStartDateToMonday,
-      this.allowMultipleActiveTimers});
+      this.allowMultipleActiveTimers,
+      this.displayProjectNameInTimer});
 
   @override
   List<Object> get props => [
@@ -122,6 +131,7 @@ class SetBoolValueEvent extends SettingsEvent {
         collapseDays,
         autocompleteDescription,
         defaultFilterStartDateToMonday,
-        allowMultipleActiveTimers
+        allowMultipleActiveTimers,
+        displayProjectNameInTimer
       ];
 }

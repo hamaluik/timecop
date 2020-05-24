@@ -20,11 +20,15 @@ import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/blocs/timers/timers_bloc.dart';
+import 'package:timecop/blocs/work_types/work_types_bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
+import 'package:timecop/models/WorkType.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/screens/dashboard/components/StoppedTimerRow.dart';
+
+import 'TimerTileBuilder.dart';
 
 class GroupedStoppedTimersRow extends StatefulWidget {
   final List<TimerEntry> timers;
@@ -59,22 +63,10 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow> with 
     super.dispose();
   }
 
-  static String formatDescription(BuildContext context, String description) {
-    if (description == null || description.trim().isEmpty) {
-      return L10N.of(context).tr.noDescription;
-    }
-    return description;
-  }
-
-  static TextStyle styleDescription(BuildContext context, String description) {
-    if (description == null || description.trim().isEmpty) {
-      return TextStyle(color: Theme.of(context).disabledColor);
-    }
-    return null;
-  }
-
   @override
   Widget build(BuildContext context) {
+    final TimerTileBuilder timerTileBuilder = TimerTileBuilder(context);
+
     return Slidable(
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.15,
@@ -94,10 +86,9 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow> with 
             project: BlocProvider.of<ProjectsBloc>(context)
                 .getProjectByID(widget.timers[0].projectID)
         ),
-        title: Text(
-          formatDescription(context, widget.timers[0].description),
-          style: styleDescription(context, widget.timers[0].description)
-        ),
+        title: timerTileBuilder.getTitleWidget(widget.timers[0]),
+        subtitle: timerTileBuilder.getSubTitleWidget(widget.timers[0]
+       ),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -113,7 +104,7 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow> with 
                     Duration(),
                     (Duration sum, TimerEntry timer) => sum + timer.endTime.difference(timer.startTime)
                   )
-                ),
+                 ),
                 style: TextStyle(fontFamily: "FiraMono")
               ),
           ],
@@ -132,13 +123,17 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow> with 
               assert(projectsBloc != null);
               Project project = projectsBloc.getProjectByID(widget.timers.first?.projectID);
 
+              final WorkTypesBloc workTypesBloc = BlocProvider.of<WorkTypesBloc>(context);
+              assert(workTypesBloc != null);
+              WorkType workType = workTypesBloc .getWorkTypeByID(widget.timers.first?.workTypeID);
+
               final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
               if (!settingsBloc.state.allowMultipleActiveTimers) {
                 timersBloc.add(StopAllTimers());
               }
-              timersBloc.add(CreateTimer( description: widget.timers.first?.description ?? "", project: project));
+              timersBloc.add(CreateTimer( description: widget.timers.first?.description ?? "", project: project, workType: workType));
             }
-        )
+         )
       ],
     );
   }

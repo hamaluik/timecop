@@ -56,7 +56,7 @@ create = Crio
 
 save = Salve 
 
-areYouSureYouWantToDelete = Tem certeza de que deseja excluir este projeto?
+areYouSureYouWantToDeleteProject = Tem certeza de que deseja excluir este projeto?
 
 editTimer = Editar temporizador
 

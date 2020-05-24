@@ -95,8 +95,19 @@ class SettingsScreen extends StatelessWidget {
                 activeColor: Theme.of(context).accentColor,
               ),
             ),
+            BlocBuilder<SettingsBloc, SettingsState>(
+              bloc: settingsBloc,
+              builder: (BuildContext context, SettingsState settings) =>
+                  SwitchListTile(
+                title: Text(L10N.of(context).tr.displayProjectNameInTimer),
+                value: settings.displayProjectNameInTimer,
+                onChanged: (bool value) => settingsBloc
+                    .add(SetBoolValueEvent(displayProjectNameInTimer: value)),
+                activeColor: Theme.of(context).accentColor,
+              ),
+            ),
           ],
         )
-    );
+      );
   }
 }

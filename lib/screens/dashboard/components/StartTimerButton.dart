@@ -64,7 +64,7 @@ class _StartTimerButtonState extends State<StartTimerButton> {
               timers.add(StopAllTimers());
             }
 
-            timers.add(CreateTimer(description: bloc.state.newDescription, project: bloc.state.newProject));
+            timers.add(CreateTimer(description: bloc.state.newDescription, project: bloc.state.newProject, workType: bloc.state.newWorkType));
             bloc.add(TimerWasStartedEvent());
           },
         );
@@ -73,6 +73,6 @@ class _StartTimerButtonState extends State<StartTimerButton> {
         return StartTimerSpeedDial();
       }
     }
-  );
+   );
   }
 }
