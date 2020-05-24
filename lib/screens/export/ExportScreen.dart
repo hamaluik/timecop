@@ -31,7 +31,9 @@ import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/blocs/work_types/work_types_bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
+import 'package:timecop/components/WorkTypeBadge.dart';
 import 'package:timecop/l10n.dart';
+import 'package:timecop/models/WorkType.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_group.dart';
 import 'package:timecop/models/timer_entry.dart';
@@ -54,6 +56,7 @@ class _ExportScreenState extends State<ExportScreen> {
   DateTime _startDate;
   DateTime _endDate;
   List<Project> selectedProjects = [];
+  List<WorkType> selectedWorkTypes = [];
   static DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
   static DateFormat _exportDateFormat = DateFormat.yMd();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -67,6 +70,12 @@ class _ExportScreenState extends State<ExportScreen> {
         .followedBy(projects.state.projects.map((p) => Project.clone(p)))
         .toList();
 
+    final WorkTypesBloc workTypes = BlocProvider.of<WorkTypesBloc>(context);
+    assert(workTypes != null);
+    selectedWorkTypes = <WorkType>[null]
+        .followedBy(workTypes.state.workTypes.map((p) => WorkType.clone(p)))
+        .toList();
+
     final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
     _startDate = settingsBloc.getFilterStartDate();
   }
@@ -75,6 +84,7 @@ class _ExportScreenState extends State<ExportScreen> {
   Widget build(BuildContext context) {
     final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
     final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+    final WorkTypesBloc workTypesBloc = BlocProvider.of<WorkTypesBloc>(context);
 
     // TODO: break this into components or something so we don't have such a massively unmanagement build function
 
@@ -342,6 +352,62 @@ class _ExportScreenState extends State<ExportScreen> {
                 .toList(),
           ),
           ExpansionTile(
+            title: Text(L10N.of(context).tr.workTypes,
+                style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                    fontWeight: FontWeight.w700)),
+            children: <Widget>[
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  RaisedButton(
+                    child: Text("Select None"),
+                    onPressed: () {
+                      setState(() {
+                        selectedWorkTypes.clear();
+                      });
+                    },
+                  ),
+                  RaisedButton(
+                    child: Text("Select All"),
+                    onPressed: () {
+                      setState(() {
+                        selectedWorkTypes = <WorkType>[null]
+                            .followedBy(workTypesBloc.state.workTypes
+                                .map((p) => WorkType.clone(p)))
+                            .toList();
+                      });
+                    },
+                  ),
+                ],
+              )
+            ]
+                .followedBy(<WorkType>[null]
+                    .followedBy(workTypesBloc.state.workTypes)
+                    .map((workType) => CheckboxListTile(
+                          secondary: WorkTypeBadge(
+                            workType: workType,
+                          ),
+                          title: Text(
+                              workType?.name ?? L10N.of(context).tr.noWorkType),
+                          value: selectedWorkTypes
+                              .any((p) => p?.id == workType?.id),
+                          activeColor: Theme.of(context).accentColor,
+                          onChanged: (_) => setState(() {
+                            if (selectedWorkTypes
+                                .any((p) => p?.id == workType?.id)) {
+                              selectedWorkTypes
+                                  .removeWhere((p) => p?.id == workType?.id);
+                            } else {
+                              selectedWorkTypes.add(workType);
+                            }
+                          }),
+                        )))
+                .toList(),
+          ),
+          ExpansionTile(
             title: Text(L10N.of(context).tr.options,
                 style: TextStyle(
                     color: Theme.of(context).accentColor,
@@ -379,6 +445,7 @@ class _ExportScreenState extends State<ExportScreen> {
           onPressed: () async {
             final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
             assert(timers != null);
+
             final ProjectsBloc projects =
                 BlocProvider.of<ProjectsBloc>(context);
             assert(projects != null);
@@ -416,6 +483,8 @@ class _ExportScreenState extends State<ExportScreen> {
             List<TimerEntry> filteredTimers = timers.state.timers
                 .where((t) => t.endTime != null)
                 .where((t) => selectedProjects.any((p) => p?.id == t.projectID))
+                .where(
+                    (t) => selectedWorkTypes.any((p) => p?.id == t.workTypeID))
                 .where((t) =>
                     _startDate == null ? true : t.startTime.isAfter(_startDate))
                 .where((t) =>
@@ -431,6 +500,8 @@ class _ExportScreenState extends State<ExportScreen> {
                   .where((t) => t.endTime != null)
                   .where(
                       (t) => selectedProjects.any((p) => p?.id == t.projectID))
+                  .where((t) =>
+                      selectedWorkTypes.any((p) => p?.id == t.workTypeID))
                   .where((t) => _startDate == null
                       ? true
                       : t.startTime.isAfter(_startDate))
@@ -453,7 +524,7 @@ class _ExportScreenState extends State<ExportScreen> {
                 pairedList.add(timer);
               }
 
-              // ok, now they're grouped based on date, then combined project + description pairs
+              // ok, now they're grouped based on date, then combined project, workTYpe, description combos
               // time to get them back into a flat list
               filteredTimers = derp.values.expand(
                   (LinkedHashMap<TimerGroup, List<TimerEntry>> pairedEntries) {
