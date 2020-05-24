@@ -29,6 +29,7 @@ class SettingsState extends Equatable {
   final bool collapseDays;
   final bool autocompleteDescription;
   final bool defaultFilterStartDateToMonday;
+  final bool allowMultipleActiveTimers;
 
   SettingsState({
     @required this.exportGroupTimers,
@@ -44,6 +45,7 @@ class SettingsState extends Equatable {
     @required this.collapseDays,
     @required this.autocompleteDescription,
     @required this.defaultFilterStartDateToMonday,
+    @required this.allowMultipleActiveTimers,
   })  : assert(exportGroupTimers != null),
         assert(exportIncludeDate != null),
         assert(exportIncludeProject != null),
@@ -56,7 +58,8 @@ class SettingsState extends Equatable {
         assert(groupTimers != null),
         assert(collapseDays != null),
         assert(autocompleteDescription != null),
-        assert(defaultFilterStartDateToMonday != null);
+        assert(defaultFilterStartDateToMonday != null),
+        assert(allowMultipleActiveTimers != null);
 
   static SettingsState initial() {
     return SettingsState(
@@ -73,10 +76,12 @@ class SettingsState extends Equatable {
       collapseDays: false,
       autocompleteDescription: true,
       defaultFilterStartDateToMonday: true,
+      allowMultipleActiveTimers: true,
     );
   }
 
-  SettingsState.clone(SettingsState project, {
+  SettingsState.clone(
+    SettingsState project, {
     bool exportGroupTimers,
     bool exportIncludeDate,
     bool exportIncludeProject,
@@ -90,33 +95,22 @@ class SettingsState extends Equatable {
     bool collapseDays,
     bool autocompleteDescription,
     bool defaultFilterStartDateToMonday,
-  }) 
-    : this(
+    bool allowMultipleActiveTimers,
+  }) : this(
           exportGroupTimers: exportGroupTimers ?? project.exportGroupTimers,
-          exportIncludeDate: 
-              exportIncludeDate ?? project.exportIncludeDate,
-          exportIncludeProject:
-              exportIncludeProject ?? project.exportIncludeProject,
-          exportIncludeDescription:
-              exportIncludeDescription ?? project.exportIncludeDescription,
-          exportIncludeProjectDescription: 
-              exportIncludeProjectDescription ?? project.exportIncludeProjectDescription,
-          exportIncludeStartTime:
-              exportIncludeStartTime ?? project.exportIncludeStartTime,
-          exportIncludeEndTime:
-              exportIncludeEndTime ?? project.exportIncludeEndTime,
-          exportIncludeDurationHours:
-              exportIncludeDurationHours ?? project.exportIncludeDurationHours,
-          defaultProjectID: 
-              defaultProjectID ?? project.defaultProjectID,
-          groupTimers: 
-              groupTimers ?? project.groupTimers,
-          collapseDays: 
-              collapseDays ?? project.collapseDays,
-          autocompleteDescription:
-              autocompleteDescription ?? project.autocompleteDescription,
-          defaultFilterStartDateToMonday: 
-              defaultFilterStartDateToMonday ?? project.defaultFilterStartDateToMonday,
+          exportIncludeDate: exportIncludeDate ?? project.exportIncludeDate,
+          exportIncludeProject: exportIncludeProject ?? project.exportIncludeProject,
+          exportIncludeDescription: exportIncludeDescription ?? project.exportIncludeDescription,
+          exportIncludeProjectDescription: exportIncludeProjectDescription ?? project.exportIncludeProjectDescription,
+          exportIncludeStartTime: exportIncludeStartTime ?? project.exportIncludeStartTime,
+          exportIncludeEndTime: exportIncludeEndTime ?? project.exportIncludeEndTime,
+          exportIncludeDurationHours: exportIncludeDurationHours ?? project.exportIncludeDurationHours,
+          defaultProjectID: defaultProjectID ?? project.defaultProjectID,
+          groupTimers: groupTimers ?? project.groupTimers,
+          collapseDays: collapseDays ?? project.collapseDays,
+          autocompleteDescription: autocompleteDescription ?? project.autocompleteDescription,
+          defaultFilterStartDateToMonday: defaultFilterStartDateToMonday ?? project.defaultFilterStartDateToMonday,
+          allowMultipleActiveTimers: allowMultipleActiveTimers ?? project.allowMultipleActiveTimers,
         );
 
   @override
@@ -134,5 +128,6 @@ class SettingsState extends Equatable {
         collapseDays,
         autocompleteDescription,
         defaultFilterStartDateToMonday,
+        allowMultipleActiveTimers,
       ];
 }

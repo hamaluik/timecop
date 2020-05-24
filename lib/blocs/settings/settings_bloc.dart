@@ -42,6 +42,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       bool collapseDays = await settings.getBool("collapseDays") ?? state.collapseDays;
       bool autocompleteDescription = await settings.getBool("autocompleteDescription") ?? state.autocompleteDescription;
       bool defaultFilterStartDateToMonday = await settings.getBool("defaultFilterStartDateToMonday") ?? state.defaultFilterStartDateToMonday;
+      bool allowMultipleActiveTimers = await settings.getBool("allowMultipleActiveTimers") ?? state.allowMultipleActiveTimers;
       yield SettingsState(
           exportGroupTimers: exportGroupTimers,
           exportIncludeDate: exportIncludeDate,
@@ -55,7 +56,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           groupTimers: groupTimers,
           collapseDays: collapseDays,
           autocompleteDescription: autocompleteDescription,
-          defaultFilterStartDateToMonday: defaultFilterStartDateToMonday);
+          defaultFilterStartDateToMonday: defaultFilterStartDateToMonday,
+          allowMultipleActiveTimers: allowMultipleActiveTimers);
     }
     /*else if(event is SetExportGroupTimers) {
       await settings.setBool("exportGroupTimers", event.value);
@@ -92,8 +94,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     else if (event is SetDefaultProjectID) {
       await settings.setInt("defaultProjectID", event.projectID ?? -1);
       yield SettingsState.clone(state, defaultProjectID: event.projectID ?? -1);
-    }
-    else if (event is SetBoolValueEvent) {
+    } else if (event is SetBoolValueEvent) {
       if (event.exportGroupTimers != null) {
         await settings.setBool("exportGroupTimers", event.exportGroupTimers);
       }
@@ -130,7 +131,11 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       if (event.defaultFilterStartDateToMonday != null) {
         await settings.setBool("defaultFilterStartDateToMonday", event.defaultFilterStartDateToMonday);
       }
-      yield SettingsState.clone(state,
+      if (event.allowMultipleActiveTimers != null) {
+        await settings.setBool("allowMultipleActiveTimers", event.allowMultipleActiveTimers);
+      }
+      yield SettingsState.clone(
+        state,
         exportGroupTimers: event.exportGroupTimers,
         exportIncludeDate: event.exportIncludeDate,
         exportIncludeProject: event.exportIncludeProject,
@@ -143,17 +148,27 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         collapseDays: event.collapseDays,
         autocompleteDescription: event.autocompleteDescription,
         defaultFilterStartDateToMonday: event.defaultFilterStartDateToMonday,
+        allowMultipleActiveTimers: event.allowMultipleActiveTimers,
       );
     }
   }
 
+  /**
+   * return the start date for a date filter with time set to 00:00:00.000.
+   * If setting defaultFilterStartDateToMonday is true, then return Monday of
+   * the current week (week starts on Monday). Otherwise, return 30 days prior to
+   * today.
+   */
   DateTime getFilterStartDate() {
+    DateTime now = DateTime.now();
+    DateTime todayZerothHour = DateTime(now.year, now.month, now.day, 0, 0, 0, 0, 0);
+    DateTime startDate;
     if (state.defaultFilterStartDateToMonday) {
       var dayOfWeek = 1; // Monday=1, Tuesday=2...
-      DateTime date = DateTime.now();
-      return date.subtract(Duration(days: date.weekday - dayOfWeek));
+      startDate = todayZerothHour.subtract(Duration(days: todayZerothHour.weekday - dayOfWeek));
     } else {
-      return DateTime.now().subtract(Duration(days: 30));
+      startDate = todayZerothHour.subtract(Duration(days: 30));
     }
+    return startDate;
   }
 }
