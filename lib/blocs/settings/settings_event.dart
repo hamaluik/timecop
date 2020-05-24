@@ -88,8 +88,9 @@ class SetBoolValueEvent extends SettingsEvent {
   final bool groupTimers;
   final bool collapseDays;
   final bool autocompleteDescription;
+  final bool defaultFilterStartDateToMonday;
 
-  const SetBoolValueEvent({this.exportGroupTimers, this.exportIncludeDate, this.exportIncludeProject, this.exportIncludeDescription, this.exportIncludeProjectDescription, this.exportIncludeStartTime, this.exportIncludeEndTime, this.exportIncludeDurationHours, this.groupTimers, this.collapseDays, this.autocompleteDescription});
+  const SetBoolValueEvent({this.exportGroupTimers, this.exportIncludeDate, this.exportIncludeProject, this.exportIncludeDescription, this.exportIncludeProjectDescription, this.exportIncludeStartTime, this.exportIncludeEndTime, this.exportIncludeDurationHours, this.groupTimers, this.collapseDays, this.autocompleteDescription,this.defaultFilterStartDateToMonday});
 
-  @override List<Object> get props => [exportGroupTimers, exportIncludeDate, exportIncludeProject, exportIncludeDescription, exportIncludeProjectDescription, exportIncludeStartTime, exportIncludeEndTime, exportIncludeDurationHours, groupTimers, collapseDays, autocompleteDescription];
+  @override List<Object> get props => [exportGroupTimers, exportIncludeDate, exportIncludeProject, exportIncludeDescription, exportIncludeProjectDescription, exportIncludeStartTime, exportIncludeEndTime, exportIncludeDurationHours, groupTimers, collapseDays, autocompleteDescription, defaultFilterStartDateToMonday];
 }

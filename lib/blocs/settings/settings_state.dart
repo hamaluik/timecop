@@ -28,6 +28,7 @@ class SettingsState extends Equatable {
   final bool groupTimers;
   final bool collapseDays;
   final bool autocompleteDescription;
+  final bool defaultFilterStartDateToMonday;
 
   SettingsState({
     @required this.exportGroupTimers,
@@ -42,6 +43,7 @@ class SettingsState extends Equatable {
     @required this.groupTimers,
     @required this.collapseDays,
     @required this.autocompleteDescription,
+    @required this.defaultFilterStartDateToMonday,
   })  : assert(exportGroupTimers != null),
         assert(exportIncludeDate != null),
         assert(exportIncludeProject != null),
@@ -53,7 +55,8 @@ class SettingsState extends Equatable {
         assert(defaultProjectID != null),
         assert(groupTimers != null),
         assert(collapseDays != null),
-        assert(autocompleteDescription != null);
+        assert(autocompleteDescription != null),
+        assert(defaultFilterStartDateToMonday != null);
 
   static SettingsState initial() {
     return SettingsState(
@@ -69,6 +72,7 @@ class SettingsState extends Equatable {
       groupTimers: true,
       collapseDays: false,
       autocompleteDescription: true,
+      defaultFilterStartDateToMonday: true,
     );
   }
 
@@ -85,16 +89,17 @@ class SettingsState extends Equatable {
     bool groupTimers,
     bool collapseDays,
     bool autocompleteDescription,
-    })
-      : this(
+    bool defaultFilterStartDateToMonday,
+  }) 
+    : this(
           exportGroupTimers: exportGroupTimers ?? project.exportGroupTimers,
-          exportIncludeDate:
+          exportIncludeDate: 
               exportIncludeDate ?? project.exportIncludeDate,
           exportIncludeProject:
               exportIncludeProject ?? project.exportIncludeProject,
           exportIncludeDescription:
               exportIncludeDescription ?? project.exportIncludeDescription,
-          exportIncludeProjectDescription:
+          exportIncludeProjectDescription: 
               exportIncludeProjectDescription ?? project.exportIncludeProjectDescription,
           exportIncludeStartTime:
               exportIncludeStartTime ?? project.exportIncludeStartTime,
@@ -102,14 +107,16 @@ class SettingsState extends Equatable {
               exportIncludeEndTime ?? project.exportIncludeEndTime,
           exportIncludeDurationHours:
               exportIncludeDurationHours ?? project.exportIncludeDurationHours,
-          defaultProjectID:
+          defaultProjectID: 
               defaultProjectID ?? project.defaultProjectID,
-          groupTimers:
+          groupTimers: 
               groupTimers ?? project.groupTimers,
-          collapseDays:
+          collapseDays: 
               collapseDays ?? project.collapseDays,
           autocompleteDescription:
               autocompleteDescription ?? project.autocompleteDescription,
+          defaultFilterStartDateToMonday: 
+              defaultFilterStartDateToMonday ?? project.defaultFilterStartDateToMonday,
         );
 
   @override
@@ -126,5 +133,6 @@ class SettingsState extends Equatable {
         groupTimers,
         collapseDays,
         autocompleteDescription,
+        defaultFilterStartDateToMonday,
       ];
 }
