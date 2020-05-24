@@ -18,16 +18,17 @@ import 'package:timecop/models/project.dart';
 class ProjectsState extends Equatable {
   final List<Project> projects;
 
-  ProjectsState(this.projects)
-    : assert(projects != null);
+  ProjectsState(this.projects) : assert(projects != null);
 
   static ProjectsState initial() {
     return ProjectsState([]);
   }
 
-  ProjectsState.clone(ProjectsState state)
-      : this(state.projects);
+  ProjectsState.clone(ProjectsState state) : this(state.projects);
 
-  @override List<Object> get props => [projects];
-  @override bool get stringify => true;
+  @override
+  List<Object> get props => [projects];
+
+  @override
+  bool get stringify => true;
 }

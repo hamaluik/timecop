@@ -32,18 +32,23 @@ import 'TimerTileBuilder.dart';
 
 class GroupedStoppedTimersRow extends StatefulWidget {
   final List<TimerEntry> timers;
+
   const GroupedStoppedTimersRow({Key key, @required this.timers})
       : assert(timers != null),
         assert(timers.length > 1),
         super(key: key);
 
   @override
-  _GroupedStoppedTimersRowState createState() => _GroupedStoppedTimersRowState();
+  _GroupedStoppedTimersRowState createState() =>
+      _GroupedStoppedTimersRowState();
 }
 
-class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow> with SingleTickerProviderStateMixin {
-  static final Animatable<double> _easeInTween = CurveTween(curve: Curves.easeIn);
-  static final Animatable<double> _halfTween = Tween<double>(begin: 0.0, end: -0.5);
+class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow>
+    with SingleTickerProviderStateMixin {
+  static final Animatable<double> _easeInTween =
+      CurveTween(curve: Curves.easeIn);
+  static final Animatable<double> _halfTween =
+      Tween<double>(begin: 0.0, end: -0.5);
 
   bool _expanded;
   AnimationController _controller;
@@ -53,7 +58,8 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow> with 
   void initState() {
     super.initState();
     _expanded = false;
-    _controller = AnimationController(duration: Duration(milliseconds: 200), vsync: this);
+    _controller =
+        AnimationController(duration: Duration(milliseconds: 200), vsync: this);
     _iconTurns = _controller.drive(_halfTween.chain(_easeInTween));
   }
 
@@ -76,19 +82,16 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow> with 
             _expanded = expanded;
             if (_expanded) {
               _controller.forward();
-            } 
-            else {
+            } else {
               _controller.reverse();
             }
           });
         },
         leading: ProjectColour(
             project: BlocProvider.of<ProjectsBloc>(context)
-                .getProjectByID(widget.timers[0].projectID)
-        ),
+                .getProjectByID(widget.timers[0].projectID)),
         title: timerTileBuilder.getTitleWidget(widget.timers[0]),
-        subtitle: timerTileBuilder.getSubTitleWidget(widget.timers[0]
-       ),
+        subtitle: timerTileBuilder.getSubTitleWidget(widget.timers[0]),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -99,17 +102,16 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow> with 
             ),
             Container(width: 8),
             Text(
-                TimerEntry.formatDuration(
-                  widget.timers.fold(
+                TimerEntry.formatDuration(widget.timers.fold(
                     Duration(),
-                    (Duration sum, TimerEntry timer) => sum + timer.endTime.difference(timer.startTime)
-                  )
-                 ),
-                style: TextStyle(fontFamily: "FiraMono")
-              ),
+                    (Duration sum, TimerEntry timer) =>
+                        sum + timer.endTime.difference(timer.startTime))),
+                style: TextStyle(fontFamily: "FiraMono")),
           ],
         ),
-        children: widget.timers.map((timer) => StoppedTimerRow(timer: timer)).toList(),
+        children: widget.timers
+            .map((timer) => StoppedTimerRow(timer: timer))
+            .toList(),
       ),
       secondaryActions: <Widget>[
         IconSlideAction(
@@ -117,23 +119,31 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow> with 
             foregroundColor: Theme.of(context).accentIconTheme.color,
             icon: FontAwesomeIcons.play,
             onTap: () {
-              final TimersBloc timersBloc = BlocProvider.of<TimersBloc>(context);
+              final TimersBloc timersBloc =
+                  BlocProvider.of<TimersBloc>(context);
               assert(timersBloc != null);
-              final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+              final ProjectsBloc projectsBloc =
+                  BlocProvider.of<ProjectsBloc>(context);
               assert(projectsBloc != null);
-              Project project = projectsBloc.getProjectByID(widget.timers.first?.projectID);
+              Project project =
+                  projectsBloc.getProjectByID(widget.timers.first?.projectID);
 
-              final WorkTypesBloc workTypesBloc = BlocProvider.of<WorkTypesBloc>(context);
+              final WorkTypesBloc workTypesBloc =
+                  BlocProvider.of<WorkTypesBloc>(context);
               assert(workTypesBloc != null);
-              WorkType workType = workTypesBloc .getWorkTypeByID(widget.timers.first?.workTypeID);
+              WorkType workType = workTypesBloc
+                  .getWorkTypeByID(widget.timers.first?.workTypeID);
 
-              final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
+              final SettingsBloc settingsBloc =
+                  BlocProvider.of<SettingsBloc>(context);
               if (!settingsBloc.state.allowMultipleActiveTimers) {
                 timersBloc.add(StopAllTimers());
               }
-              timersBloc.add(CreateTimer( description: widget.timers.first?.description ?? "", project: project, workType: workType));
-            }
-         )
+              timersBloc.add(CreateTimer(
+                  description: widget.timers.first?.description ?? "",
+                  project: project,
+                  workType: workType));
+            })
       ],
     );
   }

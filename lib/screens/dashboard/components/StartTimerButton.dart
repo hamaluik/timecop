@@ -59,20 +59,22 @@ class _StartTimerButtonState extends State<StartTimerButton> {
             final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
             assert(timers != null);
 
-            final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
+            final SettingsBloc settingsBloc =
+                BlocProvider.of<SettingsBloc>(context);
             if (!settingsBloc.state.allowMultipleActiveTimers) {
               timers.add(StopAllTimers());
             }
 
-            timers.add(CreateTimer(description: bloc.state.newDescription, project: bloc.state.newProject, workType: bloc.state.newWorkType));
+            timers.add(CreateTimer(
+                description: bloc.state.newDescription,
+                project: bloc.state.newProject,
+                workType: bloc.state.newWorkType));
             bloc.add(TimerWasStartedEvent());
           },
         );
-      } 
-      else {
+      } else {
         return StartTimerSpeedDial();
       }
-    }
-   );
+    });
   }
 }

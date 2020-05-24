@@ -20,6 +20,7 @@ class WorkTypeBadge extends StatelessWidget {
   static const double SIZE = 22;
   final bool mini = false;
   final WorkType workType;
+
   const WorkTypeBadge({Key key, this.workType}) : super(key: key);
 
   @override

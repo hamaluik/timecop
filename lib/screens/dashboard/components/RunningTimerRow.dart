@@ -28,6 +28,7 @@ import 'TimerTileBuilder.dart';
 class RunningTimerRow extends StatelessWidget {
   final TimerEntry timer;
   final DateTime now;
+
   const RunningTimerRow({Key key, @required this.timer, @required this.now})
       : assert(timer != null),
         assert(now != null),
@@ -41,15 +42,20 @@ class RunningTimerRow extends StatelessWidget {
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.15,
       child: ListTile(
-          leading: ProjectColour( project: BlocProvider.of<ProjectsBloc>(context).getProjectByID(timer.projectID)),
+          leading: ProjectColour(
+              project: BlocProvider.of<ProjectsBloc>(context)
+                  .getProjectByID(timer.projectID)),
           title: timerTileBuilder.getTitleWidget(timer),
           subtitle: timerTileBuilder.getSubTitleWidget(timer),
-          trailing: Text(timer.formatTime(), style: TextStyle(fontFamily: "FiraMono")),
-          onTap: () => Navigator.of(context).push(MaterialPageRoute<TimerEditor>(
-                builder: (BuildContext context) => TimerEditor(timer: timer,),
+          trailing: Text(timer.formatTime(),
+              style: TextStyle(fontFamily: "FiraMono")),
+          onTap: () =>
+              Navigator.of(context).push(MaterialPageRoute<TimerEditor>(
+                builder: (BuildContext context) => TimerEditor(
+                  timer: timer,
+                ),
                 fullscreenDialog: true,
-              ))
-        ),
+              ))),
       actions: <Widget>[
         IconSlideAction(
           color: Theme.of(context).errorColor,
@@ -71,10 +77,10 @@ class RunningTimerRow extends StatelessWidget {
                           onPressed: () => Navigator.of(context).pop(true),
                         ),
                       ],
-                    )
-             );
+                    ));
             if (delete) {
-              final TimersBloc timersBloc = BlocProvider.of<TimersBloc>(context);
+              final TimersBloc timersBloc =
+                  BlocProvider.of<TimersBloc>(context);
               assert(timersBloc != null);
               timersBloc.add(DeleteTimer(timer));
             }

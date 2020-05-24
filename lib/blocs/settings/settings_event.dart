@@ -73,14 +73,18 @@ class SetExportIncludeDurationHours extends SettingsEvent {
 
 class SetDefaultProjectID extends SettingsEvent {
   final int projectID;
+
   const SetDefaultProjectID(this.projectID);
+
   @override
   List<Object> get props => [projectID];
 }
 
 class SetDefaultWorkTypeID extends SettingsEvent {
   final int workTypeID;
+
   const SetDefaultWorkTypeID(this.workTypeID);
+
   @override
   List<Object> get props => [workTypeID];
 }

@@ -13,13 +13,16 @@
 // limitations under the License.
 
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:timecop/data_providers/data/data_provider.dart';
 import 'package:timecop/models/WorkType.dart';
+
 import './bloc.dart';
 
 class WorkTypesBloc extends Bloc<WorkTypesEvent, WorkTypesState> {
   final DataProvider data;
+
   WorkTypesBloc(this.data);
 
   @override

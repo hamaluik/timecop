@@ -25,7 +25,8 @@ class StartTimerSpeedDial extends StatefulWidget {
   _StartTimerSpeedDialState createState() => _StartTimerSpeedDialState();
 }
 
-class _StartTimerSpeedDialState extends State<StartTimerSpeedDial> with TickerProviderStateMixin {
+class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
+    with TickerProviderStateMixin {
   AnimationController _controller;
 
   @override
@@ -49,9 +50,7 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial> with TickerPr
     assert(bloc != null);
 
     // adapted from https://stackoverflow.com/a/46480722
-    return Column(
-       mainAxisSize: MainAxisSize.min, 
-       children: <Widget>[
+    return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
       Container(
         height: 70.0,
         width: 56.0,
@@ -59,11 +58,7 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial> with TickerPr
         child: ScaleTransition(
           scale: CurvedAnimation(
             parent: _controller,
-            curve: Interval(
-                0.0, 
-                1.0, 
-                curve: Curves.easeOut
-             ),
+            curve: Interval(0.0, 1.0, curve: Curves.easeOut),
           ),
           child: FloatingActionButton(
             heroTag: null,
@@ -86,7 +81,10 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial> with TickerPr
               _controller.reverse();
               final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
               assert(timers != null);
-              timers.add(CreateTimer( description: bloc.state.newDescription, project: bloc.state.newProject, workType: bloc.state.newWorkType));
+              timers.add(CreateTimer(
+                  description: bloc.state.newDescription,
+                  project: bloc.state.newProject,
+                  workType: bloc.state.newWorkType));
               bloc.add(TimerWasStartedEvent());
             },
           ),
@@ -99,11 +97,7 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial> with TickerPr
         child: ScaleTransition(
           scale: CurvedAnimation(
             parent: _controller,
-            curve: Interval(
-                0.0, 
-                0.75, 
-                curve: Curves.easeOut
-             ),
+            curve: Interval(0.0, 0.75, curve: Curves.easeOut),
           ),
           child: FloatingActionButton(
             heroTag: null,
@@ -134,10 +128,11 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial> with TickerPr
       AnimatedBuilder(
         animation: _controller,
         builder: (BuildContext conext, Widget child) {
-          return 
-            FloatingActionButton(
+          return FloatingActionButton(
             heroTag: null,
-            backgroundColor: _controller.isDismissed ? Theme.of(context).accentColor : Theme.of(context).disabledColor,
+            backgroundColor: _controller.isDismissed
+                ? Theme.of(context).accentColor
+                : Theme.of(context).disabledColor,
             child: _controller.isDismissed
                 ? Stack(
                     // shenanigans to properly centre the icon (font awesome glyphs are variable
@@ -147,7 +142,9 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial> with TickerPr
                       Positioned(
                         top: 15,
                         left: 16,
-                        child: Icon(FontAwesomeIcons.stopwatch,),
+                        child: Icon(
+                          FontAwesomeIcons.stopwatch,
+                        ),
                       )
                     ],
                   )
@@ -173,7 +170,6 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial> with TickerPr
           );
         },
       ),
-    ]
-   );
+    ]);
   }
 }

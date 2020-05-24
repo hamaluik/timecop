@@ -28,19 +28,25 @@ class RunningTimers extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DashboardBloc, DashboardState>(
       builder: (BuildContext context, DashboardState dashboardState) {
-        if(dashboardState.searchString != null) {
+        if (dashboardState.searchString != null) {
           return Container();
         }
 
         return BlocBuilder<TimersBloc, TimersState>(
           builder: (BuildContext context, TimersState timersState) {
-            List<TimerEntry> runningTimers = timersState.timers.where((timer) => timer.endTime == null).toList();
-            if(runningTimers.isEmpty) {
+            List<TimerEntry> runningTimers = timersState.timers
+                .where((timer) => timer.endTime == null)
+                .toList();
+            if (runningTimers.isEmpty) {
               return Container();
             }
 
             DateTime now = DateTime.now();
-            Duration runningTotal = Duration(seconds: runningTimers.fold(0, (int sum, TimerEntry t) => sum + now.difference(t.startTime).inSeconds));
+            Duration runningTotal = Duration(
+                seconds: runningTimers.fold(
+                    0,
+                    (int sum, TimerEntry t) =>
+                        sum + now.difference(t.startTime).inSeconds));
 
             return Material(
               elevation: 4,
@@ -59,29 +65,25 @@ class RunningTimers extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           mainAxisSize: MainAxisSize.max,
                           children: <Widget>[
-                            Text(
-                              L10N.of(context).tr.runningTimers,
-                              style: TextStyle(
-                                color: Theme.of(context).accentColor,
-                                fontWeight: FontWeight.w700
-                              )
-                            ),
-                            Text(
-                              TimerEntry.formatDuration(runningTotal),
-                              style: TextStyle(
-                                color: Theme.of(context).accentColor,
-                                fontFamily: "FiraMono",
-                              )
-                            )
+                            Text(L10N.of(context).tr.runningTimers,
+                                style: TextStyle(
+                                    color: Theme.of(context).accentColor,
+                                    fontWeight: FontWeight.w700)),
+                            Text(TimerEntry.formatDuration(runningTotal),
+                                style: TextStyle(
+                                  color: Theme.of(context).accentColor,
+                                  fontFamily: "FiraMono",
+                                ))
                           ],
                         ),
                         Divider(),
                       ],
                     ),
                   ),
-                ].followedBy(
-                  runningTimers.map((timer) => RunningTimerRow(timer: timer, now: timersState.now))
-                ).toList(),
+                ]
+                    .followedBy(runningTimers.map((timer) =>
+                        RunningTimerRow(timer: timer, now: timersState.now)))
+                    .toList(),
               ),
             );
           },

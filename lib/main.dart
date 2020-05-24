@@ -15,25 +15,25 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:timecop/blocs/locale/locale_bloc.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/settings/settings_event.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timecop/blocs/theme/theme_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/blocs/work_types/bloc.dart';
 import 'package:timecop/data_providers/data/data_provider.dart';
+import 'package:timecop/data_providers/data/database_provider.dart';
 import 'package:timecop/data_providers/settings/settings_provider.dart';
+import 'package:timecop/data_providers/settings/shared_prefs_settings_provider.dart';
 import 'package:timecop/fontlicenses.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/dashboard/DashboardScreen.dart';
 import 'package:timecop/themes.dart';
 
-import 'package:timecop/data_providers/data/database_provider.dart';
-import 'package:timecop/data_providers/settings/shared_prefs_settings_provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final SettingsProvider settings = await SharedPrefsSettingsProvider.load();
@@ -83,6 +83,7 @@ Future<void> runMain(SettingsProvider settings, DataProvider data) async {
 
 class TimeCopApp extends StatefulWidget {
   final SettingsProvider settings;
+
   const TimeCopApp({Key key, @required this.settings})
       : assert(settings != null),
         super(key: key);
@@ -97,7 +98,8 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
 
   @override
   void initState() {
-    _updateTimersTimer = Timer.periodic(Duration(seconds: 1), (_) => BlocProvider.of<TimersBloc>(context).add(UpdateNow()));
+    _updateTimersTimer = Timer.periodic(Duration(seconds: 1),
+        (_) => BlocProvider.of<TimersBloc>(context).add(UpdateNow()));
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     brightness = WidgetsBinding.instance.window.platformBrightness;
@@ -121,7 +123,8 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
   @override
   void didChangePlatformBrightness() {
     print(WidgetsBinding.instance.window.platformBrightness.toString());
-    setState(() => brightness = WidgetsBinding.instance.window.platformBrightness);
+    setState(
+        () => brightness = WidgetsBinding.instance.window.platformBrightness);
   }
 
   @override
@@ -137,7 +140,10 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
                       MaterialApp(
                     title: 'Time Cop',
                     home: DashboardScreen(),
-                    theme: themeState.themeData ?? (brightness == Brightness.dark ? darkTheme : lightTheme),
+                    theme: themeState.themeData ??
+                        (brightness == Brightness.dark
+                            ? darkTheme
+                            : lightTheme),
                     localizationsDelegates: [
                       L10N.delegate,
                       GlobalMaterialLocalizations.delegate,
@@ -162,8 +168,6 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
                       const Locale('it'),
                     ],
                   ),
-                )
-			)
-		);
+                )));
   }
 }

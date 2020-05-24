@@ -28,23 +28,29 @@ class LoadWorkTypes extends WorkTypesEvent {
 class CreateWorkType extends WorkTypesEvent {
   final String name;
   final Color colour;
+
   const CreateWorkType(this.name, this.colour)
       : assert(name != null),
         assert(colour != null);
+
   @override
   List<Object> get props => [name, colour];
 }
 
 class EditWorkType extends WorkTypesEvent {
   final WorkType workType;
+
   const EditWorkType(this.workType) : assert(workType != null);
+
   @override
   List<Object> get props => [workType];
 }
 
 class DeleteWorkType extends WorkTypesEvent {
   final WorkType workType;
+
   const DeleteWorkType(this.workType) : assert(workType != null);
+
   @override
   List<Object> get props => [workType];
 }

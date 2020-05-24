@@ -109,20 +109,30 @@ class SettingsState extends Equatable {
   }) : this(
           exportGroupTimers: exportGroupTimers ?? project.exportGroupTimers,
           exportIncludeDate: exportIncludeDate ?? project.exportIncludeDate,
-          exportIncludeProject: exportIncludeProject ?? project.exportIncludeProject,
-          exportIncludeDescription: exportIncludeDescription ?? project.exportIncludeDescription,
-          exportIncludeProjectDescription: exportIncludeProjectDescription ?? project.exportIncludeProjectDescription,
-          exportIncludeStartTime: exportIncludeStartTime ?? project.exportIncludeStartTime,
-          exportIncludeEndTime: exportIncludeEndTime ?? project.exportIncludeEndTime,
-          exportIncludeDurationHours: exportIncludeDurationHours ?? project.exportIncludeDurationHours,
+          exportIncludeProject:
+              exportIncludeProject ?? project.exportIncludeProject,
+          exportIncludeDescription:
+              exportIncludeDescription ?? project.exportIncludeDescription,
+          exportIncludeProjectDescription: exportIncludeProjectDescription ??
+              project.exportIncludeProjectDescription,
+          exportIncludeStartTime:
+              exportIncludeStartTime ?? project.exportIncludeStartTime,
+          exportIncludeEndTime:
+              exportIncludeEndTime ?? project.exportIncludeEndTime,
+          exportIncludeDurationHours:
+              exportIncludeDurationHours ?? project.exportIncludeDurationHours,
           defaultProjectID: defaultProjectID ?? project.defaultProjectID,
           defaultWorkTypeID: defaultWorkTypeID ?? project.defaultWorkTypeID,
           groupTimers: groupTimers ?? project.groupTimers,
           collapseDays: collapseDays ?? project.collapseDays,
-          autocompleteDescription: autocompleteDescription ?? project.autocompleteDescription,
-          defaultFilterStartDateToMonday: defaultFilterStartDateToMonday ?? project.defaultFilterStartDateToMonday,
-          allowMultipleActiveTimers: allowMultipleActiveTimers ?? project.allowMultipleActiveTimers,
-          displayProjectNameInTimer: displayProjectNameInTimer ?? project.displayProjectNameInTimer,
+          autocompleteDescription:
+              autocompleteDescription ?? project.autocompleteDescription,
+          defaultFilterStartDateToMonday: defaultFilterStartDateToMonday ??
+              project.defaultFilterStartDateToMonday,
+          allowMultipleActiveTimers:
+              allowMultipleActiveTimers ?? project.allowMultipleActiveTimers,
+          displayProjectNameInTimer:
+              displayProjectNameInTimer ?? project.displayProjectNameInTimer,
         );
 
   @override

@@ -20,16 +20,18 @@ class TimersState extends Equatable {
   final DateTime now;
 
   TimersState(this.timers, this.now)
-    : assert(timers != null),
-      assert(now != null);
+      : assert(timers != null),
+        assert(now != null);
 
   static TimersState initial() {
     return TimersState([], DateTime.now());
   }
 
-  TimersState.clone(TimersState state)
-      : this(state.timers, DateTime.now());
+  TimersState.clone(TimersState state) : this(state.timers, DateTime.now());
 
-  @override List<Object> get props => [timers, now];
-  @override bool get stringify => true;
+  @override
+  List<Object> get props => [timers, now];
+
+  @override
+  bool get stringify => true;
 }

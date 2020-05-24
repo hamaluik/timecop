@@ -132,7 +132,10 @@ class MockDataProvider extends DataProvider {
   Future<List<Project>> listProjects() async {
     return <Project>[
       Project(id: 1, name: "Time Cop", colour: Colors.cyan[600]),
-      Project(id: 2, name: l10n[localeKey]["administration"], colour: Colors.pink[600]),
+      Project(
+          id: 2,
+          name: l10n[localeKey]["administration"],
+          colour: Colors.pink[600]),
     ];
   }
 
@@ -157,7 +160,8 @@ class MockDataProvider extends DataProvider {
         description: l10n[localeKey]["ui-layout"],
         projectID: 1,
         workTypeID: 1,
-        startTime: DateTime.now().subtract(Duration(hours: 2, minutes: 10, seconds: 1)),
+        startTime: DateTime.now()
+            .subtract(Duration(hours: 2, minutes: 10, seconds: 1)),
         endTime: null,
       ),
       TimerEntry(
@@ -175,9 +179,13 @@ class MockDataProvider extends DataProvider {
       for (int d = 0; d < 5; d++) {
         String descriptionKey;
         double r = rand.nextDouble();
-        if (r <= 0.2) { descriptionKey = 'mockups'; } 
-        else if (r <= 0.5) { descriptionKey = 'ui-layout'; }
-        else { descriptionKey = 'app-development'; }
+        if (r <= 0.2) {
+          descriptionKey = 'mockups';
+        } else if (r <= 0.5) {
+          descriptionKey = 'ui-layout';
+        } else {
+          descriptionKey = 'app-development';
+        }
 
         entries.add(TimerEntry(
           id: tid++,
@@ -185,13 +193,17 @@ class MockDataProvider extends DataProvider {
           projectID: 1,
           workTypeID: 1,
           startTime: DateTime(
-            2020, 3, (w * 7) + d + 2,
+            2020,
+            3,
+            (w * 7) + d + 2,
             rand.nextInt(3) + 8,
             rand.nextInt(60),
             rand.nextInt(60),
           ),
           endTime: DateTime(
-            2020, 3, (w * 7) + d + 2,
+            2020,
+            3,
+            (w * 7) + d + 2,
             rand.nextInt(3) + 13,
             rand.nextInt(60),
             rand.nextInt(60),
@@ -204,13 +216,17 @@ class MockDataProvider extends DataProvider {
           projectID: 2,
           workTypeID: 2,
           startTime: DateTime(
-            2020, 3, (w * 7) + d + 2,
+            2020,
+            3,
+            (w * 7) + d + 2,
             14,
             rand.nextInt(30),
             rand.nextInt(60),
           ),
           endTime: DateTime(
-            2020, 3, (w * 7) + d + 2,
+            2020,
+            3,
+            (w * 7) + d + 2,
             15,
             rand.nextInt(30),
             rand.nextInt(60),
@@ -224,7 +240,9 @@ class MockDataProvider extends DataProvider {
   Future<Project> createProject({@required String name, Color colour}) async {
     return Project(id: -1, name: name, colour: colour);
   }
+
   Future<void> editProject(Project project) async {}
+
   Future<void> deleteProject(Project project) async {}
 
   Future<WorkType> createWorkType({@required String name, Color colour}) async {
@@ -232,9 +250,15 @@ class MockDataProvider extends DataProvider {
   }
 
   Future<void> editWorkType(WorkType worktype) async {}
+
   Future<void> deleteWorkType(WorkType worktype) async {}
 
-  Future<TimerEntry> createTimer({String description, int projectID, int workTypeID, DateTime startTime, DateTime endTime}) async {
+  Future<TimerEntry> createTimer(
+      {String description,
+      int projectID,
+      int workTypeID,
+      DateTime startTime,
+      DateTime endTime}) async {
     DateTime st = startTime ?? DateTime.now();
     return TimerEntry(
       id: -1,
@@ -245,6 +269,8 @@ class MockDataProvider extends DataProvider {
       endTime: endTime,
     );
   }
+
   Future<void> editTimer(TimerEntry timer) async {}
+
   Future<void> deleteTimer(TimerEntry timer) async {}
 }

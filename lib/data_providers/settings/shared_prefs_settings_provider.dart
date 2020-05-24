@@ -15,12 +15,13 @@
 import 'package:flutter/rendering.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timecop/models/theme_type.dart';
+
 import 'settings_provider.dart';
 
 class SharedPrefsSettingsProvider extends SettingsProvider {
   final SharedPreferences _prefs;
-  SharedPrefsSettingsProvider(this._prefs)
-    : assert(_prefs != null);
+
+  SharedPrefsSettingsProvider(this._prefs) : assert(_prefs != null);
 
   @override
   bool getBool(String key) => _prefs.getBool(key);
@@ -52,14 +53,12 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
   @override
   Locale getLocale() {
     String languageCode = _prefs.getString("languageCode");
-    if(languageCode == null) {
+    if (languageCode == null) {
       return null;
     }
     String countryCode = _prefs.getString("countryCode");
     return Locale.fromSubtags(
-      languageCode: languageCode,
-      countryCode: countryCode
-    );
+        languageCode: languageCode, countryCode: countryCode);
   }
 
   @override

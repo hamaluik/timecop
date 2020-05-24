@@ -22,19 +22,20 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
-import 'package:timecop/blocs/work_types/bloc.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
+import 'package:timecop/blocs/work_types/bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/components/WorkTypeBadge.dart';
 import 'package:timecop/l10n.dart';
-import 'package:timecop/models/project.dart';
 import 'package:timecop/models/WorkType.dart';
-import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/models/clone_time.dart';
+import 'package:timecop/models/project.dart';
+import 'package:timecop/models/timer_entry.dart';
 
 class TimerEditor extends StatefulWidget {
   final TimerEntry timer;
+
   TimerEditor({Key key, @required this.timer})
       : assert(timer != null),
         super(key: key);
@@ -64,14 +65,18 @@ class _TimerEditorState extends State<TimerEditor> {
   @override
   void initState() {
     super.initState();
-    _descriptionController = TextEditingController(text: widget.timer.description);
+    _descriptionController =
+        TextEditingController(text: widget.timer.description);
     _startTime = widget.timer.startTime;
     _endTime = widget.timer.endTime;
-    _project = BlocProvider.of<ProjectsBloc>(context).getProjectByID(widget.timer.projectID);
-    _workType = BlocProvider.of<WorkTypesBloc>(context).getWorkTypeByID(widget.timer.workTypeID);
+    _project = BlocProvider.of<ProjectsBloc>(context)
+        .getProjectByID(widget.timer.projectID);
+    _workType = BlocProvider.of<WorkTypesBloc>(context)
+        .getWorkTypeByID(widget.timer.workTypeID);
     _descriptionFocus = FocusNode();
     _updateTimerStreamController = StreamController();
-    _updateTimer = Timer.periodic(Duration(seconds: 1), (_) => _updateTimerStreamController.add(DateTime.now()));
+    _updateTimer = Timer.periodic(Duration(seconds: 1),
+        (_) => _updateTimerStreamController.add(DateTime.now()));
   }
 
   @override
@@ -109,7 +114,8 @@ class _TimerEditorState extends State<TimerEditor> {
         child: ListView(
           children: <Widget>[
             BlocBuilder<ProjectsBloc, ProjectsState>(
-              builder: (BuildContext context, ProjectsState projectsState) => Padding(
+              builder: (BuildContext context, ProjectsState projectsState) =>
+                  Padding(
                       padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
                       child: DropdownButton(
                         value: _project,
@@ -127,28 +133,34 @@ class _TimerEditorState extends State<TimerEditor> {
                                 ProjectColour(project: null),
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(8.0, 0, 0, 0),
-                                  child: Text(L10N.of(context).tr.noProject, style: TextStyle( color: Theme.of(context).disabledColor)),
+                                  child: Text(L10N.of(context).tr.noProject,
+                                      style: TextStyle(
+                                          color:
+                                              Theme.of(context).disabledColor)),
                                 ),
                               ],
                             ),
                             value: null,
                           )
-                        ].followedBy(projectsState.projects.map(
+                        ]
+                            .followedBy(projectsState.projects.map(
                                 (Project project) => DropdownMenuItem<Project>(
                                       child: Row(
                                         children: <Widget>[
-                                          ProjectColour( project: project,),
+                                          ProjectColour(
+                                            project: project,
+                                          ),
                                           Padding(
-                                            padding: EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+                                            padding: EdgeInsets.fromLTRB(
+                                                8.0, 0, 0, 0),
                                             child: Text(project.name),
                                           ),
                                         ],
                                       ),
                                       value: project,
-                                    )
-                               )).toList(),
-                      )
-                  ),
+                                    )))
+                            .toList(),
+                      )),
             ),
             BlocBuilder<WorkTypesBloc, WorkTypesState>(
               builder: (BuildContext context, WorkTypesState workTypesState) =>
@@ -202,8 +214,7 @@ class _TimerEditorState extends State<TimerEditor> {
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
-              child:
-                settingsBloc.state.autocompleteDescription
+              child: settingsBloc.state.autocompleteDescription
                   ? TypeAheadField<String>(
                       direction: AxisDirection.down,
                       textFieldConfiguration: TextFieldConfiguration<String>(
@@ -215,16 +226,19 @@ class _TimerEditorState extends State<TimerEditor> {
                         ),
                       ),
                       itemBuilder: (BuildContext context, String desc) =>
-                          ListTile(
-                             title: Text(desc)
-                          ),
-                      onSuggestionSelected: (String description) => _descriptionController.text = description,
+                          ListTile(title: Text(desc)),
+                      onSuggestionSelected: (String description) =>
+                          _descriptionController.text = description,
                       suggestionsCallback: (pattern) async {
                         if (pattern.length < 2) return [];
 
                         List<String> descriptions = timers.state.timers
                             .where((timer) => timer.description != null)
-                            .where((timer) => timer.description.toLowerCase().contains(pattern.toLowerCase()) ?? false)
+                            .where((timer) =>
+                                timer.description
+                                    .toLowerCase()
+                                    .contains(pattern.toLowerCase()) ??
+                                false)
                             .map((timer) => timer.description)
                             .toSet()
                             .toList();
@@ -249,8 +263,8 @@ class _TimerEditorState extends State<TimerEditor> {
                 onTap: () async {
                   _oldStartTime = _startTime.clone();
                   _oldEndTime = _endTime.clone();
-                  DateTime newStartTime = await DatePicker.showDateTimePicker(
-                          context,
+                  DateTime newStartTime =
+                      await DatePicker.showDateTimePicker(context,
                           currentTime: _startTime,
                           maxTime: _endTime == null ? DateTime.now() : null,
                           onChanged: (DateTime dt) => setStartTime(dt),
@@ -259,9 +273,9 @@ class _TimerEditorState extends State<TimerEditor> {
                             cancelStyle: Theme.of(context).textTheme.button,
                             doneStyle: Theme.of(context).textTheme.button,
                             itemStyle: Theme.of(context).textTheme.body1,
-                            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                          )
-                        );
+                            backgroundColor:
+                                Theme.of(context).scaffoldBackgroundColor,
+                          ));
 
                   // if the user cancelled, this should be null
                   if (newStartTime == null) {
@@ -290,7 +304,8 @@ class _TimerEditorState extends State<TimerEditor> {
               actionExtentRatio: 0.15,
               child: ListTile(
                 title: Text(L10N.of(context).tr.endTime),
-                trailing: Text(_endTime == null ? "—" : _dateFormat.format(_endTime)),
+                trailing:
+                    Text(_endTime == null ? "—" : _dateFormat.format(_endTime)),
                 onTap: () async {
                   _oldEndTime = _endTime.clone();
                   DateTime newEndTime = await DatePicker.showDateTimePicker(
@@ -303,9 +318,9 @@ class _TimerEditorState extends State<TimerEditor> {
                         cancelStyle: Theme.of(context).textTheme.button,
                         doneStyle: Theme.of(context).textTheme.button,
                         itemStyle: Theme.of(context).textTheme.body1,
-                        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                      )
-                    );
+                        backgroundColor:
+                            Theme.of(context).scaffoldBackgroundColor,
+                      ));
 
                   // if the user cancelled, this should be null
                   if (newEndTime == null) {
@@ -315,12 +330,12 @@ class _TimerEditorState extends State<TimerEditor> {
                   }
                 },
               ),
-              secondaryActions:
-                  _endTime == null
+              secondaryActions: _endTime == null
                   ? <Widget>[
                       IconSlideAction(
                         color: Theme.of(context).accentColor,
-                        foregroundColor: Theme.of(context).accentIconTheme.color,
+                        foregroundColor:
+                            Theme.of(context).accentIconTheme.color,
                         icon: FontAwesomeIcons.clock,
                         onTap: () => setState(() => _endTime = DateTime.now()),
                       ),
@@ -328,13 +343,15 @@ class _TimerEditorState extends State<TimerEditor> {
                   : <Widget>[
                       IconSlideAction(
                         color: Theme.of(context).accentColor,
-                        foregroundColor: Theme.of(context).accentIconTheme.color,
+                        foregroundColor:
+                            Theme.of(context).accentIconTheme.color,
                         icon: FontAwesomeIcons.clock,
                         onTap: () => setState(() => _endTime = DateTime.now()),
                       ),
                       IconSlideAction(
                         color: Theme.of(context).errorColor,
-                        foregroundColor: Theme.of(context).accentIconTheme.color,
+                        foregroundColor:
+                            Theme.of(context).accentIconTheme.color,
                         icon: FontAwesomeIcons.minusCircle,
                         onTap: () {
                           setState(() {
@@ -347,13 +364,13 @@ class _TimerEditorState extends State<TimerEditor> {
             StreamBuilder(
               initialData: DateTime.now(),
               stream: _updateTimerStreamController.stream,
-              builder: (BuildContext context, AsyncSnapshot<DateTime> snapshot) => ListTile(
+              builder:
+                  (BuildContext context, AsyncSnapshot<DateTime> snapshot) =>
+                      ListTile(
                 title: Text(L10N.of(context).tr.duration),
-                trailing: Text(TimerEntry.formatDuration(
-                    _endTime == null
+                trailing: Text(TimerEntry.formatDuration(_endTime == null
                     ? snapshot.data.difference(_startTime)
-                    : _endTime.difference(_startTime)
-                  )),
+                    : _endTime.difference(_startTime))),
               ),
             ),
           ],

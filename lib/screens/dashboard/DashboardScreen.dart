@@ -20,11 +20,11 @@ import 'package:timecop/blocs/work_types/work_types_bloc.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:timecop/screens/dashboard/components/DescriptionField.dart';
 import 'package:timecop/screens/dashboard/components/ProjectSelectField.dart';
-import 'package:timecop/screens/dashboard/components/WorkTypeSelectField.dart';
 import 'package:timecop/screens/dashboard/components/RunningTimers.dart';
 import 'package:timecop/screens/dashboard/components/StartTimerButton.dart';
 import 'package:timecop/screens/dashboard/components/StoppedTimers.dart';
 import 'package:timecop/screens/dashboard/components/TopBar.dart';
+import 'package:timecop/screens/dashboard/components/WorkTypeSelectField.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({Key key}) : super(key: key);
@@ -35,8 +35,7 @@ class DashboardScreen extends StatelessWidget {
     final WorkTypesBloc workTypesBloc = BlocProvider.of<WorkTypesBloc>(context);
     final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
 
-    return 
-       BlocProvider<DashboardBloc>(
+    return BlocProvider<DashboardBloc>(
         create: (_) => DashboardBloc(projectsBloc, workTypesBloc, settingsBloc),
         child: Scaffold(
           appBar: TopBar(),
@@ -84,7 +83,6 @@ class DashboardScreen extends StatelessWidget {
             ],
           ),
           floatingActionButton: StartTimerButton(),
-        )
-      );
+        ));
   }
 }

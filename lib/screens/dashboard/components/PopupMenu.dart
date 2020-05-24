@@ -24,7 +24,12 @@ import 'package:timecop/screens/settings/SettingsScreen.dart';
 import 'package:timecop/screens/workTypes/WorkTypesScreen.dart';
 
 enum MenuItem {
-  projects, workTypes, reports, export, settings, about,
+  projects,
+  workTypes,
+  reports,
+  export,
+  settings,
+  about,
 }
 
 class PopupMenu extends StatelessWidget {

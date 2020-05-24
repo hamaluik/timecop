@@ -31,6 +31,7 @@ import 'TimerTileBuilder.dart';
 
 class StoppedTimerRow extends StatelessWidget {
   final TimerEntry timer;
+
   const StoppedTimerRow({Key key, @required this.timer})
       : assert(timer != null),
         super(key: key);
@@ -47,15 +48,19 @@ class StoppedTimerRow extends StatelessWidget {
       actionExtentRatio: 0.15,
       child: ListTile(
           key: Key("stoppedTimer-" + timer.id.toString()),
-          leading: ProjectColour(project: projects.getProjectByID(timer.projectID)),
+          leading:
+              ProjectColour(project: projects.getProjectByID(timer.projectID)),
           title: timerTileBuilder.getTitleWidget(timer),
           subtitle: timerTileBuilder.getSubTitleWidget(timer),
-          trailing: Text(timer.formatTime(), style: TextStyle(fontFamily: "FiraMono")),
-          onTap: () => Navigator.of(context).push(MaterialPageRoute<TimerEditor>(
-                builder: (BuildContext context) => TimerEditor( timer: timer,),
+          trailing: Text(timer.formatTime(),
+              style: TextStyle(fontFamily: "FiraMono")),
+          onTap: () =>
+              Navigator.of(context).push(MaterialPageRoute<TimerEditor>(
+                builder: (BuildContext context) => TimerEditor(
+                  timer: timer,
+                ),
                 fullscreenDialog: true,
-              ))
-           ),
+              ))),
       actions: <Widget>[
         IconSlideAction(
           color: Theme.of(context).errorColor,
@@ -77,10 +82,10 @@ class StoppedTimerRow extends StatelessWidget {
                           onPressed: () => Navigator.of(context).pop(true),
                         ),
                       ],
-                    )
-                );
+                    ));
             if (delete) {
-              final TimersBloc timersBloc = BlocProvider.of<TimersBloc>(context);
+              final TimersBloc timersBloc =
+                  BlocProvider.of<TimersBloc>(context);
               assert(timersBloc != null);
               timersBloc.add(DeleteTimer(timer));
             }
@@ -93,24 +98,31 @@ class StoppedTimerRow extends StatelessWidget {
             foregroundColor: Theme.of(context).accentIconTheme.color,
             icon: FontAwesomeIcons.play,
             onTap: () {
-              final TimersBloc timersBloc = BlocProvider.of<TimersBloc>(context);
+              final TimersBloc timersBloc =
+                  BlocProvider.of<TimersBloc>(context);
               assert(timersBloc != null);
-              final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+              final ProjectsBloc projectsBloc =
+                  BlocProvider.of<ProjectsBloc>(context);
               assert(projectsBloc != null);
               Project project = projectsBloc.getProjectByID(timer.projectID);
 
-              final WorkTypesBloc workTypesBloc = BlocProvider.of<WorkTypesBloc>(context);
+              final WorkTypesBloc workTypesBloc =
+                  BlocProvider.of<WorkTypesBloc>(context);
               assert(workTypesBloc != null);
-              WorkType workType = workTypesBloc.getWorkTypeByID(timer.workTypeID);
+              WorkType workType =
+                  workTypesBloc.getWorkTypeByID(timer.workTypeID);
 
-              final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
+              final SettingsBloc settingsBloc =
+                  BlocProvider.of<SettingsBloc>(context);
               if (!settingsBloc.state.allowMultipleActiveTimers) {
                 timersBloc.add(StopAllTimers());
               }
 
-              timersBloc.add(CreateTimer( description: timer.description, project: project, workType: workType));
-            }
-          )
+              timersBloc.add(CreateTimer(
+                  description: timer.description,
+                  project: project,
+                  workType: workType));
+            })
       ],
     );
   }

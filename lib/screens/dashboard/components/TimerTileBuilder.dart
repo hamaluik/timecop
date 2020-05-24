@@ -1,11 +1,9 @@
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timecop/blocs/projects/projects_bloc.dart';
 import 'package:timecop/blocs/settings/bloc.dart';
 import 'package:timecop/blocs/work_types/bloc.dart';
 import 'package:timecop/components/WorkTypeBadge.dart';
-import 'package:timecop/models/WorkType.dart';
 import 'package:timecop/models/timer_entry.dart';
 
 import '../../../l10n.dart';

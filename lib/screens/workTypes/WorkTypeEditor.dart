@@ -22,6 +22,7 @@ import 'package:timecop/models/WorkType.dart';
 
 class WorkTypeEditor extends StatefulWidget {
   final WorkType workType;
+
   WorkTypeEditor({Key key, @required this.workType}) : super(key: key);
 
   @override

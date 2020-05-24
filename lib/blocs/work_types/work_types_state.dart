@@ -14,7 +14,6 @@
 
 import 'package:equatable/equatable.dart';
 import 'package:timecop/models/WorkType.dart';
-import 'package:timecop/models/project.dart';
 
 class WorkTypesState extends Equatable {
   final List<WorkType> workTypes;
@@ -29,6 +28,7 @@ class WorkTypesState extends Equatable {
 
   @override
   List<Object> get props => [workTypes];
+
   @override
   bool get stringify => true;
 }

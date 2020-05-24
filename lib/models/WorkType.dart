@@ -27,6 +27,7 @@ class WorkType extends Equatable {
 
   @override
   List<Object> get props => [id, name, colour];
+
   @override
   bool get stringify => true;
 
