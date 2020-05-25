@@ -144,6 +144,12 @@ class FluentL10NProvider extends L10NProvider {
 
   String get groupTimers => _bundle.format("groupTimers", errors: _errors);
 
+  String get includeDateRangeInExportFilename =>
+      _bundle.format("includeDateRangeInExportFilename", errors: _errors);
+
+  String get includeTimeInExportFilename =>
+      _bundle.format("includeTimeInExportFilename", errors: _errors);
+
   String get columns => _bundle.format("columns", errors: _errors);
 
   String get date => _bundle.format("date", errors: _errors);

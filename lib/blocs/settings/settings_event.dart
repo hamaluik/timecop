@@ -23,54 +23,6 @@ class LoadSettingsFromRepository extends SettingsEvent {
   List<Object> get props => [];
 }
 
-/*class SetExportGroupTimers extends SettingsEvent {
-  final bool value;
-  const SetExportGroupTimers(this.value);
-  @override List<Object> get props => [value];
-}
-
-class SetExportIncludeDate extends SettingsEvent {
-  final bool value;
-  const SetExportIncludeDate(this.value);
-  @override List<Object> get props => [value];
-}
-
-class SetExportIncludeProject extends SettingsEvent {
-  final bool value;
-  const SetExportIncludeProject(this.value);
-  @override List<Object> get props => [value];
-}
-
-class SetExportIncludeDescription extends SettingsEvent {
-  final bool value;
-  const SetExportIncludeDescription(this.value);
-  @override List<Object> get props => [value];
-}
-
-class SetExportIncludeProjectDescription extends SettingsEvent {
-  final bool value;
-  const SetExportIncludeProjectDescription(this.value);
-  @override List<Object> get props => [value];
-}
-
-class SetExportIncludeStartTime extends SettingsEvent {
-  final bool value;
-  const SetExportIncludeStartTime(this.value);
-  @override List<Object> get props => [value];
-}
-
-class SetExportIncludeEndTime extends SettingsEvent {
-  final bool value;
-  const SetExportIncludeEndTime(this.value);
-  @override List<Object> get props => [value];
-}
-
-class SetExportIncludeDurationHours extends SettingsEvent {
-  final bool value;
-  const SetExportIncludeDurationHours(this.value);
-  @override List<Object> get props => [value];
-}*/
-
 class SetDefaultProjectID extends SettingsEvent {
   final int projectID;
 
@@ -91,6 +43,8 @@ class SetDefaultWorkTypeID extends SettingsEvent {
 
 class SetBoolValueEvent extends SettingsEvent {
   final bool exportGroupTimers;
+  final bool exportIncludeDateRangeInFilename;
+  final bool exportIncludeTimeInFilename;
   final bool exportIncludeDate;
   final bool exportIncludeProject;
   final bool exportIncludeWorkType;
@@ -108,6 +62,8 @@ class SetBoolValueEvent extends SettingsEvent {
 
   const SetBoolValueEvent(
       {this.exportGroupTimers,
+      this.exportIncludeDateRangeInFilename,
+      this.exportIncludeTimeInFilename,
       this.exportIncludeDate,
       this.exportIncludeProject,
       this.exportIncludeWorkType,
@@ -126,6 +82,8 @@ class SetBoolValueEvent extends SettingsEvent {
   @override
   List<Object> get props => [
         exportGroupTimers,
+        exportIncludeDateRangeInFilename,
+        exportIncludeTimeInFilename,
         exportIncludeDate,
         exportIncludeProject,
         exportIncludeWorkType,

@@ -92,6 +92,10 @@ options = Options
 
 groupTimers = Group Similar Timers Per Day
 
+includeDateRangeInExportFilename = Include Date Range in Export Filename
+
+includeTimeInExportFilename = Include Current Time in Export Filename
+
 columns = Columns
 
 date = Date

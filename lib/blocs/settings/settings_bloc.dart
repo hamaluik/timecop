@@ -34,6 +34,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     if (event is LoadSettingsFromRepository) {
       bool exportGroupTimers = await settings.getBool("exportGroupTimers") ??
           state.exportGroupTimers;
+      bool exportIncludeDateRangeInFilename =
+          await settings.getBool("exportIncludeDateRangeInFilename") ??
+              state.exportIncludeDateRangeInFilename;
+      bool exportIncludeTimeInFilename =
+          await settings.getBool("exportIncludeTimeInFilename") ??
+              state.exportIncludeTimeInFilename;
       bool exportIncludeProject =
           await settings.getBool("exportIncludeProject") ??
               state.exportIncludeProject;
@@ -79,6 +85,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
               state.displayProjectNameInTimer;
       yield SettingsState(
           exportGroupTimers: exportGroupTimers,
+          exportIncludeDateRangeInFilename: exportIncludeDateRangeInFilename,
+          exportIncludeTimeInFilename: exportIncludeTimeInFilename,
           exportIncludeDate: exportIncludeDate,
           exportIncludeProject: exportIncludeProject,
           exportIncludeWorkType: exportIncludeWorkType,
@@ -95,40 +103,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           defaultFilterStartDateToMonday: defaultFilterStartDateToMonday,
           allowMultipleActiveTimers: allowMultipleActiveTimers,
           displayProjectNameInTimer: displayProjectNameInTimer);
-    }
-    /*else if(event is SetExportGroupTimers) {
-      await settings.setBool("exportGroupTimers", event.value);
-      yield SettingsState.clone(state, exportGroupTimers: event.value);
-    }
-    else if(event is SetExportIncludeDate) {
-      await settings.setBool("exportIncludeDate", event.value);
-      yield SettingsState.clone(state, exportIncludeDate: event.value);
-    }
-    else if(event is SetExportIncludeProject) {
-      await settings.setBool("exportIncludeProject", event.value);
-      yield SettingsState.clone(state, exportIncludeProject: event.value);
-    }
-    else if(event is SetExportIncludeDescription) {
-      await settings.setBool("exportIncludeDescription", event.value);
-      yield SettingsState.clone(state, exportIncludeDescription: event.value);
-    }
-    else if(event is SetExportIncludeProjectDescription) {
-      await settings.setBool("exportIncludeProjectDescription", event.value);
-      yield SettingsState.clone(state, exportIncludeProjectDescription: event.value);
-    }
-    else if(event is SetExportIncludeStartTime) {
-      await settings.setBool("exportIncludeStartTime", event.value);
-      yield SettingsState.clone(state, exportIncludeStartTime: event.value);
-    }
-    else if(event is SetExportIncludeEndTime) {
-      await settings.setBool("exportIncludeEndTime", event.value);
-      yield SettingsState.clone(state, exportIncludeEndTime: event.value);
-    }
-    else if(event is SetExportIncludeDurationHours) {
-      await settings.setBool("exportIncludeDurationHours", event.value);
-      yield SettingsState.clone(state, exportIncludeDurationHours: event.value);
-    }*/
-    else if (event is SetDefaultProjectID) {
+    } else if (event is SetDefaultProjectID) {
       await settings.setInt("defaultProjectID", event.projectID ?? -1);
       yield SettingsState.clone(state, defaultProjectID: event.projectID ?? -1);
     } else if (event is SetDefaultWorkTypeID) {
@@ -138,6 +113,14 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     } else if (event is SetBoolValueEvent) {
       if (event.exportGroupTimers != null) {
         await settings.setBool("exportGroupTimers", event.exportGroupTimers);
+      }
+      if (event.exportIncludeDateRangeInFilename != null) {
+        await settings.setBool("exportIncludeDateRangeInFilename",
+            event.exportIncludeDateRangeInFilename);
+      }
+      if (event.exportIncludeTimeInFilename != null) {
+        await settings.setBool(
+            "exportIncludeTimeInFilename", event.exportIncludeTimeInFilename);
       }
       if (event.exportIncludeDate != null) {
         await settings.setBool("exportIncludeDate", event.exportIncludeDate);
@@ -195,6 +178,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       yield SettingsState.clone(
         state,
         exportGroupTimers: event.exportGroupTimers,
+        exportIncludeDateRangeInFilename:
+            event.exportIncludeDateRangeInFilename,
+        exportIncludeTimeInFilename: event.exportIncludeTimeInFilename,
         exportIncludeDate: event.exportIncludeDate,
         exportIncludeProject: event.exportIncludeProject,
         exportIncludeWorkType: event.exportIncludeWorkType,

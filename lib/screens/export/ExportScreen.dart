@@ -58,6 +58,7 @@ class _ExportScreenState extends State<ExportScreen> {
   List<Project> selectedProjects = [];
   List<WorkType> selectedWorkTypes = [];
   static DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
+  static DateFormat _dateTimeFormat = DateFormat("EE, MMM d, yyyy HH_mm_s");
   static DateFormat _exportDateFormat = DateFormat.yMd();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -423,6 +424,29 @@ class _ExportScreenState extends State<ExportScreen> {
                       .add(SetBoolValueEvent(exportGroupTimers: value)),
                   activeColor: Theme.of(context).accentColor,
                 ),
+              ),
+              BlocBuilder<SettingsBloc, SettingsState>(
+                bloc: settingsBloc,
+                builder: (BuildContext context, SettingsState settingsState) =>
+                    SwitchListTile(
+                  title: Text(
+                      L10N.of(context).tr.includeDateRangeInExportFilename),
+                  value: settingsState.exportIncludeDateRangeInFilename,
+                  onChanged: (bool value) => settingsBloc.add(SetBoolValueEvent(
+                      exportIncludeDateRangeInFilename: value)),
+                  activeColor: Theme.of(context).accentColor,
+                ),
+              ),
+              BlocBuilder<SettingsBloc, SettingsState>(
+                bloc: settingsBloc,
+                builder: (BuildContext context, SettingsState settingsState) =>
+                    SwitchListTile(
+                  title: Text(L10N.of(context).tr.includeTimeInExportFilename),
+                  value: settingsState.exportIncludeTimeInFilename,
+                  onChanged: (bool value) => settingsBloc.add(
+                      SetBoolValueEvent(exportIncludeTimeInFilename: value)),
+                  activeColor: Theme.of(context).accentColor,
+                ),
               )
             ],
           ),
@@ -593,14 +617,46 @@ class _ExportScreenState extends State<ExportScreen> {
             } else {
               directory = await getApplicationDocumentsDirectory();
             }
+
+            String timestamp;
+            DateFormat dateTimeFormatFilename = _dateFormat;
+            if (settingsBloc.state.exportIncludeTimeInFilename) {
+              dateTimeFormatFilename = _dateTimeFormat;
+            }
+            timestamp = dateTimeFormatFilename.format(DateTime.now());
+
+            String dateRange = '';
+            if (settingsBloc.state.exportIncludeDateRangeInFilename &&
+                (_startDate != null || _endDate != null)) {
+              String startDateStr = _startDate != null
+                  ? '${L10N.of(context).tr.from} ${_dateFormat.format(_startDate)}'
+                  : '';
+              String endDateStr = _endDate != null
+                  ? '${L10N.of(context).tr.to} ${_dateFormat.format(_endDate)}'
+                  : '';
+              dateRange = '[' + ('${startDateStr} ${endDateStr}'.trim()) + ']';
+
+              // file name examples:
+              // no time, no date range:
+              //     Time Cop Entries (Sun, May 24, 2020)
+
+              // with time, no date range:
+              //     Time Cop Entries (Sun, May 24, 2020 20_11_12)
+
+              // with time, with date range, but only start date of range
+              //     Time Cop Entries (Sun, May 24, 2020 20_10_18 [From Mon, May 18, 2020])
+
+              // with time, with date range
+              //     Time Cop Entries (Sun, May 24, 2020 20_10_33 [From Mon, May 18, 2020 To Sat, May 23, 2020])
+
+              timestamp = '${timestamp} ${dateRange}'.trim();
+            }
+
             final String localPath = '${directory.path}/timecop.csv';
             File file = File(localPath);
             await file.writeAsString(csv, flush: true);
             await FlutterShare.shareFile(
-                title: L10N
-                    .of(context)
-                    .tr
-                    .timeCopEntries(_dateFormat.format(DateTime.now())),
+                title: L10N.of(context).tr.timeCopEntries(timestamp),
                 filePath: localPath);
           }),
     );

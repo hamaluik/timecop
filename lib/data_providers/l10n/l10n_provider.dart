@@ -109,6 +109,10 @@ abstract class L10NProvider {
 
   String get groupTimers;
 
+  String get includeDateRangeInExportFilename;
+
+  String get includeTimeInExportFilename;
+
   String get columns;
 
   String get date;

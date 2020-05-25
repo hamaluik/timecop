@@ -17,6 +17,8 @@ import 'package:flutter/foundation.dart';
 
 class SettingsState extends Equatable {
   final bool exportGroupTimers;
+  final bool exportIncludeDateRangeInFilename;
+  final bool exportIncludeTimeInFilename;
   final bool exportIncludeDate;
   final bool exportIncludeProject;
   final bool exportIncludeWorkType;
@@ -36,6 +38,8 @@ class SettingsState extends Equatable {
 
   SettingsState({
     @required this.exportGroupTimers,
+    @required this.exportIncludeDateRangeInFilename,
+    @required this.exportIncludeTimeInFilename,
     @required this.exportIncludeDate,
     @required this.exportIncludeProject,
     @required this.exportIncludeWorkType,
@@ -53,6 +57,8 @@ class SettingsState extends Equatable {
     @required this.allowMultipleActiveTimers,
     @required this.displayProjectNameInTimer,
   })  : assert(exportGroupTimers != null),
+        assert(exportIncludeDateRangeInFilename != null),
+        assert(exportIncludeTimeInFilename != null),
         assert(exportIncludeDate != null),
         assert(exportIncludeProject != null),
         assert(exportIncludeWorkType != null),
@@ -73,6 +79,8 @@ class SettingsState extends Equatable {
   static SettingsState initial() {
     return SettingsState(
       exportGroupTimers: true,
+      exportIncludeDateRangeInFilename: false,
+      exportIncludeTimeInFilename: false,
       exportIncludeDate: true,
       exportIncludeProject: true,
       exportIncludeWorkType: true,
@@ -95,6 +103,8 @@ class SettingsState extends Equatable {
   SettingsState.clone(
     SettingsState project, {
     bool exportGroupTimers,
+    bool exportIncludeDateRangeInFilename,
+    bool exportIncludeTimeInFilename,
     bool exportIncludeDate,
     bool exportIncludeProject,
     bool exportIncludeWorkType,
@@ -113,6 +123,10 @@ class SettingsState extends Equatable {
     bool displayProjectNameInTimer,
   }) : this(
           exportGroupTimers: exportGroupTimers ?? project.exportGroupTimers,
+          exportIncludeDateRangeInFilename: exportIncludeDateRangeInFilename ??
+              project.exportIncludeDateRangeInFilename,
+          exportIncludeTimeInFilename: exportIncludeTimeInFilename ??
+              project.exportIncludeTimeInFilename,
           exportIncludeDate: exportIncludeDate ?? project.exportIncludeDate,
           exportIncludeProject:
               exportIncludeProject ?? project.exportIncludeProject,
@@ -145,6 +159,8 @@ class SettingsState extends Equatable {
   @override
   List<Object> get props => [
         exportGroupTimers,
+        exportIncludeDateRangeInFilename,
+        exportIncludeTimeInFilename,
         exportIncludeDate,
         exportIncludeProject,
         exportIncludeWorkType,
