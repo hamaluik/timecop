@@ -96,6 +96,8 @@ includeDateRangeInExportFilename = Include Date Range in Export Filename
 
 includeTimeInExportFilename = Include Current Time in Export Filename
 
+timesheetExport = Timesheet Export
+
 columns = Columns
 
 date = Date

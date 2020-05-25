@@ -113,6 +113,8 @@ abstract class L10NProvider {
 
   String get includeTimeInExportFilename;
 
+  String get timesheetExport;
+
   String get columns;
 
   String get date;

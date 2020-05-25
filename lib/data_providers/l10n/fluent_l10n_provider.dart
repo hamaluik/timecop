@@ -150,6 +150,9 @@ class FluentL10NProvider extends L10NProvider {
   String get includeTimeInExportFilename =>
       _bundle.format("includeTimeInExportFilename", errors: _errors);
 
+  String get timesheetExport =>
+      _bundle.format("timesheetExport", errors: _errors);
+
   String get columns => _bundle.format("columns", errors: _errors);
 
   String get date => _bundle.format("date", errors: _errors);

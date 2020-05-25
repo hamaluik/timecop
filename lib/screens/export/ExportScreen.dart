@@ -12,30 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:collection';
-import 'dart:io';
-import 'package:path/path.dart' as p;
-import 'package:flutter_share/flutter_share.dart';
-import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:timecop/blocs/projects/projects_bloc.dart';
 import 'package:timecop/blocs/settings/bloc.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
-import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/blocs/work_types/work_types_bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/components/WorkTypeBadge.dart';
+import 'package:timecop/components/exporter.dart';
+import 'package:timecop/components/exporter_data.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/WorkType.dart';
 import 'package:timecop/models/project.dart';
-import 'package:timecop/models/timer_group.dart';
 import 'package:timecop/models/timer_entry.dart';
 
 class ExportScreen extends StatefulWidget {
@@ -53,32 +45,25 @@ class DayGroup {
 }
 
 class _ExportScreenState extends State<ExportScreen> {
-  DateTime _startDate;
-  DateTime _endDate;
-  List<Project> selectedProjects = [];
-  List<WorkType> selectedWorkTypes = [];
-  static DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
-  static DateFormat _dateTimeFormat = DateFormat("EE, MMM d, yyyy HH_mm_s");
-  static DateFormat _exportDateFormat = DateFormat.yMd();
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  ExporterData _exporterData = new ExporterData();
 
   @override
   void initState() {
     super.initState();
     final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
     assert(projects != null);
-    selectedProjects = <Project>[null]
+    _exporterData.selectedProjects = <Project>[null]
         .followedBy(projects.state.projects.map((p) => Project.clone(p)))
         .toList();
 
     final WorkTypesBloc workTypes = BlocProvider.of<WorkTypesBloc>(context);
     assert(workTypes != null);
-    selectedWorkTypes = <WorkType>[null]
+    _exporterData.selectedWorkTypes = <WorkType>[null]
         .followedBy(workTypes.state.workTypes.map((p) => WorkType.clone(p)))
         .toList();
 
     final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
-    _startDate = settingsBloc.getFilterStartDate();
+    _exporterData.startDate = settingsBloc.getFilterStartDate();
   }
 
   @override
@@ -86,44 +71,19 @@ class _ExportScreenState extends State<ExportScreen> {
     final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
     final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
     final WorkTypesBloc workTypesBloc = BlocProvider.of<WorkTypesBloc>(context);
+    final Exporter exporter = Exporter(context: context);
 
-    // TODO: break this into components or something so we don't have such a massively unmanagement build function
+    // TODO: break this into components or something so we don't have such a massively unmanageable build function
 
     return Scaffold(
-      key: _scaffoldKey,
+      key: _exporterData.scaffoldKey,
       appBar: AppBar(
         title: Text(L10N.of(context).tr.export),
         actions: <Widget>[
           IconButton(
             icon: Icon(FontAwesomeIcons.database),
             onPressed: () async {
-              var databasesPath = await getDatabasesPath();
-              var dbPath = p.join(databasesPath, 'timecop.db');
-
-              try {
-                // on android, copy it somewhere where it can be shared
-                if (Platform.isAndroid) {
-                  Directory directory = await getExternalStorageDirectory();
-                  File copiedDB = await File(dbPath)
-                      .copy(p.join(directory.path, "timecop.db"));
-                  dbPath = copiedDB.path;
-                }
-                await FlutterShare.shareFile(
-                    title: L10N
-                        .of(context)
-                        .tr
-                        .timeCopDatabase(_dateFormat.format(DateTime.now())),
-                    filePath: dbPath);
-              } on Exception catch (e) {
-                _scaffoldKey.currentState.showSnackBar(SnackBar(
-                  backgroundColor: Theme.of(context).errorColor,
-                  content: Text(
-                    e.toString(),
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  duration: Duration(seconds: 5),
-                ));
-              }
+              exporter.exportDatabase();
             },
           )
         ],
@@ -145,17 +105,18 @@ class _ExportScreenState extends State<ExportScreen> {
                   title: Text(L10N.of(context).tr.from),
                   trailing: Padding(
                     padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
-                    child: Text(_startDate == null
+                    child: Text(_exporterData.startDate == null
                         ? "—"
-                        : _dateFormat.format(_startDate)),
+                        : ExporterData.dateFormat
+                            .format(_exporterData.startDate)),
                   ),
                   onTap: () async {
                     await DatePicker.showDatePicker(context,
-                        currentTime: _startDate,
-                        onChanged: (DateTime dt) => setState(() =>
-                            _startDate = DateTime(dt.year, dt.month, dt.day)),
-                        onConfirm: (DateTime dt) => setState(() =>
-                            _startDate = DateTime(dt.year, dt.month, dt.day)),
+                        currentTime: _exporterData.startDate,
+                        onChanged: (DateTime dt) => setState(() => _exporterData
+                            .startDate = DateTime(dt.year, dt.month, dt.day)),
+                        onConfirm: (DateTime dt) => setState(() => _exporterData
+                            .startDate = DateTime(dt.year, dt.month, dt.day)),
                         theme: DatePickerTheme(
                           cancelStyle: Theme.of(context).textTheme.button,
                           doneStyle: Theme.of(context).textTheme.button,
@@ -165,7 +126,7 @@ class _ExportScreenState extends State<ExportScreen> {
                         ));
                   },
                 ),
-                secondaryActions: _startDate == null
+                secondaryActions: _exporterData.startDate == null
                     ? <Widget>[]
                     : <Widget>[
                         IconSlideAction(
@@ -175,7 +136,7 @@ class _ExportScreenState extends State<ExportScreen> {
                           icon: FontAwesomeIcons.minusCircle,
                           onTap: () {
                             setState(() {
-                              _startDate = null;
+                              _exporterData.startDate = null;
                             });
                           },
                         )
@@ -189,17 +150,19 @@ class _ExportScreenState extends State<ExportScreen> {
                   title: Text(L10N.of(context).tr.to),
                   trailing: Padding(
                     padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
-                    child: Text(
-                        _endDate == null ? "—" : _dateFormat.format(_endDate)),
+                    child: Text(_exporterData.endDate == null
+                        ? "—"
+                        : ExporterData.dateFormat
+                            .format(_exporterData.endDate)),
                   ),
                   onTap: () async {
                     await DatePicker.showDatePicker(context,
-                        currentTime: _endDate,
-                        onChanged: (DateTime dt) => setState(() => _endDate =
-                            DateTime(
+                        currentTime: _exporterData.endDate,
+                        onChanged: (DateTime dt) => setState(() =>
+                            _exporterData.endDate = DateTime(
                                 dt.year, dt.month, dt.day, 23, 59, 59, 999)),
-                        onConfirm: (DateTime dt) => setState(() => _endDate =
-                            DateTime(
+                        onConfirm: (DateTime dt) => setState(() =>
+                            _exporterData.endDate = DateTime(
                                 dt.year, dt.month, dt.day, 23, 59, 59, 999)),
                         theme: DatePickerTheme(
                           cancelStyle: Theme.of(context).textTheme.button,
@@ -210,7 +173,7 @@ class _ExportScreenState extends State<ExportScreen> {
                         ));
                   },
                 ),
-                secondaryActions: _endDate == null
+                secondaryActions: _exporterData.endDate == null
                     ? <Widget>[]
                     : <Widget>[
                         IconSlideAction(
@@ -220,7 +183,7 @@ class _ExportScreenState extends State<ExportScreen> {
                           icon: FontAwesomeIcons.minusCircle,
                           onTap: () {
                             setState(() {
-                              _endDate = null;
+                              _exporterData.endDate = null;
                             });
                           },
                         )
@@ -312,7 +275,7 @@ class _ExportScreenState extends State<ExportScreen> {
                     child: Text("Select None"),
                     onPressed: () {
                       setState(() {
-                        selectedProjects.clear();
+                        _exporterData.selectedProjects.clear();
                       });
                     },
                   ),
@@ -320,7 +283,7 @@ class _ExportScreenState extends State<ExportScreen> {
                     child: Text("Select All"),
                     onPressed: () {
                       setState(() {
-                        selectedProjects = <Project>[null]
+                        _exporterData.selectedProjects = <Project>[null]
                             .followedBy(projectsBloc.state.projects
                                 .map((p) => Project.clone(p)))
                             .toList();
@@ -330,26 +293,27 @@ class _ExportScreenState extends State<ExportScreen> {
                 ],
               )
             ]
-                .followedBy(<Project>[
-                  null
-                ].followedBy(projectsBloc.state.projects).map((project) =>
-                    CheckboxListTile(
-                      secondary: ProjectColour(
-                        project: project,
-                      ),
-                      title:
-                          Text(project?.name ?? L10N.of(context).tr.noProject),
-                      value: selectedProjects.any((p) => p?.id == project?.id),
-                      activeColor: Theme.of(context).accentColor,
-                      onChanged: (_) => setState(() {
-                        if (selectedProjects.any((p) => p?.id == project?.id)) {
-                          selectedProjects
-                              .removeWhere((p) => p?.id == project?.id);
-                        } else {
-                          selectedProjects.add(project);
-                        }
-                      }),
-                    )))
+                .followedBy(<Project>[null]
+                    .followedBy(projectsBloc.state.projects)
+                    .map((project) => CheckboxListTile(
+                          secondary: ProjectColour(
+                            project: project,
+                          ),
+                          title: Text(
+                              project?.name ?? L10N.of(context).tr.noProject),
+                          value: _exporterData.selectedProjects
+                              .any((p) => p?.id == project?.id),
+                          activeColor: Theme.of(context).accentColor,
+                          onChanged: (_) => setState(() {
+                            if (_exporterData.selectedProjects
+                                .any((p) => p?.id == project?.id)) {
+                              _exporterData.selectedProjects
+                                  .removeWhere((p) => p?.id == project?.id);
+                            } else {
+                              _exporterData.selectedProjects.add(project);
+                            }
+                          }),
+                        )))
                 .toList(),
           ),
           ExpansionTile(
@@ -367,7 +331,7 @@ class _ExportScreenState extends State<ExportScreen> {
                     child: Text("Select None"),
                     onPressed: () {
                       setState(() {
-                        selectedWorkTypes.clear();
+                        _exporterData.selectedWorkTypes.clear();
                       });
                     },
                   ),
@@ -375,7 +339,7 @@ class _ExportScreenState extends State<ExportScreen> {
                     child: Text("Select All"),
                     onPressed: () {
                       setState(() {
-                        selectedWorkTypes = <WorkType>[null]
+                        _exporterData.selectedWorkTypes = <WorkType>[null]
                             .followedBy(workTypesBloc.state.workTypes
                                 .map((p) => WorkType.clone(p)))
                             .toList();
@@ -393,16 +357,16 @@ class _ExportScreenState extends State<ExportScreen> {
                           ),
                           title: Text(
                               workType?.name ?? L10N.of(context).tr.noWorkType),
-                          value: selectedWorkTypes
+                          value: _exporterData.selectedWorkTypes
                               .any((p) => p?.id == workType?.id),
                           activeColor: Theme.of(context).accentColor,
                           onChanged: (_) => setState(() {
-                            if (selectedWorkTypes
+                            if (_exporterData.selectedWorkTypes
                                 .any((p) => p?.id == workType?.id)) {
-                              selectedWorkTypes
+                              _exporterData.selectedWorkTypes
                                   .removeWhere((p) => p?.id == workType?.id);
                             } else {
-                              selectedWorkTypes.add(workType);
+                              _exporterData.selectedWorkTypes.add(workType);
                             }
                           }),
                         )))
@@ -447,6 +411,17 @@ class _ExportScreenState extends State<ExportScreen> {
                       SetBoolValueEvent(exportIncludeTimeInFilename: value)),
                   activeColor: Theme.of(context).accentColor,
                 ),
+              ),
+              BlocBuilder<SettingsBloc, SettingsState>(
+                bloc: settingsBloc,
+                builder: (BuildContext context, SettingsState settingsState) =>
+                    SwitchListTile(
+                  title: Text(L10N.of(context).tr.timesheetExport),
+                  value: settingsState.exportTimesheet,
+                  onChanged: (bool value) => settingsBloc
+                      .add(SetBoolValueEvent(exportTimesheet: value)),
+                  activeColor: Theme.of(context).accentColor,
+                ),
               )
             ],
           ),
@@ -467,197 +442,7 @@ class _ExportScreenState extends State<ExportScreen> {
             ],
           ),
           onPressed: () async {
-            final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
-            assert(timers != null);
-
-            final ProjectsBloc projects =
-                BlocProvider.of<ProjectsBloc>(context);
-            assert(projects != null);
-
-            final WorkTypesBloc workTypes =
-                BlocProvider.of<WorkTypesBloc>(context);
-            assert(workTypes != null);
-
-            List<String> headers = [];
-            if (settingsBloc.state.exportIncludeDate) {
-              headers.add(L10N.of(context).tr.date);
-            }
-            if (settingsBloc.state.exportIncludeProject) {
-              headers.add(L10N.of(context).tr.project);
-            }
-            if (settingsBloc.state.exportIncludeWorkType) {
-              headers.add(L10N.of(context).tr.workType);
-            }
-            if (settingsBloc.state.exportIncludeDescription) {
-              headers.add(L10N.of(context).tr.description);
-            }
-            if (settingsBloc.state.exportIncludeProjectDescription) {
-              headers.add(L10N.of(context).tr.combinedProjectDescription);
-            }
-            if (settingsBloc.state.exportIncludeStartTime) {
-              headers.add(L10N.of(context).tr.startTime);
-            }
-            if (settingsBloc.state.exportIncludeEndTime) {
-              headers.add(L10N.of(context).tr.endTime);
-            }
-            if (settingsBloc.state.exportIncludeDurationHours) {
-              headers.add(L10N.of(context).tr.timeH);
-            }
-
-            List<TimerEntry> filteredTimers = timers.state.timers
-                .where((t) => t.endTime != null)
-                .where((t) => selectedProjects.any((p) => p?.id == t.projectID))
-                .where(
-                    (t) => selectedWorkTypes.any((p) => p?.id == t.workTypeID))
-                .where((t) =>
-                    _startDate == null ? true : t.startTime.isAfter(_startDate))
-                .where((t) =>
-                    _endDate == null ? true : t.endTime.isBefore(_endDate))
-                .toList();
-            filteredTimers.sort((a, b) => a.startTime.compareTo(b.startTime));
-
-            // group similar timers if that's what you're in to
-            if (settingsBloc.state.exportGroupTimers &&
-                !(settingsBloc.state.exportIncludeStartTime ||
-                    settingsBloc.state.exportIncludeEndTime)) {
-              filteredTimers = timers.state.timers
-                  .where((t) => t.endTime != null)
-                  .where(
-                      (t) => selectedProjects.any((p) => p?.id == t.projectID))
-                  .where((t) =>
-                      selectedWorkTypes.any((p) => p?.id == t.workTypeID))
-                  .where((t) => _startDate == null
-                      ? true
-                      : t.startTime.isAfter(_startDate))
-                  .where((t) =>
-                      _endDate == null ? true : t.endTime.isBefore(_endDate))
-                  .toList();
-              filteredTimers.sort((a, b) => a.startTime.compareTo(b.startTime));
-
-              // now start grouping those suckers
-              LinkedHashMap<String, LinkedHashMap<TimerGroup, List<TimerEntry>>>
-                  derp = LinkedHashMap();
-              for (TimerEntry timer in filteredTimers) {
-                String date = _exportDateFormat.format(timer.startTime);
-                LinkedHashMap<TimerGroup, List<TimerEntry>> pairedEntries =
-                    derp.putIfAbsent(date, () => LinkedHashMap());
-                List<TimerEntry> pairedList = pairedEntries.putIfAbsent(
-                    TimerGroup(
-                        timer.projectID, timer.workTypeID, timer.description),
-                    () => <TimerEntry>[]);
-                pairedList.add(timer);
-              }
-
-              // ok, now they're grouped based on date, then combined project, workTYpe, description combos
-              // time to get them back into a flat list
-              filteredTimers = derp.values.expand(
-                  (LinkedHashMap<TimerGroup, List<TimerEntry>> pairedEntries) {
-                return pairedEntries.values
-                    .map((List<TimerEntry> groupedEntries) {
-                  assert(groupedEntries.isNotEmpty);
-
-                  // not a grouped entry
-                  if (groupedEntries.length == 1) return groupedEntries[0];
-
-                  // yes a group entry, build a dummy timer entry
-                  Duration totalTime = groupedEntries.fold(
-                      Duration(),
-                      (Duration d, TimerEntry t) =>
-                          d + t.endTime.difference(t.startTime));
-                  return TimerEntry.clone(groupedEntries[0],
-                      endTime: groupedEntries[0].startTime.add(totalTime));
-                });
-              }).toList();
-            }
-
-            List<List<String>> data =
-                <List<String>>[headers].followedBy(filteredTimers.map((timer) {
-              List<String> row = [];
-              if (settingsBloc.state.exportIncludeDate) {
-                row.add(_exportDateFormat.format(timer.startTime));
-              }
-              if (settingsBloc.state.exportIncludeProject) {
-                row.add(projects.getProjectByID(timer.projectID)?.name ?? "");
-              }
-              if (settingsBloc.state.exportIncludeWorkType) {
-                row.add(
-                    workTypes.getWorkTypeByID(timer.workTypeID)?.name ?? "");
-              }
-              if (settingsBloc.state.exportIncludeDescription) {
-                row.add(timer.description ?? "");
-              }
-              if (settingsBloc.state.exportIncludeProjectDescription) {
-                row.add((projects.getProjectByID(timer.projectID)?.name ?? "") +
-                    ": " +
-                    (timer.description ?? ""));
-              }
-              if (settingsBloc.state.exportIncludeStartTime) {
-                row.add(timer.startTime.toUtc().toIso8601String());
-              }
-              if (settingsBloc.state.exportIncludeEndTime) {
-                row.add(timer.endTime.toUtc().toIso8601String());
-              }
-              if (settingsBloc.state.exportIncludeDurationHours) {
-                row.add((timer.endTime
-                            .difference(timer.startTime)
-                            .inSeconds
-                            .toDouble() /
-                        3600.0)
-                    .toStringAsFixed(4));
-              }
-              return row;
-            })).toList();
-            String csv = ListToCsvConverter().convert(data);
-            print('CSV:');
-            print(csv);
-
-            Directory directory;
-            if (Platform.isAndroid) {
-              directory = await getExternalStorageDirectory();
-            } else {
-              directory = await getApplicationDocumentsDirectory();
-            }
-
-            String timestamp;
-            DateFormat dateTimeFormatFilename = _dateFormat;
-            if (settingsBloc.state.exportIncludeTimeInFilename) {
-              dateTimeFormatFilename = _dateTimeFormat;
-            }
-            timestamp = dateTimeFormatFilename.format(DateTime.now());
-
-            String dateRange = '';
-            if (settingsBloc.state.exportIncludeDateRangeInFilename &&
-                (_startDate != null || _endDate != null)) {
-              String startDateStr = _startDate != null
-                  ? '${L10N.of(context).tr.from} ${_dateFormat.format(_startDate)}'
-                  : '';
-              String endDateStr = _endDate != null
-                  ? '${L10N.of(context).tr.to} ${_dateFormat.format(_endDate)}'
-                  : '';
-              dateRange = '[' + ('${startDateStr} ${endDateStr}'.trim()) + ']';
-
-              // file name examples:
-              // no time, no date range:
-              //     Time Cop Entries (Sun, May 24, 2020)
-
-              // with time, no date range:
-              //     Time Cop Entries (Sun, May 24, 2020 20_11_12)
-
-              // with time, with date range, but only start date of range
-              //     Time Cop Entries (Sun, May 24, 2020 20_10_18 [From Mon, May 18, 2020])
-
-              // with time, with date range
-              //     Time Cop Entries (Sun, May 24, 2020 20_10_33 [From Mon, May 18, 2020 To Sat, May 23, 2020])
-
-              timestamp = '${timestamp} ${dateRange}'.trim();
-            }
-
-            final String localPath = '${directory.path}/timecop.csv';
-            File file = File(localPath);
-            await file.writeAsString(csv, flush: true);
-            await FlutterShare.shareFile(
-                title: L10N.of(context).tr.timeCopEntries(timestamp),
-                filePath: localPath);
+            exporter.exportTimeEntries();
           }),
     );
   }

@@ -19,6 +19,7 @@ class SettingsState extends Equatable {
   final bool exportGroupTimers;
   final bool exportIncludeDateRangeInFilename;
   final bool exportIncludeTimeInFilename;
+  final bool exportTimesheet;
   final bool exportIncludeDate;
   final bool exportIncludeProject;
   final bool exportIncludeWorkType;
@@ -40,6 +41,7 @@ class SettingsState extends Equatable {
     @required this.exportGroupTimers,
     @required this.exportIncludeDateRangeInFilename,
     @required this.exportIncludeTimeInFilename,
+    @required this.exportTimesheet,
     @required this.exportIncludeDate,
     @required this.exportIncludeProject,
     @required this.exportIncludeWorkType,
@@ -59,6 +61,7 @@ class SettingsState extends Equatable {
   })  : assert(exportGroupTimers != null),
         assert(exportIncludeDateRangeInFilename != null),
         assert(exportIncludeTimeInFilename != null),
+        assert(exportTimesheet != null),
         assert(exportIncludeDate != null),
         assert(exportIncludeProject != null),
         assert(exportIncludeWorkType != null),
@@ -81,6 +84,7 @@ class SettingsState extends Equatable {
       exportGroupTimers: true,
       exportIncludeDateRangeInFilename: false,
       exportIncludeTimeInFilename: false,
+      exportTimesheet: false,
       exportIncludeDate: true,
       exportIncludeProject: true,
       exportIncludeWorkType: true,
@@ -105,6 +109,7 @@ class SettingsState extends Equatable {
     bool exportGroupTimers,
     bool exportIncludeDateRangeInFilename,
     bool exportIncludeTimeInFilename,
+    bool exportTimesheet,
     bool exportIncludeDate,
     bool exportIncludeProject,
     bool exportIncludeWorkType,
@@ -127,6 +132,7 @@ class SettingsState extends Equatable {
               project.exportIncludeDateRangeInFilename,
           exportIncludeTimeInFilename: exportIncludeTimeInFilename ??
               project.exportIncludeTimeInFilename,
+          exportTimesheet: exportTimesheet ?? project.exportTimesheet,
           exportIncludeDate: exportIncludeDate ?? project.exportIncludeDate,
           exportIncludeProject:
               exportIncludeProject ?? project.exportIncludeProject,
@@ -161,6 +167,7 @@ class SettingsState extends Equatable {
         exportGroupTimers,
         exportIncludeDateRangeInFilename,
         exportIncludeTimeInFilename,
+        exportTimesheet,
         exportIncludeDate,
         exportIncludeProject,
         exportIncludeWorkType,

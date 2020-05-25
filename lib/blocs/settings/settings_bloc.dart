@@ -40,6 +40,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       bool exportIncludeTimeInFilename =
           await settings.getBool("exportIncludeTimeInFilename") ??
               state.exportIncludeTimeInFilename;
+      bool exportTimesheet =
+          await settings.getBool("exportTimesheet") ?? state.exportTimesheet;
       bool exportIncludeProject =
           await settings.getBool("exportIncludeProject") ??
               state.exportIncludeProject;
@@ -87,6 +89,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           exportGroupTimers: exportGroupTimers,
           exportIncludeDateRangeInFilename: exportIncludeDateRangeInFilename,
           exportIncludeTimeInFilename: exportIncludeTimeInFilename,
+          exportTimesheet: exportTimesheet,
           exportIncludeDate: exportIncludeDate,
           exportIncludeProject: exportIncludeProject,
           exportIncludeWorkType: exportIncludeWorkType,
@@ -121,6 +124,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       if (event.exportIncludeTimeInFilename != null) {
         await settings.setBool(
             "exportIncludeTimeInFilename", event.exportIncludeTimeInFilename);
+      }
+      if (event.exportTimesheet != null) {
+        await settings.setBool("exportTimesheet", event.exportTimesheet);
       }
       if (event.exportIncludeDate != null) {
         await settings.setBool("exportIncludeDate", event.exportIncludeDate);
@@ -181,6 +187,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         exportIncludeDateRangeInFilename:
             event.exportIncludeDateRangeInFilename,
         exportIncludeTimeInFilename: event.exportIncludeTimeInFilename,
+        exportTimesheet: event.exportTimesheet,
         exportIncludeDate: event.exportIncludeDate,
         exportIncludeProject: event.exportIncludeProject,
         exportIncludeWorkType: event.exportIncludeWorkType,
