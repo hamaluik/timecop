@@ -56,7 +56,7 @@ create = خلق
 
 save = حفظ
 
-areYouSureYouWantToDelete = هل أنت متأكد أنك تريد حذف هذا المشروع؟
+areYouSureYouWantToDeleteProject = هل أنت متأكد أنك تريد حذف هذا المشروع؟
 
 editTimer = تحرير الموقت
 

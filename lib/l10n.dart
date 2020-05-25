@@ -23,9 +23,9 @@ class L10N {
   final bool rtl;
 
   const L10N._internal(this.locale, this.tr, this.rtl)
-    : assert(locale != null),
-      assert(tr != null),
-      assert(rtl != null);
+      : assert(locale != null),
+        assert(tr != null),
+        assert(rtl != null);
 
   static Future<L10N> load(Locale locale) async {
     Intl.defaultLocale = locale.languageCode;
@@ -44,7 +44,21 @@ class _L10NDelegate extends LocalizationsDelegate<L10N> {
   const _L10NDelegate();
 
   @override
-  bool isSupported(Locale locale) => ['de', 'en', 'es', 'fr', 'hi', 'id', 'ja', 'ko', 'pt', 'ru', 'zh', 'ar', 'it'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => [
+        'de',
+        'en',
+        'es',
+        'fr',
+        'hi',
+        'id',
+        'ja',
+        'ko',
+        'pt',
+        'ru',
+        'zh',
+        'ar',
+        'it'
+      ].contains(locale.languageCode);
 
   @override
   Future<L10N> load(Locale locale) => L10N.load(locale);

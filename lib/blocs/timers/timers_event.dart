@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'package:equatable/equatable.dart';
+import 'package:timecop/models/WorkType.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
 
@@ -21,40 +22,58 @@ abstract class TimersEvent extends Equatable {
 }
 
 class LoadTimers extends TimersEvent {
-  @override List<Object> get props => [];
+  @override
+  List<Object> get props => [];
 }
 
 class CreateTimer extends TimersEvent {
   final String description;
   final Project project;
-  CreateTimer({this.description, this.project});
-  @override List<Object> get props => [description, project];
+  final WorkType workType;
+
+  CreateTimer({this.description, this.project, this.workType});
+
+  @override
+  List<Object> get props => [description, project, workType];
 }
 
 class UpdateNow extends TimersEvent {
   const UpdateNow();
-  @override List<Object> get props => [];
+
+  @override
+  List<Object> get props => [];
 }
 
 class StopTimer extends TimersEvent {
   final TimerEntry timer;
+
   StopTimer(this.timer);
-  @override List<Object> get props => [timer];
+
+  @override
+  List<Object> get props => [timer];
 }
 
 class EditTimer extends TimersEvent {
   final TimerEntry timer;
+
   EditTimer(this.timer);
-  @override List<Object> get props => [timer];
+
+  @override
+  List<Object> get props => [timer];
 }
 
 class DeleteTimer extends TimersEvent {
   final TimerEntry timer;
+
   DeleteTimer(this.timer);
-  @override List<Object> get props => [timer];
+
+  @override
+  List<Object> get props => [timer];
 }
 
 class StopAllTimers extends TimersEvent {
   const StopAllTimers();
-  @override List<Object> get props => [];
+
+  @override
+  List<Object> get props => [];
 }

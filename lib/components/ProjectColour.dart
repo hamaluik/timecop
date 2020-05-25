@@ -19,6 +19,7 @@ class ProjectColour extends StatelessWidget {
   static const double SIZE = 22;
   final Project project;
   final bool mini;
+
   const ProjectColour({Key key, this.project, this.mini}) : super(key: key);
 
   @override
@@ -34,11 +35,11 @@ class ProjectColour extends StatelessWidget {
         color: project?.colour ?? Colors.transparent,
         //borderRadius: BorderRadius.circular(SIZE * 0.5 * scale),
         border: project == null
-          ? Border.all(
-              color: Theme.of(context).disabledColor,
-              width: 3.0,
-            )
-          : null,
+            ? Border.all(
+                color: Theme.of(context).disabledColor,
+                width: 3.0,
+              )
+            : null,
         shape: BoxShape.circle,
       ),
     );

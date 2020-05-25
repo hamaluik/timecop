@@ -14,9 +14,13 @@ whatAreYouDoing = What are you doing?
 
 projects = Projects
 
+workTypes = Work Types
+
 export = Export
 
 noProject = (no project)
+
+noWorkType = (no work type)
 
 confirmDelete = Confirm Delete
 
@@ -38,25 +42,37 @@ to = To
 
 project = Project
 
+workType = Work Type
+
 description = Description
 
 timeH = Time (hours)
 
 timeCopEntries = Time Cop Entries ({ $date })
 
+timeSheetExportFileName = Time Cop TimeSheet ({$date}).json
+
 createNewProject = Create New Project
 
+createNewWorkType = Create New Work Type
+
 editProject = Edit Project
+
+editWorkType = Edit Work Type
 
 pleaseEnterAName = Please enter a name
 
 projectName = Project Name
 
+workTypeName = Work Type Name
+
 create = Create
 
 save = Save
 
-areYouSureYouWantToDelete = Are you sure you want to delete this project?
+areYouSureYouWantToDeleteProject = Are you sure you want to delete this project?
+
+areYouSureYouWantToDeleteWorkType = Are you sure you want to delete this work type?
 
 editTimer = Edit Timer
 
@@ -77,6 +93,12 @@ noDescription = (no description)
 options = Options
 
 groupTimers = Group Similar Timers Per Day
+
+includeDateRangeInExportFilename = Include Date Range in Export Filename
+
+includeTimeInExportFilename = Include Current Time in Export Filename
+
+timesheetExport = Timesheet Export
 
 columns = Columns
 
@@ -117,6 +139,12 @@ automaticLanguage = Automatic ({ $langName })
 collapseDays = Collapse Days
 
 autocompleteDescription = Autocomplete Descriptions
+
+defaultFilterStartDateToMonday = Default Filter Start Date to Monday
+
+allowMultipleActiveTimers = Allow Multiple Active Timers
+
+displayProjectNameInTimer = Display Project Name in Timer
 
 hours = Hours
 

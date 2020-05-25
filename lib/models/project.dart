@@ -21,18 +21,29 @@ class Project extends Equatable {
   final Color colour;
 
   Project({@required this.id, @required this.name, @required this.colour})
-    : assert(id != null),
-      assert(name != null),
-      assert(colour != null);
+      : assert(id != null),
+        assert(name != null),
+        assert(colour != null);
 
-  @override List<Object> get props => [id, name, colour];
-  @override bool get stringify => true;
+  @override
+  List<Object> get props => [id, name, colour];
 
-  Project.clone(Project project,
-    {String name, Color colour})
-    : this(
-        id: project.id,
-        name: name ?? project.name,
-        colour: colour ?? project.colour,
-      );
+  @override
+  bool get stringify => true;
+
+  Project.clone(Project project, {String name, Color colour})
+      : this(
+          id: project.id,
+          name: name ?? project.name,
+          colour: colour ?? project.colour,
+        );
+
+  String getProjectCode() {
+    var projectCode = name;
+    var spaceInProject = projectCode.indexOf(' ');
+    if (spaceInProject > 0) {
+      projectCode = projectCode.substring(0, spaceInProject);
+    }
+    return projectCode;
+  }
 }

@@ -12,6 +12,7 @@ part 'theme_state.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   final SettingsProvider settings;
+
   ThemeBloc(this.settings);
 
   @override
@@ -21,10 +22,9 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   Stream<ThemeState> mapEventToState(
     ThemeEvent event,
   ) async* {
-    if(event is LoadThemeEvent) {
+    if (event is LoadThemeEvent) {
       yield ThemeState(settings.getTheme());
-    }
-    else if(event is ChangeThemeEvent) {
+    } else if (event is ChangeThemeEvent) {
       settings.setTheme(event.theme);
       yield ThemeState(event.theme);
     }

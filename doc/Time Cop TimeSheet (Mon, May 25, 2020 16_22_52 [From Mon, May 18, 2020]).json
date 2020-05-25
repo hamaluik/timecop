@@ -1,0 +1,54 @@
+{
+  "endOfWeek": "5/24/2020",
+  "rows": [
+    {
+      "project": "INC-IAN",
+      "workType": "Reqs",
+      "notes": "MTG with John for details[2m]",
+      "totalHours": 0.0,
+      "dayHours": "[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]"
+    },
+    {
+      "project": "INC-IAN",
+      "workType": "Doc",
+      "notes": "test[44m]",
+      "totalHours": 0.75,
+      "dayHours": "[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.75]"
+    },
+    {
+      "project": "INC-IAN",
+      "workType": "Dep",
+      "notes": "MTG with John for details[0m]",
+      "totalHours": 0.0,
+      "dayHours": "[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]"
+    },
+    {
+      "project": "ITR6339",
+      "workType": "Dev",
+      "notes": "README[11h 36m]",
+      "totalHours": 11.5,
+      "dayHours": "[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 11.5]"
+    },
+    {
+      "project": null,
+      "workType": "Test",
+      "notes": "bersat[0m]",
+      "totalHours": 0.0,
+      "dayHours": "[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]"
+    },
+    {
+      "project": null,
+      "workType": "Dev",
+      "notes": "a[0m]",
+      "totalHours": 0.0,
+      "dayHours": "[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]"
+    },
+    {
+      "project": null,
+      "workType": null,
+      "notes": "test no project or work type[2m]",
+      "totalHours": 0.0,
+      "dayHours": "[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]"
+    }
+  ]
+}

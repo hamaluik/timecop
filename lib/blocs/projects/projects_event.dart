@@ -21,28 +21,36 @@ abstract class ProjectsEvent extends Equatable {
 }
 
 class LoadProjects extends ProjectsEvent {
-  @override List<Object> get props => [];
+  @override
+  List<Object> get props => [];
 }
 
 class CreateProject extends ProjectsEvent {
   final String name;
   final Color colour;
+
   const CreateProject(this.name, this.colour)
-    : assert(name != null),
-      assert(colour != null);
-  @override List<Object> get props => [name, colour];
+      : assert(name != null),
+        assert(colour != null);
+
+  @override
+  List<Object> get props => [name, colour];
 }
 
 class EditProject extends ProjectsEvent {
   final Project project;
-  const EditProject(this.project)
-    : assert(project != null);
-  @override List<Object> get props => [project];
+
+  const EditProject(this.project) : assert(project != null);
+
+  @override
+  List<Object> get props => [project];
 }
 
 class DeleteProject extends ProjectsEvent {
   final Project project;
-  const DeleteProject(this.project)
-    : assert(project != null);
-  @override List<Object> get props => [project];
+
+  const DeleteProject(this.project) : assert(project != null);
+
+  @override
+  List<Object> get props => [project];
 }

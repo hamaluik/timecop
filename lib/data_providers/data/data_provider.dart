@@ -13,16 +13,37 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:timecop/models/WorkType.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
 
 abstract class DataProvider {
   Future<Project> createProject({@required String name, Color colour});
+
   Future<List<Project>> listProjects();
+
   Future<void> editProject(Project project);
+
   Future<void> deleteProject(Project project);
-  Future<TimerEntry> createTimer({String description, int projectID, DateTime startTime, DateTime endTime});
+
+  Future<WorkType> createWorkType({@required String name, Color colour});
+
+  Future<List<WorkType>> listWorkTypes();
+
+  Future<void> editWorkType(WorkType workType);
+
+  Future<void> deleteWorkType(WorkType workType);
+
+  Future<TimerEntry> createTimer(
+      {String description,
+      int projectID,
+      int workTypeID,
+      DateTime startTime,
+      DateTime endTime});
+
   Future<List<TimerEntry>> listTimers();
+
   Future<void> editTimer(TimerEntry timer);
+
   Future<void> deleteTimer(TimerEntry timer);
 }

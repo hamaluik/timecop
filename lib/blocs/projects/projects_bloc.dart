@@ -13,13 +13,16 @@
 // limitations under the License.
 
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:timecop/data_providers/data/data_provider.dart';
 import 'package:timecop/models/project.dart';
+
 import './bloc.dart';
 
 class ProjectsBloc extends Bloc<ProjectsEvent, ProjectsState> {
   final DataProvider data;
+
   ProjectsBloc(this.data);
 
   @override
@@ -32,8 +35,7 @@ class ProjectsBloc extends Bloc<ProjectsEvent, ProjectsState> {
     if (event is LoadProjects) {
       List<Project> projects = await data.listProjects();
       yield ProjectsState(projects);
-    }
-    else if (event is CreateProject) {
+    } else if (event is CreateProject) {
       Project newProject =
           await data.createProject(name: event.name, colour: event.colour);
       List<Project> projects =
@@ -41,8 +43,7 @@ class ProjectsBloc extends Bloc<ProjectsEvent, ProjectsState> {
       projects.add(newProject);
       projects.sort((a, b) => a.name.compareTo(b.name));
       yield ProjectsState(projects);
-    }
-    else if (event is EditProject) {
+    } else if (event is EditProject) {
       await data.editProject(event.project);
       List<Project> projects = state.projects.map((project) {
         if (project.id == event.project.id) return Project.clone(event.project);
@@ -50,8 +51,7 @@ class ProjectsBloc extends Bloc<ProjectsEvent, ProjectsState> {
       }).toList();
       projects.sort((a, b) => a.name.compareTo(b.name));
       yield ProjectsState(projects);
-    }
-    else if (event is DeleteProject) {
+    } else if (event is DeleteProject) {
       await data.deleteProject(event.project);
       List<Project> projects = state.projects
           .where((p) => p.id != event.project.id)
@@ -62,10 +62,15 @@ class ProjectsBloc extends Bloc<ProjectsEvent, ProjectsState> {
   }
 
   Project getProjectByID(int id) {
+    return getProjectByIDFromList(state.projects, id);
+  }
+
+  static Project getProjectByIDFromList(List<Project> projectList, int id) {
     if (id == null) return null;
-    for (Project p in state.projects) {
-      if (p.id == id) return p;
+    try {
+      return projectList.singleWhere((w) => w.id == id);
+    } catch (err) {
+      return null;
     }
-    return null;
   }
 }

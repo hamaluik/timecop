@@ -1,11 +1,11 @@
 // Copyright 2020 Kenton Hamaluik
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,49 +32,84 @@ class SettingsScreen extends StatelessWidget {
     final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(L10N.of(context).tr.settings),
-      ),
-      body: ListView(
-        children: <Widget>[
-          ThemeOptions(
-            bloc: themeBloc,
-          ),
-          LocaleOptions(
-            bloc: localeBloc,
-          ),
-          BlocBuilder<SettingsBloc, SettingsState>(
-            bloc: settingsBloc,
-            builder: (BuildContext context, SettingsState settings) =>
-              SwitchListTile(
+        appBar: AppBar(
+          title: Text(L10N.of(context).tr.settings),
+        ),
+        body: ListView(
+          children: <Widget>[
+            ThemeOptions(
+              bloc: themeBloc,
+            ),
+            LocaleOptions(
+              bloc: localeBloc,
+            ),
+            BlocBuilder<SettingsBloc, SettingsState>(
+              bloc: settingsBloc,
+              builder: (BuildContext context, SettingsState settings) =>
+                  SwitchListTile(
                 title: Text(L10N.of(context).tr.groupTimers),
                 value: settings.groupTimers,
-                onChanged: (bool value) => settingsBloc.add(SetBoolValueEvent(groupTimers: value)),
+                onChanged: (bool value) =>
+                    settingsBloc.add(SetBoolValueEvent(groupTimers: value)),
                 activeColor: Theme.of(context).accentColor,
               ),
-          ),
-          BlocBuilder<SettingsBloc, SettingsState>(
-            bloc: settingsBloc,
-            builder: (BuildContext context, SettingsState settings) =>
-              SwitchListTile(
+            ),
+            BlocBuilder<SettingsBloc, SettingsState>(
+              bloc: settingsBloc,
+              builder: (BuildContext context, SettingsState settings) =>
+                  SwitchListTile(
                 title: Text(L10N.of(context).tr.collapseDays),
                 value: settings.collapseDays,
-                onChanged: (bool value) => settingsBloc.add(SetBoolValueEvent(collapseDays: value)),
+                onChanged: (bool value) =>
+                    settingsBloc.add(SetBoolValueEvent(collapseDays: value)),
                 activeColor: Theme.of(context).accentColor,
               ),
-          ),
-          BlocBuilder<SettingsBloc, SettingsState>(
-            bloc: settingsBloc,
-            builder: (BuildContext context, SettingsState settings) =>
-              SwitchListTile(
+            ),
+            BlocBuilder<SettingsBloc, SettingsState>(
+              bloc: settingsBloc,
+              builder: (BuildContext context, SettingsState settings) =>
+                  SwitchListTile(
                 title: Text(L10N.of(context).tr.autocompleteDescription),
                 value: settings.autocompleteDescription,
-                onChanged: (bool value) => settingsBloc.add(SetBoolValueEvent(autocompleteDescription: value)),
+                onChanged: (bool value) => settingsBloc
+                    .add(SetBoolValueEvent(autocompleteDescription: value)),
                 activeColor: Theme.of(context).accentColor,
               ),
-          ),
-        ],
-      )
-    );
+            ),
+            BlocBuilder<SettingsBloc, SettingsState>(
+              bloc: settingsBloc,
+              builder: (BuildContext context, SettingsState settings) =>
+                  SwitchListTile(
+                title: Text(L10N.of(context).tr.defaultFilterStartDateToMonday),
+                value: settings.defaultFilterStartDateToMonday,
+                onChanged: (bool value) => settingsBloc.add(
+                    SetBoolValueEvent(defaultFilterStartDateToMonday: value)),
+                activeColor: Theme.of(context).accentColor,
+              ),
+            ),
+            BlocBuilder<SettingsBloc, SettingsState>(
+              bloc: settingsBloc,
+              builder: (BuildContext context, SettingsState settings) =>
+                  SwitchListTile(
+                title: Text(L10N.of(context).tr.allowMultipleActiveTimers),
+                value: settings.allowMultipleActiveTimers,
+                onChanged: (bool value) => settingsBloc
+                    .add(SetBoolValueEvent(allowMultipleActiveTimers: value)),
+                activeColor: Theme.of(context).accentColor,
+              ),
+            ),
+            BlocBuilder<SettingsBloc, SettingsState>(
+              bloc: settingsBloc,
+              builder: (BuildContext context, SettingsState settings) =>
+                  SwitchListTile(
+                title: Text(L10N.of(context).tr.displayProjectNameInTimer),
+                value: settings.displayProjectNameInTimer,
+                onChanged: (bool value) => settingsBloc
+                    .add(SetBoolValueEvent(displayProjectNameInTimer: value)),
+                activeColor: Theme.of(context).accentColor,
+              ),
+            ),
+          ],
+        ));
   }
 }

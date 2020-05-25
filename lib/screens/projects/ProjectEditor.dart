@@ -22,6 +22,7 @@ import 'package:timecop/models/project.dart';
 
 class ProjectEditor extends StatefulWidget {
   final Project project;
+
   ProjectEditor({Key key, @required this.project}) : super(key: key);
 
   @override
@@ -49,60 +50,67 @@ class _ProjectEditorState extends State<ProjectEditor> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      child: Padding(
-        padding: EdgeInsets.all(16),
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            shrinkWrap: true,
-            children: <Widget>[
-              Text(
-                widget.project == null ? L10N.of(context).tr.createNewProject : L10N.of(context).tr.editProject,
-                style: Theme.of(context).textTheme.title,
+        child: Padding(
+      padding: EdgeInsets.all(16),
+      child: Form(
+        key: _formKey,
+        child: ListView(
+          shrinkWrap: true,
+          children: <Widget>[
+            Text(
+              widget.project == null
+                  ? L10N.of(context).tr.createNewProject
+                  : L10N.of(context).tr.editProject,
+              style: Theme.of(context).textTheme.title,
+            ),
+            TextFormField(
+              controller: _nameController,
+              validator: (String value) => value.trim().isEmpty
+                  ? L10N.of(context).tr.pleaseEnterAName
+                  : null,
+              decoration: InputDecoration(
+                hintText: L10N.of(context).tr.projectName,
               ),
-              TextFormField(
-                controller: _nameController,
-                validator: (String value) => value.trim().isEmpty ? L10N.of(context).tr.pleaseEnterAName : null,
-                decoration: InputDecoration(
-                  hintText: L10N.of(context).tr.projectName,
+            ),
+            MaterialColorPicker(
+              selectedColor: _colour,
+              shrinkWrap: true,
+              onColorChange: (Color colour) => _colour = colour,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                FlatButton(
+                  child: Text(L10N.of(context).tr.cancel),
+                  onPressed: () => Navigator.of(context).pop(),
                 ),
-              ),
-              MaterialColorPicker(
-                selectedColor: _colour,
-                shrinkWrap: true,
-                onColorChange: (Color colour) => _colour = colour,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  FlatButton(
-                    child: Text(L10N.of(context).tr.cancel),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                  FlatButton(
-                    child: Text(widget.project == null ? L10N.of(context).tr.create: L10N.of(context).tr.save),
-                    onPressed: () async {
-                      bool valid = _formKey.currentState.validate();
-                      if(!valid) return;
+                FlatButton(
+                  child: Text(widget.project == null
+                      ? L10N.of(context).tr.create
+                      : L10N.of(context).tr.save),
+                  onPressed: () async {
+                    bool valid = _formKey.currentState.validate();
+                    if (!valid) return;
 
-                      final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
-                      assert(projects != null);
-                      if(widget.project == null) {
-                        projects.add(CreateProject(_nameController.text.trim(), _colour));
-                      }
-                      else {
-                        Project p = Project.clone(widget.project, name: _nameController.text.trim(), colour: _colour);
-                        projects.add(EditProject(p));
-                      }
-                      Navigator.of(context).pop();
-                    },
-                  )
-                ],
-              )
-            ],
-          ),
+                    final ProjectsBloc projects =
+                        BlocProvider.of<ProjectsBloc>(context);
+                    assert(projects != null);
+                    if (widget.project == null) {
+                      projects.add(
+                          CreateProject(_nameController.text.trim(), _colour));
+                    } else {
+                      Project p = Project.clone(widget.project,
+                          name: _nameController.text.trim(), colour: _colour);
+                      projects.add(EditProject(p));
+                    }
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            )
+          ],
         ),
-      )
-    );
+      ),
+    ));
   }
 }

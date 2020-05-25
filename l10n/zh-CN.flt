@@ -56,7 +56,7 @@ create = 创建
 
 save = 保存
 
-areYouSureYouWantToDelete = 您确定要删除此项目吗？
+areYouSureYouWantToDeleteProject = 您确定要删除此项目吗？
 
 editTimer = 编辑计时器
 
