@@ -14,12 +14,12 @@
 
 import 'package:equatable/equatable.dart';
 
-class TimerGroup extends Equatable {
+class ProjWorkDescData extends Equatable {
   final int project;
   final int workType;
   final String description;
 
-  TimerGroup(this.project, this.workType, this.description);
+  ProjWorkDescData(this.project, this.workType, this.description);
 
   @override
   List<Object> get props => [project, workType, description];

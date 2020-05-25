@@ -20,7 +20,7 @@ import 'package:intl/intl.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/models/timer_entry.dart';
-import 'package:timecop/models/timer_group.dart';
+import 'package:timecop/models/proj_work_desc_data.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:timecop/screens/dashboard/components/CollapsibleDayGrouping.dart';
 import 'package:timecop/screens/dashboard/components/GroupedStoppedTimersRow.dart';
@@ -42,10 +42,11 @@ class DayGrouping {
             (int sum, TimerEntry t) =>
                 sum + t.endTime.difference(t.startTime).inSeconds));
 
-    LinkedHashMap<TimerGroup, List<TimerEntry>> pairedEntries = LinkedHashMap();
+    LinkedHashMap<ProjWorkDescData, List<TimerEntry>> pairedEntries =
+        LinkedHashMap();
     for (TimerEntry entry in entries) {
-      TimerGroup pair =
-          TimerGroup(entry.projectID, entry.workTypeID, entry.description);
+      ProjWorkDescData pair = ProjWorkDescData(
+          entry.projectID, entry.workTypeID, entry.description);
       if (pairedEntries.containsKey(pair)) {
         pairedEntries[pair].add(entry);
       } else {

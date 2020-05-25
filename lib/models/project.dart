@@ -37,4 +37,13 @@ class Project extends Equatable {
           name: name ?? project.name,
           colour: colour ?? project.colour,
         );
+
+  String getProjectCode() {
+    var projectCode = name;
+    var spaceInProject = projectCode.indexOf(' ');
+    if (spaceInProject > 0) {
+      projectCode = projectCode.substring(0, spaceInProject);
+    }
+    return projectCode;
+  }
 }

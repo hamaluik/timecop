@@ -63,10 +63,15 @@ class WorkTypesBloc extends Bloc<WorkTypesEvent, WorkTypesState> {
   }
 
   WorkType getWorkTypeByID(int id) {
+    return getWorkTypeByIDFromList(state.workTypes, id);
+  }
+
+  static WorkType getWorkTypeByIDFromList(List<WorkType> worktypeList, int id) {
     if (id == null) return null;
-    for (WorkType p in state.workTypes) {
-      if (p.id == id) return p;
+    try {
+      return worktypeList.singleWhere((w) => w.id == id);
+    } catch (err) {
+      return null;
     }
-    return null;
   }
 }

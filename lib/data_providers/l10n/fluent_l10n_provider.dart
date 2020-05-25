@@ -140,6 +140,10 @@ class FluentL10NProvider extends L10NProvider {
   String timeCopEntries(String date) => _bundle.format("timeCopEntries",
       args: <String, dynamic>{"date": date}, errors: _errors);
 
+  String timeSheetExportFileName(String date) =>
+      _bundle.format("timeSheetExportFileName",
+          args: <String, dynamic>{"date": date}, errors: _errors);
+
   String get options => _bundle.format("options", errors: _errors);
 
   String get groupTimers => _bundle.format("groupTimers", errors: _errors);

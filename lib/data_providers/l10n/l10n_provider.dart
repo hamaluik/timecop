@@ -105,6 +105,8 @@ abstract class L10NProvider {
 
   String timeCopEntries(String date);
 
+  String timeSheetExportFileName(String date);
+
   String get options;
 
   String get groupTimers;

@@ -50,6 +50,8 @@ timeH = Time (hours)
 
 timeCopEntries = Time Cop Entries ({ $date })
 
+timeSheetExportFileName = Time Cop TimeSheet ({$date}).json
+
 createNewProject = Create New Project
 
 createNewWorkType = Create New Work Type

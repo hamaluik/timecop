@@ -71,7 +71,8 @@ class _ExportScreenState extends State<ExportScreen> {
     final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
     final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
     final WorkTypesBloc workTypesBloc = BlocProvider.of<WorkTypesBloc>(context);
-    final Exporter exporter = Exporter(context: context);
+    final Exporter exporter =
+        Exporter(context: context, exporterData: _exporterData);
 
     // TODO: break this into components or something so we don't have such a massively unmanageable build function
 

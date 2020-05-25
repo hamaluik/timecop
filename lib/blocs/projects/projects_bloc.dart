@@ -62,10 +62,15 @@ class ProjectsBloc extends Bloc<ProjectsEvent, ProjectsState> {
   }
 
   Project getProjectByID(int id) {
+    return getProjectByIDFromList(state.projects, id);
+  }
+
+  static Project getProjectByIDFromList(List<Project> projectList, int id) {
     if (id == null) return null;
-    for (Project p in state.projects) {
-      if (p.id == id) return p;
+    try {
+      return projectList.singleWhere((w) => w.id == id);
+    } catch (err) {
+      return null;
     }
-    return null;
   }
 }

@@ -12,5 +12,4 @@ class ExporterData {
   static final DateFormat dateFormat = DateFormat("EE, MMM d, yyyy");
   static final DateFormat dateTimeFormat =
       DateFormat("EE, MMM d, yyyy HH_mm_s");
-  static final DateFormat exportDateFormat = DateFormat.yMd();
 }
