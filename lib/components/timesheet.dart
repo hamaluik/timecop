@@ -72,9 +72,7 @@ class Timesheet {
       if (projectID != null) {
         project = ProjectsBloc.getProjectByIDFromList(projects, projectID);
       }
-      if (project?.name != 'personal') {
-        addProjectData(project, projectData);
-      }
+      addProjectData(project, projectData);
     });
   }
 
