@@ -17,122 +17,165 @@ import 'package:flutter/foundation.dart';
 
 class SettingsState extends Equatable {
   final bool exportGroupTimers;
+  final bool exportIncludeDateRangeInFilename;
+  final bool exportIncludeTimeInFilename;
   final bool exportIncludeDate;
   final bool exportIncludeProject;
+  final bool exportIncludeWorkType;
   final bool exportIncludeDescription;
   final bool exportIncludeProjectDescription;
   final bool exportIncludeStartTime;
   final bool exportIncludeEndTime;
   final bool exportIncludeDurationHours;
   final int defaultProjectID;
+  final int defaultWorkTypeID;
   final bool groupTimers;
   final bool collapseDays;
   final bool autocompleteDescription;
   final bool defaultFilterStartDateToMonday;
+  final bool allowMultipleActiveTimers;
+  final bool displayProjectNameInTimer;
 
   SettingsState({
     @required this.exportGroupTimers,
+    @required this.exportIncludeDateRangeInFilename,
+    @required this.exportIncludeTimeInFilename,
     @required this.exportIncludeDate,
     @required this.exportIncludeProject,
+    @required this.exportIncludeWorkType,
     @required this.exportIncludeDescription,
     @required this.exportIncludeProjectDescription,
     @required this.exportIncludeStartTime,
     @required this.exportIncludeEndTime,
     @required this.exportIncludeDurationHours,
     @required this.defaultProjectID,
+    @required this.defaultWorkTypeID,
     @required this.groupTimers,
     @required this.collapseDays,
     @required this.autocompleteDescription,
     @required this.defaultFilterStartDateToMonday,
+    @required this.allowMultipleActiveTimers,
+    @required this.displayProjectNameInTimer,
   })  : assert(exportGroupTimers != null),
+        assert(exportIncludeDateRangeInFilename != null),
+        assert(exportIncludeTimeInFilename != null),
         assert(exportIncludeDate != null),
         assert(exportIncludeProject != null),
+        assert(exportIncludeWorkType != null),
         assert(exportIncludeDescription != null),
         assert(exportIncludeProjectDescription != null),
         assert(exportIncludeStartTime != null),
         assert(exportIncludeEndTime != null),
         assert(exportIncludeDurationHours != null),
         assert(defaultProjectID != null),
+        assert(defaultWorkTypeID != null),
         assert(groupTimers != null),
         assert(collapseDays != null),
         assert(autocompleteDescription != null),
-        assert(defaultFilterStartDateToMonday != null);
+        assert(defaultFilterStartDateToMonday != null),
+        assert(allowMultipleActiveTimers != null),
+        assert(displayProjectNameInTimer != null);
 
   static SettingsState initial() {
     return SettingsState(
       exportGroupTimers: true,
+      exportIncludeDateRangeInFilename: false,
+      exportIncludeTimeInFilename: false,
       exportIncludeDate: true,
       exportIncludeProject: true,
+      exportIncludeWorkType: true,
       exportIncludeDescription: true,
       exportIncludeProjectDescription: false,
       exportIncludeStartTime: false,
       exportIncludeEndTime: false,
       exportIncludeDurationHours: true,
       defaultProjectID: -1,
+      defaultWorkTypeID: -1,
       groupTimers: true,
       collapseDays: false,
       autocompleteDescription: true,
       defaultFilterStartDateToMonday: true,
+      allowMultipleActiveTimers: true,
+      displayProjectNameInTimer: true,
     );
   }
 
-  SettingsState.clone(SettingsState project, {
+  SettingsState.clone(
+    SettingsState project, {
     bool exportGroupTimers,
+    bool exportIncludeDateRangeInFilename,
+    bool exportIncludeTimeInFilename,
     bool exportIncludeDate,
     bool exportIncludeProject,
+    bool exportIncludeWorkType,
     bool exportIncludeDescription,
     bool exportIncludeProjectDescription,
     bool exportIncludeStartTime,
     bool exportIncludeEndTime,
     bool exportIncludeDurationHours,
     int defaultProjectID,
+    int defaultWorkTypeID,
     bool groupTimers,
     bool collapseDays,
     bool autocompleteDescription,
     bool defaultFilterStartDateToMonday,
-  }) 
-    : this(
+    bool allowMultipleActiveTimers,
+    bool displayProjectNameInTimer,
+  }) : this(
           exportGroupTimers: exportGroupTimers ?? project.exportGroupTimers,
-          exportIncludeDate: 
-              exportIncludeDate ?? project.exportIncludeDate,
+          exportIncludeDateRangeInFilename: exportIncludeDateRangeInFilename ??
+              project.exportIncludeDateRangeInFilename,
+          exportIncludeTimeInFilename: exportIncludeTimeInFilename ??
+              project.exportIncludeTimeInFilename,
+          exportIncludeDate: exportIncludeDate ?? project.exportIncludeDate,
           exportIncludeProject:
               exportIncludeProject ?? project.exportIncludeProject,
+          exportIncludeWorkType:
+              exportIncludeWorkType ?? project.exportIncludeWorkType,
           exportIncludeDescription:
               exportIncludeDescription ?? project.exportIncludeDescription,
-          exportIncludeProjectDescription: 
-              exportIncludeProjectDescription ?? project.exportIncludeProjectDescription,
+          exportIncludeProjectDescription: exportIncludeProjectDescription ??
+              project.exportIncludeProjectDescription,
           exportIncludeStartTime:
               exportIncludeStartTime ?? project.exportIncludeStartTime,
           exportIncludeEndTime:
               exportIncludeEndTime ?? project.exportIncludeEndTime,
           exportIncludeDurationHours:
               exportIncludeDurationHours ?? project.exportIncludeDurationHours,
-          defaultProjectID: 
-              defaultProjectID ?? project.defaultProjectID,
-          groupTimers: 
-              groupTimers ?? project.groupTimers,
-          collapseDays: 
-              collapseDays ?? project.collapseDays,
+          defaultProjectID: defaultProjectID ?? project.defaultProjectID,
+          defaultWorkTypeID: defaultWorkTypeID ?? project.defaultWorkTypeID,
+          groupTimers: groupTimers ?? project.groupTimers,
+          collapseDays: collapseDays ?? project.collapseDays,
           autocompleteDescription:
               autocompleteDescription ?? project.autocompleteDescription,
-          defaultFilterStartDateToMonday: 
-              defaultFilterStartDateToMonday ?? project.defaultFilterStartDateToMonday,
+          defaultFilterStartDateToMonday: defaultFilterStartDateToMonday ??
+              project.defaultFilterStartDateToMonday,
+          allowMultipleActiveTimers:
+              allowMultipleActiveTimers ?? project.allowMultipleActiveTimers,
+          displayProjectNameInTimer:
+              displayProjectNameInTimer ?? project.displayProjectNameInTimer,
         );
 
   @override
   List<Object> get props => [
         exportGroupTimers,
+        exportIncludeDateRangeInFilename,
+        exportIncludeTimeInFilename,
         exportIncludeDate,
         exportIncludeProject,
+        exportIncludeWorkType,
         exportIncludeDescription,
         exportIncludeProjectDescription,
         exportIncludeStartTime,
         exportIncludeEndTime,
         exportIncludeDurationHours,
         defaultProjectID,
+        defaultWorkTypeID,
         groupTimers,
         collapseDays,
         autocompleteDescription,
         defaultFilterStartDateToMonday,
+        allowMultipleActiveTimers,
+        displayProjectNameInTimer,
       ];
 }

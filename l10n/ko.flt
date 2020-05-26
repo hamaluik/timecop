@@ -56,7 +56,7 @@ create = 창조하다
 
 save = 저장
 
-areYouSureYouWantToDelete = 이 프로젝트를 삭제 하시겠습니까?
+areYouSureYouWantToDeleteProject = 이 프로젝트를 삭제 하시겠습니까?
 
 editTimer = 타이머 편집
 

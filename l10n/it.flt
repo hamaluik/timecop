@@ -86,7 +86,7 @@ create = Crea
 save = Salva
 
 # tt-hand-translated
-areYouSureYouWantToDelete = Sei sicuro di voler cancellare questo progetto?
+areYouSureYouWantToDeleteProject = Sei sicuro di voler cancellare questo progetto?
 
 # tt-hand-translated
 editTimer = Modifica timer

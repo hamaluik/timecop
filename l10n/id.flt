@@ -56,7 +56,7 @@ create = Membuat
 
 save = Menyimpan
 
-areYouSureYouWantToDelete = Anda yakin ingin menghapus proyek ini?
+areYouSureYouWantToDeleteProject = Anda yakin ingin menghapus proyek ini?
 
 editTimer = Edit Timer
 

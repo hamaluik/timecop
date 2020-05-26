@@ -59,7 +59,7 @@ create = Создать
 
 save = Сохранить
 
-areYouSureYouWantToDelete = Вы уверены, что хотите удалить этот проект?
+areYouSureYouWantToDeleteProject = Вы уверены, что хотите удалить этот проект?
 
 editTimer = Редактировать таймер
 

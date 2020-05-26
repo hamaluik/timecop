@@ -16,66 +16,150 @@ import 'package:flutter/widgets.dart';
 
 abstract class L10NProvider {
   String get about;
+
   String get appDescription;
+
   String get appLegalese;
+
   String get appName;
-  String get areYouSureYouWantToDelete;
+
+  String get areYouSureYouWantToDeleteProject;
+
+  String get areYouSureYouWantToDeleteWorkType;
+
   String get cancel;
+
   String get changeLog;
+
   String get confirmDelete;
+
   String get create;
+
   String get createNewProject;
+
+  String get createNewWorkType;
+
   String get delete;
+
   String get deleteTimerConfirm;
+
   String get description;
+
   String get duration;
+
   String get editProject;
+
+  String get editWorkType;
+
   String get editTimer;
+
   String get endTime;
+
   String get export;
+
   String get filter;
+
   String get from;
+
   String get logoSemantics;
+
   String get noProject;
+
+  String get noWorkType;
+
   String get pleaseEnterAName;
+
   String get project;
+
+  String get workType;
+
   String get projectName;
+
+  String get workTypeName;
+
   String get projects;
+
+  String get workTypes;
+
   String get readme;
+
   String get runningTimers;
+
   String get save;
+
   String get sourceCode;
+
   String get startTime;
+
   String get timeH;
+
   String get to;
+
   String get whatAreYouDoing;
+
   String get whatWereYouDoing;
+
   String get noDescription;
+
   String timeCopDatabase(String date);
+
   String timeCopEntries(String date);
+
   String get options;
+
   String get groupTimers;
+
+  String get includeDateRangeInExportFilename;
+
+  String get includeTimeInExportFilename;
+
   String get columns;
+
   String get date;
+
   String get combinedProjectDescription;
+
   String get reports;
+
   String nHours(String hours);
+
   String get averageDailyHours;
+
   String get totalProjectShare;
+
   String get weeklyHours;
+
   String get contributors;
+
   String get settings;
+
   String get theme;
+
   String get auto;
+
   String get light;
+
   String get dark;
+
   String get black;
+
   String langName(Locale locale);
+
   String get language;
+
   String get automaticLanguage;
+
   String get collapseDays;
+
   String get autocompleteDescription;
+
   String get defaultFilterStartDateToMonday;
+
+  String get allowMultipleActiveTimers;
+
+  String get displayProjectNameInTimer;
+
   String get hours;
+
   String get total;
 }

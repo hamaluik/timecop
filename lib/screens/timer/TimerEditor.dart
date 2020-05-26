@@ -24,17 +24,21 @@ import 'package:intl/intl.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
+import 'package:timecop/blocs/work_types/bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
+import 'package:timecop/components/WorkTypeBadge.dart';
 import 'package:timecop/l10n.dart';
+import 'package:timecop/models/WorkType.dart';
+import 'package:timecop/models/clone_time.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
-import 'package:timecop/models/clone_time.dart';
 
 class TimerEditor extends StatefulWidget {
   final TimerEntry timer;
+
   TimerEditor({Key key, @required this.timer})
-    : assert(timer != null),
-      super(key: key);
+      : assert(timer != null),
+        super(key: key);
 
   @override
   _TimerEditorState createState() => _TimerEditorState();
@@ -50,6 +54,7 @@ class _TimerEditorState extends State<TimerEditor> {
   DateTime _oldEndTime;
 
   Project _project;
+  WorkType _workType;
   FocusNode _descriptionFocus;
   final _formKey = GlobalKey<FormState>();
   Timer _updateTimer;
@@ -60,13 +65,18 @@ class _TimerEditorState extends State<TimerEditor> {
   @override
   void initState() {
     super.initState();
-    _descriptionController = TextEditingController(text: widget.timer.description);
+    _descriptionController =
+        TextEditingController(text: widget.timer.description);
     _startTime = widget.timer.startTime;
     _endTime = widget.timer.endTime;
-    _project = BlocProvider.of<ProjectsBloc>(context).getProjectByID(widget.timer.projectID);
+    _project = BlocProvider.of<ProjectsBloc>(context)
+        .getProjectByID(widget.timer.projectID);
+    _workType = BlocProvider.of<WorkTypesBloc>(context)
+        .getWorkTypeByID(widget.timer.workTypeID);
     _descriptionFocus = FocusNode();
     _updateTimerStreamController = StreamController();
-    _updateTimer = Timer.periodic(Duration(seconds: 1), (_) => _updateTimerStreamController.add(DateTime.now()));
+    _updateTimer = Timer.periodic(Duration(seconds: 1),
+        (_) => _updateTimerStreamController.add(DateTime.now()));
   }
 
   @override
@@ -82,7 +92,7 @@ class _TimerEditorState extends State<TimerEditor> {
     assert(dt != null);
     setState(() {
       // adjust the end time to keep a constant duration if we would somehow make the time negative
-      if(_oldEndTime != null && dt.isAfter(_oldStartTime)) {
+      if (_oldEndTime != null && dt.isAfter(_oldStartTime)) {
         Duration d = _oldEndTime.difference(_oldStartTime);
         _endTime = dt.add(d);
       }
@@ -104,51 +114,107 @@ class _TimerEditorState extends State<TimerEditor> {
         child: ListView(
           children: <Widget>[
             BlocBuilder<ProjectsBloc, ProjectsState>(
-              builder: (BuildContext context, ProjectsState projectsState) => Padding(
-                padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
-                child: DropdownButton(
-                  value: _project,
-                  underline: Container(),
-                  elevation: 0,
-                  onChanged: (Project newProject) {
-                    setState(() {
-                      _project = newProject;
-                    });
-                  },
-                  items: <DropdownMenuItem<Project>>[
-                    DropdownMenuItem<Project>(
-                      child: Row(
-                        children: <Widget>[
-                          ProjectColour(project: null),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(8.0, 0, 0, 0),
-                            child: Text(L10N.of(context).tr.noProject, style: TextStyle(color: Theme.of(context).disabledColor)),
-                          ),
-                        ],
-                      ),
-                      value: null,
-                    )
-                  ].followedBy(projectsState.projects.map(
-                    (Project project) => DropdownMenuItem<Project>(
-                      child: Row(
-                        children: <Widget>[
-                          ProjectColour(project: project,),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(8.0, 0, 0, 0),
-                            child: Text(project.name),
-                          ),
-                        ],
-                      ),
-                      value: project,
-                    )
-                  )).toList(),
-                )
-              ),
+              builder: (BuildContext context, ProjectsState projectsState) =>
+                  Padding(
+                      padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
+                      child: DropdownButton(
+                        value: _project,
+                        underline: Container(),
+                        elevation: 0,
+                        onChanged: (Project newProject) {
+                          setState(() {
+                            _project = newProject;
+                          });
+                        },
+                        items: <DropdownMenuItem<Project>>[
+                          DropdownMenuItem<Project>(
+                            child: Row(
+                              children: <Widget>[
+                                ProjectColour(project: null),
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+                                  child: Text(L10N.of(context).tr.noProject,
+                                      style: TextStyle(
+                                          color:
+                                              Theme.of(context).disabledColor)),
+                                ),
+                              ],
+                            ),
+                            value: null,
+                          )
+                        ]
+                            .followedBy(projectsState.projects.map(
+                                (Project project) => DropdownMenuItem<Project>(
+                                      child: Row(
+                                        children: <Widget>[
+                                          ProjectColour(
+                                            project: project,
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.fromLTRB(
+                                                8.0, 0, 0, 0),
+                                            child: Text(project.name),
+                                          ),
+                                        ],
+                                      ),
+                                      value: project,
+                                    )))
+                            .toList(),
+                      )),
+            ),
+            BlocBuilder<WorkTypesBloc, WorkTypesState>(
+              builder: (BuildContext context, WorkTypesState workTypesState) =>
+                  Padding(
+                      padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
+                      child: DropdownButton(
+                        value: _workType,
+                        underline: Container(),
+                        elevation: 0,
+                        onChanged: (WorkType newWorkType) {
+                          setState(() {
+                            _workType = newWorkType;
+                          });
+                        },
+                        items: <DropdownMenuItem<WorkType>>[
+                          DropdownMenuItem<WorkType>(
+                            child: Row(
+                              children: <Widget>[
+                                WorkTypeBadge(workType: null),
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+                                  child: Text(L10N.of(context).tr.noWorkType,
+                                      style: TextStyle(
+                                          color:
+                                              Theme.of(context).disabledColor)),
+                                ),
+                              ],
+                            ),
+                            value: null,
+                          )
+                        ]
+                            .followedBy(workTypesState.workTypes.map(
+                                (WorkType workType) =>
+                                    DropdownMenuItem<WorkType>(
+                                      child: Row(
+                                        children: <Widget>[
+                                          WorkTypeBadge(
+                                            workType: workType,
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.fromLTRB(
+                                                8.0, 0, 0, 0),
+                                            child: Text(workType.name),
+                                          ),
+                                        ],
+                                      ),
+                                      value: workType,
+                                    )))
+                            .toList(),
+                      )),
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
-              child:
-                settingsBloc.state.autocompleteDescription
+              child: settingsBloc.state.autocompleteDescription
                   ? TypeAheadField<String>(
                       direction: AxisDirection.down,
                       textFieldConfiguration: TextFieldConfiguration<String>(
@@ -160,19 +226,22 @@ class _TimerEditorState extends State<TimerEditor> {
                         ),
                       ),
                       itemBuilder: (BuildContext context, String desc) =>
-                        ListTile(
-                          title: Text(desc)
-                        ),
-                      onSuggestionSelected: (String description) => _descriptionController.text = description,
+                          ListTile(title: Text(desc)),
+                      onSuggestionSelected: (String description) =>
+                          _descriptionController.text = description,
                       suggestionsCallback: (pattern) async {
-                        if(pattern.length < 2) return [];
+                        if (pattern.length < 2) return [];
 
                         List<String> descriptions = timers.state.timers
-                          .where((timer) => timer.description != null)
-                          .where((timer) => timer.description.toLowerCase().contains(pattern.toLowerCase()) ?? false)
-                          .map((timer) => timer.description)
-                          .toSet()
-                          .toList();
+                            .where((timer) => timer.description != null)
+                            .where((timer) =>
+                                timer.description
+                                    .toLowerCase()
+                                    .contains(pattern.toLowerCase()) ??
+                                false)
+                            .map((timer) => timer.description)
+                            .toSet()
+                            .toList();
                         return descriptions;
                       },
                     )
@@ -194,22 +263,22 @@ class _TimerEditorState extends State<TimerEditor> {
                 onTap: () async {
                   _oldStartTime = _startTime.clone();
                   _oldEndTime = _endTime.clone();
-                  DateTime newStartTime = await DatePicker.showDateTimePicker(
-                    context,
-                    currentTime: _startTime,
-                    maxTime: _endTime == null ? DateTime.now() : null,
-                    onChanged: (DateTime dt) => setStartTime(dt),
-                    onConfirm: (DateTime dt) => setStartTime(dt),
-                    theme: DatePickerTheme(
-                      cancelStyle: Theme.of(context).textTheme.button,
-                      doneStyle: Theme.of(context).textTheme.button,
-                      itemStyle: Theme.of(context).textTheme.body1,
-                      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                    )
-                  );
+                  DateTime newStartTime =
+                      await DatePicker.showDateTimePicker(context,
+                          currentTime: _startTime,
+                          maxTime: _endTime == null ? DateTime.now() : null,
+                          onChanged: (DateTime dt) => setStartTime(dt),
+                          onConfirm: (DateTime dt) => setStartTime(dt),
+                          theme: DatePickerTheme(
+                            cancelStyle: Theme.of(context).textTheme.button,
+                            doneStyle: Theme.of(context).textTheme.button,
+                            itemStyle: Theme.of(context).textTheme.body1,
+                            backgroundColor:
+                                Theme.of(context).scaffoldBackgroundColor,
+                          ));
 
                   // if the user cancelled, this should be null
-                  if(newStartTime == null) {
+                  if (newStartTime == null) {
                     setState(() {
                       _startTime = _oldStartTime;
                       _endTime = _oldEndTime;
@@ -235,70 +304,73 @@ class _TimerEditorState extends State<TimerEditor> {
               actionExtentRatio: 0.15,
               child: ListTile(
                 title: Text(L10N.of(context).tr.endTime),
-                trailing: Text(_endTime == null ? "—" : _dateFormat.format(_endTime)),
+                trailing:
+                    Text(_endTime == null ? "—" : _dateFormat.format(_endTime)),
                 onTap: () async {
-                _oldEndTime = _endTime.clone();
-                DateTime newEndTime = await DatePicker.showDateTimePicker(
-                    context,
-                    currentTime: _endTime,
-                    minTime: _startTime,
-                    onChanged: (DateTime dt) => setState(() => _endTime = dt),
-                    onConfirm: (DateTime dt) => setState(() => _endTime = dt),
-                    theme: DatePickerTheme(
-                      cancelStyle: Theme.of(context).textTheme.button,
-                      doneStyle: Theme.of(context).textTheme.button,
-                      itemStyle: Theme.of(context).textTheme.body1,
-                      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                    )
-                  );
+                  _oldEndTime = _endTime.clone();
+                  DateTime newEndTime = await DatePicker.showDateTimePicker(
+                      context,
+                      currentTime: _endTime,
+                      minTime: _startTime,
+                      onChanged: (DateTime dt) => setState(() => _endTime = dt),
+                      onConfirm: (DateTime dt) => setState(() => _endTime = dt),
+                      theme: DatePickerTheme(
+                        cancelStyle: Theme.of(context).textTheme.button,
+                        doneStyle: Theme.of(context).textTheme.button,
+                        itemStyle: Theme.of(context).textTheme.body1,
+                        backgroundColor:
+                            Theme.of(context).scaffoldBackgroundColor,
+                      ));
 
                   // if the user cancelled, this should be null
-                  if(newEndTime == null) {
+                  if (newEndTime == null) {
                     setState(() {
                       _endTime = _oldEndTime;
                     });
                   }
                 },
               ),
-              secondaryActions:
-                _endTime == null
+              secondaryActions: _endTime == null
                   ? <Widget>[
-                    IconSlideAction(
-                      color: Theme.of(context).accentColor,
-                      foregroundColor: Theme.of(context).accentIconTheme.color,
-                      icon: FontAwesomeIcons.clock,
-                      onTap: () => setState(() => _endTime = DateTime.now()),
-                    ),
-                  ]
+                      IconSlideAction(
+                        color: Theme.of(context).accentColor,
+                        foregroundColor:
+                            Theme.of(context).accentIconTheme.color,
+                        icon: FontAwesomeIcons.clock,
+                        onTap: () => setState(() => _endTime = DateTime.now()),
+                      ),
+                    ]
                   : <Widget>[
-                    IconSlideAction(
-                      color: Theme.of(context).accentColor,
-                      foregroundColor: Theme.of(context).accentIconTheme.color,
-                      icon: FontAwesomeIcons.clock,
-                      onTap: () => setState(() => _endTime = DateTime.now()),
-                    ),
-                    IconSlideAction(
-                      color: Theme.of(context).errorColor,
-                      foregroundColor: Theme.of(context).accentIconTheme.color,
-                      icon: FontAwesomeIcons.minusCircle,
-                      onTap: () {
-                        setState(() {
-                          _endTime = null;
-                        });
-                      },
-                    )
-                  ],
+                      IconSlideAction(
+                        color: Theme.of(context).accentColor,
+                        foregroundColor:
+                            Theme.of(context).accentIconTheme.color,
+                        icon: FontAwesomeIcons.clock,
+                        onTap: () => setState(() => _endTime = DateTime.now()),
+                      ),
+                      IconSlideAction(
+                        color: Theme.of(context).errorColor,
+                        foregroundColor:
+                            Theme.of(context).accentIconTheme.color,
+                        icon: FontAwesomeIcons.minusCircle,
+                        onTap: () {
+                          setState(() {
+                            _endTime = null;
+                          });
+                        },
+                      )
+                    ],
             ),
             StreamBuilder(
               initialData: DateTime.now(),
               stream: _updateTimerStreamController.stream,
-              builder: (BuildContext context, AsyncSnapshot<DateTime> snapshot) => ListTile(
+              builder:
+                  (BuildContext context, AsyncSnapshot<DateTime> snapshot) =>
+                      ListTile(
                 title: Text(L10N.of(context).tr.duration),
-                trailing: Text(TimerEntry.formatDuration(
-                  _endTime == null
+                trailing: Text(TimerEntry.formatDuration(_endTime == null
                     ? snapshot.data.difference(_startTime)
-                    : _endTime.difference(_startTime)
-                )),
+                    : _endTime.difference(_startTime))),
               ),
             ),
           ],
@@ -320,13 +392,14 @@ class _TimerEditorState extends State<TimerEditor> {
         ),
         onPressed: () async {
           bool valid = _formKey.currentState.validate();
-          if(!valid) return;
+          if (!valid) return;
 
           TimerEntry timer = TimerEntry(
             id: widget.timer.id,
             startTime: _startTime,
             endTime: _endTime,
             projectID: _project?.id,
+            workTypeID: _workType?.id,
             description: _descriptionController.text.trim(),
           );
 

@@ -19,67 +19,35 @@ abstract class SettingsEvent extends Equatable {
 }
 
 class LoadSettingsFromRepository extends SettingsEvent {
-  @override List<Object> get props => [];
+  @override
+  List<Object> get props => [];
 }
-
-/*class SetExportGroupTimers extends SettingsEvent {
-  final bool value;
-  const SetExportGroupTimers(this.value);
-  @override List<Object> get props => [value];
-}
-
-class SetExportIncludeDate extends SettingsEvent {
-  final bool value;
-  const SetExportIncludeDate(this.value);
-  @override List<Object> get props => [value];
-}
-
-class SetExportIncludeProject extends SettingsEvent {
-  final bool value;
-  const SetExportIncludeProject(this.value);
-  @override List<Object> get props => [value];
-}
-
-class SetExportIncludeDescription extends SettingsEvent {
-  final bool value;
-  const SetExportIncludeDescription(this.value);
-  @override List<Object> get props => [value];
-}
-
-class SetExportIncludeProjectDescription extends SettingsEvent {
-  final bool value;
-  const SetExportIncludeProjectDescription(this.value);
-  @override List<Object> get props => [value];
-}
-
-class SetExportIncludeStartTime extends SettingsEvent {
-  final bool value;
-  const SetExportIncludeStartTime(this.value);
-  @override List<Object> get props => [value];
-}
-
-class SetExportIncludeEndTime extends SettingsEvent {
-  final bool value;
-  const SetExportIncludeEndTime(this.value);
-  @override List<Object> get props => [value];
-}
-
-class SetExportIncludeDurationHours extends SettingsEvent {
-  final bool value;
-  const SetExportIncludeDurationHours(this.value);
-  @override List<Object> get props => [value];
-}*/
 
 class SetDefaultProjectID extends SettingsEvent {
   final int projectID;
+
   const SetDefaultProjectID(this.projectID);
-  @override List<Object> get props => [projectID];
+
+  @override
+  List<Object> get props => [projectID];
+}
+
+class SetDefaultWorkTypeID extends SettingsEvent {
+  final int workTypeID;
+
+  const SetDefaultWorkTypeID(this.workTypeID);
+
+  @override
+  List<Object> get props => [workTypeID];
 }
 
 class SetBoolValueEvent extends SettingsEvent {
   final bool exportGroupTimers;
+  final bool exportIncludeDateRangeInFilename;
+  final bool exportIncludeTimeInFilename;
   final bool exportIncludeDate;
   final bool exportIncludeProject;
+  final bool exportIncludeWorkType;
   final bool exportIncludeDescription;
   final bool exportIncludeProjectDescription;
   final bool exportIncludeStartTime;
@@ -89,8 +57,46 @@ class SetBoolValueEvent extends SettingsEvent {
   final bool collapseDays;
   final bool autocompleteDescription;
   final bool defaultFilterStartDateToMonday;
+  final bool allowMultipleActiveTimers;
+  final bool displayProjectNameInTimer;
 
-  const SetBoolValueEvent({this.exportGroupTimers, this.exportIncludeDate, this.exportIncludeProject, this.exportIncludeDescription, this.exportIncludeProjectDescription, this.exportIncludeStartTime, this.exportIncludeEndTime, this.exportIncludeDurationHours, this.groupTimers, this.collapseDays, this.autocompleteDescription,this.defaultFilterStartDateToMonday});
+  const SetBoolValueEvent(
+      {this.exportGroupTimers,
+      this.exportIncludeDateRangeInFilename,
+      this.exportIncludeTimeInFilename,
+      this.exportIncludeDate,
+      this.exportIncludeProject,
+      this.exportIncludeWorkType,
+      this.exportIncludeDescription,
+      this.exportIncludeProjectDescription,
+      this.exportIncludeStartTime,
+      this.exportIncludeEndTime,
+      this.exportIncludeDurationHours,
+      this.groupTimers,
+      this.collapseDays,
+      this.autocompleteDescription,
+      this.defaultFilterStartDateToMonday,
+      this.allowMultipleActiveTimers,
+      this.displayProjectNameInTimer});
 
-  @override List<Object> get props => [exportGroupTimers, exportIncludeDate, exportIncludeProject, exportIncludeDescription, exportIncludeProjectDescription, exportIncludeStartTime, exportIncludeEndTime, exportIncludeDurationHours, groupTimers, collapseDays, autocompleteDescription, defaultFilterStartDateToMonday];
+  @override
+  List<Object> get props => [
+        exportGroupTimers,
+        exportIncludeDateRangeInFilename,
+        exportIncludeTimeInFilename,
+        exportIncludeDate,
+        exportIncludeProject,
+        exportIncludeWorkType,
+        exportIncludeDescription,
+        exportIncludeProjectDescription,
+        exportIncludeStartTime,
+        exportIncludeEndTime,
+        exportIncludeDurationHours,
+        groupTimers,
+        collapseDays,
+        autocompleteDescription,
+        defaultFilterStartDateToMonday,
+        allowMultipleActiveTimers,
+        displayProjectNameInTimer
+      ];
 }

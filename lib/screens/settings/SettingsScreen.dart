@@ -49,7 +49,8 @@ class SettingsScreen extends StatelessWidget {
                   SwitchListTile(
                 title: Text(L10N.of(context).tr.groupTimers),
                 value: settings.groupTimers,
-                onChanged: (bool value) => settingsBloc.add(SetBoolValueEvent(groupTimers: value)),
+                onChanged: (bool value) =>
+                    settingsBloc.add(SetBoolValueEvent(groupTimers: value)),
                 activeColor: Theme.of(context).accentColor,
               ),
             ),
@@ -59,7 +60,8 @@ class SettingsScreen extends StatelessWidget {
                   SwitchListTile(
                 title: Text(L10N.of(context).tr.collapseDays),
                 value: settings.collapseDays,
-                onChanged: (bool value) => settingsBloc.add(SetBoolValueEvent(collapseDays: value)),
+                onChanged: (bool value) =>
+                    settingsBloc.add(SetBoolValueEvent(collapseDays: value)),
                 activeColor: Theme.of(context).accentColor,
               ),
             ),
@@ -69,7 +71,8 @@ class SettingsScreen extends StatelessWidget {
                   SwitchListTile(
                 title: Text(L10N.of(context).tr.autocompleteDescription),
                 value: settings.autocompleteDescription,
-                onChanged: (bool value) => settingsBloc.add(SetBoolValueEvent(autocompleteDescription: value)),
+                onChanged: (bool value) => settingsBloc
+                    .add(SetBoolValueEvent(autocompleteDescription: value)),
                 activeColor: Theme.of(context).accentColor,
               ),
             ),
@@ -84,8 +87,29 @@ class SettingsScreen extends StatelessWidget {
                 activeColor: Theme.of(context).accentColor,
               ),
             ),
+            BlocBuilder<SettingsBloc, SettingsState>(
+              bloc: settingsBloc,
+              builder: (BuildContext context, SettingsState settings) =>
+                  SwitchListTile(
+                title: Text(L10N.of(context).tr.allowMultipleActiveTimers),
+                value: settings.allowMultipleActiveTimers,
+                onChanged: (bool value) => settingsBloc
+                    .add(SetBoolValueEvent(allowMultipleActiveTimers: value)),
+                activeColor: Theme.of(context).accentColor,
+              ),
+            ),
+            BlocBuilder<SettingsBloc, SettingsState>(
+              bloc: settingsBloc,
+              builder: (BuildContext context, SettingsState settings) =>
+                  SwitchListTile(
+                title: Text(L10N.of(context).tr.displayProjectNameInTimer),
+                value: settings.displayProjectNameInTimer,
+                onChanged: (bool value) => settingsBloc
+                    .add(SetBoolValueEvent(displayProjectNameInTimer: value)),
+                activeColor: Theme.of(context).accentColor,
+              ),
+            ),
           ],
-        )
-      );
+        ));
   }
 }

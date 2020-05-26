@@ -27,7 +27,8 @@ class MockSettingsProvider extends SettingsProvider {
   }
 
   @override
-  bool getBool(String key) => values.containsKey(key) ? values[key] as bool : true;
+  bool getBool(String key) =>
+      values.containsKey(key) ? values[key] as bool : true;
 
   @override
   void setBool(String key, bool value) => values[key] = value;

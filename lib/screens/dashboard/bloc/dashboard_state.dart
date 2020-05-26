@@ -3,6 +3,7 @@ part of 'dashboard_bloc.dart';
 class DashboardState extends Equatable {
   final String newDescription;
   final Project newProject;
+  final WorkType newWorkType;
   final bool timerWasStarted;
   final DateTime filterStart;
   final DateTime filterEnd;
@@ -15,6 +16,7 @@ class DashboardState extends Equatable {
   const DashboardState(
       this.newDescription,
       this.newProject,
+      this.newWorkType,
       this.timerWasStarted,
       this.filterStart,
       this.filterEnd,
@@ -28,23 +30,31 @@ class DashboardState extends Equatable {
     DashboardState state,
     DateTime filterStart,
     DateTime filterEnd,
-    String searchString,
-  {
+    String searchString, {
     String newDescription,
     Project newProject,
+    WorkType newWorkType,
     bool timerWasStarted,
     List<int> hiddenProjects,
-  })
-    : this(
-        newDescription ?? state.newDescription,
-        newProject ?? state.newProject,
-        timerWasStarted ?? state.timerWasStarted,
-        filterStart,
-        filterEnd,
-        hiddenProjects ?? state.hiddenProjects,
-        searchString
-      );
+  }) : this(
+            newDescription ?? state.newDescription,
+            newProject ?? state.newProject,
+            newWorkType ?? state.newWorkType,
+            timerWasStarted ?? state.timerWasStarted,
+            filterStart,
+            filterEnd,
+            hiddenProjects ?? state.hiddenProjects,
+            searchString);
 
   @override
-  List<Object> get props => [newDescription, newProject, timerWasStarted, filterStart, filterEnd, hiddenProjects, searchString];
+  List<Object> get props => [
+        newDescription,
+        newProject,
+        newWorkType,
+        timerWasStarted,
+        filterStart,
+        filterEnd,
+        hiddenProjects,
+        searchString
+      ];
 }
