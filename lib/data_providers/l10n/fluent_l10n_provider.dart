@@ -21,18 +21,18 @@ class FluentL10NProvider extends L10NProvider {
   final FluentBundle _bundle;
   List<Error> _errors = [];
 
-  FluentL10NProvider._internal(this._bundle)
+  FluentL10NProvider._internal(this._bundle) 
     : assert(_bundle != null);
 
   static Future<FluentL10NProvider> load(Locale locale) async {
     final FluentBundle bundle = FluentBundle(locale.toLanguageTag());
-    
+
     String src = "l10n/${locale.languageCode}.flt";
     // special handling of zh-CN & zh-TW for now
-    if(locale.languageCode == "zh" && locale.countryCode == "CN") {
+    if (locale.languageCode == "zh" && locale.countryCode == "CN") {
       src = "l10n/zh-CN.flt";
     }
-    else if(locale.languageCode == "zh" && locale.countryCode == "TW") {
+    else if (locale.languageCode == "zh" && locale.countryCode == "TW") {
       src = "l10n/zh-TW.flt";
     }
     String messages = await rootBundle.loadString(src);
@@ -97,10 +97,10 @@ class FluentL10NProvider extends L10NProvider {
   String get dark => _bundle.format("dark", errors: _errors) ?? "dark";
   String get black => _bundle.format("black", errors: _errors) ?? "black";
   String langName(Locale locale) {
-    if(locale == null) {
+    if (locale == null) {
       return auto;
     }
-    switch(locale.languageCode) {
+    switch (locale.languageCode) {
       case "ar": return "العربية";
       case "de": return "Deutsch";
       case "en": return "English";
@@ -114,12 +114,12 @@ class FluentL10NProvider extends L10NProvider {
       case "pt": return "Português";
       case "ru": return "русский";
       case "zh": {
-        switch(locale.countryCode) {
-          case "CN": return "中文（简体）";
-          case "TW": return "中文（繁體）";
-          default: return "中文";
+          switch (locale.countryCode) {
+            case "CN": return "中文（简体）";
+            case "TW": return "中文（繁體）";
+            default: return "中文";
+          }
         }
-      }
     }
     return "<lang name>";
   }
@@ -130,6 +130,7 @@ class FluentL10NProvider extends L10NProvider {
   }
   String get collapseDays => _bundle.format("collapseDays", errors: _errors) ?? "collapseDays";
   String get autocompleteDescription => _bundle.format("autocompleteDescription", errors: _errors) ?? "autocompleteDescription";
+  String get defaultFilterStartDateToMonday => _bundle.format("defaultFilterStartDateToMonday", errors: _errors) ?? "defaultFilterStartDateToMonday";
   String get hours => _bundle.format("hours", errors: _errors) ?? "hours";
   String get total => _bundle.format("total", errors: _errors) ?? "total";
 }

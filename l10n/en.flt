@@ -118,6 +118,8 @@ collapseDays = Collapse Days
 
 autocompleteDescription = Autocomplete Descriptions
 
+defaultFilterStartDateToMonday = Default Filter Start Date to Monday
+
 hours = Hours
 
 total = Total
