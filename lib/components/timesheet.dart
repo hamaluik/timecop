@@ -19,6 +19,8 @@ class Timesheet {
 
   final rows = <TimesheetRow>[];
 
+  final TIMESHEET_JSON_DATE_FORMAT = 'yyyy-MM-dd';
+
   // TODO use I10N for the following strings
   static final Map<String, String> workTypeNames = {
     'reqs': 'Requirements Gathering',
@@ -152,8 +154,13 @@ class Timesheet {
     return (day1ZeroTime.compareTo(day2ZeroTime) == 0);
   }
 
-  Map<String, Object> toJson() => {
-        'endOfWeek': DateFormat.yMd().format(endOfWeekOnSunday),
-        'rows': [...rows.map((e) => e.toJson()).toList()],
-      };
+  Map<String, dynamic> toJson() => _toJson(this);
+
+  Map<String, dynamic> _toJson(Timesheet instance) {
+    return <String, dynamic>{
+      'endOfWeek': DateFormat(TIMESHEET_JSON_DATE_FORMAT)
+          .format(instance.endOfWeekOnSunday),
+      'rows': [...instance.rows.map((e) => e.toJson()).toList()],
+    };
+  }
 }

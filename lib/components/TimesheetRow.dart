@@ -43,11 +43,15 @@ class TimesheetRow {
     return (mins / minBlockOfMins).round() * minBlockOfMins;
   }
 
-  Map<String, Object> toJson() => {
-        'project': project?.getProjectCode(),
-        'workType': workType?.name,
-        'notes': notes,
-        'totalHours': totalHours,
-        'dayHours': dayHrs.toString(),
-      };
+  Map<String, dynamic> toJson() => _toJson(this);
+
+  Map<String, dynamic> _toJson(TimesheetRow instance) {
+    return <String, dynamic>{
+      'project': instance.project?.getProjectCode(),
+      'workType': instance.workType?.name,
+      'notes': instance.notes,
+      'totalHours': instance.totalHours,
+      'dayHours': instance.dayHrs,
+    };
+  }
 }
