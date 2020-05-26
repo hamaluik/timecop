@@ -72,7 +72,7 @@ class SettingsState extends Equatable {
       groupTimers: true,
       collapseDays: false,
       autocompleteDescription: true,
-      defaultFilterStartDateToMonday: true,
+      defaultFilterStartDateToMonday: false,
     );
   }
 
