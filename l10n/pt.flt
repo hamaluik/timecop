@@ -118,6 +118,8 @@ collapseDays = Dias de recolhimento
 
 autocompleteDescription = Descrições de preenchimento automático
 
+defaultFilterStartDateToMonday = Data de início do filtro padrão para segunda-feira
+
 hours = Horas
 
 total = Total

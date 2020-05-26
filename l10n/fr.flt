@@ -118,6 +118,8 @@ collapseDays = Collapse Days
 
 autocompleteDescription = Descriptions de saisie semi-automatique
 
+defaultFilterStartDateToMonday = Date de début du filtre par défaut au lundi
+
 hours = Heures
 
 total = Total

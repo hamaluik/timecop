@@ -118,6 +118,8 @@ collapseDays = 崩潰天數
 
 autocompleteDescription = 自動完成說明
 
+defaultFilterStartDateToMonday = 默認過濾器開始日期為星期一
+
 hours = 小時
 
 total = 總

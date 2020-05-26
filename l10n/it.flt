@@ -167,6 +167,8 @@ collapseDays = Giorni di collasso
 
 autocompleteDescription = Descrizioni di completamento automatico
 
+defaultFilterStartDateToMonday = Data di inizio filtro predefinita a lunedì
+
 hours = Ore
 
 total = Totale

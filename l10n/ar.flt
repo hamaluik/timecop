@@ -118,6 +118,8 @@ collapseDays = أيام الانهيار
 
 autocompleteDescription = أوصاف الإكمال التلقائي
 
+defaultFilterStartDateToMonday = تاريخ بدء التصفية الافتراضي ليوم الاثنين
+
 hours = ساعات
 
 total = مجموع

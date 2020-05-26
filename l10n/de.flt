@@ -118,6 +118,8 @@ collapseDays = Tage reduzieren
 
 autocompleteDescription = Beschreibungen der automatischen Vervollständigung
 
+defaultFilterStartDateToMonday = Standard-Filterstartdatum bis Montag
+
 hours = Std
 
 total = Gesamt

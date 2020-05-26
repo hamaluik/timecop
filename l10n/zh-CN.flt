@@ -118,6 +118,8 @@ collapseDays = 崩溃天数
 
 autocompleteDescription = 自动完成说明
 
+defaultFilterStartDateToMonday = 默认过滤器开始日期为星期一
+
 hours = 小时
 
 total = 总

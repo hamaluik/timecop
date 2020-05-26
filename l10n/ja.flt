@@ -118,6 +118,8 @@ collapseDays = 崩壊日
 
 autocompleteDescription = 入力欄の説明
 
+defaultFilterStartDateToMonday = デフォルトのフィルター開始日から月曜日
+
 hours = 時間
 
 total = 合計

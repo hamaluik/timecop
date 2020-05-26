@@ -122,6 +122,8 @@ collapseDays = Свернуть Дни
 
 autocompleteDescription = Автозаполнение описаний
 
+defaultFilterStartDateToMonday = Дата начала фильтра по умолчанию - понедельник
+
 hours = часов
 
 total = Всего

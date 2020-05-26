@@ -118,6 +118,8 @@ collapseDays = 일 축소
 
 autocompleteDescription = 자동 완성 설명
 
+defaultFilterStartDateToMonday = 월요일부터 기본 필터 시작 날짜
+
 hours = 시간
 
 total = 합계

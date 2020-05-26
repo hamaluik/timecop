@@ -118,6 +118,8 @@ collapseDays = Tutup Hari
 
 autocompleteDescription = Deskripsi Pelengkapan Otomatis
 
+defaultFilterStartDateToMonday = Tanggal Mulai Filter Default hingga Senin
+
 hours = Jam
 
 total = Total
