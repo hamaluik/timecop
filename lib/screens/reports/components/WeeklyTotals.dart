@@ -118,7 +118,6 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                 lineTouchData: LineTouchData(
                   enabled: true,
                   touchTooltipData: LineTouchTooltipData(
-                    fitInsideTheChart: true,
                     tooltipBgColor: Theme.of(context).cardColor,
                     getTooltipItems: (List<LineBarSpot> spots) {
                       return spots

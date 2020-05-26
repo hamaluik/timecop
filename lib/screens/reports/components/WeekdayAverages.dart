@@ -116,7 +116,6 @@ class WeekdayAverages extends StatelessWidget {
                 barTouchData: BarTouchData(
                   enabled: true,
                   touchTooltipData: BarTouchTooltipData(
-                    fitInsideTheChart: true,
                     tooltipBgColor: Theme.of(context).cardColor,
                     getTooltipItem: (
                       BarChartGroupData group,
