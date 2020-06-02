@@ -63,6 +63,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       bool defaultFilterStartDateToMonday =
           await settings.getBool("defaultFilterStartDateToMonday") ??
               state.defaultFilterStartDateToMonday;
+      bool oneTimerAtATime =
+          await settings.getBool("oneTimerAtATime") ?? state.oneTimerAtATime;
       yield SettingsState(
           exportGroupTimers: exportGroupTimers,
           exportIncludeDate: exportIncludeDate,
@@ -76,41 +78,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           groupTimers: groupTimers,
           collapseDays: collapseDays,
           autocompleteDescription: autocompleteDescription,
-          defaultFilterStartDateToMonday: defaultFilterStartDateToMonday);
-    }
-    /*else if(event is SetExportGroupTimers) {
-      await settings.setBool("exportGroupTimers", event.value);
-      yield SettingsState.clone(state, exportGroupTimers: event.value);
-    }
-    else if(event is SetExportIncludeDate) {
-      await settings.setBool("exportIncludeDate", event.value);
-      yield SettingsState.clone(state, exportIncludeDate: event.value);
-    }
-    else if(event is SetExportIncludeProject) {
-      await settings.setBool("exportIncludeProject", event.value);
-      yield SettingsState.clone(state, exportIncludeProject: event.value);
-    }
-    else if(event is SetExportIncludeDescription) {
-      await settings.setBool("exportIncludeDescription", event.value);
-      yield SettingsState.clone(state, exportIncludeDescription: event.value);
-    }
-    else if(event is SetExportIncludeProjectDescription) {
-      await settings.setBool("exportIncludeProjectDescription", event.value);
-      yield SettingsState.clone(state, exportIncludeProjectDescription: event.value);
-    }
-    else if(event is SetExportIncludeStartTime) {
-      await settings.setBool("exportIncludeStartTime", event.value);
-      yield SettingsState.clone(state, exportIncludeStartTime: event.value);
-    }
-    else if(event is SetExportIncludeEndTime) {
-      await settings.setBool("exportIncludeEndTime", event.value);
-      yield SettingsState.clone(state, exportIncludeEndTime: event.value);
-    }
-    else if(event is SetExportIncludeDurationHours) {
-      await settings.setBool("exportIncludeDurationHours", event.value);
-      yield SettingsState.clone(state, exportIncludeDurationHours: event.value);
-    }*/
-    else if (event is SetDefaultProjectID) {
+          defaultFilterStartDateToMonday: defaultFilterStartDateToMonday,
+          oneTimerAtATime: oneTimerAtATime);
+    } else if (event is SetDefaultProjectID) {
       await settings.setInt("defaultProjectID", event.projectID ?? -1);
       yield SettingsState.clone(state, defaultProjectID: event.projectID ?? -1);
     } else if (event is SetBoolValueEvent) {
@@ -158,6 +128,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         await settings.setBool("defaultFilterStartDateToMonday",
             event.defaultFilterStartDateToMonday);
       }
+      if (event.oneTimerAtATime != null) {
+        await settings.setBool("oneTimerAtATime", event.oneTimerAtATime);
+      }
       yield SettingsState.clone(
         state,
         exportGroupTimers: event.exportGroupTimers,
@@ -172,6 +145,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         collapseDays: event.collapseDays,
         autocompleteDescription: event.autocompleteDescription,
         defaultFilterStartDateToMonday: event.defaultFilterStartDateToMonday,
+        oneTimerAtATime: event.oneTimerAtATime,
       );
     }
   }

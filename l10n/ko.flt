@@ -124,3 +124,5 @@ hours = 시간
 
 total = 합계
 
+oneTimerAtATime = 한 번에 하나의 실행 타이머 만 허용
+

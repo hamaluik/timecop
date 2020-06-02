@@ -29,6 +29,7 @@ class SettingsState extends Equatable {
   final bool collapseDays;
   final bool autocompleteDescription;
   final bool defaultFilterStartDateToMonday;
+  final bool oneTimerAtATime;
 
   SettingsState({
     @required this.exportGroupTimers,
@@ -44,6 +45,7 @@ class SettingsState extends Equatable {
     @required this.collapseDays,
     @required this.autocompleteDescription,
     @required this.defaultFilterStartDateToMonday,
+    @required this.oneTimerAtATime,
   })  : assert(exportGroupTimers != null),
         assert(exportIncludeDate != null),
         assert(exportIncludeProject != null),
@@ -56,7 +58,8 @@ class SettingsState extends Equatable {
         assert(groupTimers != null),
         assert(collapseDays != null),
         assert(autocompleteDescription != null),
-        assert(defaultFilterStartDateToMonday != null);
+        assert(defaultFilterStartDateToMonday != null),
+        assert(oneTimerAtATime != null);
 
   static SettingsState initial() {
     return SettingsState(
@@ -73,11 +76,12 @@ class SettingsState extends Equatable {
       collapseDays: false,
       autocompleteDescription: true,
       defaultFilterStartDateToMonday: false,
+      oneTimerAtATime: false,
     );
   }
 
   SettingsState.clone(
-    SettingsState project, {
+    SettingsState settings, {
     bool exportGroupTimers,
     bool exportIncludeDate,
     bool exportIncludeProject,
@@ -91,28 +95,30 @@ class SettingsState extends Equatable {
     bool collapseDays,
     bool autocompleteDescription,
     bool defaultFilterStartDateToMonday,
+    bool oneTimerAtATime,
   }) : this(
-          exportGroupTimers: exportGroupTimers ?? project.exportGroupTimers,
-          exportIncludeDate: exportIncludeDate ?? project.exportIncludeDate,
+          exportGroupTimers: exportGroupTimers ?? settings.exportGroupTimers,
+          exportIncludeDate: exportIncludeDate ?? settings.exportIncludeDate,
           exportIncludeProject:
-              exportIncludeProject ?? project.exportIncludeProject,
+              exportIncludeProject ?? settings.exportIncludeProject,
           exportIncludeDescription:
-              exportIncludeDescription ?? project.exportIncludeDescription,
+              exportIncludeDescription ?? settings.exportIncludeDescription,
           exportIncludeProjectDescription: exportIncludeProjectDescription ??
-              project.exportIncludeProjectDescription,
+              settings.exportIncludeProjectDescription,
           exportIncludeStartTime:
-              exportIncludeStartTime ?? project.exportIncludeStartTime,
+              exportIncludeStartTime ?? settings.exportIncludeStartTime,
           exportIncludeEndTime:
-              exportIncludeEndTime ?? project.exportIncludeEndTime,
+              exportIncludeEndTime ?? settings.exportIncludeEndTime,
           exportIncludeDurationHours:
-              exportIncludeDurationHours ?? project.exportIncludeDurationHours,
-          defaultProjectID: defaultProjectID ?? project.defaultProjectID,
-          groupTimers: groupTimers ?? project.groupTimers,
-          collapseDays: collapseDays ?? project.collapseDays,
+              exportIncludeDurationHours ?? settings.exportIncludeDurationHours,
+          defaultProjectID: defaultProjectID ?? settings.defaultProjectID,
+          groupTimers: groupTimers ?? settings.groupTimers,
+          collapseDays: collapseDays ?? settings.collapseDays,
           autocompleteDescription:
-              autocompleteDescription ?? project.autocompleteDescription,
+              autocompleteDescription ?? settings.autocompleteDescription,
           defaultFilterStartDateToMonday: defaultFilterStartDateToMonday ??
-              project.defaultFilterStartDateToMonday,
+              settings.defaultFilterStartDateToMonday,
+          oneTimerAtATime: oneTimerAtATime ?? settings.oneTimerAtATime,
         );
 
   @override
@@ -130,5 +136,6 @@ class SettingsState extends Equatable {
         collapseDays,
         autocompleteDescription,
         defaultFilterStartDateToMonday,
+        oneTimerAtATime,
       ];
 }

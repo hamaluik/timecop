@@ -78,4 +78,5 @@ abstract class L10NProvider {
   String get defaultFilterStartDateToMonday;
   String get hours;
   String get total;
+  String get oneTimerAtATime;
 }

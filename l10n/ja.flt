@@ -124,3 +124,5 @@ hours = 時間
 
 total = 合計
 
+oneTimerAtATime = 一度に1つの実行タイマーのみを許可する
+

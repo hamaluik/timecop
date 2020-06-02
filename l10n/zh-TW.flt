@@ -124,3 +124,5 @@ hours = 小時
 
 total = 總
 
+oneTimerAtATime = 一次只允許一個運行計時器
+

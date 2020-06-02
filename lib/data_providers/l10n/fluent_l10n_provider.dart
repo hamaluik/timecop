@@ -237,4 +237,7 @@ class FluentL10NProvider extends L10NProvider {
   String get hours => _bundle.format("hours", errors: _errors) ?? "hours";
   @override
   String get total => _bundle.format("total", errors: _errors) ?? "total";
+  @override
+  String get oneTimerAtATime =>
+      _bundle.format("oneTimerAtATime", errors: _errors) ?? "oneTimerAtATime";
 }

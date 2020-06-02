@@ -124,3 +124,5 @@ hours = Hours
 
 total = Total
 
+oneTimerAtATime = Only Allow One Running Timer at a Time
+

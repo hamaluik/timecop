@@ -124,3 +124,5 @@ hours = Std
 
 total = Gesamt
 
+oneTimerAtATime = Es ist jeweils nur ein laufender Timer zulässig
+
