@@ -240,4 +240,10 @@ class FluentL10NProvider extends L10NProvider {
   @override
   String get oneTimerAtATime =>
       _bundle.format("oneTimerAtATime", errors: _errors) ?? "oneTimerAtATime";
+  @override
+  String get selectAll =>
+      _bundle.format("selectAll", errors: _errors) ?? "selectAll";
+  @override
+  String get selectNone =>
+      _bundle.format("selectNone", errors: _errors) ?? "selectNone";
 }

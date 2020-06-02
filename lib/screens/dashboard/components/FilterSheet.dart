@@ -148,7 +148,7 @@ class FilterSheet extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     RaisedButton(
-                      child: Text("Select None"),
+                      child: Text(L10N.of(context).tr.selectNone),
                       onPressed: () => dashboardBloc.add(
                           FilterProjectsChangedEvent(<int>[null]
                               .followedBy(
@@ -156,7 +156,7 @@ class FilterSheet extends StatelessWidget {
                               .toList())),
                     ),
                     RaisedButton(
-                      child: Text("Select All"),
+                      child: Text(L10N.of(context).tr.selectAll),
                       onPressed: () => dashboardBloc
                           .add(FilterProjectsChangedEvent(<int>[])),
                     ),

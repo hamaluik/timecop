@@ -126,3 +126,7 @@ total = 總
 
 oneTimerAtATime = 一次只允許一個運行計時器
 
+selectAll = 全選
+
+selectNone = 選擇無
+

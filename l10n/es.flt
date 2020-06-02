@@ -126,3 +126,7 @@ total = Total
 
 oneTimerAtATime = Permitir solo un temporizador en ejecución a la vez
 
+selectAll = Seleccionar todo
+
+selectNone = No seleccionar ninguno
+

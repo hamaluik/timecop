@@ -254,7 +254,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     RaisedButton(
-                      child: Text("Select None"),
+                      child: Text(L10N.of(context).tr.selectNone),
                       onPressed: () {
                         setState(() {
                           selectedProjects.clear();
@@ -262,7 +262,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                       },
                     ),
                     RaisedButton(
-                      child: Text("Select All"),
+                      child: Text(L10N.of(context).tr.selectAll),
                       onPressed: () {
                         setState(() {
                           selectedProjects = <Project>[null]

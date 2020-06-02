@@ -79,4 +79,6 @@ abstract class L10NProvider {
   String get hours;
   String get total;
   String get oneTimerAtATime;
+  String get selectAll;
+  String get selectNone;
 }

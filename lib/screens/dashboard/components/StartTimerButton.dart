@@ -64,7 +64,8 @@ class _StartTimerButtonState extends State<StartTimerButton> {
               bloc.add(TimerWasStartedEvent());
             },
           );
-        } else if (settingsState.oneTimerAtATime && timersState.timers.where((t) => t.endTime == null).length == 1) {
+        } else if (settingsState.oneTimerAtATime &&
+            timersState.timers.where((t) => t.endTime == null).length == 1) {
           return FloatingActionButton(
             key: Key("stopAllTimersButton"),
             child: Stack(
