@@ -11,7 +11,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_bloc: ^4.0.0
-  equatable: ^1.1.0
+  equatable: ^1.1.1
   sqflite: ^1.2.0
   intl:
   font_awesome_flutter: ^8.7.0
