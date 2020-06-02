@@ -71,17 +71,17 @@ class DatabaseProvider extends DataProvider {
   }
 
   /// the c in crud
+  @override
   Future<Project> createProject({@required String name, Color colour}) async {
     assert(name != null);
-    if(colour == null) {
-      colour = _randomColour.randomColor();
-    }
+    colour ??= _randomColour.randomColor();
 
     int id = await _db.rawInsert("insert into projects(name, colour) values(?, ?)", <dynamic>[name, colour.value]);
     return Project(id: id, name: name, colour: colour);
   }
 
   /// the r in crud
+  @override
   Future<List<Project>> listProjects() async {
     List<Map<String, dynamic>> rawProjects = await _db.rawQuery("select id, name, colour from projects order by name asc");
     return rawProjects.map((Map<String, dynamic> row) => Project(
@@ -92,6 +92,7 @@ class DatabaseProvider extends DataProvider {
   }
 
   /// the u in crud
+  @override
   Future<void> editProject(Project project) async {
     assert(project != null);
     int rows = await _db.rawUpdate("update projects set name=?, colour=? where id=?", <dynamic>[project.name, project.colour.value, project.id]);
@@ -99,12 +100,14 @@ class DatabaseProvider extends DataProvider {
   }
 
   /// the d in crud
+  @override
   Future<void> deleteProject(Project project) async {
     assert(project != null);
     await _db.rawDelete("delete from projects where id=?", <dynamic>[project.id]);
   }
 
   /// the c in crud
+  @override
   Future<TimerEntry> createTimer({String description, int projectID, DateTime startTime, DateTime endTime}) async {
     int st = startTime?.millisecondsSinceEpoch ?? DateTime.now().millisecondsSinceEpoch;
     assert(st != null);
@@ -120,6 +123,7 @@ class DatabaseProvider extends DataProvider {
   }
 
   /// the r in crud
+  @override
   Future<List<TimerEntry>> listTimers() async {
     List<Map<String, dynamic>> rawTimers = await _db.rawQuery("select id, project_id, description, start_time, end_time from timers order by start_time asc");
     return rawTimers.map((Map<String, dynamic> row) => TimerEntry(
@@ -132,6 +136,7 @@ class DatabaseProvider extends DataProvider {
   }
 
   /// the u in crud
+  @override
   Future<void> editTimer(TimerEntry timer) async {
     assert(timer != null);
     int st = timer.startTime?.millisecondsSinceEpoch ?? DateTime.now().millisecondsSinceEpoch;
@@ -140,6 +145,7 @@ class DatabaseProvider extends DataProvider {
   }
 
   /// the d in crud
+  @override
   Future<void> deleteTimer(TimerEntry timer) async {
     assert(timer != null);
     await _db.rawDelete("delete from timers where id=?", <dynamic>[timer.id]);

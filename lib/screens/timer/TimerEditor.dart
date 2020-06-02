@@ -55,7 +55,7 @@ class _TimerEditorState extends State<TimerEditor> {
   Timer _updateTimer;
   StreamController<DateTime> _updateTimerStreamController;
 
-  static DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy h:mma");
+  static final DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy h:mma");
 
   @override
   void initState() {
@@ -203,7 +203,7 @@ class _TimerEditorState extends State<TimerEditor> {
                     theme: DatePickerTheme(
                       cancelStyle: Theme.of(context).textTheme.button,
                       doneStyle: Theme.of(context).textTheme.button,
-                      itemStyle: Theme.of(context).textTheme.body1,
+                      itemStyle: Theme.of(context).textTheme.bodyText2,
                       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                     )
                   );
@@ -247,7 +247,7 @@ class _TimerEditorState extends State<TimerEditor> {
                     theme: DatePickerTheme(
                       cancelStyle: Theme.of(context).textTheme.button,
                       doneStyle: Theme.of(context).textTheme.button,
-                      itemStyle: Theme.of(context).textTheme.body1,
+                      itemStyle: Theme.of(context).textTheme.bodyText2,
                       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                     )
                   );

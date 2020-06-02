@@ -73,7 +73,7 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
                                 padding: EdgeInsets.fromLTRB(8.0, 0, 0, 0),
                                 child: Text(
                                   p?.name ?? L10N.of(context).tr.noProject,
-                                  style: TextStyle(color: p == null ? Theme.of(context).disabledColor : Theme.of(context).textTheme.body1.color)
+                                  style: TextStyle(color: p == null ? Theme.of(context).disabledColor : Theme.of(context).textTheme.bodyText2.color)
                                 ),
                               ),
                             ],

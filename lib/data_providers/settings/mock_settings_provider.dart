@@ -22,7 +22,7 @@ class MockSettingsProvider extends SettingsProvider {
   Locale locale;
 
   MockSettingsProvider() {
-    values = Map<String, dynamic>();
+    values = <String, dynamic>{};
     theme = ThemeType.auto;
   }
 

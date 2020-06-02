@@ -8,6 +8,8 @@ analyzer:
 
 linter:
   rules:
-    - camel_case_types
-    - prefer_void_to_null
-    - void_checks
+    camel_case_types: true
+    prefer_void_to_null: true
+    void_checks: true
+    omit_local_variable_types: false
+    prefer_single_quotes: false

@@ -141,12 +141,14 @@ class MockDataProvider extends DataProvider {
     }
   }
 
+  @override
   Future<List<Project>> listProjects() async {
     return <Project>[
       Project(id: 1, name: "Time Cop", colour: Colors.cyan[600]),
       Project(id: 2, name: l10n[localeKey]["administration"], colour: Colors.pink[600]),
     ];
   }
+  @override
   Future<List<TimerEntry>> listTimers() async {
     int tid = 1;
     Random rand = Random(42);
@@ -218,11 +220,15 @@ class MockDataProvider extends DataProvider {
     return entries;
   }
 
+  @override
   Future<Project> createProject({@required String name, Color colour}) async {
     return Project(id: -1, name: name, colour: colour);
   }
+  @override
   Future<void> editProject(Project project) async {}
+  @override
   Future<void> deleteProject(Project project) async {}
+  @override
   Future<TimerEntry> createTimer({String description, int projectID, DateTime startTime, DateTime endTime}) async {
     DateTime st = startTime ?? DateTime.now();
     return TimerEntry(
@@ -233,6 +239,8 @@ class MockDataProvider extends DataProvider {
       endTime: endTime,
     );
   }
+  @override
   Future<void> editTimer(TimerEntry timer) async {}
+  @override
   Future<void> deleteTimer(TimerEntry timer) async {}
 }

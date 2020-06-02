@@ -16,14 +16,14 @@ extension CloneTime on DateTime {
   DateTime clone() {
     if(this == null) return null;
     return DateTime(
-      this.year,
-      this.month,
-      this.day,
-      this.hour,
-      this.minute,
-      this.second,
-      this.millisecond,
-      this.microsecond
+      year,
+      month,
+      day,
+      hour,
+      minute,
+      second,
+      millisecond,
+      microsecond
     );
   }
 }

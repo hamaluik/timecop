@@ -108,7 +108,7 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
                       value: entry.value,
                       color: project?.colour ?? Theme.of(context).disabledColor,
                       title: _touchedIndex == index ? L10N.of(context).tr.nHours(entry.value.toStringAsFixed(1)) + "\n(${(100.0 * entry.value / totalHours).toStringAsFixed(0)} %)" : "",
-                      titleStyle: Theme.of(context).textTheme.body1,
+                      titleStyle: Theme.of(context).textTheme.bodyText2,
                       radius: _touchedIndex == index ? 80 : 60,
                     );
                   })
@@ -117,7 +117,7 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
             ),
           ),
           Container(height: 16,),
-          Text(L10N.of(context).tr.totalProjectShare, style: Theme.of(context).textTheme.title, textAlign: TextAlign.center,),
+          Text(L10N.of(context).tr.totalProjectShare, style: Theme.of(context).textTheme.headline6, textAlign: TextAlign.center,),
           Legend(
             projects: widget
               .selectedProjects

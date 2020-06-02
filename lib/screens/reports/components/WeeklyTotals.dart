@@ -41,15 +41,13 @@ class WeeklyTotals extends StatefulWidget {
 }
 
 class _WeeklyTotalsState extends State<WeeklyTotals> {
-  static DateFormat _dateFormat = DateFormat.MMMd();
+  static final DateFormat _dateFormat = DateFormat.MMMd();
 
   static LinkedHashMap<int, LinkedHashMap<int, double>> calculateData(BuildContext context, DateTime startDate, DateTime endDate, List<Project> selectedProjects) {
     final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
 
     DateTime firstDate = startDate;
-    if(firstDate == null) {
-      firstDate = timers.state.timers.map((timer) => timer.startTime).fold(DateTime.now(), (DateTime a, DateTime b) => a.isBefore(b) ? a : b);
-    }
+    firstDate ??= timers.state.timers.map((timer) => timer.startTime).fold(DateTime.now(), (DateTime a, DateTime b) => a.isBefore(b) ? a : b);
     firstDate = firstDate.startOfWeek();
 
     LinkedHashMap<int, LinkedHashMap<int, double>> projectWeeklyHours = LinkedHashMap();
@@ -104,10 +102,10 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                   show: true,
                   border: Border(
                     bottom: BorderSide(
-                      color: Theme.of(context).textTheme.body1.color,
+                      color: Theme.of(context).textTheme.bodyText2.color,
                     ),
                     left: BorderSide(
-                      color: Theme.of(context).textTheme.body1.color,
+                      color: Theme.of(context).textTheme.bodyText2.color,
                     ),
                   )
                 ),
@@ -126,7 +124,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                             L10N.of(context).tr.nHours(spot.y.toStringAsFixed(1)),
                             TextStyle(
                               color: spot.bar.colors[0],
-                              fontSize: Theme.of(context).textTheme.body1.fontSize,
+                              fontSize: Theme.of(context).textTheme.bodyText2.fontSize,
                             )
                           );
                         })
@@ -177,7 +175,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
             ),
           ),
           Container(height: 16,),
-          Text(L10N.of(context).tr.weeklyHours, style: Theme.of(context).textTheme.title, textAlign: TextAlign.center,),
+          Text(L10N.of(context).tr.weeklyHours, style: Theme.of(context).textTheme.headline6, textAlign: TextAlign.center,),
           Legend(
             projects: widget
               .selectedProjects

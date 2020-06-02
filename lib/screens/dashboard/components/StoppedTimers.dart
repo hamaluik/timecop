@@ -29,7 +29,7 @@ import 'StoppedTimerRow.dart';
 class DayGrouping {
   final DateTime date;
   List<TimerEntry> entries = [];
-  static DateFormat _dateFormat = DateFormat.yMMMMEEEEd();
+  static final DateFormat _dateFormat = DateFormat.yMMMMEEEEd();
 
   DayGrouping(this.date);
 

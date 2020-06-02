@@ -26,7 +26,7 @@ import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 
 class FilterSheet extends StatelessWidget {
   final DashboardBloc dashboardBloc;
-  static DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
+  static final DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
   const FilterSheet({Key key, @required this.dashboardBloc})
     : assert(dashboardBloc != null),
       super(key: key);
@@ -70,7 +70,7 @@ class FilterSheet extends StatelessWidget {
                           theme: DatePickerTheme(
                             cancelStyle: Theme.of(context).textTheme.button,
                             doneStyle: Theme.of(context).textTheme.button,
-                            itemStyle: Theme.of(context).textTheme.body1,
+                            itemStyle: Theme.of(context).textTheme.bodyText2,
                             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                           )
                         );
@@ -107,7 +107,7 @@ class FilterSheet extends StatelessWidget {
                           theme: DatePickerTheme(
                             cancelStyle: Theme.of(context).textTheme.button,
                             doneStyle: Theme.of(context).textTheme.button,
-                            itemStyle: Theme.of(context).textTheme.body1,
+                            itemStyle: Theme.of(context).textTheme.bodyText2,
                             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                           )
                         );

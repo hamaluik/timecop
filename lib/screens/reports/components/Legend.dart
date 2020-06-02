@@ -33,7 +33,7 @@ class Legend extends StatelessWidget {
             label: Text(
               project?.name ?? L10N.of(context).tr.noProject,
               style: TextStyle(
-                fontSize: Theme.of(context).textTheme.body1.fontSize * 0.75,
+                fontSize: Theme.of(context).textTheme.bodyText2.fontSize * 0.75,
               )
             ),
           )

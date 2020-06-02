@@ -42,7 +42,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
   DateTime _endDate;
   DateTime _oldStartDate;
   DateTime _oldEndDate;
-  static DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
+  static final DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
   List<Project> selectedProjects = [];
 
   @override
@@ -147,7 +147,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                           theme: DatePickerTheme(
                             cancelStyle: Theme.of(context).textTheme.button,
                             doneStyle: Theme.of(context).textTheme.button,
-                            itemStyle: Theme.of(context).textTheme.body1,
+                            itemStyle: Theme.of(context).textTheme.bodyText2,
                             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                           )
                         );
@@ -198,7 +198,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                           theme: DatePickerTheme(
                             cancelStyle: Theme.of(context).textTheme.button,
                             doneStyle: Theme.of(context).textTheme.button,
-                            itemStyle: Theme.of(context).textTheme.body1,
+                            itemStyle: Theme.of(context).textTheme.bodyText2,
                             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                           )
                         );

@@ -33,7 +33,7 @@ class CollapsibleDayGrouping extends StatefulWidget {
 class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping> with SingleTickerProviderStateMixin {
   static final Animatable<double> _easeInTween = CurveTween(curve: Curves.easeIn);
   static final Animatable<double> _halfTween = Tween<double>(begin: 0.0, end: -0.5);
-  static DateFormat _dateFormat = DateFormat.yMMMMEEEEd();
+  static final DateFormat _dateFormat = DateFormat.yMMMMEEEEd();
 
   bool _expanded;
   AnimationController _controller;
@@ -77,7 +77,7 @@ class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping> with Si
         style: TextStyle(
           //color: Theme.of(context).accentColor,
           fontWeight: FontWeight.w700,
-          fontSize: Theme.of(context).textTheme.body1.fontSize,
+          fontSize: Theme.of(context).textTheme.bodyText2.fontSize,
         )
       ),
       trailing: Row(

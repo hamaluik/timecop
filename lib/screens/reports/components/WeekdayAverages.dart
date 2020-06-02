@@ -83,7 +83,7 @@ class WeekdayAverages extends StatelessWidget {
 
   WeekdayAverages(BuildContext context, {Key key, @required this.startDate, @required this.endDate, @required this.selectedProjects})
     : assert(selectedProjects != null),
-      this._daysData = calculateData(context, startDate, endDate, selectedProjects),
+      _daysData = calculateData(context, startDate, endDate, selectedProjects),
       super(key: key);
 
   @override
@@ -124,7 +124,7 @@ class WeekdayAverages extends StatelessWidget {
                       int rodIndex)
                         => BarTooltipItem(
                           L10N.of(context).tr.nHours(rod.y.toStringAsFixed(1)),
-                          Theme.of(context).textTheme.body1
+                          Theme.of(context).textTheme.bodyText2
                         )
                   )
                 ),
@@ -138,11 +138,11 @@ class WeekdayAverages extends StatelessWidget {
                   show: true,
                   leftTitles: SideTitles(
                     showTitles: true,
-                    textStyle: Theme.of(context).textTheme.body1,
+                    textStyle: Theme.of(context).textTheme.bodyText2,
                   ),
                   bottomTitles: SideTitles(
                     showTitles: true,
-                    textStyle: Theme.of(context).textTheme.body1,
+                    textStyle: Theme.of(context).textTheme.bodyText2,
                     getTitles: (double value) {
                       switch (value.toInt()) {
                         case 0:
@@ -187,7 +187,7 @@ class WeekdayAverages extends StatelessWidget {
             ),
           ),
           Container(height: 16,),
-          Text(L10N.of(context).tr.averageDailyHours, style: Theme.of(context).textTheme.title, textAlign: TextAlign.center,),
+          Text(L10N.of(context).tr.averageDailyHours, style: Theme.of(context).textTheme.headline6, textAlign: TextAlign.center,),
           Legend(
             projects: selectedProjects
               .where((project) => _daysData

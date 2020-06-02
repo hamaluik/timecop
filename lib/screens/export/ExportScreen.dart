@@ -54,8 +54,8 @@ class _ExportScreenState extends State<ExportScreen> {
   DateTime _startDate;
   DateTime _endDate;
   List<Project> selectedProjects = [];
-  static DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
-  static DateFormat _exportDateFormat = DateFormat.yMd();
+  static final DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
+  static final DateFormat _exportDateFormat = DateFormat.yMd();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -140,7 +140,7 @@ class _ExportScreenState extends State<ExportScreen> {
                         theme: DatePickerTheme(
                           cancelStyle: Theme.of(context).textTheme.button,
                           doneStyle: Theme.of(context).textTheme.button,
-                          itemStyle: Theme.of(context).textTheme.body1,
+                          itemStyle: Theme.of(context).textTheme.bodyText2,
                           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                         )
                       );
@@ -181,7 +181,7 @@ class _ExportScreenState extends State<ExportScreen> {
                         theme: DatePickerTheme(
                           cancelStyle: Theme.of(context).textTheme.button,
                           doneStyle: Theme.of(context).textTheme.button,
-                          itemStyle: Theme.of(context).textTheme.body1,
+                          itemStyle: Theme.of(context).textTheme.bodyText2,
                           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                         )
                       );

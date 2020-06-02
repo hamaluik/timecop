@@ -63,7 +63,7 @@ class TimeTable extends StatelessWidget {
                 flex: 3,
                 child: Text(
                   L10N.of(context).tr.project,
-                  style: Theme.of(context).textTheme.title
+                  style: Theme.of(context).textTheme.headline6
                 ),
               ),
               Expanded(
@@ -71,12 +71,12 @@ class TimeTable extends StatelessWidget {
                 child: Text(
                   L10N.of(context).tr.hours,
                   textAlign: TextAlign.right,
-                  style: Theme.of(context).textTheme.title
+                  style: Theme.of(context).textTheme.headline6
                 ),
               ),
             ],
           ),
-          Divider(thickness: 2.0, color: Theme.of(context).textTheme.body1.color),
+          Divider(thickness: 2.0, color: Theme.of(context).textTheme.bodyText2.color),
         ]
         .followedBy(
           projectHours
@@ -98,7 +98,7 @@ class TimeTable extends StatelessWidget {
                           Container(width: 4),
                           Text(
                             project?.name ?? L10N.of(context).tr.noProject,
-                            style: Theme.of(context).textTheme.body1
+                            style: Theme.of(context).textTheme.bodyText2
                           )
                         ],
                       ),
@@ -108,7 +108,7 @@ class TimeTable extends StatelessWidget {
                       child: Text(
                         entry.value.toStringAsFixed(1),
                         textAlign: TextAlign.right,
-                        style: Theme.of(context).textTheme.body1
+                        style: Theme.of(context).textTheme.bodyText2
                       ),
                     ),
                   ],
@@ -119,7 +119,7 @@ class TimeTable extends StatelessWidget {
         .followedBy(<Widget>[
           projectHours.isEmpty
             ? Container()
-            : Divider(thickness: 1.0, color: Theme.of(context).textTheme.body1.color),
+            : Divider(thickness: 1.0, color: Theme.of(context).textTheme.bodyText2.color),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -127,7 +127,7 @@ class TimeTable extends StatelessWidget {
                 flex: 3,
                 child: Text(
                   L10N.of(context).tr.total,
-                  style: Theme.of(context).textTheme.body1
+                  style: Theme.of(context).textTheme.bodyText2
                 ),
               ),
               Expanded(
@@ -135,7 +135,7 @@ class TimeTable extends StatelessWidget {
                 child: Text(
                   totalHours.toStringAsFixed(1),
                   textAlign: TextAlign.right,
-                  style: Theme.of(context).textTheme.body1
+                  style: Theme.of(context).textTheme.bodyText2
                 ),
               ),
             ],
