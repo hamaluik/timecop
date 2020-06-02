@@ -1,11 +1,11 @@
 // Copyright 2020 Kenton Hamaluik
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,19 +20,26 @@ class CollapsibleDayGrouping extends StatefulWidget {
   final DateTime date;
   final Iterable<Widget> children;
   final Duration totalTime;
-  CollapsibleDayGrouping({Key key, @required this.date, @required this.children, @required this.totalTime})
-    : assert(date != null),
-      assert(children != null),
-      assert(totalTime != null),
-      super(key: key);
+  CollapsibleDayGrouping(
+      {Key key,
+      @required this.date,
+      @required this.children,
+      @required this.totalTime})
+      : assert(date != null),
+        assert(children != null),
+        assert(totalTime != null),
+        super(key: key);
 
   @override
   _CollapsibleDayGroupingState createState() => _CollapsibleDayGroupingState();
 }
 
-class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping> with SingleTickerProviderStateMixin {
-  static final Animatable<double> _easeInTween = CurveTween(curve: Curves.easeIn);
-  static final Animatable<double> _halfTween = Tween<double>(begin: 0.0, end: -0.5);
+class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping>
+    with SingleTickerProviderStateMixin {
+  static final Animatable<double> _easeInTween =
+      CurveTween(curve: Curves.easeIn);
+  static final Animatable<double> _halfTween =
+      Tween<double>(begin: 0.0, end: -0.5);
   static final DateFormat _dateFormat = DateFormat.yMMMMEEEEd();
 
   bool _expanded;
@@ -40,19 +47,20 @@ class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping> with Si
   Animation<double> _iconTurns;
 
   @override
-  void initState() { 
+  void initState() {
     super.initState();
     _expanded = DateTime.now().difference(widget.date).inDays.abs() <= 1;
     _controller = AnimationController(
       duration: Duration(milliseconds: 200),
       vsync: this,
-      value: DateTime.now().difference(widget.date).inDays.abs() <= 1 ? 1.0 : 0.0,
+      value:
+          DateTime.now().difference(widget.date).inDays.abs() <= 1 ? 1.0 : 0.0,
     );
     _iconTurns = _controller.drive(_halfTween.chain(_easeInTween));
   }
 
   @override
-  void dispose() { 
+  void dispose() {
     _controller.dispose();
     super.dispose();
   }
@@ -60,26 +68,24 @@ class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping> with Si
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
-      initiallyExpanded: DateTime.now().difference(widget.date).inDays.abs() <= 1,
+      initiallyExpanded:
+          DateTime.now().difference(widget.date).inDays.abs() <= 1,
       onExpansionChanged: (expanded) {
         setState(() {
           _expanded = expanded;
-          if(_expanded) {
+          if (_expanded) {
             _controller.forward();
-          }
-          else {
+          } else {
             _controller.reverse();
           }
         });
       },
-      title: Text(
-        _dateFormat.format(widget.date),
-        style: TextStyle(
-          //color: Theme.of(context).accentColor,
-          fontWeight: FontWeight.w700,
-          fontSize: Theme.of(context).textTheme.bodyText2.fontSize,
-        )
-      ),
+      title: Text(_dateFormat.format(widget.date),
+          style: TextStyle(
+            //color: Theme.of(context).accentColor,
+            fontWeight: FontWeight.w700,
+            fontSize: Theme.of(context).textTheme.bodyText2.fontSize,
+          )),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -89,13 +95,11 @@ class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping> with Si
             child: const Icon(Icons.expand_more),
           ),
           Container(width: 8),
-          Text(
-            TimerEntry.formatDuration(widget.totalTime),
-            style: TextStyle(
-              color: _expanded ? Theme.of(context).accentColor : null,
-              fontFamily: "FiraMono",
-            )
-          ),
+          Text(TimerEntry.formatDuration(widget.totalTime),
+              style: TextStyle(
+                color: _expanded ? Theme.of(context).accentColor : null,
+                fontFamily: "FiraMono",
+              )),
         ],
       ),
       children: widget.children.toList(),

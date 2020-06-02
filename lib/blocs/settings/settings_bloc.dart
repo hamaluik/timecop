@@ -29,19 +29,40 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     SettingsEvent event,
   ) async* {
     if (event is LoadSettingsFromRepository) {
-      bool exportGroupTimers = await settings.getBool("exportGroupTimers") ?? state.exportGroupTimers;
-      bool exportIncludeProject = await settings.getBool("exportIncludeProject") ?? state.exportIncludeProject;
-      bool exportIncludeDate = await settings.getBool("exportIncludeDate") ?? state.exportIncludeDate;
-      bool exportIncludeDescription = await settings.getBool("exportIncludeDescription") ?? state.exportIncludeDescription;
-      bool exportIncludeProjectDescription = await settings.getBool("exportIncludeProjectDescription") ?? state.exportIncludeProjectDescription;
-      bool exportIncludeStartTime = await settings.getBool("exportIncludeStartTime") ?? state.exportIncludeStartTime;
-      bool exportIncludeEndTime = await settings.getBool("exportIncludeEndTime") ?? state.exportIncludeEndTime;
-      bool exportIncludeDurationHours = await settings.getBool("exportIncludeDurationHours") ?? state.exportIncludeDurationHours;
-      int defaultProjectID = await settings.getInt("defaultProjectID") ?? state.defaultProjectID;
-      bool groupTimers = await settings.getBool("groupTimers") ?? state.groupTimers;
-      bool collapseDays = await settings.getBool("collapseDays") ?? state.collapseDays;
-      bool autocompleteDescription = await settings.getBool("autocompleteDescription") ?? state.autocompleteDescription;
-      bool defaultFilterStartDateToMonday = await settings.getBool("defaultFilterStartDateToMonday") ?? state.defaultFilterStartDateToMonday;
+      bool exportGroupTimers = await settings.getBool("exportGroupTimers") ??
+          state.exportGroupTimers;
+      bool exportIncludeProject =
+          await settings.getBool("exportIncludeProject") ??
+              state.exportIncludeProject;
+      bool exportIncludeDate = await settings.getBool("exportIncludeDate") ??
+          state.exportIncludeDate;
+      bool exportIncludeDescription =
+          await settings.getBool("exportIncludeDescription") ??
+              state.exportIncludeDescription;
+      bool exportIncludeProjectDescription =
+          await settings.getBool("exportIncludeProjectDescription") ??
+              state.exportIncludeProjectDescription;
+      bool exportIncludeStartTime =
+          await settings.getBool("exportIncludeStartTime") ??
+              state.exportIncludeStartTime;
+      bool exportIncludeEndTime =
+          await settings.getBool("exportIncludeEndTime") ??
+              state.exportIncludeEndTime;
+      bool exportIncludeDurationHours =
+          await settings.getBool("exportIncludeDurationHours") ??
+              state.exportIncludeDurationHours;
+      int defaultProjectID =
+          await settings.getInt("defaultProjectID") ?? state.defaultProjectID;
+      bool groupTimers =
+          await settings.getBool("groupTimers") ?? state.groupTimers;
+      bool collapseDays =
+          await settings.getBool("collapseDays") ?? state.collapseDays;
+      bool autocompleteDescription =
+          await settings.getBool("autocompleteDescription") ??
+              state.autocompleteDescription;
+      bool defaultFilterStartDateToMonday =
+          await settings.getBool("defaultFilterStartDateToMonday") ??
+              state.defaultFilterStartDateToMonday;
       yield SettingsState(
           exportGroupTimers: exportGroupTimers,
           exportIncludeDate: exportIncludeDate,
@@ -92,8 +113,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     else if (event is SetDefaultProjectID) {
       await settings.setInt("defaultProjectID", event.projectID ?? -1);
       yield SettingsState.clone(state, defaultProjectID: event.projectID ?? -1);
-    }
-    else if (event is SetBoolValueEvent) {
+    } else if (event is SetBoolValueEvent) {
       if (event.exportGroupTimers != null) {
         await settings.setBool("exportGroupTimers", event.exportGroupTimers);
       }
@@ -101,22 +121,28 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         await settings.setBool("exportIncludeDate", event.exportIncludeDate);
       }
       if (event.exportIncludeProject != null) {
-        await settings.setBool("exportIncludeProject", event.exportIncludeProject);
+        await settings.setBool(
+            "exportIncludeProject", event.exportIncludeProject);
       }
       if (event.exportIncludeDescription != null) {
-        await settings.setBool("exportIncludeDescription", event.exportIncludeDescription);
+        await settings.setBool(
+            "exportIncludeDescription", event.exportIncludeDescription);
       }
       if (event.exportIncludeProjectDescription != null) {
-        await settings.setBool("exportIncludeProjectDescription", event.exportIncludeProjectDescription);
+        await settings.setBool("exportIncludeProjectDescription",
+            event.exportIncludeProjectDescription);
       }
       if (event.exportIncludeStartTime != null) {
-        await settings.setBool("exportIncludeStartTime", event.exportIncludeStartTime);
+        await settings.setBool(
+            "exportIncludeStartTime", event.exportIncludeStartTime);
       }
       if (event.exportIncludeEndTime != null) {
-        await settings.setBool("exportIncludeEndTime", event.exportIncludeEndTime);
+        await settings.setBool(
+            "exportIncludeEndTime", event.exportIncludeEndTime);
       }
       if (event.exportIncludeDurationHours != null) {
-        await settings.setBool("exportIncludeDurationHours", event.exportIncludeDurationHours);
+        await settings.setBool(
+            "exportIncludeDurationHours", event.exportIncludeDurationHours);
       }
       if (event.groupTimers != null) {
         await settings.setBool("groupTimers", event.groupTimers);
@@ -125,12 +151,15 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         await settings.setBool("collapseDays", event.collapseDays);
       }
       if (event.autocompleteDescription != null) {
-        await settings.setBool("autocompleteDescription", event.autocompleteDescription);
+        await settings.setBool(
+            "autocompleteDescription", event.autocompleteDescription);
       }
       if (event.defaultFilterStartDateToMonday != null) {
-        await settings.setBool("defaultFilterStartDateToMonday", event.defaultFilterStartDateToMonday);
+        await settings.setBool("defaultFilterStartDateToMonday",
+            event.defaultFilterStartDateToMonday);
       }
-      yield SettingsState.clone(state,
+      yield SettingsState.clone(
+        state,
         exportGroupTimers: event.exportGroupTimers,
         exportIncludeDate: event.exportIncludeDate,
         exportIncludeProject: event.exportIncludeProject,

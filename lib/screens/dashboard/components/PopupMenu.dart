@@ -23,7 +23,11 @@ import 'package:timecop/screens/reports/ReportsScreen.dart';
 import 'package:timecop/screens/settings/SettingsScreen.dart';
 
 enum MenuItem {
-  projects, reports, export, settings, about,
+  projects,
+  reports,
+  export,
+  settings,
+  about,
 }
 
 class PopupMenu extends StatelessWidget {
@@ -40,7 +44,7 @@ class PopupMenu extends StatelessWidget {
       ),
       color: Theme.of(context).scaffoldBackgroundColor,
       onSelected: (MenuItem item) {
-        switch(item) {
+        switch (item) {
           case MenuItem.projects:
             Navigator.of(context).push(MaterialPageRoute<ProjectsScreen>(
               builder: (BuildContext _context) => ProjectsScreen(),

@@ -76,7 +76,8 @@ class SettingsState extends Equatable {
     );
   }
 
-  SettingsState.clone(SettingsState project, {
+  SettingsState.clone(
+    SettingsState project, {
     bool exportGroupTimers,
     bool exportIncludeDate,
     bool exportIncludeProject,
@@ -90,33 +91,28 @@ class SettingsState extends Equatable {
     bool collapseDays,
     bool autocompleteDescription,
     bool defaultFilterStartDateToMonday,
-  }) 
-    : this(
+  }) : this(
           exportGroupTimers: exportGroupTimers ?? project.exportGroupTimers,
-          exportIncludeDate: 
-              exportIncludeDate ?? project.exportIncludeDate,
+          exportIncludeDate: exportIncludeDate ?? project.exportIncludeDate,
           exportIncludeProject:
               exportIncludeProject ?? project.exportIncludeProject,
           exportIncludeDescription:
               exportIncludeDescription ?? project.exportIncludeDescription,
-          exportIncludeProjectDescription: 
-              exportIncludeProjectDescription ?? project.exportIncludeProjectDescription,
+          exportIncludeProjectDescription: exportIncludeProjectDescription ??
+              project.exportIncludeProjectDescription,
           exportIncludeStartTime:
               exportIncludeStartTime ?? project.exportIncludeStartTime,
           exportIncludeEndTime:
               exportIncludeEndTime ?? project.exportIncludeEndTime,
           exportIncludeDurationHours:
               exportIncludeDurationHours ?? project.exportIncludeDurationHours,
-          defaultProjectID: 
-              defaultProjectID ?? project.defaultProjectID,
-          groupTimers: 
-              groupTimers ?? project.groupTimers,
-          collapseDays: 
-              collapseDays ?? project.collapseDays,
+          defaultProjectID: defaultProjectID ?? project.defaultProjectID,
+          groupTimers: groupTimers ?? project.groupTimers,
+          collapseDays: collapseDays ?? project.collapseDays,
           autocompleteDescription:
               autocompleteDescription ?? project.autocompleteDescription,
-          defaultFilterStartDateToMonday: 
-              defaultFilterStartDateToMonday ?? project.defaultFilterStartDateToMonday,
+          defaultFilterStartDateToMonday: defaultFilterStartDateToMonday ??
+              project.defaultFilterStartDateToMonday,
         );
 
   @override

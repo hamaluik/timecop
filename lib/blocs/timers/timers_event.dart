@@ -21,40 +21,47 @@ abstract class TimersEvent extends Equatable {
 }
 
 class LoadTimers extends TimersEvent {
-  @override List<Object> get props => [];
+  @override
+  List<Object> get props => [];
 }
 
 class CreateTimer extends TimersEvent {
   final String description;
   final Project project;
   CreateTimer({this.description, this.project});
-  @override List<Object> get props => [description, project];
+  @override
+  List<Object> get props => [description, project];
 }
 
 class UpdateNow extends TimersEvent {
   const UpdateNow();
-  @override List<Object> get props => [];
+  @override
+  List<Object> get props => [];
 }
 
 class StopTimer extends TimersEvent {
   final TimerEntry timer;
   StopTimer(this.timer);
-  @override List<Object> get props => [timer];
+  @override
+  List<Object> get props => [timer];
 }
 
 class EditTimer extends TimersEvent {
   final TimerEntry timer;
   EditTimer(this.timer);
-  @override List<Object> get props => [timer];
+  @override
+  List<Object> get props => [timer];
 }
 
 class DeleteTimer extends TimersEvent {
   final TimerEntry timer;
   DeleteTimer(this.timer);
-  @override List<Object> get props => [timer];
+  @override
+  List<Object> get props => [timer];
 }
 
 class StopAllTimers extends TimersEvent {
   const StopAllTimers();
-  @override List<Object> get props => [];
+  @override
+  List<Object> get props => [];
 }

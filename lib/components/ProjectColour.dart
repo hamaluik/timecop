@@ -34,11 +34,11 @@ class ProjectColour extends StatelessWidget {
         color: project?.colour ?? Colors.transparent,
         //borderRadius: BorderRadius.circular(SIZE * 0.5 * scale),
         border: project == null
-          ? Border.all(
-              color: Theme.of(context).disabledColor,
-              width: 3.0,
-            )
-          : null,
+            ? Border.all(
+                color: Theme.of(context).disabledColor,
+                width: 3.0,
+              )
+            : null,
         shape: BoxShape.circle,
       ),
     );

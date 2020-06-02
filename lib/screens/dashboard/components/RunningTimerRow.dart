@@ -27,19 +27,19 @@ class RunningTimerRow extends StatelessWidget {
   final TimerEntry timer;
   final DateTime now;
   const RunningTimerRow({Key key, @required this.timer, @required this.now})
-    : assert(timer != null),
-      assert(now != null),
-      super(key: key);
+      : assert(timer != null),
+        assert(now != null),
+        super(key: key);
 
   static String formatDescription(BuildContext context, String description) {
-    if(description == null || description.trim().isEmpty) {
+    if (description == null || description.trim().isEmpty) {
       return L10N.of(context).tr.noDescription;
     }
     return description;
   }
 
   static TextStyle styleDescription(BuildContext context, String description) {
-    if(description == null || description.trim().isEmpty) {
+    if (description == null || description.trim().isEmpty) {
       return TextStyle(color: Theme.of(context).disabledColor);
     }
     return null;
@@ -51,14 +51,20 @@ class RunningTimerRow extends StatelessWidget {
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.15,
       child: ListTile(
-        leading: ProjectColour(project: BlocProvider.of<ProjectsBloc>(context).getProjectByID(timer.projectID)),
-        title: Text(formatDescription(context, timer.description), style: styleDescription(context, timer.description)),
-        trailing: Text(timer.formatTime(), style: TextStyle(fontFamily: "FiraMono")),
-        onTap: () => Navigator.of(context).push(MaterialPageRoute<TimerEditor>(
-          builder: (BuildContext context) => TimerEditor(timer: timer,),
-          fullscreenDialog: true,
-        ))
-      ),
+          leading: ProjectColour(
+              project: BlocProvider.of<ProjectsBloc>(context)
+                  .getProjectByID(timer.projectID)),
+          title: Text(formatDescription(context, timer.description),
+              style: styleDescription(context, timer.description)),
+          trailing: Text(timer.formatTime(),
+              style: TextStyle(fontFamily: "FiraMono")),
+          onTap: () =>
+              Navigator.of(context).push(MaterialPageRoute<TimerEditor>(
+                builder: (BuildContext context) => TimerEditor(
+                  timer: timer,
+                ),
+                fullscreenDialog: true,
+              ))),
       actions: <Widget>[
         IconSlideAction(
           color: Theme.of(context).errorColor,
@@ -66,24 +72,24 @@ class RunningTimerRow extends StatelessWidget {
           icon: FontAwesomeIcons.trash,
           onTap: () async {
             bool delete = await showDialog(
-              context: context,
-              builder: (BuildContext context) => AlertDialog(
-                title: Text(L10N.of(context).tr.confirmDelete),
-                content: Text(L10N.of(context).tr.deleteTimerConfirm),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text(L10N.of(context).tr.cancel),
-                    onPressed: () => Navigator.of(context).pop(false),
-                  ),
-                  FlatButton(
-                    child: Text(L10N.of(context).tr.delete),
-                    onPressed: () => Navigator.of(context).pop(true),
-                  ),
-                ],
-              )
-            );
-            if(delete) {
-              final TimersBloc timersBloc = BlocProvider.of<TimersBloc>(context);
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                      title: Text(L10N.of(context).tr.confirmDelete),
+                      content: Text(L10N.of(context).tr.deleteTimerConfirm),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text(L10N.of(context).tr.cancel),
+                          onPressed: () => Navigator.of(context).pop(false),
+                        ),
+                        FlatButton(
+                          child: Text(L10N.of(context).tr.delete),
+                          onPressed: () => Navigator.of(context).pop(true),
+                        ),
+                      ],
+                    ));
+            if (delete) {
+              final TimersBloc timersBloc =
+                  BlocProvider.of<TimersBloc>(context);
               assert(timersBloc != null);
               timersBloc.add(DeleteTimer(timer));
             }

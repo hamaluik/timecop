@@ -10,15 +10,13 @@ import 'dart:ui' as ui;
 
 Future<void> main() async {
   enableFlutterDriverExtension(handler: (String query) async {
-    if(query == "direction") {
-      if(ui.window.locale.languageCode == "ar") {
+    if (query == "direction") {
+      if (ui.window.locale.languageCode == "ar") {
         return "rtl";
-      }
-      else {
+      } else {
         return "ltr";
       }
-    }
-    else {
+    } else {
       return null;
     }
   });

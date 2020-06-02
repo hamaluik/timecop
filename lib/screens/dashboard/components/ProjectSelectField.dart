@@ -35,60 +35,65 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
     final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
     assert(projectsBloc != null);
     return BlocBuilder<ProjectsBloc, ProjectsState>(
-      builder: (BuildContext context, ProjectsState projectsState) {
-        return BlocBuilder<DashboardBloc, DashboardState>(
-          bloc: bloc,
-          builder: (BuildContext context, DashboardState state) {
-            // detect if the project we had selected was deleted
-            if(state.newProject != null && projectsBloc.getProjectByID(state.newProject.id) == null) {
-              bloc.add(ProjectChangedEvent(null));
-              return IconButton(
-                alignment: Alignment.centerLeft,
-                icon: ProjectColour(project: null),
-                onPressed: null,
-              );
-            }
-
+        builder: (BuildContext context, ProjectsState projectsState) {
+      return BlocBuilder<DashboardBloc, DashboardState>(
+        bloc: bloc,
+        builder: (BuildContext context, DashboardState state) {
+          // detect if the project we had selected was deleted
+          if (state.newProject != null &&
+              projectsBloc.getProjectByID(state.newProject.id) == null) {
+            bloc.add(ProjectChangedEvent(null));
             return IconButton(
               alignment: Alignment.centerLeft,
-              icon: ProjectColour(project: state.newProject),
-              onPressed: () async {
-                Project chosenProject = await showDialog<Project>(
+              icon: ProjectColour(project: null),
+              onPressed: null,
+            );
+          }
+
+          return IconButton(
+            alignment: Alignment.centerLeft,
+            icon: ProjectColour(project: state.newProject),
+            onPressed: () async {
+              Project chosenProject = await showDialog<Project>(
                   context: context,
                   barrierDismissible: false,
                   builder: (BuildContext context) {
-
                     return SimpleDialog(
                       title: Text(L10N.of(context).tr.projects),
                       contentPadding: EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 16.0),
-                      children: <Project>[null].followedBy(projectsState.projects).map(
-                        (Project p) => FlatButton(
-                          onPressed: () {
-                            Navigator.of(context).pop(p);
-                          },
-                          child: Row(
-                            children: <Widget>[
-                              ProjectColour(project: p),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(8.0, 0, 0, 0),
-                                child: Text(
-                                  p?.name ?? L10N.of(context).tr.noProject,
-                                  style: TextStyle(color: p == null ? Theme.of(context).disabledColor : Theme.of(context).textTheme.bodyText2.color)
-                                ),
-                              ),
-                            ],
-                          )
-                        )
-                      ).toList(),
+                      children: <Project>[null]
+                          .followedBy(projectsState.projects)
+                          .map((Project p) => FlatButton(
+                              onPressed: () {
+                                Navigator.of(context).pop(p);
+                              },
+                              child: Row(
+                                children: <Widget>[
+                                  ProjectColour(project: p),
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+                                    child: Text(
+                                        p?.name ??
+                                            L10N.of(context).tr.noProject,
+                                        style: TextStyle(
+                                            color: p == null
+                                                ? Theme.of(context)
+                                                    .disabledColor
+                                                : Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText2
+                                                    .color)),
+                                  ),
+                                ],
+                              )))
+                          .toList(),
                     );
-                  }
-                );
-                bloc.add(ProjectChangedEvent(chosenProject));
-              },
-            );
-          },
-        );
-      }
-    );
+                  });
+              bloc.add(ProjectChangedEvent(chosenProject));
+            },
+          );
+        },
+      );
+    });
   }
 }

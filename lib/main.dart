@@ -33,6 +33,7 @@ import 'package:timecop/themes.dart';
 
 import 'package:timecop/data_providers/data/database_provider.dart';
 import 'package:timecop/data_providers/settings/shared_prefs_settings_provider.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final SettingsProvider settings = await SharedPrefsSettingsProvider.load();
@@ -93,7 +94,8 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
 
   @override
   void initState() {
-    _updateTimersTimer = Timer.periodic(Duration(seconds: 1), (_) => BlocProvider.of<TimersBloc>(context).add(UpdateNow()));
+    _updateTimersTimer = Timer.periodic(Duration(seconds: 1),
+        (_) => BlocProvider.of<TimersBloc>(context).add(UpdateNow()));
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     brightness = WidgetsBinding.instance.window.platformBrightness;
@@ -116,49 +118,51 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
   @override
   void didChangePlatformBrightness() {
     print(WidgetsBinding.instance.window.platformBrightness.toString());
-    setState(() => brightness = WidgetsBinding.instance.window.platformBrightness);
+    setState(
+        () => brightness = WidgetsBinding.instance.window.platformBrightness);
   }
 
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
-      providers: [
-        RepositoryProvider<SettingsProvider>.value(value: widget.settings),
-      ],
-      child: BlocBuilder<ThemeBloc, ThemeState>(
-        builder: (BuildContext context, ThemeState themeState) =>
-          BlocBuilder<LocaleBloc, LocaleState>(
-            builder: (BuildContext context, LocaleState localeState) =>
-              MaterialApp(
-                title: 'Time Cop',
-                home: DashboardScreen(),
-                theme: themeState.themeData ?? (brightness == Brightness.dark ? darkTheme : lightTheme),
-                localizationsDelegates: [
-                  L10N.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                locale: localeState.locale,
-                supportedLocales: [
-                  const Locale('en'),
-                  const Locale('fr'),
-                  const Locale('de'),
-                  const Locale('es'),
-                  const Locale('hi'),
-                  const Locale('id'),
-                  const Locale('ja'),
-                  const Locale('ko'),
-                  const Locale('pt'),
-                  const Locale('ru'),
-                  const Locale('zh', 'CN'),
-                  const Locale('zh', 'TW'),
-                  const Locale('ar'),
-                  const Locale('it'),
-                ],
-              ),
-          )
-      )
-    );
+        providers: [
+          RepositoryProvider<SettingsProvider>.value(value: widget.settings),
+        ],
+        child: BlocBuilder<ThemeBloc, ThemeState>(
+            builder: (BuildContext context, ThemeState themeState) =>
+                BlocBuilder<LocaleBloc, LocaleState>(
+                  builder: (BuildContext context, LocaleState localeState) =>
+                      MaterialApp(
+                    title: 'Time Cop',
+                    home: DashboardScreen(),
+                    theme: themeState.themeData ??
+                        (brightness == Brightness.dark
+                            ? darkTheme
+                            : lightTheme),
+                    localizationsDelegates: [
+                      L10N.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                    ],
+                    locale: localeState.locale,
+                    supportedLocales: [
+                      const Locale('en'),
+                      const Locale('fr'),
+                      const Locale('de'),
+                      const Locale('es'),
+                      const Locale('hi'),
+                      const Locale('id'),
+                      const Locale('ja'),
+                      const Locale('ko'),
+                      const Locale('pt'),
+                      const Locale('ru'),
+                      const Locale('zh', 'CN'),
+                      const Locale('zh', 'TW'),
+                      const Locale('ar'),
+                      const Locale('it'),
+                    ],
+                  ),
+                )));
   }
 }

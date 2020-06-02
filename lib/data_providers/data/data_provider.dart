@@ -21,7 +21,11 @@ abstract class DataProvider {
   Future<List<Project>> listProjects();
   Future<void> editProject(Project project);
   Future<void> deleteProject(Project project);
-  Future<TimerEntry> createTimer({String description, int projectID, DateTime startTime, DateTime endTime});
+  Future<TimerEntry> createTimer(
+      {String description,
+      int projectID,
+      DateTime startTime,
+      DateTime endTime});
   Future<List<TimerEntry>> listTimers();
   Future<void> editTimer(TimerEntry timer);
   Future<void> deleteTimer(TimerEntry timer);

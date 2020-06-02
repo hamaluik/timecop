@@ -32,8 +32,7 @@ class ProjectsBloc extends Bloc<ProjectsEvent, ProjectsState> {
     if (event is LoadProjects) {
       List<Project> projects = await data.listProjects();
       yield ProjectsState(projects);
-    }
-    else if (event is CreateProject) {
+    } else if (event is CreateProject) {
       Project newProject =
           await data.createProject(name: event.name, colour: event.colour);
       List<Project> projects =
@@ -41,8 +40,7 @@ class ProjectsBloc extends Bloc<ProjectsEvent, ProjectsState> {
       projects.add(newProject);
       projects.sort((a, b) => a.name.compareTo(b.name));
       yield ProjectsState(projects);
-    }
-    else if (event is EditProject) {
+    } else if (event is EditProject) {
       await data.editProject(event.project);
       List<Project> projects = state.projects.map((project) {
         if (project.id == event.project.id) return Project.clone(event.project);
@@ -50,8 +48,7 @@ class ProjectsBloc extends Bloc<ProjectsEvent, ProjectsState> {
       }).toList();
       projects.sort((a, b) => a.name.compareTo(b.name));
       yield ProjectsState(projects);
-    }
-    else if (event is DeleteProject) {
+    } else if (event is DeleteProject) {
       await data.deleteProject(event.project);
       List<Project> projects = state.projects
           .where((p) => p.id != event.project.id)

@@ -6,11 +6,13 @@ abstract class LocaleEvent extends Equatable {
 
 class LoadLocaleEvent extends LocaleEvent {
   const LoadLocaleEvent();
-  @override List<Object> get props => [];
+  @override
+  List<Object> get props => [];
 }
 
 class ChangeLocaleEvent extends LocaleEvent {
   final Locale locale;
   const ChangeLocaleEvent(this.locale);
-  @override List<Object> get props => [locale];
+  @override
+  List<Object> get props => [locale];
 }

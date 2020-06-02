@@ -32,8 +32,7 @@ class TimersBloc extends Bloc<TimersEvent, TimersState> {
     if (event is LoadTimers) {
       List<TimerEntry> timers = await data.listTimers();
       yield TimersState(timers, DateTime.now());
-    }
-    else if (event is CreateTimer) {
+    } else if (event is CreateTimer) {
       TimerEntry timer = await data.createTimer(
           description: event.description, projectID: event.project?.id);
       List<TimerEntry> timers =
@@ -41,11 +40,9 @@ class TimersBloc extends Bloc<TimersEvent, TimersState> {
       timers.add(timer);
       timers.sort((a, b) => a.startTime.compareTo(b.startTime));
       yield TimersState(timers, DateTime.now());
-    }
-    else if (event is UpdateNow) {
+    } else if (event is UpdateNow) {
       yield TimersState(state.timers, DateTime.now());
-    }
-    else if (event is StopTimer) {
+    } else if (event is StopTimer) {
       TimerEntry timer = TimerEntry.clone(event.timer, endTime: DateTime.now());
       await data.editTimer(timer);
       List<TimerEntry> timers = state.timers.map((t) {
@@ -54,8 +51,7 @@ class TimersBloc extends Bloc<TimersEvent, TimersState> {
       }).toList();
       timers.sort((a, b) => a.startTime.compareTo(b.startTime));
       yield TimersState(timers, DateTime.now());
-    }
-    else if (event is EditTimer) {
+    } else if (event is EditTimer) {
       await data.editTimer(event.timer);
       List<TimerEntry> timers = state.timers.map((t) {
         if (t.id == event.timer.id) return TimerEntry.clone(event.timer);
@@ -63,16 +59,14 @@ class TimersBloc extends Bloc<TimersEvent, TimersState> {
       }).toList();
       timers.sort((a, b) => a.startTime.compareTo(b.startTime));
       yield TimersState(timers, DateTime.now());
-    }
-    else if (event is DeleteTimer) {
+    } else if (event is DeleteTimer) {
       await data.deleteTimer(event.timer);
       List<TimerEntry> timers = state.timers
           .where((t) => t.id != event.timer.id)
           .map((t) => TimerEntry.clone(t))
           .toList();
       yield TimersState(timers, DateTime.now());
-    }
-    else if(event is StopAllTimers) {
+    } else if (event is StopAllTimers) {
       List<Future<TimerEntry>> timerEdits = state.timers.map((t) async {
         if (t.endTime == null) {
           TimerEntry timer = TimerEntry.clone(t, endTime: DateTime.now());

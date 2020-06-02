@@ -76,26 +76,32 @@ class DatabaseProvider extends DataProvider {
     assert(name != null);
     colour ??= _randomColour.randomColor();
 
-    int id = await _db.rawInsert("insert into projects(name, colour) values(?, ?)", <dynamic>[name, colour.value]);
+    int id = await _db.rawInsert(
+        "insert into projects(name, colour) values(?, ?)",
+        <dynamic>[name, colour.value]);
     return Project(id: id, name: name, colour: colour);
   }
 
   /// the r in crud
   @override
   Future<List<Project>> listProjects() async {
-    List<Map<String, dynamic>> rawProjects = await _db.rawQuery("select id, name, colour from projects order by name asc");
-    return rawProjects.map((Map<String, dynamic> row) => Project(
-      id: row["id"] as int,
-      name: row["name"] as String,
-      colour: Color(row["colour"] as int)))
-    .toList();
+    List<Map<String, dynamic>> rawProjects = await _db
+        .rawQuery("select id, name, colour from projects order by name asc");
+    return rawProjects
+        .map((Map<String, dynamic> row) => Project(
+            id: row["id"] as int,
+            name: row["name"] as String,
+            colour: Color(row["colour"] as int)))
+        .toList();
   }
 
   /// the u in crud
   @override
   Future<void> editProject(Project project) async {
     assert(project != null);
-    int rows = await _db.rawUpdate("update projects set name=?, colour=? where id=?", <dynamic>[project.name, project.colour.value, project.id]);
+    int rows = await _db.rawUpdate(
+        "update projects set name=?, colour=? where id=?",
+        <dynamic>[project.name, project.colour.value, project.id]);
     assert(rows == 1);
   }
 
@@ -103,45 +109,61 @@ class DatabaseProvider extends DataProvider {
   @override
   Future<void> deleteProject(Project project) async {
     assert(project != null);
-    await _db.rawDelete("delete from projects where id=?", <dynamic>[project.id]);
+    await _db
+        .rawDelete("delete from projects where id=?", <dynamic>[project.id]);
   }
 
   /// the c in crud
   @override
-  Future<TimerEntry> createTimer({String description, int projectID, DateTime startTime, DateTime endTime}) async {
-    int st = startTime?.millisecondsSinceEpoch ?? DateTime.now().millisecondsSinceEpoch;
+  Future<TimerEntry> createTimer(
+      {String description,
+      int projectID,
+      DateTime startTime,
+      DateTime endTime}) async {
+    int st = startTime?.millisecondsSinceEpoch ??
+        DateTime.now().millisecondsSinceEpoch;
     assert(st != null);
     int et = endTime?.millisecondsSinceEpoch;
-    int id = await _db.rawInsert("insert into timers(project_id, description, start_time, end_time) values(?, ?, ?, ?)", <dynamic>[projectID, description, st, et]);
+    int id = await _db.rawInsert(
+        "insert into timers(project_id, description, start_time, end_time) values(?, ?, ?, ?)",
+        <dynamic>[projectID, description, st, et]);
     return TimerEntry(
-      id: id,
-      description: description,
-      projectID: projectID,
-      startTime: DateTime.fromMillisecondsSinceEpoch(st),
-      endTime: endTime
-    );
+        id: id,
+        description: description,
+        projectID: projectID,
+        startTime: DateTime.fromMillisecondsSinceEpoch(st),
+        endTime: endTime);
   }
 
   /// the r in crud
   @override
   Future<List<TimerEntry>> listTimers() async {
-    List<Map<String, dynamic>> rawTimers = await _db.rawQuery("select id, project_id, description, start_time, end_time from timers order by start_time asc");
-    return rawTimers.map((Map<String, dynamic> row) => TimerEntry(
-      id: row["id"] as int,
-      projectID: row["project_id"] as int,
-      description: row["description"] as String,
-      startTime: DateTime.fromMillisecondsSinceEpoch(row["start_time"] as int),
-      endTime: row["end_time"] != null ? DateTime.fromMillisecondsSinceEpoch(row["end_time"] as int) : null,
-    )).toList();
+    List<Map<String, dynamic>> rawTimers = await _db.rawQuery(
+        "select id, project_id, description, start_time, end_time from timers order by start_time asc");
+    return rawTimers
+        .map((Map<String, dynamic> row) => TimerEntry(
+              id: row["id"] as int,
+              projectID: row["project_id"] as int,
+              description: row["description"] as String,
+              startTime:
+                  DateTime.fromMillisecondsSinceEpoch(row["start_time"] as int),
+              endTime: row["end_time"] != null
+                  ? DateTime.fromMillisecondsSinceEpoch(row["end_time"] as int)
+                  : null,
+            ))
+        .toList();
   }
 
   /// the u in crud
   @override
   Future<void> editTimer(TimerEntry timer) async {
     assert(timer != null);
-    int st = timer.startTime?.millisecondsSinceEpoch ?? DateTime.now().millisecondsSinceEpoch;
+    int st = timer.startTime?.millisecondsSinceEpoch ??
+        DateTime.now().millisecondsSinceEpoch;
     int et = timer.endTime?.millisecondsSinceEpoch;
-    await _db.rawUpdate("update timers set project_id=?, description=?, start_time=?, end_time=? where id=?", <dynamic>[timer.projectID, timer.description, st, et, timer.id]);
+    await _db.rawUpdate(
+        "update timers set project_id=?, description=?, start_time=?, end_time=? where id=?",
+        <dynamic>[timer.projectID, timer.description, st, et, timer.id]);
   }
 
   /// the d in crud

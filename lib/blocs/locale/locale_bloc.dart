@@ -11,7 +11,7 @@ part 'locale_state.dart';
 class LocaleBloc extends Bloc<LocaleEvent, LocaleState> {
   final SettingsProvider settings;
   LocaleBloc(this.settings);
-  
+
   @override
   LocaleState get initialState => LocaleState(null);
 
@@ -19,10 +19,9 @@ class LocaleBloc extends Bloc<LocaleEvent, LocaleState> {
   Stream<LocaleState> mapEventToState(
     LocaleEvent event,
   ) async* {
-    if(event is LoadLocaleEvent) {
+    if (event is LoadLocaleEvent) {
       yield LocaleState(settings.getLocale());
-    }
-    else if(event is ChangeLocaleEvent) {
+    } else if (event is ChangeLocaleEvent) {
       settings.setLocale(event.locale);
       yield LocaleState(event.locale);
     }

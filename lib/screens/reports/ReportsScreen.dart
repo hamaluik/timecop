@@ -50,7 +50,9 @@ class _ReportsScreenState extends State<ReportsScreen> {
     super.initState();
     final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
     assert(projects != null);
-    selectedProjects = <Project>[null].followedBy(projects.state.projects.map((p) => Project.clone(p))).toList();
+    selectedProjects = <Project>[null]
+        .followedBy(projects.state.projects.map((p) => Project.clone(p)))
+        .toList();
 
     final SettingsBloc settings = BlocProvider.of<SettingsBloc>(context);
     _startDate = settings.getFilterStartDate();
@@ -61,7 +63,8 @@ class _ReportsScreenState extends State<ReportsScreen> {
     setState(() {
       _startDate = dt;
       if (_endDate != null && _startDate.isAfter(_endDate)) {
-        _endDate = _startDate.add(Duration(hours: 23, minutes: 59, seconds: 59, milliseconds: 999));
+        _endDate = _startDate.add(
+            Duration(hours: 23, minutes: 59, seconds: 59, milliseconds: 999));
       }
     });
   }
@@ -82,23 +85,27 @@ class _ReportsScreenState extends State<ReportsScreen> {
               child: Swiper(
                 itemBuilder: (BuildContext context, int index) {
                   switch (index) {
-                    case 0: return ProjectBreakdown(
+                    case 0:
+                      return ProjectBreakdown(
                         startDate: _startDate,
                         endDate: _endDate,
                         selectedProjects: selectedProjects,
                       );
-                    case 1: return WeeklyTotals(
+                    case 1:
+                      return WeeklyTotals(
                         startDate: _startDate,
                         endDate: _endDate,
                         selectedProjects: selectedProjects,
                       );
-                    case 2: return WeekdayAverages(
+                    case 2:
+                      return WeekdayAverages(
                         context,
                         startDate: _startDate,
                         endDate: _endDate,
                         selectedProjects: selectedProjects,
                       );
-                    case 3: return TimeTable(
+                    case 3:
+                      return TimeTable(
                         startDate: _startDate,
                         endDate: _endDate,
                         selectedProjects: selectedProjects,
@@ -111,19 +118,15 @@ class _ReportsScreenState extends State<ReportsScreen> {
                     builder: DotSwiperPaginationBuilder(
                   color: Theme.of(context).disabledColor,
                   activeColor: Theme.of(context).accentColor,
-                )
-              ),
+                )),
                 control: SwiperControl(iconPrevious: null, iconNext: null),
               ),
             ),
             ExpansionTile(
-              title: Text(
-                L10N.of(context).tr.filter,
+              title: Text(L10N.of(context).tr.filter,
                   style: TextStyle(
                       color: Theme.of(context).accentColor,
-                      fontWeight: FontWeight.w700
-                  )
-                ),
+                      fontWeight: FontWeight.w700)),
               initiallyExpanded: false,
               children: <Widget>[
                 Slidable(
@@ -134,7 +137,9 @@ class _ReportsScreenState extends State<ReportsScreen> {
                     title: Text(L10N.of(context).tr.from),
                     trailing: Padding(
                       padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
-                      child: Text(_startDate == null ? "—" : _dateFormat.format(_startDate)),
+                      child: Text(_startDate == null
+                          ? "—"
+                          : _dateFormat.format(_startDate)),
                     ),
                     onTap: () async {
                       _oldStartDate = _startDate.clone();
@@ -142,15 +147,17 @@ class _ReportsScreenState extends State<ReportsScreen> {
                       DateTime newStartDate = await DatePicker.showDatePicker(
                           context,
                           currentTime: _startDate,
-                          onChanged: (DateTime dt) => setStartDate(DateTime(dt.year, dt.month, dt.day)),
-                          onConfirm: (DateTime dt) => setStartDate(DateTime(dt.year, dt.month, dt.day)),
+                          onChanged: (DateTime dt) =>
+                              setStartDate(DateTime(dt.year, dt.month, dt.day)),
+                          onConfirm: (DateTime dt) =>
+                              setStartDate(DateTime(dt.year, dt.month, dt.day)),
                           theme: DatePickerTheme(
                             cancelStyle: Theme.of(context).textTheme.button,
                             doneStyle: Theme.of(context).textTheme.button,
                             itemStyle: Theme.of(context).textTheme.bodyText2,
-                            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                          )
-                        );
+                            backgroundColor:
+                                Theme.of(context).scaffoldBackgroundColor,
+                          ));
 
                       // if the user cancelled, this should be null
                       if (newStartDate == null) {
@@ -161,13 +168,13 @@ class _ReportsScreenState extends State<ReportsScreen> {
                       }
                     },
                   ),
-                  secondaryActions: 
-                    _startDate == null
+                  secondaryActions: _startDate == null
                       ? <Widget>[]
                       : <Widget>[
                           IconSlideAction(
                             color: Theme.of(context).errorColor,
-                            foregroundColor: Theme.of(context).accentIconTheme.color,
+                            foregroundColor:
+                                Theme.of(context).accentIconTheme.color,
                             icon: FontAwesomeIcons.minusCircle,
                             onTap: () {
                               setState(() {
@@ -185,7 +192,9 @@ class _ReportsScreenState extends State<ReportsScreen> {
                     title: Text(L10N.of(context).tr.to),
                     trailing: Padding(
                       padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
-                      child: Text(_endDate == null ? "—" : _dateFormat.format(_endDate)),
+                      child: Text(_endDate == null
+                          ? "—"
+                          : _dateFormat.format(_endDate)),
                     ),
                     onTap: () async {
                       _oldEndDate = _endDate.clone();
@@ -193,15 +202,19 @@ class _ReportsScreenState extends State<ReportsScreen> {
                           context,
                           currentTime: _endDate,
                           minTime: _startDate,
-                          onChanged: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
-                          onConfirm: (DateTime dt) => setState(() => _endDate = DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
+                          onChanged: (DateTime dt) => setState(() => _endDate =
+                              DateTime(
+                                  dt.year, dt.month, dt.day, 23, 59, 59, 999)),
+                          onConfirm: (DateTime dt) => setState(() => _endDate =
+                              DateTime(
+                                  dt.year, dt.month, dt.day, 23, 59, 59, 999)),
                           theme: DatePickerTheme(
                             cancelStyle: Theme.of(context).textTheme.button,
                             doneStyle: Theme.of(context).textTheme.button,
                             itemStyle: Theme.of(context).textTheme.bodyText2,
-                            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                          )
-                        );
+                            backgroundColor:
+                                Theme.of(context).scaffoldBackgroundColor,
+                          ));
 
                       // if the user cancelled, this should be null
                       if (newEndDate == null) {
@@ -211,13 +224,13 @@ class _ReportsScreenState extends State<ReportsScreen> {
                       }
                     },
                   ),
-                  secondaryActions: 
-                    _endDate == null
+                  secondaryActions: _endDate == null
                       ? <Widget>[]
                       : <Widget>[
                           IconSlideAction(
                             color: Theme.of(context).errorColor,
-                            foregroundColor: Theme.of(context).accentIconTheme.color,
+                            foregroundColor:
+                                Theme.of(context).accentIconTheme.color,
                             icon: FontAwesomeIcons.minusCircle,
                             onTap: () {
                               setState(() {
@@ -230,13 +243,10 @@ class _ReportsScreenState extends State<ReportsScreen> {
               ],
             ),
             ExpansionTile(
-              title: Text(
-                L10N.of(context).tr.projects,
+              title: Text(L10N.of(context).tr.projects,
                   style: TextStyle(
                       color: Theme.of(context).accentColor,
-                      fontWeight: FontWeight.w700
-                 )
-               ),
+                      fontWeight: FontWeight.w700)),
               children: <Widget>[
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -255,7 +265,10 @@ class _ReportsScreenState extends State<ReportsScreen> {
                       child: Text("Select All"),
                       onPressed: () {
                         setState(() {
-                          selectedProjects = <Project>[null].followedBy(projectsBloc.state.projects.map((p) => Project.clone(p))).toList();
+                          selectedProjects = <Project>[null]
+                              .followedBy(projectsBloc.state.projects
+                                  .map((p) => Project.clone(p)))
+                              .toList();
                         });
                       },
                     ),
@@ -266,29 +279,33 @@ class _ReportsScreenState extends State<ReportsScreen> {
                     maxHeight: 150,
                   ),
                   child: ListView(
-                    children: <Project>[null].followedBy(projectsBloc.state.projects).map(
-                      (project) => CheckboxListTile(
-                              secondary: ProjectColour(project: project,),
-                              title: Text(project?.name ?? L10N.of(context).tr.noProject),
-                              value: selectedProjects.any((p) => p?.id == project?.id),
+                    children: <Project>[null]
+                        .followedBy(projectsBloc.state.projects)
+                        .map((project) => CheckboxListTile(
+                              secondary: ProjectColour(
+                                project: project,
+                              ),
+                              title: Text(project?.name ??
+                                  L10N.of(context).tr.noProject),
+                              value: selectedProjects
+                                  .any((p) => p?.id == project?.id),
                               activeColor: Theme.of(context).accentColor,
                               onChanged: (_) => setState(() {
-                                if (selectedProjects.any((p) => p?.id == project?.id)) {
-                                  selectedProjects.removeWhere((p) => p?.id == project?.id);
-                                } 
-                                else {
+                                if (selectedProjects
+                                    .any((p) => p?.id == project?.id)) {
+                                  selectedProjects
+                                      .removeWhere((p) => p?.id == project?.id);
+                                } else {
                                   selectedProjects.add(project);
                                 }
                               }),
-                            )
-                          )
+                            ))
                         .toList(),
                   ),
                 )
               ],
             ),
           ],
-        )
-       );
+        ));
   }
 }

@@ -28,23 +28,28 @@ class DashboardState extends Equatable {
     DashboardState state,
     DateTime filterStart,
     DateTime filterEnd,
-    String searchString,
-  {
+    String searchString, {
     String newDescription,
     Project newProject,
     bool timerWasStarted,
     List<int> hiddenProjects,
-  })
-    : this(
-        newDescription ?? state.newDescription,
-        newProject ?? state.newProject,
-        timerWasStarted ?? state.timerWasStarted,
-        filterStart,
-        filterEnd,
-        hiddenProjects ?? state.hiddenProjects,
-        searchString
-      );
+  }) : this(
+            newDescription ?? state.newDescription,
+            newProject ?? state.newProject,
+            timerWasStarted ?? state.timerWasStarted,
+            filterStart,
+            filterEnd,
+            hiddenProjects ?? state.hiddenProjects,
+            searchString);
 
   @override
-  List<Object> get props => [newDescription, newProject, timerWasStarted, filterStart, filterEnd, hiddenProjects, searchString];
+  List<Object> get props => [
+        newDescription,
+        newProject,
+        timerWasStarted,
+        filterStart,
+        filterEnd,
+        hiddenProjects,
+        searchString
+      ];
 }
