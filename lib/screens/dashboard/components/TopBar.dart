@@ -65,11 +65,13 @@ class _TopBarState extends State<TopBar> {
         key: _searchFormKey,
         child: TextFormField(
           controller: _searchController,
+          style: Theme.of(context).primaryTextTheme.bodyText1,
           onChanged: (search) {
             bloc.add(SearchChangedEvent(search));
           },
           decoration: InputDecoration(
-              prefixIcon: Icon(FontAwesomeIcons.search),
+              prefixIcon: Icon(FontAwesomeIcons.search,
+                  color: Theme.of(context).backgroundColor),
               suffixIcon: IconButton(
                 color: Theme.of(context).backgroundColor,
                 icon: Icon(FontAwesomeIcons.timesCircle),
