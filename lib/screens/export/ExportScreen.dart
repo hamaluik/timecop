@@ -495,9 +495,7 @@ class _ExportScreenState extends State<ExportScreen> {
               }
               return row;
             })).toList();
-            String csv = ListToCsvConverter().convert(data);
-            print('CSV:');
-            print(csv);
+            String csv = ListToCsvConverter(delimitAllFields: true).convert(data);
 
             Directory directory;
             if (Platform.isAndroid) {
