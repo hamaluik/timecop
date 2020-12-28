@@ -57,9 +57,12 @@ class _TimerEditorState extends State<TimerEditor> {
 
   static final DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy h:mma");
 
+  ProjectsBloc _projectsBloc;
+
   @override
   void initState() {
     super.initState();
+    _projectsBloc = BlocProvider.of<ProjectsBloc>(context);
     _descriptionController =
         TextEditingController(text: widget.timer.description);
     _startTime = widget.timer.startTime;
@@ -136,7 +139,7 @@ class _TimerEditorState extends State<TimerEditor> {
                             value: null,
                           )
                         ]
-                            .followedBy(projectsState.projects.map(
+                            .followedBy(projectsState.projects.where((p) => !p.archived).map(
                                 (Project project) => DropdownMenuItem<Project>(
                                       child: Row(
                                         children: <Widget>[
@@ -177,6 +180,7 @@ class _TimerEditorState extends State<TimerEditor> {
 
                         List<String> descriptions = timers.state.timers
                             .where((timer) => timer.description != null)
+                            .where((timer) => !(_projectsBloc.getProjectByID(timer.projectID)?.archived == true))
                             .where((timer) =>
                                 timer.description
                                     .toLowerCase()

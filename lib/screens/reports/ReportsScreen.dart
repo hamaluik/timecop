@@ -51,7 +51,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
     final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
     assert(projects != null);
     selectedProjects = <Project>[null]
-        .followedBy(projects.state.projects.map((p) => Project.clone(p)))
+        .followedBy(projects.state.projects.where((p) => !p.archived).map((p) => Project.clone(p)))
         .toList();
 
     final SettingsBloc settings = BlocProvider.of<SettingsBloc>(context);
@@ -267,6 +267,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                         setState(() {
                           selectedProjects = <Project>[null]
                               .followedBy(projectsBloc.state.projects
+                                .where((p) => !p.archived)
                                   .map((p) => Project.clone(p)))
                               .toList();
                         });
@@ -280,7 +281,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                   ),
                   child: ListView(
                     children: <Project>[null]
-                        .followedBy(projectsBloc.state.projects)
+                        .followedBy(projectsBloc.state.projects.where((p) => !p.archived))
                         .map((project) => CheckboxListTile(
                               secondary: ProjectColour(
                                 project: project,

@@ -19,6 +19,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
+import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/models/project_description_pair.dart';
 import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
@@ -155,6 +156,10 @@ class StoppedTimers extends StatelessWidget {
             // filter based on selected projects
             timers = timers.where((t) =>
                 !dashboardState.hiddenProjects.any((p) => p == t.projectID));
+
+            // filter based on archived and deleted projects
+            ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+            timers = timers.where((t) => projectsBloc.getProjectByID(t.id)?.archived != true);
 
             // filter based on search
             if (dashboardState.searchString != null) {

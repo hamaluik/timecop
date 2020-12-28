@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
+import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -85,8 +86,10 @@ class _DescriptionFieldState extends State<DescriptionField> {
           suggestionsCallback: (pattern) async {
             if (pattern.length < 2) return [];
 
+            ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
             List<String> descriptions = timers.state.timers
                 .where((timer) => timer.description != null)
+                .where((timer) => !(projectsBloc.getProjectByID(timer.projectID)?.archived == true))
                 .where((timer) =>
                     timer.description
                         .toLowerCase()

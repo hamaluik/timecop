@@ -63,7 +63,9 @@ class _ExportScreenState extends State<ExportScreen> {
     final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
     assert(projects != null);
     selectedProjects = <Project>[null]
-        .followedBy(projects.state.projects.map((p) => Project.clone(p)))
+        .followedBy(projects.state.projects
+            .where((p) => !p.archived)
+            .map((p) => Project.clone(p)))
         .toList();
 
     final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
@@ -303,6 +305,7 @@ class _ExportScreenState extends State<ExportScreen> {
                       setState(() {
                         selectedProjects = <Project>[null]
                             .followedBy(projectsBloc.state.projects
+                                .where((p) => !p.archived)
                                 .map((p) => Project.clone(p)))
                             .toList();
                       });
@@ -311,26 +314,28 @@ class _ExportScreenState extends State<ExportScreen> {
                 ],
               )
             ]
-                .followedBy(<Project>[
-                  null
-                ].followedBy(projectsBloc.state.projects).map((project) =>
-                    CheckboxListTile(
-                      secondary: ProjectColour(
-                        project: project,
-                      ),
-                      title:
-                          Text(project?.name ?? L10N.of(context).tr.noProject),
-                      value: selectedProjects.any((p) => p?.id == project?.id),
-                      activeColor: Theme.of(context).accentColor,
-                      onChanged: (_) => setState(() {
-                        if (selectedProjects.any((p) => p?.id == project?.id)) {
-                          selectedProjects
-                              .removeWhere((p) => p?.id == project?.id);
-                        } else {
-                          selectedProjects.add(project);
-                        }
-                      }),
-                    )))
+                .followedBy(<Project>[null]
+                    .followedBy(projectsBloc.state.projects.where((p) => !p.archived))
+                    
+                    .map((project) => CheckboxListTile(
+                          secondary: ProjectColour(
+                            project: project,
+                          ),
+                          title: Text(
+                              project?.name ?? L10N.of(context).tr.noProject),
+                          value:
+                              selectedProjects.any((p) => p?.id == project?.id),
+                          activeColor: Theme.of(context).accentColor,
+                          onChanged: (_) => setState(() {
+                            if (selectedProjects
+                                .any((p) => p?.id == project?.id)) {
+                              selectedProjects
+                                  .removeWhere((p) => p?.id == project?.id);
+                            } else {
+                              selectedProjects.add(project);
+                            }
+                          }),
+                        )))
                 .toList(),
           ),
           ExpansionTile(
@@ -405,6 +410,8 @@ class _ExportScreenState extends State<ExportScreen> {
                     _startDate == null ? true : t.startTime.isAfter(_startDate))
                 .where((t) =>
                     _endDate == null ? true : t.endTime.isBefore(_endDate))
+                .where((t) =>
+                    !(projects.getProjectByID(t.projectID)?.archived == true))
                 .toList();
             filteredTimers.sort((a, b) => a.startTime.compareTo(b.startTime));
 
@@ -421,6 +428,8 @@ class _ExportScreenState extends State<ExportScreen> {
                       : t.startTime.isAfter(_startDate))
                   .where((t) =>
                       _endDate == null ? true : t.endTime.isBefore(_endDate))
+                  .where((t) =>
+                      !(projects.getProjectByID(t.projectID)?.archived == true))
                   .toList();
               filteredTimers.sort((a, b) => a.startTime.compareTo(b.startTime));
 
@@ -495,7 +504,8 @@ class _ExportScreenState extends State<ExportScreen> {
               }
               return row;
             })).toList();
-            String csv = ListToCsvConverter(delimitAllFields: true).convert(data);
+            String csv =
+                ListToCsvConverter(delimitAllFields: true).convert(data);
 
             Directory directory;
             if (Platform.isAndroid) {
