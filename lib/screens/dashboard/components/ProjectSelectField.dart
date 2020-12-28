@@ -39,9 +39,9 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
       return BlocBuilder<DashboardBloc, DashboardState>(
         bloc: bloc,
         builder: (BuildContext context, DashboardState state) {
-          // detect if the project we had selected was deleted
+          // detect if the project we had selected was deleted or archived
           if (state.newProject != null &&
-              projectsBloc.getProjectByID(state.newProject.id) == null) {
+              (projectsBloc.getProjectByID(state.newProject.id) == null || projectsBloc.getProjectByID(state.newProject.id).archived)) {
             bloc.add(ProjectChangedEvent(null));
             return IconButton(
               alignment: Alignment.centerLeft,
@@ -62,7 +62,7 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
                       title: Text(L10N.of(context).tr.projects),
                       contentPadding: EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 16.0),
                       children: <Project>[null]
-                          .followedBy(projectsState.projects)
+                          .followedBy(projectsState.projects.where((p) => !p.archived))
                           .map((Project p) => FlatButton(
                               onPressed: () {
                                 Navigator.of(context).pop(p);

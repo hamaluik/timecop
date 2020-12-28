@@ -22,6 +22,7 @@ import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/projects/ProjectEditor.dart';
+import 'package:timecop/models/project.dart';
 
 class ProjectsScreen extends StatelessWidget {
   const ProjectsScreen({Key key}) : super(key: key);
@@ -52,8 +53,8 @@ class ProjectsScreen extends StatelessWidget {
                                 leading: ProjectColour(project: project),
                                 title: Text(project.name),
                                 trailing:
-                                    settingsState.defaultProjectID == project.id
-                                        ? Icon(FontAwesomeIcons.thumbtack)
+                                    project.archived
+                                        ? Icon(FontAwesomeIcons.box)
                                         : null,
                                 onTap: () => showDialog<void>(
                                     context: context,
@@ -134,19 +135,14 @@ class ProjectsScreen extends StatelessWidget {
                               ],
                               secondaryActions: <Widget>[
                                 IconSlideAction(
-                                    color: project.id ==
-                                            settingsState.defaultProjectID
-                                        ? Theme.of(context).errorColor
-                                        : Theme.of(context).accentColor,
+                                    color: Theme.of(context).accentColor,
                                     foregroundColor:
                                         Theme.of(context).accentIconTheme.color,
-                                    icon: FontAwesomeIcons.thumbtack,
+                                    icon: project.archived
+                                        ? FontAwesomeIcons.boxOpen
+                                        : FontAwesomeIcons.box,
                                     onTap: () {
-                                      settingsBloc.add(SetDefaultProjectID(
-                                          project.id ==
-                                                  settingsState.defaultProjectID
-                                              ? null
-                                              : project.id));
+                                        projectsBloc.add(EditProject(Project.clone(project, archived: !project.archived)));
                                     })
                               ],
                             ))

@@ -51,8 +51,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       bool exportIncludeDurationHours =
           await settings.getBool("exportIncludeDurationHours") ??
               state.exportIncludeDurationHours;
-      int defaultProjectID =
-          await settings.getInt("defaultProjectID") ?? state.defaultProjectID;
       bool groupTimers =
           await settings.getBool("groupTimers") ?? state.groupTimers;
       bool collapseDays =
@@ -74,15 +72,11 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           exportIncludeStartTime: exportIncludeStartTime,
           exportIncludeEndTime: exportIncludeEndTime,
           exportIncludeDurationHours: exportIncludeDurationHours,
-          defaultProjectID: defaultProjectID,
           groupTimers: groupTimers,
           collapseDays: collapseDays,
           autocompleteDescription: autocompleteDescription,
           defaultFilterStartDateToMonday: defaultFilterStartDateToMonday,
           oneTimerAtATime: oneTimerAtATime);
-    } else if (event is SetDefaultProjectID) {
-      await settings.setInt("defaultProjectID", event.projectID ?? -1);
-      yield SettingsState.clone(state, defaultProjectID: event.projectID ?? -1);
     } else if (event is SetBoolValueEvent) {
       if (event.exportGroupTimers != null) {
         await settings.setBool("exportGroupTimers", event.exportGroupTimers);

@@ -102,7 +102,7 @@ class DatabaseProvider extends DataProvider {
 
     int id = await _db.rawInsert(
         "insert into projects(name, colour, archived) values(?, ?, ?)",
-        <dynamic>[name, colour.value]);
+        <dynamic>[name, colour.value, archived ? 1 : 0]);
     return Project(id: id, name: name, colour: colour, archived: archived);
   }
 
@@ -116,7 +116,7 @@ class DatabaseProvider extends DataProvider {
             id: row["id"] as int,
             name: row["name"] as String,
             colour: Color(row["colour"] as int),
-            archived: row["archived"] as bool))
+            archived: (row["archived"] as int) == 1))
         .toList();
   }
 
@@ -127,7 +127,7 @@ class DatabaseProvider extends DataProvider {
     assert(project != null);
     int rows = await _db.rawUpdate(
         "update projects set name=?, colour=?, archived=? where id=?",
-        <dynamic>[project.name, project.colour.value, project.archived, project.id]);
+        <dynamic>[project.name, project.colour.value, project.archived ? 1 : 0, project.id]);
     assert(rows == 1);
   }
 

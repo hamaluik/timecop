@@ -24,7 +24,6 @@ class SettingsState extends Equatable {
   final bool exportIncludeStartTime;
   final bool exportIncludeEndTime;
   final bool exportIncludeDurationHours;
-  final int defaultProjectID;
   final bool groupTimers;
   final bool collapseDays;
   final bool autocompleteDescription;
@@ -40,7 +39,6 @@ class SettingsState extends Equatable {
     @required this.exportIncludeStartTime,
     @required this.exportIncludeEndTime,
     @required this.exportIncludeDurationHours,
-    @required this.defaultProjectID,
     @required this.groupTimers,
     @required this.collapseDays,
     @required this.autocompleteDescription,
@@ -54,7 +52,6 @@ class SettingsState extends Equatable {
         assert(exportIncludeStartTime != null),
         assert(exportIncludeEndTime != null),
         assert(exportIncludeDurationHours != null),
-        assert(defaultProjectID != null),
         assert(groupTimers != null),
         assert(collapseDays != null),
         assert(autocompleteDescription != null),
@@ -71,7 +68,6 @@ class SettingsState extends Equatable {
       exportIncludeStartTime: false,
       exportIncludeEndTime: false,
       exportIncludeDurationHours: true,
-      defaultProjectID: -1,
       groupTimers: true,
       collapseDays: false,
       autocompleteDescription: true,
@@ -111,7 +107,6 @@ class SettingsState extends Equatable {
               exportIncludeEndTime ?? settings.exportIncludeEndTime,
           exportIncludeDurationHours:
               exportIncludeDurationHours ?? settings.exportIncludeDurationHours,
-          defaultProjectID: defaultProjectID ?? settings.defaultProjectID,
           groupTimers: groupTimers ?? settings.groupTimers,
           collapseDays: collapseDays ?? settings.collapseDays,
           autocompleteDescription:
@@ -131,7 +126,6 @@ class SettingsState extends Equatable {
         exportIncludeStartTime,
         exportIncludeEndTime,
         exportIncludeDurationHours,
-        defaultProjectID,
         groupTimers,
         collapseDays,
         autocompleteDescription,
