@@ -25,7 +25,7 @@ import 'package:timecop/models/project.dart';
 class DatabaseProvider extends DataProvider {
   final Database _db;
   final RandomColor _randomColour = RandomColor();
-  static const int DB_VERSION = 1;
+  static const int DB_VERSION = 2;
 
   DatabaseProvider(this._db) : assert(_db != null);
 
@@ -38,7 +38,8 @@ class DatabaseProvider extends DataProvider {
       create table projects(
         id integer not null primary key autoincrement,
         name text not null,
-        colour int not null
+        colour int not null,
+        archived boolean not null default false
       )
     ''');
     await db.execute('''
@@ -56,6 +57,25 @@ class DatabaseProvider extends DataProvider {
     ''');
   }
 
+  static void _onUpgrade(Database db, int version, int newVersion) async {
+    while (version <= newVersion) {
+      switch (version) {
+        case 2:
+          {
+            await db.execute('''
+              alter table projects add column archived boolean not null default false
+            ''');
+            break;
+          }
+        default:
+          {
+            break;
+          }
+      }
+      version++;
+    }
+  }
+
   static Future<DatabaseProvider> open() async {
     // get a path to the database file
     var databasesPath = await getDatabasesPath();
@@ -64,7 +84,10 @@ class DatabaseProvider extends DataProvider {
 
     // open the database
     Database db = await openDatabase(path,
-        onConfigure: _onConfigure, onCreate: _onCreate, version: DB_VERSION);
+        onConfigure: _onConfigure,
+        onCreate: _onCreate,
+        onUpgrade: _onUpgrade,
+        version: DB_VERSION);
     DatabaseProvider repo = DatabaseProvider(db);
 
     return repo;
@@ -72,36 +95,39 @@ class DatabaseProvider extends DataProvider {
 
   /// the c in crud
   @override
-  Future<Project> createProject({@required String name, Color colour}) async {
+  Future<Project> createProject({@required String name, Color colour, bool archived}) async {
     assert(name != null);
     colour ??= _randomColour.randomColor();
+    archived ??= false;
 
     int id = await _db.rawInsert(
-        "insert into projects(name, colour) values(?, ?)",
+        "insert into projects(name, colour, archived) values(?, ?, ?)",
         <dynamic>[name, colour.value]);
-    return Project(id: id, name: name, colour: colour);
+    return Project(id: id, name: name, colour: colour, archived: archived);
   }
 
   /// the r in crud
   @override
   Future<List<Project>> listProjects() async {
     List<Map<String, dynamic>> rawProjects = await _db
-        .rawQuery("select id, name, colour from projects order by name asc");
+        .rawQuery("select id, name, colour, archived from projects order by name asc");
     return rawProjects
         .map((Map<String, dynamic> row) => Project(
             id: row["id"] as int,
             name: row["name"] as String,
-            colour: Color(row["colour"] as int)))
+            colour: Color(row["colour"] as int),
+            archived: row["archived"] as bool))
         .toList();
   }
+
 
   /// the u in crud
   @override
   Future<void> editProject(Project project) async {
     assert(project != null);
     int rows = await _db.rawUpdate(
-        "update projects set name=?, colour=? where id=?",
-        <dynamic>[project.name, project.colour.value, project.id]);
+        "update projects set name=?, colour=?, archived=? where id=?",
+        <dynamic>[project.name, project.colour.value, project.archived, project.id]);
     assert(rows == 1);
   }
 

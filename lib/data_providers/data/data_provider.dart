@@ -20,7 +20,7 @@ abstract class DataProvider {
   Future<Project> createProject({@required String name, Color colour});
   Future<List<Project>> listProjects();
   Future<void> editProject(Project project);
-  Future<void> deleteProject(Project project);
+    Future<void> deleteProject(Project project);
   Future<TimerEntry> createTimer(
       {String description,
       int projectID,

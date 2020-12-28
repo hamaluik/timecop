@@ -131,11 +131,13 @@ class MockDataProvider extends DataProvider {
   @override
   Future<List<Project>> listProjects() async {
     return <Project>[
-      Project(id: 1, name: "Time Cop", colour: Colors.cyan[600]),
+      Project(id: 1, name: "Time Cop", colour: Colors.cyan[600], archived: false),
       Project(
           id: 2,
           name: l10n[localeKey]["administration"],
-          colour: Colors.pink[600]),
+          colour: Colors.pink[600],
+          archived: false,
+      ),
     ];
   }
 
@@ -225,8 +227,8 @@ class MockDataProvider extends DataProvider {
   }
 
   @override
-  Future<Project> createProject({@required String name, Color colour}) async {
-    return Project(id: -1, name: name, colour: colour);
+  Future<Project> createProject({@required String name, Color colour, bool archived}) async {
+    return Project(id: -1, name: name, colour: colour, archived: archived ?? false);
   }
 
   @override
