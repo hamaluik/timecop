@@ -142,11 +142,11 @@ class WeekdayAverages extends StatelessWidget {
                       show: true,
                       leftTitles: SideTitles(
                         showTitles: true,
-                        textStyle: Theme.of(context).textTheme.bodyText2,
+                        getTextStyles: (_) => Theme.of(context).textTheme.bodyText2,
                       ),
                       bottomTitles: SideTitles(
                           showTitles: true,
-                          textStyle: Theme.of(context).textTheme.bodyText2,
+                          getTextStyles: (_) => Theme.of(context).textTheme.bodyText2,
                           getTitles: (double value) {
                             switch (value.toInt()) {
                               case 0:
@@ -171,13 +171,13 @@ class WeekdayAverages extends StatelessWidget {
                       .map((day) =>
                           BarChartGroupData(x: day, barRods: <BarChartRodData>[
                             BarChartRodData(
-                              color: Theme.of(context).disabledColor,
+                              colors: [Theme.of(context).disabledColor],
                               width: 22,
                               y: _daysData[day].entries.fold(
                                   0.0,
                                   (double sum, MapEntry<int, double> entry) =>
                                       sum + entry.value),
-                              rodStackItem:
+                              rodStackItems:
                                   _buildDayStack(context, day, projects),
                               //backDrawRodData: BackgroundBarChartRodData(
                               //  color: Theme.of(context).chipTheme.backgroundColor,

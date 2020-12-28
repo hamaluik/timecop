@@ -150,12 +150,12 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                     leftTitles: SideTitles(
                       showTitles: true,
                       getTitles: (double v) => v.toStringAsFixed(1),
-                      textStyle: Theme.of(context).textTheme.caption,
+                      getTextStyles: (_) => Theme.of(context).textTheme.caption,
                       interval: 5.0,
                     ),
                     bottomTitles: SideTitles(
                         showTitles: true,
-                        textStyle: Theme.of(context).textTheme.caption,
+                        getTextStyles: (_) => Theme.of(context).textTheme.caption,
                         getTitles: (double dweek) {
                           int week = dweek.toInt();
                           DateTime date =
@@ -173,10 +173,6 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                         ],
                         isCurved: true,
                         barWidth: 4,
-                        dotData: FlDotData(
-                          dotColor: project?.colour ??
-                              Theme.of(context).disabledColor,
-                        ),
                         spots: entry.value.entries.map((dataPoint) {
                           return FlSpot(
                               dataPoint.key.toDouble(), dataPoint.value);
