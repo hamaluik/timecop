@@ -161,11 +161,11 @@ langName = Italiano
 
 language = linguaggio
 
-automaticLanguage = Automatico ({ $langName })
+automaticLanguage = ({ $langName }) automatico
 
-collapseDays = Giorni di collasso
+collapseDays = Comprimi giorni
 
-autocompleteDescription = Descrizioni di completamento automatico
+autocompleteDescription = Completa descrizioni automaticamente
 
 defaultFilterStartDateToMonday = Data di inizio filtro predefinita a lunedì
 
