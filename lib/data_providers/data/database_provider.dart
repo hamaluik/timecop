@@ -95,7 +95,8 @@ class DatabaseProvider extends DataProvider {
 
   /// the c in crud
   @override
-  Future<Project> createProject({@required String name, Color colour, bool archived}) async {
+  Future<Project> createProject(
+      {@required String name, Color colour, bool archived}) async {
     assert(name != null);
     colour ??= _randomColour.randomColor();
     archived ??= false;
@@ -109,8 +110,8 @@ class DatabaseProvider extends DataProvider {
   /// the r in crud
   @override
   Future<List<Project>> listProjects() async {
-    List<Map<String, dynamic>> rawProjects = await _db
-        .rawQuery("select id, name, colour, archived from projects order by name asc");
+    List<Map<String, dynamic>> rawProjects = await _db.rawQuery(
+        "select id, name, colour, archived from projects order by name asc");
     return rawProjects
         .map((Map<String, dynamic> row) => Project(
             id: row["id"] as int,
@@ -120,14 +121,18 @@ class DatabaseProvider extends DataProvider {
         .toList();
   }
 
-
   /// the u in crud
   @override
   Future<void> editProject(Project project) async {
     assert(project != null);
     int rows = await _db.rawUpdate(
         "update projects set name=?, colour=?, archived=? where id=?",
-        <dynamic>[project.name, project.colour.value, project.archived ? 1 : 0, project.id]);
+        <dynamic>[
+          project.name,
+          project.colour.value,
+          project.archived ? 1 : 0,
+          project.id
+        ]);
     assert(rows == 1);
   }
 

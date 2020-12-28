@@ -315,8 +315,8 @@ class _ExportScreenState extends State<ExportScreen> {
               )
             ]
                 .followedBy(<Project>[null]
-                    .followedBy(projectsBloc.state.projects.where((p) => !p.archived))
-                    
+                    .followedBy(
+                        projectsBloc.state.projects.where((p) => !p.archived))
                     .map((project) => CheckboxListTile(
                           secondary: ProjectColour(
                             project: project,

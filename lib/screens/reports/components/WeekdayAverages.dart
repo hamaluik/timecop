@@ -142,11 +142,13 @@ class WeekdayAverages extends StatelessWidget {
                       show: true,
                       leftTitles: SideTitles(
                         showTitles: true,
-                        getTextStyles: (_) => Theme.of(context).textTheme.bodyText2,
+                        getTextStyles: (_) =>
+                            Theme.of(context).textTheme.bodyText2,
                       ),
                       bottomTitles: SideTitles(
                           showTitles: true,
-                          getTextStyles: (_) => Theme.of(context).textTheme.bodyText2,
+                          getTextStyles: (_) =>
+                              Theme.of(context).textTheme.bodyText2,
                           getTitles: (double value) {
                             switch (value.toInt()) {
                               case 0:

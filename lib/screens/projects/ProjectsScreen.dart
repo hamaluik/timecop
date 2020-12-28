@@ -52,10 +52,9 @@ class ProjectsScreen extends StatelessWidget {
                               child: ListTile(
                                 leading: ProjectColour(project: project),
                                 title: Text(project.name),
-                                trailing:
-                                    project.archived
-                                        ? Icon(FontAwesomeIcons.box)
-                                        : null,
+                                trailing: project.archived
+                                    ? Icon(FontAwesomeIcons.box)
+                                    : null,
                                 onTap: () => showDialog<void>(
                                     context: context,
                                     builder: (BuildContext context) =>
@@ -142,7 +141,9 @@ class ProjectsScreen extends StatelessWidget {
                                         ? FontAwesomeIcons.boxOpen
                                         : FontAwesomeIcons.box,
                                     onTap: () {
-                                        projectsBloc.add(EditProject(Project.clone(project, archived: !project.archived)));
+                                      projectsBloc.add(EditProject(
+                                          Project.clone(project,
+                                              archived: !project.archived)));
                                     })
                               ],
                             ))

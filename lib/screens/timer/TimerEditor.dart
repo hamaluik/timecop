@@ -139,8 +139,10 @@ class _TimerEditorState extends State<TimerEditor> {
                             value: null,
                           )
                         ]
-                            .followedBy(projectsState.projects.where((p) => !p.archived).map(
-                                (Project project) => DropdownMenuItem<Project>(
+                            .followedBy(projectsState.projects
+                                .where((p) => !p.archived)
+                                .map((Project project) =>
+                                    DropdownMenuItem<Project>(
                                       child: Row(
                                         children: <Widget>[
                                           ProjectColour(
@@ -180,7 +182,10 @@ class _TimerEditorState extends State<TimerEditor> {
 
                         List<String> descriptions = timers.state.timers
                             .where((timer) => timer.description != null)
-                            .where((timer) => !(_projectsBloc.getProjectByID(timer.projectID)?.archived == true))
+                            .where((timer) => !(_projectsBloc
+                                    .getProjectByID(timer.projectID)
+                                    ?.archived ==
+                                true))
                             .where((timer) =>
                                 timer.description
                                     .toLowerCase()

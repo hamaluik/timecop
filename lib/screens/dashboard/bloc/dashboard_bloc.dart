@@ -18,8 +18,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
   @override
   DashboardState get initialState {
-    Project newProject =
-        projectsBloc.getProjectByID(-1);
+    Project newProject = projectsBloc.getProjectByID(-1);
     return DashboardState("", newProject, false,
         settingsBloc.getFilterStartDate(), null, <int>[], null);
   }
@@ -47,13 +46,11 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           state.hiddenProjects,
           state.searchString);
     } else if (event is TimerWasStartedEvent) {
-      Project newProject =
-          projectsBloc.getProjectByID(-1);
+      Project newProject = projectsBloc.getProjectByID(-1);
       yield DashboardState("", newProject, true, state.filterStart,
           state.filterEnd, state.hiddenProjects, state.searchString);
     } else if (event is ResetEvent) {
-      Project newProject =
-          projectsBloc.getProjectByID(-1);
+      Project newProject = projectsBloc.getProjectByID(-1);
       yield DashboardState("", newProject, false, state.filterStart,
           state.filterEnd, state.hiddenProjects, state.searchString);
     } else if (event is FilterStartChangedEvent) {

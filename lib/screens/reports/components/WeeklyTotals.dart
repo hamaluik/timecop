@@ -155,7 +155,8 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                     ),
                     bottomTitles: SideTitles(
                         showTitles: true,
-                        getTextStyles: (_) => Theme.of(context).textTheme.caption,
+                        getTextStyles: (_) =>
+                            Theme.of(context).textTheme.caption,
                         getTitles: (double dweek) {
                           int week = dweek.toInt();
                           DateTime date =

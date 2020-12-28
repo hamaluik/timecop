@@ -21,7 +21,11 @@ class Project extends Equatable {
   final Color colour;
   final bool archived;
 
-  Project({@required this.id, @required this.name, @required this.colour, @required this.archived})
+  Project(
+      {@required this.id,
+      @required this.name,
+      @required this.colour,
+      @required this.archived})
       : assert(id != null),
         assert(name != null),
         assert(colour != null),

@@ -159,7 +159,8 @@ class StoppedTimers extends StatelessWidget {
 
             // filter based on archived and deleted projects
             ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
-            timers = timers.where((t) => projectsBloc.getProjectByID(t.id)?.archived != true);
+            timers = timers.where(
+                (t) => projectsBloc.getProjectByID(t.id)?.archived != true);
 
             // filter based on search
             if (dashboardState.searchString != null) {

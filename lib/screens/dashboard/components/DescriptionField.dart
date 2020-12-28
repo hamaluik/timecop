@@ -89,7 +89,9 @@ class _DescriptionFieldState extends State<DescriptionField> {
             ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
             List<String> descriptions = timers.state.timers
                 .where((timer) => timer.description != null)
-                .where((timer) => !(projectsBloc.getProjectByID(timer.projectID)?.archived == true))
+                .where((timer) =>
+                    !(projectsBloc.getProjectByID(timer.projectID)?.archived ==
+                        true))
                 .where((timer) =>
                     timer.description
                         .toLowerCase()
