@@ -246,4 +246,7 @@ class FluentL10NProvider extends L10NProvider {
   @override
   String get selectNone =>
       _bundle.format("selectNone", errors: _errors) ?? "selectNone";
+  @override
+  String get showBadgeCounts =>
+      _bundle.format("showBadgeCounts", errors: _errors) ?? "showBadgeCounts";
 }

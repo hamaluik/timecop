@@ -68,7 +68,7 @@ Future<void> runMain(SettingsProvider settings, DataProvider data) async {
         create: (_) => SettingsBloc(settings),
       ),
       BlocProvider<TimersBloc>(
-        create: (_) => TimersBloc(data),
+        create: (_) => TimersBloc(data, settings),
       ),
       BlocProvider<ProjectsBloc>(
         create: (_) => ProjectsBloc(data),

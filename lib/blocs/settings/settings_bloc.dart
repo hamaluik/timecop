@@ -63,6 +63,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
               state.defaultFilterStartDateToMonday;
       bool oneTimerAtATime =
           await settings.getBool("oneTimerAtATime") ?? state.oneTimerAtATime;
+      bool showBadgeCounts =
+          await settings.getBool("showBadgeCounts") ?? state.showBadgeCounts;
       yield SettingsState(
           exportGroupTimers: exportGroupTimers,
           exportIncludeDate: exportIncludeDate,
@@ -76,7 +78,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           collapseDays: collapseDays,
           autocompleteDescription: autocompleteDescription,
           defaultFilterStartDateToMonday: defaultFilterStartDateToMonday,
-          oneTimerAtATime: oneTimerAtATime);
+          oneTimerAtATime: oneTimerAtATime,
+          showBadgeCounts: showBadgeCounts);
     } else if (event is SetBoolValueEvent) {
       if (event.exportGroupTimers != null) {
         await settings.setBool("exportGroupTimers", event.exportGroupTimers);
@@ -125,6 +128,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       if (event.oneTimerAtATime != null) {
         await settings.setBool("oneTimerAtATime", event.oneTimerAtATime);
       }
+      if (event.showBadgeCounts != null) {
+        await settings.setBool("showBadgeCounts", event.showBadgeCounts);
+      }
       yield SettingsState.clone(
         state,
         exportGroupTimers: event.exportGroupTimers,
@@ -140,6 +146,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         autocompleteDescription: event.autocompleteDescription,
         defaultFilterStartDateToMonday: event.defaultFilterStartDateToMonday,
         oneTimerAtATime: event.oneTimerAtATime,
+        showBadgeCounts: event.showBadgeCounts,
       );
     }
   }

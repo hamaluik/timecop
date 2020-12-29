@@ -14,13 +14,16 @@
 
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:timecop/data_providers/data/data_provider.dart';
+import 'package:timecop/data_providers/settings/settings_provider.dart';
 import 'package:timecop/models/timer_entry.dart';
 import './bloc.dart';
 
 class TimersBloc extends Bloc<TimersEvent, TimersState> {
   final DataProvider data;
-  TimersBloc(this.data);
+  final SettingsProvider settings;
+  TimersBloc(this.data, this.settings);
 
   @override
   TimersState get initialState => TimersState.initial();
@@ -31,6 +34,7 @@ class TimersBloc extends Bloc<TimersEvent, TimersState> {
   ) async* {
     if (event is LoadTimers) {
       List<TimerEntry> timers = await data.listTimers();
+      _updateBadgeCountForTimers(timers);
       yield TimersState(timers, DateTime.now());
     } else if (event is CreateTimer) {
       TimerEntry timer = await data.createTimer(
@@ -39,6 +43,7 @@ class TimersBloc extends Bloc<TimersEvent, TimersState> {
           state.timers.map((t) => TimerEntry.clone(t)).toList();
       timers.add(timer);
       timers.sort((a, b) => a.startTime.compareTo(b.startTime));
+      _updateBadgeCountForTimers(timers);
       yield TimersState(timers, DateTime.now());
     } else if (event is UpdateNow) {
       yield TimersState(state.timers, DateTime.now());
@@ -50,6 +55,7 @@ class TimersBloc extends Bloc<TimersEvent, TimersState> {
         return TimerEntry.clone(t);
       }).toList();
       timers.sort((a, b) => a.startTime.compareTo(b.startTime));
+      _updateBadgeCountForTimers(timers);
       yield TimersState(timers, DateTime.now());
     } else if (event is EditTimer) {
       await data.editTimer(event.timer);
@@ -58,6 +64,7 @@ class TimersBloc extends Bloc<TimersEvent, TimersState> {
         return TimerEntry.clone(t);
       }).toList();
       timers.sort((a, b) => a.startTime.compareTo(b.startTime));
+      _updateBadgeCountForTimers(timers);
       yield TimersState(timers, DateTime.now());
     } else if (event is DeleteTimer) {
       await data.deleteTimer(event.timer);
@@ -65,6 +72,7 @@ class TimersBloc extends Bloc<TimersEvent, TimersState> {
           .where((t) => t.id != event.timer.id)
           .map((t) => TimerEntry.clone(t))
           .toList();
+      _updateBadgeCountForTimers(timers);
       yield TimersState(timers, DateTime.now());
     } else if (event is StopAllTimers) {
       List<Future<TimerEntry>> timerEdits = state.timers.map((t) async {
@@ -78,7 +86,31 @@ class TimersBloc extends Bloc<TimersEvent, TimersState> {
 
       List<TimerEntry> timers = await Future.wait(timerEdits);
       timers.sort((a, b) => a.startTime.compareTo(b.startTime));
+      _updateBadgeCountForTimers(timers);
       yield TimersState(timers, DateTime.now());
     }
+  }
+
+  void _updateBadgeCount(int count) {
+    if (!(settings.getBool("showBadgeCounts") == true)) {
+      print("removing badge because showBadgeCounts is disabled");
+      FlutterAppBadger.removeBadge();
+      return;
+    }
+    if (count > 0) {
+      print("showing badge count: " + count.toString());
+      FlutterAppBadger.updateBadgeCount(count);
+    } else {
+      print("showing badge count because count of running timers is 0");
+      FlutterAppBadger.removeBadge();
+    }
+  }
+
+  void _updateBadgeCountForTimers(List<TimerEntry> timers) {
+    _updateBadgeCount(timers.where((t) => t.endTime == null).length);
+  }
+
+  void updateBadgeCount() {
+    _updateBadgeCountForTimers(state.timers);
   }
 }

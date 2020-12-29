@@ -29,6 +29,7 @@ class SettingsState extends Equatable {
   final bool autocompleteDescription;
   final bool defaultFilterStartDateToMonday;
   final bool oneTimerAtATime;
+  final bool showBadgeCounts;
 
   SettingsState({
     @required this.exportGroupTimers,
@@ -44,6 +45,7 @@ class SettingsState extends Equatable {
     @required this.autocompleteDescription,
     @required this.defaultFilterStartDateToMonday,
     @required this.oneTimerAtATime,
+    @required this.showBadgeCounts,
   })  : assert(exportGroupTimers != null),
         assert(exportIncludeDate != null),
         assert(exportIncludeProject != null),
@@ -56,7 +58,8 @@ class SettingsState extends Equatable {
         assert(collapseDays != null),
         assert(autocompleteDescription != null),
         assert(defaultFilterStartDateToMonday != null),
-        assert(oneTimerAtATime != null);
+        assert(oneTimerAtATime != null),
+        assert(showBadgeCounts != null);
 
   static SettingsState initial() {
     return SettingsState(
@@ -73,6 +76,7 @@ class SettingsState extends Equatable {
       autocompleteDescription: true,
       defaultFilterStartDateToMonday: false,
       oneTimerAtATime: false,
+      showBadgeCounts: false,
     );
   }
 
@@ -92,6 +96,7 @@ class SettingsState extends Equatable {
     bool autocompleteDescription,
     bool defaultFilterStartDateToMonday,
     bool oneTimerAtATime,
+    bool showBadgeCounts,
   }) : this(
           exportGroupTimers: exportGroupTimers ?? settings.exportGroupTimers,
           exportIncludeDate: exportIncludeDate ?? settings.exportIncludeDate,
@@ -114,6 +119,7 @@ class SettingsState extends Equatable {
           defaultFilterStartDateToMonday: defaultFilterStartDateToMonday ??
               settings.defaultFilterStartDateToMonday,
           oneTimerAtATime: oneTimerAtATime ?? settings.oneTimerAtATime,
+          showBadgeCounts: showBadgeCounts ?? settings.showBadgeCounts,
         );
 
   @override
@@ -131,5 +137,6 @@ class SettingsState extends Equatable {
         autocompleteDescription,
         defaultFilterStartDateToMonday,
         oneTimerAtATime,
+        showBadgeCounts,
       ];
 }
