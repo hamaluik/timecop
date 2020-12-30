@@ -29,6 +29,10 @@ class TimersState extends Equatable {
 
   TimersState.clone(TimersState state) : this(state.timers, DateTime.now());
 
+  int countRunningTimers() {
+    return timers.where((t) => t.endTime == null).length;
+  }
+
   @override
   List<Object> get props => [timers, now];
   @override

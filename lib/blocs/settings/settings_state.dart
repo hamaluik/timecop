@@ -30,6 +30,7 @@ class SettingsState extends Equatable {
   final bool defaultFilterStartDateToMonday;
   final bool oneTimerAtATime;
   final bool showBadgeCounts;
+  final bool hasAskedNotificationPermissions;
 
   SettingsState({
     @required this.exportGroupTimers,
@@ -46,6 +47,7 @@ class SettingsState extends Equatable {
     @required this.defaultFilterStartDateToMonday,
     @required this.oneTimerAtATime,
     @required this.showBadgeCounts,
+    @required this.hasAskedNotificationPermissions,
   })  : assert(exportGroupTimers != null),
         assert(exportIncludeDate != null),
         assert(exportIncludeProject != null),
@@ -59,7 +61,8 @@ class SettingsState extends Equatable {
         assert(autocompleteDescription != null),
         assert(defaultFilterStartDateToMonday != null),
         assert(oneTimerAtATime != null),
-        assert(showBadgeCounts != null);
+        assert(showBadgeCounts != null),
+        assert(hasAskedNotificationPermissions != null);
 
   static SettingsState initial() {
     return SettingsState(
@@ -77,6 +80,7 @@ class SettingsState extends Equatable {
       defaultFilterStartDateToMonday: false,
       oneTimerAtATime: false,
       showBadgeCounts: false,
+      hasAskedNotificationPermissions: false,
     );
   }
 
@@ -97,6 +101,7 @@ class SettingsState extends Equatable {
     bool defaultFilterStartDateToMonday,
     bool oneTimerAtATime,
     bool showBadgeCounts,
+    bool hasAskedNotificationPermissions,
   }) : this(
           exportGroupTimers: exportGroupTimers ?? settings.exportGroupTimers,
           exportIncludeDate: exportIncludeDate ?? settings.exportIncludeDate,
@@ -120,6 +125,8 @@ class SettingsState extends Equatable {
               settings.defaultFilterStartDateToMonday,
           oneTimerAtATime: oneTimerAtATime ?? settings.oneTimerAtATime,
           showBadgeCounts: showBadgeCounts ?? settings.showBadgeCounts,
+          hasAskedNotificationPermissions: hasAskedNotificationPermissions ??
+              settings.hasAskedNotificationPermissions,
         );
 
   @override
@@ -138,5 +145,6 @@ class SettingsState extends Equatable {
         defaultFilterStartDateToMonday,
         oneTimerAtATime,
         showBadgeCounts,
+        hasAskedNotificationPermissions,
       ];
 }

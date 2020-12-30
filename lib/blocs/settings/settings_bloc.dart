@@ -14,6 +14,7 @@
 
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:timecop/data_providers/settings/settings_provider.dart';
 import './bloc.dart';
 
@@ -65,6 +66,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           await settings.getBool("oneTimerAtATime") ?? state.oneTimerAtATime;
       bool showBadgeCounts =
           await settings.getBool("showBadgeCounts") ?? state.showBadgeCounts;
+      bool hasAskedNotificationPermissions =
+          await settings.getBool("hasAskedNotificationPermissions") ??
+              state.hasAskedNotificationPermissions;
       yield SettingsState(
           exportGroupTimers: exportGroupTimers,
           exportIncludeDate: exportIncludeDate,
@@ -79,7 +83,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           autocompleteDescription: autocompleteDescription,
           defaultFilterStartDateToMonday: defaultFilterStartDateToMonday,
           oneTimerAtATime: oneTimerAtATime,
-          showBadgeCounts: showBadgeCounts);
+          showBadgeCounts: showBadgeCounts,
+          hasAskedNotificationPermissions: hasAskedNotificationPermissions);
     } else if (event is SetBoolValueEvent) {
       if (event.exportGroupTimers != null) {
         await settings.setBool("exportGroupTimers", event.exportGroupTimers);
@@ -128,8 +133,16 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       if (event.oneTimerAtATime != null) {
         await settings.setBool("oneTimerAtATime", event.oneTimerAtATime);
       }
+      bool hasAskedNotificationPermissions =
+          state.hasAskedNotificationPermissions;
       if (event.showBadgeCounts != null) {
         await settings.setBool("showBadgeCounts", event.showBadgeCounts);
+        if (event.showBadgeCounts) {
+          // trigger a notification permission window
+          FlutterAppBadger.removeBadge();
+          await settings.setBool("hasAskedNotificationPermissions", true);
+          hasAskedNotificationPermissions = true;
+        }
       }
       yield SettingsState.clone(
         state,
@@ -147,6 +160,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         defaultFilterStartDateToMonday: event.defaultFilterStartDateToMonday,
         oneTimerAtATime: event.oneTimerAtATime,
         showBadgeCounts: event.showBadgeCounts,
+        hasAskedNotificationPermissions: hasAskedNotificationPermissions,
       );
     }
   }

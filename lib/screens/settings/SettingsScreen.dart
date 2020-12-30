@@ -105,10 +105,8 @@ class SettingsScreen extends StatelessWidget {
                   SwitchListTile(
                 title: Text(L10N.of(context).tr.showBadgeCounts),
                 value: settings.showBadgeCounts,
-                onChanged: (bool value) {
-                  settingsBloc.add(SetBoolValueEvent(showBadgeCounts: value));
-                  BlocProvider.of<TimersBloc>(context).updateBadgeCount();
-                },
+                onChanged: (bool value) =>
+                    settingsBloc.add(SetBoolValueEvent(showBadgeCounts: value)),
                 activeColor: Theme.of(context).accentColor,
               ),
             ),
