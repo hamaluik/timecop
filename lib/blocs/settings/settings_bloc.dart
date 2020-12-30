@@ -144,6 +144,16 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           hasAskedNotificationPermissions = true;
         }
       }
+      if (event.showRunningTimersAsNotifications != null) {
+        await settings.setBool("showRunningTimersAsNotifications",
+            event.showRunningTimersAsNotifications);
+        if (event.showRunningTimersAsNotifications) {
+          // trigger a notification permission window
+          FlutterAppBadger.removeBadge();
+          await settings.setBool("hasAskedNotificationPermissions", true);
+          hasAskedNotificationPermissions = true;
+        }
+      }
       yield SettingsState.clone(
         state,
         exportGroupTimers: event.exportGroupTimers,
@@ -161,6 +171,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         oneTimerAtATime: event.oneTimerAtATime,
         showBadgeCounts: event.showBadgeCounts,
         hasAskedNotificationPermissions: hasAskedNotificationPermissions,
+        showRunningTimersAsNotifications:
+            event.showRunningTimersAsNotifications,
       );
     }
   }

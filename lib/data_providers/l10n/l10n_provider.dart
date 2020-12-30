@@ -82,4 +82,7 @@ abstract class L10NProvider {
   String get selectAll;
   String get selectNone;
   String get showBadgeCounts;
+  String get runningTimersNotificationTitle;
+  String get runningTimersNotificationBody;
+  String get enableRunningTimersNotification;
 }

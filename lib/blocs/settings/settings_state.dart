@@ -31,6 +31,7 @@ class SettingsState extends Equatable {
   final bool oneTimerAtATime;
   final bool showBadgeCounts;
   final bool hasAskedNotificationPermissions;
+  final bool showRunningTimersAsNotifications;
 
   SettingsState({
     @required this.exportGroupTimers,
@@ -48,6 +49,7 @@ class SettingsState extends Equatable {
     @required this.oneTimerAtATime,
     @required this.showBadgeCounts,
     @required this.hasAskedNotificationPermissions,
+    @required this.showRunningTimersAsNotifications,
   })  : assert(exportGroupTimers != null),
         assert(exportIncludeDate != null),
         assert(exportIncludeProject != null),
@@ -62,7 +64,8 @@ class SettingsState extends Equatable {
         assert(defaultFilterStartDateToMonday != null),
         assert(oneTimerAtATime != null),
         assert(showBadgeCounts != null),
-        assert(hasAskedNotificationPermissions != null);
+        assert(hasAskedNotificationPermissions != null),
+        assert(showRunningTimersAsNotifications != null);
 
   static SettingsState initial() {
     return SettingsState(
@@ -81,6 +84,7 @@ class SettingsState extends Equatable {
       oneTimerAtATime: false,
       showBadgeCounts: false,
       hasAskedNotificationPermissions: false,
+      showRunningTimersAsNotifications: false,
     );
   }
 
@@ -102,6 +106,7 @@ class SettingsState extends Equatable {
     bool oneTimerAtATime,
     bool showBadgeCounts,
     bool hasAskedNotificationPermissions,
+    bool showRunningTimersAsNotifications,
   }) : this(
           exportGroupTimers: exportGroupTimers ?? settings.exportGroupTimers,
           exportIncludeDate: exportIncludeDate ?? settings.exportIncludeDate,
@@ -127,6 +132,8 @@ class SettingsState extends Equatable {
           showBadgeCounts: showBadgeCounts ?? settings.showBadgeCounts,
           hasAskedNotificationPermissions: hasAskedNotificationPermissions ??
               settings.hasAskedNotificationPermissions,
+          showRunningTimersAsNotifications: showRunningTimersAsNotifications ??
+              settings.showRunningTimersAsNotifications,
         );
 
   @override
@@ -146,5 +153,6 @@ class SettingsState extends Equatable {
         oneTimerAtATime,
         showBadgeCounts,
         hasAskedNotificationPermissions,
+        showRunningTimersAsNotifications,
       ];
 }

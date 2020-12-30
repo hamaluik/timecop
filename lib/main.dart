@@ -17,6 +17,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:timecop/blocs/locale/locale_bloc.dart';
+import 'package:timecop/blocs/notifications/notifications_bloc.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/settings/settings_event.dart';
@@ -26,6 +27,7 @@ import 'package:timecop/blocs/settings/settings_state.dart';
 import 'package:timecop/blocs/theme/theme_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/data_providers/data/data_provider.dart';
+import 'package:timecop/data_providers/notifications/notifications_provider.dart';
 import 'package:timecop/data_providers/settings/settings_provider.dart';
 import 'package:timecop/fontlicenses.dart';
 import 'package:timecop/l10n.dart';
@@ -40,7 +42,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final SettingsProvider settings = await SharedPrefsSettingsProvider.load();
   final DataProvider data = await DatabaseProvider.open();
-  await runMain(settings, data);
+  final NotificationsProvider notifications =
+      await NotificationsProvider.load();
+  await runMain(settings, data, notifications);
 }
 
 /*import 'package:timecop/data_providers/data/mock_data_provider.dart';
@@ -51,7 +55,8 @@ Future<void> main() async {
   await runMain(settings, data);
 }*/
 
-Future<void> runMain(SettingsProvider settings, DataProvider data) async {
+Future<void> runMain(SettingsProvider settings, DataProvider data,
+    NotificationsProvider notifications) async {
   // setup intl date formats?
   //await initializeDateFormatting();
   LicenseRegistry.addLicense(getFontLicenses);
@@ -74,6 +79,9 @@ Future<void> runMain(SettingsProvider settings, DataProvider data) async {
       ),
       BlocProvider<ProjectsBloc>(
         create: (_) => ProjectsBloc(data),
+      ),
+      BlocProvider<NotificationsBloc>(
+        create: (_) => NotificationsBloc(notifications),
       ),
     ],
     child: TimeCopApp(settings: settings),
@@ -132,6 +140,21 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
     } else {
       // remove any and all badges if we disable the option
       FlutterAppBadger.removeBadge();
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print("application lifecycle changed to: " + state.toString());
+    if (state == AppLifecycleState.paused) {
+      SettingsState settings = BlocProvider.of<SettingsBloc>(context).state;
+      TimersState timers = BlocProvider.of<TimersBloc>(context).state;
+      if (settings.showRunningTimersAsNotifications &&
+          timers.countRunningTimers() > 0) {
+        BlocProvider.of<NotificationsBloc>(context).add(ShowNotification(
+            title: L10N.of(context).tr.runningTimersNotificationTitle,
+            body: L10N.of(context).tr.runningTimersNotificationBody));
+      }
     }
   }
 
