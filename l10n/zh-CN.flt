@@ -130,3 +130,5 @@ selectAll = 全选
 
 selectNone = 选择无
 
+showBadgeCounts = 将正在运行的计时器计数显示为应用程序图标徽章
+

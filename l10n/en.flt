@@ -130,3 +130,5 @@ selectAll = Select All
 
 selectNone = Select None
 
+showBadgeCounts = Show Running Timer Count As App Icon Badge
+

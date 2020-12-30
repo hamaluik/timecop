@@ -130,3 +130,5 @@ selectAll = Seleccionar todo
 
 selectNone = No seleccionar ninguno
 
+showBadgeCounts = Mostrar cuenta del temporizador en ejecución como insignia del icono de la aplicación
+

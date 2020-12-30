@@ -130,3 +130,5 @@ selectAll = Selecionar tudo
 
 selectNone = Selecione nenhum
 
+showBadgeCounts = Mostrar contagem de cronômetro em execução como emblema do ícone do aplicativo
+

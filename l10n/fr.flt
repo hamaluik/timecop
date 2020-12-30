@@ -130,3 +130,5 @@ selectAll = Tout sélectionner
 
 selectNone = Ne rien sélectionner
 
+showBadgeCounts = Afficher le nombre de minuteries en cours d'exécution comme badge d'icône d'application
+

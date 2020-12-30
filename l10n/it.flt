@@ -179,3 +179,5 @@ selectAll = Seleziona tutto
 
 selectNone = Non selezionare niente
 
+showBadgeCounts = Mostra il conteggio del timer di esecuzione come badge dell'icona dell'app
+

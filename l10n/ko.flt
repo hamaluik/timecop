@@ -130,3 +130,5 @@ selectAll = 모두 선택
 
 selectNone = 없음을 선택하십시오
 
+showBadgeCounts = 실행중인 타이머 수를 앱 아이콘 배지로 표시
+
