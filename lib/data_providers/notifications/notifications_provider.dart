@@ -23,7 +23,7 @@ class NotificationsProvider {
     FlutterLocalNotificationsPlugin notif = FlutterLocalNotificationsPlugin();
 
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/launcher_icon');
+        AndroidInitializationSettings('ic_notification_icon');
     final IOSInitializationSettings initializationSettingsIOS =
         IOSInitializationSettings(
       requestSoundPermission: false,
