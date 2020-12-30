@@ -87,7 +87,7 @@ class RunningTimerRow extends StatelessWidget {
                         ),
                       ],
                     ));
-            if (delete) {
+            if (delete == true) {
               final TimersBloc timersBloc =
                   BlocProvider.of<TimersBloc>(context);
               assert(timersBloc != null);
