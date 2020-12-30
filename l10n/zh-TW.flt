@@ -132,3 +132,9 @@ selectNone = 選擇無
 
 showBadgeCounts = 將正在運行的計時器計數顯示為應用程序圖標徽章
 
+runningTimersNotificationTitle = 運行計時器
+
+runningTimersNotificationBody = 計時器仍在後台運行
+
+enableRunningTimersNotification = 顯示正在運行的計時器通知
+

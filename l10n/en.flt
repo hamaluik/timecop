@@ -132,3 +132,9 @@ selectNone = Select None
 
 showBadgeCounts = Show Running Timer Count As App Icon Badge
 
+runningTimersNotificationTitle = Running Timers
+
+runningTimersNotificationBody = Timers are still running in the background
+
+enableRunningTimersNotification = Show Running Timer Notifications
+

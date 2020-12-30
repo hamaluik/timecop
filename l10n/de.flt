@@ -132,3 +132,9 @@ selectNone = Nichts ausgewählt
 
 showBadgeCounts = Anzahl laufender Timer als App-Symbol anzeigen
 
+runningTimersNotificationTitle = Timer ausführen
+
+runningTimersNotificationBody = Timer laufen noch im Hintergrund
+
+enableRunningTimersNotification = Laufende Timer-Benachrichtigungen anzeigen
+

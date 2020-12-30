@@ -132,3 +132,9 @@ selectNone = Pilih Tidak Ada
 
 showBadgeCounts = Tampilkan Hitungan Pengatur Waktu Berjalan Sebagai Lencana Ikon Aplikasi
 
+runningTimersNotificationTitle = Menjalankan Timer
+
+runningTimersNotificationBody = Timer masih berjalan di latar belakang
+
+enableRunningTimersNotification = Tampilkan Notifikasi Pengatur Waktu Berjalan
+

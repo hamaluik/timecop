@@ -132,3 +132,9 @@ selectNone = Ne rien sélectionner
 
 showBadgeCounts = Afficher le nombre de minuteries en cours d'exécution comme badge d'icône d'application
 
+runningTimersNotificationTitle = Minuteries en cours
+
+runningTimersNotificationBody = Les minuteries fonctionnent toujours en arrière-plan
+
+enableRunningTimersNotification = Afficher les notifications du minuteur en cours d'exécution
+

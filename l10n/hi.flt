@@ -132,3 +132,9 @@ selectNone = किसी का चयन न करें
 
 showBadgeCounts = ऐप आइकन बैज के रूप में रनिंग टाइमर गणना दिखाएं
 
+runningTimersNotificationTitle = रनिंग टाइमर
+
+runningTimersNotificationBody = टाइमर अभी भी पृष्ठभूमि में चल रहे हैं
+
+enableRunningTimersNotification = रनिंग टाइमर सूचनाएं दिखाएं
+

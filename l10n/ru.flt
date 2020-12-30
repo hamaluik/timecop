@@ -136,3 +136,9 @@ selectNone = Выберите Нет
 
 showBadgeCounts = Показывать счетчик работающего таймера как значок значка приложения
 
+runningTimersNotificationTitle = Беговые таймеры
+
+runningTimersNotificationBody = Таймеры все еще работают в фоновом режиме
+
+enableRunningTimersNotification = Показать уведомления о запуске таймера
+

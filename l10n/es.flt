@@ -132,3 +132,9 @@ selectNone = No seleccionar ninguno
 
 showBadgeCounts = Mostrar cuenta del temporizador en ejecución como insignia del icono de la aplicación
 
+runningTimersNotificationTitle = Ejecutando temporizadores
+
+runningTimersNotificationBody = Los temporizadores siguen funcionando en segundo plano
+
+enableRunningTimersNotification = Mostrar notificaciones del temporizador en ejecución
+
