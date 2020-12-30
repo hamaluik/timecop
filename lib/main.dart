@@ -121,19 +121,17 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
     if (!settingsState.hasAskedNotificationPermissions &&
         !settingsState.showBadgeCounts) {
       // they haven't set the permission yet
-      print("no permissions for app badge yet");
       return;
     } else if (settingsState.showBadgeCounts) {
       // need to ask permission
       if (count > 0) {
-        print("setting badge count to " + count.toString());
         FlutterAppBadger.updateBadgeCount(count);
       } else {
-        print("removing badge");
         FlutterAppBadger.removeBadge();
       }
     } else {
-      print("ignoring Icons.notifications badge");
+      // remove any and all badges if we disable the option
+      FlutterAppBadger.removeBadge();
     }
   }
 
