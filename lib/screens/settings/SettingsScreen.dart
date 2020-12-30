@@ -17,6 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timecop/blocs/locale/locale_bloc.dart';
 import 'package:timecop/blocs/settings/bloc.dart';
 import 'package:timecop/blocs/theme/theme_bloc.dart';
+import 'package:timecop/blocs/timers/timers_bloc.dart';
 import 'package:timecop/l10n.dart';
 
 import 'components/locale_options.dart';
@@ -95,6 +96,19 @@ class SettingsScreen extends StatelessWidget {
                 value: settings.oneTimerAtATime,
                 onChanged: (bool value) =>
                     settingsBloc.add(SetBoolValueEvent(oneTimerAtATime: value)),
+                activeColor: Theme.of(context).accentColor,
+              ),
+            ),
+            BlocBuilder<SettingsBloc, SettingsState>(
+              bloc: settingsBloc,
+              builder: (BuildContext context, SettingsState settings) =>
+                  SwitchListTile(
+                title: Text(L10N.of(context).tr.showBadgeCounts),
+                value: settings.showBadgeCounts,
+                onChanged: (bool value) {
+                  settingsBloc.add(SetBoolValueEvent(showBadgeCounts: value));
+                  BlocProvider.of<TimersBloc>(context).updateBadgeCount();
+                },
                 activeColor: Theme.of(context).accentColor,
               ),
             ),

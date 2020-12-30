@@ -81,4 +81,5 @@ abstract class L10NProvider {
   String get oneTimerAtATime;
   String get selectAll;
   String get selectNone;
+  String get showBadgeCounts;
 }
