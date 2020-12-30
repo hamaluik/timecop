@@ -17,3 +17,9 @@ class ShowNotification extends NotificationsEvent {
   @override
   List<Object> get props => [title, body];
 }
+
+class RemoveNotifications extends NotificationsEvent {
+  RemoveNotifications();
+  @override
+  List<Object> get props => [];
+}

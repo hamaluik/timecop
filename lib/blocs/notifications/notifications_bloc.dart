@@ -25,6 +25,9 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
       await notifications.displayRunningTimersNotification(
           event.title, event.body);
       yield NotificationsState();
+    } else if (event is RemoveNotifications) {
+      await notifications.removeAllNotifications();
+      yield NotificationsState();
     }
   }
 }

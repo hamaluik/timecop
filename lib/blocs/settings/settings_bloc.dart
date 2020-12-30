@@ -69,22 +69,27 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       bool hasAskedNotificationPermissions =
           await settings.getBool("hasAskedNotificationPermissions") ??
               state.hasAskedNotificationPermissions;
+      bool showRunningTimersAsNotifications =
+          await settings.getBool("showRunningTimersAsNotifications") ??
+              state.showRunningTimersAsNotifications;
       yield SettingsState(
-          exportGroupTimers: exportGroupTimers,
-          exportIncludeDate: exportIncludeDate,
-          exportIncludeProject: exportIncludeProject,
-          exportIncludeDescription: exportIncludeDescription,
-          exportIncludeProjectDescription: exportIncludeProjectDescription,
-          exportIncludeStartTime: exportIncludeStartTime,
-          exportIncludeEndTime: exportIncludeEndTime,
-          exportIncludeDurationHours: exportIncludeDurationHours,
-          groupTimers: groupTimers,
-          collapseDays: collapseDays,
-          autocompleteDescription: autocompleteDescription,
-          defaultFilterStartDateToMonday: defaultFilterStartDateToMonday,
-          oneTimerAtATime: oneTimerAtATime,
-          showBadgeCounts: showBadgeCounts,
-          hasAskedNotificationPermissions: hasAskedNotificationPermissions);
+        exportGroupTimers: exportGroupTimers,
+        exportIncludeDate: exportIncludeDate,
+        exportIncludeProject: exportIncludeProject,
+        exportIncludeDescription: exportIncludeDescription,
+        exportIncludeProjectDescription: exportIncludeProjectDescription,
+        exportIncludeStartTime: exportIncludeStartTime,
+        exportIncludeEndTime: exportIncludeEndTime,
+        exportIncludeDurationHours: exportIncludeDurationHours,
+        groupTimers: groupTimers,
+        collapseDays: collapseDays,
+        autocompleteDescription: autocompleteDescription,
+        defaultFilterStartDateToMonday: defaultFilterStartDateToMonday,
+        oneTimerAtATime: oneTimerAtATime,
+        showBadgeCounts: showBadgeCounts,
+        hasAskedNotificationPermissions: hasAskedNotificationPermissions,
+        showRunningTimersAsNotifications: showRunningTimersAsNotifications,
+      );
     } else if (event is SetBoolValueEvent) {
       if (event.exportGroupTimers != null) {
         await settings.setBool("exportGroupTimers", event.exportGroupTimers);

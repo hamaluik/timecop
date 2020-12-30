@@ -144,17 +144,29 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
     print("application lifecycle changed to: " + state.toString());
     if (state == AppLifecycleState.paused) {
       SettingsState settings = BlocProvider.of<SettingsBloc>(context).state;
       TimersState timers = BlocProvider.of<TimersBloc>(context).state;
+
+      // TODO: fix this ugly hack. The L10N we load is part of the material app
+      // that we build in build(); so we don't have access to it here
+      LocaleState localeState = BlocProvider.of<LocaleBloc>(context).state;
+      Locale locale = localeState.locale ?? Locale("en");
+      L10N l10n = await L10N.load(locale);
+
       if (settings.showRunningTimersAsNotifications &&
           timers.countRunningTimers() > 0) {
+        print("showing notification");
         BlocProvider.of<NotificationsBloc>(context).add(ShowNotification(
-            title: L10N.of(context).tr.runningTimersNotificationTitle,
-            body: L10N.of(context).tr.runningTimersNotificationBody));
+            title: l10n.tr.runningTimersNotificationTitle,
+            body: l10n.tr.runningTimersNotificationBody));
+      } else {
+        print("not showing notification");
       }
+    } else if (state == AppLifecycleState.resumed) {
+      BlocProvider.of<NotificationsBloc>(context).add(RemoveNotifications());
     }
   }
 

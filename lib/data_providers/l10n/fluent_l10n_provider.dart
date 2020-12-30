@@ -249,4 +249,16 @@ class FluentL10NProvider extends L10NProvider {
   @override
   String get showBadgeCounts =>
       _bundle.format("showBadgeCounts", errors: _errors) ?? "showBadgeCounts";
+  @override
+  String get runningTimersNotificationTitle =>
+      _bundle.format("runningTimersNotificationTitle", errors: _errors) ??
+      "runningTimersNotificationTitle";
+  @override
+  String get runningTimersNotificationBody =>
+      _bundle.format("runningTimersNotificationBody", errors: _errors) ??
+      "runningTimersNotificationBody";
+  @override
+  String get enableRunningTimersNotification =>
+      _bundle.format("enableRunningTimersNotification", errors: _errors) ??
+      "enableRunningTimersNotification";
 }

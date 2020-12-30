@@ -23,7 +23,7 @@ class NotificationsProvider {
     FlutterLocalNotificationsPlugin notif = FlutterLocalNotificationsPlugin();
 
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('app_icon');
+        AndroidInitializationSettings('@mipmap/launcher_icon');
     final IOSInitializationSettings initializationSettingsIOS =
         IOSInitializationSettings(
       requestSoundPermission: false,
@@ -55,7 +55,9 @@ class NotificationsProvider {
 
   Future<void> displayRunningTimersNotification(
       String title, String body) async {
+    print("displaying notification");
     if (!await requestPermissions()) {
+      print("no permissions, quitting");
       return;
     }
 
@@ -78,5 +80,9 @@ class NotificationsProvider {
         NotificationDetails(iOS: ios, android: android);
 
     await _notif.show(0, title, body, details);
+  }
+
+  Future<void> removeAllNotifications() async {
+    await _notif.cancelAll();
   }
 }
