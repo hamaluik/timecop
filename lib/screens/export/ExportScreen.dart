@@ -14,7 +14,6 @@
 
 import 'dart:collection';
 import 'dart:io';
-import 'package:path/path.dart' as p;
 import 'package:flutter_share/flutter_share.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +23,6 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:timecop/blocs/projects/projects_bloc.dart';
 import 'package:timecop/blocs/settings/bloc.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
@@ -34,6 +32,7 @@ import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/models/project_description_pair.dart';
 import 'package:timecop/models/timer_entry.dart';
+import 'package:timecop/screens/export/components/ExportMenu.dart';
 
 class ExportScreen extends StatefulWidget {
   ExportScreen({Key key}) : super(key: key);
@@ -84,38 +83,7 @@ class _ExportScreenState extends State<ExportScreen> {
       appBar: AppBar(
         title: Text(L10N.of(context).tr.export),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(FontAwesomeIcons.database),
-            onPressed: () async {
-              var databasesPath = await getDatabasesPath();
-              var dbPath = p.join(databasesPath, 'timecop.db');
-
-              try {
-                // on android, copy it somewhere where it can be shared
-                if (Platform.isAndroid) {
-                  Directory directory = await getExternalStorageDirectory();
-                  File copiedDB = await File(dbPath)
-                      .copy(p.join(directory.path, "timecop.db"));
-                  dbPath = copiedDB.path;
-                }
-                await FlutterShare.shareFile(
-                    title: L10N
-                        .of(context)
-                        .tr
-                        .timeCopDatabase(_dateFormat.format(DateTime.now())),
-                    filePath: dbPath);
-              } on Exception catch (e) {
-                _scaffoldKey.currentState.showSnackBar(SnackBar(
-                  backgroundColor: Theme.of(context).errorColor,
-                  content: Text(
-                    e.toString(),
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  duration: Duration(seconds: 5),
-                ));
-              }
-            },
-          )
+          ExportMenu(dateFormat: _dateFormat, scaffoldKey: _scaffoldKey),
         ],
       ),
       body: ListView(

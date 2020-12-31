@@ -33,6 +33,7 @@ abstract class L10NProvider {
   String get editTimer;
   String get endTime;
   String get export;
+  String get import;
   String get filter;
   String get from;
   String get logoSemantics;

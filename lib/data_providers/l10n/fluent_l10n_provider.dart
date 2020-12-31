@@ -80,6 +80,8 @@ class FluentL10NProvider extends L10NProvider {
   @override
   String get export => _bundle.format("export", errors: _errors);
   @override
+  String get import => _bundle.format("import", errors: _errors) ?? "import";
+  @override
   String get filter => _bundle.format("filter", errors: _errors);
   @override
   String get from => _bundle.format("from", errors: _errors);
