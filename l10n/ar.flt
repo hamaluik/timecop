@@ -130,3 +130,5 @@ selectAll = اختر الكل
 
 selectNone = لا تختر شيء
 
+defaultFilterDays = فترة التصفية الافتراضية (أيام)
+

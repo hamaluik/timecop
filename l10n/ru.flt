@@ -134,3 +134,5 @@ selectAll = Выбрать все
 
 selectNone = Выберите Нет
 
+defaultFilterDays = Период фильтра по умолчанию (дни)
+

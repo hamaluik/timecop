@@ -130,3 +130,6 @@ oneTimerAtATime = Only Allow One Running Timer at a Time
 selectAll = Select All
 
 selectNone = Select None
+
+defaultFilterDays = Default Filter Period (Days)
+

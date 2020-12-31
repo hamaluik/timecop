@@ -130,3 +130,5 @@ selectAll = Wählen Sie Alle
 
 selectNone = Nichts ausgewählt
 
+defaultFilterDays = Standardfilterzeitraum (Tage)
+

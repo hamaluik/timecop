@@ -130,3 +130,5 @@ selectAll = Pilih Semua
 
 selectNone = Pilih Tidak Ada
 
+defaultFilterDays = Periode Filter Default (Hari)
+

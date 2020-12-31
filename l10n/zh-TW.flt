@@ -130,3 +130,5 @@ selectAll = 全選
 
 selectNone = 選擇無
 
+defaultFilterDays = 默認過濾期限（天）
+

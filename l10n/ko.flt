@@ -130,3 +130,5 @@ selectAll = 모두 선택
 
 selectNone = 없음을 선택하십시오
 
+defaultFilterDays = 기본 필터 기간 (일)
+

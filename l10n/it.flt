@@ -179,3 +179,5 @@ selectAll = Seleziona tutto
 
 selectNone = Non selezionare niente
 
+defaultFilterDays = Periodo filtro predefinito (giorni)
+

@@ -130,3 +130,5 @@ selectAll = すべて選択
 
 selectNone = 何も選択しない
 
+defaultFilterDays = デフォルトのフィルター期間（日）
+

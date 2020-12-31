@@ -130,3 +130,5 @@ selectAll = Select All
 
 selectNone = Select None
 
+defaultFilterDays = Default Filter Period (Days)
+
