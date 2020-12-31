@@ -65,6 +65,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           await settings.getBool("oneTimerAtATime") ?? state.oneTimerAtATime;
       bool showBadgeCounts =
           await settings.getBool("showBadgeCounts") ?? state.showBadgeCounts;
+      int defaultFilterDays = await settings.getInt("defaultFilterDays") ?? 30;
       yield SettingsState(
           exportGroupTimers: exportGroupTimers,
           exportIncludeDate: exportIncludeDate,
@@ -79,7 +80,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           autocompleteDescription: autocompleteDescription,
           defaultFilterStartDateToMonday: defaultFilterStartDateToMonday,
           oneTimerAtATime: oneTimerAtATime,
-          showBadgeCounts: showBadgeCounts);
+          showBadgeCounts: showBadgeCounts,
+          defaultFilterDays: defaultFilterDays);
     } else if (event is SetBoolValueEvent) {
       if (event.exportGroupTimers != null) {
         await settings.setBool("exportGroupTimers", event.exportGroupTimers);
@@ -148,6 +150,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         oneTimerAtATime: event.oneTimerAtATime,
         showBadgeCounts: event.showBadgeCounts,
       );
+    } else if (event is SetDefaultFilterDays) {
+      await settings.setInt("defaultFilterDays", event.days ?? -1);
+      yield SettingsState.clone(state, defaultFilterDays: event.days ?? -1);
     }
   }
 
@@ -156,8 +161,10 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       var dayOfWeek = 1; // Monday=1, Tuesday=2...
       DateTime date = DateTime.now();
       return date.subtract(Duration(days: date.weekday - dayOfWeek));
-    } else {
+    } else if (state.defaultFilterDays > 0) {
       return DateTime.now().subtract(Duration(days: 30));
+    } else {
+      return null;
     }
   }
 }

@@ -82,4 +82,5 @@ abstract class L10NProvider {
   String get selectAll;
   String get selectNone;
   String get showBadgeCounts;
+  String get defaultFilterDays;
 }

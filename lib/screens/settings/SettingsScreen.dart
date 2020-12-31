@@ -19,6 +19,9 @@ import 'package:timecop/blocs/settings/bloc.dart';
 import 'package:timecop/blocs/theme/theme_bloc.dart';
 import 'package:timecop/blocs/timers/timers_bloc.dart';
 import 'package:timecop/l10n.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:numberpicker/numberpicker.dart';
 
 import 'components/locale_options.dart';
 import 'components/theme_options.dart';
@@ -88,6 +91,56 @@ class SettingsScreen extends StatelessWidget {
                 activeColor: Theme.of(context).accentColor,
               ),
             ),
+            BlocBuilder<SettingsBloc, SettingsState>(
+                bloc: settingsBloc,
+                builder: (BuildContext context, SettingsState settings) {
+                  if (settings.defaultFilterStartDateToMonday) {
+                    return Container();
+                  }
+
+                  return Slidable(
+                    actionPane: SlidableDrawerActionPane(),
+                    actionExtentRatio: 0.15,
+                    child: ListTile(
+                      title: Text(L10N.of(context).tr.defaultFilterDays),
+                      trailing: Text(settings.defaultFilterDays == -1
+                          ? "—"
+                          : settings.defaultFilterDays.toString()),
+                      onTap: () async {
+                        int days = await showDialog<int>(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return NumberPickerDialog.integer(
+                                minValue: 1,
+                                maxValue: 365,
+                                initialIntegerValue:
+                                    settings.defaultFilterDays > 0
+                                        ? settings.defaultFilterDays
+                                        : 30,
+                                title:
+                                    Text(L10N.of(context).tr.defaultFilterDays),
+                                infiniteLoop: true,
+                                haptics: true,
+                              );
+                            });
+                        if (days != null) {
+                          settingsBloc.add(SetDefaultFilterDays(days));
+                        }
+                      },
+                    ),
+                    secondaryActions: <Widget>[
+                      IconSlideAction(
+                        color: Theme.of(context).errorColor,
+                        foregroundColor:
+                            Theme.of(context).accentIconTheme.color,
+                        icon: FontAwesomeIcons.minusCircle,
+                        onTap: () {
+                          settingsBloc.add(SetDefaultFilterDays(null));
+                        },
+                      )
+                    ],
+                  );
+                }),
             BlocBuilder<SettingsBloc, SettingsState>(
               bloc: settingsBloc,
               builder: (BuildContext context, SettingsState settings) =>

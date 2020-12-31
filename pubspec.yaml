@@ -31,6 +31,7 @@ dependencies:
   flutter_swiper: ^1.1.6
   flutter_typeahead: ^1.8.0
   flutter_app_badger: ^1.1.2
+  numberpicker: ^1.3.0
 
 dev_dependencies:
   pedantic: ^1.0.0

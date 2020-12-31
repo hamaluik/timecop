@@ -249,4 +249,8 @@ class FluentL10NProvider extends L10NProvider {
   @override
   String get showBadgeCounts =>
       _bundle.format("showBadgeCounts", errors: _errors) ?? "showBadgeCounts";
+  @override
+  String get defaultFilterDays =>
+      _bundle.format("defaultFilterDays", errors: _errors) ??
+      "defaultFilterDays";
 }

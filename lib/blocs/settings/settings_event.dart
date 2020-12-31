@@ -73,3 +73,10 @@ class SetBoolValueEvent extends SettingsEvent {
         showBadgeCounts,
       ];
 }
+
+class SetDefaultFilterDays extends SettingsEvent {
+  final int days;
+  const SetDefaultFilterDays(this.days);
+  @override
+  List<Object> get props => [days];
+}

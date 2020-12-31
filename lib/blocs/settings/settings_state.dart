@@ -30,6 +30,7 @@ class SettingsState extends Equatable {
   final bool defaultFilterStartDateToMonday;
   final bool oneTimerAtATime;
   final bool showBadgeCounts;
+  final int defaultFilterDays;
 
   SettingsState({
     @required this.exportGroupTimers,
@@ -46,6 +47,7 @@ class SettingsState extends Equatable {
     @required this.defaultFilterStartDateToMonday,
     @required this.oneTimerAtATime,
     @required this.showBadgeCounts,
+    @required this.defaultFilterDays,
   })  : assert(exportGroupTimers != null),
         assert(exportIncludeDate != null),
         assert(exportIncludeProject != null),
@@ -59,7 +61,8 @@ class SettingsState extends Equatable {
         assert(autocompleteDescription != null),
         assert(defaultFilterStartDateToMonday != null),
         assert(oneTimerAtATime != null),
-        assert(showBadgeCounts != null);
+        assert(showBadgeCounts != null),
+        assert(defaultFilterDays != null);
 
   static SettingsState initial() {
     return SettingsState(
@@ -77,6 +80,7 @@ class SettingsState extends Equatable {
       defaultFilterStartDateToMonday: false,
       oneTimerAtATime: false,
       showBadgeCounts: false,
+      defaultFilterDays: 30,
     );
   }
 
@@ -90,13 +94,13 @@ class SettingsState extends Equatable {
     bool exportIncludeStartTime,
     bool exportIncludeEndTime,
     bool exportIncludeDurationHours,
-    int defaultProjectID,
     bool groupTimers,
     bool collapseDays,
     bool autocompleteDescription,
     bool defaultFilterStartDateToMonday,
     bool oneTimerAtATime,
     bool showBadgeCounts,
+    int defaultFilterDays,
   }) : this(
           exportGroupTimers: exportGroupTimers ?? settings.exportGroupTimers,
           exportIncludeDate: exportIncludeDate ?? settings.exportIncludeDate,
@@ -120,6 +124,7 @@ class SettingsState extends Equatable {
               settings.defaultFilterStartDateToMonday,
           oneTimerAtATime: oneTimerAtATime ?? settings.oneTimerAtATime,
           showBadgeCounts: showBadgeCounts ?? settings.showBadgeCounts,
+          defaultFilterDays: defaultFilterDays ?? settings.defaultFilterDays,
         );
 
   @override
@@ -138,5 +143,6 @@ class SettingsState extends Equatable {
         defaultFilterStartDateToMonday,
         oneTimerAtATime,
         showBadgeCounts,
+        defaultFilterDays,
       ];
 }

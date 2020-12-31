@@ -346,6 +346,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.19"
+  infinite_listview:
+    dependency: transitive
+    description:
+      name: infinite_listview
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1+1"
   intl:
     dependency: "direct main"
     description:
@@ -437,6 +444,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.12"
+  numberpicker:
+    dependency: "direct main"
+    description:
+      name: numberpicker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.3.0"
   package_config:
     dependency: transitive
     description:
