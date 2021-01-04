@@ -146,3 +146,5 @@ runningTimersNotificationBody = Les minuteries fonctionnent toujours en arrière
 
 enableRunningTimersNotification = Afficher les notifications du minuteur en cours d'exécution
 
+notes = Remarques
+

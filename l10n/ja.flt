@@ -146,3 +146,5 @@ runningTimersNotificationBody = タイマーはまだバックグラウンドで
 
 enableRunningTimersNotification = 実行中のタイマー通知を表示する
 
+notes = ノート
+

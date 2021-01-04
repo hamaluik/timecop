@@ -146,3 +146,5 @@ runningTimersNotificationBody = Os cronômetros ainda estão funcionando em segu
 
 enableRunningTimersNotification = Mostrar notificações do cronômetro em execução
 
+notes = Notas
+

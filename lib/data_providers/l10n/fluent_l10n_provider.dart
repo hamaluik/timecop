@@ -274,4 +274,6 @@ class FluentL10NProvider extends L10NProvider {
   String get enableRunningTimersNotification =>
       _bundle.format("enableRunningTimersNotification", errors: _errors) ??
       "enableRunningTimersNotification";
+  @override
+  String get notes => _bundle.format("notes", errors: _errors) ?? "notes";
 }

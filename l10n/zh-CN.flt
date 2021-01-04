@@ -146,3 +146,5 @@ runningTimersNotificationBody = 计时器仍在后台运行
 
 enableRunningTimersNotification = 显示正在运行的计时器通知
 
+notes = 笔记
+

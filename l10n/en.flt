@@ -146,3 +146,5 @@ runningTimersNotificationBody = Timers are still running in the background
 
 enableRunningTimersNotification = Show Running Timer Notifications
 
+notes = Notes
+

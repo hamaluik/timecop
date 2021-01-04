@@ -146,3 +146,5 @@ runningTimersNotificationBody = Los temporizadores siguen funcionando en segundo
 
 enableRunningTimersNotification = Mostrar notificaciones del temporizador en ejecución
 
+notes = Notas
+

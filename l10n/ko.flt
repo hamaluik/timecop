@@ -146,3 +146,5 @@ runningTimersNotificationBody = 타이머가 여전히 백그라운드에서 실
 
 enableRunningTimersNotification = 실행중인 타이머 알림 표시
 
+notes = 메모
+
