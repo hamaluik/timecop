@@ -132,3 +132,9 @@ selectNone = 없음을 선택하십시오
 
 defaultFilterDays = 기본 필터 기간 (일)
 
+import = 수입
+
+invalidDatabaseFile = 잘못된 데이터베이스 파일!
+
+databaseImported = 가져온 데이터베이스
+

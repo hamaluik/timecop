@@ -132,3 +132,9 @@ selectNone = Nichts ausgewählt
 
 defaultFilterDays = Standardfilterzeitraum (Tage)
 
+import = Importieren
+
+invalidDatabaseFile = Ungültige Datenbankdatei!
+
+databaseImported = Datenbank importiert
+

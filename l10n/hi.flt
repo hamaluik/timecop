@@ -132,3 +132,9 @@ selectNone = किसी का चयन न करें
 
 defaultFilterDays = डिफ़ॉल्ट फ़िल्टर अवधि (दिन)
 
+import = आयात
+
+invalidDatabaseFile = अमान्य डेटाबेस फ़ाइल!
+
+databaseImported = डेटाबेस आयात किया गया
+

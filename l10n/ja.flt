@@ -132,3 +132,9 @@ selectNone = 何も選択しない
 
 defaultFilterDays = デフォルトのフィルター期間（日）
 
+import = インポート
+
+invalidDatabaseFile = データベースファイルが無効です！
+
+databaseImported = インポートされたデータベース
+

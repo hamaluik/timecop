@@ -132,3 +132,9 @@ selectNone = لا تختر شيء
 
 defaultFilterDays = فترة التصفية الافتراضية (أيام)
 
+import = استيراد
+
+invalidDatabaseFile = ملف قاعدة بيانات غير صالح!
+
+databasedImported = تم استيراد قاعدة البيانات
+

@@ -136,3 +136,9 @@ selectNone = Выберите Нет
 
 defaultFilterDays = Период фильтра по умолчанию (дни)
 
+import = импорт
+
+invalidDatabaseFile = Неверный файл базы данных!
+
+databaseImported = База данных импортирована
+

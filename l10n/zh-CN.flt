@@ -132,3 +132,9 @@ selectNone = 选择无
 
 defaultFilterDays = 默认过滤期限（天）
 
+import = 进口
+
+invalidDatabaseFile = 无效的数据库文件！
+
+databaseImported = 数据库导入
+

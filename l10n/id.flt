@@ -132,3 +132,9 @@ selectNone = Pilih Tidak Ada
 
 defaultFilterDays = Periode Filter Default (Hari)
 
+import = Impor
+
+invalidDatabaseFile = File database tidak valid!
+
+databaseImported = Basis data diimpor
+
