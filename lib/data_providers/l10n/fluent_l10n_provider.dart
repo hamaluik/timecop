@@ -255,4 +255,11 @@ class FluentL10NProvider extends L10NProvider {
   String get defaultFilterDays =>
       _bundle.format("defaultFilterDays", errors: _errors) ??
       "defaultFilterDays";
+  @override
+  String get invalidDatabaseFile =>
+      _bundle.format("invalidDatabaseFile", errors: _errors) ??
+      "invalidDatabaseFile";
+  @override
+  String get databaseImported =>
+      _bundle.format("databaseImported", errors: _errors) ?? "databaseImported";
 }

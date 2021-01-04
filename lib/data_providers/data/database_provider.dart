@@ -197,15 +197,28 @@ class DatabaseProvider extends DataProvider {
     await _db.rawDelete("delete from timers where id=?", <dynamic>[timer.id]);
   }
 
-  @override
-  Future<void> factoryReset() async {
-    await _db.transaction((t) async {
-      await t.delete("timers");
-      await t.delete("projects");
-      await t.execute(
-          "UPDATE `sqlite_sequence` SET `seq` = 0 WHERE `name` = 'timers';");
-      await t.execute(
-          "UPDATE `sqlite_sequence` SET `seq` = 0 WHERE `name` = 'projects';");
-    });
+  static Future<bool> isValidDatabaseFile(String path) async {
+    try {
+      Database db = await openDatabase(path);
+      await db.rawQuery(
+          "select id, name, colour, archived from projects order by name asc limit 1");
+      await db.rawQuery(
+          "select id, project_id, description, start_time, end_time from timers order by start_time asc limit 1");
+      return true;
+    } on Exception catch (_) {
+      return false;
+    }
   }
+
+  //@override
+  //Future<void> factoryReset() async {
+  //await _db.transaction((t) async {
+  //await t.delete("timers");
+  //await t.delete("projects");
+  //await t.execute(
+  //"UPDATE `sqlite_sequence` SET `seq` = 0 WHERE `name` = 'timers';");
+  //await t.execute(
+  //"UPDATE `sqlite_sequence` SET `seq` = 0 WHERE `name` = 'projects';");
+  //});
+  //}
 }

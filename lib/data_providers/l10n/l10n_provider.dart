@@ -84,4 +84,6 @@ abstract class L10NProvider {
   String get selectNone;
   String get showBadgeCounts;
   String get defaultFilterDays;
+  String get invalidDatabaseFile;
+  String get databaseImported;
 }

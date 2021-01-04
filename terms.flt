@@ -135,3 +135,7 @@ defaultFilterDays = Default Filter Period (Days)
 
 import = Import
 
+invalidDatabaseFile = Invalid database file!
+
+databaseImported = Database imported
+

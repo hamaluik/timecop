@@ -13,6 +13,8 @@
 // limitations under the License.
 
 import 'package:equatable/equatable.dart';
+import 'package:timecop/blocs/projects/projects_bloc.dart';
+import 'package:timecop/blocs/timers/timers_bloc.dart';
 
 abstract class SettingsEvent extends Equatable {
   const SettingsEvent();
@@ -21,6 +23,18 @@ abstract class SettingsEvent extends Equatable {
 class LoadSettingsFromRepository extends SettingsEvent {
   @override
   List<Object> get props => [];
+}
+
+class ImportDatabaseEvent extends SettingsEvent {
+  final String path;
+  final TimersBloc timers;
+  final ProjectsBloc projects;
+  const ImportDatabaseEvent(this.path, this.timers, this.projects)
+      : assert(path != null),
+        assert(timers != null),
+        assert(projects != null);
+  @override
+  List<Object> get props => [path, timers, projects];
 }
 
 class SetBoolValueEvent extends SettingsEvent {

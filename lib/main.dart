@@ -74,7 +74,7 @@ Future<void> runMain(SettingsProvider settings, DataProvider data) async {
         create: (_) => LocaleBloc(settings),
       ),
       BlocProvider<SettingsBloc>(
-        create: (_) => SettingsBloc(settings),
+        create: (_) => SettingsBloc(settings, data),
       ),
       BlocProvider<TimersBloc>(
         create: (_) => TimersBloc(data, settings),

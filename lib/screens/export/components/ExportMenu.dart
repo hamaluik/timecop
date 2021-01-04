@@ -20,7 +20,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:timecop/blocs/projects/projects_bloc.dart';
+import 'package:timecop/blocs/settings/bloc.dart';
+import 'package:timecop/blocs/timers/timers_bloc.dart';
+import 'package:timecop/data_providers/data/database_provider.dart';
 import 'package:timecop/l10n.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:share/share.dart';
 
 enum ExportMenuItem {
@@ -50,7 +55,43 @@ class ExportMenu extends StatelessWidget {
               return;
             }
 
-            print("picked file: " + result.files.first.toString());
+            try {
+              if (!await DatabaseProvider.isValidDatabaseFile(
+                  result.files[0].path)) {
+                scaffoldKey.currentState.showSnackBar(SnackBar(
+                  backgroundColor: Theme.of(context).errorColor,
+                  content: Text(
+                    L10N.of(context).tr.invalidDatabaseFile,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  duration: Duration(seconds: 5),
+                ));
+              } else {
+                SettingsBloc settings = BlocProvider.of<SettingsBloc>(context);
+                TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+                ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
+                settings.add(ImportDatabaseEvent(
+                    result.files[0].path, timers, projects));
+
+                scaffoldKey.currentState.showSnackBar(SnackBar(
+                  backgroundColor: Theme.of(context).primaryColorDark,
+                  content: Text(
+                    L10N.of(context).tr.databaseImported,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  duration: Duration(seconds: 5),
+                ));
+              }
+            } on Exception catch (e) {
+              scaffoldKey.currentState.showSnackBar(SnackBar(
+                backgroundColor: Theme.of(context).errorColor,
+                content: Text(
+                  e.toString(),
+                  style: TextStyle(color: Colors.white),
+                ),
+                duration: Duration(seconds: 5),
+              ));
+            }
             break;
           case ExportMenuItem.export:
             var databasesPath = await getDatabasesPath();

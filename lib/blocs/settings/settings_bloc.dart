@@ -14,12 +14,17 @@
 
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:timecop/blocs/projects/projects_event.dart';
+import 'package:timecop/blocs/timers/timers_event.dart';
+import 'package:timecop/data_providers/data/data_provider.dart';
+import 'package:timecop/data_providers/data/database_provider.dart';
 import 'package:timecop/data_providers/settings/settings_provider.dart';
 import './bloc.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final SettingsProvider settings;
-  SettingsBloc(this.settings);
+  final DataProvider data;
+  SettingsBloc(this.settings, this.data);
 
   @override
   SettingsState get initialState => SettingsState.initial();
@@ -153,6 +158,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     } else if (event is SetDefaultFilterDays) {
       await settings.setInt("defaultFilterDays", event.days ?? -1);
       yield SettingsState.clone(state, defaultFilterDays: event.days ?? -1);
+    } else if (event is ImportDatabaseEvent) {
+      final DataProvider importData = await DatabaseProvider.open(event.path);
+      await data.import(importData);
+      event.projects.add(LoadProjects());
+      event.timers.add(LoadTimers());
+      yield SettingsState.clone(state);
     }
   }
 
