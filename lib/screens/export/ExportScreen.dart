@@ -14,7 +14,7 @@
 
 import 'dart:collection';
 import 'dart:io';
-import 'package:flutter_share/flutter_share.dart';
+import 'package:share/share.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -484,12 +484,12 @@ class _ExportScreenState extends State<ExportScreen> {
             final String localPath = '${directory.path}/timecop.csv';
             File file = File(localPath);
             await file.writeAsString(csv, flush: true);
-            await FlutterShare.shareFile(
-                title: L10N
+            await Share.shareFiles(<String>[localPath],
+                mimeTypes: <String>["text/csv"],
+                subject: L10N
                     .of(context)
                     .tr
-                    .timeCopEntries(_dateFormat.format(DateTime.now())),
-                filePath: localPath);
+                    .timeCopEntries(_dateFormat.format(DateTime.now())));
           }),
     );
   }

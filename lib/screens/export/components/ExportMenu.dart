@@ -12,20 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:collection';
 import 'dart:io';
+import 'package:file_picker/file_picker.dart';
 import 'package:path/path.dart' as p;
-import 'package:flutter_share/flutter_share.dart';
-import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:timecop/l10n.dart';
+import 'package:share/share.dart';
 
 enum ExportMenuItem {
   import,
@@ -46,6 +42,15 @@ class ExportMenu extends StatelessWidget {
       onSelected: (ExportMenuItem item) async {
         switch (item) {
           case ExportMenuItem.import:
+            FilePickerResult result = await FilePicker.platform.pickFiles(
+                type: FileType.custom,
+                allowedExtensions: <String>["db"],
+                allowMultiple: false);
+            if (result == null) {
+              return;
+            }
+
+            print("picked file: " + result.files.first.toString());
             break;
           case ExportMenuItem.export:
             var databasesPath = await getDatabasesPath();
@@ -59,12 +64,12 @@ class ExportMenu extends StatelessWidget {
                     .copy(p.join(directory.path, "timecop.db"));
                 dbPath = copiedDB.path;
               }
-              await FlutterShare.shareFile(
-                  title: L10N
+              await Share.shareFiles(<String>[dbPath],
+                  mimeTypes: <String>["application/vnd.sqlite3"],
+                  subject: L10N
                       .of(context)
                       .tr
-                      .timeCopDatabase(dateFormat.format(DateTime.now())),
-                  filePath: dbPath);
+                      .timeCopDatabase(dateFormat.format(DateTime.now())));
             } on Exception catch (e) {
               scaffoldKey.currentState.showSnackBar(SnackBar(
                 backgroundColor: Theme.of(context).errorColor,

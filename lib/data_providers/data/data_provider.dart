@@ -29,4 +29,5 @@ abstract class DataProvider {
   Future<List<TimerEntry>> listTimers();
   Future<void> editTimer(TimerEntry timer);
   Future<void> deleteTimer(TimerEntry timer);
+  Future<void> factoryReset();
 }

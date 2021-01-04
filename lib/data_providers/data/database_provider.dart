@@ -13,9 +13,7 @@
 // limitations under the License.
 
 import 'dart:async';
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart' as p;
 import 'package:random_color/random_color.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:timecop/data_providers/data/data_provider.dart';
@@ -76,12 +74,7 @@ class DatabaseProvider extends DataProvider {
     }
   }
 
-  static Future<DatabaseProvider> open() async {
-    // get a path to the database file
-    var databasesPath = await getDatabasesPath();
-    var path = p.join(databasesPath, 'timecop.db');
-    await Directory(databasesPath).create(recursive: true);
-
+  static Future<DatabaseProvider> open(String path) async {
     // open the database
     Database db = await openDatabase(path,
         onConfigure: _onConfigure,
@@ -202,5 +195,17 @@ class DatabaseProvider extends DataProvider {
   Future<void> deleteTimer(TimerEntry timer) async {
     assert(timer != null);
     await _db.rawDelete("delete from timers where id=?", <dynamic>[timer.id]);
+  }
+
+  @override
+  Future<void> factoryReset() async {
+    await _db.transaction((t) async {
+      await t.delete("timers");
+      await t.delete("projects");
+      await t.execute(
+          "UPDATE `sqlite_sequence` SET `seq` = 0 WHERE `name` = 'timers';");
+      await t.execute(
+          "UPDATE `sqlite_sequence` SET `seq` = 0 WHERE `name` = 'projects';");
+    });
   }
 }

@@ -14,7 +14,10 @@
 
 import 'dart:async';
 
+import 'dart:io';
+import 'package:path/path.dart' as p;
 import 'package:flutter/foundation.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:timecop/blocs/locale/locale_bloc.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
@@ -37,7 +40,13 @@ import 'package:timecop/data_providers/settings/shared_prefs_settings_provider.d
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final SettingsProvider settings = await SharedPrefsSettingsProvider.load();
-  final DataProvider data = await DatabaseProvider.open();
+
+  // get a path to the database file
+  String databasesPath = await getDatabasesPath();
+  var path = p.join(databasesPath, 'timecop.db');
+  await Directory(databasesPath).create(recursive: true);
+
+  final DataProvider data = await DatabaseProvider.open(path);
   await runMain(settings, data);
 }
 
