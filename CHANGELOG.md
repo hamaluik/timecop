@@ -8,6 +8,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 * Added setting to automatically filter out timers older than the last Monday
 * Added setting to only allow a single active timer at once (when creating new ones)
+* Added ability to archive projects & their respective timers
+* Added app badge notifications on iOS and Android launchers which support the feature to indicate running timers
+* Added notifications when timers are running in the background
+* Added ability to import records from a database
+* Added ability to record markdown-formatted notes for individual timers
+
+### Changed
+* Search bar now gets focus immediately upon tapping the search button
+* No more "default project" setting (it was buggy and I didn't like it in practice)
+
+## Fixed
+* Always delimit fields when exporting CSV files
+* Fixed dashboard top bar search text & icon colour
+* Fixed some translations (thanks @SeaPants, @danielpetrica)
 
 ## [1.5.0] - 2020-04-07
 ### Added
