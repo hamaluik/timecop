@@ -138,3 +138,11 @@ invalidDatabaseFile = Arquivo de banco de dados inválido!
 
 databaseImported = Banco de dados importado
 
+showBadgeCounts = Mostrar contagem de cronômetro em execução como emblema do ícone do aplicativo
+
+runningTimersNotificationTitle = Temporizadores em execução
+
+runningTimersNotificationBody = Os cronômetros ainda estão funcionando em segundo plano
+
+enableRunningTimersNotification = Mostrar notificações do cronômetro em execução
+

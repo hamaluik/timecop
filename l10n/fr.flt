@@ -138,3 +138,11 @@ invalidDatabaseFile = Fichier de base de données invalide!
 
 databaseImported = Base de données importée
 
+showBadgeCounts = Afficher le nombre de minuteries en cours d'exécution comme badge d'icône d'application
+
+runningTimersNotificationTitle = Minuteries en cours
+
+runningTimersNotificationBody = Les minuteries fonctionnent toujours en arrière-plan
+
+enableRunningTimersNotification = Afficher les notifications du minuteur en cours d'exécution
+

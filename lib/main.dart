@@ -20,19 +20,23 @@ import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:timecop/blocs/locale/locale_bloc.dart';
+import 'package:timecop/blocs/notifications/notifications_bloc.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/settings/settings_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:timecop/blocs/settings/settings_state.dart';
 import 'package:timecop/blocs/theme/theme_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/data_providers/data/data_provider.dart';
+import 'package:timecop/data_providers/notifications/notifications_provider.dart';
 import 'package:timecop/data_providers/settings/settings_provider.dart';
 import 'package:timecop/fontlicenses.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/dashboard/DashboardScreen.dart';
 import 'package:timecop/themes.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 
 import 'package:timecop/data_providers/data/database_provider.dart';
 import 'package:timecop/data_providers/settings/shared_prefs_settings_provider.dart';
@@ -47,7 +51,9 @@ Future<void> main() async {
   await Directory(databasesPath).create(recursive: true);
 
   final DataProvider data = await DatabaseProvider.open(path);
-  await runMain(settings, data);
+  final NotificationsProvider notifications =
+      await NotificationsProvider.load();
+  await runMain(settings, data, notifications);
 }
 
 /*import 'package:timecop/data_providers/data/mock_data_provider.dart';
@@ -58,7 +64,8 @@ Future<void> main() async {
   await runMain(settings, data);
 }*/
 
-Future<void> runMain(SettingsProvider settings, DataProvider data) async {
+Future<void> runMain(SettingsProvider settings, DataProvider data,
+    NotificationsProvider notifications) async {
   // setup intl date formats?
   //await initializeDateFormatting();
   LicenseRegistry.addLicense(getFontLicenses);
@@ -81,6 +88,9 @@ Future<void> runMain(SettingsProvider settings, DataProvider data) async {
       ),
       BlocProvider<ProjectsBloc>(
         create: (_) => ProjectsBloc(data),
+      ),
+      BlocProvider<NotificationsBloc>(
+        create: (_) => NotificationsBloc(notifications),
       ),
     ],
     child: TimeCopApp(settings: settings),
@@ -109,12 +119,64 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
     brightness = WidgetsBinding.instance.window.platformBrightness;
 
+    SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
+    TimersBloc timersBloc = BlocProvider.of<TimersBloc>(context);
+    settingsBloc.listen((settingsState) => _updateNotificationBadge(
+        settingsState, timersBloc.state.countRunningTimers()));
+    timersBloc.listen((timersState) => _updateNotificationBadge(
+        settingsBloc.state, timersState.countRunningTimers()));
+
     // send commands to our top-level blocs to get them to initialize
-    BlocProvider.of<SettingsBloc>(context).add(LoadSettingsFromRepository());
-    BlocProvider.of<TimersBloc>(context).add(LoadTimers());
+    settingsBloc.add(LoadSettingsFromRepository());
+    timersBloc.add(LoadTimers());
     BlocProvider.of<ProjectsBloc>(context).add(LoadProjects());
     BlocProvider.of<ThemeBloc>(context).add(LoadThemeEvent());
     BlocProvider.of<LocaleBloc>(context).add(LoadLocaleEvent());
+  }
+
+  void _updateNotificationBadge(SettingsState settingsState, int count) async {
+    if (!settingsState.hasAskedNotificationPermissions &&
+        !settingsState.showBadgeCounts) {
+      // they haven't set the permission yet
+      return;
+    } else if (settingsState.showBadgeCounts) {
+      // need to ask permission
+      if (count > 0) {
+        FlutterAppBadger.updateBadgeCount(count);
+      } else {
+        FlutterAppBadger.removeBadge();
+      }
+    } else {
+      // remove any and all badges if we disable the option
+      FlutterAppBadger.removeBadge();
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    print("application lifecycle changed to: " + state.toString());
+    if (state == AppLifecycleState.paused) {
+      SettingsState settings = BlocProvider.of<SettingsBloc>(context).state;
+      TimersState timers = BlocProvider.of<TimersBloc>(context).state;
+
+      // TODO: fix this ugly hack. The L10N we load is part of the material app
+      // that we build in build(); so we don't have access to it here
+      LocaleState localeState = BlocProvider.of<LocaleBloc>(context).state;
+      Locale locale = localeState.locale ?? Locale("en");
+      L10N l10n = await L10N.load(locale);
+
+      if (settings.showRunningTimersAsNotifications &&
+          timers.countRunningTimers() > 0) {
+        print("showing notification");
+        BlocProvider.of<NotificationsBloc>(context).add(ShowNotification(
+            title: l10n.tr.runningTimersNotificationTitle,
+            body: l10n.tr.runningTimersNotificationBody));
+      } else {
+        print("not showing notification");
+      }
+    } else if (state == AppLifecycleState.resumed) {
+      BlocProvider.of<NotificationsBloc>(context).add(RemoveNotifications());
+    }
   }
 
   @override

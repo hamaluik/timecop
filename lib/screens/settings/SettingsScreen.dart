@@ -15,6 +15,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timecop/blocs/locale/locale_bloc.dart';
+import 'package:timecop/blocs/notifications/notifications_bloc.dart';
 import 'package:timecop/blocs/settings/bloc.dart';
 import 'package:timecop/blocs/theme/theme_bloc.dart';
 import 'package:timecop/blocs/timers/timers_bloc.dart';
@@ -158,9 +159,25 @@ class SettingsScreen extends StatelessWidget {
                   SwitchListTile(
                 title: Text(L10N.of(context).tr.showBadgeCounts),
                 value: settings.showBadgeCounts,
+                onChanged: (bool value) =>
+                    settingsBloc.add(SetBoolValueEvent(showBadgeCounts: value)),
+                activeColor: Theme.of(context).accentColor,
+              ),
+            ),
+            BlocBuilder<SettingsBloc, SettingsState>(
+              bloc: settingsBloc,
+              builder: (BuildContext context, SettingsState settings) =>
+                  SwitchListTile(
+                title:
+                    Text(L10N.of(context).tr.enableRunningTimersNotification),
+                value: settings.showRunningTimersAsNotifications,
                 onChanged: (bool value) {
-                  settingsBloc.add(SetBoolValueEvent(showBadgeCounts: value));
-                  BlocProvider.of<TimersBloc>(context).updateBadgeCount();
+                  if (value) {
+                    BlocProvider.of<NotificationsBloc>(context)
+                        .add(RequestNotificationPermissions());
+                  }
+                  settingsBloc.add(SetBoolValueEvent(
+                      showRunningTimersAsNotifications: value));
                 },
                 activeColor: Theme.of(context).accentColor,
               ),

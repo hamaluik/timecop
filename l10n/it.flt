@@ -187,3 +187,11 @@ invalidDatabaseFile = File di database non valido!
 
 databaseImported = Database importato
 
+showBadgeCounts = Mostra il conteggio del timer di esecuzione come badge dell'icona dell'app
+
+runningTimersNotificationTitle = Timer in esecuzione
+
+runningTimersNotificationBody = I timer sono ancora in esecuzione in background
+
+enableRunningTimersNotification = Mostra le notifiche del timer di esecuzione
+

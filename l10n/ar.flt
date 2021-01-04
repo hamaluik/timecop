@@ -138,3 +138,11 @@ invalidDatabaseFile = ملف قاعدة بيانات غير صالح!
 
 databasedImported = تم استيراد قاعدة البيانات
 
+showBadgeCounts = إظهار عد عداد الوقت كشارة أيقونة التطبيق
+
+runningTimersNotificationTitle = تشغيل الموقتات
+
+runningTimersNotificationBody = لا تزال الموقتات تعمل في الخلفية
+
+enableRunningTimersNotification = إظهار إخطارات تشغيل عداد الوقت
+

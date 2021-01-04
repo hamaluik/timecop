@@ -262,4 +262,16 @@ class FluentL10NProvider extends L10NProvider {
   @override
   String get databaseImported =>
       _bundle.format("databaseImported", errors: _errors) ?? "databaseImported";
+  @override
+  String get runningTimersNotificationTitle =>
+      _bundle.format("runningTimersNotificationTitle", errors: _errors) ??
+      "runningTimersNotificationTitle";
+  @override
+  String get runningTimersNotificationBody =>
+      _bundle.format("runningTimersNotificationBody", errors: _errors) ??
+      "runningTimersNotificationBody";
+  @override
+  String get enableRunningTimersNotification =>
+      _bundle.format("enableRunningTimersNotification", errors: _errors) ??
+      "enableRunningTimersNotification";
 }

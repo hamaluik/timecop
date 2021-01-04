@@ -138,3 +138,11 @@ invalidDatabaseFile = 无效的数据库文件！
 
 databaseImported = 数据库导入
 
+showBadgeCounts = 将正在运行的计时器计数显示为应用程序图标徽章
+
+runningTimersNotificationTitle = 运行计时器
+
+runningTimersNotificationBody = 计时器仍在后台运行
+
+enableRunningTimersNotification = 显示正在运行的计时器通知
+

@@ -52,6 +52,7 @@ class SetBoolValueEvent extends SettingsEvent {
   final bool defaultFilterStartDateToMonday;
   final bool oneTimerAtATime;
   final bool showBadgeCounts;
+  final bool showRunningTimersAsNotifications;
 
   const SetBoolValueEvent(
       {this.exportGroupTimers,
@@ -67,7 +68,8 @@ class SetBoolValueEvent extends SettingsEvent {
       this.autocompleteDescription,
       this.defaultFilterStartDateToMonday,
       this.oneTimerAtATime,
-      this.showBadgeCounts});
+      this.showBadgeCounts,
+      this.showRunningTimersAsNotifications});
 
   @override
   List<Object> get props => [
@@ -85,6 +87,7 @@ class SetBoolValueEvent extends SettingsEvent {
         defaultFilterStartDateToMonday,
         oneTimerAtATime,
         showBadgeCounts,
+        showRunningTimersAsNotifications,
       ];
 }
 

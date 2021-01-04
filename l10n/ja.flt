@@ -138,3 +138,11 @@ invalidDatabaseFile = データベースファイルが無効です！
 
 databaseImported = インポートされたデータベース
 
+showBadgeCounts = 実行中のタイマーカウントをアプリアイコンバッジとして表示
+
+runningTimersNotificationTitle = 実行中のタイマー
+
+runningTimersNotificationBody = タイマーはまだバックグラウンドで実行されています
+
+enableRunningTimersNotification = 実行中のタイマー通知を表示する
+
