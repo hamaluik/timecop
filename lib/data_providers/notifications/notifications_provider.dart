@@ -45,7 +45,7 @@ class NotificationsProvider {
       bool result = await _notif
               .resolvePlatformSpecificImplementation<
                   IOSFlutterLocalNotificationsPlugin>()
-              ?.requestPermissions(sound: false, alert: true, badge: true) ??
+              ?.requestPermissions(sound: true, alert: true, badge: true) ??
           false;
       return result;
     } else {
@@ -62,11 +62,10 @@ class NotificationsProvider {
     }
 
     const IOSNotificationDetails ios = IOSNotificationDetails(
-        presentAlert: false,
-        presentSound: false,
-        badgeNumber: null,
-        attachments: <IOSNotificationAttachment>[],
-        subtitle: "");
+      presentAlert: true,
+      presentSound: false,
+      badgeNumber: null,
+    );
 
     const AndroidNotificationDetails android = AndroidNotificationDetails(
         "ca.hamaluik.timecop.runningtimersnotification",
