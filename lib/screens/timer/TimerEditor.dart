@@ -17,6 +17,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -42,6 +43,8 @@ class TimerEditor extends StatefulWidget {
 
 class _TimerEditorState extends State<TimerEditor> {
   TextEditingController _descriptionController;
+  TextEditingController _notesController;
+  String _notes;
 
   DateTime _startTime;
   DateTime _endTime;
@@ -63,8 +66,10 @@ class _TimerEditorState extends State<TimerEditor> {
   void initState() {
     super.initState();
     _projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+    _notes = widget.timer.notes ?? "";
     _descriptionController =
         TextEditingController(text: widget.timer.description);
+    _notesController = TextEditingController(text: _notes);
     _startTime = widget.timer.startTime;
     _endTime = widget.timer.endTime;
     _project = BlocProvider.of<ProjectsBloc>(context)
@@ -107,7 +112,10 @@ class _TimerEditorState extends State<TimerEditor> {
       ),
       body: Form(
         key: _formKey,
-        child: ListView(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             BlocBuilder<ProjectsBloc, ProjectsState>(
               builder: (BuildContext context, ProjectsState projectsState) =>
@@ -325,6 +333,26 @@ class _TimerEditorState extends State<TimerEditor> {
                     : _endTime.difference(_startTime))),
               ),
             ),
+            Slidable(
+              actionPane: SlidableDrawerActionPane(),
+              actionExtentRatio: 0.15,
+              child: ListTile(
+                title: Text("Notes"),
+                onTap: () async => await _editNotes(context),
+              ),
+              secondaryActions: <Widget>[
+                IconSlideAction(
+                  color: Theme.of(context).accentColor,
+                  foregroundColor: Theme.of(context).accentIconTheme.color,
+                  icon: FontAwesomeIcons.edit,
+                  onTap: () async => await _editNotes(context),
+                ),
+              ],
+            ),
+            Expanded(
+                child: Padding(
+                    padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+                    child: Markdown(data: _notes))),
           ],
         ),
       ),
@@ -352,6 +380,7 @@ class _TimerEditorState extends State<TimerEditor> {
             endTime: _endTime,
             projectID: _project?.id,
             description: _descriptionController.text.trim(),
+            notes: _notes.isEmpty ? null : _notes,
           );
 
           assert(timers != null);
@@ -360,5 +389,45 @@ class _TimerEditorState extends State<TimerEditor> {
         },
       ),
     );
+  }
+
+  Future<void> _editNotes(BuildContext context) async {
+    print("notes: " + _notes);
+    _notesController.text = _notes;
+    String n = await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Notes"),
+            content: TextFormField(
+              controller: _notesController,
+              autofocus: true,
+              autocorrect: true,
+              maxLines: null,
+              expands: true,
+              smartDashesType: SmartDashesType.enabled,
+              smartQuotesType: SmartQuotesType.enabled,
+              onSaved: (String n) => Navigator.of(context).pop(n),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                  child: Text(L10N.of(context).tr.cancel),
+                  onPressed: () => Navigator.of(context).pop()),
+              TextButton(
+                  child: Text(
+                    "Finish",
+                  ),
+                  style: TextButton.styleFrom(
+                      primary: Theme.of(context).accentColor),
+                  onPressed: () =>
+                      Navigator.of(context).pop(_notesController.text))
+            ],
+          );
+        });
+    if (n != null) {
+      setState(() {
+        _notes = n.trim();
+      });
+    }
   }
 }

@@ -23,7 +23,7 @@ import 'package:timecop/models/project.dart';
 class DatabaseProvider extends DataProvider {
   final Database _db;
   final RandomColor _randomColour = RandomColor();
-  static const int DB_VERSION = 2;
+  static const int DB_VERSION = 3;
 
   DatabaseProvider(this._db) : assert(_db != null);
 
@@ -47,6 +47,7 @@ class DatabaseProvider extends DataProvider {
         description text not null,
         start_time int not null,
         end_time int default null,
+        notes text default null,
         foreign key(project_id) references projects(id) on delete set null
       )
     ''');
@@ -56,21 +57,15 @@ class DatabaseProvider extends DataProvider {
   }
 
   static void _onUpgrade(Database db, int version, int newVersion) async {
-    while (version <= newVersion) {
-      switch (version) {
-        case 2:
-          {
-            await db.execute('''
+    if (version < 2) {
+      await db.execute('''
               alter table projects add column archived boolean not null default false
             ''');
-            break;
-          }
-        default:
-          {
-            break;
-          }
-      }
-      version++;
+    }
+    if (version < 3) {
+      await db.execute('''
+              alter table timers add column notes text default null
+            ''');
     }
   }
 
@@ -143,38 +138,40 @@ class DatabaseProvider extends DataProvider {
       {String description,
       int projectID,
       DateTime startTime,
-      DateTime endTime}) async {
+      DateTime endTime,
+      String notes}) async {
     int st = startTime?.millisecondsSinceEpoch ??
         DateTime.now().millisecondsSinceEpoch;
     assert(st != null);
     int et = endTime?.millisecondsSinceEpoch;
     int id = await _db.rawInsert(
-        "insert into timers(project_id, description, start_time, end_time) values(?, ?, ?, ?)",
-        <dynamic>[projectID, description, st, et]);
+        "insert into timers(project_id, description, start_time, end_time, notes) values(?, ?, ?, ?, ?)",
+        <dynamic>[projectID, description, st, et, notes]);
     return TimerEntry(
         id: id,
         description: description,
         projectID: projectID,
         startTime: DateTime.fromMillisecondsSinceEpoch(st),
-        endTime: endTime);
+        endTime: endTime,
+        notes: notes);
   }
 
   /// the r in crud
   @override
   Future<List<TimerEntry>> listTimers() async {
     List<Map<String, dynamic>> rawTimers = await _db.rawQuery(
-        "select id, project_id, description, start_time, end_time from timers order by start_time asc");
+        "select id, project_id, description, start_time, end_time, notes from timers order by start_time asc");
     return rawTimers
         .map((Map<String, dynamic> row) => TimerEntry(
-              id: row["id"] as int,
-              projectID: row["project_id"] as int,
-              description: row["description"] as String,
-              startTime:
-                  DateTime.fromMillisecondsSinceEpoch(row["start_time"] as int),
-              endTime: row["end_time"] != null
-                  ? DateTime.fromMillisecondsSinceEpoch(row["end_time"] as int)
-                  : null,
-            ))
+            id: row["id"] as int,
+            projectID: row["project_id"] as int,
+            description: row["description"] as String,
+            startTime:
+                DateTime.fromMillisecondsSinceEpoch(row["start_time"] as int),
+            endTime: row["end_time"] != null
+                ? DateTime.fromMillisecondsSinceEpoch(row["end_time"] as int)
+                : null,
+            notes: row["notes"] as String))
         .toList();
   }
 
@@ -186,8 +183,15 @@ class DatabaseProvider extends DataProvider {
         DateTime.now().millisecondsSinceEpoch;
     int et = timer.endTime?.millisecondsSinceEpoch;
     await _db.rawUpdate(
-        "update timers set project_id=?, description=?, start_time=?, end_time=? where id=?",
-        <dynamic>[timer.projectID, timer.description, st, et, timer.id]);
+        "update timers set project_id=?, description=?, start_time=?, end_time=?, notes=? where id=?",
+        <dynamic>[
+          timer.projectID,
+          timer.description,
+          st,
+          et,
+          timer.notes,
+          timer.id
+        ]);
   }
 
   /// the d in crud
@@ -203,7 +207,7 @@ class DatabaseProvider extends DataProvider {
       await db.rawQuery(
           "select id, name, colour, archived from projects order by name asc limit 1");
       await db.rawQuery(
-          "select id, project_id, description, start_time, end_time from timers order by start_time asc limit 1");
+          "select id, project_id, description, start_time, end_time, notes from timers order by start_time asc limit 1");
       return true;
     } on Exception catch (_) {
       return false;

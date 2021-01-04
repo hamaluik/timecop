@@ -255,12 +255,12 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_markdown:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_markdown
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.1"
+    version: "0.5.2"
   flutter_material_color_picker:
     dependency: "direct main"
     description:
