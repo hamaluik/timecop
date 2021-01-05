@@ -1,6 +1,6 @@
 name: timecop
 description: Simple private time tracking.
-version: 1.6.0+33
+version: 1.6.0+34
 
 environment:
   sdk: ">=2.10.0 <3.0.0"

@@ -41,9 +41,11 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To import database files.</string>
 	<key>UIBackgroundModes</key>
-    <array>
-        <string>fetch</string>
+	<array>
+		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
