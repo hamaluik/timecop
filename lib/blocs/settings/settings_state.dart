@@ -24,6 +24,7 @@ class SettingsState extends Equatable {
   final bool exportIncludeStartTime;
   final bool exportIncludeEndTime;
   final bool exportIncludeDurationHours;
+  final bool exportIncludeNotes;
   final bool groupTimers;
   final bool collapseDays;
   final bool autocompleteDescription;
@@ -43,6 +44,7 @@ class SettingsState extends Equatable {
     @required this.exportIncludeStartTime,
     @required this.exportIncludeEndTime,
     @required this.exportIncludeDurationHours,
+    @required this.exportIncludeNotes,
     @required this.groupTimers,
     @required this.collapseDays,
     @required this.autocompleteDescription,
@@ -60,6 +62,7 @@ class SettingsState extends Equatable {
         assert(exportIncludeStartTime != null),
         assert(exportIncludeEndTime != null),
         assert(exportIncludeDurationHours != null),
+        assert(exportIncludeNotes != null),
         assert(groupTimers != null),
         assert(collapseDays != null),
         assert(autocompleteDescription != null),
@@ -80,6 +83,7 @@ class SettingsState extends Equatable {
       exportIncludeStartTime: false,
       exportIncludeEndTime: false,
       exportIncludeDurationHours: true,
+      exportIncludeNotes: true,
       groupTimers: true,
       collapseDays: false,
       autocompleteDescription: true,
@@ -102,6 +106,7 @@ class SettingsState extends Equatable {
     bool exportIncludeStartTime,
     bool exportIncludeEndTime,
     bool exportIncludeDurationHours,
+    bool exportIncludeNotes,
     bool groupTimers,
     bool collapseDays,
     bool autocompleteDescription,
@@ -126,6 +131,7 @@ class SettingsState extends Equatable {
               exportIncludeEndTime ?? settings.exportIncludeEndTime,
           exportIncludeDurationHours:
               exportIncludeDurationHours ?? settings.exportIncludeDurationHours,
+          exportIncludeNotes: exportIncludeNotes ?? settings.exportIncludeNotes,
           groupTimers: groupTimers ?? settings.groupTimers,
           collapseDays: collapseDays ?? settings.collapseDays,
           autocompleteDescription:
@@ -151,6 +157,7 @@ class SettingsState extends Equatable {
         exportIncludeStartTime,
         exportIncludeEndTime,
         exportIncludeDurationHours,
+        exportIncludeNotes,
         groupTimers,
         collapseDays,
         autocompleteDescription,

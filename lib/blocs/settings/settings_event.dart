@@ -46,6 +46,7 @@ class SetBoolValueEvent extends SettingsEvent {
   final bool exportIncludeStartTime;
   final bool exportIncludeEndTime;
   final bool exportIncludeDurationHours;
+  final bool exportIncludeNotes;
   final bool groupTimers;
   final bool collapseDays;
   final bool autocompleteDescription;
@@ -63,6 +64,7 @@ class SetBoolValueEvent extends SettingsEvent {
       this.exportIncludeStartTime,
       this.exportIncludeEndTime,
       this.exportIncludeDurationHours,
+      this.exportIncludeNotes,
       this.groupTimers,
       this.collapseDays,
       this.autocompleteDescription,
@@ -81,6 +83,7 @@ class SetBoolValueEvent extends SettingsEvent {
         exportIncludeStartTime,
         exportIncludeEndTime,
         exportIncludeDurationHours,
+        exportIncludeNotes,
         groupTimers,
         collapseDays,
         autocompleteDescription,

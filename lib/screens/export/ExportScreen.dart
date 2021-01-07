@@ -245,6 +245,13 @@ class _ExportScreenState extends State<ExportScreen> {
                       SetBoolValueEvent(exportIncludeDurationHours: value)),
                   activeColor: Theme.of(context).accentColor,
                 ),
+                SwitchListTile(
+                  title: Text(L10N.of(context).tr.notes),
+                  value: settingsState.exportIncludeNotes,
+                  onChanged: (bool value) => settingsBloc
+                      .add(SetBoolValueEvent(exportIncludeNotes: value)),
+                  activeColor: Theme.of(context).accentColor,
+                ),
               ],
             ),
           ),
@@ -370,6 +377,9 @@ class _ExportScreenState extends State<ExportScreen> {
             if (settingsBloc.state.exportIncludeDurationHours) {
               headers.add(L10N.of(context).tr.timeH);
             }
+            if (settingsBloc.state.exportIncludeNotes) {
+              headers.add(L10N.of(context).tr.notes);
+            }
 
             List<TimerEntry> filteredTimers = timers.state.timers
                 .where((t) => t.endTime != null)
@@ -469,6 +479,9 @@ class _ExportScreenState extends State<ExportScreen> {
                             .toDouble() /
                         3600.0)
                     .toStringAsFixed(4));
+              }
+              if (settingsBloc.state.exportIncludeNotes) {
+                row.add(timer.notes?.trim() ?? "");
               }
               return row;
             })).toList();

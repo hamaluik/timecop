@@ -57,6 +57,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       bool exportIncludeDurationHours =
           await settings.getBool("exportIncludeDurationHours") ??
               state.exportIncludeDurationHours;
+      bool exportIncludeNotes = await settings.getBool("exportIncludeNotes") ??
+          state.exportIncludeNotes;
       bool groupTimers =
           await settings.getBool("groupTimers") ?? state.groupTimers;
       bool collapseDays =
@@ -87,6 +89,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         exportIncludeStartTime: exportIncludeStartTime,
         exportIncludeEndTime: exportIncludeEndTime,
         exportIncludeDurationHours: exportIncludeDurationHours,
+        exportIncludeNotes: exportIncludeNotes,
         groupTimers: groupTimers,
         collapseDays: collapseDays,
         autocompleteDescription: autocompleteDescription,
@@ -127,6 +130,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       if (event.exportIncludeDurationHours != null) {
         await settings.setBool(
             "exportIncludeDurationHours", event.exportIncludeDurationHours);
+      }
+      if (event.exportIncludeNotes != null) {
+        await settings.setBool("exportIncludeNotes", event.exportIncludeNotes);
       }
       if (event.groupTimers != null) {
         await settings.setBool("groupTimers", event.groupTimers);
