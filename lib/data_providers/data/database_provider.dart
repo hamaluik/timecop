@@ -23,7 +23,7 @@ import 'package:timecop/models/project.dart';
 class DatabaseProvider extends DataProvider {
   final Database _db;
   final RandomColor _randomColour = RandomColor();
-  static const int DB_VERSION = 3;
+  static const int DB_VERSION = 4;
 
   DatabaseProvider(this._db) : assert(_db != null);
 
@@ -37,7 +37,7 @@ class DatabaseProvider extends DataProvider {
         id integer not null primary key autoincrement,
         name text not null,
         colour int not null,
-        archived boolean not null default false
+        archived boolean not null default 0
       )
     ''');
     await db.execute('''
@@ -66,6 +66,50 @@ class DatabaseProvider extends DataProvider {
       await db.execute('''
               alter table timers add column notes text default null
             ''');
+    }
+    if (version < 4) {
+      // fix the fuck-up of the default value being `false` for project archives instead of `0`.
+      // `false` works fine on sqlite >= 3.23.0. Unfortunately, some Android phones still have
+      // ancient sqlite versions, so to them `false` is a string rather than an integer with
+      // value `0`
+      await db.transaction((Transaction t) async {
+        Batch b = t.batch();
+        b.execute("PRAGMA foreign_keys = OFF");
+        b.execute('''
+            create table projects_tmp(
+                id integer not null primary key autoincrement,
+                name text not null,
+                colour int not null,
+                archived boolean not null default 0
+            )
+            ''');
+        b.execute("insert into projects_tmp select * from projects");
+        b.execute("drop table projects");
+        b.execute('''
+            create table projects(
+                id integer not null primary key autoincrement,
+                name text not null,
+                colour int not null,
+                archived boolean not null default 0
+            )
+        ''');
+        b.execute('''
+            insert into projects select id, name, colour,
+                case archived
+                    when 'false' then 0
+                    when 'true' then 1
+                    when '0' then 0
+                    when '1' then 1
+                    when 0 then 0
+                    when 1 then 1
+                    else 0
+                end as archived
+                from projects_tmp
+        ''');
+        b.execute("drop table projects_tmp");
+        b.execute("PRAGMA foreign_keys = ON");
+        await b.commit(noResult: true);
+      });
     }
   }
 
