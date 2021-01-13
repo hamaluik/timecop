@@ -72,6 +72,7 @@ class DatabaseProvider extends DataProvider {
       // `false` works fine on sqlite >= 3.23.0. Unfortunately, some Android phones still have
       // ancient sqlite versions, so to them `false` is a string rather than an integer with
       // value `0`
+      await db.execute("PRAGMA foreign_keys = OFF");
       await db.transaction((Transaction t) async {
         Batch b = t.batch();
         b.execute("PRAGMA foreign_keys = OFF");
@@ -107,9 +108,9 @@ class DatabaseProvider extends DataProvider {
                 from projects_tmp
         ''');
         b.execute("drop table projects_tmp");
-        b.execute("PRAGMA foreign_keys = ON");
         await b.commit(noResult: true);
       });
+      await db.execute("PRAGMA foreign_keys = ON");
     }
   }
 
