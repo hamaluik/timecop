@@ -27,13 +27,20 @@ class DatabaseProvider extends DataProvider {
 
   DatabaseProvider(this._db) : assert(_db != null);
 
+  void close() async {
+    await _db.close();
+  }
+
   static void _onConfigure(Database db) async {
-    await db.execute("PRAGMA foreign_keys = ON");
+    // don't turn foreign keys on here as the onCreate / onUpgrade / onDowngrade
+    // procedures happen inside a transaction, and we can't disable keys in
+    // a transaction. Soooo... do it manually I guess when we open the database
+    //await db.execute("PRAGMA foreign_keys = ON");
   }
 
   static void _onCreate(Database db, int version) async {
     await db.execute('''
-      create table projects(
+      create table if not exists projects(
         id integer not null primary key autoincrement,
         name text not null,
         colour int not null,
@@ -41,7 +48,7 @@ class DatabaseProvider extends DataProvider {
       )
     ''');
     await db.execute('''
-      create table timers(
+      create table if not exists timers(
         id integer not null primary key autoincrement,
         project_id integer default null,
         description text not null,
@@ -72,11 +79,9 @@ class DatabaseProvider extends DataProvider {
       // `false` works fine on sqlite >= 3.23.0. Unfortunately, some Android phones still have
       // ancient sqlite versions, so to them `false` is a string rather than an integer with
       // value `0`
-      await db.execute("PRAGMA foreign_keys = OFF");
-      await db.transaction((Transaction t) async {
-        Batch b = t.batch();
-        b.execute("PRAGMA foreign_keys = OFF");
-        b.execute('''
+      Batch b = db.batch();
+      b.execute("PRAGMA foreign_keys = OFF");
+      b.execute('''
             create table projects_tmp(
                 id integer not null primary key autoincrement,
                 name text not null,
@@ -84,9 +89,9 @@ class DatabaseProvider extends DataProvider {
                 archived boolean not null default 0
             )
             ''');
-        b.execute("insert into projects_tmp select * from projects");
-        b.execute("drop table projects");
-        b.execute('''
+      b.execute("insert into projects_tmp select * from projects");
+      b.execute("drop table projects");
+      b.execute('''
             create table projects(
                 id integer not null primary key autoincrement,
                 name text not null,
@@ -94,7 +99,7 @@ class DatabaseProvider extends DataProvider {
                 archived boolean not null default 0
             )
         ''');
-        b.execute('''
+      b.execute('''
             insert into projects select id, name, colour,
                 case archived
                     when 'false' then 0
@@ -107,10 +112,8 @@ class DatabaseProvider extends DataProvider {
                 end as archived
                 from projects_tmp
         ''');
-        b.execute("drop table projects_tmp");
-        await b.commit(noResult: true);
-      });
-      await db.execute("PRAGMA foreign_keys = ON");
+      b.execute("drop table projects_tmp");
+      await b.commit(noResult: true);
     }
   }
 
@@ -121,6 +124,7 @@ class DatabaseProvider extends DataProvider {
         onCreate: _onCreate,
         onUpgrade: _onUpgrade,
         version: DB_VERSION);
+    await db.execute("PRAGMA foreign_keys = ON");
     DatabaseProvider repo = DatabaseProvider(db);
 
     return repo;
@@ -143,8 +147,19 @@ class DatabaseProvider extends DataProvider {
   /// the r in crud
   @override
   Future<List<Project>> listProjects() async {
-    List<Map<String, dynamic>> rawProjects = await _db.rawQuery(
-        "select id, name, colour, archived from projects order by name asc");
+    List<Map<String, dynamic>> rawProjects = await _db.rawQuery('''
+        select id, name, colour, 
+            case archived
+                when 'false' then 0
+                when 'true' then 1
+                when '0' then 0
+                when '1' then 1
+                when 0 then 0
+                when 1 then 1
+                else 0
+            end as archived
+        from projects order by name asc
+    ''');
     return rawProjects
         .map((Map<String, dynamic> row) => Project(
             id: row["id"] as int,
@@ -248,26 +263,15 @@ class DatabaseProvider extends DataProvider {
 
   static Future<bool> isValidDatabaseFile(String path) async {
     try {
-      Database db = await openDatabase(path);
+      Database db = await openDatabase(path, readOnly: true);
       await db.rawQuery(
           "select id, name, colour, archived from projects order by name asc limit 1");
       await db.rawQuery(
           "select id, project_id, description, start_time, end_time, notes from timers order by start_time asc limit 1");
+      await db.close();
       return true;
     } on Exception catch (_) {
       return false;
     }
   }
-
-  //@override
-  //Future<void> factoryReset() async {
-  //await _db.transaction((t) async {
-  //await t.delete("timers");
-  //await t.delete("projects");
-  //await t.execute(
-  //"UPDATE `sqlite_sequence` SET `seq` = 0 WHERE `name` = 'timers';");
-  //await t.execute(
-  //"UPDATE `sqlite_sequence` SET `seq` = 0 WHERE `name` = 'projects';");
-  //});
-  //}
 }

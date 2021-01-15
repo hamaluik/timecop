@@ -196,10 +196,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       await settings.setInt("defaultFilterDays", event.days ?? -1);
       yield SettingsState.clone(state, defaultFilterDays: event.days ?? -1);
     } else if (event is ImportDatabaseEvent) {
-      final DataProvider importData = await DatabaseProvider.open(event.path);
+      final DatabaseProvider importData =
+          await DatabaseProvider.open(event.path);
       await data.import(importData);
       event.projects.add(LoadProjects());
       event.timers.add(LoadTimers());
+      await importData.close();
       yield SettingsState.clone(state);
     }
   }
