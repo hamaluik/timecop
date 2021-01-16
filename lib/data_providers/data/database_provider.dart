@@ -36,6 +36,7 @@ class DatabaseProvider extends DataProvider {
     // procedures happen inside a transaction, and we can't disable keys in
     // a transaction. Soooo... do it manually I guess when we open the database
     //await db.execute("PRAGMA foreign_keys = ON");
+    await db.execute("PRAGMA foreign_keys = OFF");
   }
 
   static void _onCreate(Database db, int version) async {
@@ -75,12 +76,11 @@ class DatabaseProvider extends DataProvider {
             ''');
     }
     if (version < 4) {
-      // fix the fuck-up of the default value being `false` for project archives instead of `0`.
+      // fix the bug of the default value being `false` for project archives instead of `0`.
       // `false` works fine on sqlite >= 3.23.0. Unfortunately, some Android phones still have
       // ancient sqlite versions, so to them `false` is a string rather than an integer with
       // value `0`
       Batch b = db.batch();
-      b.execute("PRAGMA foreign_keys = OFF");
       b.execute('''
             create table projects_tmp(
                 id integer not null primary key autoincrement,
