@@ -1,0 +1,1 @@
+A time tracking app that respects your privacy without being fancy.
