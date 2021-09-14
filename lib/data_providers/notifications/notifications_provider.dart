@@ -30,11 +30,18 @@ class NotificationsProvider {
       requestBadgePermission: false,
       requestAlertPermission: false,
     );
+    final MacOSInitializationSettings initializationSettingsMacOS =
+        MacOSInitializationSettings(
+      requestSoundPermission: false,
+      requestBadgePermission: false,
+      requestAlertPermission: false,
+    );
 
     final InitializationSettings initializationSettings =
         InitializationSettings(
             android: initializationSettingsAndroid,
-            iOS: initializationSettingsIOS);
+            iOS: initializationSettingsIOS,
+            macOS: initializationSettingsMacOS);
     await notif.initialize(initializationSettings);
 
     return NotificationsProvider(notif);
