@@ -14,7 +14,6 @@
 
 import 'dart:collection';
 import 'dart:io';
-import 'package:share/share.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,6 +22,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:timecop/blocs/projects/projects_bloc.dart';
 import 'package:timecop/blocs/settings/bloc.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
