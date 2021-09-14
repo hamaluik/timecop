@@ -196,56 +196,56 @@ class _ExportScreenState extends State<ExportScreen> {
                       color: Theme.of(context).accentColor,
                       fontWeight: FontWeight.w700)),
               children: <Widget>[
-                SwitchListTile(
+                SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.date),
                   value: settingsState.exportIncludeDate,
                   onChanged: (bool value) => settingsBloc
                       .add(SetBoolValueEvent(exportIncludeDate: value)),
                   activeColor: Theme.of(context).accentColor,
                 ),
-                SwitchListTile(
+                SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.project),
                   value: settingsState.exportIncludeProject,
                   onChanged: (bool value) => settingsBloc
                       .add(SetBoolValueEvent(exportIncludeProject: value)),
                   activeColor: Theme.of(context).accentColor,
                 ),
-                SwitchListTile(
+                SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.description),
                   value: settingsState.exportIncludeDescription,
                   onChanged: (bool value) => settingsBloc
                       .add(SetBoolValueEvent(exportIncludeDescription: value)),
                   activeColor: Theme.of(context).accentColor,
                 ),
-                SwitchListTile(
+                SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.combinedProjectDescription),
                   value: settingsState.exportIncludeProjectDescription,
                   onChanged: (bool value) => settingsBloc.add(SetBoolValueEvent(
                       exportIncludeProjectDescription: value)),
                   activeColor: Theme.of(context).accentColor,
                 ),
-                SwitchListTile(
+                SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.startTime),
                   value: settingsState.exportIncludeStartTime,
                   onChanged: (bool value) => settingsBloc
                       .add(SetBoolValueEvent(exportIncludeStartTime: value)),
                   activeColor: Theme.of(context).accentColor,
                 ),
-                SwitchListTile(
+                SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.endTime),
                   value: settingsState.exportIncludeEndTime,
                   onChanged: (bool value) => settingsBloc
                       .add(SetBoolValueEvent(exportIncludeEndTime: value)),
                   activeColor: Theme.of(context).accentColor,
                 ),
-                SwitchListTile(
+                SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.timeH),
                   value: settingsState.exportIncludeDurationHours,
                   onChanged: (bool value) => settingsBloc.add(
                       SetBoolValueEvent(exportIncludeDurationHours: value)),
                   activeColor: Theme.of(context).accentColor,
                 ),
-                SwitchListTile(
+                SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.notes),
                   value: settingsState.exportIncludeNotes,
                   onChanged: (bool value) => settingsBloc
@@ -322,7 +322,7 @@ class _ExportScreenState extends State<ExportScreen> {
               BlocBuilder<SettingsBloc, SettingsState>(
                 bloc: settingsBloc,
                 builder: (BuildContext context, SettingsState settingsState) =>
-                    SwitchListTile(
+                    SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.groupTimers),
                   value: settingsState.exportGroupTimers,
                   onChanged: (bool value) => settingsBloc

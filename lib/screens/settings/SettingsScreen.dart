@@ -51,7 +51,7 @@ class SettingsScreen extends StatelessWidget {
             BlocBuilder<SettingsBloc, SettingsState>(
               bloc: settingsBloc,
               builder: (BuildContext context, SettingsState settings) =>
-                  SwitchListTile(
+                  SwitchListTile.adaptive(
                 title: Text(L10N.of(context).tr.groupTimers),
                 value: settings.groupTimers,
                 onChanged: (bool value) =>
@@ -62,7 +62,7 @@ class SettingsScreen extends StatelessWidget {
             BlocBuilder<SettingsBloc, SettingsState>(
               bloc: settingsBloc,
               builder: (BuildContext context, SettingsState settings) =>
-                  SwitchListTile(
+                  SwitchListTile.adaptive(
                 title: Text(L10N.of(context).tr.collapseDays),
                 value: settings.collapseDays,
                 onChanged: (bool value) =>
@@ -73,7 +73,7 @@ class SettingsScreen extends StatelessWidget {
             BlocBuilder<SettingsBloc, SettingsState>(
               bloc: settingsBloc,
               builder: (BuildContext context, SettingsState settings) =>
-                  SwitchListTile(
+                  SwitchListTile.adaptive(
                 title: Text(L10N.of(context).tr.autocompleteDescription),
                 value: settings.autocompleteDescription,
                 onChanged: (bool value) => settingsBloc
@@ -84,7 +84,7 @@ class SettingsScreen extends StatelessWidget {
             BlocBuilder<SettingsBloc, SettingsState>(
               bloc: settingsBloc,
               builder: (BuildContext context, SettingsState settings) =>
-                  SwitchListTile(
+                  SwitchListTile.adaptive(
                 title: Text(L10N.of(context).tr.defaultFilterStartDateToMonday),
                 value: settings.defaultFilterStartDateToMonday,
                 onChanged: (bool value) => settingsBloc.add(
@@ -145,7 +145,7 @@ class SettingsScreen extends StatelessWidget {
             BlocBuilder<SettingsBloc, SettingsState>(
               bloc: settingsBloc,
               builder: (BuildContext context, SettingsState settings) =>
-                  SwitchListTile(
+                  SwitchListTile.adaptive(
                 title: Text(L10N.of(context).tr.oneTimerAtATime),
                 value: settings.oneTimerAtATime,
                 onChanged: (bool value) =>
@@ -156,7 +156,7 @@ class SettingsScreen extends StatelessWidget {
             BlocBuilder<SettingsBloc, SettingsState>(
               bloc: settingsBloc,
               builder: (BuildContext context, SettingsState settings) =>
-                  SwitchListTile(
+                  SwitchListTile.adaptive(
                 title: Text(L10N.of(context).tr.showBadgeCounts),
                 value: settings.showBadgeCounts,
                 onChanged: (bool value) =>
@@ -167,7 +167,7 @@ class SettingsScreen extends StatelessWidget {
             BlocBuilder<SettingsBloc, SettingsState>(
               bloc: settingsBloc,
               builder: (BuildContext context, SettingsState settings) =>
-                  SwitchListTile(
+                  SwitchListTile.adaptive(
                 title:
                     Text(L10N.of(context).tr.enableRunningTimersNotification),
                 value: settings.showRunningTimersAsNotifications,
