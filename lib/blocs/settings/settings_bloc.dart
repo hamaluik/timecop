@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'dart:async';
+import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:timecop/blocs/projects/projects_event.dart';
 import 'package:timecop/blocs/timers/timers_event.dart';
@@ -157,7 +158,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         await settings.setBool("showBadgeCounts", event.showBadgeCounts);
         if (event.showBadgeCounts) {
           // trigger a notification permission window
-          FlutterAppBadger.removeBadge();
+          if (Platform.isIOS || Platform.isAndroid) {
+            FlutterAppBadger.removeBadge();
+          }
           await settings.setBool("hasAskedNotificationPermissions", true);
           hasAskedNotificationPermissions = true;
         }
@@ -167,7 +170,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
             event.showRunningTimersAsNotifications);
         if (event.showRunningTimersAsNotifications) {
           // trigger a notification permission window
-          FlutterAppBadger.removeBadge();
+          if (Platform.isIOS || Platform.isAndroid) {
+            FlutterAppBadger.removeBadge();
+          }
           await settings.setBool("hasAskedNotificationPermissions", true);
           hasAskedNotificationPermissions = true;
         }
