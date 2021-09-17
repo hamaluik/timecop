@@ -35,6 +35,7 @@ dependencies:
   file_picker: ^4.0.2
   flutter_local_notifications: ^3.0.2
   flutter_markdown: ^0.6.6
+  package_info_plus: ^1.0.6
 
 dependency_overrides:
   intl: 0.17.0
