@@ -48,8 +48,7 @@ class ExportMenu extends StatelessWidget {
         switch (item) {
           case ExportMenuItem.import:
             FilePickerResult result = await FilePicker.platform.pickFiles(
-                type: FileType.custom,
-                allowedExtensions: <String>["db"],
+                type: FileType.any,
                 allowMultiple: false);
             if (result == null) {
               return;
