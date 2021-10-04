@@ -1,6 +1,6 @@
 about = حول
 
-appDescription = تطبيق تتبع الوقت الذي يحترم خصوصيتك وينجز المهمة دون أن يتوهم.
+appDescription = تطبيق تتبع الوقت الذي يحترم خصوصيتك وينجز المهمة دون اضافات غير ضروريه.
 
 appLegalese = حقوق النشر © Kenton Hamaluik، 2020
 
@@ -32,7 +32,7 @@ timeCopDatabase = قاعدة بيانات شرطي الوقت ({ $date })
 
 filter = منقي
 
-from = من عند
+from = من
 
 to = إلى
 
@@ -42,7 +42,7 @@ description = وصف
 
 timeH = الوقت (ساعات)
 
-timeCopEntries = إدخالات شرطي الوقت ({ $date })
+timeCopEntries = مدخلات شرطي الوقت ({ $date })
 
 createNewProject = إنشاء مشروع جديد
 
@@ -52,7 +52,7 @@ pleaseEnterAName = الرجاء إدخال اسم
 
 projectName = اسم المشروع
 
-create = خلق
+create = انشاء 
 
 save = حفظ
 
@@ -60,13 +60,13 @@ areYouSureYouWantToDelete = هل أنت متأكد أنك تريد حذف هذا
 
 editTimer = تحرير الموقت
 
-whatWereYouDoing = ماذا كنتم تفعلون؟
+whatWereYouDoing = ماذا تفعل؟
 
 startTime = وقت البدء
 
 endTime = وقت النهاية
 
-duration = المدة الزمنية
+duration = المدة 
 
 appName = شرطي الوقت
 
@@ -76,7 +76,7 @@ noDescription = (بدون وصف)
 
 options = خيارات
 
-groupTimers = قم بتجميع الموقتات المماثلة في اليوم
+groupTimers = قم بتجميع الموقتات المماثلة باليوم
 
 columns = الأعمدة
 
@@ -98,7 +98,7 @@ contributors = المساهمون
 
 settings = الإعدادات
 
-theme = موضوع
+theme = وضع
 
 auto = تلقائي
 
@@ -114,9 +114,9 @@ language = لغة
 
 automaticLanguage = تلقائي ({ $langName })
 
-collapseDays = أيام الانهيار
+collapseDays = اغلاق الايام
 
-autocompleteDescription = أوصاف الإكمال التلقائي
+autocompleteDescription =  الاكمال التلقائى للوصف
 
 defaultFilterStartDateToMonday = تاريخ بدء التصفية الافتراضي ليوم الاثنين
 
