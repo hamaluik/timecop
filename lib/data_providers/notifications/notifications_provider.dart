@@ -30,11 +30,18 @@ class NotificationsProvider {
       requestBadgePermission: false,
       requestAlertPermission: false,
     );
+    final MacOSInitializationSettings initializationSettingsMacOS =
+        MacOSInitializationSettings(
+      requestSoundPermission: false,
+      requestBadgePermission: false,
+      requestAlertPermission: false,
+    );
 
     final InitializationSettings initializationSettings =
         InitializationSettings(
             android: initializationSettingsAndroid,
-            iOS: initializationSettingsIOS);
+            iOS: initializationSettingsIOS,
+            macOS: initializationSettingsMacOS);
     await notif.initialize(initializationSettings);
 
     return NotificationsProvider(notif);
@@ -45,6 +52,13 @@ class NotificationsProvider {
       bool result = await _notif
               .resolvePlatformSpecificImplementation<
                   IOSFlutterLocalNotificationsPlugin>()
+              ?.requestPermissions(sound: true, alert: true, badge: true) ??
+          false;
+      return result;
+    } else if (Platform.isMacOS) {
+      bool result = await _notif
+              .resolvePlatformSpecificImplementation<
+                  MacOSFlutterLocalNotificationsPlugin>()
               ?.requestPermissions(sound: true, alert: true, badge: true) ??
           false;
       return result;
@@ -67,6 +81,12 @@ class NotificationsProvider {
       badgeNumber: null,
     );
 
+    const MacOSNotificationDetails macos = MacOSNotificationDetails(
+      presentAlert: true,
+      presentSound: false,
+      badgeNumber: null,
+    );
+
     const AndroidNotificationDetails android = AndroidNotificationDetails(
         "ca.hamaluik.timecop.runningtimersnotification",
         "Running Timers",
@@ -76,7 +96,7 @@ class NotificationsProvider {
         showWhen: true);
 
     NotificationDetails details =
-        NotificationDetails(iOS: ios, android: android);
+        NotificationDetails(iOS: ios, android: android, macOS: macos);
 
     await _notif.show(0, title, body, details);
   }

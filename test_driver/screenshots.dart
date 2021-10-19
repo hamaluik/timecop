@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timecop/data_providers/data/data_provider.dart';
 import 'package:timecop/data_providers/data/mock_data_provider.dart';
+import 'package:timecop/data_providers/notifications/notifications_provider.dart';
 import 'package:timecop/data_providers/settings/mock_settings_provider.dart';
 import 'package:timecop/data_providers/settings/settings_provider.dart';
 import 'package:timecop/main.dart';
@@ -25,5 +27,6 @@ Future<void> main() async {
   final SettingsProvider settings = MockSettingsProvider();
   settings.setBool("collapseDays", false);
   final DataProvider data = MockDataProvider(ui.window.locale);
-  return runMain(settings, data);
+  final NotificationsProvider notifications = NotificationsProvider(FlutterLocalNotificationsPlugin());
+  return runMain(settings, data, notifications);
 }
