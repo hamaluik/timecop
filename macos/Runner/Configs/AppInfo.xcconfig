@@ -5,10 +5,10 @@
 // 'flutter create' template.
 
 // The application's name. By default this is also the title of the Flutter window.
-PRODUCT_NAME = timecop
+PRODUCT_NAME = Time Cop
 
 // The application's bundle identifier
 PRODUCT_BUNDLE_IDENTIFIER = ca.hamaluik.timecop
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2021 ca.hamaluik. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2020 Kenton Hamaluik
