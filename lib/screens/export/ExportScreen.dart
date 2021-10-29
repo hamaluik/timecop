@@ -15,6 +15,7 @@
 import 'dart:collection';
 import 'dart:io';
 import 'package:csv/csv.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -488,21 +489,33 @@ class _ExportScreenState extends State<ExportScreen> {
             String csv =
                 ListToCsvConverter(delimitAllFields: true).convert(data);
 
-            Directory directory;
-            if (Platform.isAndroid) {
-              directory = await getExternalStorageDirectory();
+            if (Platform.isMacOS) {
+              String outputFile = await FilePicker.platform.saveFile(
+                dialogTitle: "",
+                fileName: "timecop.csv",
+              );
+
+              if (outputFile != null) {
+                await File(outputFile).writeAsString(csv, flush: true);
+              }
             } else {
-              directory = await getApplicationDocumentsDirectory();
+              Directory directory;
+              if (Platform.isAndroid) {
+                directory = await getExternalStorageDirectory();
+              } else {
+                directory = await getApplicationDocumentsDirectory();
+              }
+              final String localPath = '${directory.path}/timecop.csv';
+
+              File file = File(localPath);
+              await file.writeAsString(csv, flush: true);
+              await Share.shareFiles(<String>[localPath],
+                  mimeTypes: <String>["text/csv"],
+                  subject: L10N
+                      .of(context)
+                      .tr
+                      .timeCopEntries(_dateFormat.format(DateTime.now())));
             }
-            final String localPath = '${directory.path}/timecop.csv';
-            File file = File(localPath);
-            await file.writeAsString(csv, flush: true);
-            await Share.shareFiles(<String>[localPath],
-                mimeTypes: <String>["text/csv"],
-                subject: L10N
-                    .of(context)
-                    .tr
-                    .timeCopEntries(_dateFormat.format(DateTime.now())));
           }),
     );
   }
