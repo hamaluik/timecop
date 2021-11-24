@@ -22,10 +22,7 @@ import './bloc.dart';
 class TimersBloc extends Bloc<TimersEvent, TimersState> {
   final DataProvider data;
   final SettingsProvider settings;
-  TimersBloc(this.data, this.settings);
-
-  @override
-  TimersState get initialState => TimersState.initial();
+  TimersBloc(this.data, this.settings) : super(TimersState.initial());
 
   @override
   Stream<TimersState> mapEventToState(

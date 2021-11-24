@@ -173,7 +173,7 @@ class _TimerEditorState extends State<TimerEditor> {
               child: settingsBloc.state.autocompleteDescription
                   ? TypeAheadField<String>(
                       direction: AxisDirection.down,
-                      textFieldConfiguration: TextFieldConfiguration<String>(
+                      textFieldConfiguration: TextFieldConfiguration(
                         controller: _descriptionController,
                         autocorrect: true,
                         decoration: InputDecoration(

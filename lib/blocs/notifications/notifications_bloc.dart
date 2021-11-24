@@ -9,10 +9,7 @@ part 'notifications_state.dart';
 
 class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   final NotificationsProvider notifications;
-  NotificationsBloc(this.notifications);
-
-  @override
-  NotificationsState get initialState => NotificationsState();
+  NotificationsBloc(this.notifications) : super(NotificationsState());
 
   @override
   Stream<NotificationsState> mapEventToState(

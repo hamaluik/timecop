@@ -12,10 +12,7 @@ part 'theme_state.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   final SettingsProvider settings;
-  ThemeBloc(this.settings);
-
-  @override
-  ThemeState get initialState => ThemeState(ThemeType.auto);
+  ThemeBloc(this.settings) : super(ThemeState(ThemeType.auto));
 
   @override
   Stream<ThemeState> mapEventToState(

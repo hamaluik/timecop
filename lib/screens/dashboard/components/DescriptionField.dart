@@ -65,7 +65,7 @@ class _DescriptionFieldState extends State<DescriptionField> {
       if (settings.state.autocompleteDescription) {
         return TypeAheadField<String>(
           direction: AxisDirection.up,
-          textFieldConfiguration: TextFieldConfiguration<String>(
+          textFieldConfiguration: TextFieldConfiguration(
               focusNode: _focus,
               controller: _controller,
               autocorrect: true,

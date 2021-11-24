@@ -25,13 +25,19 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
   bool getBool(String key) => _prefs.getBool(key);
 
   @override
-  void setBool(String key, bool value) => _prefs.setBool(key, value);
+  void setBool(String key, bool value) => (value == null)
+      ? _prefs.remove(key)
+      : _prefs.setBool(
+          key, value); //todo remove null check with null safety implementation
 
   @override
   int getInt(String key) => _prefs.getInt(key);
 
   @override
-  void setInt(String key, int value) => _prefs.setInt(key, value);
+  void setInt(String key, int value) => (value == null)
+      ? _prefs.remove(key)
+      : _prefs.setInt(
+          key, value); //todo remove null check with null safety implementation
 
   static Future<SharedPrefsSettingsProvider> load() async {
     return SharedPrefsSettingsProvider(await SharedPreferences.getInstance());
@@ -45,7 +51,12 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
 
   @override
   void setTheme(ThemeType theme) {
-    _prefs.setString("theme", theme.stringify);
+    if (theme == null) {
+      //todo remove null check with null safety implementation
+      _prefs.remove("theme");
+    } else {
+      _prefs.setString("theme", theme.stringify);
+    }
   }
 
   @override
@@ -61,7 +72,18 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
 
   @override
   void setLocale(Locale locale) {
-    _prefs.setString("languageCode", locale?.languageCode);
-    _prefs.setString("countryCode", locale?.countryCode);
+    if (locale?.languageCode ==
+        null) //todo remove null check with null safety implementation
+      _prefs.remove("languageCode");
+    else {
+      _prefs.setString("languageCode", locale?.languageCode);
+    }
+
+    if (locale?.countryCode == null) {
+      //todo remove null check with null safety implementation
+      _prefs.remove("countryCode");
+    } else {
+      _prefs.setString("countryCode", locale?.countryCode);
+    }
   }
 }

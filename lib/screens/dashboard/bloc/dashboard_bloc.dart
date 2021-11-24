@@ -14,14 +14,9 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final ProjectsBloc projectsBloc;
   final SettingsBloc settingsBloc;
 
-  DashboardBloc(this.projectsBloc, this.settingsBloc);
-
-  @override
-  DashboardState get initialState {
-    Project newProject = projectsBloc.getProjectByID(-1);
-    return DashboardState("", newProject, false,
-        settingsBloc.getFilterStartDate(), null, <int>[], null);
-  }
+  DashboardBloc(this.projectsBloc, this.settingsBloc)
+      : super(DashboardState("", projectsBloc.getProjectByID(-1), false,
+            settingsBloc.getFilterStartDate(), null, <int>[], null));
 
   @override
   Stream<DashboardState> mapEventToState(

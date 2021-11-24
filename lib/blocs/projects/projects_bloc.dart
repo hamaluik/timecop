@@ -20,10 +20,7 @@ import './bloc.dart';
 
 class ProjectsBloc extends Bloc<ProjectsEvent, ProjectsState> {
   final DataProvider data;
-  ProjectsBloc(this.data);
-
-  @override
-  ProjectsState get initialState => ProjectsState.initial();
+  ProjectsBloc(this.data) : super(ProjectsState.initial());
 
   @override
   Stream<ProjectsState> mapEventToState(
