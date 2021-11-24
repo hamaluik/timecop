@@ -24,6 +24,8 @@ deleteTimerConfirm = 이 타이머를 삭제 하시겠습니까?
 
 cancel = 취소
 
+ok = 좋아요
+
 delete = 지우다
 
 runningTimers = 타이머 실행

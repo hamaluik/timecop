@@ -20,7 +20,6 @@ import 'package:timecop/blocs/locale/locale_bloc.dart';
 import 'package:timecop/blocs/notifications/notifications_bloc.dart';
 import 'package:timecop/blocs/settings/bloc.dart';
 import 'package:timecop/blocs/theme/theme_bloc.dart';
-import 'package:timecop/blocs/timers/timers_bloc.dart';
 import 'package:timecop/l10n.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -110,21 +109,42 @@ class SettingsScreen extends StatelessWidget {
                           ? "—"
                           : settings.defaultFilterDays.toString()),
                       onTap: () async {
+                        int tempDays = settings.defaultFilterDays > 0
+                            ? settings.defaultFilterDays
+                            : 30;
                         int days = await showDialog<int>(
                             context: context,
                             builder: (BuildContext context) {
-                              return NumberPickerDialog.integer(
-                                minValue: 1,
-                                maxValue: 365,
-                                initialIntegerValue:
-                                    settings.defaultFilterDays > 0
-                                        ? settings.defaultFilterDays
-                                        : 30,
-                                title:
-                                    Text(L10N.of(context).tr.defaultFilterDays),
-                                infiniteLoop: true,
-                                haptics: true,
-                              );
+                              return StatefulBuilder(
+                                  builder: (context, setState) {
+                                return AlertDialog(
+                                  content: NumberPicker(
+                                    minValue: 1,
+                                    maxValue: 365,
+                                    onChanged: (int value) {
+                                      setState(() => tempDays = value);
+                                    },
+                                    value: tempDays,
+                                    infiniteLoop: true,
+                                    haptics: true,
+                                  ),
+                                  title: Text(
+                                      L10N.of(context).tr.defaultFilterDays),
+                                  actions: <Widget>[
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child:
+                                            Text(L10N.of(context).tr.cancel)),
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context, tempDays);
+                                        },
+                                        child: Text(L10N.of(context).tr.ok))
+                                  ],
+                                );
+                              });
                             });
                         if (days != null) {
                           settingsBloc.add(SetDefaultFilterDays(days));
@@ -163,7 +183,7 @@ class SettingsScreen extends StatelessWidget {
                   title: Text(L10N.of(context).tr.showBadgeCounts),
                   value: settings.showBadgeCounts,
                   onChanged: (bool value) =>
-                      settingsBloc.add(SetBoolValueEvent(showBadgeCounts: value)),
+                    settingsBloc.add(SetBoolValueEvent(showBadgeCounts: value)),
                   activeColor: Theme.of(context).accentColor,
                 ),
               ),

@@ -37,6 +37,8 @@ deleteTimerConfirm = Sei sicuro di voler cancellare questo timer?
 # tt-hand-translated
 cancel = Cancella
 
+ok = OK
+
 # tt-hand-translated
 delete = Cancella
 

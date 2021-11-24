@@ -24,6 +24,8 @@ deleteTimerConfirm = Tem certeza de que deseja excluir este temporizador?
 
 cancel = Cancelar
 
+ok = OK
+
 delete = Excluir
 
 runningTimers = Temporizadores

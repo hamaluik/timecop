@@ -54,6 +54,8 @@ class FluentL10NProvider extends L10NProvider {
   @override
   String get cancel => _bundle.format("cancel", errors: _errors);
   @override
+  String get ok => _bundle.format("ok", errors: _errors);
+  @override
   String get changeLog => _bundle.format("changeLog", errors: _errors);
   @override
   String get confirmDelete => _bundle.format("confirmDelete", errors: _errors);

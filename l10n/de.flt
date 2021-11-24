@@ -24,6 +24,8 @@ deleteTimerConfirm = Möchten Sie diesen Timer wirklich löschen?
 
 cancel = Stornieren
 
+ok = OK
+
 delete = Löschen
 
 runningTimers = Timer ausführen

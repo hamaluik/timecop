@@ -24,6 +24,8 @@ deleteTimerConfirm = Are you sure you want to delete this timer?
 
 cancel = Cancel
 
+ok = OK
+
 delete = Delete
 
 runningTimers = Running Timers
