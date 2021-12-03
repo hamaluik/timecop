@@ -19,6 +19,7 @@ import 'package:path/path.dart' as p;
 import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:timecop/blocs/locale/locale_bloc.dart';
 import 'package:timecop/blocs/notifications/notifications_bloc.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
@@ -46,6 +47,10 @@ Future<void> main() async {
   final SettingsProvider settings = await SharedPrefsSettingsProvider.load();
 
   // get a path to the database file
+  if (Platform.isLinux) {
+    sqfliteFfiInit();
+    databaseFactory = databaseFactoryFfi;
+  }
   String databasesPath = await getDatabasesPath();
   var path = p.join(databasesPath, 'timecop.db');
   await Directory(databasesPath).create(recursive: true);

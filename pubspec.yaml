@@ -10,6 +10,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  sqflite_common_ffi:
   flutter_bloc: ^7.0.0
   equatable: ^2.0.3
   sqflite: ^2.0.0+4
