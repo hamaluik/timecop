@@ -97,19 +97,30 @@ class ExportMenu extends StatelessWidget {
             var dbPath = p.join(databasesPath, 'timecop.db');
 
             try {
-              // on android, copy it somewhere where it can be shared
-              if (Platform.isAndroid) {
-                Directory directory = await getExternalStorageDirectory();
-                File copiedDB = await File(dbPath)
-                    .copy(p.join(directory.path, "timecop.db"));
-                dbPath = copiedDB.path;
+              if (Platform.isMacOS) {
+                String outputFile = await FilePicker.platform.saveFile(
+                  dialogTitle: "",
+                  fileName: "timecop.db",
+                );
+
+                if (outputFile != null) {
+                  await File(dbPath).copy(outputFile);
+                }
+              } else {
+                if (Platform.isAndroid) {
+                  // on android, copy it somewhere where it can be shared
+                  Directory directory = await getExternalStorageDirectory();
+                  File copiedDB = await File(dbPath)
+                      .copy(p.join(directory.path, "timecop.db"));
+                  dbPath = copiedDB.path;
+                }
+                await Share.shareFiles(<String>[dbPath],
+                    mimeTypes: <String>["application/vnd.sqlite3"],
+                    subject: L10N
+                        .of(context)
+                        .tr
+                        .timeCopDatabase(dateFormat.format(DateTime.now())));
               }
-              await Share.shareFiles(<String>[dbPath],
-                  mimeTypes: <String>["application/vnd.sqlite3"],
-                  subject: L10N
-                      .of(context)
-                      .tr
-                      .timeCopDatabase(dateFormat.format(DateTime.now())));
             } on Exception catch (e) {
               scaffoldKey.currentState.showSnackBar(SnackBar(
                 backgroundColor: Theme.of(context).errorColor,
