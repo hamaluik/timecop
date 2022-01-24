@@ -12,11 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
@@ -86,34 +89,40 @@ class _ReportsScreenState extends State<ReportsScreen> {
             Expanded(
               child: Swiper(
                 itemBuilder: (BuildContext context, int index) {
-                  switch (index) {
-                    case 0:
-                      return ProjectBreakdown(
-                        startDate: _startDate,
-                        endDate: _endDate,
-                        selectedProjects: selectedProjects,
-                      );
-                    case 1:
-                      return WeeklyTotals(
-                        startDate: _startDate,
-                        endDate: _endDate,
-                        selectedProjects: selectedProjects,
-                      );
-                    case 2:
-                      return WeekdayAverages(
-                        context,
-                        startDate: _startDate,
-                        endDate: _endDate,
-                        selectedProjects: selectedProjects,
-                      );
-                    case 3:
-                      return TimeTable(
-                        startDate: _startDate,
-                        endDate: _endDate,
-                        selectedProjects: selectedProjects,
-                      );
-                  }
-                  return Container();
+                  return Padding(
+                      padding: Platform.isLinux || Platform.isMacOS
+                          ? EdgeInsets.symmetric(horizontal: 32)
+                          : EdgeInsets.zero,
+                      child: Builder(builder: (context) {
+                        switch (index) {
+                          case 0:
+                            return ProjectBreakdown(
+                              startDate: _startDate,
+                              endDate: _endDate,
+                              selectedProjects: selectedProjects,
+                            );
+                          case 1:
+                            return WeeklyTotals(
+                              startDate: _startDate,
+                              endDate: _endDate,
+                              selectedProjects: selectedProjects,
+                            );
+                          case 2:
+                            return WeekdayAverages(
+                              context,
+                              startDate: _startDate,
+                              endDate: _endDate,
+                              selectedProjects: selectedProjects,
+                            );
+                          case 3:
+                            return TimeTable(
+                              startDate: _startDate,
+                              endDate: _endDate,
+                              selectedProjects: selectedProjects,
+                            );
+                        }
+                        return Container();
+                      }));
                 },
                 itemCount: 4,
                 pagination: SwiperPagination(
@@ -121,7 +130,11 @@ class _ReportsScreenState extends State<ReportsScreen> {
                   color: Theme.of(context).disabledColor,
                   activeColor: Theme.of(context).accentColor,
                 )),
-                control: SwiperControl(iconPrevious: null, iconNext: null),
+                control: Platform.isLinux || Platform.isMacOS
+                    ? SwiperControl(
+                        iconPrevious: Icons.arrow_back_ios_new,
+                        iconNext: Icons.arrow_forward_ios)
+                    : SwiperControl(iconPrevious: null, iconNext: null),
               ),
             ),
             ExpansionTile(

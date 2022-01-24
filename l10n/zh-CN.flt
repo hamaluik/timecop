@@ -24,6 +24,8 @@ deleteTimerConfirm = 您确定要删除此计时器吗？
 
 cancel = 取消
 
+ok = 好的
+
 delete = 删除
 
 runningTimers = 运行计时器

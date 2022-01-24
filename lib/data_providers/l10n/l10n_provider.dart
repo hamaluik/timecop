@@ -21,6 +21,7 @@ abstract class L10NProvider {
   String get appName;
   String get areYouSureYouWantToDelete;
   String get cancel;
+  String get ok;
   String get changeLog;
   String get confirmDelete;
   String get create;

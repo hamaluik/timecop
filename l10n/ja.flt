@@ -24,6 +24,8 @@ deleteTimerConfirm = このタイマーを削除しますか？
 
 cancel = キャンセル
 
+ok = わかった
+
 delete = 削除
 
 runningTimers = 計測中のタイマー

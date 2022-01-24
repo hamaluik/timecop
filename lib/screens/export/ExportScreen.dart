@@ -489,7 +489,7 @@ class _ExportScreenState extends State<ExportScreen> {
             String csv =
                 ListToCsvConverter(delimitAllFields: true).convert(data);
 
-            if (Platform.isMacOS) {
+            if (Platform.isMacOS || Platform.isLinux) {
               String outputFile = await FilePicker.platform.saveFile(
                 dialogTitle: "",
                 fileName: "timecop.csv",

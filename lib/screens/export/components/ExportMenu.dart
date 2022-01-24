@@ -47,9 +47,8 @@ class ExportMenu extends StatelessWidget {
       onSelected: (ExportMenuItem item) async {
         switch (item) {
           case ExportMenuItem.import:
-            FilePickerResult result = await FilePicker.platform.pickFiles(
-                type: FileType.any,
-                allowMultiple: false);
+            FilePickerResult result = await FilePicker.platform
+                .pickFiles(type: FileType.any, allowMultiple: false);
             if (result == null) {
               return;
             }
@@ -97,7 +96,7 @@ class ExportMenu extends StatelessWidget {
             var dbPath = p.join(databasesPath, 'timecop.db');
 
             try {
-              if (Platform.isMacOS) {
+              if (Platform.isMacOS || Platform.isLinux) {
                 String outputFile = await FilePicker.platform.saveFile(
                   dialogTitle: "",
                   fileName: "timecop.db",

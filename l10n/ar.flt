@@ -24,6 +24,8 @@ deleteTimerConfirm = هل أنت متأكد أنك تريد حذف هذا الم
 
 cancel = إلغاء
 
+ok = حسنا
+
 delete = حذف
 
 runningTimers = تشغيل المؤقتات

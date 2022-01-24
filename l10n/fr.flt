@@ -24,6 +24,8 @@ deleteTimerConfirm = Voulez-vous vraiment supprimer cette minuterie?
 
 cancel = Annuler
 
+ok = OK
+
 delete = Supprimer
 
 runningTimers = Minuteurs de course

@@ -22,25 +22,26 @@ class NotificationsProvider {
   static Future<NotificationsProvider> load() async {
     FlutterLocalNotificationsPlugin notif = FlutterLocalNotificationsPlugin();
 
-    const AndroidInitializationSettings initializationSettingsAndroid =
+    const initializationSettingsAndroid =
         AndroidInitializationSettings('ic_notification_icon');
-    final IOSInitializationSettings initializationSettingsIOS =
-        IOSInitializationSettings(
+    final initializationSettingsIOS = IOSInitializationSettings(
       requestSoundPermission: false,
       requestBadgePermission: false,
       requestAlertPermission: false,
     );
-    final MacOSInitializationSettings initializationSettingsMacOS =
-        MacOSInitializationSettings(
+    final initializationSettingsMacOS = MacOSInitializationSettings(
       requestSoundPermission: false,
       requestBadgePermission: false,
       requestAlertPermission: false,
     );
+    const initializationSettingsLinux = LinuxInitializationSettings(
+        defaultActionName: "Open time cop");
 
     final InitializationSettings initializationSettings =
         InitializationSettings(
             android: initializationSettingsAndroid,
             iOS: initializationSettingsIOS,
+            linux: initializationSettingsLinux,
             macOS: initializationSettingsMacOS);
     await notif.initialize(initializationSettings);
 
@@ -75,28 +76,30 @@ class NotificationsProvider {
       return;
     }
 
-    const IOSNotificationDetails ios = IOSNotificationDetails(
+    const ios = IOSNotificationDetails(
       presentAlert: true,
       presentSound: false,
       badgeNumber: null,
     );
 
-    const MacOSNotificationDetails macos = MacOSNotificationDetails(
+    const macos = MacOSNotificationDetails(
       presentAlert: true,
       presentSound: false,
       badgeNumber: null,
     );
 
-    const AndroidNotificationDetails android = AndroidNotificationDetails(
-        "ca.hamaluik.timecop.runningtimersnotification",
-        "Running Timers",
-        "Notification indicating that timers are currently running",
+    const android = AndroidNotificationDetails(
+        "ca.hamaluik.timecop.runningtimersnotification", "Running Timers",
+        channelDescription:
+            "Notification indicating that timers are currently running",
         priority: Priority.low,
         importance: Importance.low,
         showWhen: true);
 
-    NotificationDetails details =
-        NotificationDetails(iOS: ios, android: android, macOS: macos);
+    const linux = LinuxNotificationDetails();
+
+    NotificationDetails details = NotificationDetails(
+        iOS: ios, android: android, macOS: macos, linux: linux);
 
     await _notif.show(0, title, body, details);
   }
