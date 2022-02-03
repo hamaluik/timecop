@@ -1,0 +1,10 @@
+- Pouze offline, pouze pro mobilní zařízení (iOS / Android)
+- Plně soukromé — bez jakéhokoliv sledování / špehování / reklam / apod.
+- Častujte několik aktivit najednou pomocí souběžných časovačů, které spustíte jednoduchým stisknutím tlačítka
+- Přiřaďte časovače projektům pro seskupování vaší práce (nebo ne)
+- Spusťte, zastavte, upravte a odstraňte časovače kdykoliv bez zbytečných komplikací
+- Exportujte data jako .csv soubor filtrovaný dle časových úseků a projektů
+- Exportujte databázi aplikace pro plný přístup k veškerým datům
+- Automatický světlý / tmavý mód podle nastavení vašeho zařízení
+- Přeloženo do několika jazyků (díky Google Translate): angličtiny, arabštiny, němčiny, španělštiny, francouzštiny, hindštiny, indonéštiny, japonštiny, korejštiny, portugalštiny, ruštiny, čínštiny (zjednodušené i tradiční) a také, díky dobrovolníkům, do češtiny a italštiny
+- Open source (pod licencí Apache-2.0) — nebojte se forknout (https://github.com/hamaluik/timecop)
