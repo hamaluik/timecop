@@ -1,151 +1,75 @@
 about = حول
-
 appDescription = تطبيق تتبع الوقت الذي يحترم خصوصيتك وينجز المهمة دون اضافات غير ضروريه.
-
 appLegalese = حقوق النشر © Kenton Hamaluik، 2020
-
 readme = الملف التمهيدي
-
 changeLog = سجل التغيير
-
 sourceCode = مصدر الرمز
-
 whatAreYouDoing = ماذا تفعل؟
-
 projects = المشاريع
-
 export = تصدير
-
 noProject = (لا يوجد مشروع)
-
 confirmDelete = تأكيد الحذف
-
 deleteTimerConfirm = هل أنت متأكد أنك تريد حذف هذا المؤقت؟
-
 cancel = إلغاء
-
 ok = حسنا
-
 delete = حذف
-
 runningTimers = تشغيل المؤقتات
-
 timeCopDatabase = قاعدة بيانات شرطي الوقت ({ $date })
-
 filter = منقي
-
 from = من
-
 to = إلى
-
 project = مشروع
-
 description = وصف
-
 timeH = الوقت (ساعات)
-
 timeCopEntries = مدخلات شرطي الوقت ({ $date })
-
 createNewProject = إنشاء مشروع جديد
-
 editProject = تحرير المشروع
-
 pleaseEnterAName = الرجاء إدخال اسم
-
 projectName = اسم المشروع
-
-create = انشاء 
-
+create = انشاء
 save = حفظ
-
 areYouSureYouWantToDelete = هل أنت متأكد أنك تريد حذف هذا المشروع؟
-
 editTimer = تحرير الموقت
-
 whatWereYouDoing = ماذا تفعل؟
-
 startTime = وقت البدء
-
 endTime = وقت النهاية
-
-duration = المدة 
-
+duration = المدة
 appName = شرطي الوقت
-
 logoSemantics = شعار الوقت الشرطي
-
 noDescription = (بدون وصف)
-
 options = خيارات
-
 groupTimers = قم بتجميع الموقتات المماثلة باليوم
-
 columns = الأعمدة
-
 date = تاريخ
-
 combinedProjectDescription = الجمع بين المشروع والوصف
-
 reports = التقارير
-
 nHours = { $hours } ساعة
-
 averageDailyHours = متوسط ساعات العمل اليومية
-
 totalProjectShare = إجمالي حصة المشروع
-
 weeklyHours = ساعات العمل الأسبوعية
-
 contributors = المساهمون
-
 settings = الإعدادات
-
 theme = وضع
-
 auto = تلقائي
-
 light = ضوء
-
 dark = داكن
-
 black = أسود
-
 langName = العربية
-
 language = لغة
-
 automaticLanguage = تلقائي ({ $langName })
-
 collapseDays = اغلاق الايام
-
-autocompleteDescription =  الاكمال التلقائى للوصف
-
+autocompleteDescription = الاكمال التلقائى للوصف
 defaultFilterStartDateToMonday = تاريخ بدء التصفية الافتراضي ليوم الاثنين
-
 hours = ساعات
-
 total = مجموع
-
 oneTimerAtATime = السماح بمؤقت تشغيل واحد فقط في كل مرة
-
 selectAll = اختر الكل
-
 selectNone = لا تختر شيء
-
 defaultFilterDays = فترة التصفية الافتراضية (أيام)
-
 import = استيراد
-
 invalidDatabaseFile = ملف قاعدة بيانات غير صالح!
-
-databasedImported = تم استيراد قاعدة البيانات
-
 showBadgeCounts = إظهار عد عداد الوقت كشارة أيقونة التطبيق
-
 runningTimersNotificationTitle = تشغيل الموقتات
-
 runningTimersNotificationBody = لا تزال الموقتات تعمل في الخلفية
-
 enableRunningTimersNotification = إظهار إخطارات تشغيل عداد الوقت
-
 notes = ملاحظات
