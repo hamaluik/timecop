@@ -1,152 +1,76 @@
 about = About
-
 appDescription = A time tracking app that respects your privacy and gets the job done without getting too fancy.
-
 appLegalese = Copyright © Kenton Hamaluik, 2020
-
 readme = Readme
-
-changeLog = Change Log
-
+changeLog = Changelog
 sourceCode = Source Code
-
 whatAreYouDoing = What are you doing?
-
 projects = Projects
-
 export = Export
-
 noProject = (no project)
-
 confirmDelete = Confirm Delete
-
 deleteTimerConfirm = Are you sure you want to delete this timer?
-
 cancel = Cancel
-
 ok = OK
-
 delete = Delete
-
 runningTimers = Running Timers
-
 timeCopDatabase = Time Cop Database ({ $date })
-
 filter = Filter
-
 from = From
-
 to = To
-
 project = Project
-
 description = Description
-
 timeH = Time (hours)
-
 timeCopEntries = Time Cop Entries ({ $date })
-
 createNewProject = Create New Project
-
 editProject = Edit Project
-
 pleaseEnterAName = Please enter a name
-
 projectName = Project Name
-
 create = Create
-
 save = Save
-
 areYouSureYouWantToDelete = Are you sure you want to delete this project?
-
 editTimer = Edit Timer
-
 whatWereYouDoing = What were you doing?
-
 startTime = Start Time
-
 endTime = End Time
-
 duration = Duration
-
 appName = Time Cop
-
 logoSemantics = Time Cop Logo
-
 noDescription = (no description)
-
 options = Options
-
 groupTimers = Group Similar Timers Per Day
-
 columns = Columns
-
 date = Date
-
 combinedProjectDescription = Combined Project & Description
-
 reports = Reports
-
 nHours = { $hours } hours
-
 averageDailyHours = Average Daily Hours
-
 totalProjectShare = Total Project Share
-
 weeklyHours = Weekly Hours
-
 contributors = Contributors
-
 settings = Settings
-
 theme = Theme
-
 auto = Automatic
-
 light = Light
-
 dark = Dark
-
 black = Black
-
 langName = English
-
 language = Language
-
 automaticLanguage = Automatic ({ $langName })
-
 collapseDays = Collapse Days
-
 autocompleteDescription = Autocomplete Descriptions
-
 defaultFilterStartDateToMonday = Default Filter Start Date to Monday
-
 hours = Hours
-
 total = Total
-
 oneTimerAtATime = Only Allow One Running Timer at a Time
-
 selectAll = Select All
-
 selectNone = Select None
-
 defaultFilterDays = Default Filter Period (Days)
-
 import = Import
-
 invalidDatabaseFile = Invalid database file!
-
 databaseImported = Database imported
-
 showBadgeCounts = Show Running Timer Count As App Icon Badge
-
 runningTimersNotificationTitle = Running Timers
-
 runningTimersNotificationBody = Timers are still running in the background
-
 enableRunningTimersNotification = Show Running Timer Notifications
-
 notes = Notes
-
