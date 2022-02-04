@@ -1,0 +1,10 @@
+Kun frakoblet, kun for mobile operativsystemer (Android/iOS)
+Helt privat—ingen sporing/reklame/osv
+Hold øye med gjøremål med flere pågående tidsur som kan startes med ett knappetrykk
+Knytt tidsur til prosjekter for å gruppere arbeidet ditt
+Start, stopp, rediger og slett tidsur når som helst
+Eksporter data som en .csv-fil, filtrert som tidsrom og prosjekter
+Eksporter programmets database for full tilgang til dets data
+Automatisk lys/mørk drakt basert på enhetsinnstillinger
+Flere språk. Engelsk, arabisk, tysk, spansk, fransk, hindi, indonesisk, japansk, koreansk, portugisisk, russisk, forenklet kinesisk, tradisjonell kinesisk, og italiensk
+Fri kildekode, lisensiert Apache 2.0. Forgrein det som du vil https://github.com/hamaluik/timecop
