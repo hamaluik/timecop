@@ -1,152 +1,76 @@
 about = Sobre
-
 appDescription = Um aplicativo de rastreamento de tempo que respeita sua privacidade e faz o trabalho sem ser muito sofisticado.
-
 appLegalese = Direitos autorais © Kenton Hamaluik, 2020
-
 readme = Leia-me
-
-changeLog = Change Log
-
+changeLog = Registro de alterações
 sourceCode = Código fonte
-
 whatAreYouDoing = O que você está fazendo?
-
 projects = Projetos
-
 export = Exportação
-
 noProject = (nenhum projeto)
-
 confirmDelete = Confirmar exclusão
-
 deleteTimerConfirm = Tem certeza de que deseja excluir este temporizador?
-
 cancel = Cancelar
-
 ok = OK
-
 delete = Excluir
-
 runningTimers = Temporizadores
-
 timeCopDatabase = Banco de dados Time Cop ({ $date })
-
 filter = Filtro
-
 from = A partir de
-
 to = Para
-
 project = Projeto
-
 description = Descrição
-
 timeH = Tempo (horas)
-
 timeCopEntries = Entradas de registro de horas ({ $date })
-
 createNewProject = Criar novo projeto
-
 editProject = Editar projeto
-
 pleaseEnterAName = Por favor insira um nome
-
 projectName = Nome do Projeto
-
 create = Crio
-
 save = Salve 
-
 areYouSureYouWantToDelete = Tem certeza de que deseja excluir este projeto?
-
 editTimer = Editar temporizador
-
 whatWereYouDoing = O que você estava fazendo?
-
 startTime = Hora de início
-
 endTime = Fim do tempo
-
 duration = Duração
-
 appName = Time Cop
-
 logoSemantics = Time Cop Logo
-
 noDescription = (sem descrição)
-
 options = Opções
-
 groupTimers = Agrupar temporizadores semelhantes por dia
-
 columns = Colunas
-
 date = Encontro
-
 combinedProjectDescription = Projeto combinado e descrição
-
 reports = Relatórios
-
 nHours = { $hours } horas
-
 averageDailyHours = Média de horas diárias
-
 totalProjectShare = Participação total do projeto
-
 weeklyHours = Horas semanais
-
 contributors = Contribuintes
-
 settings = Definições
-
 theme = Tema
-
 auto = Automático
-
 light = Luz
-
 dark = Sombrio
-
 black = Preto
-
 langName = Português
-
 language = Língua
-
 automaticLanguage = Automático ({ $langName })
-
 collapseDays = Dias de recolhimento
-
 autocompleteDescription = Descrições de preenchimento automático
-
 defaultFilterStartDateToMonday = Data de início do filtro padrão para segunda-feira
-
 hours = Horas
-
 total = Total
-
 oneTimerAtATime = Permitir apenas um temporizador em execução por vez
-
 selectAll = Selecionar tudo
-
 selectNone = Selecione nenhum
-
 defaultFilterDays = Período de filtro padrão (dias)
-
 import = Importar
-
 invalidDatabaseFile = Arquivo de banco de dados inválido!
-
 databaseImported = Banco de dados importado
-
 showBadgeCounts = Mostrar contagem de cronômetro em execução como emblema do ícone do aplicativo
-
 runningTimersNotificationTitle = Temporizadores em execução
-
 runningTimersNotificationBody = Os cronômetros ainda estão funcionando em segundo plano
-
 enableRunningTimersNotification = Mostrar notificações do cronômetro em execução
-
 notes = Notas
-
