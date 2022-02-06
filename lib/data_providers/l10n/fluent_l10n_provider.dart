@@ -27,12 +27,23 @@ class FluentL10NProvider extends L10NProvider {
     final FluentBundle bundle = FluentBundle(locale.toLanguageTag());
 
     String src = "l10n/${locale.languageCode}.flt";
-    // special handling of zh-CN & zh-TW for now
-    if (locale.languageCode == "zh" && locale.countryCode == "CN") {
-      src = "l10n/zh-CN.flt";
-    } else if (locale.languageCode == "zh" && locale.countryCode == "TW") {
-      src = "l10n/zh-TW.flt";
+    // special handling of zh-CN, zh-TW & nb-NO for now
+    switch (locale.languageCode) {
+      case "zh":
+        switch (locale.countryCode) {
+          case "TW":
+            src = "l10n/zh-TW.flt";
+            break;
+          default:
+            src = "l10n/zh-CN.flt";
+            break; 
+        }
+        break;
+      case "nb":
+        src = "l10n/nb-NO.flt";
+        break;
     }
+
     String messages = await rootBundle.loadString(src);
     bundle.addMessages(messages);
 
@@ -179,6 +190,8 @@ class FluentL10NProvider extends L10NProvider {
     switch (locale.languageCode) {
       case "ar":
         return "العربية";
+      case "cs":
+        return "Čeština";
       case "de":
         return "Deutsch";
       case "en":
@@ -197,6 +210,8 @@ class FluentL10NProvider extends L10NProvider {
         return "日本語";
       case "ko":
         return "한국어";
+      case "nb":
+        return "Norsk Bokmål";
       case "pt":
         return "Português";
       case "ru":

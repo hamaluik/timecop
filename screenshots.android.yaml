@@ -10,6 +10,7 @@ staging: ./tmp/screenshots
 locales:
   - it
   - ar
+  - cs
   - en
   - fr
   - de
@@ -18,6 +19,7 @@ locales:
 #  - id # not working for some reason
   - ja
   - ko
+  - nb-NO
   - pt
   - ru
   - zh-CN

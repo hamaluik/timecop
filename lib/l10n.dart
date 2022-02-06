@@ -57,7 +57,9 @@ class _L10NDelegate extends LocalizationsDelegate<L10N> {
         'ru',
         'zh',
         'ar',
-        'it'
+        'it',
+        'cs',
+        'nb'
       ].contains(locale.languageCode);
 
   @override

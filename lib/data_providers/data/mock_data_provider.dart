@@ -28,6 +28,13 @@ class MockDataProvider extends DataProvider {
       "mockups": "نموذج تجريبي",
       "app-development": "تطوير التطبيق",
     },
+    "cs": {
+      "administration": "Správa",
+      "mockups": "Mockupy",
+      "ui-layout": "Rozvržení UI",
+      "coffee": "Kafe",
+      "app-development": "Vývoj aplikace"
+    },
     "de": {
       "app-development": "App-Entwicklung",
       "administration": "Verwaltung",
@@ -69,6 +76,13 @@ class MockDataProvider extends DataProvider {
       "ui-layout": "Layout UI",
       "mockups": "Maket",
       "administration": "Administrasi",
+    },
+    "nb-NO": {
+      "administration": "Administrasjon",
+      "mockups": "Mockups",
+      "ui-layout": "UI Layout",
+      "coffee": "Kaffe",
+      "app-development": "Apputvikling"
     },
     "ja": {
       "ui-layout": "UIレイアウト",

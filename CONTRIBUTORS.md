@@ -10,4 +10,6 @@ Time Cop started as a personal project of Kenton Hamaluik ([@hamaluik](https://g
 | rlyders | [@rlyders](https://github.com/rlyders) |
 | Laurent Savaete | [@laurentS](https://github.com/laurentS) |
 | Mohamed Fadel | [@wmfadel](https://github.com/wmfadel) |
-| Mirek Mazel | [@12people](https://github.com/12people) |
+| Miroslav Mazel | [@12people](https://github.com/12people) |
+| Allan Nordhøy | [@comradekingu](https://github.com/comradekingu) |
+| J. Lavoie | (Translations through Weblate) |

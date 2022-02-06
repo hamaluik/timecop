@@ -9,6 +9,7 @@ staging: ./tmp/screenshots
 # A list of locales supported in app
 locales:
   - en-CA
+  - cs
   - fr-FR
   - de-DE
   - es-ES
@@ -17,6 +18,7 @@ locales:
   - id
   - ja
   - ko
+  - nb-NO
   - pt-PT
   - ru
   - zh-CN

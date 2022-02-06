@@ -26,6 +26,8 @@
 		<string>ru</string>
 		<string>ar</string>
 		<string>it</string>
+		<string>nb_NO</string>
+		<string>cs</string>
 	</array>
 	<key>CFBundleName</key>
 	<string>Time Cop</string>

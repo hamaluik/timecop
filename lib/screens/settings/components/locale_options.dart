@@ -54,6 +54,7 @@ class LocaleOptions extends StatelessWidget {
                         ]
                             .followedBy([
                               const Locale('ar'),
+                              const Locale('cs'),
                               const Locale('de'),
                               const Locale('en'),
                               const Locale('es'),
@@ -63,6 +64,7 @@ class LocaleOptions extends StatelessWidget {
                               const Locale('it'),
                               const Locale('ja'),
                               const Locale('ko'),
+                              const Locale('nb', 'NO'),
                               const Locale('pt'),
                               const Locale('ru'),
                               const Locale('zh', 'CN'),
