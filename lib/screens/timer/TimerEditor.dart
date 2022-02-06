@@ -181,6 +181,9 @@ class _TimerEditorState extends State<TimerEditor> {
                           hintText: L10N.of(context).tr.whatWereYouDoing,
                         ),
                       ),
+                      noItemsFoundBuilder: (context) => ListTile(
+                          title: Text(L10N.of(context).tr.noItemsFound),
+                          enabled: false),
                       itemBuilder: (BuildContext context, String desc) =>
                           ListTile(title: Text(desc)),
                       onSuggestionSelected: (String description) =>

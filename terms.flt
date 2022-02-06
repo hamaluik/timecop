@@ -6,7 +6,7 @@ appLegalese = Copyright © Kenton Hamaluik, 2020
 
 readme = Readme
 
-changeLog = Change Log
+changeLog = Changelog
 
 sourceCode = Source Code
 
@@ -151,3 +151,4 @@ enableRunningTimersNotification = Show Running Timer Notifications
 
 notes = Notes
 
+noItemsFound = No items found

@@ -149,3 +149,5 @@ runningTimersNotificationBody = لا تزال الموقتات تعمل في ا�
 enableRunningTimersNotification = إظهار إخطارات تشغيل عداد الوقت
 
 notes = ملاحظات
+
+noItemsFound = لم يتم العثور على العناصر

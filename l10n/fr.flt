@@ -74,3 +74,4 @@ runningTimersNotificationTitle = Minuteries en cours
 runningTimersNotificationBody = Les minuteries fonctionnent toujours en arrière-plan
 enableRunningTimersNotification = Afficher les notifications du minuteur en cours d'exécution
 notes = Remarques
+noItemsFound = Aucun élément trouvé

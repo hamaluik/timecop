@@ -74,3 +74,4 @@ runningTimersNotificationTitle = Timer ausführen
 runningTimersNotificationBody = Timer laufen noch im Hintergrund
 enableRunningTimersNotification = Laufende Timer-Benachrichtigungen anzeigen
 notes = Aufzeichnungen
+noItemsFound = Keine Elemente gefunden

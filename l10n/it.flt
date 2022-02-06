@@ -123,3 +123,4 @@ runningTimersNotificationTitle = Timer in esecuzione
 runningTimersNotificationBody = I timer sono ancora in esecuzione in background
 enableRunningTimersNotification = Mostra le notifiche del timer di esecuzione
 notes = Appunti
+noItemsFound = Nessun articolo trovato

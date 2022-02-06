@@ -91,4 +91,5 @@ abstract class L10NProvider {
   String get runningTimersNotificationBody;
   String get enableRunningTimersNotification;
   String get notes;
+  String get noItemsFound;
 }

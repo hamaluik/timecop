@@ -74,3 +74,4 @@ runningTimersNotificationTitle = Running Timers
 runningTimersNotificationBody = Timers are still running in the background
 enableRunningTimersNotification = Show Running Timer Notifications
 notes = Notes
+noItemsFound = No items found

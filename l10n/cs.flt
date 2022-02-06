@@ -74,3 +74,4 @@ theme = Vzhled
 enableRunningTimersNotification = Zobrazovat upozornění o běžících časovačích
 defaultFilterDays = Výchozí doba filtrování (dny)
 notes = Poznámky
+noItemsFound = Žádné položky nenalezeny

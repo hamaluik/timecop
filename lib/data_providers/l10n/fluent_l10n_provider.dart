@@ -36,7 +36,7 @@ class FluentL10NProvider extends L10NProvider {
             break;
           default:
             src = "l10n/zh-CN.flt";
-            break; 
+            break;
         }
         break;
       case "nb":
@@ -293,4 +293,7 @@ class FluentL10NProvider extends L10NProvider {
       "enableRunningTimersNotification";
   @override
   String get notes => _bundle.format("notes", errors: _errors) ?? "notes";
+  @override
+  String get noItemsFound =>
+      _bundle.format("noItemsFound", errors: _errors) ?? "noItemsFound";
 }

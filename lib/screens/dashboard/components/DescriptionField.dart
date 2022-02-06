@@ -79,6 +79,8 @@ class _DescriptionFieldState extends State<DescriptionField> {
               }),
           itemBuilder: (BuildContext context, String desc) =>
               ListTile(title: Text(desc)),
+          noItemsFoundBuilder: (context) => ListTile(
+              title: Text(L10N.of(context).tr.noItemsFound), enabled: false),
           onSuggestionSelected: (String description) {
             _controller.text = description;
             bloc.add(DescriptionChangedEvent(description));

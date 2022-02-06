@@ -74,3 +74,4 @@ runningTimersNotificationTitle = Ejecutando temporizadores
 runningTimersNotificationBody = Los temporizadores siguen funcionando en segundo plano
 enableRunningTimersNotification = Mostrar notificaciones del temporizador en ejecución
 notes = Notas
+noItemsFound = No se encontraron artículos

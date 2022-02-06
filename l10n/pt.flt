@@ -74,3 +74,4 @@ runningTimersNotificationTitle = Temporizadores em execução
 runningTimersNotificationBody = Os cronômetros ainda estão funcionando em segundo plano
 enableRunningTimersNotification = Mostrar notificações do cronômetro em execução
 notes = Notas
+noItemsFound = Nenhum item encontrado

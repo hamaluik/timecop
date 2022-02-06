@@ -74,3 +74,4 @@ ok = OK
 runningTimers = Kjørende tidsur
 description = Beskrivelse
 timeH = Tid (timer)
+noItemsFound = Ingen objekter funnet
