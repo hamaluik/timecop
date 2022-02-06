@@ -1,201 +1,125 @@
 # tt-hand-translated
 about = Riguardo a
-
 # tt-hand-translated
 appDescription = Un'applicazione di monitoraggio del tempo che rispetta la tua privacy e fa il suo lavoro senza diventare troppo sofisticata.
-
 # tt-hand-translated
 appLegalese = Copyright © Kenton Hamaluik, 2020
-
 # tt-hand-translated
 readme = Leggimi
-
 # tt-hand-translated
 changeLog = Registro modifiche
-
 # tt-hand-translated
 sourceCode = Codice sorgente
-
 # tt-hand-translated
 whatAreYouDoing = Che cosa stai facendo?
-
 # tt-hand-translated
 projects = Progetti
-
 # tt-hand-translated
 export = Esporta
-
 # tt-hand-translated
 noProject = (nessun progetto)
-
 # tt-hand-translated
 confirmDelete = Conferma Cancellazione
-
 # tt-hand-translated
 deleteTimerConfirm = Sei sicuro di voler cancellare questo timer?
-
 # tt-hand-translated
 cancel = Cancella
-
 ok = OK
-
 # tt-hand-translated
-delete = Cancella
-
+delete = Elimina
 # tt-hand-translated
 runningTimers = Timer in esecuzione
-
 # tt-hand-translated
-timeCopDatabase = Database di Time Cop ({ $date })
-
+timeCopDatabase = Base di dati di Time Cop ({ $date })
 # tt-hand-translated
 filter = Filtra
-
 # tt-hand-translated
 from = Da
-
 # tt-hand-translated
 to = A
-
 # tt-hand-translated
 project = Progetto
-
 # tt-hand-translated
 description = Descrizione
-
 # tt-hand-translated
-timeH = Time (hours)
-
+timeH = Tempo (ore)
 # tt-hand-translated
 timeCopEntries = Registrazioni Time Cop ({ $date })
-
 # tt-hand-translated
 createNewProject = Crea nuovo progetto
-
 # tt-hand-translated
 editProject = Modifica progetto
-
 # tt-hand-translated
 pleaseEnterAName = Per favore, inserisci un nome
-
 # tt-hand-translated
 projectName = Nome del Progetto
-
 # tt-hand-translated
 create = Crea
-
 # tt-hand-translated
 save = Salva
-
 # tt-hand-translated
-areYouSureYouWantToDelete = Sei sicuro di voler cancellare questo progetto?
-
+areYouSureYouWantToDelete = Sei sicuro/a di voler eliminare questo progetto?
 # tt-hand-translated
 editTimer = Modifica timer
-
 # tt-hand-translated
 whatWereYouDoing = Che cosa stiamo facendo?
-
 # tt-hand-translated
 startTime = Inizia timer
-
 # tt-hand-translated
 endTime = Fine del tempo
-
 # tt-hand-translated
 duration = Durata
-
 # tt-hand-translated
 appName = Time Cop
-
 # tt-hand-translated
 logoSemantics = Logo Time Cop
-
 # tt-hand-translated
 noDescription = (nessuna descrizione)
-
 # tt-hand-translated
 options = Opzioni
-
 # tt-hand-translated
 groupTimers = Raggruppa Timer Simili per giorno
-
 # tt-hand-translated
 columns = Colonne
-
 # tt-hand-translated
 date = Data
-
 # tt-hand-translated
 combinedProjectDescription = Progetto e descrizione combinati
-
 # tt-hand-translated
 reports = Rapporti
-
 # tt-hand-translated
 nHours = { $hours } ore
-
 # tt-hand-translated
 averageDailyHours = Media Ore giornaliere
-
 # tt-hand-translated
 totalProjectShare = Quota Totale Progetto
-
 # tt-hand-translated
 weeklyHours = Ore Settimanali
-
 # tt-hand-translated
 contributors = Contributori
-
-settings = impostazioni
-
+settings = Impostazioni
 theme = Tema
-
 auto = Automatico
-
 light = Luce
-
 dark = Buio
-
 black = Nero
-
 langName = Italiano
-
 language = linguaggio
-
 automaticLanguage = ({ $langName }) automatico
-
 collapseDays = Comprimi giorni
-
 autocompleteDescription = Completa descrizioni automaticamente
-
 defaultFilterStartDateToMonday = Data di inizio filtro predefinita a lunedì
-
 hours = Ore
-
 total = Totale
-
 oneTimerAtATime = Consenti solo un timer in esecuzione alla volta
-
 selectAll = Seleziona tutto
-
 selectNone = Non selezionare niente
-
 defaultFilterDays = Periodo filtro predefinito (giorni)
-
 import = Importare
-
 invalidDatabaseFile = File di database non valido!
-
 databaseImported = Database importato
-
 showBadgeCounts = Mostra il conteggio del timer di esecuzione come badge dell'icona dell'app
-
 runningTimersNotificationTitle = Timer in esecuzione
-
 runningTimersNotificationBody = I timer sono ancora in esecuzione in background
-
 enableRunningTimersNotification = Mostra le notifiche del timer di esecuzione
-
 notes = Appunti
-

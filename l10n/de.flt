@@ -1,152 +1,76 @@
 about = Über
-
 appDescription = Eine Zeiterfassungs-App, die Ihre Privatsphäre respektiert und die Arbeit erledigt, ohne zu ausgefallen zu werden.
-
 appLegalese = Copyright © Kenton Hamaluik, 2020
-
 readme = Liesmich
-
 changeLog = Änderungsprotokoll
-
 sourceCode = Quellcode
-
 whatAreYouDoing = Was tun Sie?
-
 projects = Projekte
-
-export = Export
-
+export = Exportieren
 noProject = (kein Projekt)
-
 confirmDelete = Löschen bestätigen
-
 deleteTimerConfirm = Möchten Sie diesen Timer wirklich löschen?
-
 cancel = Stornieren
-
 ok = OK
-
 delete = Löschen
-
 runningTimers = Timer ausführen
-
 timeCopDatabase = Time Cop-Datenbank ({ $date })
-
 filter = Filter
-
 from = Von
-
 to = Zu
-
 project = Projekt
-
 description = Beschreibung
-
 timeH = Zeit (Stunden)
-
 timeCopEntries = Time Cop-Einträge ({ $date })
-
 createNewProject = Neues Projekt erstellen
-
 editProject = Projekt bearbeiten
-
 pleaseEnterAName = Bitte geben Sie einen Namen ein
-
 projectName = Projektname
-
 create = Erstellen
-
 save = speichern
-
 areYouSureYouWantToDelete = Möchten Sie dieses Projekt wirklich löschen?
-
 editTimer = Timer bearbeiten
-
 whatWereYouDoing = Was hast du gemacht?
-
 startTime = Startzeit
-
 endTime = Endzeit
-
 duration = Dauer
-
 appName = Time Cop
-
 logoSemantics = Time Cop Logo
-
 noDescription = (Keine Beschreibung)
-
 options = Optionen
-
 groupTimers = Gruppieren Sie ähnliche Timer pro Tag
-
 columns = Säulen
-
 date = Datum
-
 combinedProjectDescription = Kombiniertes Projekt &amp; Beschreibung
-
 reports = Berichte
-
 nHours = { $hours } Std
-
 averageDailyHours = Durchschnittliche tägliche Stunden
-
 totalProjectShare = Gesamtprojektanteil
-
 weeklyHours = Wöchentliche Stunden
-
 contributors = Mitwirkende
-
-settings = die Einstellungen
-
-theme = Thema
-
+settings = Einstellungen
+theme = Farbschema
 auto = Automatisch
-
 light = Licht
-
 dark = Dunkel
-
 black = Schwarz
-
 langName = Deutsch
-
 language = Sprache
-
 automaticLanguage = Automatisch ({ $langName })
-
 collapseDays = Tage reduzieren
-
 autocompleteDescription = Beschreibungen der automatischen Vervollständigung
-
 defaultFilterStartDateToMonday = Standard-Filterstartdatum bis Montag
-
 hours = Std
-
 total = Gesamt
-
 oneTimerAtATime = Es ist jeweils nur ein laufender Timer zulässig
-
 selectAll = Wählen Sie Alle
-
 selectNone = Nichts ausgewählt
-
 defaultFilterDays = Standardfilterzeitraum (Tage)
-
 import = Importieren
-
 invalidDatabaseFile = Ungültige Datenbankdatei!
-
 databaseImported = Datenbank importiert
-
 showBadgeCounts = Anzahl laufender Timer als App-Symbol anzeigen
-
 runningTimersNotificationTitle = Timer ausführen
-
 runningTimersNotificationBody = Timer laufen noch im Hintergrund
-
 enableRunningTimersNotification = Laufende Timer-Benachrichtigungen anzeigen
-
 notes = Aufzeichnungen
-

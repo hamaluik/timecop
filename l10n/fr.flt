@@ -1,152 +1,76 @@
-about = Sur
-
+about = À propos
 appDescription = Une application de suivi du temps qui respecte votre vie privée et fait le travail sans trop de fantaisie.
-
 appLegalese = Copyright © Kenton Hamaluik, 2020
-
 readme = Lisezmoi
-
 changeLog = Journal des modifications
-
 sourceCode = Code source
-
-whatAreYouDoing = Que faites-vous?
-
+whatAreYouDoing = Que faites-vous ?
 projects = Projets
-
-export = Exportation
-
+export = Exporter
 noProject = (pas de projet)
-
 confirmDelete = Confirmation de la suppression
-
-deleteTimerConfirm = Voulez-vous vraiment supprimer cette minuterie?
-
+deleteTimerConfirm = Voulez-vous vraiment supprimer cette minuterie ?
 cancel = Annuler
-
 ok = OK
-
 delete = Supprimer
-
 runningTimers = Minuteurs de course
-
 timeCopDatabase = Base de données Time Cop ({ $date })
-
 filter = Filtre
-
 from = De
-
 to = À
-
 project = Projet
-
 description = La description
-
 timeH = Temps (heures)
-
 timeCopEntries = Entrées Time Cop ({ $date })
-
 createNewProject = Créer un nouveau projet
-
 editProject = Modifier le projet
-
 pleaseEnterAName = Veuillez saisir un nom
-
 projectName = nom du projet
-
 create = Créer
-
 save = sauvegarder
-
-areYouSureYouWantToDelete = Voulez-vous vraiment supprimer ce projet?
-
+areYouSureYouWantToDelete = Voulez-vous vraiment supprimer ce projet ?
 editTimer = Modifier la minuterie
-
-whatWereYouDoing = Que faisiez-vous?
-
+whatWereYouDoing = Que faisiez-vous ?
 startTime = Heure de début
-
 endTime = Heure de fin
-
 duration = Durée
-
 appName = Time Cop
-
 logoSemantics = Logo de Time Cop
-
 noDescription = (Pas de description)
-
 options = Les options
-
 groupTimers = Grouper des minuteries similaires par jour
-
 columns = Colonnes
-
 date = Date
-
 combinedProjectDescription = Projet et description combinés
-
 reports = Rapports
-
 nHours = { $hours } heures
-
 averageDailyHours = Heures quotidiennes moyennes
-
 totalProjectShare = Part totale du projet
-
 weeklyHours = Heures hebdomadaires
-
 contributors = Contributeurs
-
 settings = Paramètres
-
 theme = Thème
-
 auto = Automatique
-
 light = Lumière
-
 dark = Foncé
-
 black = Noir
-
 langName = Français
-
 language = Langue
-
 automaticLanguage = Automatique ({ $langName })
-
-collapseDays = Collapse Days
-
+collapseDays = Réduire les jours
 autocompleteDescription = Descriptions de saisie semi-automatique
-
 defaultFilterStartDateToMonday = Date de début du filtre par défaut au lundi
-
 hours = Heures
-
 total = Total
-
 oneTimerAtATime = Autoriser une seule minuterie à la fois
-
 selectAll = Tout sélectionner
-
 selectNone = Ne rien sélectionner
-
 defaultFilterDays = Période de filtre par défaut (jours)
-
 import = Importer
-
-invalidDatabaseFile = Fichier de base de données invalide!
-
+invalidDatabaseFile = Fichier de base de données invalide !
 databaseImported = Base de données importée
-
 showBadgeCounts = Afficher le nombre de minuteries en cours d'exécution comme badge d'icône d'application
-
 runningTimersNotificationTitle = Minuteries en cours
-
 runningTimersNotificationBody = Les minuteries fonctionnent toujours en arrière-plan
-
 enableRunningTimersNotification = Afficher les notifications du minuteur en cours d'exécution
-
 notes = Remarques
-

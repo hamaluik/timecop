@@ -1,152 +1,76 @@
 about = Acerca de
-
 appDescription = Una aplicación de seguimiento del tiempo que respeta su privacidad y hace el trabajo sin ser demasiado elegante.
-
 appLegalese = Copyright © Kenton Hamaluik, 2020
-
 readme = Léame
-
 changeLog = Cambiar registro
-
 sourceCode = Código fuente
-
 whatAreYouDoing = ¿Qué estás haciendo?
-
 projects = Proyectos
-
 export = Exportar
-
 noProject = (sin proyecto)
-
 confirmDelete = Confirmar eliminación
-
 deleteTimerConfirm = ¿Seguro que quieres eliminar este temporizador?
-
 cancel = Cancelar
-
 ok = Listo
-
 delete = Eliminar
-
-runningTimers = Running Timers
-
+runningTimers = Cronómetros en funcionamiento
 timeCopDatabase = Base de datos de Time Cop ({ $date })
-
 filter = Filtrar
-
 from = Desde
-
 to = A
-
 project = Proyecto
-
 description = Descripción
-
 timeH = Tiempo (horas)
-
 timeCopEntries = Entradas de Time Cop ({ $date })
-
 createNewProject = Crear nuevo proyecto
-
 editProject = Editar proyecto
-
 pleaseEnterAName = Por favor ingrese un nombre
-
 projectName = Nombre del proyecto
-
 create = Crear
-
 save = Salvar
-
 areYouSureYouWantToDelete = ¿Estás seguro de que deseas eliminar este proyecto?
-
 editTimer = Editar temporizador
-
 whatWereYouDoing = ¿Que estabas haciendo?
-
 startTime = Hora de inicio
-
 endTime = Hora de finalización
-
 duration = Duración
-
 appName = Time Cop
-
 logoSemantics = Logotipo de Time Cop
-
 noDescription = (Sin descripción)
-
 options = Opciones
-
 groupTimers = Agrupe temporizadores similares por día
-
 columns = Columnas
-
 date = Fecha
-
 combinedProjectDescription = Proyecto combinado y descripción
-
 reports = Informes
-
 nHours = { $hours } horas
-
 averageDailyHours = Promedio de horas diarias
-
 totalProjectShare = Cuota total del proyecto
-
 weeklyHours = Horas semanales
-
 contributors = Colaboradores
-
 settings = Configuraciones
-
 theme = Tema
-
 auto = Automático
-
 light = Ligero
-
 dark = Oscuro
-
 black = Negro
-
 langName = Español
-
 language = Idioma
-
 automaticLanguage = Automático ({ $langName })
-
 collapseDays = Días de colapso
-
 autocompleteDescription = Descripciones de autocompletar
-
 defaultFilterStartDateToMonday = Fecha de inicio del filtro predeterminada para el lunes
-
 hours = Horas
-
 total = Total
-
 oneTimerAtATime = Permitir solo un temporizador en ejecución a la vez
-
 selectAll = Seleccionar todo
-
 selectNone = No seleccionar ninguno
-
 defaultFilterDays = Período de filtrado predeterminado (días)
-
 import = Importar
-
-invalidDatabaseFile = Archivo de base de datos no válido.
-
+invalidDatabaseFile = ¡Archivo de base de datos no válido!
 databaseImported = Base de datos importada
-
 showBadgeCounts = Mostrar cuenta del temporizador en ejecución como insignia del icono de la aplicación
-
 runningTimersNotificationTitle = Ejecutando temporizadores
-
 runningTimersNotificationBody = Los temporizadores siguen funcionando en segundo plano
-
 enableRunningTimersNotification = Mostrar notificaciones del temporizador en ejecución
-
 notes = Notas
-
