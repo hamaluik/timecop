@@ -6,5 +6,5 @@
 - Export data as a .csv file, filtered by time-spans and projects
 - Export the app's database for full access to all of its data
 - Automatic light mode / dark mode based on your device settings
-- Localized in several languages (thanks to Google Translate): English, Arabic, German, Spanish, French, Hindi, Indonesian, Japanese, Korean, Portuguese, Russian, Chinese (Simplified), Chinese (Traditional), and Italian (via contributors)
+- Localized in several languages (thanks to Google Translate): English, Arabic, German, Spanish, French, Hindi, Indonesian, Japanese, Korean, Portuguese, Russian, Chinese (Simplified), and Chinese (Traditional), as well as Italian, Czech, and Norwegian (via contributors)
 - Open source (licensed under Apache-2.0)—fork away (https://github.com/hamaluik/timecop)

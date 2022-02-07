@@ -9,6 +9,9 @@
 <br />
 <div align="center">
   <img alt="GitHub" src="https://img.shields.io/github/license/hamaluik/timecop?style=flat-square">
+  <a href="https://hosted.weblate.org/engage/timecop/">
+    <img src="https://hosted.weblate.org/widgets/timecop/-/svg-badge.svg" alt="Translation status" />
+  </a>
 </div>
 
 ## Motivation
@@ -27,7 +30,7 @@ Time tracking in and of itself is rather straightforward (hence all the apps on 
 * Export data as a `.csv` file, filtered by timespans and projects
 * Export the app's database for full access to all of its data
 * Automatic light mode / dark mode based on your device settings
-* Localized in several languages (thanks to [Google Translate](https://cloud.google.com/translate)): English, Arabic, German, Spanish, French, Hindi, Indonesian, Japanese, Korean, Portuguese, Russian, Chinese (Simplified), Chinese (Traditional)
+* Localized in several languages (thanks to [Google Translate](https://cloud.google.com/translate)): English, Arabic, German, Spanish, French, Hindi, Indonesian, Japanese, Korean, Portuguese, Russian, Chinese (Simplified), Chinese (Traditional), as well as Italian, Czech, and Norwegian (via contributors)
 * Open source ([licensed under Apache-2.0](LICENSE))—fork away!
 
 ## Screenshots
@@ -54,7 +57,9 @@ samples, guidance on mobile development, and a full API reference.
 
 ### Localizations
 
-Translations are handled using [Project Fluent](https://projectfluent.org/). Currently all translations (except English) were auto-translated by [Google Translate](https://cloud.google.com/translate) using my [Translate Tool](https://github.com/hamaluik/translatetool). If you notice any incorrect strings, I would love to know about it so that it can be fixed asap. Similarly, if you want to add a language, please do!
+You can help translate Time Cop on [Weblate](https://hosted.weblate.org/projects/timecop/). If you notice any incorrect strings, feel free to correct them. Similarly, if you want to add a language, please do!
+
+Translations are handled using [Project Fluent](https://projectfluent.org/). Currently all translations except English, Italian, Czech, and Norwegian were auto-translated by [Google Translate](https://cloud.google.com/translate) using my [Translate Tool](https://github.com/hamaluik/translatetool).
 
 ## Todo
 
