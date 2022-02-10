@@ -1,153 +1,77 @@
 about = Tentang
-
 appDescription = Aplikasi pelacakan waktu yang menghormati privasi Anda dan menyelesaikan pekerjaan tanpa menjadi terlalu mewah.
-
 appLegalese = Hak Cipta © Kenton Hamaluik, 2020
-
-readme = Baca aku
-
-changeLog = Ubah Log
-
-sourceCode = Kode sumber
-
-whatAreYouDoing = Apa yang sedang kamu lakukan?
-
-projects = Proyek
-
+readme = Readme
+changeLog = Log perubahan
+sourceCode = Kode Sumber
+whatAreYouDoing = Apa yang sedang Anda lakukan?
+projects = Proyek-proyek
 export = Ekspor
-
-noProject = (tidak ada proyek)
-
+noProject = (tak ada proyek apapun)
 confirmDelete = Konfirmasikan Hapus
-
-deleteTimerConfirm = Anda yakin ingin menghapus penghitung waktu ini?
-
-cancel = Membatalkan
-
+deleteTimerConfirm = Apakah Anda yakin ingin menghapus penghitung waktu ini?
+cancel = Batal
 ok = OK
-
-delete = Menghapus
-
-runningTimers = Pengatur Waktu Berlari
-
+delete = Hapus
+runningTimers = Pengatur Waktu Yang Berjalan
 timeCopDatabase = Database Time Cop ({ $date })
-
 filter = Saring
-
 from = Dari
-
-to = Untuk
-
+to = Hingga
 project = Proyek
-
-description = Deskripsi
-
+description = Keterangan
 timeH = Waktu (jam)
-
-timeCopEntries = Entri Cop Waktu ({ $date })
-
+timeCopEntries = Entri Time Cop ({ $date })
 createNewProject = Buat Proyek Baru
-
-editProject = Edit Proyek
-
+editProject = Sunting Proyek
 pleaseEnterAName = Silakan masukkan nama
-
 projectName = Nama Proyek
-
-create = Membuat
-
-save = Menyimpan
-
-areYouSureYouWantToDelete = Anda yakin ingin menghapus proyek ini?
-
+create = Buat
+save = Simpan
+areYouSureYouWantToDelete = Apakah Anda yakin ingin menghapus proyek ini?
 editTimer = Edit Timer
-
-whatWereYouDoing = Apa yang kamu lakukan?
-
-startTime = Waktu mulai
-
-endTime = Akhir waktu
-
+whatWereYouDoing = Apa yang Anda lakukan?
+startTime = Waktu Mulai
+endTime = Waktu Berakhir
 duration = Durasi
-
 appName = Time Cop
-
 logoSemantics = Logo Time Cop
-
-noDescription = (tidak ada deskripsi)
-
+noDescription = (tak ada keterangan)
 options = Pilihan
-
-groupTimers = Pengatur Waktu Serupa Grup Per Hari
-
+groupTimers = Kelompokkan Pengatur Waktu Berdasarkan Hari
 columns = Kolom
-
 date = Tanggal
-
 combinedProjectDescription = Proyek &amp; Deskripsi Gabungan
-
 reports = Laporan
-
 nHours = { $hours } jam
-
 averageDailyHours = Rata-rata Jam Harian
-
 totalProjectShare = Total Pangsa Proyek
-
 weeklyHours = Jam Mingguan
-
 contributors = Kontributor
-
 settings = Pengaturan
-
 theme = Tema
-
 auto = Otomatis
-
-light = Cahaya
-
+light = Cerah
 dark = Gelap
-
 black = Hitam
-
-langName = Indonesia
-
+langName = Bahasa Indonesia
 language = Bahasa
-
 automaticLanguage = Otomatis ({ $langName })
-
 collapseDays = Tutup Hari
-
 autocompleteDescription = Deskripsi Pelengkapan Otomatis
-
 defaultFilterStartDateToMonday = Tanggal Mulai Filter Default hingga Senin
-
 hours = Jam
-
-total = Total
-
-oneTimerAtATime = Hanya Bolehkan Satu Pengatur Waktu Berjalan dalam satu Waktu
-
+total = Jumlah
+oneTimerAtATime = Hanya Izinkan Satu Pengatur Waktu Berjalan dalam Satu Waktu
 selectAll = Pilih Semua
-
 selectNone = Pilih Tidak Ada
-
 defaultFilterDays = Periode Filter Default (Hari)
-
 import = Impor
-
-invalidDatabaseFile = File database tidak valid!
-
+invalidDatabaseFile = Berkas database tidak valid!
 databaseImported = Basis data diimpor
-
 showBadgeCounts = Tampilkan Hitungan Pengatur Waktu Berjalan Sebagai Lencana Ikon Aplikasi
-
 runningTimersNotificationTitle = Menjalankan Timer
-
 runningTimersNotificationBody = Timer masih berjalan di latar belakang
-
 enableRunningTimersNotification = Tampilkan Notifikasi Pengatur Waktu Berjalan
-
 notes = Catatan
-
 noItemsFound = Tidak ada item yang ditemukan
