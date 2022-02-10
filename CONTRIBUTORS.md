@@ -13,3 +13,4 @@ Time Cop started as a personal project of Kenton Hamaluik ([@hamaluik](https://g
 | Miroslav Mazel | [@12people](https://github.com/12people) |
 | Allan Nordhøy | [@comradekingu](https://github.com/comradekingu) |
 | J. Lavoie | (Translations through Weblate) |
+| liimee | [@liimee](https://github.com/liimee) |
