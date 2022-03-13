@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:path/path.dart' as p;
 import 'package:flutter/material.dart';
@@ -20,7 +21,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:timecop/blocs/projects/projects_bloc.dart';
 import 'package:timecop/blocs/settings/bloc.dart';
 import 'package:timecop/blocs/timers/timers_bloc.dart';
@@ -47,15 +47,20 @@ class ExportMenu extends StatelessWidget {
       onSelected: (ExportMenuItem item) async {
         switch (item) {
           case ExportMenuItem.import:
-            FilePickerResult result = await FilePicker.platform
-                .pickFiles(type: FileType.any, allowMultiple: false);
+            FilePickerResult result = await FilePicker.platform.pickFiles(
+                type: FileType.any,
+                allowMultiple: false,
+                withData: Platform.isLinux);
             if (result == null) {
               return;
             }
 
+            final resultPath = Platform.isLinux
+                ? await _duplicateToTempDir(result.files.first.bytes)
+                : result.files.first.path;
+
             try {
-              if (!await DatabaseProvider.isValidDatabaseFile(
-                  result.files[0].path)) {
+              if (!await DatabaseProvider.isValidDatabaseFile(resultPath)) {
                 scaffoldKey.currentState.showSnackBar(SnackBar(
                   backgroundColor: Theme.of(context).errorColor,
                   content: Text(
@@ -68,8 +73,7 @@ class ExportMenu extends StatelessWidget {
                 SettingsBloc settings = BlocProvider.of<SettingsBloc>(context);
                 TimersBloc timers = BlocProvider.of<TimersBloc>(context);
                 ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
-                settings.add(ImportDatabaseEvent(
-                    result.files[0].path, timers, projects));
+                settings.add(ImportDatabaseEvent(resultPath, timers, projects));
 
                 scaffoldKey.currentState.showSnackBar(SnackBar(
                   backgroundColor: Theme.of(context).primaryColorDark,
@@ -92,8 +96,7 @@ class ExportMenu extends StatelessWidget {
             }
             break;
           case ExportMenuItem.export:
-            var databasesPath = await getDatabasesPath();
-            var dbPath = p.join(databasesPath, 'timecop.db');
+            final dbFile = await DatabaseProvider.getDatabaseFile();
 
             try {
               if (Platform.isMacOS || Platform.isLinux) {
@@ -103,14 +106,15 @@ class ExportMenu extends StatelessWidget {
                 );
 
                 if (outputFile != null) {
-                  await File(dbPath).copy(outputFile);
+                  await dbFile.copy(outputFile);
                 }
               } else {
+                String dbPath = dbFile.path;
                 if (Platform.isAndroid) {
                   // on android, copy it somewhere where it can be shared
-                  Directory directory = await getExternalStorageDirectory();
-                  File copiedDB = await File(dbPath)
-                      .copy(p.join(directory.path, "timecop.db"));
+                  final directory = await getExternalStorageDirectory();
+                  final copiedDB =
+                      await dbFile.copy(p.join(directory.path, "timecop.db"));
                   dbPath = copiedDB.path;
                 }
                 await Share.shareFiles(<String>[dbPath],
@@ -154,5 +158,12 @@ class ExportMenu extends StatelessWidget {
         ];
       },
     );
+  }
+
+  Future<String> _duplicateToTempDir(Uint8List bytes) async {
+    final tempDir = await getTemporaryDirectory();
+    final tempPath = p.join(tempDir.path, 'timecop.db');
+    await File(tempPath).writeAsBytes(bytes);
+    return tempPath;
   }
 }

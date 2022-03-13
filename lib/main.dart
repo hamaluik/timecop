@@ -15,7 +15,6 @@
 import 'dart:async';
 
 import 'dart:io';
-import 'package:path/path.dart' as p;
 import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -51,11 +50,10 @@ Future<void> main() async {
     sqfliteFfiInit();
     databaseFactory = databaseFactoryFfi;
   }
-  String databasesPath = await getDatabasesPath();
-  var path = p.join(databasesPath, 'timecop.db');
-  await Directory(databasesPath).create(recursive: true);
+  final databaseFile = await DatabaseProvider.getDatabaseFile();
+  await databaseFile.parent.create(recursive: true);
 
-  final DataProvider data = await DatabaseProvider.open(path);
+  final DataProvider data = await DatabaseProvider.open(databaseFile.path);
   final NotificationsProvider notifications =
       await NotificationsProvider.load();
   await runMain(settings, data, notifications);

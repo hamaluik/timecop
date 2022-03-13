@@ -13,12 +13,15 @@
 // limitations under the License.
 
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:random_color/random_color.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:timecop/data_providers/data/data_provider.dart';
 import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/models/project.dart';
+import 'package:path/path.dart' as p;
+import 'package:xdg_directories/xdg_directories.dart';
 
 class DatabaseProvider extends DataProvider {
   final Database _db;
@@ -259,6 +262,12 @@ class DatabaseProvider extends DataProvider {
   Future<void> deleteTimer(TimerEntry timer) async {
     assert(timer != null);
     await _db.rawDelete("delete from timers where id=?", <dynamic>[timer.id]);
+  }
+
+  static Future<File> getDatabaseFile() async {
+    final dbPath =
+        (Platform.isLinux) ? dataHome.path : await getDatabasesPath();
+    return File(p.join(dbPath, 'timecop.db'));
   }
 
   static Future<bool> isValidDatabaseFile(String path) async {
