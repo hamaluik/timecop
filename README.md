@@ -22,7 +22,8 @@ Time tracking in and of itself is rather straightforward (hence all the apps on 
 
 ## Features
 
-* Offline-only, mobile-only (iOS / Android)
+* Offline-only, mobile-first
+* For Android, iOS, and Linux
 * Fully private—there is no tracking / spying / advertising / etc
 * Keep track of tasks with multiple parallel timers that can be started with the tap of a button
 * Associate timers with projects to group your work (or don't)
@@ -30,7 +31,7 @@ Time tracking in and of itself is rather straightforward (hence all the apps on 
 * Export data as a `.csv` file, filtered by timespans and projects
 * Export the app's database for full access to all of its data
 * Automatic light mode / dark mode based on your device settings
-* Localized in several languages (thanks to [Google Translate](https://cloud.google.com/translate)): English, Arabic, German, Spanish, French, Hindi, Indonesian, Japanese, Korean, Portuguese, Russian, Chinese (Simplified), Chinese (Traditional), as well as Italian, Czech, and Norwegian (via contributors)
+* Localized in several languages (thanks to [Google Translate](https://cloud.google.com/translate)): English, Arabic, German, Spanish, French, Hindi, Japanese, Korean, Portuguese, Russian, Chinese (Simplified), Chinese (Traditional), as well as Italian, Czech, Norwegian, and Indonesian (via contributors)
 * Open source ([licensed under Apache-2.0](LICENSE))—fork away!
 
 ## Screenshots
@@ -59,7 +60,7 @@ samples, guidance on mobile development, and a full API reference.
 
 You can help translate Time Cop on [Weblate](https://hosted.weblate.org/projects/timecop/). If you notice any incorrect strings, feel free to correct them. Similarly, if you want to add a language, please do!
 
-Translations are handled using [Project Fluent](https://projectfluent.org/). Currently all translations except English, Italian, Czech, and Norwegian were auto-translated by [Google Translate](https://cloud.google.com/translate) using my [Translate Tool](https://github.com/hamaluik/translatetool).
+Translations are handled using [Project Fluent](https://projectfluent.org/). Currently all translations except English, Italian, Czech, Norwegian, and Indonesian were auto-translated by [Google Translate](https://cloud.google.com/translate) using my [Translate Tool](https://github.com/hamaluik/translatetool).
 
 ## Todo
 

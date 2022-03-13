@@ -1,4 +1,5 @@
-- Offline-only, mobile-only (iOS / Android)
+- Offline-only, mobile-first
+- For Android, iOS, and Linux
 - Fully private—there is no tracking / spying / advertising / etc
 - Keep track of tasks with multiple parallel timers that can be started with the tap of a button
 - Associate timers with projects to group your work (or don't)
@@ -6,5 +7,5 @@
 - Export data as a .csv file, filtered by time-spans and projects
 - Export the app's database for full access to all of its data
 - Automatic light mode / dark mode based on your device settings
-- Localized in several languages (thanks to Google Translate): English, Arabic, German, Spanish, French, Hindi, Indonesian, Japanese, Korean, Portuguese, Russian, Chinese (Simplified), and Chinese (Traditional), as well as Italian, Czech, and Norwegian (via contributors)
+- Localized in several languages (thanks to Google Translate): English, Arabic, German, Spanish, French, Hindi, Indonesian, Japanese, Korean, Portuguese, Russian, Chinese (Simplified), and Chinese (Traditional), as well as Italian, Czech, Norwegian, and Indonesian (via contributors)
 - Open source (licensed under Apache-2.0)—fork away (https://github.com/hamaluik/timecop)
