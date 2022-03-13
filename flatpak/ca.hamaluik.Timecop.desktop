@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Time Cop
+Comment=A time tracking app that respects your privacy and gets the job done without getting too fancy
+Categories=Utility;
+Icon=ca.hamaluik.Timecop
+Exec=timecop
+StartupWMClass=timecop

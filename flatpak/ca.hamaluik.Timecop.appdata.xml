@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+	<id>ca.hamaluik.Timecop</id>
+	<name>Time Cop</name>
+	<summary>A time tracking app that respects your privacy and gets the job done without getting too fancy</summary>
+	
+	<metadata_license>CC0-1.0</metadata_license>
+	<project_license>Apache-2.0</project_license>
+	<recommends>
+		<control>touch</control>
+		<control>pointing</control>
+		<control>keyboard</control>
+	</recommends>
+	<developer_name>Kenton Hamaluik</developer_name>
+	<url type="homepage">https://timecop.app/en/</url>
+	<url type="bugtracker">https://github.com/hamaluik/timecop/issues</url>
+	<url type="bugtracker">https://hosted.weblate.org/engage/timecop/</url>
+	translate
+
+	<description>
+		<p>A time tracking app that respects your privacy and gets the job done without getting too fancy.</p>
+		<p>Features:</p>
+		<ul>
+			<li>Offline-only, mobile-centric design</li>
+			<li>Runs on Linux, iOS, and Android</li>
+			<li>Fully private—there is no tracking / spying / advertising / etc</li>
+			<li>Keep track of tasks with multiple parallel timers that can be started with the tap of a button</li>
+			<li>Associate timers with projects to group your work (or don't)</li>
+			<li>Start, stop, edit, and delete timers whenever with no fuss</li>
+			<li>Export data as a .csv file, filtered by timespans and projects</li>
+			<li>Export the app's database for full access to all of its data</li>
+			<li>Automatic light mode / dark mode based on your device settings</li>
+			<li>Localized in several languages (thanks to Google Translate): English, Arabic, German, Spanish, French, Hindi, Indonesian, Japanese, Korean, Portuguese, Russian, Chinese (Simplified), Chinese (Traditional)</li>
+			<li>Open source (licensed under Apache-2.0)—fork away (https://github.com/hamaluik/timecop)</li>
+		</ul>
+	</description>
+	<screenshots>
+		<screenshot type="default">
+			<caption>Main screen showing several running timers</caption>
+			<image type="source">https://raw.githubusercontent.com/hamaluik/timecop/master/screenshots/linux/dashboard.png</image>
+		  </screenshot>
+		  <screenshot>
+			<caption>Editing a timer</caption>
+			<image type="source">https://raw.githubusercontent.com/hamaluik/timecop/master/screenshots/linux/editor.png</image>
+		  </screenshot>
+		  <screenshot>
+			<caption>Settings</caption>
+			<image type="source">https://raw.githubusercontent.com/hamaluik/timecop/master/screenshots/linux/settings.png</image>
+		  </screenshot>
+		  <screenshot>
+			<caption>Time reports per project</caption>
+			<image type="source">https://raw.githubusercontent.com/hamaluik/timecop/master/screenshots/linux/reports-pie.png</image>
+		  </screenshot>
+		  <screenshot>
+			<caption>Export options</caption>
+			<image type="source">https://raw.githubusercontent.com/hamaluik/timecop/master/screenshots/linux/export.png</image>
+		  </screenshot>
+	</screenshots>
+
+	<releases>
+		<release version="1.7.0" date="2022-03-15"/>
+	</releases>
+
+	<content_rating type="oars-1.1" />
+
+	<launchable type="desktop-id">ca.hamaluik.Timecop.desktop</launchable>
+</component>
