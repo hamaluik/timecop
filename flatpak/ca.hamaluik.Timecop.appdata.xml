@@ -14,8 +14,8 @@
 	<developer_name>Kenton Hamaluik</developer_name>
 	<url type="homepage">https://timecop.app/en/</url>
 	<url type="bugtracker">https://github.com/hamaluik/timecop/issues</url>
-	<url type="bugtracker">https://hosted.weblate.org/engage/timecop/</url>
-	translate
+	<url type="translate">https://hosted.weblate.org/engage/timecop/</url>
+	
 
 	<description>
 		<p>A time tracking app that respects your privacy and gets the job done without getting too fancy.</p>
@@ -48,8 +48,8 @@
 			<image type="source">https://raw.githubusercontent.com/hamaluik/timecop/master/screenshots/linux/settings.png</image>
 		  </screenshot>
 		  <screenshot>
-			<caption>Time reports per project</caption>
-			<image type="source">https://raw.githubusercontent.com/hamaluik/timecop/master/screenshots/linux/reports-pie.png</image>
+			<caption>Reports screen showing daily time spent per project</caption>
+			<image type="source">https://raw.githubusercontent.com/hamaluik/timecop/master/screenshots/linux/reports-bar.png</image>
 		  </screenshot>
 		  <screenshot>
 			<caption>Export options</caption>
@@ -58,7 +58,7 @@
 	</screenshots>
 
 	<releases>
-		<release version="1.7.0" date="2022-03-15"/>
+		<release version="1.7.0" date="2022-03-23"/>
 	</releases>
 
 	<content_rating type="oars-1.1" />
