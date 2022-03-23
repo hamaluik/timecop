@@ -76,43 +76,43 @@ class PopupMenu extends StatelessWidget {
         return [
           PopupMenuItem(
             key: Key("menuProjects"),
+            value: MenuItem.projects,
             child: ListTile(
               leading: Icon(FontAwesomeIcons.layerGroup),
               title: Text(L10N.of(context).tr.projects),
             ),
-            value: MenuItem.projects,
           ),
           PopupMenuItem(
             key: Key("menuReports"),
+            value: MenuItem.reports,
             child: ListTile(
               leading: Icon(FontAwesomeIcons.chartPie),
               title: Text(L10N.of(context).tr.reports),
             ),
-            value: MenuItem.reports,
           ),
           PopupMenuItem(
             key: Key("menuExport"),
+            value: MenuItem.export,
             child: ListTile(
               leading: Icon(FontAwesomeIcons.fileExport),
               title: Text(L10N.of(context).tr.export),
             ),
-            value: MenuItem.export,
           ),
           PopupMenuItem(
             key: Key("menuSettings"),
+            value: MenuItem.settings,
             child: ListTile(
               leading: Icon(FontAwesomeIcons.screwdriver),
               title: Text(L10N.of(context).tr.settings),
             ),
-            value: MenuItem.settings,
           ),
           PopupMenuItem(
             key: Key("menuAbout"),
+            value: MenuItem.about,
             child: ListTile(
               leading: Icon(FontAwesomeIcons.dna),
               title: Text(L10N.of(context).tr.about),
             ),
-            value: MenuItem.about,
           ),
         ];
       },

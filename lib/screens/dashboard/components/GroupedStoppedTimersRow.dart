@@ -81,6 +81,25 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow>
     return Slidable(
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.15,
+      secondaryActions: <Widget>[
+        IconSlideAction(
+            color: Theme.of(context).accentColor,
+            foregroundColor: Theme.of(context).accentIconTheme.color,
+            icon: FontAwesomeIcons.play,
+            onTap: () {
+              final TimersBloc timersBloc =
+                  BlocProvider.of<TimersBloc>(context);
+              assert(timersBloc != null);
+              final ProjectsBloc projectsBloc =
+                  BlocProvider.of<ProjectsBloc>(context);
+              assert(projectsBloc != null);
+              Project project =
+                  projectsBloc.getProjectByID(widget.timers.first?.projectID);
+              timersBloc.add(CreateTimer(
+                  description: widget.timers.first?.description ?? "",
+                  project: project));
+            })
+      ],
       child: ExpansionTile(
         onExpansionChanged: (expanded) {
           setState(() {
@@ -118,25 +137,6 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow>
             .map((timer) => StoppedTimerRow(timer: timer))
             .toList(),
       ),
-      secondaryActions: <Widget>[
-        IconSlideAction(
-            color: Theme.of(context).accentColor,
-            foregroundColor: Theme.of(context).accentIconTheme.color,
-            icon: FontAwesomeIcons.play,
-            onTap: () {
-              final TimersBloc timersBloc =
-                  BlocProvider.of<TimersBloc>(context);
-              assert(timersBloc != null);
-              final ProjectsBloc projectsBloc =
-                  BlocProvider.of<ProjectsBloc>(context);
-              assert(projectsBloc != null);
-              Project project =
-                  projectsBloc.getProjectByID(widget.timers.first?.projectID);
-              timersBloc.add(CreateTimer(
-                  description: widget.timers.first?.description ?? "",
-                  project: project));
-            })
-      ],
     );
   }
 }

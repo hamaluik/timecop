@@ -132,6 +132,7 @@ class _TimerEditorState extends State<TimerEditor> {
                         },
                         items: <DropdownMenuItem<Project>>[
                           DropdownMenuItem<Project>(
+                            value: null,
                             child: Row(
                               children: <Widget>[
                                 ProjectColour(project: null),
@@ -144,13 +145,13 @@ class _TimerEditorState extends State<TimerEditor> {
                                 ),
                               ],
                             ),
-                            value: null,
                           )
                         ]
                             .followedBy(projectsState.projects
                                 .where((p) => !p.archived)
                                 .map((Project project) =>
                                     DropdownMenuItem<Project>(
+                                      value: project,
                                       child: Row(
                                         children: <Widget>[
                                           ProjectColour(
@@ -163,7 +164,6 @@ class _TimerEditorState extends State<TimerEditor> {
                                           ),
                                         ],
                                       ),
-                                      value: project,
                                     )))
                             .toList(),
                       )),
@@ -220,6 +220,18 @@ class _TimerEditorState extends State<TimerEditor> {
             Slidable(
               actionPane: SlidableDrawerActionPane(),
               actionExtentRatio: 0.15,
+              secondaryActions: <Widget>[
+                IconSlideAction(
+                  color: Theme.of(context).accentColor,
+                  foregroundColor: Theme.of(context).accentIconTheme.color,
+                  icon: FontAwesomeIcons.clock,
+                  onTap: () {
+                    _oldStartTime = _startTime;
+                    _oldEndTime = _endTime;
+                    setStartTime(DateTime.now());
+                  },
+                ),
+              ],
               child: ListTile(
                 title: Text(L10N.of(context).tr.startTime),
                 trailing: Text(_dateFormat.format(_startTime)),
@@ -249,50 +261,10 @@ class _TimerEditorState extends State<TimerEditor> {
                   }
                 },
               ),
-              secondaryActions: <Widget>[
-                IconSlideAction(
-                  color: Theme.of(context).accentColor,
-                  foregroundColor: Theme.of(context).accentIconTheme.color,
-                  icon: FontAwesomeIcons.clock,
-                  onTap: () {
-                    _oldStartTime = _startTime;
-                    _oldEndTime = _endTime;
-                    setStartTime(DateTime.now());
-                  },
-                ),
-              ],
             ),
             Slidable(
               actionPane: SlidableDrawerActionPane(),
               actionExtentRatio: 0.15,
-              child: ListTile(
-                title: Text(L10N.of(context).tr.endTime),
-                trailing:
-                    Text(_endTime == null ? "—" : _dateFormat.format(_endTime)),
-                onTap: () async {
-                  _oldEndTime = _endTime.clone();
-                  DateTime newEndTime = await DatePicker.showDateTimePicker(
-                      context,
-                      currentTime: _endTime,
-                      minTime: _startTime,
-                      onChanged: (DateTime dt) => setState(() => _endTime = dt),
-                      onConfirm: (DateTime dt) => setState(() => _endTime = dt),
-                      theme: DatePickerTheme(
-                        cancelStyle: Theme.of(context).textTheme.button,
-                        doneStyle: Theme.of(context).textTheme.button,
-                        itemStyle: Theme.of(context).textTheme.bodyText2,
-                        backgroundColor:
-                            Theme.of(context).scaffoldBackgroundColor,
-                      ));
-
-                  // if the user cancelled, this should be null
-                  if (newEndTime == null) {
-                    setState(() {
-                      _endTime = _oldEndTime;
-                    });
-                  }
-                },
-              ),
               secondaryActions: _endTime == null
                   ? <Widget>[
                       IconSlideAction(
@@ -323,6 +295,34 @@ class _TimerEditorState extends State<TimerEditor> {
                         },
                       )
                     ],
+              child: ListTile(
+                title: Text(L10N.of(context).tr.endTime),
+                trailing:
+                    Text(_endTime == null ? "—" : _dateFormat.format(_endTime)),
+                onTap: () async {
+                  _oldEndTime = _endTime.clone();
+                  DateTime newEndTime = await DatePicker.showDateTimePicker(
+                      context,
+                      currentTime: _endTime,
+                      minTime: _startTime,
+                      onChanged: (DateTime dt) => setState(() => _endTime = dt),
+                      onConfirm: (DateTime dt) => setState(() => _endTime = dt),
+                      theme: DatePickerTheme(
+                        cancelStyle: Theme.of(context).textTheme.button,
+                        doneStyle: Theme.of(context).textTheme.button,
+                        itemStyle: Theme.of(context).textTheme.bodyText2,
+                        backgroundColor:
+                            Theme.of(context).scaffoldBackgroundColor,
+                      ));
+
+                  // if the user cancelled, this should be null
+                  if (newEndTime == null) {
+                    setState(() {
+                      _endTime = _oldEndTime;
+                    });
+                  }
+                },
+              ),
             ),
             StreamBuilder(
               initialData: DateTime.now(),
@@ -339,10 +339,6 @@ class _TimerEditorState extends State<TimerEditor> {
             Slidable(
               actionPane: SlidableDrawerActionPane(),
               actionExtentRatio: 0.15,
-              child: ListTile(
-                title: Text("Notes"),
-                onTap: () async => await _editNotes(context),
-              ),
               secondaryActions: <Widget>[
                 IconSlideAction(
                   color: Theme.of(context).accentColor,
@@ -351,6 +347,10 @@ class _TimerEditorState extends State<TimerEditor> {
                   onTap: () async => await _editNotes(context),
                 ),
               ],
+              child: ListTile(
+                title: Text("Notes"),
+                onTap: () async => await _editNotes(context),
+              ),
             ),
             Expanded(
                 child: Padding(
@@ -417,13 +417,13 @@ class _TimerEditorState extends State<TimerEditor> {
                   child: Text(L10N.of(context).tr.cancel),
                   onPressed: () => Navigator.of(context).pop()),
               TextButton(
-                  child: Text(
-                    L10N.of(context).tr.save,
-                  ),
                   style: TextButton.styleFrom(
                       primary: Theme.of(context).accentColor),
                   onPressed: () =>
-                      Navigator.of(context).pop(_notesController.text))
+                      Navigator.of(context).pop(_notesController.text),
+                  child: Text(
+                    L10N.of(context).tr.save,
+                  ))
             ],
           );
         });

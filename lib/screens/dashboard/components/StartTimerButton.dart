@@ -41,6 +41,16 @@ class _StartTimerButtonState extends State<StartTimerButton> {
         if (timersState.timers.where((t) => t.endTime == null).isEmpty) {
           return FloatingActionButton(
             key: Key("startTimerButton"),
+            backgroundColor: Theme.of(context).accentColor,
+            foregroundColor: Theme.of(context).accentIconTheme.color,
+            onPressed: () {
+              final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+              assert(timers != null);
+              timers.add(CreateTimer(
+                  description: bloc.state.newDescription,
+                  project: bloc.state.newProject));
+              bloc.add(TimerWasStartedEvent());
+            },
             child: Stack(
               // shenanigans to properly centre the icon (font awesome glyphs are variable
               // width but the library currently doesn't deal with that)
@@ -53,21 +63,18 @@ class _StartTimerButtonState extends State<StartTimerButton> {
                 )
               ],
             ),
-            backgroundColor: Theme.of(context).accentColor,
-            foregroundColor: Theme.of(context).accentIconTheme.color,
-            onPressed: () {
-              final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
-              assert(timers != null);
-              timers.add(CreateTimer(
-                  description: bloc.state.newDescription,
-                  project: bloc.state.newProject));
-              bloc.add(TimerWasStartedEvent());
-            },
           );
         } else if (settingsState.oneTimerAtATime &&
             timersState.timers.where((t) => t.endTime == null).length == 1) {
           return FloatingActionButton(
             key: Key("stopAllTimersButton"),
+            backgroundColor: Colors.pink[600],
+            foregroundColor: Theme.of(context).accentIconTheme.color,
+            onPressed: () {
+              final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+              assert(timers != null);
+              timers.add(StopAllTimers());
+            },
             child: Stack(
               // shenanigans to properly centre the icon (font awesome glyphs are variable
               // width but the library currently doesn't deal with that)
@@ -80,13 +87,6 @@ class _StartTimerButtonState extends State<StartTimerButton> {
                 )
               ],
             ),
-            backgroundColor: Colors.pink[600],
-            foregroundColor: Theme.of(context).accentIconTheme.color,
-            onPressed: () {
-              final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
-              assert(timers != null);
-              timers.add(StopAllTimers());
-            },
           );
         } else {
           return StartTimerSpeedDial();

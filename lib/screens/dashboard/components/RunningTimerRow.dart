@@ -50,21 +50,6 @@ class RunningTimerRow extends StatelessWidget {
     return Slidable(
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.15,
-      child: ListTile(
-          leading: ProjectColour(
-              project: BlocProvider.of<ProjectsBloc>(context)
-                  .getProjectByID(timer.projectID)),
-          title: Text(formatDescription(context, timer.description),
-              style: styleDescription(context, timer.description)),
-          trailing: Text(timer.formatTime(),
-              style: TextStyle(fontFamily: "FiraMono")),
-          onTap: () =>
-              Navigator.of(context).push(MaterialPageRoute<TimerEditor>(
-                builder: (BuildContext context) => TimerEditor(
-                  timer: timer,
-                ),
-                fullscreenDialog: true,
-              ))),
       actions: <Widget>[
         IconSlideAction(
           color: Theme.of(context).errorColor,
@@ -108,6 +93,21 @@ class RunningTimerRow extends StatelessWidget {
           },
         )
       ],
+      child: ListTile(
+          leading: ProjectColour(
+              project: BlocProvider.of<ProjectsBloc>(context)
+                  .getProjectByID(timer.projectID)),
+          title: Text(formatDescription(context, timer.description),
+              style: styleDescription(context, timer.description)),
+          trailing: Text(timer.formatTime(),
+              style: TextStyle(fontFamily: "FiraMono")),
+          onTap: () =>
+              Navigator.of(context).push(MaterialPageRoute<TimerEditor>(
+                builder: (BuildContext context) => TimerEditor(
+                  timer: timer,
+                ),
+                fullscreenDialog: true,
+              ))),
     );
   }
 }

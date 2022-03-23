@@ -48,19 +48,6 @@ class ProjectsScreen extends StatelessWidget {
                         .map((project) => Slidable(
                               actionPane: SlidableDrawerActionPane(),
                               actionExtentRatio: 0.15,
-                              child: ListTile(
-                                leading: ProjectColour(project: project),
-                                title: Text(project.name),
-                                trailing: project.archived
-                                    ? Icon(FontAwesomeIcons.box)
-                                    : null,
-                                onTap: () => showDialog<void>(
-                                    context: context,
-                                    builder: (BuildContext context) =>
-                                        ProjectEditor(
-                                          project: project,
-                                        )),
-                              ),
                               actions: <Widget>[
                                 IconSlideAction(
                                   color: Theme.of(context).errorColor,
@@ -145,6 +132,19 @@ class ProjectsScreen extends StatelessWidget {
                                               archived: !project.archived)));
                                     })
                               ],
+                              child: ListTile(
+                                leading: ProjectColour(project: project),
+                                title: Text(project.name),
+                                trailing: project.archived
+                                    ? Icon(FontAwesomeIcons.box)
+                                    : null,
+                                onTap: () => showDialog<void>(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        ProjectEditor(
+                                          project: project,
+                                        )),
+                              ),
                             ))
                         .toList(),
                   );

@@ -146,6 +146,21 @@ class _ReportsScreenState extends State<ReportsScreen> {
                 Slidable(
                   actionPane: SlidableDrawerActionPane(),
                   actionExtentRatio: 0.15,
+                  secondaryActions: _startDate == null
+                      ? <Widget>[]
+                      : <Widget>[
+                          IconSlideAction(
+                            color: Theme.of(context).errorColor,
+                            foregroundColor:
+                                Theme.of(context).accentIconTheme.color,
+                            icon: FontAwesomeIcons.minusCircle,
+                            onTap: () {
+                              setState(() {
+                                _startDate = null;
+                              });
+                            },
+                          )
+                        ],
                   child: ListTile(
                     leading: Icon(FontAwesomeIcons.calendar),
                     title: Text(L10N.of(context).tr.from),
@@ -182,7 +197,11 @@ class _ReportsScreenState extends State<ReportsScreen> {
                       }
                     },
                   ),
-                  secondaryActions: _startDate == null
+                ),
+                Slidable(
+                  actionPane: SlidableDrawerActionPane(),
+                  actionExtentRatio: 0.15,
+                  secondaryActions: _endDate == null
                       ? <Widget>[]
                       : <Widget>[
                           IconSlideAction(
@@ -192,15 +211,11 @@ class _ReportsScreenState extends State<ReportsScreen> {
                             icon: FontAwesomeIcons.minusCircle,
                             onTap: () {
                               setState(() {
-                                _startDate = null;
+                                _endDate = null;
                               });
                             },
                           )
                         ],
-                ),
-                Slidable(
-                  actionPane: SlidableDrawerActionPane(),
-                  actionExtentRatio: 0.15,
                   child: ListTile(
                     leading: Icon(FontAwesomeIcons.calendar),
                     title: Text(L10N.of(context).tr.to),
@@ -238,21 +253,6 @@ class _ReportsScreenState extends State<ReportsScreen> {
                       }
                     },
                   ),
-                  secondaryActions: _endDate == null
-                      ? <Widget>[]
-                      : <Widget>[
-                          IconSlideAction(
-                            color: Theme.of(context).errorColor,
-                            foregroundColor:
-                                Theme.of(context).accentIconTheme.color,
-                            icon: FontAwesomeIcons.minusCircle,
-                            onTap: () {
-                              setState(() {
-                                _endDate = null;
-                              });
-                            },
-                          )
-                        ],
                 ),
               ],
             ),

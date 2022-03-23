@@ -63,6 +63,17 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
           child: FloatingActionButton(
             heroTag: null,
             mini: true,
+            backgroundColor: Theme.of(context).accentColor,
+            foregroundColor: Theme.of(context).accentIconTheme.color,
+            onPressed: () {
+              _controller.reverse();
+              final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+              assert(timers != null);
+              timers.add(CreateTimer(
+                  description: bloc.state.newDescription,
+                  project: bloc.state.newProject));
+              bloc.add(TimerWasStartedEvent());
+            },
             child: Stack(
               // shenanigans to properly centre the icon (font awesome glyphs are variable
               // width but the library currently doesn't deal with that)
@@ -75,17 +86,6 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
                 )
               ],
             ),
-            backgroundColor: Theme.of(context).accentColor,
-            foregroundColor: Theme.of(context).accentIconTheme.color,
-            onPressed: () {
-              _controller.reverse();
-              final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
-              assert(timers != null);
-              timers.add(CreateTimer(
-                  description: bloc.state.newDescription,
-                  project: bloc.state.newProject));
-              bloc.add(TimerWasStartedEvent());
-            },
           ),
         ),
       ),
@@ -101,6 +101,14 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
           child: FloatingActionButton(
             heroTag: null,
             mini: true,
+            backgroundColor: Colors.pink[600],
+            foregroundColor: Theme.of(context).accentIconTheme.color,
+            onPressed: () {
+              _controller.reverse();
+              final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+              assert(timers != null);
+              timers.add(StopAllTimers());
+            },
             child: Stack(
               // shenanigans to properly centre the icon (font awesome glyphs are variable
               // width but the library currently doesn't deal with that)
@@ -113,14 +121,6 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
                 )
               ],
             ),
-            backgroundColor: Colors.pink[600],
-            foregroundColor: Theme.of(context).accentIconTheme.color,
-            onPressed: () {
-              _controller.reverse();
-              final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
-              assert(timers != null);
-              timers.add(StopAllTimers());
-            },
           ),
         ),
       ),

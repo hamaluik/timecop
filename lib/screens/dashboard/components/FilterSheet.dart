@@ -51,6 +51,18 @@ class FilterSheet extends StatelessWidget {
                 Slidable(
                   actionPane: SlidableDrawerActionPane(),
                   actionExtentRatio: 0.15,
+                  secondaryActions: state.filterStart == null
+                      ? <Widget>[]
+                      : <Widget>[
+                          IconSlideAction(
+                            color: Theme.of(context).errorColor,
+                            foregroundColor:
+                                Theme.of(context).accentIconTheme.color,
+                            icon: FontAwesomeIcons.minusCircle,
+                            onTap: () => dashboardBloc
+                                .add(FilterStartChangedEvent(null)),
+                          )
+                        ],
                   child: ListTile(
                     leading: Icon(FontAwesomeIcons.calendar),
                     title: Text(L10N.of(context).tr.from),
@@ -78,7 +90,11 @@ class FilterSheet extends StatelessWidget {
                           ));
                     },
                   ),
-                  secondaryActions: state.filterStart == null
+                ),
+                Slidable(
+                  actionPane: SlidableDrawerActionPane(),
+                  actionExtentRatio: 0.15,
+                  secondaryActions: state.filterEnd == null
                       ? <Widget>[]
                       : <Widget>[
                           IconSlideAction(
@@ -86,14 +102,10 @@ class FilterSheet extends StatelessWidget {
                             foregroundColor:
                                 Theme.of(context).accentIconTheme.color,
                             icon: FontAwesomeIcons.minusCircle,
-                            onTap: () => dashboardBloc
-                                .add(FilterStartChangedEvent(null)),
+                            onTap: () =>
+                                dashboardBloc.add(FilterEndChangedEvent(null)),
                           )
                         ],
-                ),
-                Slidable(
-                  actionPane: SlidableDrawerActionPane(),
-                  actionExtentRatio: 0.15,
                   child: ListTile(
                     leading: Icon(FontAwesomeIcons.calendar),
                     title: Text(L10N.of(context).tr.to),
@@ -121,18 +133,6 @@ class FilterSheet extends StatelessWidget {
                           ));
                     },
                   ),
-                  secondaryActions: state.filterEnd == null
-                      ? <Widget>[]
-                      : <Widget>[
-                          IconSlideAction(
-                            color: Theme.of(context).errorColor,
-                            foregroundColor:
-                                Theme.of(context).accentIconTheme.color,
-                            icon: FontAwesomeIcons.minusCircle,
-                            onTap: () =>
-                                dashboardBloc.add(FilterEndChangedEvent(null)),
-                          )
-                        ],
                 ),
               ],
             ),

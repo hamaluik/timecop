@@ -103,6 +103,17 @@ class SettingsScreen extends StatelessWidget {
                   return Slidable(
                     actionPane: SlidableDrawerActionPane(),
                     actionExtentRatio: 0.15,
+                    secondaryActions: <Widget>[
+                      IconSlideAction(
+                        color: Theme.of(context).errorColor,
+                        foregroundColor:
+                            Theme.of(context).accentIconTheme.color,
+                        icon: FontAwesomeIcons.minusCircle,
+                        onTap: () {
+                          settingsBloc.add(SetDefaultFilterDays(null));
+                        },
+                      )
+                    ],
                     child: ListTile(
                       title: Text(L10N.of(context).tr.defaultFilterDays),
                       trailing: Text(settings.defaultFilterDays == -1
@@ -151,17 +162,6 @@ class SettingsScreen extends StatelessWidget {
                         }
                       },
                     ),
-                    secondaryActions: <Widget>[
-                      IconSlideAction(
-                        color: Theme.of(context).errorColor,
-                        foregroundColor:
-                            Theme.of(context).accentIconTheme.color,
-                        icon: FontAwesomeIcons.minusCircle,
-                        onTap: () {
-                          settingsBloc.add(SetDefaultFilterDays(null));
-                        },
-                      )
-                    ],
                   );
                 }),
             BlocBuilder<SettingsBloc, SettingsState>(
