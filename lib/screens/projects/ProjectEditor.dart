@@ -16,7 +16,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
-import 'package:timecop/blocs/projects/projects_bloc.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 
