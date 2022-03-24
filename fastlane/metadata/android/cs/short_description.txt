@@ -1,1 +1,1 @@
-Aplikace pro měření času, která respektuje vaše soukromí, aniž by byla komplikovaná.
+Jednoduchá aplikace pro měření času, která respektuje vaše soukromí.
