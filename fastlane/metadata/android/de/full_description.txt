@@ -1,0 +1,10 @@
+- Nur offline, nur auf Mobilgeräten (iOS / Android)
+- Komplette Privatsphäre - enthält kein Tracking / keine Werbung / etc
+- Mehrere Aufgaben gleichzeitig tracken durch parallele Timer, die jeweils mit einem Knopfdruck gestartet werden können
+- Timer mit Projekten verknüpfen um die Zeiten zu gruppieren
+- Alle Timer können jederzeit ohne großen Aufwand gestartet, gestoppt, editiert und gelöscht werden
+- Daten als CSV exportierbar, filterbar anhand einer Zeitspanne und Projekten
+- Für vollen Zugriff auf alle Daten kann die Datenbank der App exportiert werden
+- Automatisches dunkles bzw. helles Thema basierend auf den Geräteeinstellungen
+- In Zahlreiche Sprachen übersetzt (dank Google Übersetzer): Englisch, Arabisch, Deutsch, Spanisch, Französisch, Hindi, Indonesisch, Japanisch, Koreanisch, Portugiesisch, Russisch, Chinesisch (vereinfacht) und Chinesisch (traditionell), außerdem Italienisch, Tschechisch und Norwegisch (dank freiwilligen Helfern)
+- Quelloffen (unter Apache-2.0 lizenziert) kann unter https://github.com/hamaluik/timecop geforkt werden

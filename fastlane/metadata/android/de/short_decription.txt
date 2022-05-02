@@ -1,0 +1,1 @@
+Eine App zur Zeiterfassung, die Privatsphäre respektiert.
