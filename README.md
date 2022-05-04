@@ -23,7 +23,7 @@ Time tracking in and of itself is rather straightforward (hence all the apps on 
 ## Features
 
 * Offline-only, mobile-first
-* For [Android](https://play.google.com/store/apps/details?id=ca.hamaluik.timecop), [iOS](https://apps.apple.com/us/app/time-cop/id1500711020), and [Linux](https://flathub.org/apps/details/ca.hamaluik.Timecop)
+* For Android ([Google Play](https://play.google.com/store/apps/details?id=ca.hamaluik.timecop), [F-Droid](https://f-droid.org/packages/ca.hamaluik.timecop/)), [iOS](https://apps.apple.com/us/app/time-cop/id1500711020), and [Linux](https://flathub.org/apps/details/ca.hamaluik.Timecop)
 * Fully private—there is no tracking / spying / advertising / etc
 * Keep track of tasks with multiple parallel timers that can be started with the tap of a button
 * Associate timers with projects to group your work (or don't)
