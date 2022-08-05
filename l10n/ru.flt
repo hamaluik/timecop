@@ -1,157 +1,81 @@
 # tt-hand-translated
 about = О
-
 appDescription = Приложение для отслеживания времени, которое уважает вашу конфиденциальность и выполняет работу, не становясь слишком модным.
-
 # tt-hand-translated
 appLegalese = Правообладатель © Кентон Хамалук, 2020
-
 readme = Прочти меня
-
 changeLog = Журнал изменений
-
 sourceCode = Исходный код
-
 whatAreYouDoing = Что ты делаешь?
-
 projects = проектов
-
 export = экспорт
-
 noProject = (нет проекта)
-
 confirmDelete = Подтвердите удаление
-
 deleteTimerConfirm = Вы уверены, что хотите удалить этот таймер?
-
 cancel = отменить
-
 ok = ладно
-
 delete = удалять
-
 runningTimers = Таймеры бега
-
 timeCopDatabase = База данных Time Cop ({ $date })
-
 filter = Фильтр
-
 from = От
-
 to = к
-
 project = проект
-
 description = Описание
-
 timeH = Время (часы)
-
 timeCopEntries = Записи временного полицейского ({ $date })
-
 createNewProject = Создать новый проект
-
 editProject = Редактировать проект
-
 pleaseEnterAName = Пожалуйста, введите имя
-
 projectName = название проекта
-
 # tt-hand-translated
 create = Создать
-
 save = Сохранить
-
 areYouSureYouWantToDelete = Вы уверены, что хотите удалить этот проект?
-
 editTimer = Редактировать таймер
-
 whatWereYouDoing = Что ты делал?
-
 startTime = Время начала
-
 endTime = Время окончания
-
 duration = продолжительность
-
 appName = Time Cop
-
 logoSemantics = Time Cop Logo
-
 noDescription = (нет описания)
-
 options = Параметры
-
 groupTimers = Группа похожих таймеров в день
-
 # tt-hand-translated
 columns = Колонки
-
 date = Дата
-
 combinedProjectDescription = Совместный проект и описание
-
 reports = Отчеты
-
 nHours = { $hours } часов
-
 averageDailyHours = Среднесуточные часы
-
 totalProjectShare = Общая доля проекта
-
 weeklyHours = Еженедельные часы
-
 contributors = Авторы
-
 settings = настройки
-
 theme = тема
-
 auto = автоматическая
-
 light = Свет
-
 dark = Темно
-
 black = черный
-
 langName = русский
-
 language = язык
-
 automaticLanguage = Автоматически ({ $langName })
-
 collapseDays = Свернуть Дни
-
 autocompleteDescription = Автозаполнение описаний
-
 defaultFilterStartDateToMonday = Дата начала фильтра по умолчанию - понедельник
-
 hours = часов
-
 total = Всего
-
 oneTimerAtATime = Разрешить только один таймер
-
 selectAll = Выбрать все
-
 selectNone = Выберите Нет
-
 defaultFilterDays = Период фильтра по умолчанию (дни)
-
 import = импорт
-
 invalidDatabaseFile = Неверный файл базы данных!
-
 databaseImported = База данных импортирована
-
 showBadgeCounts = Показывать счетчик работающего таймера как значок значка приложения
-
 runningTimersNotificationTitle = Беговые таймеры
-
 runningTimersNotificationBody = Таймеры все еще работают в фоновом режиме
-
 enableRunningTimersNotification = Показать уведомления о запуске таймера
-
 notes = Ноты
-
 noItemsFound = ничего не найдено
