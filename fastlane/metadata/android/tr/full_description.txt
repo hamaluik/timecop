@@ -1,0 +1,11 @@
+- Yalnızca çevrimdışı, mobil öncelikli
+- Android, iOS ve Linux için
+- Tamamen özel - izleme / casusluk / reklam / vb. yok
+- Bir düğmeye dokunarak başlatılabilen birden fazla paralel zamanlayıcı ile görevleri takip etme
+- Çalışmalarınızı gruplandırmak için zamanlayıcıları projelerle ilişkilendirin (veya ilişkilendirmeyin)
+- Zamanlayıcıları zahmetsizce başlatma, durdurma, düzenleme ve silme
+- Verileri zaman aralıklarına ve projelere göre filtrelenmiş bir .csv dosyası olarak dışa aktarın
+- Tüm verilere tam erişim için uygulamanın veritabanını dışa aktarın
+- Cihaz ayarlarınıza göre otomatik aydınlık mod / karanlık mod
+- Çeşitli dillerde yerelleştirilmiştir (Google Translate sayesinde): İngilizce, Arapça, Almanca, İspanyolca, Fransızca, Hintçe, Endonezce, Japonca, Korece, Portekizce, Rusça, Çince (Basitleştirilmiş) ve Çince (Geleneksel), ayrıca İtalyanca, Çekçe, Norveççe ve Endonezce (katkıda bulunanlar aracılığıyla)
+- Açık kaynak (Apache-2.0 altında lisanslı)-fork away (https://github.com/hamaluik/timecop)
