@@ -29,7 +29,7 @@ class TimerEntry extends Equatable {
       @required this.projectID,
       @required this.startTime,
       @required this.endTime,
-      @required this.notes})
+      this.notes = ""})
       : assert(id != null),
         assert(startTime != null);
 
