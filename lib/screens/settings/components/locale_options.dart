@@ -67,6 +67,7 @@ class LocaleOptions extends StatelessWidget {
                               const Locale('nb', 'NO'),
                               const Locale('pt'),
                               const Locale('ru'),
+                              const Locale('tr'),
                               const Locale('zh', 'CN'),
                               const Locale('zh', 'TW'),
                             ].map(

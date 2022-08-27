@@ -12,5 +12,6 @@ tt -c ../../translation_credentials.json -f en.flt -o . -l ko
 tt -c ../../translation_credentials.json -f en.flt -o . -l nb-NO
 tt -c ../../translation_credentials.json -f en.flt -o . -l pt
 tt -c ../../translation_credentials.json -f en.flt -o . -l ru
+tt -c ../../translation_credentials.json -f en.flt -o . -l tr
 tt -c ../../translation_credentials.json -f en.flt -o . -l zh-CN
 tt -c ../../translation_credentials.json -f en.flt -o . -l zh-TW

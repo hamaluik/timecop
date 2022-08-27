@@ -112,6 +112,13 @@ class MockDataProvider extends DataProvider {
       "ui-layout": "Макет пользовательского интерфейса",
       "administration": "администрация",
     },
+    "tr": {
+      "administration": "Yönetim",
+      "mockups": "Mockups",
+      "ui-layout": "UI Düzeni",
+      "coffee": "Kahve",
+      "app-development": "Uygulama geliştirme"
+    },
     "zh-CN": {
       "ui-layout": "UI布局",
       "administration": "管理",

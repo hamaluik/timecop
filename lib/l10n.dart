@@ -45,21 +45,22 @@ class _L10NDelegate extends LocalizationsDelegate<L10N> {
 
   @override
   bool isSupported(Locale locale) => [
-        'de',
         'en',
+        'ar',
+        'cs',
+        'de',
         'es',
         'fr',
         'hi',
         'id',
+        'it',
         'ja',
         'ko',
+        'nb',
         'pt',
         'ru',
+        'tr',
         'zh',
-        'ar',
-        'it',
-        'cs',
-        'nb'
       ].contains(locale.languageCode);
 
   @override

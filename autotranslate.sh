@@ -12,6 +12,7 @@ tt -c translation_credentials.json -f terms.flt -d l10n/en.flt -o l10n -l ko
 tt -c translation_credentials.json -f terms.flt -d l10n/en.flt -o l10n -l nb-NO
 tt -c translation_credentials.json -f terms.flt -d l10n/en.flt -o l10n -l pt
 tt -c translation_credentials.json -f terms.flt -d l10n/en.flt -o l10n -l ru
+tt -c translation_credentials.json -f terms.flt -d l10n/en.flt -o l10n -l tr
 tt -c translation_credentials.json -f terms.flt -d l10n/en.flt -o l10n -l zh-CN
 tt -c translation_credentials.json -f terms.flt -d l10n/en.flt -o l10n -l zh-TW
 tt -c translation_credentials.json -f terms.flt -d l10n/en.flt -o l10n -l en

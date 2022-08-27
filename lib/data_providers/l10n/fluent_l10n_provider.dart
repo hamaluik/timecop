@@ -216,6 +216,8 @@ class FluentL10NProvider extends L10NProvider {
         return "Português";
       case "ru":
         return "русский";
+      case "tr":
+        return "Türk";
       case "zh":
         {
           switch (locale.countryCode) {
