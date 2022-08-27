@@ -80,7 +80,7 @@ class _ExportScreenState extends State<ExportScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text(L10N.of(context).tr.export),
+        title: Text(L10N.of(context).tr.exportImport),
         actions: <Widget>[
           ExportMenu(dateFormat: _dateFormat, scaffoldKey: _scaffoldKey),
         ],
@@ -337,6 +337,7 @@ class _ExportScreenState extends State<ExportScreen> {
       ),
       floatingActionButton: FloatingActionButton(
           key: Key("exportFAB"),
+          tooltip: L10N.of(context).tr.exportCSV,
           child: Stack(
             // shenanigans to properly centre the icon (font awesome glyphs are variable
             // width but the library currently doesn't deal with that)

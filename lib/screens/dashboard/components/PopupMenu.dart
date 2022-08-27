@@ -95,7 +95,7 @@ class PopupMenu extends StatelessWidget {
             value: MenuItem.export,
             child: ListTile(
               leading: Icon(FontAwesomeIcons.fileExport),
-              title: Text(L10N.of(context).tr.export),
+              title: Text(L10N.of(context).tr.exportImport),
             ),
           ),
           PopupMenuItem(

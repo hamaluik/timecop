@@ -91,9 +91,15 @@ class FluentL10NProvider extends L10NProvider {
   @override
   String get endTime => _bundle.format("endTime", errors: _errors);
   @override
-  String get export => _bundle.format("export", errors: _errors);
+  String get exportImport => _bundle.format("exportImport", errors: _errors);
   @override
-  String get import => _bundle.format("import", errors: _errors);
+  String get exportCSV => _bundle.format("exportCSV", errors: _errors);
+  @override
+  String get exportDatabase =>
+      _bundle.format("exportDatabase", errors: _errors);
+  @override
+  String get importDatabase =>
+      _bundle.format("importDatabase", errors: _errors);
   @override
   String get filter => _bundle.format("filter", errors: _errors);
   @override

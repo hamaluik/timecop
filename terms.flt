@@ -14,7 +14,13 @@ whatAreYouDoing = What are you doing?
 
 projects = Projects
 
-export = Export
+exportImport = Import and Export
+
+exportCSV = Export CSV
+
+exportDatabase = Export Database
+
+importDatabase = Import Database
 
 noProject = (no project)
 
@@ -134,8 +140,6 @@ selectAll = Select All
 selectNone = Select None
 
 defaultFilterDays = Default Filter Period (Days)
-
-import = Import
 
 invalidDatabaseFile = Invalid database file!
 

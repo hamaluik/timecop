@@ -159,7 +159,7 @@ class ExportMenu extends StatelessWidget {
             value: ExportMenuItem.import,
             child: ListTile(
               leading: Icon(FontAwesomeIcons.fileImport),
-              title: Text(L10N.of(context).tr.import),
+              title: Text(L10N.of(context).tr.importDatabase),
             ),
           ),
           PopupMenuItem(
@@ -167,7 +167,7 @@ class ExportMenu extends StatelessWidget {
             value: ExportMenuItem.export,
             child: ListTile(
               leading: Icon(FontAwesomeIcons.fileExport),
-              title: Text(L10N.of(context).tr.export),
+              title: Text(L10N.of(context).tr.exportDatabase),
             ),
           ),
         ];
