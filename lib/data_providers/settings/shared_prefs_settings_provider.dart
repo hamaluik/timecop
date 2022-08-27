@@ -25,7 +25,7 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
   bool getBool(String key) => _prefs.getBool(key);
 
   @override
-  void setBool(String key, bool value) => (value == null)
+  Future<void> setBool(String key, bool value) => (value == null)
       ? _prefs.remove(key)
       : _prefs.setBool(
           key, value); //todo remove null check with null safety implementation
@@ -34,9 +34,9 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
   int getInt(String key) => _prefs.getInt(key);
 
   @override
-  void setInt(String key, int value) => (value == null)
-      ? _prefs.remove(key)
-      : _prefs.setInt(
+  Future<void> setInt(String key, int value) async => (value == null)
+      ? await _prefs.remove(key)
+      : await _prefs.setInt(
           key, value); //todo remove null check with null safety implementation
 
   static Future<SharedPrefsSettingsProvider> load() async {
@@ -50,12 +50,12 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
   }
 
   @override
-  void setTheme(ThemeType theme) {
+  Future<void> setTheme(ThemeType theme) async {
     if (theme == null) {
       //todo remove null check with null safety implementation
-      _prefs.remove("theme");
+      await _prefs.remove("theme");
     } else {
-      _prefs.setString("theme", theme.stringify);
+      await _prefs.setString("theme", theme.stringify);
     }
   }
 
@@ -71,19 +71,19 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
   }
 
   @override
-  void setLocale(Locale locale) {
-    if (locale?.languageCode ==
-        null) //todo remove null check with null safety implementation
-      _prefs.remove("languageCode");
-    else {
-      _prefs.setString("languageCode", locale?.languageCode);
+  Future<void> setLocale(Locale locale) async {
+    if (locale?.languageCode == null) {
+      //todo remove null check with null safety implementation
+      await _prefs.remove("languageCode");
+    } else {
+      await _prefs.setString("languageCode", locale?.languageCode);
     }
 
     if (locale?.countryCode == null) {
       //todo remove null check with null safety implementation
-      _prefs.remove("countryCode");
+      await _prefs.remove("countryCode");
     } else {
-      _prefs.setString("countryCode", locale?.countryCode);
+      await _prefs.setString("countryCode", locale?.countryCode);
     }
   }
 }

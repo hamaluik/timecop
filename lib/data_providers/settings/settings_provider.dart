@@ -17,9 +17,9 @@ import 'package:timecop/models/theme_type.dart';
 
 abstract class SettingsProvider {
   bool getBool(String key);
-  void setBool(String key, bool value);
+  Future<void> setBool(String key, bool value);
   int getInt(String key);
-  void setInt(String key, int value);
+  Future<void> setInt(String key, int value);
 
   ThemeType getTheme();
   void setTheme(ThemeType theme);

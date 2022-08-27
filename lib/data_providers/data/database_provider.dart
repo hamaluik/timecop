@@ -30,7 +30,7 @@ class DatabaseProvider extends DataProvider {
 
   DatabaseProvider(this._db) : assert(_db != null);
 
-  void close() async {
+  Future<void> close() async {
     await _db.close();
   }
 
