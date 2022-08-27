@@ -179,10 +179,12 @@ packages:
   fluent:
     dependency: "direct main"
     description:
-      name: fluent
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.2+3"
+      path: "."
+      ref: "5d99952baae6cb07a7faa409c18f4361b72dcd85"
+      resolved-ref: "5d99952baae6cb07a7faa409c18f4361b72dcd85"
+      url: "https://github.com/iot-d/fluent-dart"
+    source: git
+    version: "1.1.0+0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -314,7 +316,7 @@ packages:
       name: flutter_typeahead
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.7"
+    version: "4.0.0"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -326,7 +328,7 @@ packages:
       name: font_awesome_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "9.2.0"
+    version: "10.1.0"
   frontend_server_client:
     dependency: transitive
     description:
@@ -653,42 +655,42 @@ packages:
       name: share_plus
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.0"
+    version: "4.0.10+1"
   share_plus_linux:
     dependency: transitive
     description:
       name: share_plus_linux
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.4"
+    version: "3.0.0"
   share_plus_macos:
     dependency: transitive
     description:
       name: share_plus_macos
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "3.0.1"
   share_plus_platform_interface:
     dependency: transitive
     description:
       name: share_plus_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "3.0.3"
   share_plus_web:
     dependency: transitive
     description:
       name: share_plus_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.4"
+    version: "3.0.1"
   share_plus_windows:
     dependency: transitive
     description:
       name: share_plus_windows
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.3"
+    version: "3.0.1"
   shared_preferences:
     dependency: "direct main"
     description:
