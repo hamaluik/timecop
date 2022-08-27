@@ -25,7 +25,7 @@ Future<void> main() async {
   WidgetsApp.debugAllowBannerOverride = false; // remove debug banner
 
   final SettingsProvider settings = MockSettingsProvider();
-  settings.setBool("collapseDays", false);
+  await settings.setBool("collapseDays", false);
   final DataProvider data = MockDataProvider(ui.window.locale);
   final NotificationsProvider notifications = NotificationsProvider(FlutterLocalNotificationsPlugin());
   return runMain(settings, data, notifications);
