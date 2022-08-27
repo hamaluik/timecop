@@ -19,25 +19,23 @@ import 'settings_provider.dart';
 
 class SharedPrefsSettingsProvider extends SettingsProvider {
   final SharedPreferences _prefs;
-  SharedPrefsSettingsProvider(this._prefs) : assert(_prefs != null);
+  SharedPrefsSettingsProvider(this._prefs);
 
   @override
-  bool getBool(String key) => _prefs.getBool(key);
+  bool? getBool(String key) => _prefs.getBool(key);
 
   @override
-  Future<void> setBool(String key, bool value) => (value == null)
+  Future<void> setBool(String key, bool? value) => (value == null)
       ? _prefs.remove(key)
       : _prefs.setBool(
           key, value); //todo remove null check with null safety implementation
 
   @override
-  int getInt(String key) => _prefs.getInt(key);
+  int? getInt(String key) => _prefs.getInt(key);
 
   @override
-  Future<void> setInt(String key, int value) async => (value == null)
-      ? await _prefs.remove(key)
-      : await _prefs.setInt(
-          key, value); //todo remove null check with null safety implementation
+  Future<void> setInt(String key, int value) async =>
+      await _prefs.setInt(key, value);
 
   static Future<SharedPrefsSettingsProvider> load() async {
     return SharedPrefsSettingsProvider(await SharedPreferences.getInstance());
@@ -45,45 +43,48 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
 
   @override
   ThemeType getTheme() {
-    String t = _prefs.getString("theme");
-    return themeFromString(t) ?? ThemeType.auto;
+    String? t = _prefs.getString("theme");
+    return themeFromString(t);
   }
 
   @override
-  Future<void> setTheme(ThemeType theme) async {
+  Future<void> setTheme(ThemeType? theme) async {
     if (theme == null) {
       //todo remove null check with null safety implementation
       await _prefs.remove("theme");
     } else {
-      await _prefs.setString("theme", theme.stringify);
+      await _prefs.setString("theme", theme.stringify!);
     }
   }
 
   @override
-  Locale getLocale() {
-    String languageCode = _prefs.getString("languageCode");
+  Locale? getLocale() {
+    String? languageCode = _prefs.getString("languageCode");
     if (languageCode == null) {
       return null;
     }
-    String countryCode = _prefs.getString("countryCode");
+    String? countryCode = _prefs.getString("countryCode");
     return Locale.fromSubtags(
         languageCode: languageCode, countryCode: countryCode);
   }
 
   @override
-  Future<void> setLocale(Locale locale) async {
-    if (locale?.languageCode == null) {
+  Future<void> setLocale(Locale? locale) async {
+    final langCode = locale?.languageCode;
+    if (langCode == null) {
       //todo remove null check with null safety implementation
       await _prefs.remove("languageCode");
     } else {
-      await _prefs.setString("languageCode", locale?.languageCode);
+      await _prefs.setString("languageCode", langCode);
     }
 
-    if (locale?.countryCode == null) {
+    final countryCode = locale?.countryCode;
+
+    if (countryCode == null) {
       //todo remove null check with null safety implementation
       await _prefs.remove("countryCode");
     } else {
-      await _prefs.setString("countryCode", locale?.countryCode);
+      await _prefs.setString("countryCode", countryCode);
     }
   }
 }

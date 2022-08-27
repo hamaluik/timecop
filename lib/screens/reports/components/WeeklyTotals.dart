@@ -15,6 +15,7 @@
 import 'dart:collection';
 import 'dart:math';
 
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,16 +30,15 @@ import 'package:timecop/models/start_of_week.dart';
 import 'Legend.dart';
 
 class WeeklyTotals extends StatefulWidget {
-  final DateTime startDate;
-  final DateTime endDate;
-  final List<Project> selectedProjects;
+  final DateTime? startDate;
+  final DateTime? endDate;
+  final List<Project?> selectedProjects;
   WeeklyTotals(
-      {Key key,
-      @required this.startDate,
-      @required this.endDate,
-      @required this.selectedProjects})
-      : assert(selectedProjects != null),
-        super(key: key);
+      {Key? key,
+      required this.startDate,
+      required this.endDate,
+      required this.selectedProjects})
+      : super(key: key);
 
   @override
   _WeeklyTotalsState createState() => _WeeklyTotalsState();
@@ -47,19 +47,21 @@ class WeeklyTotals extends StatefulWidget {
 class _WeeklyTotalsState extends State<WeeklyTotals> {
   static final DateFormat _dateFormat = DateFormat.MMMd();
 
-  static LinkedHashMap<int, LinkedHashMap<int, double>> calculateData(
+  static LinkedHashMap<int?, LinkedHashMap<int, double>> calculateData(
       BuildContext context,
-      DateTime startDate,
-      DateTime endDate,
-      List<Project> selectedProjects) {
+      DateTime? startDate,
+      DateTime? endDate,
+      List<Project?> selectedProjects) {
     final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
 
-    DateTime firstDate = startDate;
+    DateTime? firstDate = startDate;
     firstDate ??= timers.state.timers.map((timer) => timer.startTime).fold(
-        DateTime.now(), (DateTime a, DateTime b) => a.isBefore(b) ? a : b);
-    firstDate = firstDate.startOfWeek();
+        DateTime.now(),
+        ((DateTime a, DateTime b) => a.isBefore(b) ? a : b) as DateTime?
+            Function(DateTime?, DateTime));
+    firstDate = firstDate!.startOfWeek();
 
-    LinkedHashMap<int, LinkedHashMap<int, double>> projectWeeklyHours =
+    LinkedHashMap<int?, LinkedHashMap<int, double>> projectWeeklyHours =
         LinkedHashMap();
     for (TimerEntry timer in timers.state.timers
         .where((timer) => timer.endTime != null)
@@ -73,7 +75,8 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
 
       // calculate the week
       int week = timer.startTime.difference(firstDate).inDays ~/ 7;
-      double hours = timer.endTime.difference(timer.startTime).inSeconds / 3600;
+      double hours =
+          timer.endTime!.difference(timer.startTime).inSeconds / 3600;
       weeklyHours.update(week, (double oldHours) => oldHours + hours,
           ifAbsent: () => hours);
     }
@@ -84,15 +87,17 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
   @override
   Widget build(BuildContext context) {
     final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
-    DateTime firstDate = widget.startDate;
+    DateTime? firstDate = widget.startDate;
     if (firstDate == null) {
       final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
       firstDate = timers.state.timers.map((timer) => timer.startTime).fold(
-          DateTime.now(), (DateTime a, DateTime b) => a.isBefore(b) ? a : b);
+          DateTime.now(),
+          ((DateTime a, DateTime b) => a.isBefore(b) ? a : b) as DateTime?
+              Function(DateTime?, DateTime));
     }
-    firstDate = firstDate.startOfWeek();
+    firstDate = firstDate!.startOfWeek();
 
-    LinkedHashMap<int, LinkedHashMap<int, double>> _projectWeeklyHours =
+    LinkedHashMap<int?, LinkedHashMap<int, double>> _projectWeeklyHours =
         calculateData(
             context, widget.startDate, widget.endDate, widget.selectedProjects);
     double maxY = _projectWeeklyHours.values.fold(
@@ -115,10 +120,10 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                       show: true,
                       border: Border(
                         bottom: BorderSide(
-                          color: Theme.of(context).textTheme.bodyText2.color,
+                          color: Theme.of(context).textTheme.bodyText2!.color!,
                         ),
                         left: BorderSide(
-                          color: Theme.of(context).textTheme.bodyText2.color,
+                          color: Theme.of(context).textTheme.bodyText2!.color!,
                         ),
                       )),
                   gridData: FlGridData(
@@ -140,7 +145,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                                     color: spot.bar.color,
                                     fontSize: Theme.of(context)
                                         .textTheme
-                                        .bodyText2
+                                        .bodyText2!
                                         .fontSize,
                                   ));
                             }).toList();
@@ -162,7 +167,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                             getTitlesWidget: (double dweek, _) {
                               int week = dweek.toInt();
                               DateTime date =
-                                  firstDate.add(Duration(days: week * 7));
+                                  firstDate!.add(Duration(days: week * 7));
                               return Text(
                                 _dateFormat.format(date).replaceAll(' ', '\n'),
                                 style: Theme.of(context).textTheme.caption,
@@ -170,9 +175,8 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                             }),
                       )),
                   lineBarsData: _projectWeeklyHours.entries.map((entry) {
-                    Project project = projects.state.projects.firstWhere(
-                        (project) => project.id == entry.key,
-                        orElse: () => null);
+                    Project? project = projects.state.projects
+                        .firstWhereOrNull((project) => project.id == entry.key);
                     return LineChartBarData(
                         color:
                             project?.colour ?? Theme.of(context).disabledColor,

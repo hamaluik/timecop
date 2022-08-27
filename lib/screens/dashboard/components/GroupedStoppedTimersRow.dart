@@ -26,9 +26,8 @@ import 'package:timecop/screens/dashboard/components/StoppedTimerRow.dart';
 
 class GroupedStoppedTimersRow extends StatefulWidget {
   final List<TimerEntry> timers;
-  const GroupedStoppedTimersRow({Key key, @required this.timers})
-      : assert(timers != null),
-        assert(timers.length > 1),
+  const GroupedStoppedTimersRow({Key? key, required this.timers})
+      : assert(timers.length > 1),
         super(key: key);
 
   @override
@@ -43,9 +42,9 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow>
   static final Animatable<double> _halfTween =
       Tween<double>(begin: 0.0, end: -0.5);
 
-  bool _expanded;
-  AnimationController _controller;
-  Animation<double> _iconTurns;
+  late bool _expanded;
+  late AnimationController _controller;
+  late Animation<double> _iconTurns;
 
   @override
   void initState() {
@@ -62,14 +61,15 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow>
     super.dispose();
   }
 
-  static String formatDescription(BuildContext context, String description) {
+  static String formatDescription(BuildContext context, String? description) {
     if (description == null || description.trim().isEmpty) {
       return L10N.of(context).tr.noDescription;
     }
     return description;
   }
 
-  static TextStyle styleDescription(BuildContext context, String description) {
+  static TextStyle? styleDescription(
+      BuildContext context, String? description) {
     if (description == null || description.trim().isEmpty) {
       return TextStyle(color: Theme.of(context).disabledColor);
     }
@@ -90,14 +90,12 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow>
                 onPressed: (_) {
                   final TimersBloc timersBloc =
                       BlocProvider.of<TimersBloc>(context);
-                  assert(timersBloc != null);
                   final ProjectsBloc projectsBloc =
                       BlocProvider.of<ProjectsBloc>(context);
-                  assert(projectsBloc != null);
-                  Project project = projectsBloc
-                      .getProjectByID(widget.timers.first?.projectID);
+                  Project? project = projectsBloc
+                      .getProjectByID(widget.timers.first.projectID);
                   timersBloc.add(CreateTimer(
-                      description: widget.timers.first?.description ?? "",
+                      description: widget.timers.first.description ?? "",
                       project: project));
                 })
           ]),
@@ -130,7 +128,7 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow>
                 TimerEntry.formatDuration(widget.timers.fold(
                     Duration(),
                     (Duration sum, TimerEntry timer) =>
-                        sum + timer.endTime.difference(timer.startTime))),
+                        sum + timer.endTime!.difference(timer.startTime))),
                 style: TextStyle(fontFamily: "FiraMono")),
           ],
         ),

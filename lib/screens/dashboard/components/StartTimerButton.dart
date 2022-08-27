@@ -22,7 +22,7 @@ import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:timecop/screens/dashboard/components/StartTimerSpeedDial.dart';
 
 class StartTimerButton extends StatefulWidget {
-  StartTimerButton({Key key}) : super(key: key);
+  StartTimerButton({Key? key}) : super(key: key);
 
   @override
   _StartTimerButtonState createState() => _StartTimerButtonState();
@@ -32,7 +32,6 @@ class _StartTimerButtonState extends State<StartTimerButton> {
   @override
   Widget build(BuildContext context) {
     final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
-    assert(bloc != null);
 
     return BlocBuilder<SettingsBloc, SettingsState>(
         builder: (BuildContext context, SettingsState settingsState) {
@@ -45,7 +44,6 @@ class _StartTimerButtonState extends State<StartTimerButton> {
             foregroundColor: Theme.of(context).colorScheme.onSecondary,
             onPressed: () {
               final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
-              assert(timers != null);
               timers.add(CreateTimer(
                   description: bloc.state.newDescription,
                   project: bloc.state.newProject));
@@ -72,7 +70,6 @@ class _StartTimerButtonState extends State<StartTimerButton> {
             foregroundColor: Theme.of(context).colorScheme.onSecondary,
             onPressed: () {
               final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
-              assert(timers != null);
               timers.add(StopAllTimers());
             },
             child: Stack(

@@ -13,38 +13,35 @@
 // limitations under the License.
 
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 
 class TimerEntry extends Equatable {
   final int id;
-  final String description;
-  final int projectID;
+  final String? description;
+  final int? projectID;
   final DateTime startTime;
-  final DateTime endTime;
-  final String notes;
+  final DateTime? endTime;
+  final String? notes;
 
   TimerEntry(
-      {@required this.id,
-      @required this.description,
-      @required this.projectID,
-      @required this.startTime,
-      @required this.endTime,
-      this.notes = ""})
-      : assert(id != null),
-        assert(startTime != null);
+      {required this.id,
+      required this.description,
+      required this.projectID,
+      required this.startTime,
+      required this.endTime,
+      this.notes = ""});
 
   @override
-  List<Object> get props =>
+  List<Object?> get props =>
       [id, description, projectID, startTime, endTime, notes];
   @override
   bool get stringify => true;
 
   TimerEntry.clone(TimerEntry timer,
-      {String description,
-      int projectID,
-      DateTime startTime,
-      DateTime endTime,
-      String notes})
+      {String? description,
+      int? projectID,
+      DateTime? startTime,
+      DateTime? endTime,
+      String? notes})
       : this(
           id: timer.id,
           description: description ?? timer.description,

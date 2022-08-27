@@ -35,7 +35,7 @@ import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/screens/export/components/ExportMenu.dart';
 
 class ExportScreen extends StatefulWidget {
-  ExportScreen({Key key}) : super(key: key);
+  ExportScreen({Key? key}) : super(key: key);
 
   @override
   _ExportScreenState createState() => _ExportScreenState();
@@ -45,13 +45,13 @@ class DayGroup {
   final DateTime date;
   List<TimerEntry> timers = [];
 
-  DayGroup(this.date) : assert(date != null);
+  DayGroup(this.date);
 }
 
 class _ExportScreenState extends State<ExportScreen> {
-  DateTime _startDate;
-  DateTime _endDate;
-  List<Project> selectedProjects = [];
+  DateTime? _startDate;
+  DateTime? _endDate;
+  List<Project?> selectedProjects = [];
   static final DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
   static final DateFormat _exportDateFormat = DateFormat.yMd();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -60,8 +60,7 @@ class _ExportScreenState extends State<ExportScreen> {
   void initState() {
     super.initState();
     final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
-    assert(projects != null);
-    selectedProjects = <Project>[null]
+    selectedProjects = <Project?>[null]
         .followedBy(projects.state.projects
             .where((p) => !p.archived)
             .map((p) => Project.clone(p)))
@@ -121,7 +120,7 @@ class _ExportScreenState extends State<ExportScreen> {
                     padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
                     child: Text(_startDate == null
                         ? "—"
-                        : _dateFormat.format(_startDate)),
+                        : _dateFormat.format(_startDate!)),
                   ),
                   onTap: () async {
                     await DatePicker.showDatePicker(context,
@@ -131,9 +130,9 @@ class _ExportScreenState extends State<ExportScreen> {
                         onConfirm: (DateTime dt) => setState(() =>
                             _startDate = DateTime(dt.year, dt.month, dt.day)),
                         theme: DatePickerTheme(
-                          cancelStyle: Theme.of(context).textTheme.button,
-                          doneStyle: Theme.of(context).textTheme.button,
-                          itemStyle: Theme.of(context).textTheme.bodyText2,
+                          cancelStyle: Theme.of(context).textTheme.button!,
+                          doneStyle: Theme.of(context).textTheme.button!,
+                          itemStyle: Theme.of(context).textTheme.bodyText2!,
                           backgroundColor:
                               Theme.of(context).colorScheme.surface,
                         ));
@@ -165,7 +164,7 @@ class _ExportScreenState extends State<ExportScreen> {
                   trailing: Padding(
                     padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
                     child: Text(
-                        _endDate == null ? "—" : _dateFormat.format(_endDate)),
+                        _endDate == null ? "—" : _dateFormat.format(_endDate!)),
                   ),
                   onTap: () async {
                     await DatePicker.showDatePicker(context,
@@ -177,9 +176,9 @@ class _ExportScreenState extends State<ExportScreen> {
                             DateTime(
                                 dt.year, dt.month, dt.day, 23, 59, 59, 999)),
                         theme: DatePickerTheme(
-                          cancelStyle: Theme.of(context).textTheme.button,
-                          doneStyle: Theme.of(context).textTheme.button,
-                          itemStyle: Theme.of(context).textTheme.bodyText2,
+                          cancelStyle: Theme.of(context).textTheme.button!,
+                          doneStyle: Theme.of(context).textTheme.button!,
+                          itemStyle: Theme.of(context).textTheme.bodyText2!,
                           backgroundColor:
                               Theme.of(context).colorScheme.surface,
                         ));
@@ -280,7 +279,7 @@ class _ExportScreenState extends State<ExportScreen> {
                     child: Text(L10N.of(context).tr.selectAll),
                     onPressed: () {
                       setState(() {
-                        selectedProjects = <Project>[null]
+                        selectedProjects = <Project?>[null]
                             .followedBy(projectsBloc.state.projects
                                 .where((p) => !p.archived)
                                 .map((p) => Project.clone(p)))
@@ -291,7 +290,7 @@ class _ExportScreenState extends State<ExportScreen> {
                 ],
               )
             ]
-                .followedBy(<Project>[null]
+                .followedBy(<Project?>[null]
                     .followedBy(
                         projectsBloc.state.projects.where((p) => !p.archived))
                     .map((project) => CheckboxListTile(
@@ -352,10 +351,8 @@ class _ExportScreenState extends State<ExportScreen> {
           ),
           onPressed: () async {
             final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
-            assert(timers != null);
             final ProjectsBloc projects =
                 BlocProvider.of<ProjectsBloc>(context);
-            assert(projects != null);
 
             List<String> headers = [];
             if (settingsBloc.state.exportIncludeDate) {
@@ -386,10 +383,11 @@ class _ExportScreenState extends State<ExportScreen> {
             List<TimerEntry> filteredTimers = timers.state.timers
                 .where((t) => t.endTime != null)
                 .where((t) => selectedProjects.any((p) => p?.id == t.projectID))
+                .where((t) => _startDate == null
+                    ? true
+                    : t.startTime.isAfter(_startDate!))
                 .where((t) =>
-                    _startDate == null ? true : t.startTime.isAfter(_startDate))
-                .where((t) =>
-                    _endDate == null ? true : t.endTime.isBefore(_endDate))
+                    _endDate == null ? true : t.endTime!.isBefore(_endDate!))
                 .where((t) =>
                     !(projects.getProjectByID(t.projectID)?.archived == true))
                 .toList();
@@ -405,9 +403,9 @@ class _ExportScreenState extends State<ExportScreen> {
                       (t) => selectedProjects.any((p) => p?.id == t.projectID))
                   .where((t) => _startDate == null
                       ? true
-                      : t.startTime.isAfter(_startDate))
+                      : t.startTime.isAfter(_startDate!))
                   .where((t) =>
-                      _endDate == null ? true : t.endTime.isBefore(_endDate))
+                      _endDate == null ? true : t.endTime!.isBefore(_endDate!))
                   .where((t) =>
                       !(projects.getProjectByID(t.projectID)?.archived == true))
                   .toList();
@@ -444,7 +442,7 @@ class _ExportScreenState extends State<ExportScreen> {
                   Duration totalTime = groupedEntries.fold(
                       Duration(),
                       (Duration d, TimerEntry t) =>
-                          d + t.endTime.difference(t.startTime));
+                          d + t.endTime!.difference(t.startTime));
                   return TimerEntry.clone(groupedEntries[0],
                       endTime: groupedEntries[0].startTime.add(totalTime));
                 });
@@ -472,10 +470,10 @@ class _ExportScreenState extends State<ExportScreen> {
                 row.add(timer.startTime.toUtc().toIso8601String());
               }
               if (settingsBloc.state.exportIncludeEndTime) {
-                row.add(timer.endTime.toUtc().toIso8601String());
+                row.add(timer.endTime!.toUtc().toIso8601String());
               }
               if (settingsBloc.state.exportIncludeDurationHours) {
-                row.add((timer.endTime
+                row.add((timer.endTime!
                             .difference(timer.startTime)
                             .inSeconds
                             .toDouble() /
@@ -491,7 +489,7 @@ class _ExportScreenState extends State<ExportScreen> {
                 ListToCsvConverter(delimitAllFields: true).convert(data);
 
             if (Platform.isMacOS || Platform.isLinux) {
-              String outputFile = await FilePicker.platform.saveFile(
+              String? outputFile = await FilePicker.platform.saveFile(
                 dialogTitle: "",
                 fileName: "timecop.csv",
               );
@@ -500,13 +498,13 @@ class _ExportScreenState extends State<ExportScreen> {
                 await File(outputFile).writeAsString(csv, flush: true);
               }
             } else {
-              Directory directory;
+              Directory? directory;
               if (Platform.isAndroid) {
                 directory = await getExternalStorageDirectory();
               } else {
                 directory = await getApplicationDocumentsDirectory();
               }
-              final String localPath = '${directory.path}/timecop.csv';
+              final String localPath = '${directory!.path}/timecop.csv';
 
               File file = File(localPath);
               await file.writeAsString(csv, flush: true);

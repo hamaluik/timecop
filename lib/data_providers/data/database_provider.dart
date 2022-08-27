@@ -28,7 +28,7 @@ class DatabaseProvider extends DataProvider {
   final RandomColor _randomColour = RandomColor();
   static const int DB_VERSION = 4;
 
-  DatabaseProvider(this._db) : assert(_db != null);
+  DatabaseProvider(this._db);
 
   Future<void> close() async {
     await _db.close();
@@ -136,8 +136,7 @@ class DatabaseProvider extends DataProvider {
   /// the c in crud
   @override
   Future<Project> createProject(
-      {@required String name, Color colour, bool archived}) async {
-    assert(name != null);
+      {required String name, Color? colour, bool? archived}) async {
     colour ??= _randomColour.randomColor();
     archived ??= false;
 
@@ -168,14 +167,13 @@ class DatabaseProvider extends DataProvider {
             id: row["id"] as int,
             name: row["name"] as String,
             colour: Color(row["colour"] as int),
-            archived: (row["archived"] as int) == 1))
+            archived: (row["archived"] as int?) == 1))
         .toList();
   }
 
   /// the u in crud
   @override
   Future<void> editProject(Project project) async {
-    assert(project != null);
     int rows = await _db.rawUpdate(
         "update projects set name=?, colour=?, archived=? where id=?",
         <dynamic>[
@@ -190,7 +188,6 @@ class DatabaseProvider extends DataProvider {
   /// the d in crud
   @override
   Future<void> deleteProject(Project project) async {
-    assert(project != null);
     await _db
         .rawDelete("delete from projects where id=?", <dynamic>[project.id]);
   }
@@ -198,15 +195,14 @@ class DatabaseProvider extends DataProvider {
   /// the c in crud
   @override
   Future<TimerEntry> createTimer(
-      {String description,
-      int projectID,
-      DateTime startTime,
-      DateTime endTime,
-      String notes}) async {
+      {String? description,
+      int? projectID,
+      DateTime? startTime,
+      DateTime? endTime,
+      String? notes}) async {
     int st = startTime?.millisecondsSinceEpoch ??
         DateTime.now().millisecondsSinceEpoch;
-    assert(st != null);
-    int et = endTime?.millisecondsSinceEpoch;
+    int? et = endTime?.millisecondsSinceEpoch;
     int id = await _db.rawInsert(
         "insert into timers(project_id, description, start_time, end_time, notes) values(?, ?, ?, ?, ?)",
         <dynamic>[projectID, description, st, et, notes]);
@@ -227,24 +223,22 @@ class DatabaseProvider extends DataProvider {
     return rawTimers
         .map((Map<String, dynamic> row) => TimerEntry(
             id: row["id"] as int,
-            projectID: row["project_id"] as int,
-            description: row["description"] as String,
+            projectID: row["project_id"] as int?,
+            description: row["description"] as String?,
             startTime:
                 DateTime.fromMillisecondsSinceEpoch(row["start_time"] as int),
             endTime: row["end_time"] != null
                 ? DateTime.fromMillisecondsSinceEpoch(row["end_time"] as int)
                 : null,
-            notes: row["notes"] as String))
+            notes: row["notes"] as String?))
         .toList();
   }
 
   /// the u in crud
   @override
   Future<void> editTimer(TimerEntry timer) async {
-    assert(timer != null);
-    int st = timer.startTime?.millisecondsSinceEpoch ??
-        DateTime.now().millisecondsSinceEpoch;
-    int et = timer.endTime?.millisecondsSinceEpoch;
+    int st = timer.startTime.millisecondsSinceEpoch;
+    int? et = timer.endTime?.millisecondsSinceEpoch;
     await _db.rawUpdate(
         "update timers set project_id=?, description=?, start_time=?, end_time=?, notes=? where id=?",
         <dynamic>[
@@ -260,7 +254,6 @@ class DatabaseProvider extends DataProvider {
   /// the d in crud
   @override
   Future<void> deleteTimer(TimerEntry timer) async {
-    assert(timer != null);
     await _db.rawDelete("delete from timers where id=?", <dynamic>[timer.id]);
   }
 

@@ -21,7 +21,7 @@ import 'package:timecop/models/project.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 
 class ProjectSelectField extends StatefulWidget {
-  ProjectSelectField({Key key}) : super(key: key);
+  ProjectSelectField({Key? key}) : super(key: key);
 
   @override
   _ProjectSelectFieldState createState() => _ProjectSelectFieldState();
@@ -31,9 +31,7 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
   @override
   Widget build(BuildContext context) {
     final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
-    assert(bloc != null);
     final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
-    assert(projectsBloc != null);
     return BlocBuilder<ProjectsBloc, ProjectsState>(
         builder: (BuildContext context, ProjectsState projectsState) {
       return BlocBuilder<DashboardBloc, DashboardState>(
@@ -41,8 +39,10 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
         builder: (BuildContext context, DashboardState state) {
           // detect if the project we had selected was deleted or archived
           if (state.newProject != null &&
-              (projectsBloc.getProjectByID(state.newProject.id) == null ||
-                  projectsBloc.getProjectByID(state.newProject.id).archived)) {
+              (projectsBloc.getProjectByID(state.newProject!.id) == null ||
+                  projectsBloc
+                      .getProjectByID(state.newProject!.id)!
+                      .archived)) {
             bloc.add(ProjectChangedEvent(null));
             return IconButton(
               alignment: Alignment.centerLeft,
@@ -55,17 +55,17 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
             alignment: Alignment.centerLeft,
             icon: ProjectColour(project: state.newProject),
             onPressed: () async {
-              Project chosenProject = await showDialog<Project>(
+              Project? chosenProject = await showDialog<Project>(
                   context: context,
                   barrierDismissible: false,
                   builder: (BuildContext context) {
                     return SimpleDialog(
                       title: Text(L10N.of(context).tr.projects),
                       contentPadding: EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 16.0),
-                      children: <Project>[null]
+                      children: <Project?>[null]
                           .followedBy(
                               projectsState.projects.where((p) => !p.archived))
-                          .map((Project p) => TextButton(
+                          .map((Project? p) => TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop(p);
                               },
@@ -83,7 +83,7 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
                                                     .disabledColor
                                                 : Theme.of(context)
                                                     .textTheme
-                                                    .bodyText2
+                                                    .bodyText2!
                                                     .color)),
                                   ),
                                 ],

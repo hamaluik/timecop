@@ -11,11 +11,11 @@ class RequestNotificationPermissions extends NotificationsEvent {
 }
 
 class ShowNotification extends NotificationsEvent {
-  final String title;
-  final String body;
+  final String? title;
+  final String? body;
   ShowNotification({this.title, this.body});
   @override
-  List<Object> get props => [title, body];
+  List<Object?> get props => [title, body];
 }
 
 class RemoveNotifications extends NotificationsEvent {

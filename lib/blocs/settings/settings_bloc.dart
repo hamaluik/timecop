@@ -153,7 +153,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           state.hasAskedNotificationPermissions;
       if (event.showBadgeCounts != null) {
         await settings.setBool("showBadgeCounts", event.showBadgeCounts);
-        if (event.showBadgeCounts) {
+        if (event.showBadgeCounts!) {
           // trigger a notification permission window
           if (Platform.isIOS || Platform.isAndroid) {
             FlutterAppBadger.removeBadge();
@@ -165,7 +165,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       if (event.showRunningTimersAsNotifications != null) {
         await settings.setBool("showRunningTimersAsNotifications",
             event.showRunningTimersAsNotifications);
-        if (event.showRunningTimersAsNotifications) {
+        if (event.showRunningTimersAsNotifications!) {
           // trigger a notification permission window
           if (Platform.isIOS || Platform.isAndroid) {
             FlutterAppBadger.removeBadge();
@@ -208,7 +208,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     }
   }
 
-  DateTime getFilterStartDate() {
+  DateTime? getFilterStartDate() {
     if (state.defaultFilterStartDateToMonday) {
       var dayOfWeek = 1; // Monday=1, Tuesday=2...
       DateTime date = DateTime.now();

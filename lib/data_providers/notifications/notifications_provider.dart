@@ -17,7 +17,7 @@ import 'dart:io' show Platform;
 
 class NotificationsProvider {
   final FlutterLocalNotificationsPlugin _notif;
-  NotificationsProvider(this._notif) : assert(_notif != null);
+  NotificationsProvider(this._notif);
 
   static Future<NotificationsProvider> load() async {
     FlutterLocalNotificationsPlugin notif = FlutterLocalNotificationsPlugin();
@@ -34,8 +34,8 @@ class NotificationsProvider {
       requestBadgePermission: false,
       requestAlertPermission: false,
     );
-    const initializationSettingsLinux = LinuxInitializationSettings(
-        defaultActionName: "Open time cop");
+    const initializationSettingsLinux =
+        LinuxInitializationSettings(defaultActionName: "Open time cop");
 
     final InitializationSettings initializationSettings =
         InitializationSettings(
@@ -69,7 +69,7 @@ class NotificationsProvider {
   }
 
   Future<void> displayRunningTimersNotification(
-      String title, String body) async {
+      String? title, String? body) async {
     print("displaying notification");
     if (!await requestPermissions()) {
       print("no permissions, quitting");

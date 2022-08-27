@@ -17,7 +17,7 @@ import 'package:timecop/l10n.dart';
 
 enum ThemeType { auto, light, dark, black }
 
-ThemeType themeFromString(String type) {
+ThemeType themeFromString(String? type) {
   if (type == null) return ThemeType.auto;
   switch (type) {
     case "auto":
@@ -33,8 +33,8 @@ ThemeType themeFromString(String type) {
   }
 }
 
-extension ThemeTypeStr on ThemeType {
-  String get stringify {
+extension ThemeTypeStr on ThemeType? {
+  String? get stringify {
     switch (this) {
       case ThemeType.auto:
         return "auto";
@@ -44,11 +44,12 @@ extension ThemeTypeStr on ThemeType {
         return "dark";
       case ThemeType.black:
         return "black";
+      default:
+        return null;
     }
-    return null;
   }
 
-  String display(BuildContext context) {
+  String? display(BuildContext context) {
     switch (this) {
       case ThemeType.auto:
         return L10N.of(context).tr.auto;
@@ -58,7 +59,8 @@ extension ThemeTypeStr on ThemeType {
         return L10N.of(context).tr.dark;
       case ThemeType.black:
         return L10N.of(context).tr.black;
+      default:
+        return null;
     }
-    return null;
   }
 }

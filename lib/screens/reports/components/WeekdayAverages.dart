@@ -14,6 +14,7 @@
 
 import 'dart:collection';
 
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,23 +29,23 @@ import 'dart:math';
 import 'Legend.dart';
 
 class WeekdayAverages extends StatelessWidget {
-  final DateTime startDate;
-  final DateTime endDate;
-  final List<Project> selectedProjects;
-  final LinkedHashMap<int, LinkedHashMap<int, double>> _daysData;
+  final DateTime? startDate;
+  final DateTime? endDate;
+  final List<Project?> selectedProjects;
+  final LinkedHashMap<int, LinkedHashMap<int?, double>> _daysData;
 
-  static LinkedHashMap<int, LinkedHashMap<int, double>> calculateData(
+  static LinkedHashMap<int, LinkedHashMap<int?, double>> calculateData(
       BuildContext context,
-      DateTime startDate,
-      DateTime endDate,
-      List<Project> selectedProjects) {
+      DateTime? startDate,
+      DateTime? endDate,
+      List<Project?> selectedProjects) {
     final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
 
     DateTime firstDate = DateTime.now();
     DateTime lastDate = DateTime(1970);
-    LinkedHashMap<int, LinkedHashMap<int, double>> daySums = LinkedHashMap();
+    LinkedHashMap<int, LinkedHashMap<int?, double>> daySums = LinkedHashMap();
     for (int i = 0; i < 7; i++) {
-      daySums.putIfAbsent(i, () => LinkedHashMap<int, double>());
+      daySums.putIfAbsent(i, () => LinkedHashMap<int?, double>());
     }
 
     for (TimerEntry timer in timers.state.timers
@@ -55,12 +56,12 @@ class WeekdayAverages extends StatelessWidget {
         .where((timer) =>
             endDate != null ? timer.startTime.isBefore(endDate) : true)) {
       double hours =
-          timer.endTime.difference(timer.startTime).inSeconds.toDouble() /
+          timer.endTime!.difference(timer.startTime).inSeconds.toDouble() /
               3600.0;
       int weekday = timer.startTime.weekday;
       if (weekday == 7) weekday = 0;
 
-      daySums[weekday].update(timer.projectID, (double sum) => sum + hours,
+      daySums[weekday]!.update(timer.projectID, (double sum) => sum + hours,
           ifAbsent: () => hours);
 
       if (timer.startTime.isBefore(firstDate)) {
@@ -81,7 +82,7 @@ class WeekdayAverages extends StatelessWidget {
     double totalWeeks = totalDays.toDouble() / 7.0;
     if (totalDays > 0) {
       for (int i = 0; i < 7; i++) {
-        daySums[i].updateAll((int _project, double sum) => sum / totalWeeks);
+        daySums[i]!.updateAll((int? _project, double sum) => sum / totalWeeks);
       }
     }
 
@@ -89,12 +90,11 @@ class WeekdayAverages extends StatelessWidget {
   }
 
   WeekdayAverages(BuildContext context,
-      {Key key,
-      @required this.startDate,
-      @required this.endDate,
-      @required this.selectedProjects})
-      : assert(selectedProjects != null),
-        _daysData =
+      {Key? key,
+      required this.startDate,
+      required this.endDate,
+      required this.selectedProjects})
+      : _daysData =
             calculateData(context, startDate, endDate, selectedProjects),
         super(key: key);
 
@@ -131,7 +131,7 @@ class WeekdayAverages extends StatelessWidget {
                                       .of(context)
                                       .tr
                                       .nHours(rod.toY.toStringAsFixed(1)),
-                                  Theme.of(context).textTheme.bodyText2))),
+                                  Theme.of(context).textTheme.bodyText2!))),
                   borderData: FlBorderData(
                     show: false,
                   ),
@@ -189,9 +189,9 @@ class WeekdayAverages extends StatelessWidget {
                             BarChartRodData(
                               color: Theme.of(context).disabledColor,
                               width: 22,
-                              toY: _daysData[day].entries.fold(
+                              toY: _daysData[day]!.entries.fold(
                                   0.0,
-                                  (double sum, MapEntry<int, double> entry) =>
+                                  (double sum, MapEntry<int?, double> entry) =>
                                       sum + entry.value),
                               rodStackItems:
                                   _buildDayStack(context, day, projects),
@@ -214,7 +214,7 @@ class WeekdayAverages extends StatelessWidget {
             ),
             Legend(
                 projects: selectedProjects.where((project) => _daysData.entries
-                    .any((MapEntry<int, LinkedHashMap<int, double>> derp) =>
+                    .any((MapEntry<int, LinkedHashMap<int?, double>> derp) =>
                         derp.value.keys.any((id) => project?.id == id)))),
           ],
         ));
@@ -225,9 +225,9 @@ class WeekdayAverages extends StatelessWidget {
     double runningY = 0;
 
     // sort the stack from largest to smallest
-    List<List<dynamic>> derp = _daysData[day].entries.map((entry) {
-      Project project = projects.state.projects
-          .firstWhere((project) => project.id == entry.key, orElse: () => null);
+    List<List<dynamic>> derp = _daysData[day]!.entries.map((entry) {
+      Project? project = projects.state.projects
+          .firstWhereOrNull((project) => project.id == entry.key);
       return <dynamic>[project, entry.value];
     }).toList();
     derp.sort((a, b) {
@@ -237,7 +237,7 @@ class WeekdayAverages extends StatelessWidget {
     });
 
     List<BarChartRodStackItem> stack = derp.map((entry) {
-      Project project = entry[0] as Project;
+      Project? project = entry[0] as Project?;
       double value = entry[1] as double;
       return BarChartRodStackItem(runningY, runningY += value,
           project?.colour ?? Theme.of(context).disabledColor);

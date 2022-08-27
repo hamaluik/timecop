@@ -26,11 +26,11 @@ class LoadTimers extends TimersEvent {
 }
 
 class CreateTimer extends TimersEvent {
-  final String description;
-  final Project project;
+  final String? description;
+  final Project? project;
   CreateTimer({this.description, this.project});
   @override
-  List<Object> get props => [description, project];
+  List<Object?> get props => [description, project];
 }
 
 class UpdateNow extends TimersEvent {

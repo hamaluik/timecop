@@ -22,10 +22,7 @@ class L10N {
   final L10NProvider tr;
   final bool rtl;
 
-  const L10N._internal(this.locale, this.tr, this.rtl)
-      : assert(locale != null),
-        assert(tr != null),
-        assert(rtl != null);
+  const L10N._internal(this.locale, this.tr, this.rtl);
 
   static Future<L10N> load(Locale locale) async {
     Intl.defaultLocale = locale.languageCode;
@@ -34,7 +31,7 @@ class L10N {
   }
 
   static L10N of(BuildContext context) {
-    return Localizations.of<L10N>(context, L10N);
+    return Localizations.of<L10N>(context, L10N)!;
   }
 
   static const LocalizationsDelegate<L10N> delegate = _L10NDelegate();

@@ -20,16 +20,16 @@ import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 
 class ProjectEditor extends StatefulWidget {
-  final Project project;
-  ProjectEditor({Key key, @required this.project}) : super(key: key);
+  final Project? project;
+  ProjectEditor({Key? key, required this.project}) : super(key: key);
 
   @override
   _ProjectEditorState createState() => _ProjectEditorState();
 }
 
 class _ProjectEditorState extends State<ProjectEditor> {
-  TextEditingController _nameController;
-  Color _colour;
+  TextEditingController? _nameController;
+  Color? _colour;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -41,7 +41,7 @@ class _ProjectEditorState extends State<ProjectEditor> {
 
   @override
   void dispose() {
-    _nameController.dispose();
+    _nameController!.dispose();
     super.dispose();
   }
 
@@ -63,7 +63,7 @@ class _ProjectEditorState extends State<ProjectEditor> {
             ),
             TextFormField(
               controller: _nameController,
-              validator: (String value) => value.trim().isEmpty
+              validator: (String? value) => value!.trim().isEmpty
                   ? L10N.of(context).tr.pleaseEnterAName
                   : null,
               decoration: InputDecoration(
@@ -87,18 +87,17 @@ class _ProjectEditorState extends State<ProjectEditor> {
                       ? L10N.of(context).tr.create
                       : L10N.of(context).tr.save),
                   onPressed: () async {
-                    bool valid = _formKey.currentState.validate();
+                    bool valid = _formKey.currentState!.validate();
                     if (!valid) return;
 
                     final ProjectsBloc projects =
                         BlocProvider.of<ProjectsBloc>(context);
-                    assert(projects != null);
                     if (widget.project == null) {
-                      projects.add(
-                          CreateProject(_nameController.text.trim(), _colour));
+                      projects.add(CreateProject(
+                          _nameController!.text.trim(), _colour!));
                     } else {
-                      Project p = Project.clone(widget.project,
-                          name: _nameController.text.trim(), colour: _colour);
+                      Project p = Project.clone(widget.project!,
+                          name: _nameController!.text.trim(), colour: _colour);
                       projects.add(EditProject(p));
                     }
                     Navigator.of(context).pop();

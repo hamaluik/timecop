@@ -55,7 +55,7 @@ class ProjectsBloc extends Bloc<ProjectsEvent, ProjectsState> {
     }
   }
 
-  Project getProjectByID(int id) {
+  Project? getProjectByID(int? id) {
     if (id == null) return null;
     for (Project p in state.projects) {
       if (p.id == id) return p;

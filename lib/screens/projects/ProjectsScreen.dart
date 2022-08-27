@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -24,14 +26,12 @@ import 'package:timecop/screens/projects/ProjectEditor.dart';
 import 'package:timecop/models/project.dart';
 
 class ProjectsScreen extends StatelessWidget {
-  const ProjectsScreen({Key key}) : super(key: key);
+  const ProjectsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
-    assert(projectsBloc != null);
     final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
-    assert(settingsBloc != null);
 
     return Scaffold(
       appBar: AppBar(
@@ -58,7 +58,7 @@ class ProjectsScreen extends StatelessWidget {
                                           .onSecondary,
                                       icon: FontAwesomeIcons.trash,
                                       onPressed: (_) async {
-                                        bool delete = await showDialog(
+                                        bool delete = await (showDialog<bool>(
                                             context: context,
                                             builder: (BuildContext context) =>
                                                 AlertDialog(
@@ -74,7 +74,7 @@ class ProjectsScreen extends StatelessWidget {
                                                               color: Theme.of(
                                                                       context)
                                                                   .textTheme
-                                                                  .bodyText2
+                                                                  .bodyText2!
                                                                   .color),
                                                           children: <TextSpan>[
                                                             TextSpan(
@@ -116,7 +116,7 @@ class ProjectsScreen extends StatelessWidget {
                                                               .pop(true),
                                                     ),
                                                   ],
-                                                ));
+                                                )) as FutureOr<bool>);
                                         if (delete) {
                                           projectsBloc
                                               .add(DeleteProject(project));

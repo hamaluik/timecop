@@ -14,6 +14,7 @@
 
 import 'dart:collection';
 
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
@@ -24,14 +25,14 @@ import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
 
 class TimeTable extends StatelessWidget {
-  final DateTime startDate;
-  final DateTime endDate;
-  final List<Project> selectedProjects;
+  final DateTime? startDate;
+  final DateTime? endDate;
+  final List<Project?> selectedProjects;
   const TimeTable(
-      {Key key,
-      @required this.startDate,
-      @required this.endDate,
-      @required this.selectedProjects})
+      {Key? key,
+      required this.startDate,
+      required this.endDate,
+      required this.selectedProjects})
       : super(key: key);
 
   @override
@@ -39,22 +40,22 @@ class TimeTable extends StatelessWidget {
     final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
     final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
 
-    LinkedHashMap<int, double> projectHours = LinkedHashMap();
+    LinkedHashMap<int?, double> projectHours = LinkedHashMap();
     for (TimerEntry timer in timers.state.timers
         .where((timer) => timer.endTime != null)
         .where((timer) => selectedProjects.any((p) => p?.id == timer.projectID))
         .where((timer) =>
-            startDate != null ? timer.startTime.isAfter(startDate) : true)
+            startDate != null ? timer.startTime.isAfter(startDate!) : true)
         .where((timer) =>
-            endDate != null ? timer.startTime.isBefore(endDate) : true)) {
+            endDate != null ? timer.startTime.isBefore(endDate!) : true)) {
       projectHours.update(
           timer.projectID,
           (sum) =>
               sum +
-              timer.endTime.difference(timer.startTime).inSeconds.toDouble() /
+              timer.endTime!.difference(timer.startTime).inSeconds.toDouble() /
                   3600,
           ifAbsent: () =>
-              timer.endTime.difference(timer.startTime).inSeconds.toDouble() /
+              timer.endTime!.difference(timer.startTime).inSeconds.toDouble() /
               3600);
     }
     final double totalHours =
@@ -84,11 +85,10 @@ class TimeTable extends StatelessWidget {
           ),
           Divider(
               thickness: 2.0,
-              color: Theme.of(context).textTheme.bodyText2.color),
-        ].followedBy(projectHours.entries.map((MapEntry<int, double> entry) {
-          Project project = projects.state.projects.firstWhere(
-              (project) => project?.id == entry.key,
-              orElse: () => null);
+              color: Theme.of(context).textTheme.bodyText2!.color),
+        ].followedBy(projectHours.entries.map((MapEntry<int?, double> entry) {
+          Project? project = projects.state.projects
+              .firstWhereOrNull((project) => project.id == entry.key);
           return Padding(
               padding: EdgeInsets.only(top: 4.0, bottom: 4.0),
               child: Row(
@@ -122,7 +122,7 @@ class TimeTable extends StatelessWidget {
               ? Container()
               : Divider(
                   thickness: 1.0,
-                  color: Theme.of(context).textTheme.bodyText2.color),
+                  color: Theme.of(context).textTheme.bodyText2!.color),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[

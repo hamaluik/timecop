@@ -17,9 +17,9 @@ import 'package:timecop/data_providers/settings/settings_provider.dart';
 import 'package:timecop/models/theme_type.dart';
 
 class MockSettingsProvider extends SettingsProvider {
-  Map<String, dynamic> values;
-  ThemeType theme;
-  Locale locale;
+  late Map<String, dynamic> values;
+  ThemeType? theme;
+  Locale? locale;
 
   MockSettingsProvider() {
     values = <String, dynamic>{};
@@ -27,27 +27,27 @@ class MockSettingsProvider extends SettingsProvider {
   }
 
   @override
-  bool getBool(String key) =>
-      values.containsKey(key) ? values[key] as bool : true;
+  bool? getBool(String key) =>
+      values.containsKey(key) ? values[key] as bool? : true;
 
   @override
-  Future<void> setBool(String key, bool value) async => values[key] = value;
+  Future<void> setBool(String key, bool? value) async => values[key] = value;
 
   @override
-  int getInt(String key) => values.containsKey(key) ? values[key] as int : -1;
+  int? getInt(String key) => values.containsKey(key) ? values[key] as int? : -1;
 
   @override
   Future<void> setInt(String key, int value) async => values[key] = value;
 
   @override
-  ThemeType getTheme() => theme;
+  ThemeType? getTheme() => theme;
 
   @override
-  Future<void> setTheme(ThemeType t) async => theme = t;
+  Future<void> setTheme(ThemeType? t) async => theme = t;
 
   @override
-  Locale getLocale() => locale;
+  Locale? getLocale() => locale;
 
   @override
-  void setLocale(Locale l) => locale = l;
+  void setLocale(Locale? l) => locale = l;
 }

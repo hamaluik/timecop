@@ -18,7 +18,7 @@ import 'package:timecop/models/project.dart';
 class ProjectsState extends Equatable {
   final List<Project> projects;
 
-  ProjectsState(this.projects) : assert(projects != null);
+  ProjectsState(this.projects);
 
   static ProjectsState initial() {
     return ProjectsState([]);

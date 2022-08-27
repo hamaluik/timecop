@@ -11,8 +11,8 @@ class LoadLocaleEvent extends LocaleEvent {
 }
 
 class ChangeLocaleEvent extends LocaleEvent {
-  final Locale locale;
+  final Locale? locale;
   const ChangeLocaleEvent(this.locale);
   @override
-  List<Object> get props => [locale];
+  List<Object?> get props => [locale];
 }

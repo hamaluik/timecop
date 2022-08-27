@@ -14,6 +14,7 @@
 
 import 'dart:collection';
 
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,16 +27,15 @@ import 'package:timecop/models/timer_entry.dart';
 import 'Legend.dart';
 
 class ProjectBreakdown extends StatefulWidget {
-  final DateTime startDate;
-  final DateTime endDate;
-  final List<Project> selectedProjects;
+  final DateTime? startDate;
+  final DateTime? endDate;
+  final List<Project?> selectedProjects;
   ProjectBreakdown(
-      {Key key,
-      @required this.startDate,
-      @required this.endDate,
-      @required this.selectedProjects})
-      : assert(selectedProjects != null),
-        super(key: key);
+      {Key? key,
+      required this.startDate,
+      required this.endDate,
+      required this.selectedProjects})
+      : super(key: key);
 
   @override
   _ProjectBreakdownState createState() => _ProjectBreakdownState();
@@ -44,11 +44,11 @@ class ProjectBreakdown extends StatefulWidget {
 class _ProjectBreakdownState extends State<ProjectBreakdown> {
   int _touchedIndex = -1;
 
-  static LinkedHashMap<int, double> calculateData(BuildContext context,
-      DateTime startDate, DateTime endDate, List<Project> selectedProjects) {
+  static LinkedHashMap<int?, double> calculateData(BuildContext context,
+      DateTime? startDate, DateTime? endDate, List<Project?> selectedProjects) {
     final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
 
-    LinkedHashMap<int, double> projectHours = LinkedHashMap();
+    LinkedHashMap<int?, double> projectHours = LinkedHashMap();
     for (TimerEntry timer in timers.state.timers
         .where((timer) => timer.endTime != null)
         .where((timer) => selectedProjects.any((p) => p?.id == timer.projectID))
@@ -60,10 +60,10 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
           timer.projectID,
           (sum) =>
               sum +
-              timer.endTime.difference(timer.startTime).inSeconds.toDouble() /
+              timer.endTime!.difference(timer.startTime).inSeconds.toDouble() /
                   3600,
           ifAbsent: () =>
-              timer.endTime.difference(timer.startTime).inSeconds.toDouble() /
+              timer.endTime!.difference(timer.startTime).inSeconds.toDouble() /
               3600);
     }
 
@@ -80,7 +80,7 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
   Widget build(BuildContext context) {
     final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
 
-    LinkedHashMap<int, double> _projectHours = calculateData(
+    LinkedHashMap<int?, double> _projectHours = calculateData(
         context, widget.startDate, widget.endDate, widget.selectedProjects);
     if (_projectHours.isEmpty) {
       return Container();
@@ -108,17 +108,17 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
                             flTouchEvent is FlPanEndEvent) {
                           _touchedIndex = -1;
                         } else {
-                          _touchedIndex = pieTouchResponse
-                              .touchedSection.touchedSectionIndex;
+                          _touchedIndex = pieTouchResponse!
+                              .touchedSection!.touchedSectionIndex;
                         }
                       });
                     }),
                     sections: List.generate(_projectHours.length, (int index) {
-                      MapEntry<int, double> entry =
+                      MapEntry<int?, double> entry =
                           _projectHours.entries.elementAt(index);
-                      Project project = projects.state.projects.firstWhere(
-                          (project) => project?.id == entry.key,
-                          orElse: () => null);
+                      Project? project = projects.state.projects
+                          .firstWhereOrNull(
+                              (project) => project.id == entry.key);
                       return PieChartSectionData(
                         value: entry.value,
                         color:

@@ -22,21 +22,17 @@ class Project extends Equatable {
   final bool archived;
 
   Project(
-      {@required this.id,
-      @required this.name,
-      @required this.colour,
-      @required this.archived})
-      : assert(id != null),
-        assert(name != null),
-        assert(colour != null),
-        assert(archived != null);
+      {required this.id,
+      required this.name,
+      required this.colour,
+      required this.archived});
 
   @override
   List<Object> get props => [id, name, colour, archived];
   @override
   bool get stringify => true;
 
-  Project.clone(Project project, {String name, Color colour, bool archived})
+  Project.clone(Project project, {String? name, Color? colour, bool? archived})
       : this(
           id: project.id,
           name: name ?? project.name,

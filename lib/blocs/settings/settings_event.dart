@@ -29,31 +29,28 @@ class ImportDatabaseEvent extends SettingsEvent {
   final String path;
   final TimersBloc timers;
   final ProjectsBloc projects;
-  const ImportDatabaseEvent(this.path, this.timers, this.projects)
-      : assert(path != null),
-        assert(timers != null),
-        assert(projects != null);
+  const ImportDatabaseEvent(this.path, this.timers, this.projects);
   @override
   List<Object> get props => [path, timers, projects];
 }
 
 class SetBoolValueEvent extends SettingsEvent {
-  final bool exportGroupTimers;
-  final bool exportIncludeDate;
-  final bool exportIncludeProject;
-  final bool exportIncludeDescription;
-  final bool exportIncludeProjectDescription;
-  final bool exportIncludeStartTime;
-  final bool exportIncludeEndTime;
-  final bool exportIncludeDurationHours;
-  final bool exportIncludeNotes;
-  final bool groupTimers;
-  final bool collapseDays;
-  final bool autocompleteDescription;
-  final bool defaultFilterStartDateToMonday;
-  final bool oneTimerAtATime;
-  final bool showBadgeCounts;
-  final bool showRunningTimersAsNotifications;
+  final bool? exportGroupTimers;
+  final bool? exportIncludeDate;
+  final bool? exportIncludeProject;
+  final bool? exportIncludeDescription;
+  final bool? exportIncludeProjectDescription;
+  final bool? exportIncludeStartTime;
+  final bool? exportIncludeEndTime;
+  final bool? exportIncludeDurationHours;
+  final bool? exportIncludeNotes;
+  final bool? groupTimers;
+  final bool? collapseDays;
+  final bool? autocompleteDescription;
+  final bool? defaultFilterStartDateToMonday;
+  final bool? oneTimerAtATime;
+  final bool? showBadgeCounts;
+  final bool? showRunningTimersAsNotifications;
 
   const SetBoolValueEvent(
       {this.exportGroupTimers,
@@ -74,7 +71,7 @@ class SetBoolValueEvent extends SettingsEvent {
       this.showRunningTimersAsNotifications});
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         exportGroupTimers,
         exportIncludeDate,
         exportIncludeProject,
@@ -95,8 +92,8 @@ class SetBoolValueEvent extends SettingsEvent {
 }
 
 class SetDefaultFilterDays extends SettingsEvent {
-  final int days;
+  final int? days;
   const SetDefaultFilterDays(this.days);
   @override
-  List<Object> get props => [days];
+  List<Object?> get props => [days];
 }

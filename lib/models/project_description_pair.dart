@@ -15,11 +15,11 @@
 import 'package:equatable/equatable.dart';
 
 class ProjectDescriptionPair extends Equatable {
-  final int project;
-  final String description;
+  final int? project;
+  final String? description;
 
   ProjectDescriptionPair(this.project, this.description);
 
   @override
-  List<Object> get props => [project, description];
+  List<Object?> get props => [project, description];
 }

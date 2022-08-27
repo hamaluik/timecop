@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 
 class SettingsState extends Equatable {
   final bool exportGroupTimers;
@@ -36,42 +35,25 @@ class SettingsState extends Equatable {
   final bool showRunningTimersAsNotifications;
 
   SettingsState({
-    @required this.exportGroupTimers,
-    @required this.exportIncludeDate,
-    @required this.exportIncludeProject,
-    @required this.exportIncludeDescription,
-    @required this.exportIncludeProjectDescription,
-    @required this.exportIncludeStartTime,
-    @required this.exportIncludeEndTime,
-    @required this.exportIncludeDurationHours,
-    @required this.exportIncludeNotes,
-    @required this.groupTimers,
-    @required this.collapseDays,
-    @required this.autocompleteDescription,
-    @required this.defaultFilterStartDateToMonday,
-    @required this.oneTimerAtATime,
-    @required this.showBadgeCounts,
-    @required this.defaultFilterDays,
-    @required this.hasAskedNotificationPermissions,
-    @required this.showRunningTimersAsNotifications,
-  })  : assert(exportGroupTimers != null),
-        assert(exportIncludeDate != null),
-        assert(exportIncludeProject != null),
-        assert(exportIncludeDescription != null),
-        assert(exportIncludeProjectDescription != null),
-        assert(exportIncludeStartTime != null),
-        assert(exportIncludeEndTime != null),
-        assert(exportIncludeDurationHours != null),
-        assert(exportIncludeNotes != null),
-        assert(groupTimers != null),
-        assert(collapseDays != null),
-        assert(autocompleteDescription != null),
-        assert(defaultFilterStartDateToMonday != null),
-        assert(oneTimerAtATime != null),
-        assert(showBadgeCounts != null),
-        assert(defaultFilterDays != null),
-        assert(hasAskedNotificationPermissions != null),
-        assert(showRunningTimersAsNotifications != null);
+    required this.exportGroupTimers,
+    required this.exportIncludeDate,
+    required this.exportIncludeProject,
+    required this.exportIncludeDescription,
+    required this.exportIncludeProjectDescription,
+    required this.exportIncludeStartTime,
+    required this.exportIncludeEndTime,
+    required this.exportIncludeDurationHours,
+    required this.exportIncludeNotes,
+    required this.groupTimers,
+    required this.collapseDays,
+    required this.autocompleteDescription,
+    required this.defaultFilterStartDateToMonday,
+    required this.oneTimerAtATime,
+    required this.showBadgeCounts,
+    required this.defaultFilterDays,
+    required this.hasAskedNotificationPermissions,
+    required this.showRunningTimersAsNotifications,
+  });
 
   static SettingsState initial() {
     return SettingsState(
@@ -98,24 +80,24 @@ class SettingsState extends Equatable {
 
   SettingsState.clone(
     SettingsState settings, {
-    bool exportGroupTimers,
-    bool exportIncludeDate,
-    bool exportIncludeProject,
-    bool exportIncludeDescription,
-    bool exportIncludeProjectDescription,
-    bool exportIncludeStartTime,
-    bool exportIncludeEndTime,
-    bool exportIncludeDurationHours,
-    bool exportIncludeNotes,
-    bool groupTimers,
-    bool collapseDays,
-    bool autocompleteDescription,
-    bool defaultFilterStartDateToMonday,
-    bool oneTimerAtATime,
-    bool showBadgeCounts,
-    int defaultFilterDays,
-    bool hasAskedNotificationPermissions,
-    bool showRunningTimersAsNotifications,
+    bool? exportGroupTimers,
+    bool? exportIncludeDate,
+    bool? exportIncludeProject,
+    bool? exportIncludeDescription,
+    bool? exportIncludeProjectDescription,
+    bool? exportIncludeStartTime,
+    bool? exportIncludeEndTime,
+    bool? exportIncludeDurationHours,
+    bool? exportIncludeNotes,
+    bool? groupTimers,
+    bool? collapseDays,
+    bool? autocompleteDescription,
+    bool? defaultFilterStartDateToMonday,
+    bool? oneTimerAtATime,
+    bool? showBadgeCounts,
+    int? defaultFilterDays,
+    bool? hasAskedNotificationPermissions,
+    bool? showRunningTimersAsNotifications,
   }) : this(
           exportGroupTimers: exportGroupTimers ?? settings.exportGroupTimers,
           exportIncludeDate: exportIncludeDate ?? settings.exportIncludeDate,

@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -26,18 +28,17 @@ import 'package:timecop/screens/timer/TimerEditor.dart';
 
 class StoppedTimerRow extends StatelessWidget {
   final TimerEntry timer;
-  const StoppedTimerRow({Key key, @required this.timer})
-      : assert(timer != null),
-        super(key: key);
+  const StoppedTimerRow({Key? key, required this.timer}) : super(key: key);
 
-  static String formatDescription(BuildContext context, String description) {
+  static String formatDescription(BuildContext context, String? description) {
     if (description == null || description.trim().isEmpty) {
       return L10N.of(context).tr.noDescription;
     }
     return description;
   }
 
-  static TextStyle styleDescription(BuildContext context, String description) {
+  static TextStyle? styleDescription(
+      BuildContext context, String? description) {
     if (description == null || description.trim().isEmpty) {
       return TextStyle(color: Theme.of(context).disabledColor);
     }
@@ -58,7 +59,7 @@ class StoppedTimerRow extends StatelessWidget {
             foregroundColor: Theme.of(context).colorScheme.onSecondary,
             icon: FontAwesomeIcons.trash,
             onPressed: (_) async {
-              bool delete = await showDialog(
+              bool delete = await (showDialog<bool>(
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
                         title: Text(L10N.of(context).tr.confirmDelete),
@@ -73,11 +74,10 @@ class StoppedTimerRow extends StatelessWidget {
                             onPressed: () => Navigator.of(context).pop(true),
                           ),
                         ],
-                      ));
+                      )) as FutureOr<bool>);
               if (delete) {
                 final TimersBloc timersBloc =
                     BlocProvider.of<TimersBloc>(context);
-                assert(timersBloc != null);
                 timersBloc.add(DeleteTimer(timer));
               }
             },
@@ -95,11 +95,9 @@ class StoppedTimerRow extends StatelessWidget {
                 onPressed: (_) {
                   final TimersBloc timersBloc =
                       BlocProvider.of<TimersBloc>(context);
-                  assert(timersBloc != null);
                   final ProjectsBloc projectsBloc =
                       BlocProvider.of<ProjectsBloc>(context);
-                  assert(projectsBloc != null);
-                  Project project =
+                  Project? project =
                       projectsBloc.getProjectByID(timer.projectID);
                   timersBloc.add(CreateTimer(
                       description: timer.description, project: project));

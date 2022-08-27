@@ -22,29 +22,28 @@ import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class DescriptionField extends StatefulWidget {
-  DescriptionField({Key key}) : super(key: key);
+  DescriptionField({Key? key}) : super(key: key);
 
   @override
   _DescriptionFieldState createState() => _DescriptionFieldState();
 }
 
 class _DescriptionFieldState extends State<DescriptionField> {
-  TextEditingController _controller;
-  FocusNode _focus;
+  TextEditingController? _controller;
+  FocusNode? _focus;
 
   @override
   void initState() {
     super.initState();
     final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
-    assert(bloc != null);
     _controller = TextEditingController(text: bloc.state.newDescription);
     _focus = FocusNode();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
-    _focus.dispose();
+    _controller!.dispose();
+    _focus!.dispose();
     super.dispose();
   }
 
@@ -57,13 +56,13 @@ class _DescriptionFieldState extends State<DescriptionField> {
     return BlocBuilder<DashboardBloc, DashboardState>(
         builder: (BuildContext context, DashboardState state) {
       if (state.timerWasStarted) {
-        _controller.clear();
-        _focus.unfocus();
+        _controller!.clear();
+        _focus!.unfocus();
         bloc.add(ResetEvent());
       }
 
       if (settings.state.autocompleteDescription) {
-        return TypeAheadField<String>(
+        return TypeAheadField<String?>(
           direction: AxisDirection.up,
           textFieldConfiguration: TextFieldConfiguration(
               focusNode: _focus,
@@ -74,29 +73,29 @@ class _DescriptionFieldState extends State<DescriptionField> {
               onChanged: (dynamic description) =>
                   bloc.add(DescriptionChangedEvent(description as String)),
               onSubmitted: (dynamic description) {
-                _focus.unfocus();
+                _focus!.unfocus();
                 bloc.add(DescriptionChangedEvent(description as String));
               }),
-          itemBuilder: (BuildContext context, String desc) =>
-              ListTile(title: Text(desc)),
+          itemBuilder: (BuildContext context, String? desc) =>
+              ListTile(title: Text(desc!)),
           noItemsFoundBuilder: (context) => ListTile(
               title: Text(L10N.of(context).tr.noItemsFound), enabled: false),
-          onSuggestionSelected: (String description) {
-            _controller.text = description;
+          onSuggestionSelected: (String? description) {
+            _controller!.text = description!;
             bloc.add(DescriptionChangedEvent(description));
           },
           suggestionsCallback: (pattern) async {
             if (pattern.length < 2) return [];
 
             ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
-            List<String> descriptions = timers.state.timers
+            List<String?> descriptions = timers.state.timers
                 .where((timer) => timer.description != null)
                 .where((timer) =>
                     !(projectsBloc.getProjectByID(timer.projectID)?.archived ==
                         true))
                 .where((timer) =>
                     timer.description
-                        .toLowerCase()
+                        ?.toLowerCase()
                         .contains(pattern.toLowerCase()) ??
                     false)
                 .map((timer) => timer.description)
@@ -117,7 +116,7 @@ class _DescriptionFieldState extends State<DescriptionField> {
           onChanged: (String description) =>
               bloc.add(DescriptionChangedEvent(description)),
           onSubmitted: (String description) {
-            _focus.unfocus();
+            _focus!.unfocus();
             bloc.add(DescriptionChangedEvent(description));
           },
         );

@@ -19,9 +19,7 @@ class TimersState extends Equatable {
   final List<TimerEntry> timers;
   final DateTime now;
 
-  TimersState(this.timers, this.now)
-      : assert(timers != null),
-        assert(now != null);
+  TimersState(this.timers, this.now);
 
   static TimersState initial() {
     return TimersState([], DateTime.now());

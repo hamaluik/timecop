@@ -40,7 +40,7 @@ class DayGrouping {
         seconds: entries.fold(
             0,
             (int sum, TimerEntry t) =>
-                sum + t.endTime.difference(t.startTime).inSeconds));
+                sum + t.endTime!.difference(t.startTime).inSeconds));
 
     LinkedHashMap<ProjectDescriptionPair, List<TimerEntry>> pairedEntries =
         LinkedHashMap();
@@ -48,7 +48,7 @@ class DayGrouping {
       ProjectDescriptionPair pair =
           ProjectDescriptionPair(entry.projectID, entry.description);
       if (pairedEntries.containsKey(pair)) {
-        pairedEntries[pair].add(entry);
+        pairedEntries[pair]!.add(entry);
       } else {
         pairedEntries[pair] = <TimerEntry>[entry];
       }
@@ -107,7 +107,7 @@ class DayGrouping {
 }
 
 class StoppedTimers extends StatelessWidget {
-  const StoppedTimers({Key key}) : super(key: key);
+  const StoppedTimers({Key? key}) : super(key: key);
 
   static List<DayGrouping> groupDays(List<DayGrouping> days, TimerEntry timer) {
     bool newDay = days.isEmpty ||
@@ -146,11 +146,11 @@ class StoppedTimers extends StatelessWidget {
             // filter based on filters
             if (dashboardState.filterStart != null) {
               timers = timers.where((timer) =>
-                  timer.startTime.isAfter(dashboardState.filterStart));
+                  timer.startTime.isAfter(dashboardState.filterStart!));
             }
             if (dashboardState.filterEnd != null) {
               timers = timers.where((timer) =>
-                  timer.startTime.isBefore(dashboardState.filterEnd));
+                  timer.startTime.isBefore(dashboardState.filterEnd!));
             }
 
             // filter based on selected projects
@@ -166,17 +166,19 @@ class StoppedTimers extends StatelessWidget {
             if (dashboardState.searchString != null) {
               timers = timers.where((timer) {
                 // allow searching using a regex if surrounded by `/` and `/`
-                if (dashboardState.searchString.length > 2 &&
-                    dashboardState.searchString.startsWith("/") &&
-                    dashboardState.searchString.endsWith("/")) {
+                if (dashboardState.searchString!.length > 2 &&
+                    dashboardState.searchString!.startsWith("/") &&
+                    dashboardState.searchString!.endsWith("/")) {
                   return timer.description?.contains(RegExp(
-                          dashboardState.searchString.substring(
-                              1, dashboardState.searchString.length - 1))) ??
+                          dashboardState.searchString!.substring(
+                              1, dashboardState.searchString!.length - 1))) ??
                       true;
                 } else {
-                  return timer.description?.toLowerCase()?.contains(
-                          dashboardState.searchString.toLowerCase()) ??
-                      true;
+                  return dashboardState.searchString == null
+                      ? true
+                      : timer.description?.toLowerCase().contains(
+                              dashboardState.searchString!.toLowerCase()) ??
+                          true;
                 }
               });
             }

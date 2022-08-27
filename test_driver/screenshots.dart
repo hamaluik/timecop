@@ -11,7 +11,7 @@ import 'package:flutter_driver/driver_extension.dart';
 import 'dart:ui' as ui;
 
 Future<void> main() async {
-  enableFlutterDriverExtension(handler: (String query) async {
+  enableFlutterDriverExtension(handler: (String? query) async {
     if (query == "direction") {
       if (ui.window.locale.languageCode == "ar") {
         return "rtl";
@@ -21,7 +21,7 @@ Future<void> main() async {
     } else {
       return null;
     }
-  });
+  } as Future<String> Function(String?)?);
   WidgetsApp.debugAllowBannerOverride = false; // remove debug banner
 
   final SettingsProvider settings = MockSettingsProvider();

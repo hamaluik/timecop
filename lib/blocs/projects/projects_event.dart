@@ -28,23 +28,21 @@ class LoadProjects extends ProjectsEvent {
 class CreateProject extends ProjectsEvent {
   final String name;
   final Color colour;
-  const CreateProject(this.name, this.colour)
-      : assert(name != null),
-        assert(colour != null);
+  const CreateProject(this.name, this.colour);
   @override
   List<Object> get props => [name, colour];
 }
 
 class EditProject extends ProjectsEvent {
   final Project project;
-  const EditProject(this.project) : assert(project != null);
+  const EditProject(this.project);
   @override
   List<Object> get props => [project];
 }
 
 class DeleteProject extends ProjectsEvent {
   final Project project;
-  const DeleteProject(this.project) : assert(project != null);
+  const DeleteProject(this.project);
   @override
   List<Object> get props => [project];
 }

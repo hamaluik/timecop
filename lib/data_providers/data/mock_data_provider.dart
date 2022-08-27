@@ -142,10 +142,9 @@ class MockDataProvider extends DataProvider {
     }
   };
 
-  MockDataProvider(Locale locale) {
-    localeKey = locale.languageCode;
+  MockDataProvider(Locale locale) : localeKey = locale.languageCode {
     if (locale.languageCode == "zh") {
-      localeKey += "-" + locale.countryCode;
+      localeKey += "-" + locale.countryCode!;
     }
   }
 
@@ -153,11 +152,11 @@ class MockDataProvider extends DataProvider {
   Future<List<Project>> listProjects() async {
     return <Project>[
       Project(
-          id: 1, name: "Time Cop", colour: Colors.cyan[600], archived: false),
+          id: 1, name: "Time Cop", colour: Colors.cyan[600]!, archived: false),
       Project(
         id: 2,
-        name: l10n[localeKey]["administration"],
-        colour: Colors.pink[600],
+        name: l10n[localeKey]!["administration"]!,
+        colour: Colors.pink[600]!,
         archived: false,
       ),
     ];
@@ -172,7 +171,7 @@ class MockDataProvider extends DataProvider {
     List<TimerEntry> entries = [
       TimerEntry(
         id: tid++,
-        description: l10n[localeKey]["ui-layout"],
+        description: l10n[localeKey]!["ui-layout"],
         projectID: 1,
         startTime: DateTime.now()
             .subtract(Duration(hours: 2, minutes: 10, seconds: 1)),
@@ -180,7 +179,7 @@ class MockDataProvider extends DataProvider {
       ),
       TimerEntry(
         id: tid++,
-        description: l10n[localeKey]["coffee"],
+        description: l10n[localeKey]!["coffee"],
         projectID: 2,
         startTime: DateTime.now().subtract(Duration(minutes: 3, seconds: 14)),
         endTime: null,
@@ -202,7 +201,7 @@ class MockDataProvider extends DataProvider {
 
         entries.add(TimerEntry(
           id: tid++,
-          description: l10n[localeKey][descriptionKey],
+          description: l10n[localeKey]![descriptionKey],
           projectID: 1,
           startTime: DateTime(
             2020,
@@ -224,7 +223,7 @@ class MockDataProvider extends DataProvider {
 
         entries.add(TimerEntry(
           id: tid++,
-          description: l10n[localeKey]['administration'],
+          description: l10n[localeKey]!['administration'],
           projectID: 2,
           startTime: DateTime(
             2020,
@@ -250,9 +249,9 @@ class MockDataProvider extends DataProvider {
 
   @override
   Future<Project> createProject(
-      {@required String name, Color colour, bool archived}) async {
+      {required String name, Color? colour, bool? archived}) async {
     return Project(
-        id: -1, name: name, colour: colour, archived: archived ?? false);
+        id: -1, name: name, colour: colour!, archived: archived ?? false);
   }
 
   @override
@@ -261,10 +260,10 @@ class MockDataProvider extends DataProvider {
   Future<void> deleteProject(Project project) async {}
   @override
   Future<TimerEntry> createTimer(
-      {String description,
-      int projectID,
-      DateTime startTime,
-      DateTime endTime}) async {
+      {String? description,
+      int? projectID,
+      DateTime? startTime,
+      DateTime? endTime}) async {
     DateTime st = startTime ?? DateTime.now();
     return TimerEntry(
       id: -1,

@@ -14,7 +14,6 @@
 
 extension CloneTime on DateTime {
   DateTime clone() {
-    if (this == null) return null;
     return DateTime(
         year, month, day, hour, minute, second, millisecond, microsecond);
   }

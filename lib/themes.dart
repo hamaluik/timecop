@@ -16,29 +16,29 @@ import 'package:flutter/material.dart';
 
 class ThemeUtil {
   static final lightColors = ColorScheme.light(
-      primary: Colors.blueGrey[900],
+      primary: Colors.blueGrey.shade900,
       onPrimary: Colors.white,
-      secondary: Colors.cyan[600],
+      secondary: Colors.cyan.shade600,
       onSecondary: Colors.white,
       background: Colors.white,
       onBackground: Colors.black87,
-      surface: Colors.grey[50],
+      surface: Colors.grey.shade50,
       onSurface: Colors.black87);
 
   static final darkColors = ColorScheme.dark(
-      primary: Colors.grey[900],
+      primary: Colors.grey.shade900,
       onPrimary: Colors.white,
-      secondary: Colors.cyan[600],
+      secondary: Colors.cyan.shade600,
       onSecondary: Colors.white,
-      background: Colors.grey[800],
+      background: Colors.grey.shade800,
       onBackground: Colors.white,
-      surface: Colors.grey[900],
+      surface: Colors.grey.shade900,
       onSurface: Colors.white);
 
   static final blackColors = ColorScheme.dark(
       primary: Colors.black,
       onPrimary: Colors.white,
-      secondary: Colors.cyan[600],
+      secondary: Colors.cyan.shade600,
       onSecondary: Colors.white,
       background: Colors.black,
       onBackground: Colors.white,
@@ -48,17 +48,17 @@ class ThemeUtil {
   static final lightTheme = ThemeData(
       brightness: Brightness.light,
       primarySwatch: Colors.blueGrey,
-      primaryColor: Colors.blueGrey[900],
+      primaryColor: Colors.blueGrey.shade900,
       primaryColorBrightness: Brightness.dark,
-      accentColor: Colors.cyan[600],
+      accentColor: Colors.cyan.shade600,
       accentColorBrightness: Brightness.dark,
       colorScheme: lightColors,
       fontFamily: 'PublicSans',
-      //scaffoldBackgroundColor: Colors.grey[100],
+      //scaffoldBackgroundColor: Colors.grey.shade100,
       scaffoldBackgroundColor: Colors.white,
-      appBarTheme: AppBarTheme(backgroundColor: Colors.blueGrey[400]),
+      appBarTheme: AppBarTheme(backgroundColor: Colors.blueGrey.shade400),
       bottomSheetTheme: BottomSheetThemeData(
-        backgroundColor: Colors.blueGrey[50],
+        backgroundColor: Colors.blueGrey.shade50,
       ),
       textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(primary: lightColors.onSurface)),
@@ -71,16 +71,16 @@ class ThemeUtil {
   static final darkTheme = ThemeData(
       brightness: Brightness.dark,
       primarySwatch: Colors.grey,
-      primaryColor: Colors.grey[900],
+      primaryColor: Colors.grey.shade900,
       primaryColorBrightness: Brightness.dark,
-      accentColor: Colors.cyan[600],
+      accentColor: Colors.cyan.shade600,
       accentColorBrightness: Brightness.dark,
       colorScheme: darkColors,
       fontFamily: 'PublicSans',
-      scaffoldBackgroundColor: Colors.grey[800],
-      appBarTheme: AppBarTheme(backgroundColor: Colors.grey[800]),
+      scaffoldBackgroundColor: Colors.grey.shade800,
+      appBarTheme: AppBarTheme(backgroundColor: Colors.grey.shade800),
       bottomSheetTheme: BottomSheetThemeData(
-        backgroundColor: Colors.grey[850],
+        backgroundColor: Color(0xFF303030),
       ),
       textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(primary: darkColors.onSurface)),
@@ -95,12 +95,12 @@ class ThemeUtil {
       primarySwatch: Colors.grey,
       primaryColor: Colors.black,
       primaryColorBrightness: Brightness.dark,
-      accentColor: Colors.cyan[600],
+      accentColor: Colors.cyan.shade600,
       accentColorBrightness: Brightness.dark,
       colorScheme: blackColors,
       fontFamily: 'PublicSans',
       scaffoldBackgroundColor: Colors.black,
-      appBarTheme: AppBarTheme(backgroundColor: Colors.grey[800]),
+      appBarTheme: AppBarTheme(backgroundColor: Colors.grey.shade800),
       bottomSheetTheme: BottomSheetThemeData(
         backgroundColor: Colors.black,
       ),

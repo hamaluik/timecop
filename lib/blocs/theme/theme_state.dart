@@ -1,12 +1,12 @@
 part of 'theme_bloc.dart';
 
 class ThemeState extends Equatable {
-  final ThemeType theme;
+  final ThemeType? theme;
   ThemeState(this.theme);
   @override
-  List<Object> get props => [theme];
+  List<Object?> get props => [theme];
 
-  ThemeData get themeData {
+  ThemeData? get themeData {
     switch (theme) {
       case ThemeType.auto:
         return null;
@@ -16,7 +16,8 @@ class ThemeState extends Equatable {
         return ThemeUtil.darkTheme;
       case ThemeType.black:
         return ThemeUtil.blackTheme;
+      default:
+        return null;
     }
-    return null;
   }
 }

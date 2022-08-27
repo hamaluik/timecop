@@ -34,9 +34,9 @@ enum ExportMenuItem {
 }
 
 class ExportMenu extends StatelessWidget {
-  final DateFormat dateFormat;
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  const ExportMenu({Key key, this.dateFormat, this.scaffoldKey})
+  final DateFormat? dateFormat;
+  final GlobalKey<ScaffoldState>? scaffoldKey;
+  const ExportMenu({Key? key, this.dateFormat, this.scaffoldKey})
       : super(key: key);
 
   @override
@@ -47,7 +47,7 @@ class ExportMenu extends StatelessWidget {
       onSelected: (ExportMenuItem item) async {
         switch (item) {
           case ExportMenuItem.import:
-            FilePickerResult result = await FilePicker.platform.pickFiles(
+            FilePickerResult? result = await FilePicker.platform.pickFiles(
                 type: FileType.any,
                 allowMultiple: false,
                 withData: Platform.isLinux);
@@ -56,12 +56,12 @@ class ExportMenu extends StatelessWidget {
             }
 
             final resultPath = Platform.isLinux
-                ? await _duplicateToTempDir(result.files.first.bytes)
-                : result.files.first.path;
+                ? await _duplicateToTempDir(result.files.first.bytes!)
+                : result.files.first.path!;
 
             try {
               if (!await DatabaseProvider.isValidDatabaseFile(resultPath)) {
-                scaffoldKey.currentState.showSnackBar(SnackBar(
+                scaffoldKey!.currentState!.showSnackBar(SnackBar(
                   backgroundColor: Theme.of(context).errorColor,
                   content: Text(
                     L10N.of(context).tr.invalidDatabaseFile,
@@ -75,7 +75,7 @@ class ExportMenu extends StatelessWidget {
                 ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
                 settings.add(ImportDatabaseEvent(resultPath, timers, projects));
 
-                scaffoldKey.currentState.showSnackBar(SnackBar(
+                scaffoldKey!.currentState!.showSnackBar(SnackBar(
                   backgroundColor: Theme.of(context).primaryColorDark,
                   content: Text(
                     L10N.of(context).tr.databaseImported,
@@ -85,7 +85,7 @@ class ExportMenu extends StatelessWidget {
                 ));
               }
             } on Exception catch (e) {
-              scaffoldKey.currentState.showSnackBar(SnackBar(
+              scaffoldKey!.currentState!.showSnackBar(SnackBar(
                 backgroundColor: Theme.of(context).errorColor,
                 content: Text(
                   e.toString(),
@@ -100,7 +100,7 @@ class ExportMenu extends StatelessWidget {
 
             try {
               if (Platform.isMacOS || Platform.isLinux) {
-                String outputFile = await FilePicker.platform.saveFile(
+                String? outputFile = await FilePicker.platform.saveFile(
                   dialogTitle: "",
                   fileName: "timecop.db",
                 );
@@ -113,19 +113,21 @@ class ExportMenu extends StatelessWidget {
                 if (Platform.isAndroid) {
                   // on android, copy it somewhere where it can be shared
                   final directory = await getExternalStorageDirectory();
-                  final copiedDB =
-                      await dbFile.copy(p.join(directory.path, "timecop.db"));
-                  dbPath = copiedDB.path;
+                  if (directory != null) {
+                    final copiedDB =
+                        await dbFile.copy(p.join(directory.path, "timecop.db"));
+                    dbPath = copiedDB.path;
+                  }
                 }
                 await Share.shareFiles(<String>[dbPath],
                     mimeTypes: <String>["application/vnd.sqlite3"],
                     subject: L10N
                         .of(context)
                         .tr
-                        .timeCopDatabase(dateFormat.format(DateTime.now())));
+                        .timeCopDatabase(dateFormat!.format(DateTime.now())));
               }
             } on Exception catch (e) {
-              scaffoldKey.currentState.showSnackBar(SnackBar(
+              scaffoldKey!.currentState!.showSnackBar(SnackBar(
                 backgroundColor: Theme.of(context).errorColor,
                 content: Text(
                   e.toString(),

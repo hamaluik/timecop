@@ -73,8 +73,6 @@ Future<void> runMain(SettingsProvider settings, DataProvider data,
   //await initializeDateFormatting();
   LicenseRegistry.addLicense(getFontLicenses);
 
-  assert(settings != null);
-
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider<ThemeBloc>(
@@ -102,17 +100,15 @@ Future<void> runMain(SettingsProvider settings, DataProvider data,
 
 class TimeCopApp extends StatefulWidget {
   final SettingsProvider settings;
-  const TimeCopApp({Key key, @required this.settings})
-      : assert(settings != null),
-        super(key: key);
+  const TimeCopApp({Key? key, required this.settings}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _TimeCopAppState();
 }
 
 class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
-  Timer _updateTimersTimer;
-  Brightness brightness;
+  late Timer _updateTimersTimer;
+  Brightness? brightness;
 
   @override
   void initState() {

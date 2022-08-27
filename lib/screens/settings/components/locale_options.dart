@@ -20,9 +20,7 @@ import 'package:timecop/l10n.dart';
 
 class LocaleOptions extends StatelessWidget {
   final LocaleBloc bloc;
-  const LocaleOptions({Key key, @required this.bloc})
-      : assert(bloc != null),
-        super(key: key);
+  const LocaleOptions({Key? key, required this.bloc}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +35,16 @@ class LocaleOptions extends StatelessWidget {
                 : FontAwesomeIcons.chevronRight),
             leading: Icon(FontAwesomeIcons.language),
             onTap: () async {
-              Locale newLocale = await showModalBottomSheet<Locale>(
+              Locale? newLocale = await showModalBottomSheet<Locale>(
                   context: context,
                   builder: (context) => ListView(
                         shrinkWrap: true,
                         children: <Widget>[
-                          RadioListTile<Locale>(
+                          RadioListTile<Locale?>(
                             title: Text(L10N.of(context).tr.automaticLanguage),
                             value: null,
                             groupValue: state.locale,
-                            onChanged: (Locale type) {
+                            onChanged: (Locale? type) {
                               bloc.add(ChangeLocaleEvent(type));
                               Navigator.pop(context, type);
                             },
@@ -75,7 +73,7 @@ class LocaleOptions extends StatelessWidget {
                                 title: Text(L10N.of(context).tr.langName(l)),
                                 value: l,
                                 groupValue: state.locale,
-                                onChanged: (Locale type) {
+                                onChanged: (Locale? type) {
                                   bloc.add(ChangeLocaleEvent(type));
                                   Navigator.pop(context, type);
                                 },

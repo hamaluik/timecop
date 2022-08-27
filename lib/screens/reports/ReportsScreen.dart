@@ -33,26 +33,25 @@ import 'package:timecop/screens/reports/components/WeeklyTotals.dart';
 import 'package:timecop/models/clone_time.dart';
 
 class ReportsScreen extends StatefulWidget {
-  ReportsScreen({Key key}) : super(key: key);
+  ReportsScreen({Key? key}) : super(key: key);
 
   @override
   _ReportsScreenState createState() => _ReportsScreenState();
 }
 
 class _ReportsScreenState extends State<ReportsScreen> {
-  DateTime _startDate;
-  DateTime _endDate;
-  DateTime _oldStartDate;
-  DateTime _oldEndDate;
+  DateTime? _startDate;
+  DateTime? _endDate;
+  DateTime? _oldStartDate;
+  DateTime? _oldEndDate;
   static final DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
-  List<Project> selectedProjects = [];
+  List<Project?> selectedProjects = [];
 
   @override
   void initState() {
     super.initState();
     final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
-    assert(projects != null);
-    selectedProjects = <Project>[null]
+    selectedProjects = <Project?>[null]
         .followedBy(projects.state.projects
             .where((p) => !p.archived)
             .map((p) => Project.clone(p)))
@@ -63,11 +62,10 @@ class _ReportsScreenState extends State<ReportsScreen> {
   }
 
   void setStartDate(DateTime dt) {
-    assert(dt != null);
     setState(() {
       _startDate = dt;
-      if (_endDate != null && _startDate.isAfter(_endDate)) {
-        _endDate = _startDate.add(
+      if (_endDate != null && _startDate!.isAfter(_endDate!)) {
+        _endDate = _startDate!.add(
             Duration(hours: 23, minutes: 59, seconds: 59, milliseconds: 999));
       }
     });
@@ -134,7 +132,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                         iconPrevious: Icons.arrow_back_ios_new,
                         iconNext: Icons.arrow_forward_ios,
                         color: Theme.of(context).colorScheme.onBackground)
-                    : SwiperControl(iconPrevious: null, iconNext: null),
+                    : null, //todo test
               ),
             ),
             ExpansionTile(
@@ -170,12 +168,12 @@ class _ReportsScreenState extends State<ReportsScreen> {
                       padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
                       child: Text(_startDate == null
                           ? "—"
-                          : _dateFormat.format(_startDate)),
+                          : _dateFormat.format(_startDate!)),
                     ),
                     onTap: () async {
-                      _oldStartDate = _startDate.clone();
-                      _oldEndDate = _endDate.clone();
-                      DateTime newStartDate = await DatePicker.showDatePicker(
+                      _oldStartDate = _startDate?.clone();
+                      _oldEndDate = _endDate?.clone();
+                      DateTime? newStartDate = await DatePicker.showDatePicker(
                           context,
                           currentTime: _startDate,
                           onChanged: (DateTime dt) =>
@@ -183,9 +181,9 @@ class _ReportsScreenState extends State<ReportsScreen> {
                           onConfirm: (DateTime dt) =>
                               setStartDate(DateTime(dt.year, dt.month, dt.day)),
                           theme: DatePickerTheme(
-                            cancelStyle: Theme.of(context).textTheme.button,
-                            doneStyle: Theme.of(context).textTheme.button,
-                            itemStyle: Theme.of(context).textTheme.bodyText2,
+                            cancelStyle: Theme.of(context).textTheme.button!,
+                            doneStyle: Theme.of(context).textTheme.button!,
+                            itemStyle: Theme.of(context).textTheme.bodyText2!,
                             backgroundColor:
                                 Theme.of(context).colorScheme.surface,
                           ));
@@ -226,11 +224,11 @@ class _ReportsScreenState extends State<ReportsScreen> {
                       padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
                       child: Text(_endDate == null
                           ? "—"
-                          : _dateFormat.format(_endDate)),
+                          : _dateFormat.format(_endDate!)),
                     ),
                     onTap: () async {
-                      _oldEndDate = _endDate.clone();
-                      DateTime newEndDate = await DatePicker.showDatePicker(
+                      _oldEndDate = _endDate?.clone();
+                      DateTime? newEndDate = await DatePicker.showDatePicker(
                           context,
                           currentTime: _endDate,
                           minTime: _startDate,
@@ -241,9 +239,9 @@ class _ReportsScreenState extends State<ReportsScreen> {
                               DateTime(
                                   dt.year, dt.month, dt.day, 23, 59, 59, 999)),
                           theme: DatePickerTheme(
-                            cancelStyle: Theme.of(context).textTheme.button,
-                            doneStyle: Theme.of(context).textTheme.button,
-                            itemStyle: Theme.of(context).textTheme.bodyText2,
+                            cancelStyle: Theme.of(context).textTheme.button!,
+                            doneStyle: Theme.of(context).textTheme.button!,
+                            itemStyle: Theme.of(context).textTheme.bodyText2!,
                             backgroundColor:
                                 Theme.of(context).colorScheme.surface,
                           ));
@@ -282,7 +280,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                       child: Text(L10N.of(context).tr.selectAll),
                       onPressed: () {
                         setState(() {
-                          selectedProjects = <Project>[null]
+                          selectedProjects = <Project?>[null]
                               .followedBy(projectsBloc.state.projects
                                   .where((p) => !p.archived)
                                   .map((p) => Project.clone(p)))
@@ -297,7 +295,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                     maxHeight: 150,
                   ),
                   child: ListView(
-                    children: <Project>[null]
+                    children: <Project?>[null]
                         .followedBy(projectsBloc.state.projects
                             .where((p) => !p.archived))
                         .map((project) => CheckboxListTile(

@@ -11,8 +11,8 @@ class LoadThemeEvent extends ThemeEvent {
 }
 
 class ChangeThemeEvent extends ThemeEvent {
-  final ThemeType theme;
+  final ThemeType? theme;
   const ChangeThemeEvent(this.theme);
   @override
-  List<Object> get props => [theme];
+  List<Object?> get props => [theme];
 }

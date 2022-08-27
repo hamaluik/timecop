@@ -21,14 +21,11 @@ class CollapsibleDayGrouping extends StatefulWidget {
   final Iterable<Widget> children;
   final Duration totalTime;
   CollapsibleDayGrouping(
-      {Key key,
-      @required this.date,
-      @required this.children,
-      @required this.totalTime})
-      : assert(date != null),
-        assert(children != null),
-        assert(totalTime != null),
-        super(key: key);
+      {Key? key,
+      required this.date,
+      required this.children,
+      required this.totalTime})
+      : super(key: key);
 
   @override
   _CollapsibleDayGroupingState createState() => _CollapsibleDayGroupingState();
@@ -42,9 +39,9 @@ class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping>
       Tween<double>(begin: 0.0, end: -0.5);
   static final DateFormat _dateFormat = DateFormat.yMMMMEEEEd();
 
-  bool _expanded;
-  AnimationController _controller;
-  Animation<double> _iconTurns;
+  late bool _expanded;
+  late AnimationController _controller;
+  late Animation<double> _iconTurns;
 
   @override
   void initState() {
@@ -84,7 +81,7 @@ class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping>
           style: TextStyle(
             //color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.w700,
-            fontSize: Theme.of(context).textTheme.bodyText2.fontSize,
+            fontSize: Theme.of(context).textTheme.bodyText2!.fontSize,
           )),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,

@@ -18,11 +18,9 @@ import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 
 class Legend extends StatelessWidget {
-  final Iterable<Project> projects;
+  final Iterable<Project?> projects;
 
-  const Legend({Key key, @required this.projects})
-      : assert(projects != null),
-        super(key: key);
+  const Legend({Key? key, required this.projects}) : super(key: key);
 
   List<Widget> _chips(BuildContext context) {
     return projects
@@ -31,7 +29,7 @@ class Legend extends StatelessWidget {
               label: Text(project?.name ?? L10N.of(context).tr.noProject,
                   style: TextStyle(
                     fontSize:
-                        Theme.of(context).textTheme.bodyText2.fontSize * 0.75,
+                        Theme.of(context).textTheme.bodyText2!.fontSize! * 0.75,
                   )),
             ))
         .toList();

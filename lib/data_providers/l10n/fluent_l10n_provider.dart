@@ -21,7 +21,7 @@ class FluentL10NProvider extends L10NProvider {
   final FluentBundle _bundle;
   final List<Error> _errors = [];
 
-  FluentL10NProvider._internal(this._bundle) : assert(_bundle != null);
+  FluentL10NProvider._internal(this._bundle);
 
   static Future<FluentL10NProvider> load(Locale locale) async {
     final FluentBundle bundle = FluentBundle(locale.toLanguageTag());
@@ -93,7 +93,7 @@ class FluentL10NProvider extends L10NProvider {
   @override
   String get export => _bundle.format("export", errors: _errors);
   @override
-  String get import => _bundle.format("import", errors: _errors) ?? "import";
+  String get import => _bundle.format("import", errors: _errors);
   @override
   String get filter => _bundle.format("filter", errors: _errors);
   @override
@@ -151,42 +151,34 @@ class FluentL10NProvider extends L10NProvider {
   String get combinedProjectDescription =>
       _bundle.format("combinedProjectDescription", errors: _errors);
   @override
-  String get reports => _bundle.format("reports", errors: _errors) ?? "reports";
+  String get reports => _bundle.format("reports", errors: _errors);
   @override
   String nHours(String hours) => _bundle.format("nHours",
       args: <String, dynamic>{"hours": hours}, errors: _errors);
   @override
   String get averageDailyHours =>
-      _bundle.format("averageDailyHours", errors: _errors) ??
-      "averageDailyHours";
+      _bundle.format("averageDailyHours", errors: _errors);
   @override
   String get totalProjectShare =>
-      _bundle.format("totalProjectShare", errors: _errors) ??
-      "totalProjectShare";
+      _bundle.format("totalProjectShare", errors: _errors);
   @override
-  String get weeklyHours =>
-      _bundle.format("weeklyHours", errors: _errors) ?? "weeklyHours";
+  String get weeklyHours => _bundle.format("weeklyHours", errors: _errors);
   @override
-  String get contributors =>
-      _bundle.format("contributors", errors: _errors) ?? "contributors";
+  String get contributors => _bundle.format("contributors", errors: _errors);
   @override
-  String get settings =>
-      _bundle.format("settings", errors: _errors) ?? "settings";
+  String get settings => _bundle.format("settings", errors: _errors);
   @override
-  String get theme => _bundle.format("theme", errors: _errors) ?? "theme";
+  String get theme => _bundle.format("theme", errors: _errors);
   @override
-  String get auto => _bundle.format("auto", errors: _errors) ?? "auto";
+  String get auto => _bundle.format("auto", errors: _errors);
   @override
-  String get light => _bundle.format("light", errors: _errors) ?? "light";
+  String get light => _bundle.format("light", errors: _errors);
   @override
-  String get dark => _bundle.format("dark", errors: _errors) ?? "dark";
+  String get dark => _bundle.format("dark", errors: _errors);
   @override
-  String get black => _bundle.format("black", errors: _errors) ?? "black";
+  String get black => _bundle.format("black", errors: _errors);
   @override
   String langName(Locale locale) {
-    if (locale == null) {
-      return auto;
-    }
     switch (locale.languageCode) {
       case "ar":
         return "العربية";
@@ -234,68 +226,56 @@ class FluentL10NProvider extends L10NProvider {
   }
 
   @override
-  String get language =>
-      _bundle.format("language", errors: _errors) ?? "language";
+  String get language => _bundle.format("language", errors: _errors);
   @override
   String get automaticLanguage {
-    String langName = _bundle.format("langName", errors: _errors) ?? "langName";
+    String langName = _bundle.format("langName", errors: _errors);
     return _bundle.format("automaticLanguage",
         args: <String, dynamic>{"langName": langName}, errors: _errors);
   }
 
   @override
-  String get collapseDays =>
-      _bundle.format("collapseDays", errors: _errors) ?? "collapseDays";
+  String get collapseDays => _bundle.format("collapseDays", errors: _errors);
   @override
   String get autocompleteDescription =>
-      _bundle.format("autocompleteDescription", errors: _errors) ??
-      "autocompleteDescription";
+      _bundle.format("autocompleteDescription", errors: _errors);
   @override
   String get defaultFilterStartDateToMonday =>
-      _bundle.format("defaultFilterStartDateToMonday", errors: _errors) ??
-      "defaultFilterStartDateToMonday";
+      _bundle.format("defaultFilterStartDateToMonday", errors: _errors);
   @override
-  String get hours => _bundle.format("hours", errors: _errors) ?? "hours";
+  String get hours => _bundle.format("hours", errors: _errors);
   @override
-  String get total => _bundle.format("total", errors: _errors) ?? "total";
+  String get total => _bundle.format("total", errors: _errors);
   @override
   String get oneTimerAtATime =>
-      _bundle.format("oneTimerAtATime", errors: _errors) ?? "oneTimerAtATime";
+      _bundle.format("oneTimerAtATime", errors: _errors);
   @override
-  String get selectAll =>
-      _bundle.format("selectAll", errors: _errors) ?? "selectAll";
+  String get selectAll => _bundle.format("selectAll", errors: _errors);
   @override
-  String get selectNone =>
-      _bundle.format("selectNone", errors: _errors) ?? "selectNone";
+  String get selectNone => _bundle.format("selectNone", errors: _errors);
   @override
   String get showBadgeCounts =>
-      _bundle.format("showBadgeCounts", errors: _errors) ?? "showBadgeCounts";
+      _bundle.format("showBadgeCounts", errors: _errors);
   @override
   String get defaultFilterDays =>
-      _bundle.format("defaultFilterDays", errors: _errors) ??
-      "defaultFilterDays";
+      _bundle.format("defaultFilterDays", errors: _errors);
   @override
   String get invalidDatabaseFile =>
-      _bundle.format("invalidDatabaseFile", errors: _errors) ??
-      "invalidDatabaseFile";
+      _bundle.format("invalidDatabaseFile", errors: _errors);
   @override
   String get databaseImported =>
-      _bundle.format("databaseImported", errors: _errors) ?? "databaseImported";
+      _bundle.format("databaseImported", errors: _errors);
   @override
   String get runningTimersNotificationTitle =>
-      _bundle.format("runningTimersNotificationTitle", errors: _errors) ??
-      "runningTimersNotificationTitle";
+      _bundle.format("runningTimersNotificationTitle", errors: _errors);
   @override
   String get runningTimersNotificationBody =>
-      _bundle.format("runningTimersNotificationBody", errors: _errors) ??
-      "runningTimersNotificationBody";
+      _bundle.format("runningTimersNotificationBody", errors: _errors);
   @override
   String get enableRunningTimersNotification =>
-      _bundle.format("enableRunningTimersNotification", errors: _errors) ??
-      "enableRunningTimersNotification";
+      _bundle.format("enableRunningTimersNotification", errors: _errors);
   @override
-  String get notes => _bundle.format("notes", errors: _errors) ?? "notes";
+  String get notes => _bundle.format("notes", errors: _errors);
   @override
-  String get noItemsFound =>
-      _bundle.format("noItemsFound", errors: _errors) ?? "noItemsFound";
+  String get noItemsFound => _bundle.format("noItemsFound", errors: _errors);
 }

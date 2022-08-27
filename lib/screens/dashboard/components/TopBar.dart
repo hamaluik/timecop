@@ -21,7 +21,7 @@ import 'package:timecop/screens/dashboard/components/FilterButton.dart';
 import 'package:timecop/screens/dashboard/components/PopupMenu.dart';
 
 class TopBar extends StatefulWidget implements PreferredSizeWidget {
-  TopBar({Key key}) : super(key: key);
+  TopBar({Key? key}) : super(key: key);
 
   @override
   _TopBarState createState() => _TopBarState();
@@ -32,10 +32,10 @@ class TopBar extends StatefulWidget implements PreferredSizeWidget {
 
 class _TopBarState extends State<TopBar> {
   final _searchFormKey = GlobalKey<FormState>();
-  TextEditingController _searchController;
-  bool _searching;
+  TextEditingController? _searchController;
+  late bool _searching;
 
-  FocusNode _searchFocusNode;
+  FocusNode? _searchFocusNode;
 
   @override
   void initState() {
@@ -47,8 +47,8 @@ class _TopBarState extends State<TopBar> {
 
   @override
   void dispose() {
-    _searchFocusNode.dispose();
-    _searchController.dispose();
+    _searchFocusNode!.dispose();
+    _searchController!.dispose();
     super.dispose();
   }
 
@@ -99,10 +99,10 @@ class _TopBarState extends State<TopBar> {
                 IconButton(
                   icon: Icon(FontAwesomeIcons.search),
                   onPressed: () {
-                    _searchController.text = "";
+                    _searchController!.text = "";
                     bloc.add(SearchChangedEvent(""));
                     setState(() => _searching = true);
-                    _searchFocusNode.requestFocus();
+                    _searchFocusNode!.requestFocus();
                   },
                 ),
                 FilterButton(),

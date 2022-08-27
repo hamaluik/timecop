@@ -17,9 +17,9 @@ import 'package:timecop/models/project.dart';
 
 class ProjectColour extends StatelessWidget {
   static const double SIZE = 22;
-  final Project project;
-  final bool mini;
-  const ProjectColour({Key key, this.project, this.mini}) : super(key: key);
+  final Project? project;
+  final bool? mini;
+  const ProjectColour({Key? key, this.project, this.mini}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

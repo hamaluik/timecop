@@ -29,7 +29,7 @@ import 'components/locale_options.dart';
 import 'components/theme_options.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key key}) : super(key: key);
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +124,7 @@ class SettingsScreen extends StatelessWidget {
                         int tempDays = settings.defaultFilterDays > 0
                             ? settings.defaultFilterDays
                             : 30;
-                        int days = await showDialog<int>(
+                        int? days = await showDialog<int>(
                             context: context,
                             builder: (BuildContext context) {
                               return StatefulBuilder(

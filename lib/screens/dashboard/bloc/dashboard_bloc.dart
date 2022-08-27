@@ -24,7 +24,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   ) async* {
     if (event is DescriptionChangedEvent) {
       yield DashboardState(
-          event.description,
+          event.description!,
           state.newProject,
           false,
           state.filterStart,
@@ -41,18 +41,18 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           state.hiddenProjects,
           state.searchString);
     } else if (event is TimerWasStartedEvent) {
-      Project newProject = projectsBloc.getProjectByID(-1);
+      Project? newProject = projectsBloc.getProjectByID(-1);
       yield DashboardState("", newProject, true, state.filterStart,
           state.filterEnd, state.hiddenProjects, state.searchString);
     } else if (event is ResetEvent) {
-      Project newProject = projectsBloc.getProjectByID(-1);
+      Project? newProject = projectsBloc.getProjectByID(-1);
       yield DashboardState("", newProject, false, state.filterStart,
           state.filterEnd, state.hiddenProjects, state.searchString);
     } else if (event is FilterStartChangedEvent) {
-      DateTime end = state.filterEnd;
+      DateTime? end = state.filterEnd;
       if (state.filterEnd != null &&
-          event.filterStart.isAfter(state.filterEnd)) {
-        end = event.filterStart.add(
+          event.filterStart!.isAfter(state.filterEnd!)) {
+        end = event.filterStart!.add(
             Duration(hours: 23, minutes: 59, seconds: 59, milliseconds: 999));
       }
 

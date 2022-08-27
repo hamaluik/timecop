@@ -17,15 +17,15 @@ import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
 
 abstract class DataProvider {
-  Future<Project> createProject({@required String name, Color colour});
+  Future<Project> createProject({required String name, Color? colour});
   Future<List<Project>> listProjects();
   Future<void> editProject(Project project);
   Future<void> deleteProject(Project project);
   Future<TimerEntry> createTimer(
-      {String description,
-      int projectID,
-      DateTime startTime,
-      DateTime endTime});
+      {String? description,
+      int? projectID,
+      DateTime? startTime,
+      DateTime? endTime});
   Future<List<TimerEntry>> listTimers();
   Future<void> editTimer(TimerEntry timer);
   Future<void> deleteTimer(TimerEntry timer);
@@ -46,8 +46,8 @@ abstract class DataProvider {
       // map the old project ID to its corresponding new one
       int projectOffset =
           otherProjects.indexWhere((p) => p.id == otherEntry.projectID);
-      int projectID;
-      if (projectOffset != null && projectOffset >= 0) {
+      int? projectID;
+      if (projectOffset >= 0) {
         projectID = newOtherProjects[projectOffset].id;
       }
 

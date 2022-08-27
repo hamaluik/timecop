@@ -33,34 +33,32 @@ import 'package:timecop/models/clone_time.dart';
 
 class TimerEditor extends StatefulWidget {
   final TimerEntry timer;
-  TimerEditor({Key key, @required this.timer})
-      : assert(timer != null),
-        super(key: key);
+  TimerEditor({Key? key, required this.timer}) : super(key: key);
 
   @override
   _TimerEditorState createState() => _TimerEditorState();
 }
 
 class _TimerEditorState extends State<TimerEditor> {
-  TextEditingController _descriptionController;
-  TextEditingController _notesController;
-  String _notes;
+  TextEditingController? _descriptionController;
+  TextEditingController? _notesController;
+  String? _notes;
 
-  DateTime _startTime;
-  DateTime _endTime;
+  DateTime? _startTime;
+  DateTime? _endTime;
 
-  DateTime _oldStartTime;
-  DateTime _oldEndTime;
+  DateTime? _oldStartTime;
+  DateTime? _oldEndTime;
 
-  Project _project;
-  FocusNode _descriptionFocus;
+  Project? _project;
+  late FocusNode _descriptionFocus;
   final _formKey = GlobalKey<FormState>();
-  Timer _updateTimer;
-  StreamController<DateTime> _updateTimerStreamController;
+  late Timer _updateTimer;
+  late StreamController<DateTime> _updateTimerStreamController;
 
   static final DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy h:mma");
 
-  ProjectsBloc _projectsBloc;
+  late ProjectsBloc _projectsBloc;
 
   @override
   void initState() {
@@ -82,7 +80,7 @@ class _TimerEditorState extends State<TimerEditor> {
 
   @override
   void dispose() {
-    _descriptionController.dispose();
+    _descriptionController!.dispose();
     _descriptionFocus.dispose();
     _updateTimer.cancel();
     _updateTimerStreamController.close();
@@ -90,11 +88,10 @@ class _TimerEditorState extends State<TimerEditor> {
   }
 
   void setStartTime(DateTime dt) {
-    assert(dt != null);
     setState(() {
       // adjust the end time to keep a constant duration if we would somehow make the time negative
-      if (_oldEndTime != null && dt.isAfter(_oldStartTime)) {
-        Duration d = _oldEndTime.difference(_oldStartTime);
+      if (_oldEndTime != null && dt.isAfter(_oldStartTime!)) {
+        Duration d = _oldEndTime!.difference(_oldStartTime!);
         _endTime = dt.add(d);
       }
       _startTime = dt;
@@ -125,7 +122,7 @@ class _TimerEditorState extends State<TimerEditor> {
                         value: _project,
                         underline: Container(),
                         elevation: 0,
-                        onChanged: (Project newProject) {
+                        onChanged: (Project? newProject) {
                           setState(() {
                             _project = newProject;
                           });
@@ -171,7 +168,7 @@ class _TimerEditorState extends State<TimerEditor> {
             Padding(
               padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
               child: settingsBloc.state.autocompleteDescription
-                  ? TypeAheadField<String>(
+                  ? TypeAheadField<String?>(
                       direction: AxisDirection.down,
                       textFieldConfiguration: TextFieldConfiguration(
                         controller: _descriptionController,
@@ -184,14 +181,14 @@ class _TimerEditorState extends State<TimerEditor> {
                       noItemsFoundBuilder: (context) => ListTile(
                           title: Text(L10N.of(context).tr.noItemsFound),
                           enabled: false),
-                      itemBuilder: (BuildContext context, String desc) =>
-                          ListTile(title: Text(desc)),
-                      onSuggestionSelected: (String description) =>
-                          _descriptionController.text = description,
+                      itemBuilder: (BuildContext context, String? desc) =>
+                          ListTile(title: Text(desc!)),
+                      onSuggestionSelected: (String? description) =>
+                          _descriptionController!.text = description!,
                       suggestionsCallback: (pattern) async {
                         if (pattern.length < 2) return [];
 
-                        List<String> descriptions = timers.state.timers
+                        List<String?> descriptions = timers.state.timers
                             .where((timer) => timer.description != null)
                             .where((timer) => !(_projectsBloc
                                     .getProjectByID(timer.projectID)
@@ -199,7 +196,7 @@ class _TimerEditorState extends State<TimerEditor> {
                                 true))
                             .where((timer) =>
                                 timer.description
-                                    .toLowerCase()
+                                    ?.toLowerCase()
                                     .contains(pattern.toLowerCase()) ??
                                 false)
                             .map((timer) => timer.description)
@@ -236,20 +233,20 @@ class _TimerEditorState extends State<TimerEditor> {
                   ]),
               child: ListTile(
                 title: Text(L10N.of(context).tr.startTime),
-                trailing: Text(_dateFormat.format(_startTime)),
+                trailing: Text(_dateFormat.format(_startTime!)),
                 onTap: () async {
-                  _oldStartTime = _startTime.clone();
-                  _oldEndTime = _endTime.clone();
-                  DateTime newStartTime =
+                  _oldStartTime = _startTime?.clone();
+                  _oldEndTime = _endTime?.clone();
+                  DateTime? newStartTime =
                       await DatePicker.showDateTimePicker(context,
                           currentTime: _startTime,
                           maxTime: _endTime == null ? DateTime.now() : null,
                           onChanged: (DateTime dt) => setStartTime(dt),
                           onConfirm: (DateTime dt) => setStartTime(dt),
                           theme: DatePickerTheme(
-                            cancelStyle: Theme.of(context).textTheme.button,
-                            doneStyle: Theme.of(context).textTheme.button,
-                            itemStyle: Theme.of(context).textTheme.bodyText2,
+                            cancelStyle: Theme.of(context).textTheme.button!,
+                            doneStyle: Theme.of(context).textTheme.button!,
+                            itemStyle: Theme.of(context).textTheme.bodyText2!,
                             backgroundColor:
                                 Theme.of(context).colorScheme.surface,
                           ));
@@ -304,20 +301,20 @@ class _TimerEditorState extends State<TimerEditor> {
                         ]),
               child: ListTile(
                 title: Text(L10N.of(context).tr.endTime),
-                trailing:
-                    Text(_endTime == null ? "—" : _dateFormat.format(_endTime)),
+                trailing: Text(
+                    _endTime == null ? "—" : _dateFormat.format(_endTime!)),
                 onTap: () async {
-                  _oldEndTime = _endTime.clone();
-                  DateTime newEndTime = await DatePicker.showDateTimePicker(
+                  _oldEndTime = _endTime?.clone();
+                  DateTime? newEndTime = await DatePicker.showDateTimePicker(
                       context,
                       currentTime: _endTime,
                       minTime: _startTime,
                       onChanged: (DateTime dt) => setState(() => _endTime = dt),
                       onConfirm: (DateTime dt) => setState(() => _endTime = dt),
                       theme: DatePickerTheme(
-                        cancelStyle: Theme.of(context).textTheme.button,
-                        doneStyle: Theme.of(context).textTheme.button,
-                        itemStyle: Theme.of(context).textTheme.bodyText2,
+                        cancelStyle: Theme.of(context).textTheme.button!,
+                        doneStyle: Theme.of(context).textTheme.button!,
+                        itemStyle: Theme.of(context).textTheme.bodyText2!,
                         backgroundColor: Theme.of(context).colorScheme.surface,
                       ));
 
@@ -338,8 +335,8 @@ class _TimerEditorState extends State<TimerEditor> {
                       ListTile(
                 title: Text(L10N.of(context).tr.duration),
                 trailing: Text(TimerEntry.formatDuration(_endTime == null
-                    ? snapshot.data.difference(_startTime)
-                    : _endTime.difference(_startTime))),
+                    ? snapshot.data!.difference(_startTime!)
+                    : _endTime!.difference(_startTime!))),
               ),
             ),
             Slidable(
@@ -363,7 +360,7 @@ class _TimerEditorState extends State<TimerEditor> {
             Expanded(
                 child: Padding(
                     padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
-                    child: Markdown(data: _notes))),
+                    child: Markdown(data: _notes!))),
           ],
         ),
       ),
@@ -382,19 +379,18 @@ class _TimerEditorState extends State<TimerEditor> {
           ],
         ),
         onPressed: () async {
-          bool valid = _formKey.currentState.validate();
+          bool valid = _formKey.currentState!.validate();
           if (!valid) return;
 
           TimerEntry timer = TimerEntry(
             id: widget.timer.id,
-            startTime: _startTime,
+            startTime: _startTime!,
             endTime: _endTime,
             projectID: _project?.id,
-            description: _descriptionController.text.trim(),
-            notes: _notes.isEmpty ? null : _notes,
+            description: _descriptionController!.text.trim(),
+            notes: _notes!.isEmpty ? null : _notes,
           );
 
-          assert(timers != null);
           timers.add(EditTimer(timer));
           Navigator.of(context).pop();
         },
@@ -403,9 +399,9 @@ class _TimerEditorState extends State<TimerEditor> {
   }
 
   Future<void> _editNotes(BuildContext context) async {
-    print("notes: " + _notes);
-    _notesController.text = _notes;
-    String n = await showDialog(
+    print("notes: " + _notes!);
+    _notesController!.text = _notes!;
+    String? n = await showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
@@ -418,7 +414,7 @@ class _TimerEditorState extends State<TimerEditor> {
               expands: true,
               smartDashesType: SmartDashesType.enabled,
               smartQuotesType: SmartQuotesType.enabled,
-              onSaved: (String n) => Navigator.of(context).pop(n),
+              onSaved: (String? n) => Navigator.of(context).pop(n),
             ),
             actions: <Widget>[
               TextButton(
@@ -428,7 +424,7 @@ class _TimerEditorState extends State<TimerEditor> {
                   style: TextButton.styleFrom(
                       primary: Theme.of(context).colorScheme.secondary),
                   onPressed: () =>
-                      Navigator.of(context).pop(_notesController.text),
+                      Navigator.of(context).pop(_notesController!.text),
                   child: Text(
                     L10N.of(context).tr.save,
                   ))

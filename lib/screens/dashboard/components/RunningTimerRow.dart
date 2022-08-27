@@ -26,19 +26,18 @@ import 'package:timecop/screens/timer/TimerEditor.dart';
 class RunningTimerRow extends StatelessWidget {
   final TimerEntry timer;
   final DateTime now;
-  const RunningTimerRow({Key key, @required this.timer, @required this.now})
-      : assert(timer != null),
-        assert(now != null),
-        super(key: key);
+  const RunningTimerRow({Key? key, required this.timer, required this.now})
+      : super(key: key);
 
-  static String formatDescription(BuildContext context, String description) {
+  static String formatDescription(BuildContext context, String? description) {
     if (description == null || description.trim().isEmpty) {
       return L10N.of(context).tr.noDescription;
     }
     return description;
   }
 
-  static TextStyle styleDescription(BuildContext context, String description) {
+  static TextStyle? styleDescription(
+      BuildContext context, String? description) {
     if (description == null || description.trim().isEmpty) {
       return TextStyle(color: Theme.of(context).disabledColor);
     }
@@ -57,7 +56,7 @@ class RunningTimerRow extends StatelessWidget {
               foregroundColor: Theme.of(context).colorScheme.onSecondary,
               icon: FontAwesomeIcons.trash,
               onPressed: (_) async {
-                bool delete = await showDialog(
+                bool? delete = await showDialog(
                     context: context,
                     builder: (BuildContext context) => AlertDialog(
                           title: Text(L10N.of(context).tr.confirmDelete),
@@ -76,7 +75,6 @@ class RunningTimerRow extends StatelessWidget {
                 if (delete == true) {
                   final TimersBloc timersBloc =
                       BlocProvider.of<TimersBloc>(context);
-                  assert(timersBloc != null);
                   timersBloc.add(DeleteTimer(timer));
                 }
               },
@@ -92,7 +90,6 @@ class RunningTimerRow extends StatelessWidget {
               icon: FontAwesomeIcons.solidStopCircle,
               onPressed: (_) {
                 final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
-                assert(timers != null);
                 timers.add(StopTimer(timer));
               },
             )

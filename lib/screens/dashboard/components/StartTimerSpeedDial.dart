@@ -19,7 +19,7 @@ import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 
 class StartTimerSpeedDial extends StatefulWidget {
-  StartTimerSpeedDial({Key key}) : super(key: key);
+  StartTimerSpeedDial({Key? key}) : super(key: key);
 
   @override
   _StartTimerSpeedDialState createState() => _StartTimerSpeedDialState();
@@ -27,7 +27,7 @@ class StartTimerSpeedDial extends StatefulWidget {
 
 class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
     with TickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
 
   @override
   void initState() {
@@ -47,7 +47,6 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
   @override
   Widget build(BuildContext context) {
     final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
-    assert(bloc != null);
 
     // adapted from https://stackoverflow.com/a/46480722
     return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
@@ -68,7 +67,6 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
             onPressed: () {
               _controller.reverse();
               final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
-              assert(timers != null);
               timers.add(CreateTimer(
                   description: bloc.state.newDescription,
                   project: bloc.state.newProject));
@@ -106,7 +104,6 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
             onPressed: () {
               _controller.reverse();
               final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
-              assert(timers != null);
               timers.add(StopAllTimers());
             },
             child: Stack(
@@ -126,7 +123,7 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
       ),
       AnimatedBuilder(
         animation: _controller,
-        builder: (BuildContext conext, Widget child) {
+        builder: (BuildContext conext, Widget? child) {
           return FloatingActionButton(
             heroTag: null,
             backgroundColor: _controller.isDismissed
