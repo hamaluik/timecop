@@ -42,7 +42,7 @@ class ProjectBreakdown extends StatefulWidget {
 }
 
 class _ProjectBreakdownState extends State<ProjectBreakdown> {
-  int _touchedIndex = -1;
+  int? _touchedIndex = -1;
 
   static LinkedHashMap<int?, double> calculateData(BuildContext context,
       DateTime? startDate, DateTime? endDate, List<Project?> selectedProjects) {
@@ -108,8 +108,8 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
                             flTouchEvent is FlPanEndEvent) {
                           _touchedIndex = -1;
                         } else {
-                          _touchedIndex = pieTouchResponse!
-                              .touchedSection!.touchedSectionIndex;
+                          _touchedIndex = pieTouchResponse
+                              ?.touchedSection?.touchedSectionIndex;
                         }
                       });
                     }),
