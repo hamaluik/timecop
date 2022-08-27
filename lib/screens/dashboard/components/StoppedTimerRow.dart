@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -110,8 +111,12 @@ class StoppedTimerRow extends StatelessWidget {
                   .getProjectByID(timer.projectID)),
           title: Text(formatDescription(context, timer.description),
               style: styleDescription(context, timer.description)),
-          trailing: Text(timer.formatTime(),
-              style: TextStyle(fontFamily: "FiraMono")),
+          trailing: Text(
+            timer.formatTime(),
+            style: TextStyle(
+              fontFeatures: [FontFeature.tabularFigures()],
+            ),
+          ),
           onTap: () =>
               Navigator.of(context).push(MaterialPageRoute<TimerEditor>(
                 builder: (BuildContext context) => TimerEditor(

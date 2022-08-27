@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -334,9 +335,13 @@ class _TimerEditorState extends State<TimerEditor> {
                   (BuildContext context, AsyncSnapshot<DateTime> snapshot) =>
                       ListTile(
                 title: Text(L10N.of(context).tr.duration),
-                trailing: Text(TimerEntry.formatDuration(_endTime == null
-                    ? snapshot.data!.difference(_startTime!)
-                    : _endTime!.difference(_startTime!))),
+                trailing: Text(
+                  TimerEntry.formatDuration(_endTime == null
+                      ? snapshot.data!.difference(_startTime!)
+                      : _endTime!.difference(_startTime!)),
+                  style:
+                      TextStyle(fontFeatures: [FontFeature.tabularFigures()]),
+                ),
               ),
             ),
             Slidable(

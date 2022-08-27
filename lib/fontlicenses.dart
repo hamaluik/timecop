@@ -24,6 +24,5 @@ Future<LicenseEntry> _license(String library, String path) async {
 Stream<LicenseEntry> getFontLicenses() {
   return Stream.fromFutures([
     _license("PublicSans", "fonts/LICENSE-PublicSans.md"),
-    _license("FiraMono", "fonts/LICENSE-FiraMono.txt"),
   ]);
 }

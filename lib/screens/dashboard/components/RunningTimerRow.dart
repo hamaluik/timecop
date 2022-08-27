@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -101,7 +103,9 @@ class RunningTimerRow extends StatelessWidget {
           title: Text(formatDescription(context, timer.description),
               style: styleDescription(context, timer.description)),
           trailing: Text(timer.formatTime(),
-              style: TextStyle(fontFamily: "FiraMono")),
+              style: TextStyle(
+                fontFeatures: [FontFeature.tabularFigures()],
+              )),
           onTap: () =>
               Navigator.of(context).push(MaterialPageRoute<TimerEditor>(
                 builder: (BuildContext context) => TimerEditor(

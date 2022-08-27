@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'dart:collection';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -92,7 +93,7 @@ class DayGrouping {
                     Text(TimerEntry.formatDuration(runningTotal),
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.secondary,
-                          fontFamily: "FiraMono",
+                          fontFeatures: [FontFeature.tabularFigures()],
                         ))
                   ],
                 ),

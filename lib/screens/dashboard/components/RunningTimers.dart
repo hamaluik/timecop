@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
@@ -74,7 +76,7 @@ class RunningTimers extends StatelessWidget {
                                 style: TextStyle(
                                   color:
                                       Theme.of(context).colorScheme.secondary,
-                                  fontFamily: "FiraMono",
+                                  fontFeatures: [FontFeature.tabularFigures()],
                                 ))
                           ],
                         ),
