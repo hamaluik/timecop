@@ -33,50 +33,50 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     SettingsEvent event,
   ) async* {
     if (event is LoadSettingsFromRepository) {
-      bool exportGroupTimers = await settings.getBool("exportGroupTimers") ??
+      bool exportGroupTimers = settings.getBool("exportGroupTimers") ??
           state.exportGroupTimers;
       bool exportIncludeProject =
-          await settings.getBool("exportIncludeProject") ??
+          settings.getBool("exportIncludeProject") ??
               state.exportIncludeProject;
-      bool exportIncludeDate = await settings.getBool("exportIncludeDate") ??
+      bool exportIncludeDate = settings.getBool("exportIncludeDate") ??
           state.exportIncludeDate;
       bool exportIncludeDescription =
-          await settings.getBool("exportIncludeDescription") ??
+          settings.getBool("exportIncludeDescription") ??
               state.exportIncludeDescription;
       bool exportIncludeProjectDescription =
-          await settings.getBool("exportIncludeProjectDescription") ??
+          settings.getBool("exportIncludeProjectDescription") ??
               state.exportIncludeProjectDescription;
       bool exportIncludeStartTime =
-          await settings.getBool("exportIncludeStartTime") ??
+          settings.getBool("exportIncludeStartTime") ??
               state.exportIncludeStartTime;
       bool exportIncludeEndTime =
-          await settings.getBool("exportIncludeEndTime") ??
+          settings.getBool("exportIncludeEndTime") ??
               state.exportIncludeEndTime;
       bool exportIncludeDurationHours =
-          await settings.getBool("exportIncludeDurationHours") ??
+          settings.getBool("exportIncludeDurationHours") ??
               state.exportIncludeDurationHours;
-      bool exportIncludeNotes = await settings.getBool("exportIncludeNotes") ??
+      bool exportIncludeNotes = settings.getBool("exportIncludeNotes") ??
           state.exportIncludeNotes;
       bool groupTimers =
-          await settings.getBool("groupTimers") ?? state.groupTimers;
+          settings.getBool("groupTimers") ?? state.groupTimers;
       bool collapseDays =
-          await settings.getBool("collapseDays") ?? state.collapseDays;
+          settings.getBool("collapseDays") ?? state.collapseDays;
       bool autocompleteDescription =
-          await settings.getBool("autocompleteDescription") ??
+          settings.getBool("autocompleteDescription") ??
               state.autocompleteDescription;
       bool defaultFilterStartDateToMonday =
-          await settings.getBool("defaultFilterStartDateToMonday") ??
+          settings.getBool("defaultFilterStartDateToMonday") ??
               state.defaultFilterStartDateToMonday;
       bool oneTimerAtATime =
-          await settings.getBool("oneTimerAtATime") ?? state.oneTimerAtATime;
+          settings.getBool("oneTimerAtATime") ?? state.oneTimerAtATime;
       bool showBadgeCounts =
-          await settings.getBool("showBadgeCounts") ?? state.showBadgeCounts;
-      int defaultFilterDays = await settings.getInt("defaultFilterDays") ?? 30;
+          settings.getBool("showBadgeCounts") ?? state.showBadgeCounts;
+      int defaultFilterDays = settings.getInt("defaultFilterDays") ?? 30;
       bool hasAskedNotificationPermissions =
-          await settings.getBool("hasAskedNotificationPermissions") ??
+          settings.getBool("hasAskedNotificationPermissions") ??
               state.hasAskedNotificationPermissions;
       bool showRunningTimersAsNotifications =
-          await settings.getBool("showRunningTimersAsNotifications") ??
+          settings.getBool("showRunningTimersAsNotifications") ??
               state.showRunningTimersAsNotifications;
       yield SettingsState(
         exportGroupTimers: exportGroupTimers,
