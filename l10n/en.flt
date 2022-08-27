@@ -69,6 +69,7 @@ defaultFilterDays = Default Filter Period (Days)
 import = Import
 invalidDatabaseFile = Invalid database file!
 databaseImported = Database imported
+storageAccessRequired = Storage access required
 showBadgeCounts = Show Running Timer Count As App Icon Badge
 runningTimersNotificationTitle = Running Timers
 runningTimersNotificationBody = Timers are still running in the background

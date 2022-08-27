@@ -15,6 +15,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -47,19 +48,19 @@ class ExportMenu extends StatelessWidget {
       onSelected: (ExportMenuItem item) async {
         switch (item) {
           case ExportMenuItem.import:
-            FilePickerResult? result = await FilePicker.platform.pickFiles(
-                type: FileType.any,
-                allowMultiple: false,
-                withData: Platform.isLinux);
-            if (result == null) {
-              return;
-            }
-
-            final resultPath = Platform.isLinux
-                ? await _duplicateToTempDir(result.files.first.bytes!)
-                : result.files.first.path!;
-
             try {
+              FilePickerResult? result = await FilePicker.platform.pickFiles(
+                  type: FileType.any,
+                  allowMultiple: false,
+                  withData: Platform.isLinux);
+              if (result == null) {
+                return;
+              }
+
+              final resultPath = Platform.isLinux
+                  ? await _duplicateToTempDir(result.files.first.bytes!)
+                  : result.files.first.path!;
+
               if (!await DatabaseProvider.isValidDatabaseFile(resultPath)) {
                 scaffoldKey!.currentState!.showSnackBar(SnackBar(
                   backgroundColor: Theme.of(context).errorColor,
@@ -84,15 +85,27 @@ class ExportMenu extends StatelessWidget {
                   duration: Duration(seconds: 5),
                 ));
               }
-            } on Exception catch (e) {
-              scaffoldKey!.currentState!.showSnackBar(SnackBar(
-                backgroundColor: Theme.of(context).errorColor,
-                content: Text(
-                  e.toString(),
-                  style: TextStyle(color: Colors.white),
-                ),
-                duration: Duration(seconds: 5),
-              ));
+            } catch (e) {
+              if (e is PlatformException &&
+                  e.code == "read_external_storage_denied") {
+                scaffoldKey!.currentState!.showSnackBar(SnackBar(
+                  backgroundColor: Theme.of(context).primaryColorDark,
+                  content: Text(
+                    L10N.of(context).tr.storageAccessRequired,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  duration: Duration(seconds: 5),
+                ));
+              } else {
+                scaffoldKey!.currentState!.showSnackBar(SnackBar(
+                  backgroundColor: Theme.of(context).errorColor,
+                  content: Text(
+                    e.toString(),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  duration: Duration(seconds: 5),
+                ));
+              }
             }
             break;
           case ExportMenuItem.export:

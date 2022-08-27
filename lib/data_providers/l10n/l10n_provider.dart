@@ -87,6 +87,7 @@ abstract class L10NProvider {
   String get defaultFilterDays;
   String get invalidDatabaseFile;
   String get databaseImported;
+  String get storageAccessRequired;
   String get runningTimersNotificationTitle;
   String get runningTimersNotificationBody;
   String get enableRunningTimersNotification;
