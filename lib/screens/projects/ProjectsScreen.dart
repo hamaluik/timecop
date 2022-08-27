@@ -46,94 +46,105 @@ class ProjectsScreen extends StatelessWidget {
                   return ListView(
                     children: state.projects
                         .map((project) => Slidable(
-                              actionPane: SlidableDrawerActionPane(),
-                              actionExtentRatio: 0.15,
-                              actions: <Widget>[
-                                IconSlideAction(
-                                  color: Theme.of(context).errorColor,
-                                  foregroundColor:
-                                      Theme.of(context).colorScheme.onSecondary,
-                                  icon: FontAwesomeIcons.trash,
-                                  onTap: () async {
-                                    bool delete = await showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) =>
-                                            AlertDialog(
-                                              title: Text(L10N
-                                                  .of(context)
-                                                  .tr
-                                                  .confirmDelete),
-                                              content: RichText(
-                                                  textAlign: TextAlign.justify,
-                                                  text: TextSpan(
-                                                      style: TextStyle(
-                                                          color:
-                                                              Theme.of(context)
+                              startActionPane: ActionPane(
+                                  motion: const DrawerMotion(),
+                                  extentRatio: 0.15,
+                                  children: <Widget>[
+                                    SlidableAction(
+                                      backgroundColor:
+                                          Theme.of(context).errorColor,
+                                      foregroundColor: Theme.of(context)
+                                          .colorScheme
+                                          .onSecondary,
+                                      icon: FontAwesomeIcons.trash,
+                                      onPressed: (_) async {
+                                        bool delete = await showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) =>
+                                                AlertDialog(
+                                                  title: Text(L10N
+                                                      .of(context)
+                                                      .tr
+                                                      .confirmDelete),
+                                                  content: RichText(
+                                                      textAlign:
+                                                          TextAlign.justify,
+                                                      text: TextSpan(
+                                                          style: TextStyle(
+                                                              color: Theme.of(
+                                                                      context)
                                                                   .textTheme
                                                                   .bodyText2
                                                                   .color),
-                                                      children: <TextSpan>[
-                                                        TextSpan(
-                                                            text: L10N
-                                                                    .of(context)
-                                                                    .tr
-                                                                    .areYouSureYouWantToDelete +
-                                                                "\n\n"),
-                                                        TextSpan(
-                                                            text: "⬤ ",
-                                                            style: TextStyle(
-                                                                color: project
-                                                                    .colour)),
-                                                        TextSpan(
-                                                            text: project.name,
-                                                            style: TextStyle(
-                                                                fontStyle:
-                                                                    FontStyle
-                                                                        .italic)),
-                                                      ])),
-                                              actions: <Widget>[
-                                                TextButton(
-                                                  child: Text(L10N
-                                                      .of(context)
-                                                      .tr
-                                                      .cancel),
-                                                  onPressed: () =>
-                                                      Navigator.of(context)
-                                                          .pop(false),
-                                                ),
-                                                TextButton(
-                                                  child: Text(L10N
-                                                      .of(context)
-                                                      .tr
-                                                      .delete),
-                                                  onPressed: () =>
-                                                      Navigator.of(context)
-                                                          .pop(true),
-                                                ),
-                                              ],
-                                            ));
-                                    if (delete) {
-                                      projectsBloc.add(DeleteProject(project));
-                                    }
-                                  },
-                                )
-                              ],
-                              secondaryActions: <Widget>[
-                                IconSlideAction(
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
-                                    foregroundColor: Theme.of(context)
-                                        .colorScheme
-                                        .onSecondary,
-                                    icon: project.archived
-                                        ? FontAwesomeIcons.boxOpen
-                                        : FontAwesomeIcons.box,
-                                    onTap: () {
-                                      projectsBloc.add(EditProject(
-                                          Project.clone(project,
-                                              archived: !project.archived)));
-                                    })
-                              ],
+                                                          children: <TextSpan>[
+                                                            TextSpan(
+                                                                text: L10N
+                                                                        .of(context)
+                                                                        .tr
+                                                                        .areYouSureYouWantToDelete +
+                                                                    "\n\n"),
+                                                            TextSpan(
+                                                                text: "⬤ ",
+                                                                style: TextStyle(
+                                                                    color: project
+                                                                        .colour)),
+                                                            TextSpan(
+                                                                text: project
+                                                                    .name,
+                                                                style: TextStyle(
+                                                                    fontStyle:
+                                                                        FontStyle
+                                                                            .italic)),
+                                                          ])),
+                                                  actions: <Widget>[
+                                                    TextButton(
+                                                      child: Text(L10N
+                                                          .of(context)
+                                                          .tr
+                                                          .cancel),
+                                                      onPressed: () =>
+                                                          Navigator.of(context)
+                                                              .pop(false),
+                                                    ),
+                                                    TextButton(
+                                                      child: Text(L10N
+                                                          .of(context)
+                                                          .tr
+                                                          .delete),
+                                                      onPressed: () =>
+                                                          Navigator.of(context)
+                                                              .pop(true),
+                                                    ),
+                                                  ],
+                                                ));
+                                        if (delete) {
+                                          projectsBloc
+                                              .add(DeleteProject(project));
+                                        }
+                                      },
+                                    )
+                                  ]),
+                              endActionPane: ActionPane(
+                                  motion: const DrawerMotion(),
+                                  extentRatio: 0.15,
+                                  children: <Widget>[
+                                    SlidableAction(
+                                        backgroundColor: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
+                                        foregroundColor: Theme.of(context)
+                                            .colorScheme
+                                            .onSecondary,
+                                        icon: project.archived
+                                            ? FontAwesomeIcons.boxOpen
+                                            : FontAwesomeIcons.box,
+                                        onPressed: (_) {
+                                          projectsBloc.add(EditProject(
+                                              Project.clone(project,
+                                                  archived:
+                                                      !project.archived)));
+                                        })
+                                  ]),
                               child: ListTile(
                                 leading: ProjectColour(project: project),
                                 title: Text(project.name),

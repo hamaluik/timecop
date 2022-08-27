@@ -79,27 +79,28 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow>
   @override
   Widget build(BuildContext context) {
     return Slidable(
-      actionPane: SlidableDrawerActionPane(),
-      actionExtentRatio: 0.15,
-      secondaryActions: <Widget>[
-        IconSlideAction(
-            color: Theme.of(context).colorScheme.secondary,
-            foregroundColor: Theme.of(context).colorScheme.onSecondary,
-            icon: FontAwesomeIcons.play,
-            onTap: () {
-              final TimersBloc timersBloc =
-                  BlocProvider.of<TimersBloc>(context);
-              assert(timersBloc != null);
-              final ProjectsBloc projectsBloc =
-                  BlocProvider.of<ProjectsBloc>(context);
-              assert(projectsBloc != null);
-              Project project =
-                  projectsBloc.getProjectByID(widget.timers.first?.projectID);
-              timersBloc.add(CreateTimer(
-                  description: widget.timers.first?.description ?? "",
-                  project: project));
-            })
-      ],
+      endActionPane: ActionPane(
+          motion: const DrawerMotion(),
+          extentRatio: 0.15,
+          children: <Widget>[
+            SlidableAction(
+                backgroundColor: Theme.of(context).colorScheme.secondary,
+                foregroundColor: Theme.of(context).colorScheme.onSecondary,
+                icon: FontAwesomeIcons.play,
+                onPressed: (_) {
+                  final TimersBloc timersBloc =
+                      BlocProvider.of<TimersBloc>(context);
+                  assert(timersBloc != null);
+                  final ProjectsBloc projectsBloc =
+                      BlocProvider.of<ProjectsBloc>(context);
+                  assert(projectsBloc != null);
+                  Project project = projectsBloc
+                      .getProjectByID(widget.timers.first?.projectID);
+                  timersBloc.add(CreateTimer(
+                      description: widget.timers.first?.description ?? "",
+                      project: project));
+                })
+          ]),
       child: ExpansionTile(
         onExpansionChanged: (expanded) {
           setState(() {

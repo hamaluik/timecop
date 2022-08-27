@@ -96,23 +96,24 @@ class _ExportScreenState extends State<ExportScreen> {
             initiallyExpanded: true,
             children: <Widget>[
               Slidable(
-                actionPane: SlidableDrawerActionPane(),
-                actionExtentRatio: 0.15,
-                secondaryActions: _startDate == null
-                    ? <Widget>[]
-                    : <Widget>[
-                        IconSlideAction(
-                          color: Theme.of(context).errorColor,
-                          foregroundColor:
-                              Theme.of(context).colorScheme.onSecondary,
-                          icon: FontAwesomeIcons.minusCircle,
-                          onTap: () {
-                            setState(() {
-                              _startDate = null;
-                            });
-                          },
-                        )
-                      ],
+                endActionPane: ActionPane(
+                    motion: const DrawerMotion(),
+                    extentRatio: 0.15,
+                    children: _startDate == null
+                        ? <Widget>[]
+                        : <Widget>[
+                            SlidableAction(
+                              backgroundColor: Theme.of(context).errorColor,
+                              foregroundColor:
+                                  Theme.of(context).colorScheme.onSecondary,
+                              icon: FontAwesomeIcons.minusCircle,
+                              onPressed: (_) {
+                                setState(() {
+                                  _startDate = null;
+                                });
+                              },
+                            )
+                          ]),
                 child: ListTile(
                   leading: Icon(FontAwesomeIcons.calendar),
                   title: Text(L10N.of(context).tr.from),
@@ -140,23 +141,24 @@ class _ExportScreenState extends State<ExportScreen> {
                 ),
               ),
               Slidable(
-                actionPane: SlidableDrawerActionPane(),
-                actionExtentRatio: 0.15,
-                secondaryActions: _endDate == null
-                    ? <Widget>[]
-                    : <Widget>[
-                        IconSlideAction(
-                          color: Theme.of(context).errorColor,
-                          foregroundColor:
-                              Theme.of(context).colorScheme.onSecondary,
-                          icon: FontAwesomeIcons.minusCircle,
-                          onTap: () {
-                            setState(() {
-                              _endDate = null;
-                            });
-                          },
-                        )
-                      ],
+                endActionPane: ActionPane(
+                    motion: const DrawerMotion(),
+                    extentRatio: 0.15,
+                    children: _endDate == null
+                        ? <Widget>[]
+                        : <Widget>[
+                            SlidableAction(
+                              backgroundColor: Theme.of(context).errorColor,
+                              foregroundColor:
+                                  Theme.of(context).colorScheme.onSecondary,
+                              icon: FontAwesomeIcons.minusCircle,
+                              onPressed: (_) {
+                                setState(() {
+                                  _endDate = null;
+                                });
+                              },
+                            )
+                          ]),
                 child: ListTile(
                   leading: Icon(FontAwesomeIcons.calendar),
                   title: Text(L10N.of(context).tr.to),

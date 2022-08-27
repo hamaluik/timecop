@@ -101,19 +101,20 @@ class SettingsScreen extends StatelessWidget {
                   }
 
                   return Slidable(
-                    actionPane: SlidableDrawerActionPane(),
-                    actionExtentRatio: 0.15,
-                    secondaryActions: <Widget>[
-                      IconSlideAction(
-                        color: Theme.of(context).errorColor,
-                        foregroundColor:
-                            Theme.of(context).colorScheme.onSecondary,
-                        icon: FontAwesomeIcons.minusCircle,
-                        onTap: () {
-                          settingsBloc.add(SetDefaultFilterDays(null));
-                        },
-                      )
-                    ],
+                    endActionPane: ActionPane(
+                        motion: const DrawerMotion(),
+                        extentRatio: 0.15,
+                        children: <Widget>[
+                          SlidableAction(
+                            backgroundColor: Theme.of(context).errorColor,
+                            foregroundColor:
+                                Theme.of(context).colorScheme.onSecondary,
+                            icon: FontAwesomeIcons.minusCircle,
+                            onPressed: (_) {
+                              settingsBloc.add(SetDefaultFilterDays(null));
+                            },
+                          )
+                        ]),
                     child: ListTile(
                       title: Text(L10N.of(context).tr.defaultFilterDays),
                       trailing: Text(settings.defaultFilterDays == -1

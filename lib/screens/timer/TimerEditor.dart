@@ -218,20 +218,22 @@ class _TimerEditorState extends State<TimerEditor> {
                     ),
             ),
             Slidable(
-              actionPane: SlidableDrawerActionPane(),
-              actionExtentRatio: 0.15,
-              secondaryActions: <Widget>[
-                IconSlideAction(
-                  color: Theme.of(context).colorScheme.secondary,
-                  foregroundColor: Theme.of(context).colorScheme.onSecondary,
-                  icon: FontAwesomeIcons.clock,
-                  onTap: () {
-                    _oldStartTime = _startTime;
-                    _oldEndTime = _endTime;
-                    setStartTime(DateTime.now());
-                  },
-                ),
-              ],
+              endActionPane: ActionPane(
+                  motion: const DrawerMotion(),
+                  extentRatio: 0.15,
+                  children: <Widget>[
+                    SlidableAction(
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+                      foregroundColor:
+                          Theme.of(context).colorScheme.onSecondary,
+                      icon: FontAwesomeIcons.clock,
+                      onPressed: (_) {
+                        _oldStartTime = _startTime;
+                        _oldEndTime = _endTime;
+                        setStartTime(DateTime.now());
+                      },
+                    ),
+                  ]),
               child: ListTile(
                 title: Text(L10N.of(context).tr.startTime),
                 trailing: Text(_dateFormat.format(_startTime)),
@@ -263,38 +265,43 @@ class _TimerEditorState extends State<TimerEditor> {
               ),
             ),
             Slidable(
-              actionPane: SlidableDrawerActionPane(),
-              actionExtentRatio: 0.15,
-              secondaryActions: _endTime == null
-                  ? <Widget>[
-                      IconSlideAction(
-                        color: Theme.of(context).colorScheme.secondary,
-                        foregroundColor:
-                            Theme.of(context).colorScheme.onSecondary,
-                        icon: FontAwesomeIcons.clock,
-                        onTap: () => setState(() => _endTime = DateTime.now()),
-                      ),
-                    ]
-                  : <Widget>[
-                      IconSlideAction(
-                        color: Theme.of(context).colorScheme.secondary,
-                        foregroundColor:
-                            Theme.of(context).colorScheme.onSecondary,
-                        icon: FontAwesomeIcons.clock,
-                        onTap: () => setState(() => _endTime = DateTime.now()),
-                      ),
-                      IconSlideAction(
-                        color: Theme.of(context).errorColor,
-                        foregroundColor:
-                            Theme.of(context).colorScheme.onSecondary,
-                        icon: FontAwesomeIcons.minusCircle,
-                        onTap: () {
-                          setState(() {
-                            _endTime = null;
-                          });
-                        },
-                      )
-                    ],
+              endActionPane: ActionPane(
+                  motion: const DrawerMotion(),
+                  extentRatio: 0.15,
+                  children: _endTime == null
+                      ? <Widget>[
+                          SlidableAction(
+                            backgroundColor:
+                                Theme.of(context).colorScheme.secondary,
+                            foregroundColor:
+                                Theme.of(context).colorScheme.onSecondary,
+                            icon: FontAwesomeIcons.clock,
+                            onPressed: (_) =>
+                                setState(() => _endTime = DateTime.now()),
+                          ),
+                        ]
+                      : <Widget>[
+                          SlidableAction(
+                            backgroundColor:
+                                Theme.of(context).colorScheme.secondary,
+                            foregroundColor:
+                                Theme.of(context).colorScheme.onSecondary,
+                            icon: FontAwesomeIcons.clock,
+                            onPressed: (_) =>
+                                setState(() => _endTime = DateTime.now()),
+                          ),
+                          SlidableAction(
+                            backgroundColor: Theme.of(context).errorColor,
+                            foregroundColor:
+                                Theme.of(context).colorScheme.onSecondary,
+                            icon: FontAwesomeIcons.minusCircle,
+                            onPressed: (_) {
+                              setState(() {
+                                _endTime = null;
+                              });
+                            },
+                          )
+                        ]),
               child: ListTile(
                 title: Text(L10N.of(context).tr.endTime),
                 trailing:
@@ -336,16 +343,18 @@ class _TimerEditorState extends State<TimerEditor> {
               ),
             ),
             Slidable(
-              actionPane: SlidableDrawerActionPane(),
-              actionExtentRatio: 0.15,
-              secondaryActions: <Widget>[
-                IconSlideAction(
-                  color: Theme.of(context).colorScheme.secondary,
-                  foregroundColor: Theme.of(context).colorScheme.onSecondary,
-                  icon: FontAwesomeIcons.edit,
-                  onTap: () async => await _editNotes(context),
-                ),
-              ],
+              endActionPane: ActionPane(
+                  motion: const DrawerMotion(),
+                  extentRatio: 0.15,
+                  children: <Widget>[
+                    SlidableAction(
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+                      foregroundColor:
+                          Theme.of(context).colorScheme.onSecondary,
+                      icon: FontAwesomeIcons.edit,
+                      onPressed: (_) async => await _editNotes(context),
+                    ),
+                  ]),
               child: ListTile(
                 title: Text("Notes"),
                 onTap: () async => await _editNotes(context),

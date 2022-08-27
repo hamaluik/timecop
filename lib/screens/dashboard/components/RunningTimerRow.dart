@@ -48,51 +48,55 @@ class RunningTimerRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Slidable(
-      actionPane: SlidableDrawerActionPane(),
-      actionExtentRatio: 0.15,
-      actions: <Widget>[
-        IconSlideAction(
-          color: Theme.of(context).errorColor,
-          foregroundColor: Theme.of(context).colorScheme.onSecondary,
-          icon: FontAwesomeIcons.trash,
-          onTap: () async {
-            bool delete = await showDialog(
-                context: context,
-                builder: (BuildContext context) => AlertDialog(
-                      title: Text(L10N.of(context).tr.confirmDelete),
-                      content: Text(L10N.of(context).tr.deleteTimerConfirm),
-                      actions: <Widget>[
-                        TextButton(
-                          child: Text(L10N.of(context).tr.cancel),
-                          onPressed: () => Navigator.of(context).pop(false),
-                        ),
-                        TextButton(
-                          child: Text(L10N.of(context).tr.delete),
-                          onPressed: () => Navigator.of(context).pop(true),
-                        ),
-                      ],
-                    ));
-            if (delete == true) {
-              final TimersBloc timersBloc =
-                  BlocProvider.of<TimersBloc>(context);
-              assert(timersBloc != null);
-              timersBloc.add(DeleteTimer(timer));
-            }
-          },
-        )
-      ],
-      secondaryActions: <Widget>[
-        IconSlideAction(
-          color: Theme.of(context).colorScheme.secondary,
-          foregroundColor: Theme.of(context).colorScheme.onSecondary,
-          icon: FontAwesomeIcons.solidStopCircle,
-          onTap: () {
-            final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
-            assert(timers != null);
-            timers.add(StopTimer(timer));
-          },
-        )
-      ],
+      startActionPane: ActionPane(
+          motion: const DrawerMotion(),
+          extentRatio: 0.15,
+          children: <Widget>[
+            SlidableAction(
+              backgroundColor: Theme.of(context).errorColor,
+              foregroundColor: Theme.of(context).colorScheme.onSecondary,
+              icon: FontAwesomeIcons.trash,
+              onPressed: (_) async {
+                bool delete = await showDialog(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                          title: Text(L10N.of(context).tr.confirmDelete),
+                          content: Text(L10N.of(context).tr.deleteTimerConfirm),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text(L10N.of(context).tr.cancel),
+                              onPressed: () => Navigator.of(context).pop(false),
+                            ),
+                            TextButton(
+                              child: Text(L10N.of(context).tr.delete),
+                              onPressed: () => Navigator.of(context).pop(true),
+                            ),
+                          ],
+                        ));
+                if (delete == true) {
+                  final TimersBloc timersBloc =
+                      BlocProvider.of<TimersBloc>(context);
+                  assert(timersBloc != null);
+                  timersBloc.add(DeleteTimer(timer));
+                }
+              },
+            )
+          ]),
+      endActionPane: ActionPane(
+          motion: const DrawerMotion(),
+          extentRatio: 0.15,
+          children: <Widget>[
+            SlidableAction(
+              backgroundColor: Theme.of(context).colorScheme.secondary,
+              foregroundColor: Theme.of(context).colorScheme.onSecondary,
+              icon: FontAwesomeIcons.solidStopCircle,
+              onPressed: (_) {
+                final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+                assert(timers != null);
+                timers.add(StopTimer(timer));
+              },
+            )
+          ]),
       child: ListTile(
           leading: ProjectColour(
               project: BlocProvider.of<ProjectsBloc>(context)
