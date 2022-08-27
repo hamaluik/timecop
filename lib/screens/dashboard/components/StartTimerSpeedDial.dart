@@ -63,8 +63,8 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
           child: FloatingActionButton(
             heroTag: null,
             mini: true,
-            backgroundColor: Theme.of(context).accentColor,
-            foregroundColor: Theme.of(context).accentIconTheme.color,
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+            foregroundColor: Theme.of(context).colorScheme.onSecondary,
             onPressed: () {
               _controller.reverse();
               final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
@@ -102,7 +102,7 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
             heroTag: null,
             mini: true,
             backgroundColor: Colors.pink[600],
-            foregroundColor: Theme.of(context).accentIconTheme.color,
+            foregroundColor: Theme.of(context).colorScheme.onSecondary,
             onPressed: () {
               _controller.reverse();
               final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
@@ -130,7 +130,7 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
           return FloatingActionButton(
             heroTag: null,
             backgroundColor: _controller.isDismissed
-                ? Theme.of(context).accentColor
+                ? Theme.of(context).colorScheme.secondary
                 : Theme.of(context).disabledColor,
             child: _controller.isDismissed
                 ? Stack(

@@ -44,7 +44,7 @@ class FilterSheet extends StatelessWidget {
             ExpansionTile(
               title: Text(L10N.of(context).tr.filter,
                   style: TextStyle(
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).colorScheme.secondary,
                       fontWeight: FontWeight.w700)),
               initiallyExpanded: true,
               children: <Widget>[
@@ -57,7 +57,7 @@ class FilterSheet extends StatelessWidget {
                           IconSlideAction(
                             color: Theme.of(context).errorColor,
                             foregroundColor:
-                                Theme.of(context).accentIconTheme.color,
+                                Theme.of(context).colorScheme.onSecondary,
                             icon: FontAwesomeIcons.minusCircle,
                             onTap: () => dashboardBloc
                                 .add(FilterStartChangedEvent(null)),
@@ -86,7 +86,7 @@ class FilterSheet extends StatelessWidget {
                             doneStyle: Theme.of(context).textTheme.button,
                             itemStyle: Theme.of(context).textTheme.bodyText2,
                             backgroundColor:
-                                Theme.of(context).scaffoldBackgroundColor,
+                                Theme.of(context).colorScheme.surface,
                           ));
                     },
                   ),
@@ -100,7 +100,7 @@ class FilterSheet extends StatelessWidget {
                           IconSlideAction(
                             color: Theme.of(context).errorColor,
                             foregroundColor:
-                                Theme.of(context).accentIconTheme.color,
+                                Theme.of(context).colorScheme.onSecondary,
                             icon: FontAwesomeIcons.minusCircle,
                             onTap: () =>
                                 dashboardBloc.add(FilterEndChangedEvent(null)),
@@ -129,7 +129,7 @@ class FilterSheet extends StatelessWidget {
                             doneStyle: Theme.of(context).textTheme.button,
                             itemStyle: Theme.of(context).textTheme.bodyText2,
                             backgroundColor:
-                                Theme.of(context).scaffoldBackgroundColor,
+                                Theme.of(context).colorScheme.surface,
                           ));
                     },
                   ),
@@ -139,7 +139,7 @@ class FilterSheet extends StatelessWidget {
             ExpansionTile(
               title: Text(L10N.of(context).tr.projects,
                   style: TextStyle(
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).colorScheme.secondary,
                       fontWeight: FontWeight.w700)),
               children: <Widget>[
                 Row(
@@ -147,7 +147,7 @@ class FilterSheet extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    RaisedButton(
+                    ElevatedButton(
                       child: Text(L10N.of(context).tr.selectNone),
                       onPressed: () => dashboardBloc.add(
                           FilterProjectsChangedEvent(<int>[null]
@@ -155,7 +155,7 @@ class FilterSheet extends StatelessWidget {
                                   projectsBloc.state.projects.map((p) => p.id))
                               .toList())),
                     ),
-                    RaisedButton(
+                    ElevatedButton(
                       child: Text(L10N.of(context).tr.selectAll),
                       onPressed: () => dashboardBloc
                           .add(FilterProjectsChangedEvent(<int>[])),
@@ -174,7 +174,8 @@ class FilterSheet extends StatelessWidget {
                                 project?.name ?? L10N.of(context).tr.noProject),
                             value: !state.hiddenProjects
                                 .any((p) => p == project?.id),
-                            activeColor: Theme.of(context).accentColor,
+                            activeColor:
+                                Theme.of(context).colorScheme.secondary,
                             onChanged: (_) {
                               List<int> hiddenProjects =
                                   state.hiddenProjects.map((p) => p).toList();

@@ -141,19 +141,19 @@ class ExportMenu extends StatelessWidget {
         return [
           PopupMenuItem(
             key: Key("exportMenuImport"),
+            value: ExportMenuItem.import,
             child: ListTile(
               leading: Icon(FontAwesomeIcons.fileImport),
               title: Text(L10N.of(context).tr.import),
             ),
-            value: ExportMenuItem.import,
           ),
           PopupMenuItem(
             key: Key("exportMenuExport"),
+            value: ExportMenuItem.export,
             child: ListTile(
               leading: Icon(FontAwesomeIcons.fileExport),
               title: Text(L10N.of(context).tr.export),
             ),
-            value: ExportMenuItem.export,
           ),
         ];
       },

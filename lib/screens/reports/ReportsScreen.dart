@@ -127,19 +127,20 @@ class _ReportsScreenState extends State<ReportsScreen> {
                 pagination: SwiperPagination(
                     builder: DotSwiperPaginationBuilder(
                   color: Theme.of(context).disabledColor,
-                  activeColor: Theme.of(context).accentColor,
+                  activeColor: Theme.of(context).colorScheme.secondary,
                 )),
                 control: Platform.isLinux || Platform.isMacOS
                     ? SwiperControl(
                         iconPrevious: Icons.arrow_back_ios_new,
-                        iconNext: Icons.arrow_forward_ios)
+                        iconNext: Icons.arrow_forward_ios,
+                        color: Theme.of(context).colorScheme.onBackground)
                     : SwiperControl(iconPrevious: null, iconNext: null),
               ),
             ),
             ExpansionTile(
               title: Text(L10N.of(context).tr.filter,
                   style: TextStyle(
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).colorScheme.secondary,
                       fontWeight: FontWeight.w700)),
               initiallyExpanded: false,
               children: <Widget>[
@@ -152,7 +153,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                           IconSlideAction(
                             color: Theme.of(context).errorColor,
                             foregroundColor:
-                                Theme.of(context).accentIconTheme.color,
+                                Theme.of(context).colorScheme.onSecondary,
                             icon: FontAwesomeIcons.minusCircle,
                             onTap: () {
                               setState(() {
@@ -185,7 +186,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                             doneStyle: Theme.of(context).textTheme.button,
                             itemStyle: Theme.of(context).textTheme.bodyText2,
                             backgroundColor:
-                                Theme.of(context).scaffoldBackgroundColor,
+                                Theme.of(context).colorScheme.surface,
                           ));
 
                       // if the user cancelled, this should be null
@@ -207,7 +208,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                           IconSlideAction(
                             color: Theme.of(context).errorColor,
                             foregroundColor:
-                                Theme.of(context).accentIconTheme.color,
+                                Theme.of(context).colorScheme.onSecondary,
                             icon: FontAwesomeIcons.minusCircle,
                             onTap: () {
                               setState(() {
@@ -242,7 +243,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                             doneStyle: Theme.of(context).textTheme.button,
                             itemStyle: Theme.of(context).textTheme.bodyText2,
                             backgroundColor:
-                                Theme.of(context).scaffoldBackgroundColor,
+                                Theme.of(context).colorScheme.surface,
                           ));
 
                       // if the user cancelled, this should be null
@@ -259,7 +260,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
             ExpansionTile(
               title: Text(L10N.of(context).tr.projects,
                   style: TextStyle(
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).colorScheme.secondary,
                       fontWeight: FontWeight.w700)),
               children: <Widget>[
                 Row(
@@ -267,7 +268,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    RaisedButton(
+                    ElevatedButton(
                       child: Text(L10N.of(context).tr.selectNone),
                       onPressed: () {
                         setState(() {
@@ -275,7 +276,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                         });
                       },
                     ),
-                    RaisedButton(
+                    ElevatedButton(
                       child: Text(L10N.of(context).tr.selectAll),
                       onPressed: () {
                         setState(() {
@@ -305,7 +306,8 @@ class _ReportsScreenState extends State<ReportsScreen> {
                                   L10N.of(context).tr.noProject),
                               value: selectedProjects
                                   .any((p) => p?.id == project?.id),
-                              activeColor: Theme.of(context).accentColor,
+                              activeColor:
+                                  Theme.of(context).colorScheme.secondary,
                               onChanged: (_) => setState(() {
                                 if (selectedProjects
                                     .any((p) => p?.id == project?.id)) {

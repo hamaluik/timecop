@@ -42,7 +42,7 @@ class PopupMenu extends StatelessWidget {
         height: 30,
         semanticsLabel: L10N.of(context).tr.logoSemantics,
       ),
-      color: Theme.of(context).scaffoldBackgroundColor,
+      color: Theme.of(context).colorScheme.surface,
       onSelected: (MenuItem item) {
         switch (item) {
           case MenuItem.projects:

@@ -83,8 +83,8 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow>
       actionExtentRatio: 0.15,
       secondaryActions: <Widget>[
         IconSlideAction(
-            color: Theme.of(context).accentColor,
-            foregroundColor: Theme.of(context).accentIconTheme.color,
+            color: Theme.of(context).colorScheme.secondary,
+            foregroundColor: Theme.of(context).colorScheme.onSecondary,
             icon: FontAwesomeIcons.play,
             onTap: () {
               final TimersBloc timersBloc =

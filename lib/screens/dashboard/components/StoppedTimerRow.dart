@@ -54,7 +54,7 @@ class StoppedTimerRow extends StatelessWidget {
       actions: <Widget>[
         IconSlideAction(
           color: Theme.of(context).errorColor,
-          foregroundColor: Theme.of(context).accentIconTheme.color,
+          foregroundColor: Theme.of(context).colorScheme.onSecondary,
           icon: FontAwesomeIcons.trash,
           onTap: () async {
             bool delete = await showDialog(
@@ -63,11 +63,11 @@ class StoppedTimerRow extends StatelessWidget {
                       title: Text(L10N.of(context).tr.confirmDelete),
                       content: Text(L10N.of(context).tr.deleteTimerConfirm),
                       actions: <Widget>[
-                        FlatButton(
+                        TextButton(
                           child: Text(L10N.of(context).tr.cancel),
                           onPressed: () => Navigator.of(context).pop(false),
                         ),
-                        FlatButton(
+                        TextButton(
                           child: Text(L10N.of(context).tr.delete),
                           onPressed: () => Navigator.of(context).pop(true),
                         ),
@@ -84,8 +84,8 @@ class StoppedTimerRow extends StatelessWidget {
       ],
       secondaryActions: <Widget>[
         IconSlideAction(
-            color: Theme.of(context).accentColor,
-            foregroundColor: Theme.of(context).accentIconTheme.color,
+            color: Theme.of(context).colorScheme.secondary,
+            foregroundColor: Theme.of(context).colorScheme.onSecondary,
             icon: FontAwesomeIcons.play,
             onTap: () {
               final TimersBloc timersBloc =

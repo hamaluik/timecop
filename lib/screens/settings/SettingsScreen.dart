@@ -57,7 +57,7 @@ class SettingsScreen extends StatelessWidget {
                 value: settings.groupTimers,
                 onChanged: (bool value) =>
                     settingsBloc.add(SetBoolValueEvent(groupTimers: value)),
-                activeColor: Theme.of(context).accentColor,
+                activeColor: Theme.of(context).colorScheme.secondary,
               ),
             ),
             BlocBuilder<SettingsBloc, SettingsState>(
@@ -68,7 +68,7 @@ class SettingsScreen extends StatelessWidget {
                 value: settings.collapseDays,
                 onChanged: (bool value) =>
                     settingsBloc.add(SetBoolValueEvent(collapseDays: value)),
-                activeColor: Theme.of(context).accentColor,
+                activeColor: Theme.of(context).colorScheme.secondary,
               ),
             ),
             BlocBuilder<SettingsBloc, SettingsState>(
@@ -79,7 +79,7 @@ class SettingsScreen extends StatelessWidget {
                 value: settings.autocompleteDescription,
                 onChanged: (bool value) => settingsBloc
                     .add(SetBoolValueEvent(autocompleteDescription: value)),
-                activeColor: Theme.of(context).accentColor,
+                activeColor: Theme.of(context).colorScheme.secondary,
               ),
             ),
             BlocBuilder<SettingsBloc, SettingsState>(
@@ -90,7 +90,7 @@ class SettingsScreen extends StatelessWidget {
                 value: settings.defaultFilterStartDateToMonday,
                 onChanged: (bool value) => settingsBloc.add(
                     SetBoolValueEvent(defaultFilterStartDateToMonday: value)),
-                activeColor: Theme.of(context).accentColor,
+                activeColor: Theme.of(context).colorScheme.secondary,
               ),
             ),
             BlocBuilder<SettingsBloc, SettingsState>(
@@ -107,7 +107,7 @@ class SettingsScreen extends StatelessWidget {
                       IconSlideAction(
                         color: Theme.of(context).errorColor,
                         foregroundColor:
-                            Theme.of(context).accentIconTheme.color,
+                            Theme.of(context).colorScheme.onSecondary,
                         icon: FontAwesomeIcons.minusCircle,
                         onTap: () {
                           settingsBloc.add(SetDefaultFilterDays(null));
@@ -172,7 +172,7 @@ class SettingsScreen extends StatelessWidget {
                 value: settings.oneTimerAtATime,
                 onChanged: (bool value) =>
                     settingsBloc.add(SetBoolValueEvent(oneTimerAtATime: value)),
-                activeColor: Theme.of(context).accentColor,
+                activeColor: Theme.of(context).colorScheme.secondary,
               ),
             ),
             if (Platform.isIOS || Platform.isAndroid)
@@ -182,9 +182,9 @@ class SettingsScreen extends StatelessWidget {
                     SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.showBadgeCounts),
                   value: settings.showBadgeCounts,
-                  onChanged: (bool value) =>
-                    settingsBloc.add(SetBoolValueEvent(showBadgeCounts: value)),
-                  activeColor: Theme.of(context).accentColor,
+                  onChanged: (bool value) => settingsBloc
+                      .add(SetBoolValueEvent(showBadgeCounts: value)),
+                  activeColor: Theme.of(context).colorScheme.secondary,
                 ),
               ),
             BlocBuilder<SettingsBloc, SettingsState>(
@@ -202,7 +202,7 @@ class SettingsScreen extends StatelessWidget {
                   settingsBloc.add(SetBoolValueEvent(
                       showRunningTimersAsNotifications: value));
                 },
-                activeColor: Theme.of(context).accentColor,
+                activeColor: Theme.of(context).colorScheme.secondary,
               ),
             ),
           ],

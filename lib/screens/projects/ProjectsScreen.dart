@@ -52,7 +52,7 @@ class ProjectsScreen extends StatelessWidget {
                                 IconSlideAction(
                                   color: Theme.of(context).errorColor,
                                   foregroundColor:
-                                      Theme.of(context).accentIconTheme.color,
+                                      Theme.of(context).colorScheme.onSecondary,
                                   icon: FontAwesomeIcons.trash,
                                   onTap: () async {
                                     bool delete = await showDialog(
@@ -92,7 +92,7 @@ class ProjectsScreen extends StatelessWidget {
                                                                         .italic)),
                                                       ])),
                                               actions: <Widget>[
-                                                FlatButton(
+                                                TextButton(
                                                   child: Text(L10N
                                                       .of(context)
                                                       .tr
@@ -101,7 +101,7 @@ class ProjectsScreen extends StatelessWidget {
                                                       Navigator.of(context)
                                                           .pop(false),
                                                 ),
-                                                FlatButton(
+                                                TextButton(
                                                   child: Text(L10N
                                                       .of(context)
                                                       .tr
@@ -120,9 +120,11 @@ class ProjectsScreen extends StatelessWidget {
                               ],
                               secondaryActions: <Widget>[
                                 IconSlideAction(
-                                    color: Theme.of(context).accentColor,
-                                    foregroundColor:
-                                        Theme.of(context).accentIconTheme.color,
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
+                                    foregroundColor: Theme.of(context)
+                                        .colorScheme
+                                        .onSecondary,
                                     icon: project.archived
                                         ? FontAwesomeIcons.boxOpen
                                         : FontAwesomeIcons.box,

@@ -78,11 +78,11 @@ class _ProjectEditorState extends State<ProjectEditor> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                FlatButton(
+                TextButton(
                   child: Text(L10N.of(context).tr.cancel),
                   onPressed: () => Navigator.of(context).pop(),
                 ),
-                FlatButton(
+                TextButton(
                   child: Text(widget.project == null
                       ? L10N.of(context).tr.create
                       : L10N.of(context).tr.save),

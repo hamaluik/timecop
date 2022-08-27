@@ -41,8 +41,8 @@ class _StartTimerButtonState extends State<StartTimerButton> {
         if (timersState.timers.where((t) => t.endTime == null).isEmpty) {
           return FloatingActionButton(
             key: Key("startTimerButton"),
-            backgroundColor: Theme.of(context).accentColor,
-            foregroundColor: Theme.of(context).accentIconTheme.color,
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+            foregroundColor: Theme.of(context).colorScheme.onSecondary,
             onPressed: () {
               final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
               assert(timers != null);
@@ -69,7 +69,7 @@ class _StartTimerButtonState extends State<StartTimerButton> {
           return FloatingActionButton(
             key: Key("stopAllTimersButton"),
             backgroundColor: Colors.pink[600],
-            foregroundColor: Theme.of(context).accentIconTheme.color,
+            foregroundColor: Theme.of(context).colorScheme.onSecondary,
             onPressed: () {
               final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
               assert(timers != null);

@@ -72,9 +72,9 @@ class _TopBarState extends State<TopBar> {
           },
           decoration: InputDecoration(
               prefixIcon: Icon(FontAwesomeIcons.search,
-                  color: Theme.of(context).backgroundColor),
+                  color: Theme.of(context).colorScheme.onPrimary),
               suffixIcon: IconButton(
-                color: Theme.of(context).backgroundColor,
+                color: Theme.of(context).colorScheme.onPrimary,
                 icon: Icon(FontAwesomeIcons.timesCircle),
                 onPressed: cancelSearch,
               )),

@@ -87,11 +87,11 @@ class DayGrouping {
                   children: <Widget>[
                     Text(_dateFormat.format(date),
                         style: TextStyle(
-                            color: Theme.of(context).accentColor,
+                            color: Theme.of(context).colorScheme.secondary,
                             fontWeight: FontWeight.w700)),
                     Text(TimerEntry.formatDuration(runningTotal),
                         style: TextStyle(
-                          color: Theme.of(context).accentColor,
+                          color: Theme.of(context).colorScheme.secondary,
                           fontFamily: "FiraMono",
                         ))
                   ],

@@ -91,13 +91,28 @@ class _ExportScreenState extends State<ExportScreen> {
           ExpansionTile(
             title: Text(L10N.of(context).tr.filter,
                 style: TextStyle(
-                    color: Theme.of(context).accentColor,
+                    color: Theme.of(context).colorScheme.secondary,
                     fontWeight: FontWeight.w700)),
             initiallyExpanded: true,
             children: <Widget>[
               Slidable(
                 actionPane: SlidableDrawerActionPane(),
                 actionExtentRatio: 0.15,
+                secondaryActions: _startDate == null
+                    ? <Widget>[]
+                    : <Widget>[
+                        IconSlideAction(
+                          color: Theme.of(context).errorColor,
+                          foregroundColor:
+                              Theme.of(context).colorScheme.onSecondary,
+                          icon: FontAwesomeIcons.minusCircle,
+                          onTap: () {
+                            setState(() {
+                              _startDate = null;
+                            });
+                          },
+                        )
+                      ],
                 child: ListTile(
                   leading: Icon(FontAwesomeIcons.calendar),
                   title: Text(L10N.of(context).tr.from),
@@ -119,29 +134,29 @@ class _ExportScreenState extends State<ExportScreen> {
                           doneStyle: Theme.of(context).textTheme.button,
                           itemStyle: Theme.of(context).textTheme.bodyText2,
                           backgroundColor:
-                              Theme.of(context).scaffoldBackgroundColor,
+                              Theme.of(context).colorScheme.surface,
                         ));
                   },
                 ),
-                secondaryActions: _startDate == null
+              ),
+              Slidable(
+                actionPane: SlidableDrawerActionPane(),
+                actionExtentRatio: 0.15,
+                secondaryActions: _endDate == null
                     ? <Widget>[]
                     : <Widget>[
                         IconSlideAction(
                           color: Theme.of(context).errorColor,
                           foregroundColor:
-                              Theme.of(context).accentIconTheme.color,
+                              Theme.of(context).colorScheme.onSecondary,
                           icon: FontAwesomeIcons.minusCircle,
                           onTap: () {
                             setState(() {
-                              _startDate = null;
+                              _endDate = null;
                             });
                           },
                         )
                       ],
-              ),
-              Slidable(
-                actionPane: SlidableDrawerActionPane(),
-                actionExtentRatio: 0.15,
                 child: ListTile(
                   leading: Icon(FontAwesomeIcons.calendar),
                   title: Text(L10N.of(context).tr.to),
@@ -164,25 +179,10 @@ class _ExportScreenState extends State<ExportScreen> {
                           doneStyle: Theme.of(context).textTheme.button,
                           itemStyle: Theme.of(context).textTheme.bodyText2,
                           backgroundColor:
-                              Theme.of(context).scaffoldBackgroundColor,
+                              Theme.of(context).colorScheme.surface,
                         ));
                   },
                 ),
-                secondaryActions: _endDate == null
-                    ? <Widget>[]
-                    : <Widget>[
-                        IconSlideAction(
-                          color: Theme.of(context).errorColor,
-                          foregroundColor:
-                              Theme.of(context).accentIconTheme.color,
-                          icon: FontAwesomeIcons.minusCircle,
-                          onTap: () {
-                            setState(() {
-                              _endDate = null;
-                            });
-                          },
-                        )
-                      ],
               ),
             ],
           ),
@@ -193,7 +193,7 @@ class _ExportScreenState extends State<ExportScreen> {
               key: Key("optionColumns"),
               title: Text(L10N.of(context).tr.columns,
                   style: TextStyle(
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).colorScheme.secondary,
                       fontWeight: FontWeight.w700)),
               children: <Widget>[
                 SwitchListTile.adaptive(
@@ -201,56 +201,56 @@ class _ExportScreenState extends State<ExportScreen> {
                   value: settingsState.exportIncludeDate,
                   onChanged: (bool value) => settingsBloc
                       .add(SetBoolValueEvent(exportIncludeDate: value)),
-                  activeColor: Theme.of(context).accentColor,
+                  activeColor: Theme.of(context).colorScheme.secondary,
                 ),
                 SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.project),
                   value: settingsState.exportIncludeProject,
                   onChanged: (bool value) => settingsBloc
                       .add(SetBoolValueEvent(exportIncludeProject: value)),
-                  activeColor: Theme.of(context).accentColor,
+                  activeColor: Theme.of(context).colorScheme.secondary,
                 ),
                 SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.description),
                   value: settingsState.exportIncludeDescription,
                   onChanged: (bool value) => settingsBloc
                       .add(SetBoolValueEvent(exportIncludeDescription: value)),
-                  activeColor: Theme.of(context).accentColor,
+                  activeColor: Theme.of(context).colorScheme.secondary,
                 ),
                 SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.combinedProjectDescription),
                   value: settingsState.exportIncludeProjectDescription,
                   onChanged: (bool value) => settingsBloc.add(SetBoolValueEvent(
                       exportIncludeProjectDescription: value)),
-                  activeColor: Theme.of(context).accentColor,
+                  activeColor: Theme.of(context).colorScheme.secondary,
                 ),
                 SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.startTime),
                   value: settingsState.exportIncludeStartTime,
                   onChanged: (bool value) => settingsBloc
                       .add(SetBoolValueEvent(exportIncludeStartTime: value)),
-                  activeColor: Theme.of(context).accentColor,
+                  activeColor: Theme.of(context).colorScheme.secondary,
                 ),
                 SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.endTime),
                   value: settingsState.exportIncludeEndTime,
                   onChanged: (bool value) => settingsBloc
                       .add(SetBoolValueEvent(exportIncludeEndTime: value)),
-                  activeColor: Theme.of(context).accentColor,
+                  activeColor: Theme.of(context).colorScheme.secondary,
                 ),
                 SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.timeH),
                   value: settingsState.exportIncludeDurationHours,
                   onChanged: (bool value) => settingsBloc.add(
                       SetBoolValueEvent(exportIncludeDurationHours: value)),
-                  activeColor: Theme.of(context).accentColor,
+                  activeColor: Theme.of(context).colorScheme.secondary,
                 ),
                 SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.notes),
                   value: settingsState.exportIncludeNotes,
                   onChanged: (bool value) => settingsBloc
                       .add(SetBoolValueEvent(exportIncludeNotes: value)),
-                  activeColor: Theme.of(context).accentColor,
+                  activeColor: Theme.of(context).colorScheme.secondary,
                 ),
               ],
             ),
@@ -258,7 +258,7 @@ class _ExportScreenState extends State<ExportScreen> {
           ExpansionTile(
             title: Text(L10N.of(context).tr.projects,
                 style: TextStyle(
-                    color: Theme.of(context).accentColor,
+                    color: Theme.of(context).colorScheme.secondary,
                     fontWeight: FontWeight.w700)),
             children: <Widget>[
               Row(
@@ -266,7 +266,7 @@ class _ExportScreenState extends State<ExportScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  RaisedButton(
+                  ElevatedButton(
                     child: Text(L10N.of(context).tr.selectNone),
                     onPressed: () {
                       setState(() {
@@ -274,7 +274,7 @@ class _ExportScreenState extends State<ExportScreen> {
                       });
                     },
                   ),
-                  RaisedButton(
+                  ElevatedButton(
                     child: Text(L10N.of(context).tr.selectAll),
                     onPressed: () {
                       setState(() {
@@ -300,7 +300,7 @@ class _ExportScreenState extends State<ExportScreen> {
                               project?.name ?? L10N.of(context).tr.noProject),
                           value:
                               selectedProjects.any((p) => p?.id == project?.id),
-                          activeColor: Theme.of(context).accentColor,
+                          activeColor: Theme.of(context).colorScheme.secondary,
                           onChanged: (_) => setState(() {
                             if (selectedProjects
                                 .any((p) => p?.id == project?.id)) {
@@ -316,7 +316,7 @@ class _ExportScreenState extends State<ExportScreen> {
           ExpansionTile(
             title: Text(L10N.of(context).tr.options,
                 style: TextStyle(
-                    color: Theme.of(context).accentColor,
+                    color: Theme.of(context).colorScheme.secondary,
                     fontWeight: FontWeight.w700)),
             children: <Widget>[
               BlocBuilder<SettingsBloc, SettingsState>(
@@ -327,7 +327,7 @@ class _ExportScreenState extends State<ExportScreen> {
                   value: settingsState.exportGroupTimers,
                   onChanged: (bool value) => settingsBloc
                       .add(SetBoolValueEvent(exportGroupTimers: value)),
-                  activeColor: Theme.of(context).accentColor,
+                  activeColor: Theme.of(context).colorScheme.secondary,
                 ),
               )
             ],

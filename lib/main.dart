@@ -124,9 +124,9 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
 
     SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
     TimersBloc timersBloc = BlocProvider.of<TimersBloc>(context);
-    settingsBloc.listen((settingsState) => _updateNotificationBadge(
+    settingsBloc.stream.listen((settingsState) => _updateNotificationBadge(
         settingsState, timersBloc.state.countRunningTimers()));
-    timersBloc.listen((timersState) => _updateNotificationBadge(
+    timersBloc.stream.listen((timersState) => _updateNotificationBadge(
         settingsBloc.state, timersState.countRunningTimers()));
 
     // send commands to our top-level blocs to get them to initialize
@@ -213,8 +213,8 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
                     home: DashboardScreen(),
                     theme: themeState.themeData ??
                         (brightness == Brightness.dark
-                            ? darkTheme
-                            : lightTheme),
+                            ? ThemeUtil.darkTheme
+                            : ThemeUtil.lightTheme),
                     localizationsDelegates: [
                       L10N.delegate,
                       GlobalMaterialLocalizations.delegate,

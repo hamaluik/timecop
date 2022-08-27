@@ -65,7 +65,7 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
                       children: <Project>[null]
                           .followedBy(
                               projectsState.projects.where((p) => !p.archived))
-                          .map((Project p) => FlatButton(
+                          .map((Project p) => TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop(p);
                               },

@@ -222,8 +222,8 @@ class _TimerEditorState extends State<TimerEditor> {
               actionExtentRatio: 0.15,
               secondaryActions: <Widget>[
                 IconSlideAction(
-                  color: Theme.of(context).accentColor,
-                  foregroundColor: Theme.of(context).accentIconTheme.color,
+                  color: Theme.of(context).colorScheme.secondary,
+                  foregroundColor: Theme.of(context).colorScheme.onSecondary,
                   icon: FontAwesomeIcons.clock,
                   onTap: () {
                     _oldStartTime = _startTime;
@@ -249,7 +249,7 @@ class _TimerEditorState extends State<TimerEditor> {
                             doneStyle: Theme.of(context).textTheme.button,
                             itemStyle: Theme.of(context).textTheme.bodyText2,
                             backgroundColor:
-                                Theme.of(context).scaffoldBackgroundColor,
+                                Theme.of(context).colorScheme.surface,
                           ));
 
                   // if the user cancelled, this should be null
@@ -268,25 +268,25 @@ class _TimerEditorState extends State<TimerEditor> {
               secondaryActions: _endTime == null
                   ? <Widget>[
                       IconSlideAction(
-                        color: Theme.of(context).accentColor,
+                        color: Theme.of(context).colorScheme.secondary,
                         foregroundColor:
-                            Theme.of(context).accentIconTheme.color,
+                            Theme.of(context).colorScheme.onSecondary,
                         icon: FontAwesomeIcons.clock,
                         onTap: () => setState(() => _endTime = DateTime.now()),
                       ),
                     ]
                   : <Widget>[
                       IconSlideAction(
-                        color: Theme.of(context).accentColor,
+                        color: Theme.of(context).colorScheme.secondary,
                         foregroundColor:
-                            Theme.of(context).accentIconTheme.color,
+                            Theme.of(context).colorScheme.onSecondary,
                         icon: FontAwesomeIcons.clock,
                         onTap: () => setState(() => _endTime = DateTime.now()),
                       ),
                       IconSlideAction(
                         color: Theme.of(context).errorColor,
                         foregroundColor:
-                            Theme.of(context).accentIconTheme.color,
+                            Theme.of(context).colorScheme.onSecondary,
                         icon: FontAwesomeIcons.minusCircle,
                         onTap: () {
                           setState(() {
@@ -311,8 +311,7 @@ class _TimerEditorState extends State<TimerEditor> {
                         cancelStyle: Theme.of(context).textTheme.button,
                         doneStyle: Theme.of(context).textTheme.button,
                         itemStyle: Theme.of(context).textTheme.bodyText2,
-                        backgroundColor:
-                            Theme.of(context).scaffoldBackgroundColor,
+                        backgroundColor: Theme.of(context).colorScheme.surface,
                       ));
 
                   // if the user cancelled, this should be null
@@ -341,8 +340,8 @@ class _TimerEditorState extends State<TimerEditor> {
               actionExtentRatio: 0.15,
               secondaryActions: <Widget>[
                 IconSlideAction(
-                  color: Theme.of(context).accentColor,
-                  foregroundColor: Theme.of(context).accentIconTheme.color,
+                  color: Theme.of(context).colorScheme.secondary,
+                  foregroundColor: Theme.of(context).colorScheme.onSecondary,
                   icon: FontAwesomeIcons.edit,
                   onTap: () async => await _editNotes(context),
                 ),
@@ -413,12 +412,12 @@ class _TimerEditorState extends State<TimerEditor> {
               onSaved: (String n) => Navigator.of(context).pop(n),
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                   child: Text(L10N.of(context).tr.cancel),
                   onPressed: () => Navigator.of(context).pop()),
               TextButton(
                   style: TextButton.styleFrom(
-                      primary: Theme.of(context).accentColor),
+                      primary: Theme.of(context).colorScheme.secondary),
                   onPressed: () =>
                       Navigator.of(context).pop(_notesController.text),
                   child: Text(

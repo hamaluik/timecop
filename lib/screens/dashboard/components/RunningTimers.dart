@@ -67,11 +67,13 @@ class RunningTimers extends StatelessWidget {
                           children: <Widget>[
                             Text(L10N.of(context).tr.runningTimers,
                                 style: TextStyle(
-                                    color: Theme.of(context).accentColor,
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
                                     fontWeight: FontWeight.w700)),
                             Text(TimerEntry.formatDuration(runningTotal),
                                 style: TextStyle(
-                                  color: Theme.of(context).accentColor,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
                                   fontFamily: "FiraMono",
                                 ))
                           ],
