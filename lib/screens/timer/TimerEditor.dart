@@ -291,7 +291,7 @@ class _TimerEditorState extends State<TimerEditor> {
                             backgroundColor: Theme.of(context).errorColor,
                             foregroundColor:
                                 Theme.of(context).colorScheme.onSecondary,
-                            icon: FontAwesomeIcons.minusCircle,
+                            icon: FontAwesomeIcons.circleMinus,
                             onPressed: (_) {
                               setState(() {
                                 _endTime = null;
@@ -348,7 +348,7 @@ class _TimerEditorState extends State<TimerEditor> {
                       backgroundColor: Theme.of(context).colorScheme.secondary,
                       foregroundColor:
                           Theme.of(context).colorScheme.onSecondary,
-                      icon: FontAwesomeIcons.edit,
+                      icon: FontAwesomeIcons.penToSquare,
                       onPressed: (_) async => await _editNotes(context),
                     ),
                   ]),
@@ -374,7 +374,7 @@ class _TimerEditorState extends State<TimerEditor> {
             Positioned(
               top: 14,
               left: 16,
-              child: Icon(FontAwesomeIcons.solidSave),
+              child: Icon(FontAwesomeIcons.check),
             )
           ],
         ),

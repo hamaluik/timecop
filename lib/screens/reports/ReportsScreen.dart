@@ -153,7 +153,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                                 backgroundColor: Theme.of(context).errorColor,
                                 foregroundColor:
                                     Theme.of(context).colorScheme.onSecondary,
-                                icon: FontAwesomeIcons.minusCircle,
+                                icon: FontAwesomeIcons.circleMinus,
                                 onPressed: (_) {
                                   setState(() {
                                     _startDate = null;
@@ -209,7 +209,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                                 backgroundColor: Theme.of(context).errorColor,
                                 foregroundColor:
                                     Theme.of(context).colorScheme.onSecondary,
-                                icon: FontAwesomeIcons.minusCircle,
+                                icon: FontAwesomeIcons.circleMinus,
                                 onPressed: (_) {
                                   setState(() {
                                     _endDate = null;

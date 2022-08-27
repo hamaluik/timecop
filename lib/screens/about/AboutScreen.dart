@@ -55,7 +55,7 @@ class AboutScreen extends StatelessWidget {
               MarkdownPageListTile(
                 filename: 'CHANGELOG.md',
                 title: Text(L10N.of(context).tr.changeLog),
-                icon: Icon(FontAwesomeIcons.boxes),
+                icon: Icon(FontAwesomeIcons.boxesStacked),
               ),
               MarkdownPageListTile(
                 filename: 'CONTRIBUTORS.md',

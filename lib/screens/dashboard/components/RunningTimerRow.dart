@@ -87,7 +87,7 @@ class RunningTimerRow extends StatelessWidget {
             SlidableAction(
               backgroundColor: Theme.of(context).colorScheme.secondary,
               foregroundColor: Theme.of(context).colorScheme.onSecondary,
-              icon: FontAwesomeIcons.solidStopCircle,
+              icon: FontAwesomeIcons.solidCircleStop,
               onPressed: (_) {
                 final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
                 timers.add(StopTimer(timer));

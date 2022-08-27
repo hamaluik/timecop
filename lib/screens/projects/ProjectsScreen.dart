@@ -137,7 +137,7 @@ class ProjectsScreen extends StatelessWidget {
                                             .onSecondary,
                                         icon: project.archived
                                             ? FontAwesomeIcons.boxOpen
-                                            : FontAwesomeIcons.box,
+                                            : FontAwesomeIcons.boxArchive,
                                         onPressed: (_) {
                                           projectsBloc.add(EditProject(
                                               Project.clone(project,

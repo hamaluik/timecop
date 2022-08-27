@@ -71,11 +71,11 @@ class _TopBarState extends State<TopBar> {
             bloc.add(SearchChangedEvent(search));
           },
           decoration: InputDecoration(
-              prefixIcon: Icon(FontAwesomeIcons.search,
+              prefixIcon: Icon(FontAwesomeIcons.magnifyingGlass,
                   color: Theme.of(context).colorScheme.onPrimary),
               suffixIcon: IconButton(
                 color: Theme.of(context).colorScheme.onPrimary,
-                icon: Icon(FontAwesomeIcons.timesCircle),
+                icon: Icon(FontAwesomeIcons.circleXmark),
                 onPressed: cancelSearch,
               )),
         ));
@@ -97,7 +97,7 @@ class _TopBarState extends State<TopBar> {
         actions: !_searching
             ? <Widget>[
                 IconButton(
-                  icon: Icon(FontAwesomeIcons.search),
+                  icon: Icon(FontAwesomeIcons.magnifyingGlass),
                   onPressed: () {
                     _searchController!.text = "";
                     bloc.add(SearchChangedEvent(""));

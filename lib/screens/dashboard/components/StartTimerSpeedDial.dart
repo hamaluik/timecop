@@ -152,7 +152,7 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
                       Positioned(
                         top: 15,
                         left: 16,
-                        child: Icon(FontAwesomeIcons.times),
+                        child: Icon(FontAwesomeIcons.xmark),
                       )
                     ],
                   ),

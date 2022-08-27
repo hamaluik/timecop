@@ -57,7 +57,7 @@ class FilterSheet extends StatelessWidget {
                               backgroundColor: Theme.of(context).errorColor,
                               foregroundColor:
                                   Theme.of(context).colorScheme.onSecondary,
-                              icon: FontAwesomeIcons.minusCircle,
+                              icon: FontAwesomeIcons.circleMinus,
                               onPressed: (_) => dashboardBloc
                                   .add(FilterStartChangedEvent(null)),
                             )
@@ -102,7 +102,7 @@ class FilterSheet extends StatelessWidget {
                                 backgroundColor: Theme.of(context).errorColor,
                                 foregroundColor:
                                     Theme.of(context).colorScheme.onSecondary,
-                                icon: FontAwesomeIcons.minusCircle,
+                                icon: FontAwesomeIcons.circleMinus,
                                 onPressed: (_) => dashboardBloc
                                     .add(FilterEndChangedEvent(null)),
                               )
