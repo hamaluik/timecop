@@ -1,153 +1,75 @@
 about = 概要
-
 appDescription = あなたのプライバシーを尊重しながら完了した仕事を追跡する、派手過ぎない時間追跡アプリ。
-
 appLegalese = Copyright © Kenton Hamaluik, 2020
-
 readme = Readme
-
 changeLog = 変更ログ
-
 sourceCode = ソースコード
-
 whatAreYouDoing = 何してるの？
-
 projects = プロジェクト
-
-export = 書き出し
-
 noProject = （プロジェクトなし）
-
 confirmDelete = 削除を確認
-
 deleteTimerConfirm = このタイマーを削除しますか？
-
 cancel = キャンセル
-
 ok = わかった
-
 delete = 削除
-
 runningTimers = 計測中のタイマー
-
 timeCopDatabase = TimeCopデータベース（{ $date }）
-
 filter = フィルタ
-
 from = フィルタ開始日
-
 to = フィルタ終了日
-
 project = プロジェクト
-
 description = 説明文
-
 timeH = 期間（時間）
-
 timeCopEntries = TimeCopエントリー（{ $date }）
-
 createNewProject = 新しいプロジェクトを作成
-
 editProject = プロジェクトを編集
-
 pleaseEnterAName = 名前を入力してください
-
 projectName = プロジェクト名
-
 create = 作成
-
 save = 保存
-
 areYouSureYouWantToDelete = このプロジェクトを削除しますか？
-
 editTimer = タイマーを編集
-
 whatWereYouDoing = 何してたの？
-
 startTime = 開始時間
-
 endTime = 終了時間
-
 duration = 期間
-
 appName = TimeCop
-
 logoSemantics = TimeCopロゴ
-
 noDescription = （説明なし）
-
 options = オプション
-
 groupTimers = 1日毎の類似タイマーのグループ化
-
 columns = カラム
-
 date = 日付
-
 combinedProjectDescription = 組み合わせたプロジェクトとその説明
-
 reports = 活動レポート
-
 nHours = { $hours } 時間
-
 averageDailyHours = 1日の平均時間
-
 totalProjectShare = プロジェクト全体のシェア
-
 weeklyHours = 週間の時間
-
 contributors = 貢献者
-
 settings = 設定
-
 theme = テーマ
-
 auto = 自動
-
 light = ライト
-
 dark = ダーク
-
 black = ブラック
-
 langName = 日本語
-
 language = 言語
-
 automaticLanguage = 自動（{ $langName }）
-
 collapseDays = 崩壊日
-
 autocompleteDescription = 入力欄の説明
-
 defaultFilterStartDateToMonday = デフォルトのフィルター開始日から月曜日
-
 hours = 時間
-
 total = 合計
-
 oneTimerAtATime = 一度に1つの実行タイマーのみを許可する
-
 selectAll = すべて選択
-
 selectNone = 何も選択しない
-
 defaultFilterDays = デフォルトのフィルター期間（日）
-
-import = インポート
-
 invalidDatabaseFile = データベースファイルが無効です！
-
 databaseImported = インポートされたデータベース
-
 showBadgeCounts = 実行中のタイマーカウントをアプリアイコンバッジとして表示
-
 runningTimersNotificationTitle = 実行中のタイマー
-
 runningTimersNotificationBody = タイマーはまだバックグラウンドで実行されています
-
 enableRunningTimersNotification = 実行中のタイマー通知を表示する
-
 notes = ノート
-
 noItemsFound = 項目は見つかりませんでした
