@@ -102,7 +102,7 @@ class PopupMenu extends StatelessWidget {
             key: Key("menuSettings"),
             value: MenuItem.settings,
             child: ListTile(
-              leading: Icon(FontAwesomeIcons.screwdriver),
+              leading: Icon(FontAwesomeIcons.screwdriverWrench),
               title: Text(L10N.of(context).tr.settings),
             ),
           ),
