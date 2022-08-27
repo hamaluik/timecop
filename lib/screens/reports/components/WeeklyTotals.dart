@@ -137,7 +137,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                                       .tr
                                       .nHours(spot.y.toStringAsFixed(1)),
                                   TextStyle(
-                                    color: spot.bar.colors[0],
+                                    color: spot.bar.color,
                                     fontSize: Theme.of(context)
                                         .textTheme
                                         .bodyText2
@@ -146,32 +146,36 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                             }).toList();
                           })),
                   titlesData: FlTitlesData(
-                    show: true,
-                    leftTitles: SideTitles(
-                      showTitles: true,
-                      getTitles: (double v) => v.toStringAsFixed(1),
-                      getTextStyles: (_) => Theme.of(context).textTheme.caption,
-                      interval: 5.0,
-                    ),
-                    bottomTitles: SideTitles(
+                      show: true,
+                      leftTitles: AxisTitles(
+                          sideTitles: SideTitles(
                         showTitles: true,
-                        getTextStyles: (_) =>
-                            Theme.of(context).textTheme.caption,
-                        getTitles: (double dweek) {
-                          int week = dweek.toInt();
-                          DateTime date =
-                              firstDate.add(Duration(days: week * 7));
-                          return _dateFormat.format(date).replaceAll(' ', '\n');
-                        }),
-                  ),
+                        getTitlesWidget: (double v, _) => Text(
+                          v.toStringAsFixed(1),
+                          style: Theme.of(context).textTheme.caption,
+                        ),
+                        interval: 5.0,
+                      )),
+                      bottomTitles: AxisTitles(
+                        sideTitles: SideTitles(
+                            showTitles: true,
+                            getTitlesWidget: (double dweek, _) {
+                              int week = dweek.toInt();
+                              DateTime date =
+                                  firstDate.add(Duration(days: week * 7));
+                              return Text(
+                                _dateFormat.format(date).replaceAll(' ', '\n'),
+                                style: Theme.of(context).textTheme.caption,
+                              );
+                            }),
+                      )),
                   lineBarsData: _projectWeeklyHours.entries.map((entry) {
                     Project project = projects.state.projects.firstWhere(
                         (project) => project.id == entry.key,
                         orElse: () => null);
                     return LineChartBarData(
-                        colors: <Color>[
-                          project?.colour ?? Theme.of(context).disabledColor
-                        ],
+                        color:
+                            project?.colour ?? Theme.of(context).disabledColor,
                         isCurved: true,
                         barWidth: 4,
                         spots: entry.value.entries.map((dataPoint) {

@@ -101,14 +101,15 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
                     borderData: FlBorderData(
                       show: false,
                     ),
-                    pieTouchData:
-                        PieTouchData(touchCallback: (pieTouchResponse) {
+                    pieTouchData: PieTouchData(
+                        touchCallback: (flTouchEvent, pieTouchResponse) {
                       setState(() {
-                        if (pieTouchResponse.touchInput is FlLongPressEnd ||
-                            pieTouchResponse.touchInput is FlPanEnd) {
+                        if (flTouchEvent is FlLongPressEnd ||
+                            flTouchEvent is FlPanEndEvent) {
                           _touchedIndex = -1;
                         } else {
-                          _touchedIndex = pieTouchResponse.touchedSectionIndex;
+                          _touchedIndex = pieTouchResponse
+                              .touchedSection.touchedSectionIndex;
                         }
                       });
                     }),

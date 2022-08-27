@@ -130,7 +130,7 @@ class WeekdayAverages extends StatelessWidget {
                                   L10N
                                       .of(context)
                                       .tr
-                                      .nHours(rod.y.toStringAsFixed(1)),
+                                      .nHours(rod.toY.toStringAsFixed(1)),
                                   Theme.of(context).textTheme.bodyText2))),
                   borderData: FlBorderData(
                     show: false,
@@ -140,42 +140,56 @@ class WeekdayAverages extends StatelessWidget {
                   ),
                   titlesData: FlTitlesData(
                       show: true,
-                      leftTitles: SideTitles(
+                      leftTitles: AxisTitles(
+                          sideTitles: SideTitles(
                         showTitles: true,
-                        getTextStyles: (_) =>
-                            Theme.of(context).textTheme.bodyText2,
-                      ),
-                      bottomTitles: SideTitles(
-                          showTitles: true,
-                          getTextStyles: (_) =>
-                              Theme.of(context).textTheme.bodyText2,
-                          getTitles: (double value) {
-                            switch (value.toInt()) {
-                              case 0:
-                                return 'S';
-                              case 1:
-                                return 'M';
-                              case 2:
-                                return 'T';
-                              case 3:
-                                return 'W';
-                              case 4:
-                                return 'T';
-                              case 5:
-                                return 'F';
-                              case 6:
-                                return 'S';
-                              default:
-                                return '';
-                            }
-                          })),
+                        getTitlesWidget: (value, meta) => Text(
+                          value.toString(),
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                      )),
+                      bottomTitles: AxisTitles(
+                          sideTitles: SideTitles(
+                              showTitles: true,
+                              getTitlesWidget: (double value, _) {
+                                String title;
+                                switch (value.toInt()) {
+                                  case 0:
+                                    title = 'S';
+                                    break;
+                                  case 1:
+                                    title = 'M';
+                                    break;
+                                  case 2:
+                                    title = 'T';
+                                    break;
+                                  case 3:
+                                    title = 'W';
+                                    break;
+                                  case 4:
+                                    title = 'T';
+                                    break;
+                                  case 5:
+                                    title = 'F';
+                                    break;
+                                  case 6:
+                                    title = 'S';
+                                    break;
+                                  default:
+                                    title = '';
+                                }
+                                return Text(
+                                  title,
+                                  style: Theme.of(context).textTheme.bodyText2,
+                                );
+                              }))),
                   barGroups: List.generate(7, (i) => i)
                       .map((day) =>
                           BarChartGroupData(x: day, barRods: <BarChartRodData>[
                             BarChartRodData(
-                              colors: [Theme.of(context).disabledColor],
+                              color: Theme.of(context).disabledColor,
                               width: 22,
-                              y: _daysData[day].entries.fold(
+                              toY: _daysData[day].entries.fold(
                                   0.0,
                                   (double sum, MapEntry<int, double> entry) =>
                                       sum + entry.value),
