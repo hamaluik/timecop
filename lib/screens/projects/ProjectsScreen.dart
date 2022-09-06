@@ -59,64 +59,68 @@ class ProjectsScreen extends StatelessWidget {
                                       icon: FontAwesomeIcons.trash,
                                       onPressed: (_) async {
                                         bool delete = await (showDialog<bool>(
-                                            context: context,
-                                            builder: (BuildContext context) =>
-                                                AlertDialog(
-                                                  title: Text(L10N
-                                                      .of(context)
-                                                      .tr
-                                                      .confirmDelete),
-                                                  content: RichText(
-                                                      textAlign:
-                                                          TextAlign.justify,
-                                                      text: TextSpan(
-                                                          style: TextStyle(
-                                                              color: Theme.of(
+                                                context: context,
+                                                builder: (BuildContext
+                                                        context) =>
+                                                    AlertDialog(
+                                                      title: Text(L10N
+                                                          .of(context)
+                                                          .tr
+                                                          .confirmDelete),
+                                                      content: RichText(
+                                                          textAlign:
+                                                              TextAlign.justify,
+                                                          text: TextSpan(
+                                                              style: TextStyle(
+                                                                  color: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .bodyText2!
+                                                                      .color),
+                                                              children: <
+                                                                  TextSpan>[
+                                                                TextSpan(
+                                                                    text: L10N
+                                                                            .of(context)
+                                                                            .tr
+                                                                            .areYouSureYouWantToDelete +
+                                                                        "\n\n"),
+                                                                TextSpan(
+                                                                    text: "⬤ ",
+                                                                    style: TextStyle(
+                                                                        color: project
+                                                                            .colour)),
+                                                                TextSpan(
+                                                                    text: project
+                                                                        .name,
+                                                                    style: TextStyle(
+                                                                        fontStyle:
+                                                                            FontStyle.italic)),
+                                                              ])),
+                                                      actions: <Widget>[
+                                                        TextButton(
+                                                          child: Text(L10N
+                                                              .of(context)
+                                                              .tr
+                                                              .cancel),
+                                                          onPressed: () =>
+                                                              Navigator.of(
                                                                       context)
-                                                                  .textTheme
-                                                                  .bodyText2!
-                                                                  .color),
-                                                          children: <TextSpan>[
-                                                            TextSpan(
-                                                                text: L10N
-                                                                        .of(context)
-                                                                        .tr
-                                                                        .areYouSureYouWantToDelete +
-                                                                    "\n\n"),
-                                                            TextSpan(
-                                                                text: "⬤ ",
-                                                                style: TextStyle(
-                                                                    color: project
-                                                                        .colour)),
-                                                            TextSpan(
-                                                                text: project
-                                                                    .name,
-                                                                style: TextStyle(
-                                                                    fontStyle:
-                                                                        FontStyle
-                                                                            .italic)),
-                                                          ])),
-                                                  actions: <Widget>[
-                                                    TextButton(
-                                                      child: Text(L10N
-                                                          .of(context)
-                                                          .tr
-                                                          .cancel),
-                                                      onPressed: () =>
-                                                          Navigator.of(context)
-                                                              .pop(false),
-                                                    ),
-                                                    TextButton(
-                                                      child: Text(L10N
-                                                          .of(context)
-                                                          .tr
-                                                          .delete),
-                                                      onPressed: () =>
-                                                          Navigator.of(context)
-                                                              .pop(true),
-                                                    ),
-                                                  ],
-                                                )) as FutureOr<bool>);
+                                                                  .pop(false),
+                                                        ),
+                                                        TextButton(
+                                                          child: Text(L10N
+                                                              .of(context)
+                                                              .tr
+                                                              .delete),
+                                                          onPressed: () =>
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop(true),
+                                                        ),
+                                                      ],
+                                                    ))) ??
+                                            false;
                                         if (delete) {
                                           projectsBloc
                                               .add(DeleteProject(project));

@@ -61,21 +61,25 @@ class StoppedTimerRow extends StatelessWidget {
             icon: FontAwesomeIcons.trash,
             onPressed: (_) async {
               bool delete = await (showDialog<bool>(
-                  context: context,
-                  builder: (BuildContext context) => AlertDialog(
-                        title: Text(L10N.of(context).tr.confirmDelete),
-                        content: Text(L10N.of(context).tr.deleteTimerConfirm),
-                        actions: <Widget>[
-                          TextButton(
-                            child: Text(L10N.of(context).tr.cancel),
-                            onPressed: () => Navigator.of(context).pop(false),
-                          ),
-                          TextButton(
-                            child: Text(L10N.of(context).tr.delete),
-                            onPressed: () => Navigator.of(context).pop(true),
-                          ),
-                        ],
-                      )) as FutureOr<bool>);
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                            title: Text(L10N.of(context).tr.confirmDelete),
+                            content:
+                                Text(L10N.of(context).tr.deleteTimerConfirm),
+                            actions: <Widget>[
+                              TextButton(
+                                child: Text(L10N.of(context).tr.cancel),
+                                onPressed: () =>
+                                    Navigator.of(context).pop(false),
+                              ),
+                              TextButton(
+                                child: Text(L10N.of(context).tr.delete),
+                                onPressed: () =>
+                                    Navigator.of(context).pop(true),
+                              ),
+                            ],
+                          ))) ??
+                  false;
               if (delete) {
                 final TimersBloc timersBloc =
                     BlocProvider.of<TimersBloc>(context);
