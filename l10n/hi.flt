@@ -1,153 +1,75 @@
 about = के बारे में
-
 appDescription = एक समय ट्रैकिंग ऐप जो आपकी गोपनीयता का सम्मान करता है और बहुत अधिक कल्पना किए बिना काम पूरा करता है।
-
 appLegalese = कॉपीराइट © केंटन हामालिक, 2020
-
 readme = रीडमी
-
 changeLog = लॉग बदलें
-
 sourceCode = सोर्स कोड
-
 whatAreYouDoing = तुम क्या कर रहे हो?
-
 projects = परियोजनाओं
-
-export = निर्यात
-
 noProject = (कोई परियोजना नहीं)
-
 confirmDelete = हटाने की पुष्टि करें
-
 deleteTimerConfirm = क्या आप वाकई इस टाइमर को हटाना चाहते हैं?
-
 cancel = रद्द करना
-
 ok = ठीक है
-
 delete = हटाएं
-
 runningTimers = रनिंग टाइमर
-
 timeCopDatabase = टाइम कॉप डेटाबेस ({ $date })
-
 filter = फ़िल्टर
-
 from = से
-
 to = सेवा
-
 project = परियोजना
-
 description = विवरण
-
 timeH = समय (घंटे)
-
 timeCopEntries = समय कॉप प्रविष्टियाँ ({ $date })
-
 createNewProject = नया प्रोजेक्ट बनाएं
-
 editProject = प्रोजेक्ट संपादित करें
-
 pleaseEnterAName = कृपया एक नाम दर्ज करें
-
 projectName = परियोजना का नाम
-
 create = सृजन करना
-
 save = सहेजें
-
 areYouSureYouWantToDelete = क्या आप वाकई इस प्रोजेक्ट को हटाना चाहते हैं?
-
 editTimer = टाइमर संपादित करें
-
 whatWereYouDoing = तुम क्या कर रहे थे?
-
 startTime = समय शुरू
-
 endTime = अंतिम समय
-
 duration = समयांतराल
-
 appName = समय कॉप
-
 logoSemantics = टाइम कॉप लोगो
-
 noDescription = (कोई विवरण नहीं)
-
 options = विकल्प
-
 groupTimers = प्रति दिन समूह समान टाइमर
-
 columns = कॉलम
-
 date = तारीख
-
 combinedProjectDescription = संयुक्त परियोजना और विवरण
-
 reports = रिपोर्ट
-
 nHours = { $hours } घंटे
-
 averageDailyHours = औसत दैनिक घंटे
-
 totalProjectShare = कुल परियोजना हिस्सा
-
 weeklyHours = साप्ताहिक घंटे
-
 contributors = योगदानकर्ता
-
 settings = समायोजन
-
 theme = विषय
-
 auto = स्वचालित
-
 light = रोशनी
-
 dark = अंधेरा
-
 black = काली
-
 langName = हिन्दी
-
 language = भाषा: हिन्दी
-
 automaticLanguage = स्वचालित ({ $langName })
-
 collapseDays = पतन के दिन
-
 autocompleteDescription = स्वत: पूर्ण विवरण
-
 defaultFilterStartDateToMonday = डिफ़ॉल्ट फ़िल्टर प्रारंभ दिनांक से सोमवार
-
 hours = घंटे
-
 total = संपूर्ण
-
 oneTimerAtATime = केवल एक समय में एक रनिंग टाइमर की अनुमति दें
-
 selectAll = सभी का चयन करे
-
 selectNone = किसी का चयन न करें
-
 defaultFilterDays = डिफ़ॉल्ट फ़िल्टर अवधि (दिन)
-
-import = आयात
-
 invalidDatabaseFile = अमान्य डेटाबेस फ़ाइल!
-
 databaseImported = डेटाबेस आयात किया गया
-
 showBadgeCounts = ऐप आइकन बैज के रूप में रनिंग टाइमर गणना दिखाएं
-
 runningTimersNotificationTitle = रनिंग टाइमर
-
 runningTimersNotificationBody = टाइमर अभी भी पृष्ठभूमि में चल रहे हैं
-
 enableRunningTimersNotification = रनिंग टाइमर सूचनाएं दिखाएं
-
 notes = टिप्पणियाँ
-
 noItemsFound = कुछ नहीं मिला
