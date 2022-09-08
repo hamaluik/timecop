@@ -10,7 +10,6 @@ invalidDatabaseFile = Ongeldig database bestand!
 noItemsFound = Geen items gevonden
 notes = Opmerkingen
 enableRunningTimersNotification = Meldingen over lopende timer weergeven
-import = Importeer
 total = Totaal
 hours = Uren
 defaultFilterStartDateToMonday = Begin filterdatum standaard op maandag

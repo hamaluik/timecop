@@ -15,8 +15,6 @@ whatAreYouDoing = Che cosa stai facendo?
 # tt-hand-translated
 projects = Progetti
 # tt-hand-translated
-export = Esporta
-# tt-hand-translated
 noProject = (nessun progetto)
 # tt-hand-translated
 confirmDelete = Conferma Cancellazione
@@ -115,7 +113,6 @@ oneTimerAtATime = Consenti solo un timer in esecuzione alla volta
 selectAll = Seleziona tutto
 selectNone = Non selezionare niente
 defaultFilterDays = Periodo filtro predefinito (giorni)
-import = Importare
 invalidDatabaseFile = File di database non valido!
 databaseImported = Database importato
 showBadgeCounts = Mostra il conteggio del timer di esecuzione come badge dell'icona dell'app
