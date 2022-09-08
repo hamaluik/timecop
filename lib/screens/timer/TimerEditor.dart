@@ -120,7 +120,7 @@ class _TimerEditorState extends State<TimerEditor> {
                   Padding(
                       padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
                       child: DropdownButton(
-                        value: _project,
+                        value: (_project?.archived ?? true) ? null : _project,
                         underline: Container(),
                         elevation: 0,
                         onChanged: (Project? newProject) {
