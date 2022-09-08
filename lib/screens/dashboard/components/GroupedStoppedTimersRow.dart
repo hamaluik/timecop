@@ -74,8 +74,9 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow>
       BuildContext context, String? description) {
     if (description == null || description.trim().isEmpty) {
       return TextStyle(color: Theme.of(context).disabledColor);
+    } else {
+      return TextStyle(color: Theme.of(context).colorScheme.onBackground);
     }
-    return null;
   }
 
   @override
@@ -123,7 +124,10 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow>
           children: <Widget>[
             RotationTransition(
               turns: _iconTurns,
-              child: const Icon(Icons.expand_more),
+              child: Icon(
+                Icons.expand_more,
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
             ),
             Container(width: 8),
             Text(
@@ -132,6 +136,7 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow>
                     (Duration sum, TimerEntry timer) =>
                         sum + timer.endTime!.difference(timer.startTime))),
                 style: TextStyle(
+                  color: Theme.of(context).colorScheme.onBackground,
                   fontFeatures: [FontFeature.tabularFigures()],
                 )),
           ],
