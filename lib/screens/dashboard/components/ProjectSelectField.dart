@@ -51,9 +51,14 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
             );
           }
 
+          final projectName = state.newProject?.name;
+
           return IconButton(
             alignment: Alignment.centerLeft,
             icon: ProjectColour(project: state.newProject),
+            tooltip: projectName != null
+                ? "${L10N.of(context).tr.project} ($projectName)"
+                : L10N.of(context).tr.project,
             onPressed: () async {
               Project? chosenProject = await showDialog<Project>(
                   context: context,

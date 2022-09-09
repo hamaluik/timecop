@@ -77,6 +77,7 @@ class _TopBarState extends State<TopBar> {
                 color: Theme.of(context).colorScheme.onPrimary,
                 icon: Icon(FontAwesomeIcons.circleXmark),
                 onPressed: cancelSearch,
+                tooltip: L10N.of(context).tr.cancel,
               )),
         ));
   }
@@ -90,6 +91,7 @@ class _TopBarState extends State<TopBar> {
             ? IconButton(
                 icon: Icon(FontAwesomeIcons.chevronLeft),
                 onPressed: cancelSearch,
+                tooltip: L10N.of(context).tr.cancel,
               )
             : PopupMenu(),
         title:
@@ -97,6 +99,7 @@ class _TopBarState extends State<TopBar> {
         actions: !_searching
             ? <Widget>[
                 IconButton(
+                  tooltip: L10N.of(context).tr.search,
                   icon: Icon(FontAwesomeIcons.magnifyingGlass),
                   onPressed: () {
                     _searchController!.text = "";

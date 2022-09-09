@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
+import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 
 class StartTimerSpeedDial extends StatefulWidget {
@@ -60,6 +61,7 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
             curve: Interval(0.0, 1.0, curve: Curves.easeOut),
           ),
           child: FloatingActionButton(
+            tooltip: L10N.of(context).tr.startNewTimer,
             heroTag: null,
             mini: true,
             backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -97,6 +99,7 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
             curve: Interval(0.0, 0.75, curve: Curves.easeOut),
           ),
           child: FloatingActionButton(
+            tooltip: L10N.of(context).tr.stopAllTimers,
             heroTag: null,
             mini: true,
             backgroundColor: Colors.pink[600],
@@ -125,6 +128,9 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
         animation: _controller,
         builder: (BuildContext conext, Widget? child) {
           return FloatingActionButton(
+            tooltip: (_controller.isDismissed)
+                ? L10N.of(context).tr.timerMenu
+                : L10N.of(context).tr.closeMenu,
             heroTag: null,
             backgroundColor: _controller.isDismissed
                 ? Theme.of(context).colorScheme.secondary

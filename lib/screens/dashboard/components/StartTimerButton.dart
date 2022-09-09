@@ -18,6 +18,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/blocs/settings/settings_state.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
+import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:timecop/screens/dashboard/components/StartTimerSpeedDial.dart';
 
@@ -40,6 +41,7 @@ class _StartTimerButtonState extends State<StartTimerButton> {
         if (timersState.timers.where((t) => t.endTime == null).isEmpty) {
           return FloatingActionButton(
             key: Key("startTimerButton"),
+            tooltip: L10N.of(context).tr.startTimer,
             backgroundColor: Theme.of(context).colorScheme.secondary,
             foregroundColor: Theme.of(context).colorScheme.onSecondary,
             onPressed: () {
@@ -65,6 +67,7 @@ class _StartTimerButtonState extends State<StartTimerButton> {
         } else if (settingsState.oneTimerAtATime &&
             timersState.timers.where((t) => t.endTime == null).length == 1) {
           return FloatingActionButton(
+            tooltip: L10N.of(context).tr.stopAllTimers,
             key: Key("stopAllTimersButton"),
             backgroundColor: Colors.pink[600],
             foregroundColor: Theme.of(context).colorScheme.onSecondary,

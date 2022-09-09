@@ -15,6 +15,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:timecop/screens/dashboard/components/FilterSheet.dart';
 
@@ -25,6 +26,7 @@ class FilterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
     return IconButton(
+      tooltip: L10N.of(context).tr.filter,
       icon: Icon(FontAwesomeIcons.filter),
       onPressed: () => showModalBottomSheet<void>(
         context: context,
