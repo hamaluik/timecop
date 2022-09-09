@@ -49,10 +49,10 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       yield DashboardState("", newProject, false, state.filterStart,
           state.filterEnd, state.hiddenProjects, state.searchString);
     } else if (event is FilterStartChangedEvent) {
+      final filterStart = event.filterStart;
       DateTime? end = state.filterEnd;
-      if (state.filterEnd != null &&
-          event.filterStart!.isAfter(state.filterEnd!)) {
-        end = event.filterStart!.add(
+      if (end != null && filterStart != null && filterStart.isAfter(end)) {
+        end = filterStart.add(
             Duration(hours: 23, minutes: 59, seconds: 59, milliseconds: 999));
       }
 
