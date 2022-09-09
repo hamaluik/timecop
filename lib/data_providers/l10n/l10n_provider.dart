@@ -28,6 +28,9 @@ abstract class L10NProvider {
   String get createNewProject;
   String get delete;
   String get deleteTimerConfirm;
+  String get remove;
+  String get stopTimer;
+  String get resumeTimer;
   String get description;
   String get duration;
   String get editProject;
@@ -55,6 +58,15 @@ abstract class L10NProvider {
   String get whatAreYouDoing;
   String get whatWereYouDoing;
   String get noDescription;
+  String get archive;
+  String get unarchive;
+  String get startTimer;
+  String get stopAllTimers;
+  String get startNewTimer;
+  String get timerMenu;
+  String get closeMenu;
+  String get search;
+  String get setToCurrentTime;
   String timeCopDatabase(String date);
   String timeCopEntries(String date);
   String get options;

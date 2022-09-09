@@ -34,7 +34,26 @@ ok = OK
 
 delete = Delete
 
+remove = Remove
+
+stopTimer = Stop Timer
+
+resumeTimer = Resume Timer
+
 runningTimers = Running Timers
+
+archive = Archive
+
+unarchive = Unarchive
+
+startTimer = Start Timer
+stopAllTimers = Stop All Timers
+startNewTimer = Start New Timer
+timerMenu = Timer Menu
+closeMenu = Close Menu
+search = Search
+
+setToCurrentTime = Set to Current Time
 
 timeCopDatabase = Time Cop Database ({$date})
 

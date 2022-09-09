@@ -81,6 +81,12 @@ class FluentL10NProvider extends L10NProvider {
   String get deleteTimerConfirm =>
       _bundle.format("deleteTimerConfirm", errors: _errors);
   @override
+  String get remove => _bundle.format("remove", errors: _errors);
+  @override
+  String get stopTimer => _bundle.format("stopTimer", errors: _errors);
+  @override
+  String get resumeTimer => _bundle.format("resumeTimer", errors: _errors);
+  @override
   String get description => _bundle.format("description", errors: _errors);
   @override
   String get duration => _bundle.format("duration", errors: _errors);
@@ -139,6 +145,25 @@ class FluentL10NProvider extends L10NProvider {
       _bundle.format("whatWereYouDoing", errors: _errors);
   @override
   String get noDescription => _bundle.format("noDescription", errors: _errors);
+  @override
+  String get archive => _bundle.format("archive", errors: _errors);
+  @override
+  String get unarchive => _bundle.format("unarchive", errors: _errors);
+  @override
+  String get startTimer => _bundle.format("startTimer", errors: _errors);
+  @override
+  String get stopAllTimers => _bundle.format("stopAllTimers", errors: _errors);
+  @override
+  String get startNewTimer => _bundle.format("startNewTimer", errors: _errors);
+  @override
+  String get timerMenu => _bundle.format("timerMenu", errors: _errors);
+  @override
+  String get closeMenu => _bundle.format("closeMenu", errors: _errors);
+  @override
+  String get search => _bundle.format("search", errors: _errors);
+  @override
+  String get setToCurrentTime =>
+      _bundle.format("setToCurrentTime", errors: _errors);
   @override
   String timeCopDatabase(String date) => _bundle.format("timeCopDatabase",
       args: <String, dynamic>{"date": date}, errors: _errors);
