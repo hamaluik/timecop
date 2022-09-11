@@ -65,7 +65,8 @@ class AboutScreen extends StatelessWidget {
               ListTile(
                 leading: Icon(FontAwesomeIcons.code),
                 title: Text(L10N.of(context).tr.sourceCode),
-                onTap: () => launch("https://github.com/hamaluik/timecop"),
+                onTap: () =>
+                    launchUrl(Uri.parse("https://github.com/hamaluik/timecop")),
               ),
               LicensesPageListTile(
                 icon: Icon(FontAwesomeIcons.scroll),
