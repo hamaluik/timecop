@@ -15,7 +15,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:timecop/blocs/projects/projects_bloc.dart';
@@ -40,100 +39,85 @@ class FilterSheet extends StatelessWidget {
           shrinkWrap: true,
           children: <Widget>[
             ExpansionTile(
-              title: Text(L10N.of(context).tr.filter,
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
-                      fontWeight: FontWeight.w700)),
+              title: Text(
+                L10N.of(context).tr.filter,
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontWeight: FontWeight.w700),
+              ),
               initiallyExpanded: true,
               children: <Widget>[
-                Slidable(
-                  endActionPane: ActionPane(
-                    motion: const DrawerMotion(),
-                    extentRatio: 0.15,
-                    children: state.filterStart == null
-                        ? []
-                        : [
-                            SlidableAction(
-                              backgroundColor: Theme.of(context).errorColor,
-                              foregroundColor:
-                                  Theme.of(context).colorScheme.onSecondary,
-                              icon: FontAwesomeIcons.circleMinus,
-                              onPressed: (_) => dashboardBloc
-                                  .add(FilterStartChangedEvent(null)),
-                            )
-                          ],
-                  ),
-                  child: ListTile(
-                    leading: Icon(FontAwesomeIcons.calendar),
-                    title: Text(L10N.of(context).tr.from),
-                    trailing: Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
-                      child: Text(state.filterStart == null
-                          ? "—"
-                          : _dateFormat.format(state.filterStart!)),
-                    ),
-                    onTap: () async {
-                      await DatePicker.showDatePicker(context,
-                          currentTime: state.filterStart,
-                          onChanged: (DateTime dt) => dashboardBloc.add(
-                              FilterStartChangedEvent(
-                                  DateTime(dt.year, dt.month, dt.day))),
-                          onConfirm: (DateTime dt) => dashboardBloc.add(
-                              FilterStartChangedEvent(
-                                  DateTime(dt.year, dt.month, dt.day))),
-                          theme: DatePickerTheme(
-                            cancelStyle: Theme.of(context).textTheme.button!,
-                            doneStyle: Theme.of(context).textTheme.button!,
-                            itemStyle: Theme.of(context).textTheme.bodyText2!,
-                            backgroundColor:
-                                Theme.of(context).colorScheme.surface,
-                          ));
-                    },
-                  ),
+                ListTile(
+                  leading: Icon(FontAwesomeIcons.calendar),
+                  title: Text(L10N.of(context).tr.from),
+                  trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+                    state.filterStart == null
+                        ? Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 18),
+                            child: Text("--"))
+                        : Text(
+                            _dateFormat.format(state.filterStart!),
+                          ),
+                    if (state.filterStart != null)
+                      IconButton(
+                        tooltip: L10N.of(context).tr.remove,
+                        icon: Icon(FontAwesomeIcons.circleMinus),
+                        onPressed: () =>
+                            dashboardBloc.add(FilterStartChangedEvent(null)),
+                      ),
+                  ]),
+                  onTap: () async {
+                    await DatePicker.showDatePicker(context,
+                        currentTime: state.filterStart,
+                        onChanged: (DateTime dt) => dashboardBloc.add(
+                            FilterStartChangedEvent(
+                                DateTime(dt.year, dt.month, dt.day))),
+                        onConfirm: (DateTime dt) => dashboardBloc.add(
+                            FilterStartChangedEvent(
+                                DateTime(dt.year, dt.month, dt.day))),
+                        theme: DatePickerTheme(
+                          cancelStyle: Theme.of(context).textTheme.button!,
+                          doneStyle: Theme.of(context).textTheme.button!,
+                          itemStyle: Theme.of(context).textTheme.bodyText2!,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.surface,
+                        ));
+                  },
                 ),
-                Slidable(
-                  endActionPane: ActionPane(
-                      motion: const DrawerMotion(),
-                      extentRatio: 0.15,
-                      children: state.filterEnd == null
-                          ? <Widget>[]
-                          : <Widget>[
-                              SlidableAction(
-                                backgroundColor: Theme.of(context).errorColor,
-                                foregroundColor:
-                                    Theme.of(context).colorScheme.onSecondary,
-                                icon: FontAwesomeIcons.circleMinus,
-                                onPressed: (_) => dashboardBloc
-                                    .add(FilterEndChangedEvent(null)),
-                              )
-                            ]),
-                  child: ListTile(
-                    leading: Icon(FontAwesomeIcons.calendar),
-                    title: Text(L10N.of(context).tr.to),
-                    trailing: Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
-                      child: Text(state.filterEnd == null
-                          ? "—"
-                          : _dateFormat.format(state.filterEnd!)),
-                    ),
-                    onTap: () async {
-                      await DatePicker.showDatePicker(context,
-                          currentTime: state.filterEnd,
-                          onChanged: (DateTime dt) => dashboardBloc.add(
-                              FilterEndChangedEvent(DateTime(
-                                  dt.year, dt.month, dt.day, 23, 59, 59, 999))),
-                          onConfirm: (DateTime dt) => dashboardBloc.add(
-                              FilterEndChangedEvent(DateTime(
-                                  dt.year, dt.month, dt.day, 23, 59, 59, 999))),
-                          theme: DatePickerTheme(
-                            cancelStyle: Theme.of(context).textTheme.button!,
-                            doneStyle: Theme.of(context).textTheme.button!,
-                            itemStyle: Theme.of(context).textTheme.bodyText2!,
-                            backgroundColor:
-                                Theme.of(context).colorScheme.surface,
-                          ));
-                    },
-                  ),
+                ListTile(
+                  leading: Icon(FontAwesomeIcons.calendar),
+                  title: Text(L10N.of(context).tr.to),
+                  trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+                    state.filterEnd == null
+                        ? Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 18),
+                            child: Text("--"))
+                        : Text(_dateFormat.format(state.filterEnd!)),
+                    if (state.filterEnd != null)
+                      IconButton(
+                        tooltip: L10N.of(context).tr.remove,
+                        icon: Icon(FontAwesomeIcons.circleMinus),
+                        onPressed: () =>
+                            dashboardBloc.add(FilterEndChangedEvent(null)),
+                      ),
+                  ]),
+                  onTap: () async {
+                    await DatePicker.showDatePicker(context,
+                        currentTime: state.filterEnd,
+                        onChanged: (DateTime dt) => dashboardBloc.add(
+                            FilterEndChangedEvent(DateTime(
+                                dt.year, dt.month, dt.day, 23, 59, 59, 999))),
+                        onConfirm: (DateTime dt) => dashboardBloc.add(
+                            FilterEndChangedEvent(DateTime(
+                                dt.year, dt.month, dt.day, 23, 59, 59, 999))),
+                        theme: DatePickerTheme(
+                          cancelStyle: Theme.of(context).textTheme.button!,
+                          doneStyle: Theme.of(context).textTheme.button!,
+                          itemStyle: Theme.of(context).textTheme.bodyText2!,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.surface,
+                        ));
+                  },
                 ),
               ],
             ),

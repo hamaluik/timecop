@@ -17,7 +17,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -142,118 +141,100 @@ class _ReportsScreenState extends State<ReportsScreen> {
                       fontWeight: FontWeight.w700)),
               initiallyExpanded: false,
               children: <Widget>[
-                Slidable(
-                  endActionPane: ActionPane(
-                      motion: const DrawerMotion(),
-                      extentRatio: 0.15,
-                      children: _startDate == null
-                          ? <Widget>[]
-                          : <Widget>[
-                              SlidableAction(
-                                backgroundColor: Theme.of(context).errorColor,
-                                foregroundColor:
-                                    Theme.of(context).colorScheme.onSecondary,
-                                icon: FontAwesomeIcons.circleMinus,
-                                onPressed: (_) {
-                                  setState(() {
-                                    _startDate = null;
-                                  });
-                                },
-                              )
-                            ]),
-                  child: ListTile(
-                    leading: Icon(FontAwesomeIcons.calendar),
-                    title: Text(L10N.of(context).tr.from),
-                    trailing: Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
-                      child: Text(_startDate == null
-                          ? "—"
-                          : _dateFormat.format(_startDate!)),
-                    ),
-                    onTap: () async {
-                      _oldStartDate = _startDate?.clone();
-                      _oldEndDate = _endDate?.clone();
-                      DateTime? newStartDate = await DatePicker.showDatePicker(
-                          context,
-                          currentTime: _startDate,
-                          onChanged: (DateTime dt) =>
-                              setStartDate(DateTime(dt.year, dt.month, dt.day)),
-                          onConfirm: (DateTime dt) =>
-                              setStartDate(DateTime(dt.year, dt.month, dt.day)),
-                          theme: DatePickerTheme(
-                            cancelStyle: Theme.of(context).textTheme.button!,
-                            doneStyle: Theme.of(context).textTheme.button!,
-                            itemStyle: Theme.of(context).textTheme.bodyText2!,
-                            backgroundColor:
-                                Theme.of(context).colorScheme.surface,
-                          ));
+                ListTile(
+                  leading: Icon(FontAwesomeIcons.calendar),
+                  title: Text(L10N.of(context).tr.from),
+                  trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+                    _startDate == null
+                        ? Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 18),
+                            child: Text("--"))
+                        : Text(_dateFormat.format(_startDate!)),
+                    if (_startDate != null)
+                      IconButton(
+                        icon: Icon(FontAwesomeIcons.circleMinus),
+                        onPressed: () {
+                          setState(() {
+                            _startDate = null;
+                          });
+                        },
+                        tooltip: L10N.of(context).tr.remove,
+                      )
+                  ]),
+                  onTap: () async {
+                    _oldStartDate = _startDate?.clone();
+                    _oldEndDate = _endDate?.clone();
+                    DateTime? newStartDate = await DatePicker.showDatePicker(
+                        context,
+                        currentTime: _startDate,
+                        onChanged: (DateTime dt) =>
+                            setStartDate(DateTime(dt.year, dt.month, dt.day)),
+                        onConfirm: (DateTime dt) =>
+                            setStartDate(DateTime(dt.year, dt.month, dt.day)),
+                        theme: DatePickerTheme(
+                          cancelStyle: Theme.of(context).textTheme.button!,
+                          doneStyle: Theme.of(context).textTheme.button!,
+                          itemStyle: Theme.of(context).textTheme.bodyText2!,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.surface,
+                        ));
 
-                      // if the user cancelled, this should be null
-                      if (newStartDate == null) {
-                        setState(() {
-                          _startDate = _oldStartDate;
-                          _endDate = _oldEndDate;
-                        });
-                      }
-                    },
-                  ),
+                    // if the user cancelled, this should be null
+                    if (newStartDate == null) {
+                      setState(() {
+                        _startDate = _oldStartDate;
+                        _endDate = _oldEndDate;
+                      });
+                    }
+                  },
                 ),
-                Slidable(
-                  endActionPane: ActionPane(
-                      motion: const DrawerMotion(),
-                      extentRatio: 0.15,
-                      children: _endDate == null
-                          ? <Widget>[]
-                          : <Widget>[
-                              SlidableAction(
-                                backgroundColor: Theme.of(context).errorColor,
-                                foregroundColor:
-                                    Theme.of(context).colorScheme.onSecondary,
-                                icon: FontAwesomeIcons.circleMinus,
-                                onPressed: (_) {
-                                  setState(() {
-                                    _endDate = null;
-                                  });
-                                },
-                              )
-                            ]),
-                  child: ListTile(
-                    leading: Icon(FontAwesomeIcons.calendar),
-                    title: Text(L10N.of(context).tr.to),
-                    trailing: Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
-                      child: Text(_endDate == null
-                          ? "—"
-                          : _dateFormat.format(_endDate!)),
-                    ),
-                    onTap: () async {
-                      _oldEndDate = _endDate?.clone();
-                      DateTime? newEndDate = await DatePicker.showDatePicker(
-                          context,
-                          currentTime: _endDate,
-                          minTime: _startDate,
-                          onChanged: (DateTime dt) => setState(() => _endDate =
-                              DateTime(
-                                  dt.year, dt.month, dt.day, 23, 59, 59, 999)),
-                          onConfirm: (DateTime dt) => setState(() => _endDate =
-                              DateTime(
-                                  dt.year, dt.month, dt.day, 23, 59, 59, 999)),
-                          theme: DatePickerTheme(
-                            cancelStyle: Theme.of(context).textTheme.button!,
-                            doneStyle: Theme.of(context).textTheme.button!,
-                            itemStyle: Theme.of(context).textTheme.bodyText2!,
-                            backgroundColor:
-                                Theme.of(context).colorScheme.surface,
-                          ));
+                ListTile(
+                  leading: Icon(FontAwesomeIcons.calendar),
+                  title: Text(L10N.of(context).tr.to),
+                  trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+                    _endDate == null
+                        ? Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 18),
+                            child: Text("--"))
+                        : Text(_dateFormat.format(_endDate!)),
+                    if (_endDate != null)
+                      IconButton(
+                        tooltip: L10N.of(context).tr.remove,
+                        icon: Icon(FontAwesomeIcons.circleMinus),
+                        onPressed: () {
+                          setState(() {
+                            _endDate = null;
+                          });
+                        },
+                      )
+                  ]),
+                  onTap: () async {
+                    _oldEndDate = _endDate?.clone();
+                    DateTime? newEndDate = await DatePicker.showDatePicker(
+                        context,
+                        currentTime: _endDate,
+                        minTime: _startDate,
+                        onChanged: (DateTime dt) => setState(() => _endDate =
+                            DateTime(
+                                dt.year, dt.month, dt.day, 23, 59, 59, 999)),
+                        onConfirm: (DateTime dt) => setState(() => _endDate =
+                            DateTime(
+                                dt.year, dt.month, dt.day, 23, 59, 59, 999)),
+                        theme: DatePickerTheme(
+                          cancelStyle: Theme.of(context).textTheme.button!,
+                          doneStyle: Theme.of(context).textTheme.button!,
+                          itemStyle: Theme.of(context).textTheme.bodyText2!,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.surface,
+                        ));
 
-                      // if the user cancelled, this should be null
-                      if (newEndDate == null) {
-                        setState(() {
-                          _endDate = _oldEndDate;
-                        });
-                      }
-                    },
-                  ),
+                    // if the user cancelled, this should be null
+                    if (newEndDate == null) {
+                      setState(() {
+                        _endDate = _oldEndDate;
+                      });
+                    }
+                  },
                 ),
               ],
             ),

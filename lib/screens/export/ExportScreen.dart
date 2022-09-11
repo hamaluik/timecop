@@ -19,7 +19,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
@@ -94,96 +93,77 @@ class _ExportScreenState extends State<ExportScreen> {
                     fontWeight: FontWeight.w700)),
             initiallyExpanded: true,
             children: <Widget>[
-              Slidable(
-                endActionPane: ActionPane(
-                    motion: const DrawerMotion(),
-                    extentRatio: 0.15,
-                    children: _startDate == null
-                        ? <Widget>[]
-                        : <Widget>[
-                            SlidableAction(
-                              backgroundColor: Theme.of(context).errorColor,
-                              foregroundColor:
-                                  Theme.of(context).colorScheme.onSecondary,
-                              icon: FontAwesomeIcons.circleMinus,
-                              onPressed: (_) {
-                                setState(() {
-                                  _startDate = null;
-                                });
-                              },
-                            )
-                          ]),
-                child: ListTile(
-                  leading: Icon(FontAwesomeIcons.calendar),
-                  title: Text(L10N.of(context).tr.from),
-                  trailing: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
-                    child: Text(_startDate == null
-                        ? "—"
-                        : _dateFormat.format(_startDate!)),
-                  ),
-                  onTap: () async {
-                    await DatePicker.showDatePicker(context,
-                        currentTime: _startDate,
-                        onChanged: (DateTime dt) => setState(() =>
-                            _startDate = DateTime(dt.year, dt.month, dt.day)),
-                        onConfirm: (DateTime dt) => setState(() =>
-                            _startDate = DateTime(dt.year, dt.month, dt.day)),
-                        theme: DatePickerTheme(
-                          cancelStyle: Theme.of(context).textTheme.button!,
-                          doneStyle: Theme.of(context).textTheme.button!,
-                          itemStyle: Theme.of(context).textTheme.bodyText2!,
-                          backgroundColor:
-                              Theme.of(context).colorScheme.surface,
-                        ));
-                  },
-                ),
+              ListTile(
+                leading: Icon(FontAwesomeIcons.calendar),
+                title: Text(L10N.of(context).tr.from),
+                trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+                  _startDate == null
+                      ? Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 18),
+                          child: Text("--"),
+                        )
+                      : Text(_dateFormat.format(_startDate!)),
+                  if (_startDate != null)
+                    IconButton(
+                      tooltip: L10N.of(context).tr.remove,
+                      icon: Icon(FontAwesomeIcons.circleMinus),
+                      onPressed: () {
+                        setState(() {
+                          _startDate = null;
+                        });
+                      },
+                    )
+                ]),
+                onTap: () async {
+                  await DatePicker.showDatePicker(context,
+                      currentTime: _startDate,
+                      onChanged: (DateTime dt) => setState(() =>
+                          _startDate = DateTime(dt.year, dt.month, dt.day)),
+                      onConfirm: (DateTime dt) => setState(() =>
+                          _startDate = DateTime(dt.year, dt.month, dt.day)),
+                      theme: DatePickerTheme(
+                        cancelStyle: Theme.of(context).textTheme.button!,
+                        doneStyle: Theme.of(context).textTheme.button!,
+                        itemStyle: Theme.of(context).textTheme.bodyText2!,
+                        backgroundColor: Theme.of(context).colorScheme.surface,
+                      ));
+                },
               ),
-              Slidable(
-                endActionPane: ActionPane(
-                    motion: const DrawerMotion(),
-                    extentRatio: 0.15,
-                    children: _endDate == null
-                        ? <Widget>[]
-                        : <Widget>[
-                            SlidableAction(
-                              backgroundColor: Theme.of(context).errorColor,
-                              foregroundColor:
-                                  Theme.of(context).colorScheme.onSecondary,
-                              icon: FontAwesomeIcons.circleMinus,
-                              onPressed: (_) {
-                                setState(() {
-                                  _endDate = null;
-                                });
-                              },
-                            )
-                          ]),
-                child: ListTile(
-                  leading: Icon(FontAwesomeIcons.calendar),
-                  title: Text(L10N.of(context).tr.to),
-                  trailing: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 18, 0),
-                    child: Text(
-                        _endDate == null ? "—" : _dateFormat.format(_endDate!)),
-                  ),
-                  onTap: () async {
-                    await DatePicker.showDatePicker(context,
-                        currentTime: _endDate,
-                        onChanged: (DateTime dt) => setState(() => _endDate =
-                            DateTime(
-                                dt.year, dt.month, dt.day, 23, 59, 59, 999)),
-                        onConfirm: (DateTime dt) => setState(() => _endDate =
-                            DateTime(
-                                dt.year, dt.month, dt.day, 23, 59, 59, 999)),
-                        theme: DatePickerTheme(
-                          cancelStyle: Theme.of(context).textTheme.button!,
-                          doneStyle: Theme.of(context).textTheme.button!,
-                          itemStyle: Theme.of(context).textTheme.bodyText2!,
-                          backgroundColor:
-                              Theme.of(context).colorScheme.surface,
-                        ));
-                  },
-                ),
+              ListTile(
+                leading: Icon(FontAwesomeIcons.calendar),
+                title: Text(L10N.of(context).tr.to),
+                trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+                  _endDate == null
+                      ? Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 18),
+                          child: Text("--"),
+                        )
+                      : Text(_dateFormat.format(_endDate!)),
+                  if (_endDate != null)
+                    IconButton(
+                      tooltip: L10N.of(context).tr.remove,
+                      icon: Icon(FontAwesomeIcons.circleMinus),
+                      onPressed: () {
+                        setState(() {
+                          _endDate = null;
+                        });
+                      },
+                    )
+                ]),
+                onTap: () async {
+                  await DatePicker.showDatePicker(context,
+                      currentTime: _endDate,
+                      onChanged: (DateTime dt) => setState(() => _endDate =
+                          DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
+                      onConfirm: (DateTime dt) => setState(() => _endDate =
+                          DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
+                      theme: DatePickerTheme(
+                        cancelStyle: Theme.of(context).textTheme.button!,
+                        doneStyle: Theme.of(context).textTheme.button!,
+                        itemStyle: Theme.of(context).textTheme.bodyText2!,
+                        backgroundColor: Theme.of(context).colorScheme.surface,
+                      ));
+                },
               ),
             ],
           ),

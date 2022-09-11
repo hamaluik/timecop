@@ -21,7 +21,6 @@ import 'package:timecop/blocs/notifications/notifications_bloc.dart';
 import 'package:timecop/blocs/settings/bloc.dart';
 import 'package:timecop/blocs/theme/theme_bloc.dart';
 import 'package:timecop/l10n.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:numberpicker/numberpicker.dart';
 
@@ -100,69 +99,64 @@ class SettingsScreen extends StatelessWidget {
                     return Container();
                   }
 
-                  return Slidable(
-                    endActionPane: ActionPane(
-                        motion: const DrawerMotion(),
-                        extentRatio: 0.15,
-                        children: <Widget>[
-                          SlidableAction(
-                            backgroundColor: Theme.of(context).errorColor,
-                            foregroundColor:
-                                Theme.of(context).colorScheme.onSecondary,
-                            icon: FontAwesomeIcons.circleMinus,
-                            onPressed: (_) {
-                              settingsBloc.add(SetDefaultFilterDays(null));
-                            },
-                          )
-                        ]),
-                    child: ListTile(
-                      title: Text(L10N.of(context).tr.defaultFilterDays),
-                      trailing: Text(settings.defaultFilterDays == -1
-                          ? "—"
-                          : settings.defaultFilterDays.toString()),
-                      onTap: () async {
-                        int tempDays = settings.defaultFilterDays > 0
-                            ? settings.defaultFilterDays
-                            : 30;
-                        int? days = await showDialog<int>(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return StatefulBuilder(
-                                  builder: (context, setState) {
-                                return AlertDialog(
-                                  content: NumberPicker(
-                                    minValue: 1,
-                                    maxValue: 365,
-                                    onChanged: (int value) {
-                                      setState(() => tempDays = value);
-                                    },
-                                    value: tempDays,
-                                    infiniteLoop: true,
-                                    haptics: true,
-                                  ),
-                                  title: Text(
-                                      L10N.of(context).tr.defaultFilterDays),
-                                  actions: <Widget>[
-                                    TextButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child:
-                                            Text(L10N.of(context).tr.cancel)),
-                                    TextButton(
-                                        onPressed: () {
-                                          Navigator.pop(context, tempDays);
-                                        },
-                                        child: Text(L10N.of(context).tr.ok))
-                                  ],
-                                );
-                              });
+                  return ListTile(
+                    title: Text(L10N.of(context).tr.defaultFilterDays),
+                    trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+                      settings.defaultFilterDays == -1
+                          ? Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 18),
+                              child: Text("--"))
+                          : Text(settings.defaultFilterDays.toString()),
+                      if (settings.defaultFilterDays != -1)
+                        IconButton(
+                          tooltip: L10N.of(context).tr.remove,
+                          icon: Icon(FontAwesomeIcons.circleMinus),
+                          onPressed: () {
+                            settingsBloc.add(SetDefaultFilterDays(null));
+                          },
+                        )
+                    ]),
+                    onTap: () async {
+                      int tempDays = settings.defaultFilterDays > 0
+                          ? settings.defaultFilterDays
+                          : 30;
+                      int? days = await showDialog<int>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return StatefulBuilder(
+                                builder: (context, setState) {
+                              return AlertDialog(
+                                content: NumberPicker(
+                                  minValue: 1,
+                                  maxValue: 365,
+                                  onChanged: (int value) {
+                                    setState(() => tempDays = value);
+                                  },
+                                  value: tempDays,
+                                  infiniteLoop: true,
+                                  haptics: true,
+                                ),
+                                title:
+                                    Text(L10N.of(context).tr.defaultFilterDays),
+                                actions: <Widget>[
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(L10N.of(context).tr.cancel)),
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context, tempDays);
+                                      },
+                                      child: Text(L10N.of(context).tr.ok))
+                                ],
+                              );
                             });
-                        if (days != null) {
-                          settingsBloc.add(SetDefaultFilterDays(days));
-                        }
-                      },
-                    ),
+                          });
+                      if (days != null) {
+                        settingsBloc.add(SetDefaultFilterDays(days));
+                      }
+                    },
                   );
                 }),
             BlocBuilder<SettingsBloc, SettingsState>(
