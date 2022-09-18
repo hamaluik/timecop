@@ -24,27 +24,14 @@ import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/screens/timer/TimerEditor.dart';
+import 'package:timecop/timer_utils.dart';
 
 class RunningTimerRow extends StatelessWidget {
   final TimerEntry timer;
   final DateTime now;
+
   const RunningTimerRow({Key? key, required this.timer, required this.now})
       : super(key: key);
-
-  static String formatDescription(BuildContext context, String? description) {
-    if (description == null || description.trim().isEmpty) {
-      return L10N.of(context).tr.noDescription;
-    }
-    return description;
-  }
-
-  static TextStyle? styleDescription(
-      BuildContext context, String? description) {
-    if (description == null || description.trim().isEmpty) {
-      return TextStyle(color: Theme.of(context).disabledColor);
-    }
-    return null;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,30 +69,27 @@ class RunningTimerRow extends StatelessWidget {
               },
             )
           ]),
-      endActionPane: ActionPane(
-          motion: const DrawerMotion(),
-          extentRatio: 0.15,
-          children: <Widget>[
-            SlidableAction(
-              backgroundColor: Theme.of(context).colorScheme.secondary,
-              foregroundColor: Theme.of(context).colorScheme.onSecondary,
-              icon: FontAwesomeIcons.solidCircleStop,
-              onPressed: (_) {
-                final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
-                timers.add(StopTimer(timer));
-              },
-            )
-          ]),
       child: ListTile(
           leading: ProjectColour(
               project: BlocProvider.of<ProjectsBloc>(context)
                   .getProjectByID(timer.projectID)),
-          title: Text(formatDescription(context, timer.description),
-              style: styleDescription(context, timer.description)),
-          trailing: Text(timer.formatTime(),
-              style: TextStyle(
-                fontFeatures: [FontFeature.tabularFigures()],
-              )),
+          title: Text(TimerUtils.formatDescription(context, timer.description),
+              style: TimerUtils.styleDescription(context, timer.description)),
+          trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+            Text(timer.formatTime(),
+                style: TextStyle(
+                  fontFeatures: [FontFeature.tabularFigures()],
+                )),
+            const SizedBox(width: 4),
+            IconButton(
+              tooltip: L10N.of(context).tr.stopTimer,
+              icon: Icon(FontAwesomeIcons.solidCircleStop),
+              onPressed: () {
+                final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+                timers.add(StopTimer(timer));
+              },
+            ),
+          ]),
           onTap: () =>
               Navigator.of(context).push(MaterialPageRoute<TimerEditor>(
                 builder: (BuildContext context) => TimerEditor(
