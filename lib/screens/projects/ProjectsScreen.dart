@@ -25,6 +25,8 @@ import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/projects/ProjectEditor.dart';
 import 'package:timecop/models/project.dart';
 
+enum _ProjectMenuItems { archive, delete }
+
 class ProjectsScreen extends StatelessWidget {
   const ProjectsScreen({Key? key}) : super(key: key);
 
@@ -58,73 +60,8 @@ class ProjectsScreen extends StatelessWidget {
                                           .onSecondary,
                                       icon: FontAwesomeIcons.trash,
                                       onPressed: (_) async {
-                                        bool delete = await (showDialog<bool>(
-                                                context: context,
-                                                builder: (BuildContext
-                                                        context) =>
-                                                    AlertDialog(
-                                                      title: Text(L10N
-                                                          .of(context)
-                                                          .tr
-                                                          .confirmDelete),
-                                                      content: RichText(
-                                                          textAlign:
-                                                              TextAlign.justify,
-                                                          text: TextSpan(
-                                                              style: TextStyle(
-                                                                  color: Theme.of(
-                                                                          context)
-                                                                      .textTheme
-                                                                      .bodyText2!
-                                                                      .color),
-                                                              children: <
-                                                                  TextSpan>[
-                                                                TextSpan(
-                                                                    text: L10N
-                                                                            .of(context)
-                                                                            .tr
-                                                                            .areYouSureYouWantToDelete +
-                                                                        "\n\n"),
-                                                                TextSpan(
-                                                                    text: "⬤ ",
-                                                                    style: TextStyle(
-                                                                        color: project
-                                                                            .colour)),
-                                                                TextSpan(
-                                                                    text: project
-                                                                        .name,
-                                                                    style: TextStyle(
-                                                                        fontStyle:
-                                                                            FontStyle.italic)),
-                                                              ])),
-                                                      actions: <Widget>[
-                                                        TextButton(
-                                                          child: Text(L10N
-                                                              .of(context)
-                                                              .tr
-                                                              .cancel),
-                                                          onPressed: () =>
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop(false),
-                                                        ),
-                                                        TextButton(
-                                                          child: Text(L10N
-                                                              .of(context)
-                                                              .tr
-                                                              .delete),
-                                                          onPressed: () =>
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop(true),
-                                                        ),
-                                                      ],
-                                                    ))) ??
-                                            false;
-                                        if (delete) {
-                                          projectsBloc
-                                              .add(DeleteProject(project));
-                                        }
+                                        await _deleteProject(
+                                            context, projectsBloc, project);
                                       },
                                     )
                                   ]),
@@ -151,10 +88,49 @@ class ProjectsScreen extends StatelessWidget {
                                   ]),
                               child: ListTile(
                                 leading: ProjectColour(project: project),
-                                title: Text(project.name),
-                                trailing: project.archived
-                                    ? Icon(FontAwesomeIcons.box)
-                                    : null,
+                                title: project.archived
+                                    ? Row(
+                                        children: [
+                                          Icon(
+                                            FontAwesomeIcons.boxArchive,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onBackground,
+                                            size: 20,
+                                          ),
+                                          const SizedBox(width: 8),
+                                          Expanded(child: Text(project.name))
+                                        ],
+                                      )
+                                    : Text(project.name),
+                                trailing: PopupMenuButton<_ProjectMenuItems>(
+                                    onSelected: (menuItem) async {
+                                      switch (menuItem) {
+                                        case _ProjectMenuItems.archive:
+                                          projectsBloc.add(EditProject(
+                                              Project.clone(project,
+                                                  archived:
+                                                      !project.archived)));
+                                          break;
+                                        case _ProjectMenuItems.delete:
+                                          await _deleteProject(
+                                              context, projectsBloc, project);
+                                          break;
+                                      }
+                                    },
+                                    itemBuilder: (_) => [
+                                          PopupMenuItem(
+                                            value: _ProjectMenuItems.archive,
+                                            child: Text(project.archived
+                                                ? L10N.of(context).tr.unarchive
+                                                : L10N.of(context).tr.archive),
+                                          ),
+                                          PopupMenuItem(
+                                            value: _ProjectMenuItems.delete,
+                                            child: Text(
+                                                L10N.of(context).tr.delete),
+                                          )
+                                        ]),
                                 onTap: () => showDialog<void>(
                                     context: context,
                                     builder: (BuildContext context) =>
@@ -168,6 +144,7 @@ class ProjectsScreen extends StatelessWidget {
                 }),
       ),
       floatingActionButton: FloatingActionButton(
+        tooltip: L10N.of(context).tr.createNewProject,
         key: Key("addProject"),
         child: Stack(
           // shenanigans to properly centre the icon (font awesome glyphs are variable
@@ -188,5 +165,48 @@ class ProjectsScreen extends StatelessWidget {
                 )),
       ),
     );
+  }
+
+  Future<void> _deleteProject(
+      BuildContext context, ProjectsBloc projectsBloc, Project project) async {
+    bool delete = await (showDialog<bool>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+                  title: Text(L10N.of(context).tr.confirmDelete),
+                  content: RichText(
+                      textAlign: TextAlign.justify,
+                      text: TextSpan(
+                          style: TextStyle(
+                              color:
+                                  Theme.of(context).textTheme.bodyText2!.color),
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: L10N
+                                        .of(context)
+                                        .tr
+                                        .areYouSureYouWantToDelete +
+                                    "\n\n"),
+                            TextSpan(
+                                text: "⬤ ",
+                                style: TextStyle(color: project.colour)),
+                            TextSpan(
+                                text: project.name,
+                                style: TextStyle(fontStyle: FontStyle.italic)),
+                          ])),
+                  actions: <Widget>[
+                    TextButton(
+                      child: Text(L10N.of(context).tr.cancel),
+                      onPressed: () => Navigator.of(context).pop(false),
+                    ),
+                    TextButton(
+                      child: Text(L10N.of(context).tr.delete),
+                      onPressed: () => Navigator.of(context).pop(true),
+                    ),
+                  ],
+                ))) ??
+        false;
+    if (delete) {
+      projectsBloc.add(DeleteProject(project));
+    }
   }
 }
