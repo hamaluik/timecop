@@ -53,7 +53,6 @@ class _ExportScreenState extends State<ExportScreen> {
   List<Project?> selectedProjects = [];
   static final DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
   static final DateFormat _exportDateFormat = DateFormat.yMd();
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -77,11 +76,10 @@ class _ExportScreenState extends State<ExportScreen> {
     // TODO: break this into components or something so we don't have such a massively unmanagement build function
 
     return Scaffold(
-      key: _scaffoldKey,
       appBar: AppBar(
         title: Text(L10N.of(context).tr.exportImport),
         actions: <Widget>[
-          ExportMenu(dateFormat: _dateFormat, scaffoldKey: _scaffoldKey),
+          ExportMenu(dateFormat: _dateFormat),
         ],
       ),
       body: ListView(
