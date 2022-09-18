@@ -19,7 +19,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -31,6 +30,8 @@ import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/models/clone_time.dart';
+
+enum _DateTimeMenuItems { now }
 
 class TimerEditor extends StatefulWidget {
   final TimerEntry timer;
@@ -45,7 +46,7 @@ class _TimerEditorState extends State<TimerEditor> {
   TextEditingController? _notesController;
   String? _notes;
 
-  DateTime? _startTime;
+  late DateTime _startTime;
   DateTime? _endTime;
 
   DateTime? _oldStartTime;
@@ -107,10 +108,44 @@ class _TimerEditorState extends State<TimerEditor> {
     return Scaffold(
       appBar: AppBar(
         title: Text(L10N.of(context).tr.editTimer),
+        actions: [
+          IconButton(
+              tooltip: L10N.of(context).tr.delete,
+              onPressed: () async {
+                bool delete = await (showDialog<bool>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                              title: Text(L10N.of(context).tr.confirmDelete),
+                              content:
+                                  Text(L10N.of(context).tr.deleteTimerConfirm),
+                              actions: <Widget>[
+                                TextButton(
+                                  child: Text(L10N.of(context).tr.cancel),
+                                  onPressed: () =>
+                                      Navigator.of(context).pop(false),
+                                ),
+                                TextButton(
+                                  child: Text(L10N.of(context).tr.delete),
+                                  onPressed: () =>
+                                      Navigator.of(context).pop(true),
+                                ),
+                              ],
+                            ))) ??
+                    false;
+                if (delete) {
+                  final TimersBloc timersBloc =
+                      BlocProvider.of<TimersBloc>(context);
+                  timersBloc.add(DeleteTimer(widget.timer));
+                  Navigator.of(context).pop();
+                }
+              },
+              icon: Icon(FontAwesomeIcons.trash))
+        ],
       ),
       body: Form(
         key: _formKey,
         child: Column(
+          //todo this should include a scrollable area
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -215,118 +250,119 @@ class _TimerEditorState extends State<TimerEditor> {
                       ),
                     ),
             ),
-            Slidable(
-              endActionPane: ActionPane(
-                  motion: const DrawerMotion(),
-                  extentRatio: 0.15,
-                  children: <Widget>[
-                    SlidableAction(
-                      backgroundColor: Theme.of(context).colorScheme.secondary,
-                      foregroundColor:
-                          Theme.of(context).colorScheme.onSecondary,
-                      icon: FontAwesomeIcons.clock,
-                      onPressed: (_) {
-                        _oldStartTime = _startTime;
-                        _oldEndTime = _endTime;
-                        setStartTime(DateTime.now());
-                      },
-                    ),
-                  ]),
-              child: ListTile(
-                title: Text(L10N.of(context).tr.startTime),
-                trailing: Text(_dateFormat.format(_startTime!)),
-                onTap: () async {
-                  _oldStartTime = _startTime?.clone();
-                  _oldEndTime = _endTime?.clone();
-                  DateTime? newStartTime =
-                      await DatePicker.showDateTimePicker(context,
-                          currentTime: _startTime,
-                          maxTime: _endTime == null ? DateTime.now() : null,
-                          onChanged: (DateTime dt) => setStartTime(dt),
-                          onConfirm: (DateTime dt) => setStartTime(dt),
-                          theme: DatePickerTheme(
-                            cancelStyle: Theme.of(context).textTheme.button!,
-                            doneStyle: Theme.of(context).textTheme.button!,
-                            itemStyle: Theme.of(context).textTheme.bodyText2!,
-                            backgroundColor:
-                                Theme.of(context).colorScheme.surface,
-                          ));
-
-                  // if the user cancelled, this should be null
-                  if (newStartTime == null) {
-                    setState(() {
-                      _startTime = _oldStartTime;
-                      _endTime = _oldEndTime;
-                    });
-                  }
-                },
-              ),
-            ),
-            Slidable(
-              endActionPane: ActionPane(
-                  motion: const DrawerMotion(),
-                  extentRatio: 0.15,
-                  children: _endTime == null
-                      ? <Widget>[
-                          SlidableAction(
-                            backgroundColor:
-                                Theme.of(context).colorScheme.secondary,
-                            foregroundColor:
-                                Theme.of(context).colorScheme.onSecondary,
-                            icon: FontAwesomeIcons.clock,
-                            onPressed: (_) =>
-                                setState(() => _endTime = DateTime.now()),
-                          ),
-                        ]
-                      : <Widget>[
-                          SlidableAction(
-                            backgroundColor:
-                                Theme.of(context).colorScheme.secondary,
-                            foregroundColor:
-                                Theme.of(context).colorScheme.onSecondary,
-                            icon: FontAwesomeIcons.clock,
-                            onPressed: (_) =>
-                                setState(() => _endTime = DateTime.now()),
-                          ),
-                          SlidableAction(
-                            backgroundColor: Theme.of(context).errorColor,
-                            foregroundColor:
-                                Theme.of(context).colorScheme.onSecondary,
-                            icon: FontAwesomeIcons.circleMinus,
-                            onPressed: (_) {
-                              setState(() {
-                                _endTime = null;
-                              });
-                            },
+            ListTile(
+              title: Row(mainAxisSize: MainAxisSize.min, children: [
+                Expanded(
+                  child: Text(L10N.of(context).tr.startTime),
+                ),
+                Expanded(
+                    flex: 3,
+                    child: Text(
+                      _dateFormat.format(_startTime),
+                      textAlign: TextAlign.right,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    )),
+                PopupMenuButton<_DateTimeMenuItems>(
+                    onSelected: (menuItem) {
+                      switch (menuItem) {
+                        case _DateTimeMenuItems.now:
+                          _oldStartTime = _startTime;
+                          _oldEndTime = _endTime;
+                          setStartTime(DateTime.now());
+                          break;
+                      }
+                    },
+                    itemBuilder: (_) => [
+                          PopupMenuItem(
+                            value: _DateTimeMenuItems.now,
+                            child: Text(L10N.of(context).tr.setToCurrentTime),
                           )
                         ]),
-              child: ListTile(
-                title: Text(L10N.of(context).tr.endTime),
-                trailing: Text(
-                    _endTime == null ? "—" : _dateFormat.format(_endTime!)),
-                onTap: () async {
-                  _oldEndTime = _endTime?.clone();
-                  DateTime? newEndTime = await DatePicker.showDateTimePicker(
-                      context,
-                      currentTime: _endTime,
-                      minTime: _startTime,
-                      onChanged: (DateTime dt) => setState(() => _endTime = dt),
-                      onConfirm: (DateTime dt) => setState(() => _endTime = dt),
-                      theme: DatePickerTheme(
-                        cancelStyle: Theme.of(context).textTheme.button!,
-                        doneStyle: Theme.of(context).textTheme.button!,
-                        itemStyle: Theme.of(context).textTheme.bodyText2!,
-                        backgroundColor: Theme.of(context).colorScheme.surface,
-                      ));
+              ]),
+              onTap: () async {
+                _oldStartTime = _startTime.clone();
+                _oldEndTime = _endTime?.clone();
+                DateTime? newStartTime =
+                    await DatePicker.showDateTimePicker(context,
+                        currentTime: _startTime,
+                        maxTime: _endTime == null ? DateTime.now() : null,
+                        onChanged: (DateTime dt) => setStartTime(dt),
+                        onConfirm: (DateTime dt) => setStartTime(dt),
+                        theme: DatePickerTheme(
+                          cancelStyle: Theme.of(context).textTheme.button!,
+                          doneStyle: Theme.of(context).textTheme.button!,
+                          itemStyle: Theme.of(context).textTheme.bodyText2!,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.surface,
+                        ));
 
-                  // if the user cancelled, this should be null
-                  if (newEndTime == null) {
-                    setState(() {
-                      _endTime = _oldEndTime;
-                    });
-                  }
-                },
-              ),
+                // if the user cancelled, this should be null
+                if (newStartTime == null) {
+                  setState(() {
+                    _startTime = _oldStartTime!;
+                    _endTime = _oldEndTime;
+                  });
+                }
+              },
+            ),
+            ListTile(
+              title: Row(children: [
+                Expanded(child: Text(L10N.of(context).tr.endTime)),
+                Expanded(
+                    flex: 3,
+                    child: Text(
+                      _endTime == null ? "--" : _dateFormat.format(_endTime!),
+                      textAlign: TextAlign.right,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    )),
+                if (_endTime != null)
+                  IconButton(
+                    visualDensity: VisualDensity.compact,
+                    padding: EdgeInsetsDirectional.only(start: 16),
+                    tooltip: L10N.of(context).tr.remove,
+                    icon: Icon(FontAwesomeIcons.circleMinus),
+                    onPressed: () {
+                      setState(() {
+                        _endTime = null;
+                      });
+                    },
+                  ),
+                PopupMenuButton<_DateTimeMenuItems>(
+                    onSelected: (menuItem) {
+                      switch (menuItem) {
+                        case _DateTimeMenuItems.now:
+                          setState(() => _endTime = DateTime.now());
+                      }
+                    },
+                    itemBuilder: (_) => [
+                          PopupMenuItem(
+                            value: _DateTimeMenuItems.now,
+                            child: Text(L10N.of(context).tr.setToCurrentTime),
+                          )
+                        ])
+              ]),
+              onTap: () async {
+                _oldEndTime = _endTime?.clone();
+                DateTime? newEndTime = await DatePicker.showDateTimePicker(
+                    context,
+                    currentTime: _endTime,
+                    minTime: _startTime,
+                    onChanged: (DateTime dt) => setState(() => _endTime = dt),
+                    onConfirm: (DateTime dt) => setState(() => _endTime = dt),
+                    theme: DatePickerTheme(
+                      cancelStyle: Theme.of(context).textTheme.button!,
+                      doneStyle: Theme.of(context).textTheme.button!,
+                      itemStyle: Theme.of(context).textTheme.bodyText2!,
+                      backgroundColor: Theme.of(context).colorScheme.surface,
+                    ));
+
+                // if the user cancelled, this should be null
+                if (newEndTime == null) {
+                  setState(() {
+                    _endTime = _oldEndTime;
+                  });
+                }
+              },
             ),
             StreamBuilder(
               initialData: DateTime.now(),
@@ -337,40 +373,29 @@ class _TimerEditorState extends State<TimerEditor> {
                 title: Text(L10N.of(context).tr.duration),
                 trailing: Text(
                   TimerEntry.formatDuration(_endTime == null
-                      ? snapshot.data!.difference(_startTime!)
-                      : _endTime!.difference(_startTime!)),
+                      ? snapshot.data!.difference(_startTime)
+                      : _endTime!.difference(_startTime)),
                   style:
                       TextStyle(fontFeatures: [FontFeature.tabularFigures()]),
                 ),
               ),
             ),
-            Slidable(
-              endActionPane: ActionPane(
-                  motion: const DrawerMotion(),
-                  extentRatio: 0.15,
-                  children: <Widget>[
-                    SlidableAction(
-                      backgroundColor: Theme.of(context).colorScheme.secondary,
-                      foregroundColor:
-                          Theme.of(context).colorScheme.onSecondary,
-                      icon: FontAwesomeIcons.penToSquare,
-                      onPressed: (_) async => await _editNotes(context),
-                    ),
-                  ]),
-              child: ListTile(
-                title: Text("Notes"),
-                onTap: () async => await _editNotes(context),
-              ),
+            ListTile(
+              title: Text("Notes"),
+              onTap: () async => await _editNotes(context),
             ),
             Expanded(
-                child: Padding(
-                    padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
-                    child: Markdown(data: _notes!))),
+                child: InkWell(
+                    onTap: () async => await _editNotes(context),
+                    child: Padding(
+                        padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+                        child: Markdown(data: _notes!)))),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         key: Key("saveDetails"),
+        tooltip: L10N.of(context).tr.save,
         child: Stack(
           // shenanigans to properly centre the icon (font awesome glyphs are variable
           // width but the library currently doesn't deal with that)
@@ -389,7 +414,7 @@ class _TimerEditorState extends State<TimerEditor> {
 
           TimerEntry timer = TimerEntry(
             id: widget.timer.id,
-            startTime: _startTime!,
+            startTime: _startTime,
             endTime: _endTime,
             projectID: _project?.id,
             description: _descriptionController!.text.trim(),
