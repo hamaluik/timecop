@@ -26,6 +26,8 @@ import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/screens/dashboard/components/StoppedTimerRow.dart';
 
+import 'package:timecop/timer_utils.dart';
+
 class GroupedStoppedTimersRow extends StatefulWidget {
   final List<TimerEntry> timers;
   const GroupedStoppedTimersRow({Key? key, required this.timers})
@@ -44,7 +46,9 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow>
   static final Animatable<double> _halfTween =
       Tween<double>(begin: 0.0, end: -0.5);
 
+  bool _isHovering = false;
   late bool _expanded;
+
   late AnimationController _controller;
   late Animation<double> _iconTurns;
 
@@ -63,88 +67,89 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow>
     super.dispose();
   }
 
-  static String formatDescription(BuildContext context, String? description) {
-    if (description == null || description.trim().isEmpty) {
-      return L10N.of(context).tr.noDescription;
-    }
-    return description;
-  }
-
-  static TextStyle? styleDescription(
-      BuildContext context, String? description) {
-    if (description == null || description.trim().isEmpty) {
-      return TextStyle(color: Theme.of(context).disabledColor);
-    } else {
-      return TextStyle(color: Theme.of(context).colorScheme.onBackground);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Slidable(
-      endActionPane: ActionPane(
-          motion: const DrawerMotion(),
-          extentRatio: 0.15,
-          children: <Widget>[
-            SlidableAction(
-                backgroundColor: Theme.of(context).colorScheme.secondary,
-                foregroundColor: Theme.of(context).colorScheme.onSecondary,
-                icon: FontAwesomeIcons.play,
-                onPressed: (_) {
-                  final TimersBloc timersBloc =
-                      BlocProvider.of<TimersBloc>(context);
-                  final ProjectsBloc projectsBloc =
-                      BlocProvider.of<ProjectsBloc>(context);
-                  Project? project = projectsBloc
-                      .getProjectByID(widget.timers.first.projectID);
-                  timersBloc.add(CreateTimer(
-                      description: widget.timers.first.description ?? "",
-                      project: project));
-                })
-          ]),
-      child: ExpansionTile(
-        onExpansionChanged: (expanded) {
-          setState(() {
-            _expanded = expanded;
-            if (_expanded) {
-              _controller.forward();
-            } else {
-              _controller.reverse();
-            }
-          });
-        },
-        leading: ProjectColour(
-            project: BlocProvider.of<ProjectsBloc>(context)
-                .getProjectByID(widget.timers[0].projectID)),
-        title: Text(formatDescription(context, widget.timers[0].description),
-            style: styleDescription(context, widget.timers[0].description)),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            RotationTransition(
-              turns: _iconTurns,
-              child: Icon(
-                Icons.expand_more,
-                color: Theme.of(context).colorScheme.onBackground,
-              ),
+    return MouseRegion(
+        onEnter: (_) => setState(() {
+              _isHovering = true;
+            }),
+        onExit: (_) => setState(() {
+              _isHovering = false;
+            }),
+        child: Slidable(
+          endActionPane: ActionPane(
+              motion: const DrawerMotion(),
+              extentRatio: 0.15,
+              children: <Widget>[
+                SlidableAction(
+                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                    foregroundColor: Theme.of(context).colorScheme.onSecondary,
+                    icon: FontAwesomeIcons.play,
+                    onPressed: (_) => _resumeTimer())
+              ]),
+          child: ExpansionTile(
+            onExpansionChanged: (expanded) {
+              setState(() {
+                _expanded = expanded;
+                if (_expanded) {
+                  _controller.forward();
+                } else {
+                  _controller.reverse();
+                }
+              });
+            },
+            leading: ProjectColour(
+                project: BlocProvider.of<ProjectsBloc>(context)
+                    .getProjectByID(widget.timers[0].projectID)),
+            title: Text(
+                TimerUtils.formatDescription(
+                    context, widget.timers[0].description),
+                style: TimerUtils.styleDescription(
+                    context, widget.timers[0].description)),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                RotationTransition(
+                  turns: _iconTurns,
+                  child: Icon(
+                    Icons.expand_more,
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+                ),
+                const SizedBox(width: 4),
+                Text(
+                    TimerEntry.formatDuration(widget.timers.fold(
+                        Duration(),
+                        (Duration sum, TimerEntry timer) =>
+                            sum + timer.endTime!.difference(timer.startTime))),
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onBackground,
+                      fontFeatures: [FontFeature.tabularFigures()],
+                    )),
+                if (_isHovering && !_expanded) const SizedBox(width: 4),
+                if (_isHovering && !_expanded)
+                  IconButton(
+                    icon: Icon(FontAwesomeIcons.circlePlay),
+                    onPressed: _resumeTimer,
+                    tooltip: L10N.of(context).tr.resumeTimer,
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+              ],
             ),
-            Container(width: 8),
-            Text(
-                TimerEntry.formatDuration(widget.timers.fold(
-                    Duration(),
-                    (Duration sum, TimerEntry timer) =>
-                        sum + timer.endTime!.difference(timer.startTime))),
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onBackground,
-                  fontFeatures: [FontFeature.tabularFigures()],
-                )),
-          ],
-        ),
-        children: widget.timers
-            .map((timer) => StoppedTimerRow(timer: timer))
-            .toList(),
-      ),
-    );
+            children: widget.timers
+                .map((timer) => StoppedTimerRow(timer: timer))
+                .toList(),
+          ),
+        ));
+  }
+
+  void _resumeTimer() {
+    final TimersBloc timersBloc = BlocProvider.of<TimersBloc>(context);
+    final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+    Project? project =
+        projectsBloc.getProjectByID(widget.timers.first.projectID);
+    timersBloc.add(CreateTimer(
+        description: widget.timers.first.description ?? "", project: project));
   }
 }
