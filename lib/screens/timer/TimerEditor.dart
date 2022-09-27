@@ -452,7 +452,7 @@ class _TimerEditorState extends State<TimerEditor> {
                   onPressed: () => Navigator.of(context).pop()),
               TextButton(
                   style: TextButton.styleFrom(
-                      primary: Theme.of(context).colorScheme.secondary),
+                      foregroundColor: Theme.of(context).colorScheme.secondary),
                   onPressed: () =>
                       Navigator.of(context).pop(_notesController!.text),
                   child: Text(
