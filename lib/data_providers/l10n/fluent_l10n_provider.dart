@@ -312,4 +312,15 @@ class FluentL10NProvider extends L10NProvider {
   String get notes => _bundle.format("notes", errors: _errors);
   @override
   String get noItemsFound => _bundle.format("noItemsFound", errors: _errors);
+  @override
+  String filterFrom(String dateFrom) => _bundle.format("filterFrom",
+      args: <String, dynamic>{"dateFrom": dateFrom}, errors: _errors);
+  @override
+  String filterUntil(String dateUntil) => _bundle.format("filterUntil",
+      args: <String, dynamic>{"dateUntil": dateUntil}, errors: _errors);
+  @override
+  String filterFromUntil(String dateFrom, String dateUntil) =>
+      _bundle.format("filterFromUntil",
+          args: <String, dynamic>{"dateFrom": dateFrom, "dateUntil": dateUntil},
+          errors: _errors);
 }

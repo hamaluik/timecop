@@ -25,6 +25,7 @@ import 'package:timecop/models/project_description_pair.dart';
 import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:timecop/screens/dashboard/components/CollapsibleDayGrouping.dart';
+import 'package:timecop/screens/dashboard/components/FilterText.dart';
 import 'package:timecop/screens/dashboard/components/GroupedStoppedTimersRow.dart';
 import 'StoppedTimerRow.dart';
 
@@ -184,12 +185,22 @@ class StoppedTimers extends StatelessWidget {
               });
             }
 
-            List<DayGrouping> days = timers.fold(<DayGrouping>[], groupDays);
+            final days = timers.fold(<DayGrouping>[], groupDays);
+
+            final isFiltered = (dashboardState.filterStart != null ||
+                dashboardState.filterEnd != null);
 
             return ListView.builder(
-              itemCount: days.length,
-              itemBuilder: (BuildContext context, int index) =>
-                  days[index].rows(context),
+              itemCount: isFiltered ? days.length + 1 : days.length,
+              itemBuilder: isFiltered
+                  ? (BuildContext context, int index) => (index < days.length)
+                      ? days[index].rows(context)
+                      : FilterText(
+                          filterStart: dashboardState.filterStart,
+                          filterEnd: dashboardState.filterEnd,
+                        )
+                  : (BuildContext context, int index) =>
+                      days[index].rows(context),
             );
           },
         );

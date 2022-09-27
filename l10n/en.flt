@@ -90,3 +90,6 @@ runningTimersNotificationBody = Timers are still running in the background
 enableRunningTimersNotification = Show Running Timer Notifications
 notes = Notes
 noItemsFound = No items found
+filterFrom = Filtering from {$dateFrom}
+filterUntil = Filtering until {$dateUntil}
+filterFromUntil = Filtering from {$dateFrom} until {$dateUntil}
