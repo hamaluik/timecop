@@ -75,6 +75,11 @@ class _DescriptionFieldState extends State<DescriptionField> {
               onSubmitted: (dynamic description) {
                 _focus!.unfocus();
                 bloc.add(DescriptionChangedEvent(description as String));
+                final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+                timers.add(CreateTimer(
+                    description: bloc.state.newDescription,
+                    project: bloc.state.newProject));
+                bloc.add(TimerWasStartedEvent());
               }),
           itemBuilder: (BuildContext context, String? desc) =>
               ListTile(title: Text(desc!)),
@@ -118,6 +123,11 @@ class _DescriptionFieldState extends State<DescriptionField> {
           onSubmitted: (String description) {
             _focus!.unfocus();
             bloc.add(DescriptionChangedEvent(description));
+            final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+            timers.add(CreateTimer(
+                description: bloc.state.newDescription,
+                project: bloc.state.newProject));
+            bloc.add(TimerWasStartedEvent());
           },
         );
       }
