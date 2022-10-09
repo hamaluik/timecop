@@ -8,6 +8,7 @@
     <application
         android:name="${applicationName}"
         android:label="Time Cop"
+        android:localeConfig="@xml/locale_config"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"

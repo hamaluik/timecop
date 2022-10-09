@@ -45,10 +45,11 @@ android {
     defaultConfig {
         applicationId "ca.hamaluik.timecop"
         minSdkVersion 16
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        resConfigs "en", "ar", "cs", "de", "es", "fr", "hi", "id", "it", "ja", "ko", "nb-rNO", "pt", "ru", "tr", "zh-rCN", "zh-rTW"
     }
 
    signingConfigs {
