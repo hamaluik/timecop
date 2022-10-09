@@ -206,6 +206,7 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
                   builder: (BuildContext context, LocaleState localeState) =>
                       MaterialApp(
                     title: 'Time Cop',
+                    debugShowCheckedModeBanner: false,
                     home: DashboardScreen(),
                     theme: themeState.themeData ??
                         (brightness == Brightness.dark
