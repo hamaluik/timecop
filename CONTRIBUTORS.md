@@ -17,3 +17,6 @@ Time Cop started as a personal project of Kenton Hamaluik ([@hamaluik](https://g
 | jugendhacker | [@jugendhacker](https://github.com/jugendhacker) |
 | mondstern | [@mondlicht-und-sterne](https://github.com/mondlicht-und-sterne) |
 | metezd | (Translations through Weblate) |
+| Dhanush-K-Gowda | [@](https://github.com/Dhanush-K-Gowda) |
+| ersen0 | [@ersen0](https://github.com/ersen0) |
+| Andre-LA | [@Andre-LA](https://github.com/Andre-LA) |
