@@ -144,7 +144,7 @@ class MockDataProvider extends DataProvider {
 
   MockDataProvider(Locale locale) : localeKey = locale.languageCode {
     if (locale.languageCode == "zh") {
-      localeKey += "-" + locale.countryCode!;
+      localeKey += "-${locale.countryCode!}";
     }
   }
 

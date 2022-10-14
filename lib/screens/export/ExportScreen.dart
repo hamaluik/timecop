@@ -442,9 +442,8 @@ class _ExportScreenState extends State<ExportScreen> {
                 row.add(timer.description ?? "");
               }
               if (settingsBloc.state.exportIncludeProjectDescription) {
-                row.add((projects.getProjectByID(timer.projectID)?.name ?? "") +
-                    ": " +
-                    (timer.description ?? ""));
+                row.add(
+                    "${projects.getProjectByID(timer.projectID)?.name ?? ""}: ${timer.description ?? ""}");
               }
               if (settingsBloc.state.exportIncludeStartTime) {
                 row.add(timer.startTime.toUtc().toIso8601String());

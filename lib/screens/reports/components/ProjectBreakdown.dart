@@ -124,11 +124,7 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
                         color:
                             project?.colour ?? Theme.of(context).disabledColor,
                         title: _touchedIndex == index
-                            ? L10N
-                                    .of(context)
-                                    .tr
-                                    .nHours(entry.value.toStringAsFixed(1)) +
-                                "\n(${(100.0 * entry.value / totalHours).toStringAsFixed(0)} %)"
+                            ? "${L10N.of(context).tr.nHours(entry.value.toStringAsFixed(1))}\n(${(100.0 * entry.value / totalHours).toStringAsFixed(0)} %)"
                             : "",
                         titleStyle: Theme.of(context).textTheme.bodyText2,
                         radius: _touchedIndex == index ? 80 : 60,

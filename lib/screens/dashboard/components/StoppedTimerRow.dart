@@ -100,7 +100,7 @@ class _StoppedTimerRowState extends State<StoppedTimerRow> {
                     onPressed: (_) => _resumeTimer(context))
               ]),
           child: ListTile(
-              key: Key("stoppedTimer-" + widget.timer.id.toString()),
+              key: Key("stoppedTimer-${widget.timer.id}"),
               leading: ProjectColour(
                   project: BlocProvider.of<ProjectsBloc>(context)
                       .getProjectByID(widget.timer.projectID)),
