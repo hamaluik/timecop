@@ -65,9 +65,9 @@ class NotificationsProvider {
 
   Future<void> displayRunningTimersNotification(
       String? title, String? body) async {
-    print("displaying notification");
+    // print("displaying notification");
     if (!await requestPermissions()) {
-      print("no permissions, quitting");
+      // print("no permissions, quitting");
       return;
     }
 

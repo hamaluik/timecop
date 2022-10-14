@@ -155,7 +155,7 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) async {
-    print("application lifecycle changed to: " + state.toString());
+    // print("application lifecycle changed to: " + state.toString());
     if (state == AppLifecycleState.paused) {
       SettingsState settings = BlocProvider.of<SettingsBloc>(context).state;
       TimersState timers = BlocProvider.of<TimersBloc>(context).state;
@@ -168,12 +168,12 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
 
       if (settings.showRunningTimersAsNotifications &&
           timers.countRunningTimers() > 0) {
-        print("showing notification");
+        // print("showing notification");
         BlocProvider.of<NotificationsBloc>(context).add(ShowNotification(
             title: l10n.tr.runningTimersNotificationTitle,
             body: l10n.tr.runningTimersNotificationBody));
       } else {
-        print("not showing notification");
+        // print("not showing notification");
       }
     } else if (state == AppLifecycleState.resumed) {
       BlocProvider.of<NotificationsBloc>(context)
@@ -190,7 +190,7 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
 
   @override
   void didChangePlatformBrightness() {
-    print(WidgetsBinding.instance.window.platformBrightness.toString());
+    // print(WidgetsBinding.instance.window.platformBrightness.toString());
     setState(
         () => brightness = WidgetsBinding.instance.window.platformBrightness);
   }

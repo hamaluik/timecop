@@ -430,7 +430,6 @@ class _TimerEditorState extends State<TimerEditor> {
   }
 
   Future<void> _editNotes(BuildContext context) async {
-    print("notes: " + _notes!);
     _notesController!.text = _notes!;
     String? n = await showDialog(
         context: context,
