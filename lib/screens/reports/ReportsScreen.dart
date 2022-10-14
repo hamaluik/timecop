@@ -32,7 +32,7 @@ import 'package:timecop/screens/reports/components/WeeklyTotals.dart';
 import 'package:timecop/models/clone_time.dart';
 
 class ReportsScreen extends StatefulWidget {
-  ReportsScreen({Key? key}) : super(key: key);
+  const ReportsScreen({Key? key}) : super(key: key);
 
   @override
   _ReportsScreenState createState() => _ReportsScreenState();
@@ -64,8 +64,8 @@ class _ReportsScreenState extends State<ReportsScreen> {
     setState(() {
       _startDate = dt;
       if (_endDate != null && _startDate!.isAfter(_endDate!)) {
-        _endDate = _startDate!.add(
-            Duration(hours: 23, minutes: 59, seconds: 59, milliseconds: 999));
+        _endDate = _startDate!.add(const Duration(
+            hours: 23, minutes: 59, seconds: 59, milliseconds: 999));
       }
     });
   }
@@ -87,7 +87,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                       padding: Platform.isLinux || Platform.isMacOS
-                          ? EdgeInsets.symmetric(horizontal: 32)
+                          ? const EdgeInsets.symmetric(horizontal: 32)
                           : EdgeInsets.zero,
                       child: Builder(builder: (context) {
                         switch (index) {
@@ -142,17 +142,17 @@ class _ReportsScreenState extends State<ReportsScreen> {
               initiallyExpanded: false,
               children: <Widget>[
                 ListTile(
-                  leading: Icon(FontAwesomeIcons.calendar),
+                  leading: const Icon(FontAwesomeIcons.calendar),
                   title: Text(L10N.of(context).tr.from),
                   trailing: Row(mainAxisSize: MainAxisSize.min, children: [
                     _startDate == null
-                        ? Padding(
+                        ? const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 18),
                             child: Text("--"))
                         : Text(_dateFormat.format(_startDate!)),
                     if (_startDate != null)
                       IconButton(
-                        icon: Icon(FontAwesomeIcons.circleMinus),
+                        icon: const Icon(FontAwesomeIcons.circleMinus),
                         onPressed: () {
                           setState(() {
                             _startDate = null;
@@ -189,18 +189,18 @@ class _ReportsScreenState extends State<ReportsScreen> {
                   },
                 ),
                 ListTile(
-                  leading: Icon(FontAwesomeIcons.calendar),
+                  leading: const Icon(FontAwesomeIcons.calendar),
                   title: Text(L10N.of(context).tr.to),
                   trailing: Row(mainAxisSize: MainAxisSize.min, children: [
                     _endDate == null
-                        ? Padding(
+                        ? const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 18),
                             child: Text("--"))
                         : Text(_dateFormat.format(_endDate!)),
                     if (_endDate != null)
                       IconButton(
                         tooltip: L10N.of(context).tr.remove,
-                        icon: Icon(FontAwesomeIcons.circleMinus),
+                        icon: const Icon(FontAwesomeIcons.circleMinus),
                         onPressed: () {
                           setState(() {
                             _endDate = null;
@@ -272,7 +272,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                   ],
                 ),
                 Container(
-                  constraints: BoxConstraints(
+                  constraints: const BoxConstraints(
                     maxHeight: 150,
                   ),
                   child: ListView(

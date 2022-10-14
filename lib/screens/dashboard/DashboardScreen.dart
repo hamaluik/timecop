@@ -35,29 +35,29 @@ class DashboardScreen extends StatelessWidget {
     return BlocProvider<DashboardBloc>(
         create: (_) => DashboardBloc(projectsBloc, settingsBloc),
         child: Scaffold(
-          appBar: TopBar(),
+          appBar: const TopBar(),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              Expanded(
+              const Expanded(
                 flex: 1,
                 child: StoppedTimers(),
               ),
-              RunningTimers(),
+              const RunningTimers(),
               Material(
                 elevation: 8.0,
                 color: Theme.of(context).bottomSheetTheme.backgroundColor,
                 child: Container(
                   child: Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       //crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
-                        ProjectSelectField(),
-                        Expanded(
+                        const ProjectSelectField(),
+                        const Expanded(
                           flex: 1,
                           child: Padding(
                             padding: EdgeInsets.fromLTRB(4.0, 0, 4.0, 0),
@@ -75,7 +75,7 @@ class DashboardScreen extends StatelessWidget {
               )
             ],
           ),
-          floatingActionButton: StartTimerButton(),
+          floatingActionButton: const StartTimerButton(),
         ));
   }
 }

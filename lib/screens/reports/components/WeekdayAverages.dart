@@ -74,7 +74,7 @@ class WeekdayAverages extends StatelessWidget {
 
     // adjust first date and last date to match the start and end of the week
     firstDate = firstDate.startOfWeek();
-    lastDate = lastDate.startOfWeek().add(Duration(days: 7));
+    lastDate = lastDate.startOfWeek().add(const Duration(days: 7));
 
     int totalDays = DateTime(lastDate.year, lastDate.month, lastDate.day)
         .difference(DateTime(firstDate.year, firstDate.month, firstDate.day))
@@ -109,12 +109,12 @@ class WeekdayAverages extends StatelessWidget {
     maxY = ((maxY ~/ 2) + 1) * 2.0 + 2.0;
 
     return Padding(
-        padding: EdgeInsets.fromLTRB(16, 16, 16, 40),
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Expanded(
-              key: Key("weekdayAverages"),
+              key: const Key("weekdayAverages"),
               child: BarChart(BarChartData(
                   alignment: BarChartAlignment.spaceAround,
                   maxY: maxY,

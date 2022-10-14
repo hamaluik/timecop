@@ -62,9 +62,9 @@ class TimeTable extends StatelessWidget {
         projectHours.values.fold(0.0, (double sum, double v) => sum + v);
 
     return Padding(
-      padding: EdgeInsets.fromLTRB(16, 16, 16, 40),
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 40),
       child: ListView(
-        key: Key("timeTable"),
+        key: const Key("timeTable"),
         shrinkWrap: true,
         children: <Widget>[
           Row(
@@ -90,7 +90,7 @@ class TimeTable extends StatelessWidget {
           Project? project = projects.state.projects
               .firstWhereOrNull((project) => project.id == entry.key);
           return Padding(
-              padding: EdgeInsets.only(top: 4.0, bottom: 4.0),
+              padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[

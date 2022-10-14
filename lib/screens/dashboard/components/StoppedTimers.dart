@@ -79,7 +79,7 @@ class DayGrouping {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
+            padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
@@ -94,11 +94,11 @@ class DayGrouping {
                     Text(TimerEntry.formatDuration(runningTotal),
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.secondary,
-                          fontFeatures: [FontFeature.tabularFigures()],
+                          fontFeatures: const [FontFeature.tabularFigures()],
                         ))
                   ],
                 ),
-                Divider(),
+                const Divider(),
               ],
             ),
           ),

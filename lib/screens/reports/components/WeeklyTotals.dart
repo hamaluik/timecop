@@ -33,7 +33,7 @@ class WeeklyTotals extends StatefulWidget {
   final DateTime? startDate;
   final DateTime? endDate;
   final List<Project?> selectedProjects;
-  WeeklyTotals(
+  const WeeklyTotals(
       {Key? key,
       required this.startDate,
       required this.endDate,
@@ -107,12 +107,12 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
     maxY = ((maxY ~/ 5) + 1) * 5.0 + 5.0;
 
     return Padding(
-        padding: EdgeInsets.fromLTRB(16, 16, 16, 40),
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Expanded(
-              key: Key("weeklyTotals"),
+              key: const Key("weeklyTotals"),
               child: LineChart(LineChartData(
                   minY: 0,
                   maxY: maxY,

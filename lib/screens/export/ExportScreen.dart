@@ -35,7 +35,7 @@ import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/screens/export/components/ExportMenu.dart';
 
 class ExportScreen extends StatefulWidget {
-  ExportScreen({Key? key}) : super(key: key);
+  const ExportScreen({Key? key}) : super(key: key);
 
   @override
   _ExportScreenState createState() => _ExportScreenState();
@@ -93,11 +93,11 @@ class _ExportScreenState extends State<ExportScreen> {
             initiallyExpanded: true,
             children: <Widget>[
               ListTile(
-                leading: Icon(FontAwesomeIcons.calendar),
+                leading: const Icon(FontAwesomeIcons.calendar),
                 title: Text(L10N.of(context).tr.from),
                 trailing: Row(mainAxisSize: MainAxisSize.min, children: [
                   _startDate == null
-                      ? Padding(
+                      ? const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 18),
                           child: Text("--"),
                         )
@@ -105,7 +105,7 @@ class _ExportScreenState extends State<ExportScreen> {
                   if (_startDate != null)
                     IconButton(
                       tooltip: L10N.of(context).tr.remove,
-                      icon: Icon(FontAwesomeIcons.circleMinus),
+                      icon: const Icon(FontAwesomeIcons.circleMinus),
                       onPressed: () {
                         setState(() {
                           _startDate = null;
@@ -129,11 +129,11 @@ class _ExportScreenState extends State<ExportScreen> {
                 },
               ),
               ListTile(
-                leading: Icon(FontAwesomeIcons.calendar),
+                leading: const Icon(FontAwesomeIcons.calendar),
                 title: Text(L10N.of(context).tr.to),
                 trailing: Row(mainAxisSize: MainAxisSize.min, children: [
                   _endDate == null
-                      ? Padding(
+                      ? const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 18),
                           child: Text("--"),
                         )
@@ -141,7 +141,7 @@ class _ExportScreenState extends State<ExportScreen> {
                   if (_endDate != null)
                     IconButton(
                       tooltip: L10N.of(context).tr.remove,
-                      icon: Icon(FontAwesomeIcons.circleMinus),
+                      icon: const Icon(FontAwesomeIcons.circleMinus),
                       onPressed: () {
                         setState(() {
                           _endDate = null;
@@ -170,7 +170,7 @@ class _ExportScreenState extends State<ExportScreen> {
             bloc: settingsBloc,
             builder: (BuildContext context, SettingsState settingsState) =>
                 ExpansionTile(
-              key: Key("optionColumns"),
+              key: const Key("optionColumns"),
               title: Text(L10N.of(context).tr.columns,
                   style: TextStyle(
                       color: Theme.of(context).colorScheme.secondary,
@@ -315,13 +315,13 @@ class _ExportScreenState extends State<ExportScreen> {
         ].toList(),
       ),
       floatingActionButton: FloatingActionButton(
-          key: Key("exportFAB"),
+          key: const Key("exportFAB"),
           tooltip: L10N.of(context).tr.exportCSV,
           child: Stack(
             // shenanigans to properly centre the icon (font awesome glyphs are variable
             // width but the library currently doesn't deal with that)
             fit: StackFit.expand,
-            children: <Widget>[
+            children: const <Widget>[
               Positioned(
                 top: 15,
                 left: 19,
@@ -420,7 +420,7 @@ class _ExportScreenState extends State<ExportScreen> {
 
                   // yes a group entry, build a dummy timer entry
                   Duration totalTime = groupedEntries.fold(
-                      Duration(),
+                      const Duration(),
                       (Duration d, TimerEntry t) =>
                           d + t.endTime!.difference(t.startTime));
                   return TimerEntry.clone(groupedEntries[0],
@@ -466,7 +466,7 @@ class _ExportScreenState extends State<ExportScreen> {
               return row;
             })).toList();
             String csv =
-                ListToCsvConverter(delimitAllFields: true).convert(data);
+                const ListToCsvConverter(delimitAllFields: true).convert(data);
 
             if (Platform.isMacOS || Platform.isLinux) {
               String? outputFile = await FilePicker.platform.saveFile(

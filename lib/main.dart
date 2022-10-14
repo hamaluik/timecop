@@ -112,8 +112,8 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
 
   @override
   void initState() {
-    _updateTimersTimer = Timer.periodic(Duration(seconds: 1),
-        (_) => BlocProvider.of<TimersBloc>(context).add(UpdateNow()));
+    _updateTimersTimer = Timer.periodic(const Duration(seconds: 1),
+        (_) => BlocProvider.of<TimersBloc>(context).add(const UpdateNow()));
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     brightness = WidgetsBinding.instance.window.platformBrightness;
@@ -129,8 +129,8 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
     settingsBloc.add(LoadSettingsFromRepository());
     timersBloc.add(LoadTimers());
     BlocProvider.of<ProjectsBloc>(context).add(LoadProjects());
-    BlocProvider.of<ThemeBloc>(context).add(LoadThemeEvent());
-    BlocProvider.of<LocaleBloc>(context).add(LoadLocaleEvent());
+    BlocProvider.of<ThemeBloc>(context).add(const LoadThemeEvent());
+    BlocProvider.of<LocaleBloc>(context).add(const LoadLocaleEvent());
   }
 
   void _updateNotificationBadge(SettingsState settingsState, int count) async {
@@ -163,7 +163,7 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
       // TODO: fix this ugly hack. The L10N we load is part of the material app
       // that we build in build(); so we don't have access to it here
       LocaleState localeState = BlocProvider.of<LocaleBloc>(context).state;
-      Locale locale = localeState.locale ?? Locale("en");
+      Locale locale = localeState.locale ?? const Locale("en");
       L10N l10n = await L10N.load(locale);
 
       if (settings.showRunningTimersAsNotifications &&
@@ -176,7 +176,8 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
         print("not showing notification");
       }
     } else if (state == AppLifecycleState.resumed) {
-      BlocProvider.of<NotificationsBloc>(context).add(RemoveNotifications());
+      BlocProvider.of<NotificationsBloc>(context)
+          .add(const RemoveNotifications());
     }
   }
 
@@ -206,36 +207,36 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
                   builder: (BuildContext context, LocaleState localeState) =>
                       MaterialApp(
                     title: 'Time Cop',
-                    home: DashboardScreen(),
+                    home: const DashboardScreen(),
                     theme: themeState.themeData ??
                         (brightness == Brightness.dark
                             ? ThemeUtil.darkTheme
                             : ThemeUtil.lightTheme),
-                    localizationsDelegates: [
+                    localizationsDelegates: const [
                       L10N.delegate,
                       GlobalMaterialLocalizations.delegate,
                       GlobalWidgetsLocalizations.delegate,
                       GlobalCupertinoLocalizations.delegate,
                     ],
                     locale: localeState.locale,
-                    supportedLocales: [
-                      const Locale('en'),
-                      const Locale('ar'),
-                      const Locale('cs'),
-                      const Locale('de'),
-                      const Locale('es'),
-                      const Locale('fr'),
-                      const Locale('hi'),
-                      const Locale('id'),
-                      const Locale('it'),
-                      const Locale('ja'),
-                      const Locale('ko'),
-                      const Locale('nb', 'NO'),
-                      const Locale('pt'),
-                      const Locale('ru'),
-                      const Locale('tr'),
-                      const Locale('zh', 'CN'),
-                      const Locale('zh', 'TW'),
+                    supportedLocales: const [
+                      Locale('en'),
+                      Locale('ar'),
+                      Locale('cs'),
+                      Locale('de'),
+                      Locale('es'),
+                      Locale('fr'),
+                      Locale('hi'),
+                      Locale('id'),
+                      Locale('it'),
+                      Locale('ja'),
+                      Locale('ko'),
+                      Locale('nb', 'NO'),
+                      Locale('pt'),
+                      Locale('ru'),
+                      Locale('tr'),
+                      Locale('zh', 'CN'),
+                      Locale('zh', 'TW'),
                     ],
                   ),
                 )));

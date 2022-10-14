@@ -34,7 +34,7 @@ class SettingsState extends Equatable {
   final bool hasAskedNotificationPermissions;
   final bool showRunningTimersAsNotifications;
 
-  SettingsState({
+  const SettingsState({
     required this.exportGroupTimers,
     required this.exportIncludeDate,
     required this.exportIncludeProject,
@@ -56,7 +56,7 @@ class SettingsState extends Equatable {
   });
 
   static SettingsState initial() {
-    return SettingsState(
+    return const SettingsState(
       exportGroupTimers: true,
       exportIncludeDate: true,
       exportIncludeProject: true,

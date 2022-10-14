@@ -1,7 +1,7 @@
 part of 'notifications_bloc.dart';
 
 class NotificationsState extends Equatable {
-  NotificationsState();
+  const NotificationsState();
   @override
   List<Object> get props => [];
 }

@@ -21,7 +21,7 @@ import 'package:timecop/models/project.dart';
 
 class ProjectEditor extends StatefulWidget {
   final Project? project;
-  ProjectEditor({Key? key, required this.project}) : super(key: key);
+  const ProjectEditor({Key? key, required this.project}) : super(key: key);
 
   @override
   _ProjectEditorState createState() => _ProjectEditorState();
@@ -49,7 +49,7 @@ class _ProjectEditorState extends State<ProjectEditor> {
   Widget build(BuildContext context) {
     return Dialog(
         child: Padding(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Form(
         key: _formKey,
         child: ListView(

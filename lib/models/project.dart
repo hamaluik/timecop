@@ -21,7 +21,7 @@ class Project extends Equatable {
   final Color colour;
   final bool archived;
 
-  Project(
+  const Project(
       {required this.id,
       required this.name,
       required this.colour,

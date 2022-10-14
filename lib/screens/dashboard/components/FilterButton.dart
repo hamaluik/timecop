@@ -27,7 +27,7 @@ class FilterButton extends StatelessWidget {
     final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
     return IconButton(
       tooltip: L10N.of(context).tr.filter,
-      icon: Icon(FontAwesomeIcons.filter),
+      icon: const Icon(FontAwesomeIcons.filter),
       onPressed: () => showModalBottomSheet<void>(
         context: context,
         builder: (BuildContext context) => FilterSheet(

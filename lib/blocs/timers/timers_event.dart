@@ -28,7 +28,7 @@ class LoadTimers extends TimersEvent {
 class CreateTimer extends TimersEvent {
   final String? description;
   final Project? project;
-  CreateTimer({this.description, this.project});
+  const CreateTimer({this.description, this.project});
   @override
   List<Object?> get props => [description, project];
 }
@@ -41,21 +41,21 @@ class UpdateNow extends TimersEvent {
 
 class StopTimer extends TimersEvent {
   final TimerEntry timer;
-  StopTimer(this.timer);
+  const StopTimer(this.timer);
   @override
   List<Object> get props => [timer];
 }
 
 class EditTimer extends TimersEvent {
   final TimerEntry timer;
-  EditTimer(this.timer);
+  const EditTimer(this.timer);
   @override
   List<Object> get props => [timer];
 }
 
 class DeleteTimer extends TimersEvent {
   final TimerEntry timer;
-  DeleteTimer(this.timer);
+  const DeleteTimer(this.timer);
   @override
   List<Object> get props => [timer];
 }

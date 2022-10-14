@@ -16,7 +16,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
   DashboardBloc(this.projectsBloc, this.settingsBloc)
       : super(DashboardState("", projectsBloc.getProjectByID(-1), false,
-            settingsBloc.getFilterStartDate(), null, <int>[], null));
+            settingsBloc.getFilterStartDate(), null, const <int>[], null));
 
   @override
   Stream<DashboardState> mapEventToState(
@@ -52,8 +52,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       final filterStart = event.filterStart;
       DateTime? end = state.filterEnd;
       if (end != null && filterStart != null && filterStart.isAfter(end)) {
-        end = filterStart.add(
-            Duration(hours: 23, minutes: 59, seconds: 59, milliseconds: 999));
+        end = filterStart.add(const Duration(
+            hours: 23, minutes: 59, seconds: 59, milliseconds: 999));
       }
 
       yield DashboardState(state.newDescription, state.newProject, false,

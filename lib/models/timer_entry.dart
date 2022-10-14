@@ -22,7 +22,7 @@ class TimerEntry extends Equatable {
   final DateTime? endTime;
   final String? notes;
 
-  TimerEntry(
+  const TimerEntry(
       {required this.id,
       required this.description,
       required this.projectID,

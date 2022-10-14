@@ -30,7 +30,7 @@ class ProjectBreakdown extends StatefulWidget {
   final DateTime? startDate;
   final DateTime? endDate;
   final List<Project?> selectedProjects;
-  ProjectBreakdown(
+  const ProjectBreakdown(
       {Key? key,
       required this.startDate,
       required this.endDate,
@@ -89,13 +89,13 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
         _projectHours.values.fold(0.0, (double sum, double v) => sum + v);
 
     return Padding(
-        padding: EdgeInsets.fromLTRB(16, 16, 16, 40),
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Expanded(
               child: AspectRatio(
-                key: Key("projectBreakdown"),
+                key: const Key("projectBreakdown"),
                 aspectRatio: 1,
                 child: PieChart(PieChartData(
                     borderData: FlBorderData(

@@ -24,7 +24,7 @@ class NotificationsProvider {
 
     const initializationSettingsAndroid =
         AndroidInitializationSettings('ic_notification_icon');
-    final initializationSettingsDarwin = DarwinInitializationSettings(
+    const initializationSettingsDarwin = DarwinInitializationSettings(
       requestSoundPermission: false,
       requestBadgePermission: false,
       requestAlertPermission: false,
@@ -32,7 +32,7 @@ class NotificationsProvider {
     const initializationSettingsLinux =
         LinuxInitializationSettings(defaultActionName: "Open Time Cop");
 
-    final InitializationSettings initializationSettings =
+    const InitializationSettings initializationSettings =
         InitializationSettings(
             android: initializationSettingsAndroid,
             iOS: initializationSettingsDarwin,
@@ -87,7 +87,7 @@ class NotificationsProvider {
 
     const linux = LinuxNotificationDetails();
 
-    NotificationDetails details = NotificationDetails(
+    NotificationDetails details = const NotificationDetails(
         iOS: darwin, android: android, macOS: darwin, linux: linux);
 
     await _notif.show(0, title, body, details);

@@ -41,8 +41,8 @@ class ExportMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<ExportMenuItem>(
-      key: Key("exportMenuButton"),
-      icon: Icon(FontAwesomeIcons.database),
+      key: const Key("exportMenuButton"),
+      icon: const Icon(FontAwesomeIcons.database),
       onSelected: (ExportMenuItem item) async {
         switch (item) {
           case ExportMenuItem.import:
@@ -64,9 +64,9 @@ class ExportMenu extends StatelessWidget {
                   backgroundColor: Theme.of(context).errorColor,
                   content: Text(
                     L10N.of(context).tr.invalidDatabaseFile,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
-                  duration: Duration(seconds: 5),
+                  duration: const Duration(seconds: 5),
                 ));
               } else {
                 SettingsBloc settings = BlocProvider.of<SettingsBloc>(context);
@@ -78,9 +78,9 @@ class ExportMenu extends StatelessWidget {
                   backgroundColor: Theme.of(context).primaryColorDark,
                   content: Text(
                     L10N.of(context).tr.databaseImported,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
-                  duration: Duration(seconds: 5),
+                  duration: const Duration(seconds: 5),
                 ));
               }
             } catch (e) {
@@ -90,18 +90,18 @@ class ExportMenu extends StatelessWidget {
                   backgroundColor: Theme.of(context).primaryColorDark,
                   content: Text(
                     L10N.of(context).tr.storageAccessRequired,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
-                  duration: Duration(seconds: 5),
+                  duration: const Duration(seconds: 5),
                 ));
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   backgroundColor: Theme.of(context).errorColor,
                   content: Text(
                     e.toString(),
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                   ),
-                  duration: Duration(seconds: 5),
+                  duration: const Duration(seconds: 5),
                 ));
               }
             }
@@ -142,9 +142,9 @@ class ExportMenu extends StatelessWidget {
                 backgroundColor: Theme.of(context).errorColor,
                 content: Text(
                   e.toString(),
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
-                duration: Duration(seconds: 5),
+                duration: const Duration(seconds: 5),
               ));
             }
             break;
@@ -153,18 +153,18 @@ class ExportMenu extends StatelessWidget {
       itemBuilder: (BuildContext context) {
         return [
           PopupMenuItem(
-            key: Key("exportMenuImport"),
+            key: const Key("exportMenuImport"),
             value: ExportMenuItem.import,
             child: ListTile(
-              leading: Icon(FontAwesomeIcons.fileImport),
+              leading: const Icon(FontAwesomeIcons.fileImport),
               title: Text(L10N.of(context).tr.importDatabase),
             ),
           ),
           PopupMenuItem(
-            key: Key("exportMenuExport"),
+            key: const Key("exportMenuExport"),
             value: ExportMenuItem.export,
             child: ListTile(
-              leading: Icon(FontAwesomeIcons.fileExport),
+              leading: const Icon(FontAwesomeIcons.fileExport),
               title: Text(L10N.of(context).tr.exportDatabase),
             ),
           ),

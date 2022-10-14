@@ -21,13 +21,13 @@ import 'package:timecop/screens/dashboard/components/FilterButton.dart';
 import 'package:timecop/screens/dashboard/components/PopupMenu.dart';
 
 class TopBar extends StatefulWidget implements PreferredSizeWidget {
-  TopBar({Key? key}) : super(key: key);
+  const TopBar({Key? key}) : super(key: key);
 
   @override
   _TopBarState createState() => _TopBarState();
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
 class _TopBarState extends State<TopBar> {
@@ -55,7 +55,7 @@ class _TopBarState extends State<TopBar> {
   void cancelSearch() {
     setState(() => _searching = false);
     DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
-    bloc.add(SearchChangedEvent(null));
+    bloc.add(const SearchChangedEvent(null));
   }
 
   Widget searchBar(BuildContext context) {
@@ -75,7 +75,7 @@ class _TopBarState extends State<TopBar> {
                   color: Theme.of(context).colorScheme.onPrimary),
               suffixIcon: IconButton(
                 color: Theme.of(context).colorScheme.onPrimary,
-                icon: Icon(FontAwesomeIcons.circleXmark),
+                icon: const Icon(FontAwesomeIcons.circleXmark),
                 onPressed: cancelSearch,
                 tooltip: L10N.of(context).tr.cancel,
               )),
@@ -89,26 +89,26 @@ class _TopBarState extends State<TopBar> {
     return AppBar(
         leading: _searching
             ? IconButton(
-                icon: Icon(FontAwesomeIcons.chevronLeft),
+                icon: const Icon(FontAwesomeIcons.chevronLeft),
                 onPressed: cancelSearch,
                 tooltip: L10N.of(context).tr.cancel,
               )
-            : PopupMenu(),
+            : const PopupMenu(),
         title:
             _searching ? searchBar(context) : Text(L10N.of(context).tr.appName),
         actions: !_searching
             ? <Widget>[
                 IconButton(
                   tooltip: L10N.of(context).tr.search,
-                  icon: Icon(FontAwesomeIcons.magnifyingGlass),
+                  icon: const Icon(FontAwesomeIcons.magnifyingGlass),
                   onPressed: () {
                     _searchController!.text = "";
-                    bloc.add(SearchChangedEvent(""));
+                    bloc.add(const SearchChangedEvent(""));
                     setState(() => _searching = true);
                     _searchFocusNode!.requestFocus();
                   },
                 ),
-                FilterButton(),
+                const FilterButton(),
               ]
             : <Widget>[]);
   }

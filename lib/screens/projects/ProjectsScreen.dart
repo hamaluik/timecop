@@ -145,12 +145,12 @@ class ProjectsScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         tooltip: L10N.of(context).tr.createNewProject,
-        key: Key("addProject"),
+        key: const Key("addProject"),
         child: Stack(
           // shenanigans to properly centre the icon (font awesome glyphs are variable
           // width but the library currently doesn't deal with that)
           fit: StackFit.expand,
-          children: <Widget>[
+          children: const <Widget>[
             Positioned(
               top: 15,
               left: 16,
@@ -160,7 +160,7 @@ class ProjectsScreen extends StatelessWidget {
         ),
         onPressed: () => showDialog<void>(
             context: context,
-            builder: (BuildContext context) => ProjectEditor(
+            builder: (BuildContext context) => const ProjectEditor(
                   project: null,
                 )),
       ),
@@ -191,7 +191,8 @@ class ProjectsScreen extends StatelessWidget {
                                 style: TextStyle(color: project.colour)),
                             TextSpan(
                                 text: project.name,
-                                style: TextStyle(fontStyle: FontStyle.italic)),
+                                style: const TextStyle(
+                                    fontStyle: FontStyle.italic)),
                           ])),
                   actions: <Widget>[
                     TextButton(

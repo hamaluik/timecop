@@ -36,7 +36,7 @@ class PopupMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<MenuItem>(
-      key: Key("menuButton"),
+      key: const Key("menuButton"),
       icon: SvgPicture.asset(
         "icon.no-bg.svg",
         height: 30,
@@ -47,27 +47,27 @@ class PopupMenu extends StatelessWidget {
         switch (item) {
           case MenuItem.projects:
             Navigator.of(context).push(MaterialPageRoute<ProjectsScreen>(
-              builder: (BuildContext _context) => ProjectsScreen(),
+              builder: (BuildContext _context) => const ProjectsScreen(),
             ));
             break;
           case MenuItem.reports:
             Navigator.of(context).push(MaterialPageRoute<ReportsScreen>(
-              builder: (BuildContext _context) => ReportsScreen(),
+              builder: (BuildContext _context) => const ReportsScreen(),
             ));
             break;
           case MenuItem.export:
             Navigator.of(context).push(MaterialPageRoute<ExportScreen>(
-              builder: (BuildContext _context) => ExportScreen(),
+              builder: (BuildContext _context) => const ExportScreen(),
             ));
             break;
           case MenuItem.settings:
             Navigator.of(context).push(MaterialPageRoute<SettingsScreen>(
-              builder: (BuildContext _context) => SettingsScreen(),
+              builder: (BuildContext _context) => const SettingsScreen(),
             ));
             break;
           case MenuItem.about:
             Navigator.of(context).push(MaterialPageRoute<AboutScreen>(
-              builder: (BuildContext _context) => AboutScreen(),
+              builder: (BuildContext _context) => const AboutScreen(),
             ));
             break;
         }
@@ -75,42 +75,42 @@ class PopupMenu extends StatelessWidget {
       itemBuilder: (BuildContext context) {
         return [
           PopupMenuItem(
-            key: Key("menuProjects"),
+            key: const Key("menuProjects"),
             value: MenuItem.projects,
             child: ListTile(
-              leading: Icon(FontAwesomeIcons.layerGroup),
+              leading: const Icon(FontAwesomeIcons.layerGroup),
               title: Text(L10N.of(context).tr.projects),
             ),
           ),
           PopupMenuItem(
-            key: Key("menuReports"),
+            key: const Key("menuReports"),
             value: MenuItem.reports,
             child: ListTile(
-              leading: Icon(FontAwesomeIcons.chartPie),
+              leading: const Icon(FontAwesomeIcons.chartPie),
               title: Text(L10N.of(context).tr.reports),
             ),
           ),
           PopupMenuItem(
-            key: Key("menuExport"),
+            key: const Key("menuExport"),
             value: MenuItem.export,
             child: ListTile(
-              leading: Icon(FontAwesomeIcons.fileExport),
+              leading: const Icon(FontAwesomeIcons.fileExport),
               title: Text(L10N.of(context).tr.exportImport),
             ),
           ),
           PopupMenuItem(
-            key: Key("menuSettings"),
+            key: const Key("menuSettings"),
             value: MenuItem.settings,
             child: ListTile(
-              leading: Icon(FontAwesomeIcons.screwdriverWrench),
+              leading: const Icon(FontAwesomeIcons.screwdriverWrench),
               title: Text(L10N.of(context).tr.settings),
             ),
           ),
           PopupMenuItem(
-            key: Key("menuAbout"),
+            key: const Key("menuAbout"),
             value: MenuItem.about,
             child: ListTile(
-              leading: Icon(FontAwesomeIcons.dna),
+              leading: const Icon(FontAwesomeIcons.dna),
               title: Text(L10N.of(context).tr.about),
             ),
           ),

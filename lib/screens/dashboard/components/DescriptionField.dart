@@ -22,7 +22,7 @@ import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class DescriptionField extends StatefulWidget {
-  DescriptionField({Key? key}) : super(key: key);
+  const DescriptionField({Key? key}) : super(key: key);
 
   @override
   _DescriptionFieldState createState() => _DescriptionFieldState();
@@ -58,7 +58,7 @@ class _DescriptionFieldState extends State<DescriptionField> {
       if (state.timerWasStarted) {
         _controller!.clear();
         _focus!.unfocus();
-        bloc.add(ResetEvent());
+        bloc.add(const ResetEvent());
       }
 
       if (settings.state.autocompleteDescription) {
@@ -79,7 +79,7 @@ class _DescriptionFieldState extends State<DescriptionField> {
                 timers.add(CreateTimer(
                     description: bloc.state.newDescription,
                     project: bloc.state.newProject));
-                bloc.add(TimerWasStartedEvent());
+                bloc.add(const TimerWasStartedEvent());
               }),
           itemBuilder: (BuildContext context, String? desc) =>
               ListTile(title: Text(desc!)),
@@ -111,7 +111,7 @@ class _DescriptionFieldState extends State<DescriptionField> {
         );
       } else {
         return TextField(
-          key: Key("descriptionField"),
+          key: const Key("descriptionField"),
           focusNode: _focus,
           controller: _controller,
           autocorrect: true,
@@ -127,7 +127,7 @@ class _DescriptionFieldState extends State<DescriptionField> {
             timers.add(CreateTimer(
                 description: bloc.state.newDescription,
                 project: bloc.state.newProject));
-            bloc.add(TimerWasStartedEvent());
+            bloc.add(const TimerWasStartedEvent());
           },
         );
       }

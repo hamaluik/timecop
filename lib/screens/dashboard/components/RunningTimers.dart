@@ -59,7 +59,7 @@ class RunningTimers extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+                    padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
@@ -76,11 +76,13 @@ class RunningTimers extends StatelessWidget {
                                 style: TextStyle(
                                   color:
                                       Theme.of(context).colorScheme.secondary,
-                                  fontFeatures: [FontFeature.tabularFigures()],
+                                  fontFeatures: const [
+                                    FontFeature.tabularFigures()
+                                  ],
                                 ))
                           ],
                         ),
-                        Divider(),
+                        const Divider(),
                       ],
                     ),
                   ),

@@ -21,7 +21,7 @@ import 'package:timecop/models/project.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 
 class ProjectSelectField extends StatefulWidget {
-  ProjectSelectField({Key? key}) : super(key: key);
+  const ProjectSelectField({Key? key}) : super(key: key);
 
   @override
   _ProjectSelectFieldState createState() => _ProjectSelectFieldState();
@@ -43,8 +43,8 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
                   projectsBloc
                       .getProjectByID(state.newProject!.id)!
                       .archived)) {
-            bloc.add(ProjectChangedEvent(null));
-            return IconButton(
+            bloc.add(const ProjectChangedEvent(null));
+            return const IconButton(
               alignment: Alignment.centerLeft,
               icon: ProjectColour(project: null),
               onPressed: null,
@@ -66,7 +66,8 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
                   builder: (BuildContext context) {
                     return SimpleDialog(
                       title: Text(L10N.of(context).tr.projects),
-                      contentPadding: EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 16.0),
+                      contentPadding:
+                          const EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 16.0),
                       children: <Project?>[null]
                           .followedBy(
                               projectsState.projects.where((p) => !p.archived))
@@ -78,7 +79,8 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
                                 children: <Widget>[
                                   ProjectColour(project: p),
                                   Padding(
-                                    padding: EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
                                     child: Text(
                                         p?.name ??
                                             L10N.of(context).tr.noProject,

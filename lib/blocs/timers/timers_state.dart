@@ -19,10 +19,10 @@ class TimersState extends Equatable {
   final List<TimerEntry> timers;
   final DateTime now;
 
-  TimersState(this.timers, this.now);
+  const TimersState(this.timers, this.now);
 
   static TimersState initial() {
-    return TimersState([], DateTime.now());
+    return TimersState(const [], DateTime.now());
   }
 
   TimersState.clone(TimersState state) : this(state.timers, DateTime.now());

@@ -22,7 +22,7 @@ class CollapsibleDayGrouping extends StatefulWidget {
   final DateTime date;
   final Iterable<Widget> children;
   final Duration totalTime;
-  CollapsibleDayGrouping(
+  const CollapsibleDayGrouping(
       {Key? key,
       required this.date,
       required this.children,
@@ -50,7 +50,7 @@ class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping>
     super.initState();
     _expanded = DateTime.now().difference(widget.date).inDays.abs() <= 1;
     _controller = AnimationController(
-      duration: Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 200),
       vsync: this,
       value:
           DateTime.now().difference(widget.date).inDays.abs() <= 1 ? 1.0 : 0.0,
@@ -98,7 +98,7 @@ class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping>
               style: TextStyle(
                 color:
                     _expanded ? Theme.of(context).colorScheme.secondary : null,
-                fontFeatures: [FontFeature.tabularFigures()],
+                fontFeatures: const [FontFeature.tabularFigures()],
               )),
         ],
       ),

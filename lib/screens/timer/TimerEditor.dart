@@ -35,7 +35,7 @@ enum _DateTimeMenuItems { now }
 
 class TimerEditor extends StatefulWidget {
   final TimerEntry timer;
-  TimerEditor({Key? key, required this.timer}) : super(key: key);
+  const TimerEditor({Key? key, required this.timer}) : super(key: key);
 
   @override
   _TimerEditorState createState() => _TimerEditorState();
@@ -76,7 +76,7 @@ class _TimerEditorState extends State<TimerEditor> {
         .getProjectByID(widget.timer.projectID);
     _descriptionFocus = FocusNode();
     _updateTimerStreamController = StreamController();
-    _updateTimer = Timer.periodic(Duration(seconds: 1),
+    _updateTimer = Timer.periodic(const Duration(seconds: 1),
         (_) => _updateTimerStreamController.add(DateTime.now()));
   }
 
@@ -139,7 +139,7 @@ class _TimerEditorState extends State<TimerEditor> {
                   Navigator.of(context).pop();
                 }
               },
-              icon: Icon(FontAwesomeIcons.trash))
+              icon: const Icon(FontAwesomeIcons.trash))
         ],
       ),
       body: Form(
@@ -153,7 +153,7 @@ class _TimerEditorState extends State<TimerEditor> {
             BlocBuilder<ProjectsBloc, ProjectsState>(
               builder: (BuildContext context, ProjectsState projectsState) =>
                   Padding(
-                      padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
+                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                       child: DropdownButton(
                         value: (_project?.archived ?? true) ? null : _project,
                         underline: Container(),
@@ -168,9 +168,10 @@ class _TimerEditorState extends State<TimerEditor> {
                             value: null,
                             child: Row(
                               children: <Widget>[
-                                ProjectColour(project: null),
+                                const ProjectColour(project: null),
                                 Padding(
-                                  padding: EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
                                   child: Text(L10N.of(context).tr.noProject,
                                       style: TextStyle(
                                           color:
@@ -191,7 +192,7 @@ class _TimerEditorState extends State<TimerEditor> {
                                             project: project,
                                           ),
                                           Padding(
-                                            padding: EdgeInsets.fromLTRB(
+                                            padding: const EdgeInsets.fromLTRB(
                                                 8.0, 0, 0, 0),
                                             child: Text(project.name),
                                           ),
@@ -202,7 +203,7 @@ class _TimerEditorState extends State<TimerEditor> {
                       )),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
               child: settingsBloc.state.autocompleteDescription
                   ? TypeAheadField<String?>(
                       direction: AxisDirection.down,
@@ -318,9 +319,9 @@ class _TimerEditorState extends State<TimerEditor> {
                 if (_endTime != null)
                   IconButton(
                     visualDensity: VisualDensity.compact,
-                    padding: EdgeInsetsDirectional.only(start: 16),
+                    padding: const EdgeInsetsDirectional.only(start: 16),
                     tooltip: L10N.of(context).tr.remove,
-                    icon: Icon(FontAwesomeIcons.circleMinus),
+                    icon: const Icon(FontAwesomeIcons.circleMinus),
                     onPressed: () {
                       setState(() {
                         _endTime = null;
@@ -375,32 +376,32 @@ class _TimerEditorState extends State<TimerEditor> {
                   TimerEntry.formatDuration(_endTime == null
                       ? snapshot.data!.difference(_startTime)
                       : _endTime!.difference(_startTime)),
-                  style:
-                      TextStyle(fontFeatures: [FontFeature.tabularFigures()]),
+                  style: const TextStyle(
+                      fontFeatures: [FontFeature.tabularFigures()]),
                 ),
               ),
             ),
             ListTile(
-              title: Text("Notes"),
+              title: const Text("Notes"),
               onTap: () async => await _editNotes(context),
             ),
             Expanded(
                 child: InkWell(
                     onTap: () async => await _editNotes(context),
                     child: Padding(
-                        padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
+                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
                         child: Markdown(data: _notes!)))),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        key: Key("saveDetails"),
+        key: const Key("saveDetails"),
         tooltip: L10N.of(context).tr.save,
         child: Stack(
           // shenanigans to properly centre the icon (font awesome glyphs are variable
           // width but the library currently doesn't deal with that)
           fit: StackFit.expand,
-          children: <Widget>[
+          children: const <Widget>[
             Positioned(
               top: 14,
               left: 16,
@@ -435,7 +436,7 @@ class _TimerEditorState extends State<TimerEditor> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Notes"),
+            title: const Text("Notes"),
             content: TextFormField(
               controller: _notesController,
               autofocus: true,

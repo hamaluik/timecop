@@ -48,11 +48,11 @@ class FilterSheet extends StatelessWidget {
               initiallyExpanded: true,
               children: <Widget>[
                 ListTile(
-                  leading: Icon(FontAwesomeIcons.calendar),
+                  leading: const Icon(FontAwesomeIcons.calendar),
                   title: Text(L10N.of(context).tr.from),
                   trailing: Row(mainAxisSize: MainAxisSize.min, children: [
                     state.filterStart == null
-                        ? Padding(
+                        ? const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 18),
                             child: Text("--"))
                         : Text(
@@ -61,9 +61,9 @@ class FilterSheet extends StatelessWidget {
                     if (state.filterStart != null)
                       IconButton(
                         tooltip: L10N.of(context).tr.remove,
-                        icon: Icon(FontAwesomeIcons.circleMinus),
-                        onPressed: () =>
-                            dashboardBloc.add(FilterStartChangedEvent(null)),
+                        icon: const Icon(FontAwesomeIcons.circleMinus),
+                        onPressed: () => dashboardBloc
+                            .add(const FilterStartChangedEvent(null)),
                       ),
                   ]),
                   onTap: () async {
@@ -85,20 +85,20 @@ class FilterSheet extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  leading: Icon(FontAwesomeIcons.calendar),
+                  leading: const Icon(FontAwesomeIcons.calendar),
                   title: Text(L10N.of(context).tr.to),
                   trailing: Row(mainAxisSize: MainAxisSize.min, children: [
                     state.filterEnd == null
-                        ? Padding(
+                        ? const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 18),
                             child: Text("--"))
                         : Text(_dateFormat.format(state.filterEnd!)),
                     if (state.filterEnd != null)
                       IconButton(
                         tooltip: L10N.of(context).tr.remove,
-                        icon: Icon(FontAwesomeIcons.circleMinus),
-                        onPressed: () =>
-                            dashboardBloc.add(FilterEndChangedEvent(null)),
+                        icon: const Icon(FontAwesomeIcons.circleMinus),
+                        onPressed: () => dashboardBloc
+                            .add(const FilterEndChangedEvent(null)),
                       ),
                   ]),
                   onTap: () async {
@@ -143,7 +143,7 @@ class FilterSheet extends StatelessWidget {
                     ElevatedButton(
                       child: Text(L10N.of(context).tr.selectAll),
                       onPressed: () => dashboardBloc
-                          .add(FilterProjectsChangedEvent(<int>[])),
+                          .add(const FilterProjectsChangedEvent(<int>[])),
                     ),
                   ],
                 ),

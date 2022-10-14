@@ -33,7 +33,7 @@ class AboutScreen extends StatelessWidget {
           String version = packageInfo.version;
           String buildNumber = packageInfo.buildNumber;
           return AboutPage(
-            key: Key("aboutPage"),
+            key: const Key("aboutPage"),
             title: Text(L10N.of(context).tr.about),
             applicationVersion: "v$version+$buildNumber",
             applicationDescription: Text(
@@ -50,31 +50,31 @@ class AboutScreen extends StatelessWidget {
               MarkdownPageListTile(
                 filename: 'README.md',
                 title: Text(L10N.of(context).tr.readme),
-                icon: Icon(FontAwesomeIcons.readme),
+                icon: const Icon(FontAwesomeIcons.readme),
               ),
               MarkdownPageListTile(
                 filename: 'CHANGELOG.md',
                 title: Text(L10N.of(context).tr.changeLog),
-                icon: Icon(FontAwesomeIcons.boxesStacked),
+                icon: const Icon(FontAwesomeIcons.boxesStacked),
               ),
               MarkdownPageListTile(
                 filename: 'CONTRIBUTORS.md',
                 title: Text(L10N.of(context).tr.contributors),
-                icon: Icon(FontAwesomeIcons.userAstronaut),
+                icon: const Icon(FontAwesomeIcons.userAstronaut),
               ),
               ListTile(
-                leading: Icon(FontAwesomeIcons.code),
+                leading: const Icon(FontAwesomeIcons.code),
                 title: Text(L10N.of(context).tr.sourceCode),
                 onTap: () =>
                     launchUrl(Uri.parse("https://github.com/hamaluik/timecop")),
               ),
-              LicensesPageListTile(
+              const LicensesPageListTile(
                 icon: Icon(FontAwesomeIcons.scroll),
               ),
             ],
           );
         } else {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }

@@ -33,7 +33,7 @@ class LocaleOptions extends StatelessWidget {
             trailing: Icon(L10N.of(context).rtl
                 ? FontAwesomeIcons.chevronLeft
                 : FontAwesomeIcons.chevronRight),
-            leading: Icon(FontAwesomeIcons.language),
+            leading: const Icon(FontAwesomeIcons.language),
             onTap: () async {
               Locale? newLocale = await showModalBottomSheet<Locale>(
                   context: context,

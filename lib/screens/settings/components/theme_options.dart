@@ -29,13 +29,13 @@ class ThemeOptions extends StatelessWidget {
         bloc: bloc,
         builder: (BuildContext context, ThemeState state) {
           return ListTile(
-            key: Key("themeOption"),
+            key: const Key("themeOption"),
             title: Text(L10N.of(context).tr.theme),
             subtitle: Text(state.theme.display(context)!),
             trailing: Icon(L10N.of(context).rtl
                 ? FontAwesomeIcons.chevronLeft
                 : FontAwesomeIcons.chevronRight),
-            leading: Icon(FontAwesomeIcons.palette),
+            leading: const Icon(FontAwesomeIcons.palette),
             onTap: () async {
               ThemeType? oldTheme = state.theme;
               ThemeType? newTheme = await showModalBottomSheet<ThemeType>(
@@ -44,7 +44,7 @@ class ThemeOptions extends StatelessWidget {
                         shrinkWrap: true,
                         children: <Widget>[
                           RadioListTile<ThemeType>(
-                            key: Key("themeAuto"),
+                            key: const Key("themeAuto"),
                             title: Text(L10N.of(context).tr.auto),
                             value: ThemeType.auto,
                             groupValue: state.theme,
@@ -52,7 +52,7 @@ class ThemeOptions extends StatelessWidget {
                                 Navigator.pop(context, type),
                           ),
                           RadioListTile<ThemeType>(
-                            key: Key("themeLight"),
+                            key: const Key("themeLight"),
                             title: Text(L10N.of(context).tr.light),
                             value: ThemeType.light,
                             groupValue: state.theme,
@@ -60,7 +60,7 @@ class ThemeOptions extends StatelessWidget {
                                 Navigator.pop(context, type),
                           ),
                           RadioListTile<ThemeType>(
-                            key: Key("themeDark"),
+                            key: const Key("themeDark"),
                             title: Text(L10N.of(context).tr.dark),
                             value: ThemeType.dark,
                             groupValue: state.theme,
@@ -68,7 +68,7 @@ class ThemeOptions extends StatelessWidget {
                                 Navigator.pop(context, type),
                           ),
                           RadioListTile<ThemeType>(
-                            key: Key("themeBlack"),
+                            key: const Key("themeBlack"),
                             title: Text(L10N.of(context).tr.black),
                             value: ThemeType.black,
                             groupValue: state.theme,

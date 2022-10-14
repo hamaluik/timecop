@@ -18,10 +18,10 @@ import 'package:timecop/models/project.dart';
 class ProjectsState extends Equatable {
   final List<Project> projects;
 
-  ProjectsState(this.projects);
+  const ProjectsState(this.projects);
 
   static ProjectsState initial() {
-    return ProjectsState([]);
+    return const ProjectsState([]);
   }
 
   ProjectsState.clone(ProjectsState state) : this(state.projects);

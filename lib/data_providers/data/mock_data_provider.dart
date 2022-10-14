@@ -174,14 +174,15 @@ class MockDataProvider extends DataProvider {
         description: l10n[localeKey]!["ui-layout"],
         projectID: 1,
         startTime: DateTime.now()
-            .subtract(Duration(hours: 2, minutes: 10, seconds: 1)),
+            .subtract(const Duration(hours: 2, minutes: 10, seconds: 1)),
         endTime: null,
       ),
       TimerEntry(
         id: tid++,
         description: l10n[localeKey]!["coffee"],
         projectID: 2,
-        startTime: DateTime.now().subtract(Duration(minutes: 3, seconds: 14)),
+        startTime:
+            DateTime.now().subtract(const Duration(minutes: 3, seconds: 14)),
         endTime: null,
       ),
     ];

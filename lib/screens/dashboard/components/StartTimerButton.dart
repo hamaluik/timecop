@@ -23,7 +23,7 @@ import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:timecop/screens/dashboard/components/StartTimerSpeedDial.dart';
 
 class StartTimerButton extends StatefulWidget {
-  StartTimerButton({Key? key}) : super(key: key);
+  const StartTimerButton({Key? key}) : super(key: key);
 
   @override
   _StartTimerButtonState createState() => _StartTimerButtonState();
@@ -40,7 +40,7 @@ class _StartTimerButtonState extends State<StartTimerButton> {
           builder: (BuildContext context, TimersState timersState) {
         if (timersState.timers.where((t) => t.endTime == null).isEmpty) {
           return FloatingActionButton(
-            key: Key("startTimerButton"),
+            key: const Key("startTimerButton"),
             tooltip: L10N.of(context).tr.startTimer,
             backgroundColor: Theme.of(context).colorScheme.secondary,
             foregroundColor: Theme.of(context).colorScheme.onSecondary,
@@ -49,13 +49,13 @@ class _StartTimerButtonState extends State<StartTimerButton> {
               timers.add(CreateTimer(
                   description: bloc.state.newDescription,
                   project: bloc.state.newProject));
-              bloc.add(TimerWasStartedEvent());
+              bloc.add(const TimerWasStartedEvent());
             },
             child: Stack(
               // shenanigans to properly centre the icon (font awesome glyphs are variable
               // width but the library currently doesn't deal with that)
               fit: StackFit.expand,
-              children: <Widget>[
+              children: const <Widget>[
                 Positioned(
                   top: 15,
                   left: 18,
@@ -68,18 +68,18 @@ class _StartTimerButtonState extends State<StartTimerButton> {
             timersState.timers.where((t) => t.endTime == null).length == 1) {
           return FloatingActionButton(
             tooltip: L10N.of(context).tr.stopAllTimers,
-            key: Key("stopAllTimersButton"),
+            key: const Key("stopAllTimersButton"),
             backgroundColor: Colors.pink[600],
             foregroundColor: Theme.of(context).colorScheme.onSecondary,
             onPressed: () {
               final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
-              timers.add(StopAllTimers());
+              timers.add(const StopAllTimers());
             },
             child: Stack(
               // shenanigans to properly centre the icon (font awesome glyphs are variable
               // width but the library currently doesn't deal with that)
               fit: StackFit.expand,
-              children: <Widget>[
+              children: const <Widget>[
                 Positioned(
                   top: 15,
                   left: 16,
@@ -89,7 +89,7 @@ class _StartTimerButtonState extends State<StartTimerButton> {
             ),
           );
         } else {
-          return StartTimerSpeedDial();
+          return const StartTimerSpeedDial();
         }
       });
     });

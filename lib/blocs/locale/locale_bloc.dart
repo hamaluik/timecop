@@ -10,7 +10,7 @@ part 'locale_state.dart';
 
 class LocaleBloc extends Bloc<LocaleEvent, LocaleState> {
   final SettingsProvider settings;
-  LocaleBloc(this.settings) : super(LocaleState(null));
+  LocaleBloc(this.settings) : super(const LocaleState(null));
 
   @override
   Stream<LocaleState> mapEventToState(

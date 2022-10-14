@@ -33,13 +33,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     SettingsEvent event,
   ) async* {
     if (event is LoadSettingsFromRepository) {
-      bool exportGroupTimers = settings.getBool("exportGroupTimers") ??
-          state.exportGroupTimers;
-      bool exportIncludeProject =
-          settings.getBool("exportIncludeProject") ??
-              state.exportIncludeProject;
-      bool exportIncludeDate = settings.getBool("exportIncludeDate") ??
-          state.exportIncludeDate;
+      bool exportGroupTimers =
+          settings.getBool("exportGroupTimers") ?? state.exportGroupTimers;
+      bool exportIncludeProject = settings.getBool("exportIncludeProject") ??
+          state.exportIncludeProject;
+      bool exportIncludeDate =
+          settings.getBool("exportIncludeDate") ?? state.exportIncludeDate;
       bool exportIncludeDescription =
           settings.getBool("exportIncludeDescription") ??
               state.exportIncludeDescription;
@@ -49,16 +48,14 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       bool exportIncludeStartTime =
           settings.getBool("exportIncludeStartTime") ??
               state.exportIncludeStartTime;
-      bool exportIncludeEndTime =
-          settings.getBool("exportIncludeEndTime") ??
-              state.exportIncludeEndTime;
+      bool exportIncludeEndTime = settings.getBool("exportIncludeEndTime") ??
+          state.exportIncludeEndTime;
       bool exportIncludeDurationHours =
           settings.getBool("exportIncludeDurationHours") ??
               state.exportIncludeDurationHours;
-      bool exportIncludeNotes = settings.getBool("exportIncludeNotes") ??
-          state.exportIncludeNotes;
-      bool groupTimers =
-          settings.getBool("groupTimers") ?? state.groupTimers;
+      bool exportIncludeNotes =
+          settings.getBool("exportIncludeNotes") ?? state.exportIncludeNotes;
+      bool groupTimers = settings.getBool("groupTimers") ?? state.groupTimers;
       bool collapseDays =
           settings.getBool("collapseDays") ?? state.collapseDays;
       bool autocompleteDescription =
@@ -214,7 +211,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       DateTime date = DateTime.now();
       return date.subtract(Duration(days: date.weekday - dayOfWeek));
     } else if (state.defaultFilterDays > 0) {
-      return DateTime.now().subtract(Duration(days: 30));
+      return DateTime.now().subtract(const Duration(days: 30));
     } else {
       return null;
     }

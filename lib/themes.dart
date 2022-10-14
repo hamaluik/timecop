@@ -79,7 +79,7 @@ class ThemeUtil {
       fontFamily: 'PublicSans',
       scaffoldBackgroundColor: Colors.grey.shade800,
       appBarTheme: AppBarTheme(backgroundColor: Colors.grey.shade800),
-      bottomSheetTheme: BottomSheetThemeData(
+      bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: Color(0xFF303030),
       ),
       textButtonTheme: TextButtonThemeData(
@@ -101,7 +101,7 @@ class ThemeUtil {
       fontFamily: 'PublicSans',
       scaffoldBackgroundColor: Colors.black,
       appBarTheme: AppBarTheme(backgroundColor: Colors.grey.shade800),
-      bottomSheetTheme: BottomSheetThemeData(
+      bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: Colors.black,
       ),
       textButtonTheme: TextButtonThemeData(

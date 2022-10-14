@@ -112,14 +112,14 @@ class _StoppedTimerRowState extends State<StoppedTimerRow> {
               trailing: Row(mainAxisSize: MainAxisSize.min, children: [
                 Text(
                   widget.timer.formatTime(),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFeatures: [FontFeature.tabularFigures()],
                   ),
                 ),
                 if (_hovering) const SizedBox(width: 4),
                 if (_hovering)
                   IconButton(
-                      icon: Icon(FontAwesomeIcons.circlePlay),
+                      icon: const Icon(FontAwesomeIcons.circlePlay),
                       onPressed: () => _resumeTimer(context),
                       tooltip: L10N.of(context).tr.resumeTimer,
                       color: Theme.of(context).colorScheme.onBackground),

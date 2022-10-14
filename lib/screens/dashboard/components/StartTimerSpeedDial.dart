@@ -20,7 +20,7 @@ import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 
 class StartTimerSpeedDial extends StatefulWidget {
-  StartTimerSpeedDial({Key? key}) : super(key: key);
+  const StartTimerSpeedDial({Key? key}) : super(key: key);
 
   @override
   _StartTimerSpeedDialState createState() => _StartTimerSpeedDialState();
@@ -58,7 +58,7 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
         child: ScaleTransition(
           scale: CurvedAnimation(
             parent: _controller,
-            curve: Interval(0.0, 1.0, curve: Curves.easeOut),
+            curve: const Interval(0.0, 1.0, curve: Curves.easeOut),
           ),
           child: FloatingActionButton(
             tooltip: L10N.of(context).tr.startNewTimer,
@@ -72,13 +72,13 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
               timers.add(CreateTimer(
                   description: bloc.state.newDescription,
                   project: bloc.state.newProject));
-              bloc.add(TimerWasStartedEvent());
+              bloc.add(const TimerWasStartedEvent());
             },
             child: Stack(
               // shenanigans to properly centre the icon (font awesome glyphs are variable
               // width but the library currently doesn't deal with that)
               fit: StackFit.expand,
-              children: <Widget>[
+              children: const <Widget>[
                 Positioned(
                   top: 7.5,
                   left: 8,
@@ -96,7 +96,7 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
         child: ScaleTransition(
           scale: CurvedAnimation(
             parent: _controller,
-            curve: Interval(0.0, 0.75, curve: Curves.easeOut),
+            curve: const Interval(0.0, 0.75, curve: Curves.easeOut),
           ),
           child: FloatingActionButton(
             tooltip: L10N.of(context).tr.stopAllTimers,
@@ -107,13 +107,13 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
             onPressed: () {
               _controller.reverse();
               final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
-              timers.add(StopAllTimers());
+              timers.add(const StopAllTimers());
             },
             child: Stack(
               // shenanigans to properly centre the icon (font awesome glyphs are variable
               // width but the library currently doesn't deal with that)
               fit: StackFit.expand,
-              children: <Widget>[
+              children: const <Widget>[
                 Positioned(
                   top: 7,
                   left: 7.5,
@@ -140,7 +140,7 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
                     // shenanigans to properly centre the icon (font awesome glyphs are variable
                     // width but the library currently doesn't deal with that)
                     fit: StackFit.expand,
-                    children: <Widget>[
+                    children: const <Widget>[
                       Positioned(
                         top: 15,
                         left: 16,
@@ -154,7 +154,7 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
                     // shenanigans to properly centre the icon (font awesome glyphs are variable
                     // width but the library currently doesn't deal with that)
                     fit: StackFit.expand,
-                    children: <Widget>[
+                    children: const <Widget>[
                       Positioned(
                         top: 15,
                         left: 16,

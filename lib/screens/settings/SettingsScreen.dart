@@ -103,16 +103,16 @@ class SettingsScreen extends StatelessWidget {
                     title: Text(L10N.of(context).tr.defaultFilterDays),
                     trailing: Row(mainAxisSize: MainAxisSize.min, children: [
                       settings.defaultFilterDays == -1
-                          ? Padding(
+                          ? const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 18),
                               child: Text("--"))
                           : Text(settings.defaultFilterDays.toString()),
                       if (settings.defaultFilterDays != -1)
                         IconButton(
                           tooltip: L10N.of(context).tr.remove,
-                          icon: Icon(FontAwesomeIcons.circleMinus),
+                          icon: const Icon(FontAwesomeIcons.circleMinus),
                           onPressed: () {
-                            settingsBloc.add(SetDefaultFilterDays(null));
+                            settingsBloc.add(const SetDefaultFilterDays(null));
                           },
                         )
                     ]),
@@ -192,7 +192,7 @@ class SettingsScreen extends StatelessWidget {
                 onChanged: (bool value) {
                   if (value) {
                     BlocProvider.of<NotificationsBloc>(context)
-                        .add(RequestNotificationPermissions());
+                        .add(const RequestNotificationPermissions());
                   }
                   settingsBloc.add(SetBoolValueEvent(
                       showRunningTimersAsNotifications: value));

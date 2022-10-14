@@ -5,7 +5,7 @@ abstract class NotificationsEvent extends Equatable {
 }
 
 class RequestNotificationPermissions extends NotificationsEvent {
-  RequestNotificationPermissions();
+  const RequestNotificationPermissions();
   @override
   List<Object> get props => [];
 }
@@ -13,13 +13,13 @@ class RequestNotificationPermissions extends NotificationsEvent {
 class ShowNotification extends NotificationsEvent {
   final String? title;
   final String? body;
-  ShowNotification({this.title, this.body});
+  const ShowNotification({this.title, this.body});
   @override
   List<Object?> get props => [title, body];
 }
 
 class RemoveNotifications extends NotificationsEvent {
-  RemoveNotifications();
+  const RemoveNotifications();
   @override
   List<Object> get props => [];
 }

@@ -37,7 +37,7 @@ class FilterText extends StatelessWidget {
                 _dateFormat.format(filterEnd!));
 
     return Padding(
-        padding: EdgeInsets.fromLTRB(16, 24, 16, 16),
+        padding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
         child: Center(
             child: Text(
           filterString,

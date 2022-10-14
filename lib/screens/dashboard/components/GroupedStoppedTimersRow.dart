@@ -56,8 +56,8 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow>
   void initState() {
     super.initState();
     _expanded = false;
-    _controller =
-        AnimationController(duration: Duration(milliseconds: 200), vsync: this);
+    _controller = AnimationController(
+        duration: const Duration(milliseconds: 200), vsync: this);
     _iconTurns = _controller.drive(_halfTween.chain(_easeInTween));
   }
 
@@ -120,17 +120,17 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow>
                 const SizedBox(width: 4),
                 Text(
                     TimerEntry.formatDuration(widget.timers.fold(
-                        Duration(),
+                        const Duration(),
                         (Duration sum, TimerEntry timer) =>
                             sum + timer.endTime!.difference(timer.startTime))),
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.onBackground,
-                      fontFeatures: [FontFeature.tabularFigures()],
+                      fontFeatures: const [FontFeature.tabularFigures()],
                     )),
                 if (_isHovering && !_expanded) const SizedBox(width: 4),
                 if (_isHovering && !_expanded)
                   IconButton(
-                    icon: Icon(FontAwesomeIcons.circlePlay),
+                    icon: const Icon(FontAwesomeIcons.circlePlay),
                     onPressed: _resumeTimer,
                     tooltip: L10N.of(context).tr.resumeTimer,
                     color: Theme.of(context).colorScheme.onBackground,

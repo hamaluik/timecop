@@ -77,13 +77,13 @@ class RunningTimerRow extends StatelessWidget {
               style: TimerUtils.styleDescription(context, timer.description)),
           trailing: Row(mainAxisSize: MainAxisSize.min, children: [
             Text(timer.formatTime(),
-                style: TextStyle(
+                style: const TextStyle(
                   fontFeatures: [FontFeature.tabularFigures()],
                 )),
             const SizedBox(width: 4),
             IconButton(
               tooltip: L10N.of(context).tr.stopTimer,
-              icon: Icon(FontAwesomeIcons.solidCircleStop),
+              icon: const Icon(FontAwesomeIcons.solidCircleStop),
               onPressed: () {
                 final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
                 timers.add(StopTimer(timer));
