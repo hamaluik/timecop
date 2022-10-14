@@ -82,7 +82,7 @@ class WeekdayAverages extends StatelessWidget {
     double totalWeeks = totalDays.toDouble() / 7.0;
     if (totalDays > 0) {
       for (int i = 0; i < 7; i++) {
-        daySums[i]!.updateAll((int? _project, double sum) => sum / totalWeeks);
+        daySums[i]!.updateAll((_, double sum) => sum / totalWeeks);
       }
     }
 

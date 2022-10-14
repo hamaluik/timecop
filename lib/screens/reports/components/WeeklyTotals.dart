@@ -97,10 +97,10 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
     }
     firstDate = firstDate!.startOfWeek();
 
-    LinkedHashMap<int?, LinkedHashMap<int, double>> _projectWeeklyHours =
+    LinkedHashMap<int?, LinkedHashMap<int, double>> projectWeeklyHours =
         calculateData(
             context, widget.startDate, widget.endDate, widget.selectedProjects);
-    double maxY = _projectWeeklyHours.values.fold(
+    double maxY = projectWeeklyHours.values.fold(
         0,
         (double omax, LinkedHashMap<int, double> weeks) => max(omax,
             weeks.values.fold(0, (double omax, double v) => max(omax, v))));
@@ -174,7 +174,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                               );
                             }),
                       )),
-                  lineBarsData: _projectWeeklyHours.entries.map((entry) {
+                  lineBarsData: projectWeeklyHours.entries.map((entry) {
                     Project? project = projects.state.projects
                         .firstWhereOrNull((project) => project.id == entry.key);
                     return LineChartBarData(
@@ -198,7 +198,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
             ),
             Legend(
                 projects: widget.selectedProjects.where((project) =>
-                    _projectWeeklyHours.keys.any((id) => project?.id == id))),
+                    projectWeeklyHours.keys.any((id) => project?.id == id))),
           ],
         ));
   }

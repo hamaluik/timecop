@@ -80,13 +80,13 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
   Widget build(BuildContext context) {
     final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
 
-    LinkedHashMap<int?, double> _projectHours = calculateData(
+    LinkedHashMap<int?, double> projectHours = calculateData(
         context, widget.startDate, widget.endDate, widget.selectedProjects);
-    if (_projectHours.isEmpty) {
+    if (projectHours.isEmpty) {
       return Container();
     }
     final double totalHours =
-        _projectHours.values.fold(0.0, (double sum, double v) => sum + v);
+        projectHours.values.fold(0.0, (double sum, double v) => sum + v);
 
     return Padding(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 40),
@@ -113,9 +113,9 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
                         }
                       });
                     }),
-                    sections: List.generate(_projectHours.length, (int index) {
+                    sections: List.generate(projectHours.length, (int index) {
                       MapEntry<int?, double> entry =
-                          _projectHours.entries.elementAt(index);
+                          projectHours.entries.elementAt(index);
                       Project? project = projects.state.projects
                           .firstWhereOrNull(
                               (project) => project.id == entry.key);
@@ -146,7 +146,7 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
             ),
             Legend(
                 projects: widget.selectedProjects.where((project) =>
-                    _projectHours.keys.any((id) => project?.id == id))),
+                    projectHours.keys.any((id) => project?.id == id))),
           ],
         ));
   }
