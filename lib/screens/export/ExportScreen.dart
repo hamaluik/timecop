@@ -14,6 +14,7 @@
 
 import 'dart:collection';
 import 'dart:io';
+import 'package:cross_file/cross_file.dart';
 import 'package:csv/csv.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -487,8 +488,7 @@ class _ExportScreenState extends State<ExportScreen> {
 
               File file = File(localPath);
               await file.writeAsString(csv, flush: true);
-              await Share.shareFiles(<String>[localPath],
-                  mimeTypes: <String>["text/csv"],
+              await Share.shareXFiles([XFile(localPath, mimeType: "text/csv")],
                   subject: L10N
                       .of(context)
                       .tr

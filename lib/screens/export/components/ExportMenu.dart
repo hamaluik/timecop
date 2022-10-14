@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'dart:io';
+import 'package:cross_file/cross_file.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
@@ -129,8 +130,8 @@ class ExportMenu extends StatelessWidget {
                     dbPath = copiedDB.path;
                   }
                 }
-                await Share.shareFiles(<String>[dbPath],
-                    mimeTypes: <String>["application/vnd.sqlite3"],
+                await Share.shareXFiles(
+                    [XFile(dbPath, mimeType: "application/vnd.sqlite3")],
                     subject: L10N
                         .of(context)
                         .tr
