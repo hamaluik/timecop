@@ -44,7 +44,7 @@ dependencies:
       ref: 5d99952baae6cb07a7faa409c18f4361b72dcd85
 
 dev_dependencies:
-  pedantic: ^1.11.1
+  flutter_lints: ^2.0.1
   effective_dart: ^1.3.2
   flutter_launcher_icons: ^0.10.0
   flutter_test:
