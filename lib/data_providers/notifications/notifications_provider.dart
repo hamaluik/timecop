@@ -24,25 +24,20 @@ class NotificationsProvider {
 
     const initializationSettingsAndroid =
         AndroidInitializationSettings('ic_notification_icon');
-    final initializationSettingsIOS = IOSInitializationSettings(
-      requestSoundPermission: false,
-      requestBadgePermission: false,
-      requestAlertPermission: false,
-    );
-    final initializationSettingsMacOS = MacOSInitializationSettings(
+    final initializationSettingsDarwin = DarwinInitializationSettings(
       requestSoundPermission: false,
       requestBadgePermission: false,
       requestAlertPermission: false,
     );
     const initializationSettingsLinux =
-        LinuxInitializationSettings(defaultActionName: "Open time cop");
+        LinuxInitializationSettings(defaultActionName: "Open Time Cop");
 
     final InitializationSettings initializationSettings =
         InitializationSettings(
             android: initializationSettingsAndroid,
-            iOS: initializationSettingsIOS,
+            iOS: initializationSettingsDarwin,
             linux: initializationSettingsLinux,
-            macOS: initializationSettingsMacOS);
+            macOS: initializationSettingsDarwin);
     await notif.initialize(initializationSettings);
 
     return NotificationsProvider(notif);
@@ -76,13 +71,7 @@ class NotificationsProvider {
       return;
     }
 
-    const ios = IOSNotificationDetails(
-      presentAlert: true,
-      presentSound: false,
-      badgeNumber: null,
-    );
-
-    const macos = MacOSNotificationDetails(
+    const darwin = DarwinNotificationDetails(
       presentAlert: true,
       presentSound: false,
       badgeNumber: null,
@@ -99,7 +88,7 @@ class NotificationsProvider {
     const linux = LinuxNotificationDetails();
 
     NotificationDetails details = NotificationDetails(
-        iOS: ios, android: android, macOS: macos, linux: linux);
+        iOS: darwin, android: android, macOS: darwin, linux: linux);
 
     await _notif.show(0, title, body, details);
   }
