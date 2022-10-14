@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// ignore_for_file: avoid_renaming_method_parameters
+
 import 'package:flutter/rendering.dart';
 import 'package:timecop/data_providers/settings/settings_provider.dart';
 import 'package:timecop/models/theme_type.dart';
