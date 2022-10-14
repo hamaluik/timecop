@@ -25,7 +25,7 @@ class DescriptionField extends StatefulWidget {
   const DescriptionField({Key? key}) : super(key: key);
 
   @override
-  _DescriptionFieldState createState() => _DescriptionFieldState();
+  State<DescriptionField> createState() => _DescriptionFieldState();
 }
 
 class _DescriptionFieldState extends State<DescriptionField> {

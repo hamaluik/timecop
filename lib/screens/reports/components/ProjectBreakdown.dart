@@ -38,7 +38,7 @@ class ProjectBreakdown extends StatefulWidget {
       : super(key: key);
 
   @override
-  _ProjectBreakdownState createState() => _ProjectBreakdownState();
+  State<ProjectBreakdown> createState() => _ProjectBreakdownState();
 }
 
 class _ProjectBreakdownState extends State<ProjectBreakdown> {

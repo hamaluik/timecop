@@ -23,7 +23,7 @@ class StartTimerSpeedDial extends StatefulWidget {
   const StartTimerSpeedDial({Key? key}) : super(key: key);
 
   @override
-  _StartTimerSpeedDialState createState() => _StartTimerSpeedDialState();
+  State<StartTimerSpeedDial> createState() => _StartTimerSpeedDialState();
 }
 
 class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>

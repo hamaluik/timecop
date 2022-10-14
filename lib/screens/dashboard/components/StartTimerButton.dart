@@ -26,7 +26,7 @@ class StartTimerButton extends StatefulWidget {
   const StartTimerButton({Key? key}) : super(key: key);
 
   @override
-  _StartTimerButtonState createState() => _StartTimerButtonState();
+  State<StartTimerButton> createState() => _StartTimerButtonState();
 }
 
 class _StartTimerButtonState extends State<StartTimerButton> {

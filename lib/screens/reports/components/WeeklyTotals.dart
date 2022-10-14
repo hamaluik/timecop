@@ -41,7 +41,7 @@ class WeeklyTotals extends StatefulWidget {
       : super(key: key);
 
   @override
-  _WeeklyTotalsState createState() => _WeeklyTotalsState();
+  State<WeeklyTotals> createState() => _WeeklyTotalsState();
 }
 
 class _WeeklyTotalsState extends State<WeeklyTotals> {

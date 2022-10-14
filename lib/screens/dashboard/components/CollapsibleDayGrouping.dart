@@ -30,7 +30,7 @@ class CollapsibleDayGrouping extends StatefulWidget {
       : super(key: key);
 
   @override
-  _CollapsibleDayGroupingState createState() => _CollapsibleDayGroupingState();
+  State<CollapsibleDayGrouping> createState() => _CollapsibleDayGroupingState();
 }
 
 class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping>

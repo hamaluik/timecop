@@ -38,7 +38,7 @@ class TimerEditor extends StatefulWidget {
   const TimerEditor({Key? key, required this.timer}) : super(key: key);
 
   @override
-  _TimerEditorState createState() => _TimerEditorState();
+  State<TimerEditor> createState() => _TimerEditorState();
 }
 
 class _TimerEditorState extends State<TimerEditor> {

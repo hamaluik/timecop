@@ -35,7 +35,7 @@ class GroupedStoppedTimersRow extends StatefulWidget {
         super(key: key);
 
   @override
-  _GroupedStoppedTimersRowState createState() =>
+  State<GroupedStoppedTimersRow> createState() =>
       _GroupedStoppedTimersRowState();
 }
 

@@ -24,7 +24,7 @@ class TopBar extends StatefulWidget implements PreferredSizeWidget {
   const TopBar({Key? key}) : super(key: key);
 
   @override
-  _TopBarState createState() => _TopBarState();
+  State<TopBar> createState() => _TopBarState();
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);

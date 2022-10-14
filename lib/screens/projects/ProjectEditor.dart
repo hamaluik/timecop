@@ -24,7 +24,7 @@ class ProjectEditor extends StatefulWidget {
   const ProjectEditor({Key? key, required this.project}) : super(key: key);
 
   @override
-  _ProjectEditorState createState() => _ProjectEditorState();
+  State<ProjectEditor> createState() => _ProjectEditorState();
 }
 
 class _ProjectEditorState extends State<ProjectEditor> {
