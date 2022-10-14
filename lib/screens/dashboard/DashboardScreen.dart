@@ -49,27 +49,25 @@ class DashboardScreen extends StatelessWidget {
               Material(
                 elevation: 8.0,
                 color: Theme.of(context).bottomSheetTheme.backgroundColor,
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      //crossAxisAlignment: CrossAxisAlignment.end,
-                      children: <Widget>[
-                        const ProjectSelectField(),
-                        const Expanded(
-                          flex: 1,
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(4.0, 0, 4.0, 0),
-                            child: DescriptionField(),
-                          ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    //crossAxisAlignment: CrossAxisAlignment.end,
+                    children: const <Widget>[
+                      ProjectSelectField(),
+                      Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(4.0, 0, 4.0, 0),
+                          child: DescriptionField(),
                         ),
-                        Container(
-                          width: 72,
-                          height: 72,
-                        )
-                      ],
-                    ),
+                      ),
+                      SizedBox(
+                        width: 72,
+                        height: 72,
+                      )
+                    ],
                   ),
                 ),
               )
