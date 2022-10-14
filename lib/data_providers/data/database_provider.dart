@@ -26,7 +26,7 @@ import 'package:xdg_directories/xdg_directories.dart';
 class DatabaseProvider extends DataProvider {
   final Database _db;
   final RandomColor _randomColour = RandomColor();
-  static const int DB_VERSION = 4;
+  static const int _dbVersion = 4;
 
   DatabaseProvider(this._db);
 
@@ -126,7 +126,7 @@ class DatabaseProvider extends DataProvider {
         onConfigure: _onConfigure,
         onCreate: _onCreate,
         onUpgrade: _onUpgrade,
-        version: DB_VERSION);
+        version: _dbVersion);
     await db.execute("PRAGMA foreign_keys = ON");
     DatabaseProvider repo = DatabaseProvider(db);
 

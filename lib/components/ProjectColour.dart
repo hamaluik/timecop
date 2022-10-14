@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:timecop/models/project.dart';
 
 class ProjectColour extends StatelessWidget {
-  static const double SIZE = 22;
+  static const double _size = 22;
   final Project? project;
   final bool? mini;
   const ProjectColour({Key? key, this.project, this.mini}) : super(key: key);
@@ -28,8 +28,8 @@ class ProjectColour extends StatelessWidget {
 
     return Container(
       key: Key("pc-${project?.id}-m"),
-      width: SIZE * scale,
-      height: SIZE * scale,
+      width: _size * scale,
+      height: _size * scale,
       decoration: BoxDecoration(
         color: project?.colour ?? Colors.transparent,
         //borderRadius: BorderRadius.circular(SIZE * 0.5 * scale),
