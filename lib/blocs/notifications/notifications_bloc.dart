@@ -9,22 +9,19 @@ part 'notifications_state.dart';
 
 class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   final NotificationsProvider notifications;
-  NotificationsBloc(this.notifications) : super(const NotificationsState());
-
-  @override
-  Stream<NotificationsState> mapEventToState(
-    NotificationsEvent event,
-  ) async* {
-    if (event is RequestNotificationPermissions) {
+  NotificationsBloc(this.notifications) : super(const NotificationsState()) {
+    on<RequestNotificationPermissions>((event, emit) async {
       await notifications.requestPermissions();
-      yield const NotificationsState();
-    } else if (event is ShowNotification) {
+      emit(const NotificationsState());
+    });
+    on<ShowNotification>((event, emit) async {
       await notifications.displayRunningTimersNotification(
           event.title, event.body);
-      yield const NotificationsState();
-    } else if (event is RemoveNotifications) {
+      emit(const NotificationsState());
+    });
+    on<RemoveNotifications>((event, emit) async {
       await notifications.removeAllNotifications();
-      yield const NotificationsState();
-    }
+      emit(const NotificationsState());
+    });
   }
 }

@@ -20,41 +20,41 @@ import './bloc.dart';
 
 class ProjectsBloc extends Bloc<ProjectsEvent, ProjectsState> {
   final DataProvider data;
-  ProjectsBloc(this.data) : super(ProjectsState.initial());
-
-  @override
-  Stream<ProjectsState> mapEventToState(
-    ProjectsEvent event,
-  ) async* {
-    if (event is LoadProjects) {
+  ProjectsBloc(this.data) : super(ProjectsState.initial()) {
+    on<LoadProjects>((event, emit) async {
       List<Project> projects = await data.listProjects();
-      yield ProjectsState(projects);
-    } else if (event is CreateProject) {
+      emit(ProjectsState(projects));
+    });
+
+    on<CreateProject>((event, emit) async {
       Project newProject =
           await data.createProject(name: event.name, colour: event.colour);
       List<Project> projects =
           state.projects.map((project) => Project.clone(project)).toList();
       projects.add(newProject);
       projects.sort((a, b) => a.name.compareTo(b.name));
-      yield ProjectsState(projects);
-    } else if (event is EditProject) {
+      emit(ProjectsState(projects));
+    });
+
+    on<EditProject>((event, emit) async {
       await data.editProject(event.project);
       List<Project> projects = state.projects.map((project) {
         if (project.id == event.project.id) return Project.clone(event.project);
         return Project.clone(project);
       }).toList();
       projects.sort((a, b) => a.name.compareTo(b.name));
-      yield ProjectsState(projects);
-    } else if (event is DeleteProject) {
+      emit(ProjectsState(projects));
+    });
+
+    on<DeleteProject>((event, emit) async {
       await data.deleteProject(event.project);
       List<Project> projects = state.projects
           .where((p) => p.id != event.project.id)
           .map((p) => Project.clone(p))
           .toList();
-      yield ProjectsState(projects);
-    }
+      emit(ProjectsState(projects));
+    });
   }
-
   Project? getProjectByID(int? id) {
     if (id == null) return null;
     for (Project p in state.projects) {

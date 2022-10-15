@@ -12,17 +12,14 @@ part 'theme_state.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   final SettingsProvider settings;
-  ThemeBloc(this.settings) : super(const ThemeState(ThemeType.auto));
+  ThemeBloc(this.settings) : super(const ThemeState(ThemeType.auto)) {
+    on<LoadThemeEvent>((event, emit) {
+      emit(ThemeState(settings.getTheme()));
+    });
 
-  @override
-  Stream<ThemeState> mapEventToState(
-    ThemeEvent event,
-  ) async* {
-    if (event is LoadThemeEvent) {
-      yield ThemeState(settings.getTheme());
-    } else if (event is ChangeThemeEvent) {
+    on<ChangeThemeEvent>((event, emit) {
       settings.setTheme(event.theme);
-      yield ThemeState(event.theme);
-    }
+      emit(ThemeState(event.theme));
+    });
   }
 }
