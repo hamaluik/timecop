@@ -12,8 +12,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   sqflite_common_ffi:
-  flutter_bloc: ^7.2.1
-  bloc: ^7.2.1
+  flutter_bloc: ^8.1.1
+  bloc: ^8.1.0
   equatable: ^2.0.5
   path: ^1.8.2
   collection: ^1.16.0
