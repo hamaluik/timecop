@@ -14,6 +14,7 @@
 
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 import 'package:bloc/bloc.dart';
 import 'package:timecop/blocs/projects/projects_event.dart';
 import 'package:timecop/blocs/timers/timers_event.dart';
@@ -26,13 +27,8 @@ import './bloc.dart';
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final SettingsProvider settings;
   final DataProvider data;
-  SettingsBloc(this.settings, this.data) : super(SettingsState.initial());
-
-  @override
-  Stream<SettingsState> mapEventToState(
-    SettingsEvent event,
-  ) async* {
-    if (event is LoadSettingsFromRepository) {
+  SettingsBloc(this.settings, this.data) : super(SettingsState.initial()) {
+    on<LoadSettingsFromRepository>((event, emit) {
       bool exportGroupTimers =
           settings.getBool("exportGroupTimers") ?? state.exportGroupTimers;
       bool exportIncludeProject = settings.getBool("exportIncludeProject") ??
@@ -75,7 +71,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       bool showRunningTimersAsNotifications =
           settings.getBool("showRunningTimersAsNotifications") ??
               state.showRunningTimersAsNotifications;
-      yield SettingsState(
+      emit(SettingsState(
         exportGroupTimers: exportGroupTimers,
         exportIncludeDate: exportIncludeDate,
         exportIncludeProject: exportIncludeProject,
@@ -94,8 +90,10 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         defaultFilterDays: defaultFilterDays,
         hasAskedNotificationPermissions: hasAskedNotificationPermissions,
         showRunningTimersAsNotifications: showRunningTimersAsNotifications,
-      );
-    } else if (event is SetBoolValueEvent) {
+      ));
+    });
+
+    on<SetBoolValueEvent>((event, emit) async {
       if (event.exportGroupTimers != null) {
         await settings.setBool("exportGroupTimers", event.exportGroupTimers);
       }
@@ -171,7 +169,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           hasAskedNotificationPermissions = true;
         }
       }
-      yield SettingsState.clone(
+      emit(SettingsState.clone(
         state,
         exportGroupTimers: event.exportGroupTimers,
         exportIncludeDate: event.exportIncludeDate,
@@ -190,21 +188,24 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         hasAskedNotificationPermissions: hasAskedNotificationPermissions,
         showRunningTimersAsNotifications:
             event.showRunningTimersAsNotifications,
-      );
-    } else if (event is SetDefaultFilterDays) {
+      ));
+    });
+
+    on<SetDefaultFilterDays>((event, emit) async {
       await settings.setInt("defaultFilterDays", event.days ?? -1);
-      yield SettingsState.clone(state, defaultFilterDays: event.days ?? -1);
-    } else if (event is ImportDatabaseEvent) {
+      emit(SettingsState.clone(state, defaultFilterDays: event.days ?? -1));
+    });
+
+    on<ImportDatabaseEvent>((event, emit) async {
       final DatabaseProvider importData =
           await DatabaseProvider.open(event.path);
       await data.import(importData);
       event.projects.add(LoadProjects());
       event.timers.add(LoadTimers());
       await importData.close();
-      yield SettingsState.clone(state);
-    }
+      emit(SettingsState.clone(state));
+    });
   }
-
   DateTime? getFilterStartDate() {
     if (state.defaultFilterStartDateToMonday) {
       var dayOfWeek = 1; // Monday=1, Tuesday=2...

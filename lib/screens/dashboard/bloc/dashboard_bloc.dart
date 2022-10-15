@@ -16,39 +16,42 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
   DashboardBloc(this.projectsBloc, this.settingsBloc)
       : super(DashboardState("", projectsBloc.getProjectByID(-1), false,
-            settingsBloc.getFilterStartDate(), null, const <int>[], null));
-
-  @override
-  Stream<DashboardState> mapEventToState(
-    DashboardEvent event,
-  ) async* {
-    if (event is DescriptionChangedEvent) {
-      yield DashboardState(
+            settingsBloc.getFilterStartDate(), null, const <int>[], null)) {
+    on<DescriptionChangedEvent>((event, emit) {
+      emit(DashboardState(
           event.description!,
           state.newProject,
           false,
           state.filterStart,
           state.filterEnd,
           state.hiddenProjects,
-          state.searchString);
-    } else if (event is ProjectChangedEvent) {
-      yield DashboardState(
+          state.searchString));
+    });
+
+    on<ProjectChangedEvent>((event, emit) {
+      emit(DashboardState(
           state.newDescription,
           event.project,
           false,
           state.filterStart,
           state.filterEnd,
           state.hiddenProjects,
-          state.searchString);
-    } else if (event is TimerWasStartedEvent) {
+          state.searchString));
+    });
+
+    on<TimerWasStartedEvent>((event, emit) {
       Project? newProject = projectsBloc.getProjectByID(-1);
-      yield DashboardState("", newProject, true, state.filterStart,
-          state.filterEnd, state.hiddenProjects, state.searchString);
-    } else if (event is ResetEvent) {
+      emit(DashboardState("", newProject, true, state.filterStart,
+          state.filterEnd, state.hiddenProjects, state.searchString));
+    });
+
+    on<ResetEvent>((event, emit) {
       Project? newProject = projectsBloc.getProjectByID(-1);
-      yield DashboardState("", newProject, false, state.filterStart,
-          state.filterEnd, state.hiddenProjects, state.searchString);
-    } else if (event is FilterStartChangedEvent) {
+      emit(DashboardState("", newProject, false, state.filterStart,
+          state.filterEnd, state.hiddenProjects, state.searchString));
+    });
+
+    on<FilterStartChangedEvent>((event, emit) {
       final filterStart = event.filterStart;
       DateTime? end = state.filterEnd;
       if (end != null && filterStart != null && filterStart.isAfter(end)) {
@@ -56,35 +59,41 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
             hours: 23, minutes: 59, seconds: 59, milliseconds: 999));
       }
 
-      yield DashboardState(state.newDescription, state.newProject, false,
-          event.filterStart, end, state.hiddenProjects, state.searchString);
-    } else if (event is FilterEndChangedEvent) {
-      yield DashboardState(
+      emit(DashboardState(state.newDescription, state.newProject, false,
+          event.filterStart, end, state.hiddenProjects, state.searchString));
+    });
+
+    on<FilterEndChangedEvent>((event, emit) {
+      emit(DashboardState(
           state.newDescription,
           state.newProject,
           false,
           state.filterStart,
           event.filterEnd,
           state.hiddenProjects,
-          state.searchString);
-    } else if (event is FilterProjectsChangedEvent) {
-      yield DashboardState(
+          state.searchString));
+    });
+
+    on<FilterProjectsChangedEvent>((event, emit) {
+      emit(DashboardState(
           state.newDescription,
           state.newProject,
           false,
           state.filterStart,
           state.filterEnd,
           event.projects,
-          state.searchString);
-    } else if (event is SearchChangedEvent) {
-      yield DashboardState(
+          state.searchString));
+    });
+
+    on<SearchChangedEvent>((event, emit) {
+      emit(DashboardState(
           state.newDescription,
           state.newProject,
           false,
           state.filterStart,
           state.filterEnd,
           state.hiddenProjects,
-          event.search);
-    }
+          event.search));
+    });
   }
 }
