@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:cross_file/cross_file.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/services.dart';
@@ -34,10 +35,15 @@ enum ExportMenuItem {
   export,
 }
 
-class ExportMenu extends StatelessWidget {
+class ExportMenu extends StatefulWidget {
   final DateFormat? dateFormat;
   const ExportMenu({Key? key, this.dateFormat}) : super(key: key);
 
+  @override
+  State<ExportMenu> createState() => _ExportMenuState();
+}
+
+class _ExportMenuState extends State<ExportMenu> {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<ExportMenuItem>(
@@ -60,7 +66,9 @@ class ExportMenu extends StatelessWidget {
                   : result.files.first.path!;
 
               if (!await DatabaseProvider.isValidDatabaseFile(resultPath)) {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                if (!mounted) return;
+                final messenger = ScaffoldMessenger.of(context);
+                messenger.showSnackBar(SnackBar(
                   backgroundColor: Theme.of(context).errorColor,
                   content: Text(
                     L10N.of(context).tr.invalidDatabaseFile,
@@ -69,6 +77,7 @@ class ExportMenu extends StatelessWidget {
                   duration: const Duration(seconds: 5),
                 ));
               } else {
+                if (!mounted) return;
                 SettingsBloc settings = BlocProvider.of<SettingsBloc>(context);
                 TimersBloc timers = BlocProvider.of<TimersBloc>(context);
                 ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
@@ -130,14 +139,14 @@ class ExportMenu extends StatelessWidget {
                     dbPath = copiedDB.path;
                   }
                 }
+                if (!mounted) return;
                 await Share.shareXFiles(
                     [XFile(dbPath, mimeType: "application/vnd.sqlite3")],
-                    subject: L10N
-                        .of(context)
-                        .tr
-                        .timeCopDatabase(dateFormat!.format(DateTime.now())));
+                    subject: L10N.of(context).tr.timeCopDatabase(
+                        widget.dateFormat!.format(DateTime.now())));
               }
             } on Exception catch (e) {
+              if (!mounted) return;
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 backgroundColor: Theme.of(context).errorColor,
                 content: Text(
