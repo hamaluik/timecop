@@ -49,7 +49,7 @@ packages:
       name: bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "7.2.1"
+    version: "8.1.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -200,12 +200,10 @@ packages:
   fluent:
     dependency: "direct main"
     description:
-      path: "."
-      ref: "5d99952baae6cb07a7faa409c18f4361b72dcd85"
-      resolved-ref: "5d99952baae6cb07a7faa409c18f4361b72dcd85"
-      url: "https://github.com/iot-d/fluent-dart"
-    source: git
-    version: "1.1.0+0"
+      name: fluent
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -224,7 +222,7 @@ packages:
       name: flutter_bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "7.3.3"
+    version: "8.1.1"
   flutter_datetime_picker:
     dependency: "direct main"
     description:

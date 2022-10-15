@@ -42,10 +42,7 @@ dependencies:
   flutter_markdown: ^0.6.9
   package_info_plus: ^2.0.0
   xdg_directories: ^0.2.0+1
-  fluent:
-    git:
-      url: https://github.com/iot-d/fluent-dart
-      ref: 5d99952baae6cb07a7faa409c18f4361b72dcd85
+  fluent: ^2.0.1
 
 dev_dependencies:
   flutter_lints: ^2.0.1
