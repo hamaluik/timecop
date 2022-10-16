@@ -487,6 +487,7 @@ class _ExportScreenState extends State<ExportScreen> {
 
               File file = File(localPath);
               await file.writeAsString(csv, flush: true);
+              if(!mounted) return;
               await Share.shareXFiles([XFile(localPath, mimeType: "text/csv")],
                   subject: L10N
                       .of(context)

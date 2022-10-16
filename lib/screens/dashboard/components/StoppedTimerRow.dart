@@ -60,6 +60,8 @@ class _StoppedTimerRowState extends State<StoppedTimerRow> {
                 foregroundColor: Theme.of(context).colorScheme.onSecondary,
                 icon: FontAwesomeIcons.trash,
                 onPressed: (_) async {
+                  final TimersBloc timersBloc =
+                      BlocProvider.of<TimersBloc>(context);
                   bool delete = await (showDialog<bool>(
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
@@ -81,8 +83,6 @@ class _StoppedTimerRowState extends State<StoppedTimerRow> {
                               ))) ??
                       false;
                   if (delete) {
-                    final TimersBloc timersBloc =
-                        BlocProvider.of<TimersBloc>(context);
                     timersBloc.add(DeleteTimer(widget.timer));
                   }
                 },

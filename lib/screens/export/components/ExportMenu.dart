@@ -40,6 +40,9 @@ class ExportMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+
     return PopupMenuButton<ExportMenuItem>(
       key: const Key("exportMenuButton"),
       icon: const Icon(FontAwesomeIcons.database),
@@ -60,7 +63,7 @@ class ExportMenu extends StatelessWidget {
                   : result.files.first.path!;
 
               if (!await DatabaseProvider.isValidDatabaseFile(resultPath)) {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                scaffoldMessenger.showSnackBar(SnackBar(
                   backgroundColor: Theme.of(context).errorColor,
                   content: Text(
                     L10N.of(context).tr.invalidDatabaseFile,
@@ -74,7 +77,7 @@ class ExportMenu extends StatelessWidget {
                 ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
                 settings.add(ImportDatabaseEvent(resultPath, timers, projects));
 
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                scaffoldMessenger.showSnackBar(SnackBar(
                   backgroundColor: Theme.of(context).primaryColorDark,
                   content: Text(
                     L10N.of(context).tr.databaseImported,
