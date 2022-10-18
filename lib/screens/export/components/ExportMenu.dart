@@ -42,6 +42,11 @@ class ExportMenu extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final scaffoldMessenger = ScaffoldMessenger.of(context);
+    final theme = Theme.of(context);
+    final localization = L10N.of(context);
+    final settingsBloc = BlocProvider.of<SettingsBloc>(context);
+    final timersBloc = BlocProvider.of<TimersBloc>(context);
+    final projectsBloc = BlocProvider.of<ProjectsBloc>(context);
 
     return PopupMenuButton<ExportMenuItem>(
       key: const Key("exportMenuButton"),
@@ -64,23 +69,23 @@ class ExportMenu extends StatelessWidget {
 
               if (!await DatabaseProvider.isValidDatabaseFile(resultPath)) {
                 scaffoldMessenger.showSnackBar(SnackBar(
-                  backgroundColor: Theme.of(context).errorColor,
+                  backgroundColor: theme.errorColor,
                   content: Text(
-                    L10N.of(context).tr.invalidDatabaseFile,
+                    localization.tr.invalidDatabaseFile,
                     style: const TextStyle(color: Colors.white),
                   ),
                   duration: const Duration(seconds: 5),
                 ));
               } else {
-                SettingsBloc settings = BlocProvider.of<SettingsBloc>(context);
-                TimersBloc timers = BlocProvider.of<TimersBloc>(context);
-                ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
+                SettingsBloc settings = settingsBloc;
+                TimersBloc timers = timersBloc;
+                ProjectsBloc projects = projectsBloc;
                 settings.add(ImportDatabaseEvent(resultPath, timers, projects));
 
                 scaffoldMessenger.showSnackBar(SnackBar(
-                  backgroundColor: Theme.of(context).primaryColorDark,
+                  backgroundColor: theme.primaryColorDark,
                   content: Text(
-                    L10N.of(context).tr.databaseImported,
+                    localization.tr.databaseImported,
                     style: const TextStyle(color: Colors.white),
                   ),
                   duration: const Duration(seconds: 5),
@@ -89,7 +94,7 @@ class ExportMenu extends StatelessWidget {
             } catch (e) {
               if (e is PlatformException &&
                   e.code == "read_external_storage_denied") {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                scaffoldMessenger.showSnackBar(SnackBar(
                   backgroundColor: Theme.of(context).primaryColorDark,
                   content: Text(
                     L10N.of(context).tr.storageAccessRequired,
@@ -98,7 +103,7 @@ class ExportMenu extends StatelessWidget {
                   duration: const Duration(seconds: 5),
                 ));
               } else {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                scaffoldMessenger.showSnackBar(SnackBar(
                   backgroundColor: Theme.of(context).errorColor,
                   content: Text(
                     e.toString(),
@@ -135,14 +140,13 @@ class ExportMenu extends StatelessWidget {
                 }
                 await Share.shareXFiles(
                     [XFile(dbPath, mimeType: "application/vnd.sqlite3")],
-                    subject: L10N
-                        .of(context)
+                    subject: localization
                         .tr
                         .timeCopDatabase(dateFormat!.format(DateTime.now())));
               }
             } on Exception catch (e) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                backgroundColor: Theme.of(context).errorColor,
+              scaffoldMessenger.showSnackBar(SnackBar(
+                backgroundColor: theme.errorColor,
                 content: Text(
                   e.toString(),
                   style: const TextStyle(color: Colors.white),
