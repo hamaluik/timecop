@@ -20,3 +20,7 @@ Time Cop started as a personal project of Kenton Hamaluik ([@hamaluik](https://g
 | Dhanush-K-Gowda | [@](https://github.com/Dhanush-K-Gowda) |
 | ersen0 | [@ersen0](https://github.com/ersen0) |
 | Andre-LA | [@Andre-LA](https://github.com/Andre-LA) |
+| André I. Smaniotto | [@aismaniotto](https://github.com/aismaniotto) |
+| Arya Shakya | [@Aryashakya](https://github.com/Aryashakya) |
+| Salim B | [@salim-b](https://github.com/salim-b) |
+| wemosPatrick | [wemosPatrick](https://github.com/wemosPatrick) |
