@@ -112,9 +112,8 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow>
               children: <Widget>[
                 RotationTransition(
                   turns: _iconTurns,
-                  child: Icon(
+                  child: const Icon(
                     Icons.expand_more,
-                    color: Theme.of(context).colorScheme.onBackground,
                   ),
                 ),
                 const SizedBox(width: 4),
