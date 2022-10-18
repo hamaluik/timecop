@@ -64,6 +64,10 @@ class ThemeUtil {
           style: TextButton.styleFrom(foregroundColor: lightColors.onSurface)),
       textSelectionTheme:
           TextSelectionThemeData(cursorColor: lightColors.secondary),
+      expansionTileTheme: ExpansionTileThemeData(
+        iconColor: lightColors.onBackground,
+        collapsedIconColor: lightColors.onBackground,
+      ),
       inputDecorationTheme: InputDecorationTheme(
           focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: lightColors.onPrimary))));
@@ -86,6 +90,10 @@ class ThemeUtil {
           style: TextButton.styleFrom(foregroundColor: darkColors.onSurface)),
       textSelectionTheme:
           TextSelectionThemeData(cursorColor: darkColors.secondary),
+      expansionTileTheme: ExpansionTileThemeData(
+        iconColor: darkColors.onBackground,
+        collapsedIconColor: darkColors.onBackground,
+      ),
       inputDecorationTheme: InputDecorationTheme(
           labelStyle: TextStyle(color: darkColors.onPrimary),
           focusedBorder: UnderlineInputBorder(
@@ -109,6 +117,10 @@ class ThemeUtil {
           style: TextButton.styleFrom(foregroundColor: blackColors.onSurface)),
       textSelectionTheme:
           TextSelectionThemeData(cursorColor: blackColors.secondary),
+      expansionTileTheme: ExpansionTileThemeData(
+        iconColor: blackColors.onBackground,
+        collapsedIconColor: blackColors.onBackground,
+      ),
       inputDecorationTheme: InputDecorationTheme(
           labelStyle: TextStyle(color: blackColors.onPrimary),
           focusedBorder: UnderlineInputBorder(
