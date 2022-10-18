@@ -61,9 +61,13 @@ class ThemeUtil {
         backgroundColor: Colors.blueGrey.shade50,
       ),
       textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(primary: lightColors.onSurface)),
+          style: TextButton.styleFrom(foregroundColor: lightColors.onSurface)),
       textSelectionTheme:
           TextSelectionThemeData(cursorColor: lightColors.secondary),
+      expansionTileTheme: ExpansionTileThemeData(
+        iconColor: lightColors.onBackground,
+        collapsedIconColor: lightColors.onBackground,
+      ),
       inputDecorationTheme: InputDecorationTheme(
           focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: lightColors.onPrimary))));
@@ -83,10 +87,15 @@ class ThemeUtil {
         backgroundColor: Color(0xFF303030),
       ),
       textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(primary: darkColors.onSurface)),
+          style: TextButton.styleFrom(foregroundColor: darkColors.onSurface)),
       textSelectionTheme:
           TextSelectionThemeData(cursorColor: darkColors.secondary),
+      expansionTileTheme: ExpansionTileThemeData(
+        iconColor: darkColors.onBackground,
+        collapsedIconColor: darkColors.onBackground,
+      ),
       inputDecorationTheme: InputDecorationTheme(
+          labelStyle: TextStyle(color: darkColors.onPrimary),
           focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: darkColors.onPrimary))));
 
@@ -105,10 +114,15 @@ class ThemeUtil {
         backgroundColor: Colors.black,
       ),
       textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(primary: blackColors.onSurface)),
+          style: TextButton.styleFrom(foregroundColor: blackColors.onSurface)),
       textSelectionTheme:
           TextSelectionThemeData(cursorColor: blackColors.secondary),
+      expansionTileTheme: ExpansionTileThemeData(
+        iconColor: blackColors.onBackground,
+        collapsedIconColor: blackColors.onBackground,
+      ),
       inputDecorationTheme: InputDecorationTheme(
+          labelStyle: TextStyle(color: blackColors.onPrimary),
           focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: blackColors.onPrimary))));
 }
