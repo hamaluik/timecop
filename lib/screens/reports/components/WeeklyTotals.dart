@@ -57,8 +57,8 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
     DateTime? firstDate = startDate;
     firstDate ??= timers.state.timers.map((timer) => timer.startTime).fold(
         DateTime.now(),
-        ((DateTime a, DateTime b) => a.isBefore(b) ? a : b) as DateTime?
-            Function(DateTime?, DateTime));
+        ((DateTime? prev, DateTime cur) =>
+            prev?.isBefore(cur) ?? false ? prev : cur));
     firstDate = firstDate!.startOfWeek();
 
     LinkedHashMap<int?, LinkedHashMap<int, double>> projectWeeklyHours =
@@ -92,8 +92,8 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
       final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
       firstDate = timers.state.timers.map((timer) => timer.startTime).fold(
           DateTime.now(),
-          ((DateTime a, DateTime b) => a.isBefore(b) ? a : b) as DateTime?
-              Function(DateTime?, DateTime));
+          ((DateTime? prev, DateTime cur) =>
+              prev?.isBefore(cur) ?? false ? prev : cur));
     }
     firstDate = firstDate!.startOfWeek();
 

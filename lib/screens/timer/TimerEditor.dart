@@ -383,7 +383,7 @@ class _TimerEditorState extends State<TimerEditor> {
               ),
             ),
             ListTile(
-              title: const Text("Notes"),
+              title: Text(L10N.of(context).tr.notes),
               onTap: () async => await _editNotes(context),
             ),
             Expanded(
@@ -436,7 +436,7 @@ class _TimerEditorState extends State<TimerEditor> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text("Notes"),
+            title: Text(L10N.of(context).tr.notes),
             content: TextFormField(
               controller: _notesController,
               autofocus: true,
