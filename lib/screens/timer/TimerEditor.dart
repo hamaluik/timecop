@@ -112,6 +112,8 @@ class _TimerEditorState extends State<TimerEditor> {
           IconButton(
               tooltip: L10N.of(context).tr.delete,
               onPressed: () async {
+                final TimersBloc timersBloc =
+                BlocProvider.of<TimersBloc>(context);
                 bool delete = await (showDialog<bool>(
                         context: context,
                         builder: (BuildContext context) => AlertDialog(
@@ -133,9 +135,8 @@ class _TimerEditorState extends State<TimerEditor> {
                             ))) ??
                     false;
                 if (delete) {
-                  final TimersBloc timersBloc =
-                      BlocProvider.of<TimersBloc>(context);
                   timersBloc.add(DeleteTimer(widget.timer));
+                  if(!mounted) return;
                   Navigator.of(context).pop();
                 }
               },

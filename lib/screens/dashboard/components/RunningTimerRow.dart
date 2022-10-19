@@ -45,6 +45,8 @@ class RunningTimerRow extends StatelessWidget {
               foregroundColor: Theme.of(context).colorScheme.onSecondary,
               icon: FontAwesomeIcons.trash,
               onPressed: (_) async {
+                final TimersBloc timersBloc =
+                  BlocProvider.of<TimersBloc>(context);
                 bool? delete = await showDialog(
                     context: context,
                     builder: (BuildContext context) => AlertDialog(
@@ -62,8 +64,6 @@ class RunningTimerRow extends StatelessWidget {
                           ],
                         ));
                 if (delete == true) {
-                  final TimersBloc timersBloc =
-                      BlocProvider.of<TimersBloc>(context);
                   timersBloc.add(DeleteTimer(timer));
                 }
               },

@@ -164,12 +164,13 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
       // that we build in build(); so we don't have access to it here
       LocaleState localeState = BlocProvider.of<LocaleBloc>(context).state;
       Locale locale = localeState.locale ?? const Locale("en");
+      final showNotification = BlocProvider.of<NotificationsBloc>(context);
       L10N l10n = await L10N.load(locale);
 
       if (settings.showRunningTimersAsNotifications &&
           timers.countRunningTimers() > 0) {
         // print("showing notification");
-        BlocProvider.of<NotificationsBloc>(context).add(ShowNotification(
+        showNotification.add(ShowNotification(
             title: l10n.tr.runningTimersNotificationTitle,
             body: l10n.tr.runningTimersNotificationBody));
       } else {
