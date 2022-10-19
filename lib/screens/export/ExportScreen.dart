@@ -391,7 +391,7 @@ class _ExportScreenState extends State<ExportScreen> {
               filteredTimers.sort((a, b) => a.startTime.compareTo(b.startTime));
 
               // now start grouping those suckers
-              LinkedHashMap<String,
+              final LinkedHashMap<String,
                       LinkedHashMap<ProjectDescriptionPair, List<TimerEntry>>>
                   derp = LinkedHashMap();
               for (TimerEntry timer in filteredTimers) {
@@ -428,7 +428,7 @@ class _ExportScreenState extends State<ExportScreen> {
               }).toList();
             }
 
-            List<List<String>> data =
+            final List<List<String>> data =
                 <List<String>>[headers].followedBy(filteredTimers.map((timer) {
               List<String> row = [];
               if (settingsBloc.state.exportIncludeDate) {
@@ -463,11 +463,11 @@ class _ExportScreenState extends State<ExportScreen> {
               }
               return row;
             })).toList();
-            String csv =
+            final csv =
                 const ListToCsvConverter(delimitAllFields: true).convert(data);
 
             if (Platform.isMacOS || Platform.isLinux) {
-              String? outputFile = await FilePicker.platform.saveFile(
+              final outputFile = await FilePicker.platform.saveFile(
                 dialogTitle: "",
                 fileName: "timecop.csv",
               );
@@ -476,21 +476,16 @@ class _ExportScreenState extends State<ExportScreen> {
                 await File(outputFile).writeAsString(csv, flush: true);
               }
             } else {
-              Directory? directory;
-              if (Platform.isAndroid) {
-                directory = await getExternalStorageDirectory();
-              } else {
-                directory = await getApplicationDocumentsDirectory();
-              }
-              final String localPath = '${directory!.path}/timecop.csv';
+              final localizations = L10N.of(context);
+              final directory = (Platform.isAndroid)
+                  ? await getExternalStorageDirectory()
+                  : await getApplicationDocumentsDirectory();
+              final localPath = '${directory!.path}/timecop.csv';
 
-              File file = File(localPath);
+              final file = File(localPath);
               await file.writeAsString(csv, flush: true);
-              if (!mounted) return;
               await Share.shareXFiles([XFile(localPath, mimeType: "text/csv")],
-                  subject: L10N
-                      .of(context)
-                      .tr
+                  subject: localizations.tr
                       .timeCopEntries(_dateFormat.format(DateTime.now())));
             }
           }),
