@@ -40,21 +40,20 @@ class ExportMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scaffoldMessenger = ScaffoldMessenger.of(context);
-    final theme = Theme.of(context);
-    final localization = L10N.of(context);
-    final settingsBloc = BlocProvider.of<SettingsBloc>(context);
-    final timersBloc = BlocProvider.of<TimersBloc>(context);
-    final projectsBloc = BlocProvider.of<ProjectsBloc>(context);
-
     return PopupMenuButton<ExportMenuItem>(
       key: const Key("exportMenuButton"),
       icon: const Icon(FontAwesomeIcons.database),
       onSelected: (ExportMenuItem item) async {
+        final scaffoldMessenger = ScaffoldMessenger.of(context);
+        final theme = Theme.of(context);
+        final localization = L10N.of(context);
+        final settingsBloc = BlocProvider.of<SettingsBloc>(context);
+        final timersBloc = BlocProvider.of<TimersBloc>(context);
+        final projectsBloc = BlocProvider.of<ProjectsBloc>(context);
         switch (item) {
           case ExportMenuItem.import:
             try {
-              FilePickerResult? result = await FilePicker.platform.pickFiles(
+              final result = await FilePicker.platform.pickFiles(
                   type: FileType.any,
                   allowMultiple: false,
                   withData: Platform.isLinux);
@@ -76,10 +75,8 @@ class ExportMenu extends StatelessWidget {
                   duration: const Duration(seconds: 5),
                 ));
               } else {
-                SettingsBloc settings = settingsBloc;
-                TimersBloc timers = timersBloc;
-                ProjectsBloc projects = projectsBloc;
-                settings.add(ImportDatabaseEvent(resultPath, timers, projects));
+                settingsBloc.add(
+                    ImportDatabaseEvent(resultPath, timersBloc, projectsBloc));
 
                 scaffoldMessenger.showSnackBar(SnackBar(
                   backgroundColor: theme.primaryColorDark,
