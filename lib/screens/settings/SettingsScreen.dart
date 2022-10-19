@@ -32,9 +32,9 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeBloc themeBloc = BlocProvider.of<ThemeBloc>(context);
-    final LocaleBloc localeBloc = BlocProvider.of<LocaleBloc>(context);
-    final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
+    final themeBloc = BlocProvider.of<ThemeBloc>(context);
+    final localeBloc = BlocProvider.of<LocaleBloc>(context);
+    final settingsBloc = BlocProvider.of<SettingsBloc>(context);
 
     return Scaffold(
         appBar: AppBar(

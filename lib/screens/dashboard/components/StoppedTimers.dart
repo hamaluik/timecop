@@ -37,7 +37,7 @@ class DayGrouping {
   DayGrouping(this.date);
 
   Widget rows(BuildContext context) {
-    final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
+    final settingsBloc = BlocProvider.of<SettingsBloc>(context);
     Duration runningTotal = Duration(
         seconds: entries.fold(
             0,
@@ -160,7 +160,7 @@ class StoppedTimers extends StatelessWidget {
                 !dashboardState.hiddenProjects.any((p) => p == t.projectID));
 
             // filter based on archived and deleted projects
-            ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+            final projectsBloc = BlocProvider.of<ProjectsBloc>(context);
             timers = timers.where((t) =>
                 projectsBloc.getProjectByID(t.projectID)?.archived != true);
 

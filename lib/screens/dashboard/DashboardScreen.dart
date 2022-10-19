@@ -29,8 +29,8 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
-    final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
+    final projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+    final settingsBloc = BlocProvider.of<SettingsBloc>(context);
 
     return BlocProvider<DashboardBloc>(
         create: (_) => DashboardBloc(projectsBloc, settingsBloc),

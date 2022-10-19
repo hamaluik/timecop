@@ -58,21 +58,21 @@ class _ExportScreenState extends State<ExportScreen> {
   @override
   void initState() {
     super.initState();
-    final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
+    final projects = BlocProvider.of<ProjectsBloc>(context);
     selectedProjects = <Project?>[null]
         .followedBy(projects.state.projects
             .where((p) => !p.archived)
             .map((p) => Project.clone(p)))
         .toList();
 
-    final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
+    final settingsBloc = BlocProvider.of<SettingsBloc>(context);
     _startDate = settingsBloc.getFilterStartDate();
   }
 
   @override
   Widget build(BuildContext context) {
-    final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
-    final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+    final settingsBloc = BlocProvider.of<SettingsBloc>(context);
+    final projectsBloc = BlocProvider.of<ProjectsBloc>(context);
 
     // TODO: break this into components or something so we don't have such a massively unmanagement build function
 
@@ -330,9 +330,8 @@ class _ExportScreenState extends State<ExportScreen> {
             ],
           ),
           onPressed: () async {
-            final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
-            final ProjectsBloc projects =
-                BlocProvider.of<ProjectsBloc>(context);
+            final timers = BlocProvider.of<TimersBloc>(context);
+            final projects = BlocProvider.of<ProjectsBloc>(context);
 
             List<String> headers = [];
             if (settingsBloc.state.exportIncludeDate) {
@@ -487,7 +486,7 @@ class _ExportScreenState extends State<ExportScreen> {
 
               File file = File(localPath);
               await file.writeAsString(csv, flush: true);
-              if(!mounted) return;
+              if (!mounted) return;
               await Share.shareXFiles([XFile(localPath, mimeType: "text/csv")],
                   subject: L10N
                       .of(context)

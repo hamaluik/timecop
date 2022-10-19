@@ -39,7 +39,7 @@ class WeekdayAverages extends StatelessWidget {
       DateTime? startDate,
       DateTime? endDate,
       List<Project?> selectedProjects) {
-    final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+    final timers = BlocProvider.of<TimersBloc>(context);
 
     DateTime firstDate = DateTime.now();
     DateTime lastDate = DateTime(1970);
@@ -100,7 +100,7 @@ class WeekdayAverages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
+    final projects = BlocProvider.of<ProjectsBloc>(context);
 
     double maxY = _daysData.values.fold(
         0.0,

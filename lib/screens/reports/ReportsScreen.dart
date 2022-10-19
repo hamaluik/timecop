@@ -49,14 +49,14 @@ class _ReportsScreenState extends State<ReportsScreen> {
   @override
   void initState() {
     super.initState();
-    final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
+    final projects = BlocProvider.of<ProjectsBloc>(context);
     selectedProjects = <Project?>[null]
         .followedBy(projects.state.projects
             .where((p) => !p.archived)
             .map((p) => Project.clone(p)))
         .toList();
 
-    final SettingsBloc settings = BlocProvider.of<SettingsBloc>(context);
+    final settings = BlocProvider.of<SettingsBloc>(context);
     _startDate = settings.getFilterStartDate();
   }
 
@@ -72,7 +72,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+    final projectsBloc = BlocProvider.of<ProjectsBloc>(context);
 
     return Scaffold(
         appBar: AppBar(

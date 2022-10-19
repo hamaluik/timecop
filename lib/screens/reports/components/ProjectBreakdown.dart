@@ -46,7 +46,7 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
 
   static LinkedHashMap<int?, double> calculateData(BuildContext context,
       DateTime? startDate, DateTime? endDate, List<Project?> selectedProjects) {
-    final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+    final timers = BlocProvider.of<TimersBloc>(context);
 
     LinkedHashMap<int?, double> projectHours = LinkedHashMap();
     for (TimerEntry timer in timers.state.timers
@@ -78,7 +78,7 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
 
   @override
   Widget build(BuildContext context) {
-    final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
+    final projects = BlocProvider.of<ProjectsBloc>(context);
 
     LinkedHashMap<int?, double> projectHours = calculateData(
         context, widget.startDate, widget.endDate, widget.selectedProjects);

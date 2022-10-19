@@ -37,8 +37,8 @@ class TimeTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
-    final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+    final projects = BlocProvider.of<ProjectsBloc>(context);
+    final timers = BlocProvider.of<TimersBloc>(context);
 
     LinkedHashMap<int?, double> projectHours = LinkedHashMap();
     for (TimerEntry timer in timers.state.timers

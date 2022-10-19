@@ -47,7 +47,7 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
 
   @override
   Widget build(BuildContext context) {
-    final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
+    final bloc = BlocProvider.of<DashboardBloc>(context);
 
     // adapted from https://stackoverflow.com/a/46480722
     return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
@@ -68,7 +68,7 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
             foregroundColor: Theme.of(context).colorScheme.onSecondary,
             onPressed: () {
               _controller.reverse();
-              final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+              final timers = BlocProvider.of<TimersBloc>(context);
               timers.add(CreateTimer(
                   description: bloc.state.newDescription,
                   project: bloc.state.newProject));
@@ -106,7 +106,7 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
             foregroundColor: Theme.of(context).colorScheme.onSecondary,
             onPressed: () {
               _controller.reverse();
-              final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+              final timers = BlocProvider.of<TimersBloc>(context);
               timers.add(const StopAllTimers());
             },
             child: Stack(

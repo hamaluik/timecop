@@ -144,8 +144,8 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow>
   }
 
   void _resumeTimer() {
-    final TimersBloc timersBloc = BlocProvider.of<TimersBloc>(context);
-    final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+    final timersBloc = BlocProvider.of<TimersBloc>(context);
+    final projectsBloc = BlocProvider.of<ProjectsBloc>(context);
     Project? project =
         projectsBloc.getProjectByID(widget.timers.first.projectID);
     timersBloc.add(CreateTimer(

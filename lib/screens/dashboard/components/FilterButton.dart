@@ -24,7 +24,7 @@ class FilterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
+    final bloc = BlocProvider.of<DashboardBloc>(context);
     return IconButton(
       tooltip: L10N.of(context).tr.filter,
       icon: const Icon(FontAwesomeIcons.filter),

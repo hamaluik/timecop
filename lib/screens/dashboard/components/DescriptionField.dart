@@ -35,7 +35,7 @@ class _DescriptionFieldState extends State<DescriptionField> {
   @override
   void initState() {
     super.initState();
-    final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
+    final bloc = BlocProvider.of<DashboardBloc>(context);
     _controller = TextEditingController(text: bloc.state.newDescription);
     _focus = FocusNode();
   }
@@ -49,9 +49,9 @@ class _DescriptionFieldState extends State<DescriptionField> {
 
   @override
   Widget build(BuildContext context) {
-    final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
-    final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
-    final SettingsBloc settings = BlocProvider.of<SettingsBloc>(context);
+    final bloc = BlocProvider.of<DashboardBloc>(context);
+    final timers = BlocProvider.of<TimersBloc>(context);
+    final settings = BlocProvider.of<SettingsBloc>(context);
 
     return BlocBuilder<DashboardBloc, DashboardState>(
         builder: (BuildContext context, DashboardState state) {
@@ -75,7 +75,7 @@ class _DescriptionFieldState extends State<DescriptionField> {
               onSubmitted: (dynamic description) {
                 _focus!.unfocus();
                 bloc.add(DescriptionChangedEvent(description as String));
-                final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+                final timers = BlocProvider.of<TimersBloc>(context);
                 timers.add(CreateTimer(
                     description: bloc.state.newDescription,
                     project: bloc.state.newProject));
@@ -92,8 +92,8 @@ class _DescriptionFieldState extends State<DescriptionField> {
           suggestionsCallback: (pattern) async {
             if (pattern.length < 2) return [];
 
-            ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
-            List<String?> descriptions = timers.state.timers
+            final projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+            final descriptions = timers.state.timers
                 .where((timer) => timer.description != null)
                 .where((timer) =>
                     !(projectsBloc.getProjectByID(timer.projectID)?.archived ==
@@ -123,7 +123,7 @@ class _DescriptionFieldState extends State<DescriptionField> {
           onSubmitted: (String description) {
             _focus!.unfocus();
             bloc.add(DescriptionChangedEvent(description));
-            final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+            final timers = BlocProvider.of<TimersBloc>(context);
             timers.add(CreateTimer(
                 description: bloc.state.newDescription,
                 project: bloc.state.newProject));

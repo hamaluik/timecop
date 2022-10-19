@@ -52,7 +52,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
       DateTime? startDate,
       DateTime? endDate,
       List<Project?> selectedProjects) {
-    final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+    final timers = BlocProvider.of<TimersBloc>(context);
 
     DateTime? firstDate = startDate;
     firstDate ??= timers.state.timers.map((timer) => timer.startTime).fold(
@@ -86,10 +86,10 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
 
   @override
   Widget build(BuildContext context) {
-    final ProjectsBloc projects = BlocProvider.of<ProjectsBloc>(context);
+    final projects = BlocProvider.of<ProjectsBloc>(context);
     DateTime? firstDate = widget.startDate;
     if (firstDate == null) {
-      final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+      final timers = BlocProvider.of<TimersBloc>(context);
       firstDate = timers.state.timers.map((timer) => timer.startTime).fold(
           DateTime.now(),
           ((DateTime? prev, DateTime cur) =>

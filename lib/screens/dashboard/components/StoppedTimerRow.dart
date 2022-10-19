@@ -60,8 +60,7 @@ class _StoppedTimerRowState extends State<StoppedTimerRow> {
                 foregroundColor: Theme.of(context).colorScheme.onSecondary,
                 icon: FontAwesomeIcons.trash,
                 onPressed: (_) async {
-                  final TimersBloc timersBloc =
-                      BlocProvider.of<TimersBloc>(context);
+                  final timersBloc = BlocProvider.of<TimersBloc>(context);
                   bool delete = await (showDialog<bool>(
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
@@ -135,8 +134,8 @@ class _StoppedTimerRowState extends State<StoppedTimerRow> {
   }
 
   void _resumeTimer(BuildContext context) {
-    final TimersBloc timersBloc = BlocProvider.of<TimersBloc>(context);
-    final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+    final timersBloc = BlocProvider.of<TimersBloc>(context);
+    final projectsBloc = BlocProvider.of<ProjectsBloc>(context);
     Project? project = projectsBloc.getProjectByID(widget.timer.projectID);
     timersBloc.add(
         CreateTimer(description: widget.timer.description, project: project));

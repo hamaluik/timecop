@@ -54,12 +54,12 @@ class _TopBarState extends State<TopBar> {
 
   void cancelSearch() {
     setState(() => _searching = false);
-    DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
+    final bloc = BlocProvider.of<DashboardBloc>(context);
     bloc.add(const SearchChangedEvent(null));
   }
 
   Widget searchBar(BuildContext context) {
-    DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
+    final bloc = BlocProvider.of<DashboardBloc>(context);
 
     return Form(
         key: _searchFormKey,
@@ -84,7 +84,7 @@ class _TopBarState extends State<TopBar> {
 
   @override
   Widget build(BuildContext context) {
-    final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
+    final bloc = BlocProvider.of<DashboardBloc>(context);
 
     return AppBar(
         leading: _searching

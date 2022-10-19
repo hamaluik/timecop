@@ -118,8 +118,8 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
     brightness = WidgetsBinding.instance.window.platformBrightness;
 
-    SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
-    TimersBloc timersBloc = BlocProvider.of<TimersBloc>(context);
+    final settingsBloc = BlocProvider.of<SettingsBloc>(context);
+    final timersBloc = BlocProvider.of<TimersBloc>(context);
     settingsBloc.stream.listen((settingsState) => _updateNotificationBadge(
         settingsState, timersBloc.state.countRunningTimers()));
     timersBloc.stream.listen((timersState) => _updateNotificationBadge(
@@ -157,20 +157,20 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     // print("application lifecycle changed to: " + state.toString());
     if (state == AppLifecycleState.paused) {
-      SettingsState settings = BlocProvider.of<SettingsBloc>(context).state;
-      TimersState timers = BlocProvider.of<TimersBloc>(context).state;
+      final settings = BlocProvider.of<SettingsBloc>(context).state;
+      final timers = BlocProvider.of<TimersBloc>(context).state;
 
       // TODO: fix this ugly hack. The L10N we load is part of the material app
       // that we build in build(); so we don't have access to it here
-      LocaleState localeState = BlocProvider.of<LocaleBloc>(context).state;
-      Locale locale = localeState.locale ?? const Locale("en");
-      final showNotification = BlocProvider.of<NotificationsBloc>(context);
-      L10N l10n = await L10N.load(locale);
+      final localeState = BlocProvider.of<LocaleBloc>(context).state;
+      final locale = localeState.locale ?? const Locale("en");
+      final notificationsBloc = BlocProvider.of<NotificationsBloc>(context);
+      final l10n = await L10N.load(locale);
 
       if (settings.showRunningTimersAsNotifications &&
           timers.countRunningTimers() > 0) {
         // print("showing notification");
-        showNotification.add(ShowNotification(
+        notificationsBloc.add(ShowNotification(
             title: l10n.tr.runningTimersNotificationTitle,
             body: l10n.tr.runningTimersNotificationBody));
       } else {

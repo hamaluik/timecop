@@ -30,8 +30,8 @@ class ProjectSelectField extends StatefulWidget {
 class _ProjectSelectFieldState extends State<ProjectSelectField> {
   @override
   Widget build(BuildContext context) {
-    final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
-    final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+    final bloc = BlocProvider.of<DashboardBloc>(context);
+    final projectsBloc = BlocProvider.of<ProjectsBloc>(context);
     return BlocBuilder<ProjectsBloc, ProjectsState>(
         builder: (BuildContext context, ProjectsState projectsState) {
       return BlocBuilder<DashboardBloc, DashboardState>(

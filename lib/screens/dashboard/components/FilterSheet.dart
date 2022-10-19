@@ -30,7 +30,7 @@ class FilterSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ProjectsBloc projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+    final projectsBloc = BlocProvider.of<ProjectsBloc>(context);
 
     return BlocBuilder<DashboardBloc, DashboardState>(
       bloc: dashboardBloc,

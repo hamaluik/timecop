@@ -102,8 +102,8 @@ class _TimerEditorState extends State<TimerEditor> {
 
   @override
   Widget build(BuildContext context) {
-    final SettingsBloc settingsBloc = BlocProvider.of<SettingsBloc>(context);
-    final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+    final settingsBloc = BlocProvider.of<SettingsBloc>(context);
+    final timers = BlocProvider.of<TimersBloc>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -112,8 +112,7 @@ class _TimerEditorState extends State<TimerEditor> {
           IconButton(
               tooltip: L10N.of(context).tr.delete,
               onPressed: () async {
-                final TimersBloc timersBloc =
-                BlocProvider.of<TimersBloc>(context);
+                final timersBloc = BlocProvider.of<TimersBloc>(context);
                 bool delete = await (showDialog<bool>(
                         context: context,
                         builder: (BuildContext context) => AlertDialog(
@@ -136,7 +135,7 @@ class _TimerEditorState extends State<TimerEditor> {
                     false;
                 if (delete) {
                   timersBloc.add(DeleteTimer(widget.timer));
-                  if(!mounted) return;
+                  if (!mounted) return;
                   Navigator.of(context).pop();
                 }
               },

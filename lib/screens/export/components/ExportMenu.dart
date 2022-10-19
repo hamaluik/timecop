@@ -40,7 +40,6 @@ class ExportMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final scaffoldMessenger = ScaffoldMessenger.of(context);
     final theme = Theme.of(context);
     final localization = L10N.of(context);
@@ -140,8 +139,7 @@ class ExportMenu extends StatelessWidget {
                 }
                 await Share.shareXFiles(
                     [XFile(dbPath, mimeType: "application/vnd.sqlite3")],
-                    subject: localization
-                        .tr
+                    subject: localization.tr
                         .timeCopDatabase(dateFormat!.format(DateTime.now())));
               }
             } on Exception catch (e) {

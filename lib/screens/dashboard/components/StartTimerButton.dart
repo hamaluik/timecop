@@ -32,7 +32,7 @@ class StartTimerButton extends StatefulWidget {
 class _StartTimerButtonState extends State<StartTimerButton> {
   @override
   Widget build(BuildContext context) {
-    final DashboardBloc bloc = BlocProvider.of<DashboardBloc>(context);
+    final bloc = BlocProvider.of<DashboardBloc>(context);
 
     return BlocBuilder<SettingsBloc, SettingsState>(
         builder: (BuildContext context, SettingsState settingsState) {
@@ -45,7 +45,7 @@ class _StartTimerButtonState extends State<StartTimerButton> {
             backgroundColor: Theme.of(context).colorScheme.secondary,
             foregroundColor: Theme.of(context).colorScheme.onSecondary,
             onPressed: () {
-              final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+              final timers = BlocProvider.of<TimersBloc>(context);
               timers.add(CreateTimer(
                   description: bloc.state.newDescription,
                   project: bloc.state.newProject));
@@ -72,7 +72,7 @@ class _StartTimerButtonState extends State<StartTimerButton> {
             backgroundColor: Colors.pink[600],
             foregroundColor: Theme.of(context).colorScheme.onSecondary,
             onPressed: () {
-              final TimersBloc timers = BlocProvider.of<TimersBloc>(context);
+              final timers = BlocProvider.of<TimersBloc>(context);
               timers.add(const StopAllTimers());
             },
             child: Stack(
