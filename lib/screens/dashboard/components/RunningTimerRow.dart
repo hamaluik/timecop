@@ -46,22 +46,26 @@ class RunningTimerRow extends StatelessWidget {
               icon: FontAwesomeIcons.trash,
               onPressed: (_) async {
                 final timersBloc = BlocProvider.of<TimersBloc>(context);
-                bool? delete = await showDialog(
-                    context: context,
-                    builder: (BuildContext context) => AlertDialog(
-                          title: Text(L10N.of(context).tr.confirmDelete),
-                          content: Text(L10N.of(context).tr.deleteTimerConfirm),
-                          actions: <Widget>[
-                            TextButton(
-                              child: Text(L10N.of(context).tr.cancel),
-                              onPressed: () => Navigator.of(context).pop(false),
-                            ),
-                            TextButton(
-                              child: Text(L10N.of(context).tr.delete),
-                              onPressed: () => Navigator.of(context).pop(true),
-                            ),
-                          ],
-                        ));
+                final bool delete = await showDialog<bool>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                              title: Text(L10N.of(context).tr.confirmDelete),
+                              content:
+                                  Text(L10N.of(context).tr.deleteTimerConfirm),
+                              actions: <Widget>[
+                                TextButton(
+                                  child: Text(L10N.of(context).tr.cancel),
+                                  onPressed: () =>
+                                      Navigator.of(context).pop(false),
+                                ),
+                                TextButton(
+                                  child: Text(L10N.of(context).tr.delete),
+                                  onPressed: () =>
+                                      Navigator.of(context).pop(true),
+                                ),
+                              ],
+                            )) ??
+                    false;
                 if (delete == true) {
                   timersBloc.add(DeleteTimer(timer));
                 }

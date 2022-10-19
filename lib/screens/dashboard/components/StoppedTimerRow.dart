@@ -61,7 +61,7 @@ class _StoppedTimerRowState extends State<StoppedTimerRow> {
                 icon: FontAwesomeIcons.trash,
                 onPressed: (_) async {
                   final timersBloc = BlocProvider.of<TimersBloc>(context);
-                  bool delete = await (showDialog<bool>(
+                  final bool delete = await (showDialog<bool>(
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
                                 title: Text(L10N.of(context).tr.confirmDelete),
