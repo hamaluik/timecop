@@ -12,6 +12,6 @@ samples, guidance on mobile development, and a full API reference.
 
 After [installing and setting up Flutter](https://docs.flutter.dev/get-started/install) (ideally its latest version) and downloading the Time Cop code, you can simply [build and run](https://docs.flutter.dev/get-started/test-drive#run-the-app) this Flutter project.
 
-On Linux, you will need to install `libsqlite3` development packages. On Debian-based distros, you can do so with this command:
+When building for Linux, you will need to install `libsqlite3` development packages first. On Debian-based distros, you can do so with this command:
 
 ```sudo apt-get -y install libsqlite3-0 libsqlite3-dev```
