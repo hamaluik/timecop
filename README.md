@@ -56,7 +56,7 @@ Here are a few resources to get you started if this is your first Flutter projec
 For help getting started with Flutter, view its [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-After [installing and setting up Flutter](https://docs.flutter.dev/get-started/install) (ideally its latest stable version) and downloading the Time Cop code, you can simply [build and run](https://docs.flutter.dev/get-started/test-drive#run-the-app) this Flutter project, no extra steps needed.
+After [installing and setting up Flutter](https://docs.flutter.dev/get-started/install) (ideally its latest stable version) and downloading the Time Cop code, you should be able to simply [build and run](https://docs.flutter.dev/get-started/test-drive#run-the-app) this Flutter project, at least for mobile platforms. For more information, see the `CONTRIBUTING.md` file.
 
 ### Localizations
 
