@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -15,14 +16,18 @@ import 'package:timecop/data_providers/data/mock_data_provider.dart';
 import 'package:timecop/data_providers/notifications/notifications_provider.dart';
 import 'package:timecop/data_providers/settings/mock_settings_provider.dart';
 import 'package:timecop/data_providers/settings/settings_provider.dart';
-import 'package:timecop/screens/dashboard/components/StartTimerButton.dart';
 import 'package:timecop/main.dart' as app;
+
+bool didConvertedFlutterToSurfaceImage = false;
 
 Future<void> takeScreenshot(WidgetTester tester, IntegrationTestWidgetsFlutterBinding binding, String name) async {
   if (kIsWeb) {
     await binding.takeScreenshot(name);
   } else if (Platform.isAndroid) {
-    await binding.convertFlutterSurfaceToImage();
+    if (!didConvertedFlutterToSurfaceImage) {
+      await binding.convertFlutterSurfaceToImage();
+      didConvertedFlutterToSurfaceImage = true;
+    }
     await tester.pumpAndSettle();
   }
   await binding.takeScreenshot(name);
@@ -70,30 +75,40 @@ void main() {
         );
         await tester.pumpAndSettle();
 
-      Finder startTimerButton = find.byType(StartTimerButton);
+        // start by switching to the dark theme
+        Finder menuButton = find.byKey(const ValueKey("menuButton"));
+        await tester.tap(menuButton);
 
-      // start by switching to the dark theme
-      Finder menuButton = find.byKey(const ValueKey("menuButton"));
-      await tester.tap(menuButton);
+        await tester.pumpAndSettle();
 
-      await tester.pumpAndSettle();
+        Finder menuSettings = find.byKey(const ValueKey("menuSettings"));
+        await tester.tap(menuSettings);
 
-      Finder menuSettings = find.byKey(const ValueKey("menuSettings"));
-      await tester.tap(menuSettings);
+        await tester.pumpAndSettle();
 
-      await tester.pumpAndSettle();
+        Finder themeOption = find.byKey(const ValueKey("themeOption"));
+        await tester.tap(themeOption);
 
-      Finder themeOption = find.byKey(const ValueKey("themeOption"));
-      await tester.tap(themeOption);
+        await tester.pumpAndSettle();
 
-      await tester.pumpAndSettle();
+        Finder themeDark = find.byKey(const ValueKey("themeDark"));
+        await tester.tap(themeDark);
 
-      Finder themeDark = find.byKey(const ValueKey("themeDark"));
-      await tester.tap(themeDark);
+        await tester.pumpAndSettle();
 
-      await tester.pumpAndSettle();
+        await takeScreenshot(tester, binding, "06 settings");
 
-      await takeScreenshot(tester, binding, "06 settings");
+        await tester.pumpAndSettle();
+
+        Finder backButton = find.byType(BackButton);
+        await tester.tap(backButton);
+        // Finder backButton = find.byTooltip('Back');
+        // await tester.tap(backButton);
+
+        await tester.pumpAndSettle();
+
+        await takeScreenshot(tester, binding, "01 dashboard");
+
     });
   });
 }
