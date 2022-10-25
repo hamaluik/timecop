@@ -102,8 +102,6 @@ void main() {
 
         Finder backButton = find.byType(BackButton);
         await tester.tap(backButton);
-        // Finder backButton = find.byTooltip('Back');
-        // await tester.tap(backButton);
 
         await tester.pumpAndSettle();
 
