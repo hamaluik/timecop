@@ -42,6 +42,12 @@ android {
         disable 'InvalidPackage'
     }
 
+    compileOptions { // required by flutter_local_notifications
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+        coreLibraryDesugaringEnabled true
+    }
+
     defaultConfig {
         applicationId "ca.hamaluik.timecop"
         minSdkVersion 16
@@ -50,6 +56,7 @@ android {
         versionName flutterVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resConfigs "en", "ar", "cs", "de", "es", "fr", "hi", "id", "it", "ja", "ko", "nb-rNO", "pt", "ru", "tr", "zh-rCN", "zh-rTW"
+        multiDexEnabled true // required by flutter_local_notifications
     }
 
    signingConfigs {
@@ -77,4 +84,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5' // required by flutter_local_notifications
 }
