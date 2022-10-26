@@ -76,6 +76,9 @@ class _DescriptionFieldState extends State<DescriptionField> {
                 _focus!.unfocus();
                 bloc.add(DescriptionChangedEvent(description as String));
                 final timers = BlocProvider.of<TimersBloc>(context);
+                if (settings.state.oneTimerAtATime) {
+                  timers.add(const StopAllTimers());
+                }
                 timers.add(CreateTimer(
                     description: bloc.state.newDescription,
                     project: bloc.state.newProject));
@@ -124,6 +127,9 @@ class _DescriptionFieldState extends State<DescriptionField> {
             _focus!.unfocus();
             bloc.add(DescriptionChangedEvent(description));
             final timers = BlocProvider.of<TimersBloc>(context);
+            if (settings.state.oneTimerAtATime) {
+              timers.add(const StopAllTimers());
+            }
             timers.add(CreateTimer(
                 description: bloc.state.newDescription,
                 project: bloc.state.newProject));
