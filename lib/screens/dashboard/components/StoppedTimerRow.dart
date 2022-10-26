@@ -19,6 +19,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
+import 'package:timecop/blocs/settings/bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
@@ -136,8 +137,11 @@ class _StoppedTimerRowState extends State<StoppedTimerRow> {
   void _resumeTimer(BuildContext context) {
     final timersBloc = BlocProvider.of<TimersBloc>(context);
     final projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+    final settingsBloc = BlocProvider.of<SettingsBloc>(context);
     Project? project = projectsBloc.getProjectByID(widget.timer.projectID);
-    timersBloc.add(
-        CreateTimer(description: widget.timer.description, project: project));
+    if (settingsBloc.state.oneTimerAtATime) {
+      timersBloc.add(const StopAllTimers());
+    }
+    timersBloc.add(CreateTimer(description: widget.timer.description, project: project));
   }
 }

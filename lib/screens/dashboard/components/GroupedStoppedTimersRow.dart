@@ -20,6 +20,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
+import 'package:timecop/blocs/settings/settings_bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
@@ -146,8 +147,12 @@ class _GroupedStoppedTimersRowState extends State<GroupedStoppedTimersRow>
   void _resumeTimer() {
     final timersBloc = BlocProvider.of<TimersBloc>(context);
     final projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+    final settingsBloc = BlocProvider.of<SettingsBloc>(context);
     Project? project =
         projectsBloc.getProjectByID(widget.timers.first.projectID);
+    if (settingsBloc.state.oneTimerAtATime) {
+      timersBloc.add(const StopAllTimers());
+    }
     timersBloc.add(CreateTimer(
         description: widget.timers.first.description ?? "", project: project));
   }
