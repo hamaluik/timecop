@@ -45,7 +45,7 @@ void main() {
         (tester) async {
           WidgetsFlutterBinding.ensureInitialized();
           final SettingsProvider settings = MockSettingsProvider();
-          final DataProvider data = MockDataProvider(const Locale("en"));
+          final DataProvider data = MockDataProvider(const Locale.fromSubtags(languageCode: "en"));
           NotificationsProvider notificationsProvider = await NotificationsProvider.load();
      // app.main();
       //await Future<void>.delayed(const Duration(seconds: 2));
@@ -73,6 +73,7 @@ void main() {
             child: app.TimeCopApp(settings: settings)
           )
         );
+
         await tester.pumpAndSettle();
 
         // start by switching to the dark theme
@@ -106,6 +107,75 @@ void main() {
         await tester.pumpAndSettle();
 
         await takeScreenshot(tester, binding, "01 dashboard");
+
+        await tester.pumpAndSettle();
+
+        // Finder timerEdit = find.byKey(const ValueKey("stoppedTimer-42"));
+        // await tester.tap(timerEdit);
+        //
+        // await tester.pumpAndSettle();
+        //
+        // Finder saveDetails = find.byKey(const ValueKey("saveDetails"));
+        // await tester.tap(saveDetails);
+        //
+        // await tester.pumpAndSettle();
+        //
+        // await takeScreenshot(tester, binding, "02 editor");
+        //
+        // await tester.pumpAndSettle();
+
+        // Finder closeButton = find.byType(CloseButton);
+        // await tester.tap(closeButton);
+
+        await tester.pumpAndSettle();
+
+        menuButton = find.byKey(const ValueKey("menuButton"));
+
+        await tester.tap(menuButton);
+
+        await tester.pumpAndSettle();
+
+        Finder menuProjects = find.byKey(const ValueKey("menuProjects"));
+        await tester.tap(menuProjects);
+
+        await tester.pumpAndSettle();
+
+        Finder addProject = find.byKey(const ValueKey("addProject"));
+        await tester.tap(addProject);
+
+        await tester.pumpAndSettle();
+
+        await tester.enterText(find.byType(TextFormField), "Test Project");
+        await tester.pumpAndSettle();
+
+        Finder createButton = find.text("Create");
+        await tester.tap(createButton);
+
+        await tester.pumpAndSettle();
+
+         await takeScreenshot(tester, binding, "03 projects");
+
+         await tester.pumpAndSettle();
+        //
+        // // then reports pages
+        // await tester.tap(backButton);
+        //
+        // await tester.pumpAndSettle();
+        //
+        // menuButton = find.byKey(const ValueKey("menuButton"));
+        //
+        // await tester.tap(menuButton);
+        //
+        // await tester.pumpAndSettle();
+        //
+        // Finder menuReports = find.byKey(const ValueKey("menuReports"));
+        // await tester.tap(menuReports);
+        //
+        // await tester.pumpAndSettle();
+        //
+        // await takeScreenshot(tester, binding, "04a projectBreakdown");
+        //
+        // await tester.pumpAndSettle();
 
     });
   });
