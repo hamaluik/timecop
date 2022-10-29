@@ -132,58 +132,53 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        // Finder closeButton = find.byType(CloseButton);
-        // await tester.tap(closeButton);
+        menuButton = find.byKey(const ValueKey("menuButton"));
 
-        // await tester.pumpAndSettle();
-        //
-        // menuButton = find.byKey(const ValueKey("menuButton"));
-        //
-        // await tester.tap(menuButton);
-        //
-        // await tester.pumpAndSettle();
-        //
-        // Finder menuProjects = find.byKey(const ValueKey("menuProjects"));
-        // await tester.tap(menuProjects);
-        //
-        // await tester.pumpAndSettle();
-        //
-        // Finder addProject = find.byKey(const ValueKey("addProject"));
-        // await tester.tap(addProject);
-        //
-        // await tester.pumpAndSettle();
-        //
-        // await tester.enterText(find.byType(TextFormField), "Test Project");
-        // await tester.pumpAndSettle();
-        //
-        // Finder createButton = find.text("Create");
-        // await tester.tap(createButton);
-        //
-        // await tester.pumpAndSettle();
-        //
-        //  await takeScreenshot(tester, binding, "03 projects");
-        //
-        //  await tester.pumpAndSettle();
-        //
-        // // then reports pages
-        // await tester.tap(backButton);
-        //
-        // await tester.pumpAndSettle();
-        //
-        // menuButton = find.byKey(const ValueKey("menuButton"));
-        //
-        // await tester.tap(menuButton);
-        //
-        // await tester.pumpAndSettle();
-        //
-        // Finder menuReports = find.byKey(const ValueKey("menuReports"));
-        // await tester.tap(menuReports);
-        //
-        // await tester.pumpAndSettle();
-        //
-        // await takeScreenshot(tester, binding, "04a projectBreakdown");
-        //
-        // await tester.pumpAndSettle();
+        await tester.tap(menuButton);
+
+        await tester.pumpAndSettle();
+
+        Finder menuProjects = find.byKey(const ValueKey("menuProjects"));
+        await tester.tap(menuProjects);
+
+        await tester.pumpAndSettle();
+
+        Finder addProject = find.byKey(const ValueKey("addProject"));
+        await tester.tap(addProject);
+
+        await tester.pumpAndSettle();
+
+        await tester.enterText(find.byType(TextFormField), "Test Project");
+        await tester.pumpAndSettle();
+
+        Finder createButton = find.text("Create");
+        await tester.tap(createButton);
+
+        await tester.pumpAndSettle();
+
+         await takeScreenshot(tester, binding, "03 projects");
+
+         await tester.pumpAndSettle();
+
+        // then reports pages
+        await tester.tap(backButton);
+
+        await tester.pumpAndSettle();
+
+        menuButton = find.byKey(const ValueKey("menuButton"));
+
+        await tester.tap(menuButton);
+
+        await tester.pumpAndSettle();
+
+        Finder menuReports = find.byKey(const ValueKey("menuReports"));
+        await tester.tap(menuReports);
+
+        await tester.pumpAndSettle();
+
+        await takeScreenshot(tester, binding, "04a projectBreakdown");
+
+        await tester.pumpAndSettle();
 
     });
   });
