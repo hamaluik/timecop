@@ -12,17 +12,13 @@ import 'package:timecop/blocs/projects/projects_bloc.dart';
 import 'package:timecop/blocs/settings/bloc.dart';
 import 'package:timecop/blocs/theme/theme_bloc.dart';
 import 'package:timecop/blocs/timers/timers_bloc.dart';
-import 'package:timecop/blocs/timers/timers_event.dart';
 import 'package:timecop/data_providers/data/data_provider.dart';
 import 'package:timecop/data_providers/data/mock_data_provider.dart';
 import 'package:timecop/data_providers/notifications/notifications_provider.dart';
 import 'package:timecop/data_providers/settings/mock_settings_provider.dart';
 import 'package:timecop/data_providers/settings/settings_provider.dart';
 import 'package:timecop/main.dart' as app;
-import 'package:timecop/models/timer_entry.dart';
-import 'package:timecop/screens/dashboard/components/DescriptionField.dart';
 import 'package:timecop/screens/dashboard/components/RunningTimerRow.dart';
-import 'package:timecop/screens/dashboard/components/StartTimerButton.dart';
 import 'package:timecop/screens/dashboard/components/StoppedTimerRow.dart';
 
 bool didConvertedFlutterToSurfaceImage = false;
@@ -47,15 +43,15 @@ void main() {
 
   group('end-to-end test', () {
 
-    testWidgets(
-        'tap on the floating action button, verify counter',
-        (tester) async {
-          WidgetsFlutterBinding.ensureInitialized();
-          final SettingsProvider settings = MockSettingsProvider();
-          final DataProvider data = MockDataProvider(const Locale.fromSubtags(languageCode: "en"));
-          NotificationsProvider notificationsProvider = await NotificationsProvider.load();
-     // app.main();
-      //await Future<void>.delayed(const Duration(seconds: 2));
+  testWidgets(
+      'tap on the floating action button, verify counter',
+      (tester) async {
+        WidgetsFlutterBinding.ensureInitialized();
+        final SettingsProvider settings = MockSettingsProvider();
+        final DataProvider data = MockDataProvider(const Locale.fromSubtags(languageCode: "en"));
+        NotificationsProvider notificationsProvider = await NotificationsProvider.load();
+
+
         await tester.pumpWidget(MultiBlocProvider(
             providers: [
               BlocProvider<ThemeBloc>(
@@ -117,22 +113,28 @@ void main() {
 
         await tester.pumpAndSettle();
 
+        //Finding the first running timer (UI Layout)
         Widget runningTimer = tester.firstWidget(find.byType(RunningTimerRow));
-        Finder timer = find.byWidget(runningTimer);
-        await tester.tap(timer);
+        Finder uiLayoutTimer = find.byWidget(runningTimer);
 
+        //Stopping the timer
+        Finder stopIcon = find.descendant(
+            of: uiLayoutTimer,
+            matching: find.byIcon(FontAwesomeIcons.solidCircleStop));
+        await tester.tap(stopIcon);
+        await tester.pumpAndSettle();
+
+        Widget stoppedTimer = tester.firstWidget(find.byType(StoppedTimerRow));
+        Finder stoppedUiLayoutTimer = find.byWidget(stoppedTimer);
+        await tester.tap(stoppedUiLayoutTimer);
         await tester.pumpAndSettle();
 
         Finder saveDetails = find.byKey(const ValueKey("saveDetails"));
         await tester.tap(saveDetails);
 
-        await tester.pumpAndSettle();
-
         await takeScreenshot(tester, binding, "02 editor");
 
         await tester.pumpAndSettle();
-
-        menuButton = find.byKey(const ValueKey("menuButton"));
 
         await tester.tap(menuButton);
 
@@ -181,29 +183,27 @@ void main() {
         await tester.pumpAndSettle();
 
        // then the export page
-          backButton = find.byType(BackButton);
-          await tester.tap(backButton);
+        await tester.tap(backButton);
 
-          await tester.pumpAndSettle();
+        await tester.pumpAndSettle();
 
-          menuButton = find.byKey(const ValueKey("menuButton"));
-          await tester.tap(menuButton);
+        await tester.tap(menuButton);
 
-          await tester.pumpAndSettle();
+        await tester.pumpAndSettle();
 
-          Finder menuExport = find.byKey(const ValueKey("menuExport"));
-          await tester.tap(menuExport);
+        Finder menuExport = find.byKey(const ValueKey("menuExport"));
+        await tester.tap(menuExport);
 
-          await tester.pumpAndSettle();
+        await tester.pumpAndSettle();
 
-          Finder optionColumns = find.byKey(const ValueKey("optionColumns"));
-          await tester.tap(optionColumns);
+        Finder optionColumns = find.byKey(const ValueKey("optionColumns"));
+        await tester.tap(optionColumns);
 
-          await tester.pumpAndSettle();
+        await tester.pumpAndSettle();
 
-          await takeScreenshot(tester, binding, "05 export");
+        await takeScreenshot(tester, binding, "05 export");
 
-          await tester.pumpAndSettle();
+        await tester.pumpAndSettle();
 
     });
   });
