@@ -180,6 +180,31 @@ void main() {
 
         await tester.pumpAndSettle();
 
+       // then the export page
+          backButton = find.byType(BackButton);
+          await tester.tap(backButton);
+
+          await tester.pumpAndSettle();
+
+          menuButton = find.byKey(const ValueKey("menuButton"));
+          await tester.tap(menuButton);
+
+          await tester.pumpAndSettle();
+
+          Finder menuExport = find.byKey(const ValueKey("menuExport"));
+          await tester.tap(menuExport);
+
+          await tester.pumpAndSettle();
+
+          Finder optionColumns = find.byKey(const ValueKey("optionColumns"));
+          await tester.tap(optionColumns);
+
+          await tester.pumpAndSettle();
+
+          await takeScreenshot(tester, binding, "05 export");
+
+          await tester.pumpAndSettle();
+
     });
   });
 }
