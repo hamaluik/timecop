@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:timecop/blocs/locale/locale_bloc.dart';
 import 'package:timecop/blocs/notifications/notifications_bloc.dart';
@@ -11,12 +12,18 @@ import 'package:timecop/blocs/projects/projects_bloc.dart';
 import 'package:timecop/blocs/settings/bloc.dart';
 import 'package:timecop/blocs/theme/theme_bloc.dart';
 import 'package:timecop/blocs/timers/timers_bloc.dart';
+import 'package:timecop/blocs/timers/timers_event.dart';
 import 'package:timecop/data_providers/data/data_provider.dart';
 import 'package:timecop/data_providers/data/mock_data_provider.dart';
 import 'package:timecop/data_providers/notifications/notifications_provider.dart';
 import 'package:timecop/data_providers/settings/mock_settings_provider.dart';
 import 'package:timecop/data_providers/settings/settings_provider.dart';
 import 'package:timecop/main.dart' as app;
+import 'package:timecop/models/timer_entry.dart';
+import 'package:timecop/screens/dashboard/components/DescriptionField.dart';
+import 'package:timecop/screens/dashboard/components/RunningTimerRow.dart';
+import 'package:timecop/screens/dashboard/components/StartTimerButton.dart';
+import 'package:timecop/screens/dashboard/components/StoppedTimerRow.dart';
 
 bool didConvertedFlutterToSurfaceImage = false;
 
@@ -110,52 +117,53 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        // Finder timerEdit = find.byKey(const ValueKey("stoppedTimer-42"));
-        // await tester.tap(timerEdit);
-        //
-        // await tester.pumpAndSettle();
-        //
-        // Finder saveDetails = find.byKey(const ValueKey("saveDetails"));
-        // await tester.tap(saveDetails);
-        //
-        // await tester.pumpAndSettle();
-        //
-        // await takeScreenshot(tester, binding, "02 editor");
-        //
-        // await tester.pumpAndSettle();
+        Widget runningTimer = tester.firstWidget(find.byType(RunningTimerRow));
+        Finder timer = find.byWidget(runningTimer);
+        await tester.tap(timer);
+
+        await tester.pumpAndSettle();
+
+        Finder saveDetails = find.byKey(const ValueKey("saveDetails"));
+        await tester.tap(saveDetails);
+
+        await tester.pumpAndSettle();
+
+        await takeScreenshot(tester, binding, "02 editor");
+
+        await tester.pumpAndSettle();
 
         // Finder closeButton = find.byType(CloseButton);
         // await tester.tap(closeButton);
 
-        await tester.pumpAndSettle();
-
-        menuButton = find.byKey(const ValueKey("menuButton"));
-
-        await tester.tap(menuButton);
-
-        await tester.pumpAndSettle();
-
-        Finder menuProjects = find.byKey(const ValueKey("menuProjects"));
-        await tester.tap(menuProjects);
-
-        await tester.pumpAndSettle();
-
-        Finder addProject = find.byKey(const ValueKey("addProject"));
-        await tester.tap(addProject);
-
-        await tester.pumpAndSettle();
-
-        await tester.enterText(find.byType(TextFormField), "Test Project");
-        await tester.pumpAndSettle();
-
-        Finder createButton = find.text("Create");
-        await tester.tap(createButton);
-
-        await tester.pumpAndSettle();
-
-         await takeScreenshot(tester, binding, "03 projects");
-
-         await tester.pumpAndSettle();
+        // await tester.pumpAndSettle();
+        //
+        // menuButton = find.byKey(const ValueKey("menuButton"));
+        //
+        // await tester.tap(menuButton);
+        //
+        // await tester.pumpAndSettle();
+        //
+        // Finder menuProjects = find.byKey(const ValueKey("menuProjects"));
+        // await tester.tap(menuProjects);
+        //
+        // await tester.pumpAndSettle();
+        //
+        // Finder addProject = find.byKey(const ValueKey("addProject"));
+        // await tester.tap(addProject);
+        //
+        // await tester.pumpAndSettle();
+        //
+        // await tester.enterText(find.byType(TextFormField), "Test Project");
+        // await tester.pumpAndSettle();
+        //
+        // Finder createButton = find.text("Create");
+        // await tester.tap(createButton);
+        //
+        // await tester.pumpAndSettle();
+        //
+        //  await takeScreenshot(tester, binding, "03 projects");
+        //
+        //  await tester.pumpAndSettle();
         //
         // // then reports pages
         // await tester.tap(backButton);
