@@ -48,11 +48,13 @@ dev_dependencies:
   flutter_lints: ^2.0.1
   effective_dart: ^1.3.2
   flutter_launcher_icons: ^0.10.0
-  flutter_test:
-    sdk: flutter
   flutter_driver:
     sdk: flutter
   test: ^1.17.10
+  integration_test:
+    sdk: flutter
+  flutter_test:
+    sdk: flutter
 
   #until screenshots updates on the package repo..
   #screenshots: ^2.1.1
