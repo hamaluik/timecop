@@ -17,10 +17,13 @@ Time Cop started as a personal project of Kenton Hamaluik ([@hamaluik](https://g
 | jugendhacker | [@jugendhacker](https://github.com/jugendhacker) |
 | mondstern | [@mondlicht-und-sterne](https://github.com/mondlicht-und-sterne) |
 | metezd | (Translations through Weblate) |
-| Dhanush-K-Gowda | [@](https://github.com/Dhanush-K-Gowda) |
+| Dhanush-K-Gowda | [@Dhanush-K-Gowda](https://github.com/Dhanush-K-Gowda) |
 | ersen0 | [@ersen0](https://github.com/ersen0) |
 | Andre-LA | [@Andre-LA](https://github.com/Andre-LA) |
 | André I. Smaniotto | [@aismaniotto](https://github.com/aismaniotto) |
 | Arya Shakya | [@Aryashakya](https://github.com/Aryashakya) |
 | Salim B | [@salim-b](https://github.com/salim-b) |
-| wemosPatrick | [wemosPatrick](https://github.com/wemosPatrick) |
+| wemosPatrick | [@wemosPatrick](https://github.com/wemosPatrick) |
+| Tomer Ben-Rachel  | [@TomerPacific](https://github.com/TomerPacific) |
+| Luca Clemente Gonzalez | [@lucagonzalez](https://github.com/lucagonzalez) |
+| Aditya Arora | [@AdiAr11](https://github.com/AdiAr11) |
