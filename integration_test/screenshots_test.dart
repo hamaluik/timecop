@@ -21,15 +21,13 @@ import 'package:timecop/main.dart' as app;
 import 'package:timecop/screens/dashboard/components/RunningTimerRow.dart';
 import 'package:timecop/screens/dashboard/components/StoppedTimerRow.dart';
 
-bool didConvertedFlutterToSurfaceImage = false;
+bool convertedFlutterToSurfaceImage = false;
 
 Future<void> takeScreenshot(WidgetTester tester, IntegrationTestWidgetsFlutterBinding binding, String name) async {
-  if (kIsWeb) {
-    await binding.takeScreenshot(name);
-  } else if (Platform.isAndroid) {
-    if (!didConvertedFlutterToSurfaceImage) {
+  if (Platform.isAndroid) {
+    if (!convertedFlutterToSurfaceImage) {
       await binding.convertFlutterSurfaceToImage();
-      didConvertedFlutterToSurfaceImage = true;
+      convertedFlutterToSurfaceImage = true;
     }
     await tester.pumpAndSettle();
   }
