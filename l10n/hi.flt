@@ -89,3 +89,7 @@ exportImport = आयात और निर्यात
 exportCSV = निर्यात सीएसवी
 exportDatabase = निर्यात डेटाबेस
 importDatabase = आयात डेटाबेस
+storageAccessRequired = भंडारण पहुँच की आवश्यकता
+filterFrom = { $dateFrom } से फ़िल्टर करना
+filterUntil = { $dateUntil } तक फ़िल्टर करना
+filterFromUntil = { $dateFrom } से { $dateUntil } तक फ़िल्टर करना
