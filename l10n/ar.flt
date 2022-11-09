@@ -73,3 +73,23 @@ runningTimersNotificationBody = لا تزال الموقتات تعمل في ا�
 enableRunningTimersNotification = إظهار إخطارات تشغيل عداد الوقت
 notes = ملاحظات
 noItemsFound = لم يتم العثور على العناصر
+exportDatabase = قاعدة بيانات التصدير
+importDatabase = استيراد قاعدة البيانات
+archive = أرشيف
+unarchive = أخرج من الأرشيف
+setToCurrentTime = تعيين إلى الوقت الحالي
+startTimer = بدء الموقت
+stopAllTimers = وقف كل الموقتات
+startNewTimer = بدء تشغيل مؤقت جديد
+timerMenu = قائمة المؤقت
+closeMenu = إغلاق القائمة
+search = يبحث
+remove = إزالة
+stopTimer = مؤقت الإيقاف
+resumeTimer = مؤقت استئناف
+filterFrom = التصفية من { $dateFrom }
+filterUntil = التصفية حتى { $dateUntil }
+filterFromUntil = التصفية من { $dateFrom } حتى { $dateUntil }
+exportImport = الاستيراد والتصدير
+exportCSV = تصدير CSV
+storageAccessRequired = يلزم الوصول إلى مساحة التخزين
