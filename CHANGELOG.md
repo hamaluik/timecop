@@ -6,6 +6,67 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.8.0] - 2022-11-15
+Thanks to all the Hacktoberfest participants, translators, and other volunteers for helping out!
+
+### Added
+* Turkish translation
+* Null safety
+* Tooltips for better accessibility
+* On-hover timer resume buttons
+* Directly visible timer stop button
+* Project action menu for discoverability
+* Filter indicator
+* Press enter to start timer
+* Support for Android 13 per-app localization
+* Monochrome launcher icon
+
+### Changed
+* Translations
+* Updated dependencies
+* Refactored, fixed up a lot of code
+* Increased Android compile SDK
+* Clearer import/export labels
+* Settings Icon
+* Numerals font
+* Replaced gesture-based date removal with an icon
+* Move "set to current time" to menu in timer editor
+* Low contrasts on labels and icons
+
+### Fixed
+* Fixed automated screenshot tests
+* Swiper
+* Storage access permissions
+* CastError
+* Archived project
+* Theme dropdown contrast
+* URL launching
+* firstDate bug
+
+## [1.7.2] - 2022-05-09
+### Fixed
+* Fixed bugs for Android 12 users
+
+## [1.7.1] - 2022-05-02
+### Added
+* F-Droid release
+
+## [1.7.0] - 2022-03-22
+### Added
+* Linux support!
+* Norwegian translations
+* Czech translations
+* Markdown notes for timers
+* Notifications
+* Setting for allowing a single timer at a time
+
+### Changed
+* Updated dependencies
+* Code cleaned up
+
+### Fixed
+* Various translation fixes
+
 ## [1.6.0] - 2021-01-07
 ### Added
 * Added setting to automatically filter out timers older than the last Monday
@@ -20,7 +81,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Search bar now gets focus immediately upon tapping the search button
 * No more "default project" setting (it was buggy and I didn't like it in practice)
 
-## Fixed
+### Fixed
 * Always delimit fields when exporting CSV files
 * Fixed dashboard top bar search text & icon colour
 * Fixed some translations (thanks @SeaPants, @danielpetrica)
@@ -78,7 +139,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Ability to export database file
 * Ability to export csv of filtered data
 
-[Unreleased]: https://github.com/hamaluik/timecop/compare/v1.5.0...HEAD
+[Unreleased]: https://github.com/hamaluik/timecop/compare/v1.8.0...HEAD
+[1.8.0]: https://github.com/hamaluik/timecop/compare/v1.7.2...v1.8.0
+[1.7.2]: https://github.com/hamaluik/timecop/compare/v1.7.1...v1.7.2
+[1.7.1]: https://github.com/hamaluik/timecop/compare/v1.7.0...v1.7.1
+[1.7.0]: https://github.com/hamaluik/timecop/compare/v1.6.0...v1.7.0
+[1.6.0]: https://github.com/hamaluik/timecop/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/hamaluik/timecop/compare/v1.4.0+23...v1.5.0
 [1.4.0+23]: https://github.com/hamaluik/timecop/compare/v1.3.3+22...v1.4.0+23
 [1.3.3+22]: https://github.com/hamaluik/timecop/compare/v1.2.0+14...v1.3.3+22
