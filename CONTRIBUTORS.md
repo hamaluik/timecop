@@ -27,3 +27,5 @@ Time Cop started as a personal project of Kenton Hamaluik ([@hamaluik](https://g
 | Tomer Ben-Rachel  | [@TomerPacific](https://github.com/TomerPacific) |
 | Luca Clemente Gonzalez | [@lucagonzalez](https://github.com/lucagonzalez) |
 | Aditya Arora | [@AdiAr11](https://github.com/AdiAr11) |
+| Mári Martin | (Translations through Weblate) |
+| Morten Juhl-Johansen Zölde-Fejer | [@mjjzf](https://github.com/mjjzf) |
