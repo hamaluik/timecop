@@ -1,6 +1,7 @@
 #!/bin/bash
 tt -c translation_credentials.json -f terms.flt -d l10n/en.flt -o l10n -l ar
 tt -c translation_credentials.json -f terms.flt -d l10n/en.flt -o l10n -l cs
+tt -c translation_credentials.json -f terms.flt -d l10n/en.flt -o l10n -l da
 tt -c translation_credentials.json -f terms.flt -d l10n/en.flt -o l10n -l de
 tt -c translation_credentials.json -f terms.flt -d l10n/en.flt -o l10n -l es
 tt -c translation_credentials.json -f terms.flt -d l10n/en.flt -o l10n -l fr

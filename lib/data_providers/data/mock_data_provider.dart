@@ -35,6 +35,13 @@ class MockDataProvider extends DataProvider {
       "coffee": "Kafe",
       "app-development": "Vývoj aplikace"
     },
+    "da": {
+      "administration": "Administration",
+      "mockups": "Mockups",
+      "ui-layout": "UI-Layout",
+      "coffee": "Kaffe",
+      "app-development": "App udvikling"
+    },
     "de": {
       "app-development": "App-Entwicklung",
       "administration": "Verwaltung",

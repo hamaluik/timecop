@@ -224,6 +224,7 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
                       Locale('en'),
                       Locale('ar'),
                       Locale('cs'),
+                      Locale('da'),
                       Locale('de'),
                       Locale('es'),
                       Locale('fr'),

@@ -255,6 +255,8 @@ class FluentL10NProvider extends L10NProvider {
         return "العربية";
       case "cs":
         return "Čeština";
+      case "da":
+        return "Dansk";
       case "de":
         return "Deutsch";
       case "en":

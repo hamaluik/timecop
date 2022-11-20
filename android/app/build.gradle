@@ -55,7 +55,7 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        resConfigs "en", "ar", "cs", "de", "es", "fr", "hi", "id", "it", "ja", "ko", "nb-rNO", "pt", "ru", "tr", "zh-rCN", "zh-rTW"
+        resConfigs "en", "ar", "cs", "da", "de", "es", "fr", "hi", "id", "it", "ja", "ko", "nb-rNO", "pt", "ru", "tr", "zh-rCN", "zh-rTW"
         multiDexEnabled true // required by flutter_local_notifications
     }
 

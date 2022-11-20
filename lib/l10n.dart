@@ -45,6 +45,7 @@ class _L10NDelegate extends LocalizationsDelegate<L10N> {
         'en',
         'ar',
         'cs',
+        'da',
         'de',
         'es',
         'fr',
