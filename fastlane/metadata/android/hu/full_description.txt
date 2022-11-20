@@ -1,0 +1,11 @@
+- Csak offline, mobil-első
+- Android, iOS, és Linux-ra
+- Teljesen privát—nincs nyomonkövetés / kémkedés / reklámozás / stb.
+- Tartsa nyomon feladatiat több párhuzamos időzítővel, amiket gombnyomással lehet indítani
+- Kapcsoljon össze időzítőket projektekkel a munka csoportosításához (vagy mégse)
+- Indítson, állitson, szerkesszen, és töroljön időzítőket amikor akar, gond nélkül
+- Exportáljon adatokat .csv fájlként, időtartamok és projektként szűrve
+- Exportálja az app adatbázisát teljes adatai hozzáféréséhez
+- Automatikus fényes mód / sötét mód a készülék beállításaihoz megfelelően
+- Lokalizálva külömböző nyelvekben (Google Fordítóval): Angol, Arab, Német, Spanyol, Francia, Hindi, Indonéz, Japán, Koreai, Portugál, Orosz, Kínai (Egyszerűsített), és Kínai (Hagyományos), ezen kívül Olasz, Cseh, Norvég, és Indonéz nyelveken is hozzájárulókon keresztül
+- Nyílt forráskód (Apache-2.0 licenc alatt)—nyugodtan forkolható (https://github.com/hamaluik/timecop)
