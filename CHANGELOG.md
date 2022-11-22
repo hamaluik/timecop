@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.8.1] - 2022-11-22
+### Added
+* Danish translation
+
+### Changed
+* Desugaring-related fugfix for Android 12L and Android 13
+
 ## [1.8.0] - 2022-11-15
 Thanks to all the Hacktoberfest participants, translators, and other volunteers for helping out!
 

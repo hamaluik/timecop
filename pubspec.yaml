@@ -1,6 +1,6 @@
 name: timecop
 description: Simple private time tracking.
-version: 1.8.0+44
+version: 1.8.1+45
 publish_to: none
 
 environment:
