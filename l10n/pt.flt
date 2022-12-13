@@ -93,4 +93,4 @@ stopAllTimers = Parar todos temporizadores
 stopTimer = Parar temporizador
 timerMenu = Menu do temporizador
 unarchive = Desarquivar
-resumeTimer = Temporizador de currículo
+resumeTimer = Retomar temporizador
