@@ -7,3 +7,5 @@ Categories=Utility;
 Icon=ca.hamaluik.Timecop
 Exec=timecop
 StartupWMClass=timecop
+X-Purism-FormFactor=Workstation;Mobile;
+X-KDE-FormFactors=desktop;tablet;handset;mediacenter;

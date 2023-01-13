@@ -16,6 +16,10 @@
 	<url type="bugtracker">https://github.com/hamaluik/timecop/issues</url>
 	<url type="translate">https://hosted.weblate.org/engage/timecop/</url>
 	
+	<custom>
+		<value key="Purism::form_factor">workstation</value>
+		<value key="Purism::form_factor">mobile</value>
+	</custom>
 
 	<description>
 		<p>A time tracking app that respects your privacy and gets the job done without getting too fancy.</p>
