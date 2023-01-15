@@ -60,9 +60,9 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
                 ? "${L10N.of(context).tr.project} ($projectName)"
                 : L10N.of(context).tr.project,
             onPressed: () async {
-              Project? chosenProject = await showDialog<Project>(
+              _ProjectChoice? projectChoice = await showDialog<_ProjectChoice>(
                   context: context,
-                  barrierDismissible: false,
+                  barrierDismissible: true,
                   builder: (BuildContext context) {
                     return SimpleDialog(
                       title: Text(L10N.of(context).tr.projects),
@@ -73,7 +73,7 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
                               projectsState.projects.where((p) => !p.archived))
                           .map((Project? p) => TextButton(
                               onPressed: () {
-                                Navigator.of(context).pop(p);
+                                Navigator.of(context).pop(_ProjectChoice(p));
                               },
                               child: Row(
                                 children: <Widget>[
@@ -98,11 +98,23 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
                           .toList(),
                     );
                   });
-              bloc.add(ProjectChangedEvent(chosenProject));
+
+              if (projectChoice != null) {
+                bloc.add(ProjectChangedEvent(projectChoice.chosenProject));
+              }
             },
           );
         },
       );
     });
   }
+}
+
+/// A class that stores the project that has been chosen by the user.
+///
+/// [chosenProject] may be `null` in case the user has chosen “(no project)”.
+class _ProjectChoice {
+  final Project? chosenProject;
+
+  _ProjectChoice(this.chosenProject);
 }
