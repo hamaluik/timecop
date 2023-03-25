@@ -62,7 +62,7 @@ class PopupMenu extends StatelessWidget {
             break;
           case MenuItem.settings:
             Navigator.of(context).push(MaterialPageRoute<SettingsScreen>(
-              builder: (_) => const SettingsScreen(),
+              builder: (_) => SettingsScreen(),
             ));
             break;
           case MenuItem.about:

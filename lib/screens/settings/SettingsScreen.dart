@@ -16,6 +16,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:timecop/blocs/locale/locale_bloc.dart';
 import 'package:timecop/blocs/notifications/notifications_bloc.dart';
 import 'package:timecop/blocs/settings/bloc.dart';
@@ -26,9 +27,48 @@ import 'package:numberpicker/numberpicker.dart';
 
 import 'components/locale_options.dart';
 import 'components/theme_options.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  SettingsScreen({Key? key}) : super(key: key);
+
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  FlutterLocalNotificationsPlugin();
+
+  void requestAndroidNotificationPermission(BuildContext context) async {
+    var status = await Permission.notification.status;
+    bool? result = await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>()!
+        .requestPermission();
+    if(result == null || !result || status.isDenied){
+      dialogNotificationPermission(context);
+    }
+
+  }
+
+  Future<void> dialogNotificationPermission(BuildContext context) async {
+    showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Notification Permission Required'),
+          content: const Text(
+              'Please enable notification permission in settings to use this app.'),
+          actions: [
+            TextButton(
+              child: const Text('CANCEL'),
+              onPressed: () => Navigator.pop(context),
+            ),
+            TextButton(
+              child: const Text('SETTINGS'),
+              onPressed: () => openAppSettings(),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -190,10 +230,13 @@ class SettingsScreen extends StatelessWidget {
                     Text(L10N.of(context).tr.enableRunningTimersNotification),
                 value: settings.showRunningTimersAsNotifications,
                 onChanged: (bool value) {
-                  if (value) {
+                  if (value && Platform.isAndroid) {
                     BlocProvider.of<NotificationsBloc>(context)
                         .add(const RequestNotificationPermissions());
-                  }
+                    requestAndroidNotificationPermission(context);
+                    // requestNotificationPermission();
+
+                }
                   settingsBloc.add(SetBoolValueEvent(
                       showRunningTimersAsNotifications: value));
                 },
@@ -203,4 +246,5 @@ class SettingsScreen extends StatelessWidget {
           ],
         ));
   }
+
 }
