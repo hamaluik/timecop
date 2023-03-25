@@ -35,15 +35,23 @@ class SettingsScreen extends StatelessWidget {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
   FlutterLocalNotificationsPlugin();
 
+  // bool _switchValue = false;
+  // bool _notificationPermissionGranted = false;
+
   void requestAndroidNotificationPermission(BuildContext context) async {
     var status = await Permission.notification.status;
     bool? result = await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
         AndroidFlutterLocalNotificationsPlugin>()!
         .requestPermission();
-    if(result == null || !result || status.isDenied){
-      dialogNotificationPermission(context);
+    if((result != null && !result) && status.isDenied){
+      if(context.mounted) {
+        dialogNotificationPermission(context);
+      }
     }
+    // else if(status.isGranted || result!){
+    //   _notificationPermissionGranted = true;
+    // }
 
   }
 
@@ -52,16 +60,16 @@ class SettingsScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Notification Permission Required'),
-          content: const Text(
-              'Please enable notification permission in settings to use this app.'),
+          // title: const Text('Notification Permission Required'),
+          title: Text(L10N.of(context).tr.notificationPermissionRequired),
+          content: Text(L10N.of(context).tr.notificationPermissionDialogBody),
           actions: [
             TextButton(
-              child: const Text('CANCEL'),
+              child: Text(L10N.of(context).tr.cancel),
               onPressed: () => Navigator.pop(context),
             ),
             TextButton(
-              child: const Text('SETTINGS'),
+              child: Text(L10N.of(context).tr.settings),
               onPressed: () => openAppSettings(),
             ),
           ],
@@ -229,12 +237,15 @@ class SettingsScreen extends StatelessWidget {
                 title:
                     Text(L10N.of(context).tr.enableRunningTimersNotification),
                 value: settings.showRunningTimersAsNotifications,
+                // value: _switchValue,
+
                 onChanged: (bool value) {
-                  if (value && Platform.isAndroid) {
+                  if (value) {
                     BlocProvider.of<NotificationsBloc>(context)
                         .add(const RequestNotificationPermissions());
-                    requestAndroidNotificationPermission(context);
-                    // requestNotificationPermission();
+                    if(Platform.isAndroid) {
+                      requestAndroidNotificationPermission(context);
+                    }
 
                 }
                   settingsBloc.add(SetBoolValueEvent(

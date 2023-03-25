@@ -384,4 +384,12 @@ class FluentL10NProvider extends L10NProvider {
           args: <String, dynamic>{"dateFrom": dateFrom, "dateUntil": dateUntil},
           errors: _errors) ??
       "filterFromUntil";
+
+  @override
+  String get notificationPermissionDialogBody =>
+      _bundle.format("notificationPermissionDialogBody", errors: _errors) ?? "notificationPermissionDialogBody";
+
+  @override
+  String get notificationPermissionRequired =>
+      _bundle.format("notificationPermissionRequired", errors: _errors) ?? "notificationPermissionRequired";
 }

@@ -93,3 +93,5 @@ noItemsFound = No items found
 filterFrom = Filtering from {$dateFrom}
 filterUntil = Filtering until {$dateUntil}
 filterFromUntil = Filtering from {$dateFrom} until {$dateUntil}
+notificationPermissionRequired = Notification Permission Required
+notificationPermissionDialogBody = Please enable notification permission in settings to use this feature.
