@@ -16,6 +16,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:timecop/blocs/locale/locale_bloc.dart';
 import 'package:timecop/blocs/notifications/notifications_bloc.dart';
 import 'package:timecop/blocs/settings/bloc.dart';
@@ -26,9 +27,56 @@ import 'package:numberpicker/numberpicker.dart';
 
 import 'components/locale_options.dart';
 import 'components/theme_options.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  SettingsScreen({Key? key}) : super(key: key);
+
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  FlutterLocalNotificationsPlugin();
+
+  // bool _switchValue = false;
+  // bool _notificationPermissionGranted = false;
+
+  void requestAndroidNotificationPermission(BuildContext context) async {
+    var status = await Permission.notification.status;
+    bool? result = await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>()!
+        .requestPermission();
+    if((result != null && !result) && status.isDenied){
+      if(context.mounted) {
+        dialogNotificationPermission(context);
+      }
+    }
+    // else if(status.isGranted || result!){
+    //   _notificationPermissionGranted = true;
+    // }
+
+  }
+
+  Future<void> dialogNotificationPermission(BuildContext context) async {
+    showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          // title: const Text('Notification Permission Required'),
+          title: Text(L10N.of(context).tr.notificationPermissionRequired),
+          content: Text(L10N.of(context).tr.notificationPermissionDialogBody),
+          actions: [
+            TextButton(
+              child: Text(L10N.of(context).tr.cancel),
+              onPressed: () => Navigator.pop(context),
+            ),
+            TextButton(
+              child: Text(L10N.of(context).tr.settings),
+              onPressed: () => openAppSettings(),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -189,11 +237,17 @@ class SettingsScreen extends StatelessWidget {
                 title:
                     Text(L10N.of(context).tr.enableRunningTimersNotification),
                 value: settings.showRunningTimersAsNotifications,
+                // value: _switchValue,
+
                 onChanged: (bool value) {
                   if (value) {
                     BlocProvider.of<NotificationsBloc>(context)
                         .add(const RequestNotificationPermissions());
-                  }
+                    if(Platform.isAndroid) {
+                      requestAndroidNotificationPermission(context);
+                    }
+
+                }
                   settingsBloc.add(SetBoolValueEvent(
                       showRunningTimersAsNotifications: value));
                 },
@@ -203,4 +257,5 @@ class SettingsScreen extends StatelessWidget {
           ],
         ));
   }
+
 }

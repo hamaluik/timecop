@@ -43,6 +43,7 @@ dependencies:
   package_info_plus: ^2.0.0
   xdg_directories: ^0.2.0+1
   fluent: ^2.0.1
+  permission_handler: ^10.2.0
 
 dev_dependencies:
   flutter_lints: ^2.0.1
