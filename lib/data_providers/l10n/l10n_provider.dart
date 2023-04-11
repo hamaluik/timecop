@@ -107,6 +107,8 @@ abstract class L10NProvider {
   String get enableRunningTimersNotification;
   String get notes;
   String get noItemsFound;
+  String get notificationPermissionRequired;
+  String get notificationPermissionDialogBody;
   String filterFrom(String dateFrom);
   String filterUntil(String dateUntil);
   String filterFromUntil(String dateFrom, String dateUntil);

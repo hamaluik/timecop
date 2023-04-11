@@ -29,3 +29,8 @@ Time Cop started as a personal project of Kenton Hamaluik ([@hamaluik](https://g
 | Aditya Arora | [@AdiAr11](https://github.com/AdiAr11) |
 | Mári Martin | (Translations through Weblate) |
 | Morten Juhl-Johansen Zölde-Fejer | [@mjjzf](https://github.com/mjjzf) |
+| HY | [@rhybs](https://github.com/rhybs) |
+| Reza | [@rezaalmanda](https://github.com/rezaalmanda) |
+| Silvério Santos | [@SantosSi](https://github.com/SantosSi) |
+| gallegonovato | [@gallegonovato](https://github.com/gallegonovato) |
+| bgo-eiu | [@bgo-eiu](https://github.com/bgo-eiu) |
