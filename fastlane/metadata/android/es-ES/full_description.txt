@@ -1,0 +1,11 @@
+- Solo sin conexión, móvil primero
+- Para Android, iOS y Linux
+- Completamente privado: sin seguimiento, espionaje, publicidad, etc.
+- Realiza un seguimiento de tus tareas con múltiples temporizadores paralelos que se pueden iniciar con solo presionar un botón
+- Vincular cronómetros a proyectos para trabajar en grupo (o no)
+- Inicia, deten, edita y elimina los temporizadores cuando quieras sin problemas
+- Exportar los datos como un archivo .csv . Filtrado por duraciones y proyectos
+- Exportar la base de datos de la aplicación para acceder a tus datos completos
+- Modo claro/oscuro automático con la configuración del dispositivo
+- Diferentes idiomas (con Google Translate): Inglés, Árabe, Alemán, Español, Francés, Hindi, Indonesio, Japonés, Coreano, Portugués, Ruso, Chino (simplificado) y Chino (tradicional), además del Italiano, Checo, Noruego y también en idiomas indonesios a través de colaboradores
+- Código de fuente (bajo licencia Apache-2.0): siéntete libre de hacer una bifurcación (https://github.com/hamaluik/timecop)
