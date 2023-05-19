@@ -34,3 +34,4 @@ Time Cop started as a personal project of Kenton Hamaluik ([@hamaluik](https://g
 | Silvério Santos | [@SantosSi](https://github.com/SantosSi) |
 | gallegonovato | [@gallegonovato](https://github.com/gallegonovato) |
 | bgo-eiu | [@bgo-eiu](https://github.com/bgo-eiu) |
+| leungvanice | (Translations through Weblate) |
