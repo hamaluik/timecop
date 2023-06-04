@@ -318,11 +318,11 @@ class _ExportScreenState extends State<ExportScreen> {
       floatingActionButton: FloatingActionButton(
           key: const Key("exportFAB"),
           tooltip: L10N.of(context).tr.exportCSV,
-          child: Stack(
+          child: const Stack(
             // shenanigans to properly centre the icon (font awesome glyphs are variable
             // width but the library currently doesn't deal with that)
             fit: StackFit.expand,
-            children: const <Widget>[
+            children: <Widget>[
               Positioned(
                 top: 15,
                 left: 19,

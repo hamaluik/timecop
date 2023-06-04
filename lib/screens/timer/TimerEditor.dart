@@ -398,11 +398,11 @@ class _TimerEditorState extends State<TimerEditor> {
       floatingActionButton: FloatingActionButton(
         key: const Key("saveDetails"),
         tooltip: L10N.of(context).tr.save,
-        child: Stack(
+        child: const Stack(
           // shenanigans to properly centre the icon (font awesome glyphs are variable
           // width but the library currently doesn't deal with that)
           fit: StackFit.expand,
-          children: const <Widget>[
+          children: <Widget>[
             Positioned(
               top: 14,
               left: 16,

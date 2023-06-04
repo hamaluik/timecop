@@ -146,11 +146,11 @@ class ProjectsScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         tooltip: L10N.of(context).tr.createNewProject,
         key: const Key("addProject"),
-        child: Stack(
+        child: const Stack(
           // shenanigans to properly centre the icon (font awesome glyphs are variable
           // width but the library currently doesn't deal with that)
           fit: StackFit.expand,
-          children: const <Widget>[
+          children: <Widget>[
             Positioned(
               top: 15,
               left: 16,

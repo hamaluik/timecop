@@ -51,11 +51,11 @@ class _StartTimerButtonState extends State<StartTimerButton> {
                   project: bloc.state.newProject));
               bloc.add(const TimerWasStartedEvent());
             },
-            child: Stack(
+            child: const Stack(
               // shenanigans to properly centre the icon (font awesome glyphs are variable
               // width but the library currently doesn't deal with that)
               fit: StackFit.expand,
-              children: const <Widget>[
+              children: <Widget>[
                 Positioned(
                   top: 15,
                   left: 18,
@@ -75,11 +75,11 @@ class _StartTimerButtonState extends State<StartTimerButton> {
               final timers = BlocProvider.of<TimersBloc>(context);
               timers.add(const StopAllTimers());
             },
-            child: Stack(
+            child: const Stack(
               // shenanigans to properly centre the icon (font awesome glyphs are variable
               // width but the library currently doesn't deal with that)
               fit: StackFit.expand,
-              children: const <Widget>[
+              children: <Widget>[
                 Positioned(
                   top: 15,
                   left: 16,
