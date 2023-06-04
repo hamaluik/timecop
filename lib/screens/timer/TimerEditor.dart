@@ -17,7 +17,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
+    as dt;
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -284,12 +285,12 @@ class _TimerEditorState extends State<TimerEditor> {
                 _oldStartTime = _startTime.clone();
                 _oldEndTime = _endTime?.clone();
                 DateTime? newStartTime =
-                    await DatePicker.showDateTimePicker(context,
+                    await dt.DatePicker.showDateTimePicker(context,
                         currentTime: _startTime,
                         maxTime: _endTime == null ? DateTime.now() : null,
                         onChanged: (DateTime dt) => setStartTime(dt),
                         onConfirm: (DateTime dt) => setStartTime(dt),
-                        theme: DatePickerTheme(
+                        theme: dt.DatePickerTheme(
                           cancelStyle: Theme.of(context).textTheme.button!,
                           doneStyle: Theme.of(context).textTheme.button!,
                           itemStyle: Theme.of(context).textTheme.bodyText2!,
@@ -344,13 +345,13 @@ class _TimerEditorState extends State<TimerEditor> {
               ]),
               onTap: () async {
                 _oldEndTime = _endTime?.clone();
-                DateTime? newEndTime = await DatePicker.showDateTimePicker(
+                DateTime? newEndTime = await dt.DatePicker.showDateTimePicker(
                     context,
                     currentTime: _endTime,
                     minTime: _startTime,
                     onChanged: (DateTime dt) => setState(() => _endTime = dt),
                     onConfirm: (DateTime dt) => setState(() => _endTime = dt),
-                    theme: DatePickerTheme(
+                    theme: dt.DatePickerTheme(
                       cancelStyle: Theme.of(context).textTheme.button!,
                       doneStyle: Theme.of(context).textTheme.button!,
                       itemStyle: Theme.of(context).textTheme.bodyText2!,

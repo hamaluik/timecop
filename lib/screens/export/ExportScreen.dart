@@ -19,7 +19,8 @@ import 'package:csv/csv.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
+    as dt;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
@@ -114,13 +115,13 @@ class _ExportScreenState extends State<ExportScreen> {
                     )
                 ]),
                 onTap: () async {
-                  await DatePicker.showDatePicker(context,
+                  await dt.DatePicker.showDatePicker(context,
                       currentTime: _startDate,
                       onChanged: (DateTime dt) => setState(() =>
                           _startDate = DateTime(dt.year, dt.month, dt.day)),
                       onConfirm: (DateTime dt) => setState(() =>
                           _startDate = DateTime(dt.year, dt.month, dt.day)),
-                      theme: DatePickerTheme(
+                      theme: dt.DatePickerTheme(
                         cancelStyle: Theme.of(context).textTheme.button!,
                         doneStyle: Theme.of(context).textTheme.button!,
                         itemStyle: Theme.of(context).textTheme.bodyText2!,
@@ -150,13 +151,13 @@ class _ExportScreenState extends State<ExportScreen> {
                     )
                 ]),
                 onTap: () async {
-                  await DatePicker.showDatePicker(context,
+                  await dt.DatePicker.showDatePicker(context,
                       currentTime: _endDate,
                       onChanged: (DateTime dt) => setState(() => _endDate =
                           DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
                       onConfirm: (DateTime dt) => setState(() => _endDate =
                           DateTime(dt.year, dt.month, dt.day, 23, 59, 59, 999)),
-                      theme: DatePickerTheme(
+                      theme: dt.DatePickerTheme(
                         cancelStyle: Theme.of(context).textTheme.button!,
                         doneStyle: Theme.of(context).textTheme.button!,
                         itemStyle: Theme.of(context).textTheme.bodyText2!,

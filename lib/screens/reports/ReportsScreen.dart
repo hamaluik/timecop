@@ -16,8 +16,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:card_swiper/card_swiper.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
+    as dt;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
@@ -164,14 +165,14 @@ class _ReportsScreenState extends State<ReportsScreen> {
                   onTap: () async {
                     _oldStartDate = _startDate?.clone();
                     _oldEndDate = _endDate?.clone();
-                    DateTime? newStartDate = await DatePicker.showDatePicker(
+                    DateTime? newStartDate = await dt.DatePicker.showDatePicker(
                         context,
                         currentTime: _startDate,
                         onChanged: (DateTime dt) =>
                             setStartDate(DateTime(dt.year, dt.month, dt.day)),
                         onConfirm: (DateTime dt) =>
                             setStartDate(DateTime(dt.year, dt.month, dt.day)),
-                        theme: DatePickerTheme(
+                        theme: dt.DatePickerTheme(
                           cancelStyle: Theme.of(context).textTheme.button!,
                           doneStyle: Theme.of(context).textTheme.button!,
                           itemStyle: Theme.of(context).textTheme.bodyText2!,
@@ -210,7 +211,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                   ]),
                   onTap: () async {
                     _oldEndDate = _endDate?.clone();
-                    DateTime? newEndDate = await DatePicker.showDatePicker(
+                    DateTime? newEndDate = await dt.DatePicker.showDatePicker(
                         context,
                         currentTime: _endDate,
                         minTime: _startDate,
@@ -220,7 +221,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                         onConfirm: (DateTime dt) => setState(() => _endDate =
                             DateTime(
                                 dt.year, dt.month, dt.day, 23, 59, 59, 999)),
-                        theme: DatePickerTheme(
+                        theme: dt.DatePickerTheme(
                           cancelStyle: Theme.of(context).textTheme.button!,
                           doneStyle: Theme.of(context).textTheme.button!,
                           itemStyle: Theme.of(context).textTheme.bodyText2!,

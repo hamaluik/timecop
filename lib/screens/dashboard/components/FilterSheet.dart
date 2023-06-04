@@ -14,7 +14,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
+    as dt;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:timecop/blocs/projects/projects_bloc.dart';
@@ -67,7 +68,7 @@ class FilterSheet extends StatelessWidget {
                       ),
                   ]),
                   onTap: () async {
-                    await DatePicker.showDatePicker(context,
+                    await dt.DatePicker.showDatePicker(context,
                         currentTime: state.filterStart,
                         onChanged: (DateTime dt) => dashboardBloc.add(
                             FilterStartChangedEvent(
@@ -75,7 +76,7 @@ class FilterSheet extends StatelessWidget {
                         onConfirm: (DateTime dt) => dashboardBloc.add(
                             FilterStartChangedEvent(
                                 DateTime(dt.year, dt.month, dt.day))),
-                        theme: DatePickerTheme(
+                        theme: dt.DatePickerTheme(
                           cancelStyle: Theme.of(context).textTheme.button!,
                           doneStyle: Theme.of(context).textTheme.button!,
                           itemStyle: Theme.of(context).textTheme.bodyText2!,
@@ -102,7 +103,7 @@ class FilterSheet extends StatelessWidget {
                       ),
                   ]),
                   onTap: () async {
-                    await DatePicker.showDatePicker(context,
+                    await dt.DatePicker.showDatePicker(context,
                         currentTime: state.filterEnd,
                         onChanged: (DateTime dt) => dashboardBloc.add(
                             FilterEndChangedEvent(DateTime(
@@ -110,7 +111,7 @@ class FilterSheet extends StatelessWidget {
                         onConfirm: (DateTime dt) => dashboardBloc.add(
                             FilterEndChangedEvent(DateTime(
                                 dt.year, dt.month, dt.day, 23, 59, 59, 999))),
-                        theme: DatePickerTheme(
+                        theme: dt.DatePickerTheme(
                           cancelStyle: Theme.of(context).textTheme.button!,
                           doneStyle: Theme.of(context).textTheme.button!,
                           itemStyle: Theme.of(context).textTheme.bodyText2!,
