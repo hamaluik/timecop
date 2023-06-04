@@ -15,6 +15,14 @@
 import 'package:flutter/material.dart';
 
 class ThemeUtil {
+  static const _pageTransitionsTheme =
+      PageTransitionsTheme(builders: <TargetPlatform, PageTransitionsBuilder>{
+    TargetPlatform.android: ZoomPageTransitionsBuilder(),
+    TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+    TargetPlatform.linux: CupertinoPageTransitionsBuilder(),
+    TargetPlatform.macOS: CupertinoPageTransitionsBuilder()
+  });
+
   static final lightColors = ColorScheme.light(
       primary: Colors.blueGrey.shade900,
       onPrimary: Colors.white,
@@ -46,6 +54,7 @@ class ThemeUtil {
       onSurface: Colors.white);
 
   static final lightTheme = ThemeData(
+      pageTransitionsTheme: _pageTransitionsTheme,
       brightness: Brightness.light,
       primarySwatch: Colors.blueGrey,
       primaryColor: Colors.blueGrey.shade900,
@@ -69,6 +78,7 @@ class ThemeUtil {
               borderSide: BorderSide(color: lightColors.onPrimary))));
 
   static final darkTheme = ThemeData(
+      pageTransitionsTheme: _pageTransitionsTheme,
       brightness: Brightness.dark,
       primarySwatch: Colors.grey,
       primaryColor: Colors.grey.shade900,
@@ -93,6 +103,7 @@ class ThemeUtil {
               borderSide: BorderSide(color: darkColors.onPrimary))));
 
   static final blackTheme = ThemeData(
+      pageTransitionsTheme: _pageTransitionsTheme,
       brightness: Brightness.dark,
       primarySwatch: Colors.grey,
       primaryColor: Colors.black,
