@@ -467,10 +467,13 @@ class _ExportScreenState extends State<ExportScreen> {
             final csv =
                 const ListToCsvConverter(delimitAllFields: true).convert(data);
 
+            final csvFilename =
+                "timecop_${DateTime.now().toIso8601String().split('T').first}.csv";
+
             if (Platform.isMacOS || Platform.isLinux) {
               final outputFile = await FilePicker.platform.saveFile(
                 dialogTitle: "",
-                fileName: "timecop.csv",
+                fileName: csvFilename,
               );
 
               if (outputFile != null) {
@@ -481,7 +484,7 @@ class _ExportScreenState extends State<ExportScreen> {
               final directory = (Platform.isAndroid)
                   ? await getExternalStorageDirectory()
                   : await getApplicationDocumentsDirectory();
-              final localPath = '${directory!.path}/timecop.csv';
+              final localPath = '${directory!.path}/$csvFilename';
 
               final file = File(localPath);
               await file.writeAsString(csv, flush: true);
