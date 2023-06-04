@@ -2,9 +2,6 @@ include: package:flutter_lints/flutter.yaml
 
 analyzer:
   exclude: [build/**]
-  strong-mode:
-    implicit-casts: false
-    implicit-dynamic: false
   errors:
     file_names: ignore
 
