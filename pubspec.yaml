@@ -22,16 +22,16 @@ dependencies:
   font_awesome_flutter: ^10.1.0
   random_color: ^1.0.6-nullsafety
   flutter_slidable: ^3.0.0
-  about: ^2.0.1
-  url_launcher: ^6.0.20
+  about: ^2.1.3
+  url_launcher: ^6.1.11
   flutter_svg: ^2.0.6
   flutter_material_color_picker: ^1.1.0+2
   flutter_datetime_picker_plus: ^2.0.1
   csv: ^5.0.1
-  path_provider: ^2.0.9
-  share_plus: ^5.0.0
+  path_provider: ^2.0.15
+  share_plus: ^6.3.4
   cross_file: ^0.3.3
-  shared_preferences: ^2.0.13
+  shared_preferences: ^2.0.20
   fl_chart: ^0.62.0
   card_swiper: ^2.0.4
   flutter_typeahead: ^4.0.0
@@ -40,7 +40,7 @@ dependencies:
   file_picker: ^5.3.2
   flutter_local_notifications: ^14.1.1
   flutter_markdown: ^0.6.9
-  package_info_plus: ^2.0.0
+  package_info_plus: ^4.0.2
   xdg_directories: ^1.0.0
   fluent: ^2.0.1
   permission_handler: ^10.2.0
