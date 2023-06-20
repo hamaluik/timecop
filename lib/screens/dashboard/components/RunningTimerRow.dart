@@ -41,8 +41,8 @@ class RunningTimerRow extends StatelessWidget {
           extentRatio: 0.15,
           children: <Widget>[
             SlidableAction(
-              backgroundColor: Theme.of(context).errorColor,
-              foregroundColor: Theme.of(context).colorScheme.onSecondary,
+              backgroundColor: Theme.of(context).colorScheme.error,
+              foregroundColor: Theme.of(context).colorScheme.onError,
               icon: FontAwesomeIcons.trash,
               onPressed: (_) async {
                 final timersBloc = BlocProvider.of<TimersBloc>(context);

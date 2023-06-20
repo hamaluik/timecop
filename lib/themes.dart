@@ -22,8 +22,9 @@ class ThemeUtil {
     TargetPlatform.linux: CupertinoPageTransitionsBuilder(),
     TargetPlatform.macOS: CupertinoPageTransitionsBuilder()
   });
+  static const _fontFamily = 'PublicSans';
 
-  static final lightColors = ColorScheme.light(
+  static final _lightColors = ColorScheme.light(
       primary: Colors.blueGrey.shade900,
       onPrimary: Colors.white,
       secondary: Colors.cyan.shade600,
@@ -31,9 +32,15 @@ class ThemeUtil {
       background: Colors.white,
       onBackground: Colors.black87,
       surface: Colors.grey.shade50,
-      onSurface: Colors.black87);
+      onSurface: Colors.black87,
+      onSurfaceVariant: Colors.black54,
+      error: Colors.red,
+      onError: Colors.white);
+  static const _lightPrimarySwatch = Colors.blueGrey;
+  static final _lightAppBarBackground = Colors.blueGrey.shade400;
+  static final _lightBottomSheetBackground = Colors.blueGrey.shade50;
 
-  static final darkColors = ColorScheme.dark(
+  static final _darkColors = ColorScheme.dark(
       primary: Colors.grey.shade900,
       onPrimary: Colors.white,
       secondary: Colors.cyan.shade600,
@@ -41,9 +48,15 @@ class ThemeUtil {
       background: Colors.grey.shade800,
       onBackground: Colors.white,
       surface: Colors.grey.shade900,
-      onSurface: Colors.white);
+      onSurface: Colors.white,
+      onSurfaceVariant: Colors.grey.shade400,
+      error: Colors.red,
+      onError: Colors.white);
+  static const _darkPrimarySwatch = Colors.grey;
+  static final _darkAppBarBackground = Colors.grey.shade800;
+  static const _darkBottomSheetBackground = Color(0xFF303030);
 
-  static final blackColors = ColorScheme.dark(
+  static final _blackColors = ColorScheme.dark(
       primary: Colors.black,
       onPrimary: Colors.white,
       secondary: Colors.cyan.shade600,
@@ -51,79 +64,97 @@ class ThemeUtil {
       background: Colors.black,
       onBackground: Colors.white,
       surface: Colors.black,
-      onSurface: Colors.white);
+      onSurface: Colors.white,
+      onSurfaceVariant: Colors.grey.shade400,
+      error: Colors.red,
+      onError: Colors.white);
+  static const _blackPrimarySwatch = Colors.grey;
+  static final _blackAppBarBackground = Colors.grey.shade900;
+  static const _blackBottomSheetBackground = Colors.black;
 
   static final lightTheme = ThemeData(
-      pageTransitionsTheme: _pageTransitionsTheme,
       brightness: Brightness.light,
-      primarySwatch: Colors.blueGrey,
-      primaryColor: Colors.blueGrey.shade900,
-      colorScheme: lightColors,
-      fontFamily: 'PublicSans',
-      scaffoldBackgroundColor: Colors.white,
-      appBarTheme: AppBarTheme(backgroundColor: Colors.blueGrey.shade400),
+      pageTransitionsTheme: _pageTransitionsTheme,
+      primarySwatch: _lightPrimarySwatch,
+      scaffoldBackgroundColor: _lightColors.background,
+      appBarTheme: AppBarTheme(backgroundColor: _lightAppBarBackground),
+      fontFamily: _fontFamily,
+      colorScheme: _lightColors,
+      primaryColor: _lightColors.primary,
+      listTileTheme:
+          ListTileThemeData(iconColor: _lightColors.onSurfaceVariant),
+      expansionTileTheme: ExpansionTileThemeData(
+          collapsedBackgroundColor: _lightColors.background,
+          collapsedTextColor: _lightColors.onBackground,
+          backgroundColor: _lightColors.surface,
+          textColor: _lightColors.onSurface,
+          iconColor: _lightColors.onSurfaceVariant,
+          collapsedIconColor: _lightColors.onSurfaceVariant),
       bottomSheetTheme: BottomSheetThemeData(
-        backgroundColor: Colors.blueGrey.shade50,
+        backgroundColor: _lightBottomSheetBackground,
       ),
       textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(foregroundColor: lightColors.onSurface)),
+          style: TextButton.styleFrom(foregroundColor: _lightColors.onSurface)),
       textSelectionTheme:
-          TextSelectionThemeData(cursorColor: lightColors.secondary),
-      expansionTileTheme: ExpansionTileThemeData(
-        iconColor: lightColors.onBackground,
-        collapsedIconColor: lightColors.onBackground,
-      ),
+          TextSelectionThemeData(cursorColor: _lightColors.secondary),
       inputDecorationTheme: InputDecorationTheme(
           focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: lightColors.onPrimary))));
+              borderSide: BorderSide(color: _lightColors.onPrimary))));
 
   static final darkTheme = ThemeData(
-      pageTransitionsTheme: _pageTransitionsTheme,
       brightness: Brightness.dark,
-      primarySwatch: Colors.grey,
-      primaryColor: Colors.grey.shade900,
-      colorScheme: darkColors,
-      fontFamily: 'PublicSans',
-      scaffoldBackgroundColor: Colors.grey.shade800,
-      appBarTheme: AppBarTheme(backgroundColor: Colors.grey.shade800),
+      pageTransitionsTheme: _pageTransitionsTheme,
+      primarySwatch: _darkPrimarySwatch,
+      scaffoldBackgroundColor: _darkColors.background,
+      appBarTheme: AppBarTheme(backgroundColor: _darkAppBarBackground),
+      fontFamily: _fontFamily,
+      colorScheme: _darkColors,
+      primaryColor: _darkColors.primary,
+      listTileTheme: ListTileThemeData(iconColor: _darkColors.onSurfaceVariant),
+      expansionTileTheme: ExpansionTileThemeData(
+          collapsedBackgroundColor: _darkColors.background,
+          collapsedTextColor: _darkColors.onBackground,
+          backgroundColor: _darkColors.surface,
+          textColor: _darkColors.onSurface,
+          iconColor: _darkColors.onSurfaceVariant,
+          collapsedIconColor: _darkColors.onSurfaceVariant),
       bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: Color(0xFF303030),
+        backgroundColor: _darkBottomSheetBackground,
       ),
       textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(foregroundColor: darkColors.onSurface)),
+          style: TextButton.styleFrom(foregroundColor: _darkColors.onSurface)),
       textSelectionTheme:
-          TextSelectionThemeData(cursorColor: darkColors.secondary),
-      expansionTileTheme: ExpansionTileThemeData(
-        iconColor: darkColors.onBackground,
-        collapsedIconColor: darkColors.onBackground,
-      ),
+          TextSelectionThemeData(cursorColor: _darkColors.secondary),
       inputDecorationTheme: InputDecorationTheme(
-          labelStyle: TextStyle(color: darkColors.onPrimary),
           focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: darkColors.onPrimary))));
+              borderSide: BorderSide(color: _darkColors.onPrimary))));
 
   static final blackTheme = ThemeData(
-      pageTransitionsTheme: _pageTransitionsTheme,
       brightness: Brightness.dark,
-      primarySwatch: Colors.grey,
-      primaryColor: Colors.black,
-      colorScheme: blackColors,
-      fontFamily: 'PublicSans',
-      scaffoldBackgroundColor: Colors.black,
-      appBarTheme: AppBarTheme(backgroundColor: Colors.grey.shade800),
+      pageTransitionsTheme: _pageTransitionsTheme,
+      primarySwatch: _blackPrimarySwatch,
+      scaffoldBackgroundColor: _blackColors.background,
+      appBarTheme: AppBarTheme(backgroundColor: _blackAppBarBackground),
+      fontFamily: _fontFamily,
+      colorScheme: _blackColors,
+      primaryColor: _blackColors.primary,
+      listTileTheme:
+          ListTileThemeData(iconColor: _blackColors.onSurfaceVariant),
+      expansionTileTheme: ExpansionTileThemeData(
+          collapsedBackgroundColor: _blackColors.background,
+          collapsedTextColor: _blackColors.onBackground,
+          backgroundColor: _blackColors.surface,
+          textColor: _blackColors.onSurface,
+          iconColor: _blackColors.onSurfaceVariant,
+          collapsedIconColor: _blackColors.onSurfaceVariant),
       bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: Colors.black,
+        backgroundColor: _blackBottomSheetBackground,
       ),
       textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(foregroundColor: blackColors.onSurface)),
+          style: TextButton.styleFrom(foregroundColor: _blackColors.onSurface)),
       textSelectionTheme:
-          TextSelectionThemeData(cursorColor: blackColors.secondary),
-      expansionTileTheme: ExpansionTileThemeData(
-        iconColor: blackColors.onBackground,
-        collapsedIconColor: blackColors.onBackground,
-      ),
+          TextSelectionThemeData(cursorColor: _blackColors.secondary),
       inputDecorationTheme: InputDecorationTheme(
-          labelStyle: TextStyle(color: blackColors.onPrimary),
           focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: blackColors.onPrimary))));
+              borderSide: BorderSide(color: _blackColors.onPrimary))));
 }

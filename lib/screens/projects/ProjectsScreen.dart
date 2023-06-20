@@ -54,10 +54,9 @@ class ProjectsScreen extends StatelessWidget {
                                   children: <Widget>[
                                     SlidableAction(
                                       backgroundColor:
-                                          Theme.of(context).errorColor,
-                                      foregroundColor: Theme.of(context)
-                                          .colorScheme
-                                          .onSecondary,
+                                          Theme.of(context).colorScheme.error,
+                                      foregroundColor:
+                                          Theme.of(context).colorScheme.onError,
                                       icon: FontAwesomeIcons.trash,
                                       onPressed: (_) async {
                                         await _deleteProject(

@@ -67,10 +67,10 @@ class ExportMenu extends StatelessWidget {
 
               if (!await DatabaseProvider.isValidDatabaseFile(resultPath)) {
                 scaffoldMessenger.showSnackBar(SnackBar(
-                  backgroundColor: theme.errorColor,
+                  backgroundColor: theme.colorScheme.error,
                   content: Text(
                     localization.tr.invalidDatabaseFile,
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(color: theme.colorScheme.onError),
                   ),
                   duration: const Duration(seconds: 5),
                 ));
@@ -100,10 +100,10 @@ class ExportMenu extends StatelessWidget {
                 ));
               } else {
                 scaffoldMessenger.showSnackBar(SnackBar(
-                  backgroundColor: Theme.of(context).errorColor,
+                  backgroundColor: Theme.of(context).colorScheme.error,
                   content: Text(
                     e.toString(),
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(color: theme.colorScheme.onError),
                   ),
                   duration: const Duration(seconds: 5),
                 ));
@@ -141,10 +141,10 @@ class ExportMenu extends StatelessWidget {
               }
             } on Exception catch (e) {
               scaffoldMessenger.showSnackBar(SnackBar(
-                backgroundColor: theme.errorColor,
+                backgroundColor: theme.colorScheme.error,
                 content: Text(
                   e.toString(),
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: theme.colorScheme.onError),
                 ),
                 duration: const Duration(seconds: 5),
               ));
