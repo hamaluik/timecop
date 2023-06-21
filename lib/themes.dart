@@ -84,9 +84,9 @@ class ThemeUtil {
       listTileTheme:
           ListTileThemeData(iconColor: _lightColors.onSurfaceVariant),
       expansionTileTheme: ExpansionTileThemeData(
-          collapsedBackgroundColor: _lightColors.background,
+          collapsedBackgroundColor: Colors.transparent,
+          backgroundColor: Colors.transparent,
           collapsedTextColor: _lightColors.onBackground,
-          backgroundColor: _lightColors.surface,
           textColor: _lightColors.onSurface,
           iconColor: _lightColors.onSurfaceVariant,
           collapsedIconColor: _lightColors.onSurfaceVariant),
@@ -112,9 +112,9 @@ class ThemeUtil {
       primaryColor: _darkColors.primary,
       listTileTheme: ListTileThemeData(iconColor: _darkColors.onSurfaceVariant),
       expansionTileTheme: ExpansionTileThemeData(
-          collapsedBackgroundColor: _darkColors.background,
+          collapsedBackgroundColor: Colors.transparent,
+          backgroundColor: Colors.transparent,
           collapsedTextColor: _darkColors.onBackground,
-          backgroundColor: _darkColors.surface,
           textColor: _darkColors.onSurface,
           iconColor: _darkColors.onSurfaceVariant,
           collapsedIconColor: _darkColors.onSurfaceVariant),
@@ -141,9 +141,9 @@ class ThemeUtil {
       listTileTheme:
           ListTileThemeData(iconColor: _blackColors.onSurfaceVariant),
       expansionTileTheme: ExpansionTileThemeData(
-          collapsedBackgroundColor: _blackColors.background,
+          collapsedBackgroundColor: Colors.transparent,
+          backgroundColor: Colors.transparent,
           collapsedTextColor: _blackColors.onBackground,
-          backgroundColor: _blackColors.surface,
           textColor: _blackColors.onSurface,
           iconColor: _blackColors.onSurfaceVariant,
           collapsedIconColor: _blackColors.onSurfaceVariant),
