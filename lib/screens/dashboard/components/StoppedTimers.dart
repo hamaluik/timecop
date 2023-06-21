@@ -23,30 +23,39 @@ import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/models/project_description_pair.dart';
 import 'package:timecop/models/timer_entry.dart';
+import 'package:timecop/responsiveness_utils.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:timecop/screens/dashboard/components/CollapsibleDayGrouping.dart';
 import 'package:timecop/screens/dashboard/components/FilterText.dart';
 import 'package:timecop/screens/dashboard/components/GroupedStoppedTimersRow.dart';
 import 'StoppedTimerRow.dart';
 
-class DayGrouping {
+class _DayGrouping {
   final DateTime date;
   List<TimerEntry> entries = [];
+
+  _DayGrouping(this.date);
+}
+
+class _DayGroupingRows extends StatelessWidget {
   static final DateFormat _dateFormat = DateFormat.yMMMMEEEEd();
+  final _DayGrouping dayGrouping;
 
-  DayGrouping(this.date);
+  const _DayGroupingRows({Key? key, required this.dayGrouping})
+      : super(key: key);
 
-  Widget rows(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     final settingsBloc = BlocProvider.of<SettingsBloc>(context);
     Duration runningTotal = Duration(
-        seconds: entries.fold(
+        seconds: dayGrouping.entries.fold(
             0,
             (int sum, TimerEntry t) =>
                 sum + t.endTime!.difference(t.startTime).inSeconds));
 
     LinkedHashMap<ProjectDescriptionPair, List<TimerEntry>> pairedEntries =
         LinkedHashMap();
-    for (TimerEntry entry in entries) {
+    for (TimerEntry entry in dayGrouping.entries) {
       ProjectDescriptionPair pair =
           ProjectDescriptionPair(entry.projectID, entry.description);
       if (pairedEntries.containsKey(pair)) {
@@ -70,7 +79,7 @@ class DayGrouping {
 
     if (settingsBloc.state.collapseDays) {
       return CollapsibleDayGrouping(
-        date: date,
+        date: dayGrouping.date,
         totalTime: runningTotal,
         children: theDaysTimers,
       );
@@ -79,23 +88,26 @@ class DayGrouping {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 4.0),
+            padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 4.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    Text(_dateFormat.format(date),
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.secondary,
-                            fontWeight: FontWeight.w700)),
+                    Expanded(
+                        child: Text(_dateFormat.format(dayGrouping.date),
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                                fontWeight: FontWeight.w700))),
+                    const SizedBox(
+                      width: 16,
+                    ),
                     Text(TimerEntry.formatDuration(runningTotal),
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.secondary,
                           fontFeatures: const [FontFeature.tabularFigures()],
-                        ))
+                        )),
                   ],
                 ),
                 const Divider(),
@@ -111,21 +123,22 @@ class DayGrouping {
 class StoppedTimers extends StatelessWidget {
   const StoppedTimers({Key? key}) : super(key: key);
 
-  static List<DayGrouping> groupDays(List<DayGrouping> days, TimerEntry timer) {
+  static List<_DayGrouping> _groupDays(
+      List<_DayGrouping> days, TimerEntry timer) {
     bool newDay = days.isEmpty ||
-        !days.any((DayGrouping day) =>
+        !days.any((_DayGrouping day) =>
             day.date.year == timer.startTime.year &&
             day.date.month == timer.startTime.month &&
             day.date.day == timer.startTime.day);
     if (newDay) {
-      days.add(DayGrouping(DateTime(
+      days.add(_DayGrouping(DateTime(
         timer.startTime.year,
         timer.startTime.month,
         timer.startTime.day,
       )));
     }
     days
-        .firstWhere((DayGrouping day) =>
+        .firstWhere((_DayGrouping day) =>
             day.date.year == timer.startTime.year &&
             day.date.month == timer.startTime.month &&
             day.date.day == timer.startTime.day)
@@ -185,7 +198,7 @@ class StoppedTimers extends StatelessWidget {
               });
             }
 
-            final days = timers.fold(<DayGrouping>[], groupDays);
+            final days = timers.fold(<_DayGrouping>[], _groupDays);
 
             final isFiltered = (dashboardState.filterStart != null ||
                 dashboardState.filterEnd != null);
@@ -194,13 +207,13 @@ class StoppedTimers extends StatelessWidget {
               itemCount: isFiltered ? days.length + 1 : days.length,
               itemBuilder: isFiltered
                   ? (BuildContext context, int index) => (index < days.length)
-                      ? days[index].rows(context)
+                      ? _DayGroupingRows(dayGrouping: days[index])
                       : FilterText(
                           filterStart: dashboardState.filterStart,
                           filterEnd: dashboardState.filterEnd,
                         )
                   : (BuildContext context, int index) =>
-                      days[index].rows(context),
+                      _DayGroupingRows(dayGrouping: days[index]),
             );
           },
         );
