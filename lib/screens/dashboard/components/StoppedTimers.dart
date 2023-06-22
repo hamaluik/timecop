@@ -46,6 +46,7 @@ class _DayGroupingRows extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isWidescreen = ResponsivenessUtils.isWidescreen(context);
     final settingsBloc = BlocProvider.of<SettingsBloc>(context);
     Duration runningTotal = Duration(
         seconds: dayGrouping.entries.fold(
@@ -88,7 +89,9 @@ class _DayGroupingRows extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 4.0),
+            padding: isWidescreen
+                ? const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 4.0)
+                : const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 4.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
@@ -108,6 +111,23 @@ class _DayGroupingRows extends StatelessWidget {
                           color: Theme.of(context).colorScheme.secondary,
                           fontFeatures: const [FontFeature.tabularFigures()],
                         )),
+                    if (isWidescreen)
+                      const SizedBox(
+                        width: 16,
+                      ),
+                    if (isWidescreen)
+                      Container(
+                        height: 16,
+                        width: 1,
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onBackground
+                            .withAlpha(31),
+                      ),
+                    if (isWidescreen)
+                      const SizedBox(
+                        width: 120,
+                      )
                   ],
                 ),
                 const Divider(),
