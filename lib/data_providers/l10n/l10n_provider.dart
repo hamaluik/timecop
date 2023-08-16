@@ -71,6 +71,7 @@ abstract class L10NProvider {
   String timeCopEntries(String date);
   String get options;
   String get groupTimers;
+  String get compactView;
   String get columns;
   String get date;
   String get combinedProjectDescription;

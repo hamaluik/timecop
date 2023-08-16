@@ -29,7 +29,9 @@ class ImportDatabaseEvent extends SettingsEvent {
   final String path;
   final TimersBloc timers;
   final ProjectsBloc projects;
+
   const ImportDatabaseEvent(this.path, this.timers, this.projects);
+
   @override
   List<Object> get props => [path, timers, projects];
 }
@@ -51,6 +53,7 @@ class SetBoolValueEvent extends SettingsEvent {
   final bool? oneTimerAtATime;
   final bool? showBadgeCounts;
   final bool? showRunningTimersAsNotifications;
+  final bool? compactView;
 
   const SetBoolValueEvent(
       {this.exportGroupTimers,
@@ -68,7 +71,8 @@ class SetBoolValueEvent extends SettingsEvent {
       this.defaultFilterStartDateToMonday,
       this.oneTimerAtATime,
       this.showBadgeCounts,
-      this.showRunningTimersAsNotifications});
+      this.showRunningTimersAsNotifications,
+      this.compactView});
 
   @override
   List<Object?> get props => [
@@ -88,12 +92,15 @@ class SetBoolValueEvent extends SettingsEvent {
         oneTimerAtATime,
         showBadgeCounts,
         showRunningTimersAsNotifications,
+        compactView,
       ];
 }
 
 class SetDefaultFilterDays extends SettingsEvent {
   final int? days;
+
   const SetDefaultFilterDays(this.days);
+
   @override
   List<Object?> get props => [days];
 }

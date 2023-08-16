@@ -38,6 +38,7 @@ logoSemantics = Time Cop Logo
 noDescription = (sem descrição)
 options = Opções
 groupTimers = Agrupar temporizadores semelhantes por dia
+compactView = Visualização compacta
 columns = Colunas
 date = Data
 combinedProjectDescription = Projeto combinado e descrição
