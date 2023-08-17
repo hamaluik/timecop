@@ -36,46 +36,42 @@ class DashboardScreen extends StatelessWidget {
         create: (_) => DashboardBloc(projectsBloc, settingsBloc),
         child: Scaffold(
           appBar: const TopBar(),
-          body:
-          Scrollable(
-            viewportBuilder: (BuildContext context, position) =>
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    const Expanded(
-                      flex: 1,
-                      child: StoppedTimers(),
-                    ),
-                    const RunningTimers(),
-                    Material(
-                      elevation: 8.0,
-                      color: Theme.of(context).bottomSheetTheme.backgroundColor,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          //crossAxisAlignment: CrossAxisAlignment.end,
-                          children: const <Widget>[
-                            ProjectSelectField(),
-                            Expanded(
-                              flex: 1,
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(4.0, 0, 4.0, 0),
-                                child: DescriptionField(),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 72,
-                              height: 72,
-                            )
-                          ],
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              const Expanded(
+                flex: 1,
+                child: StoppedTimers(),
+              ),
+              const RunningTimers(),
+              Material(
+                elevation: 8.0,
+                color: Theme.of(context).bottomSheetTheme.backgroundColor,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    //crossAxisAlignment: CrossAxisAlignment.end,
+                    children: const <Widget>[
+                      ProjectSelectField(),
+                      Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(4.0, 0, 4.0, 0),
+                          child: DescriptionField(),
                         ),
                       ),
-                    )
-                  ],
+                      SizedBox(
+                        width: 72,
+                        height: 72,
+                      )
+                    ],
+                  ),
                 ),
+              )
+            ],
           ),
           floatingActionButton: const StartTimerButton(),
         ));
