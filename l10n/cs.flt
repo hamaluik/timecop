@@ -26,6 +26,7 @@ logoSemantics = Logo Time Cop
 noDescription = (bez popisu)
 options = Možnosti
 groupTimers = Seskupovat podobné časovače v rámci dnů
+showProjectNames = Zobrazovat jména projektů
 columns = Sloupce
 whatWereYouDoing = Na čem jste pracoval/a?
 combinedProjectDescription = Kombinovaný projekt a popis
