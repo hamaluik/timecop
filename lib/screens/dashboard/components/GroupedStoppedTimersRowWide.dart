@@ -22,6 +22,7 @@ import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/timer_entry.dart';
+import 'package:timecop/screens/dashboard/components/ProjectTag.dart';
 import 'package:timecop/screens/dashboard/components/RowSeparator.dart';
 import 'package:timecop/screens/dashboard/components/StoppedTimerRow.dart';
 
@@ -31,12 +32,14 @@ class GroupedStoppedTimersRowWide extends StatefulWidget {
   final List<TimerEntry> timers;
   final Function(BuildContext) resumeTimer;
   final Duration totalDuration;
+  final bool showProjectName;
 
   const GroupedStoppedTimersRowWide(
       {Key? key,
       required this.totalDuration,
       required this.timers,
-      required this.resumeTimer})
+      required this.resumeTimer,
+      required this.showProjectName})
       : assert(timers.length > 1),
         super(key: key);
 
@@ -49,7 +52,6 @@ class _GroupedStoppedTimersRowWideState
     extends State<GroupedStoppedTimersRowWide>
     with SingleTickerProviderStateMixin {
   static const _spaceWidth = 16.0;
-  static final DateFormat _timeFormat = DateFormat("hh:mma");
   static final Animatable<double> _easeInTween =
       CurveTween(curve: Curves.easeIn);
   static final Animatable<double> _halfTween =
@@ -71,10 +73,13 @@ class _GroupedStoppedTimersRowWideState
   @override
   Widget build(BuildContext context) {
     assert(widget.timers.last.endTime != null);
+    final timeFormat = DateFormat.jm();
     final timeSpanStyle = TextStyle(
       color: Theme.of(context).colorScheme.onSurfaceVariant,
       fontFeatures: const [FontFeature.tabularFigures()],
     );
+    final project = BlocProvider.of<ProjectsBloc>(context)
+        .getProjectByID(widget.timers[0].projectID);
     return ExpansionTile(
       onExpansionChanged: (expanded) {
         setState(() {
@@ -86,20 +91,30 @@ class _GroupedStoppedTimersRowWideState
           }
         });
       },
-      leading: ProjectColour(
-          project: BlocProvider.of<ProjectsBloc>(context)
-              .getProjectByID(widget.timers[0].projectID)),
-      title: Text(
-          TimerUtils.formatDescription(context, widget.timers[0].description),
-          style: TimerUtils.styleDescription(
-              context, widget.timers[0].description)),
+      leading: widget.showProjectName ? null : ProjectColour(project: project),
+      title: widget.showProjectName
+          ? Row(children: [
+              Flexible(
+                  child: Text(
+                      TimerUtils.formatDescription(
+                          context, widget.timers[0].description),
+                      style: TimerUtils.styleDescription(
+                          context, widget.timers[0].description))),
+              const SizedBox(width: _spaceWidth),
+              ProjectTag(project: project)
+            ])
+          : Text(
+              TimerUtils.formatDescription(
+                  context, widget.timers[0].description),
+              style: TimerUtils.styleDescription(
+                  context, widget.timers[0].description)),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           const SizedBox(width: _spaceWidth),
           Text(
-            _timeFormat.format(widget.timers.last.startTime),
+            timeFormat.format(widget.timers.last.startTime),
             style: timeSpanStyle,
           ),
           const SizedBox(
@@ -110,7 +125,7 @@ class _GroupedStoppedTimersRowWideState
             width: _spaceWidth,
           ),
           Text(
-            _timeFormat.format(widget.timers.first.endTime!),
+            timeFormat.format(widget.timers.first.endTime!),
             style: timeSpanStyle,
           ),
           if (widget.totalDuration.inDays > 0)
@@ -153,8 +168,12 @@ class _GroupedStoppedTimersRowWideState
           ),
         ],
       ),
-      children:
-          widget.timers.map((timer) => StoppedTimerRow(timer: timer)).toList(),
+      children: widget.timers
+          .map((timer) => StoppedTimerRow(
+              timer: timer,
+              isWidescreen: true,
+              showProjectName: widget.showProjectName))
+          .toList(),
     );
   }
 

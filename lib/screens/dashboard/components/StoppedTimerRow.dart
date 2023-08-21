@@ -22,23 +22,39 @@ import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/responsiveness_utils.dart';
-import 'package:timecop/screens/dashboard/components/StoppedTimerCompactView.dart';
-import 'package:timecop/screens/dashboard/components/StoppedTimerRowNarrow.dart';
+import 'package:timecop/screens/dashboard/components/StoppedTimerRowNarrowDense.dart';
+import 'package:timecop/screens/dashboard/components/StoppedTimerRowNarrowSimple.dart';
 import 'package:timecop/screens/dashboard/components/StoppedTimerRowWide.dart';
 
 class StoppedTimerRow extends StatelessWidget {
   final TimerEntry timer;
+  final bool isWidescreen;
+  final bool showProjectName;
 
-  const StoppedTimerRow({Key? key, required this.timer}) : super(key: key);
+  const StoppedTimerRow(
+      {Key? key,
+      required this.timer,
+      required this.isWidescreen,
+      required this.showProjectName})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final settingsBloc = BlocProvider.of<SettingsBloc>(context);
     return ResponsivenessUtils.isWidescreen(context)
-        ? StoppedTimerRowWide(timer: timer, resumeTimer: _resumeTimer, deleteTimer: _deleteTimer)
-        : settingsBloc.state.compactView
-            ? StoppedTimerCompactView(timer: timer, resumeTimer: _resumeTimer, deleteTimer: _deleteTimer)
-            : StoppedTimerRowNarrow(timer: timer, resumeTimer: _resumeTimer, deleteTimer: _deleteTimer);
+        ? StoppedTimerRowWide(
+            timer: timer,
+            resumeTimer: _resumeTimer,
+            deleteTimer: _deleteTimer,
+            showProjectName: showProjectName)
+        : BlocProvider.of<SettingsBloc>(context).state.showProjectNames
+            ? StoppedTimerRowNarrowDense(
+                timer: timer,
+                resumeTimer: _resumeTimer,
+                deleteTimer: _deleteTimer)
+            : StoppedTimerRowNarrowSimple(
+                timer: timer,
+                resumeTimer: _resumeTimer,
+                deleteTimer: _deleteTimer);
   }
 
   void _resumeTimer(BuildContext context) {
@@ -49,7 +65,8 @@ class StoppedTimerRow extends StatelessWidget {
     if (settingsBloc.state.oneTimerAtATime) {
       timersBloc.add(const StopAllTimers());
     }
-    timersBloc.add(CreateTimer(description: timer.description, project: project));
+    timersBloc
+        .add(CreateTimer(description: timer.description, project: project));
   }
 
   void _deleteTimer(BuildContext context) async {

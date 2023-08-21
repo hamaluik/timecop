@@ -33,7 +33,7 @@ class SettingsState extends Equatable {
   final int defaultFilterDays;
   final bool hasAskedNotificationPermissions;
   final bool showRunningTimersAsNotifications;
-  final bool compactView;
+  final bool showProjectNames;
 
   const SettingsState({
     required this.exportGroupTimers,
@@ -54,7 +54,7 @@ class SettingsState extends Equatable {
     required this.defaultFilterDays,
     required this.hasAskedNotificationPermissions,
     required this.showRunningTimersAsNotifications,
-    required this.compactView,
+    required this.showProjectNames,
   });
 
   static SettingsState initial() {
@@ -77,7 +77,7 @@ class SettingsState extends Equatable {
       defaultFilterDays: 30,
       hasAskedNotificationPermissions: false,
       showRunningTimersAsNotifications: false,
-      compactView: false,
+      showProjectNames: false,
     );
   }
 
@@ -101,28 +101,37 @@ class SettingsState extends Equatable {
     int? defaultFilterDays,
     bool? hasAskedNotificationPermissions,
     bool? showRunningTimersAsNotifications,
-    bool? compactView,
+    bool? showProjectNames,
   }) : this(
           exportGroupTimers: exportGroupTimers ?? settings.exportGroupTimers,
           exportIncludeDate: exportIncludeDate ?? settings.exportIncludeDate,
-          exportIncludeProject: exportIncludeProject ?? settings.exportIncludeProject,
-          exportIncludeDescription: exportIncludeDescription ?? settings.exportIncludeDescription,
-          exportIncludeProjectDescription: exportIncludeProjectDescription ?? settings.exportIncludeProjectDescription,
-          exportIncludeStartTime: exportIncludeStartTime ?? settings.exportIncludeStartTime,
-          exportIncludeEndTime: exportIncludeEndTime ?? settings.exportIncludeEndTime,
-          exportIncludeDurationHours: exportIncludeDurationHours ?? settings.exportIncludeDurationHours,
+          exportIncludeProject:
+              exportIncludeProject ?? settings.exportIncludeProject,
+          exportIncludeDescription:
+              exportIncludeDescription ?? settings.exportIncludeDescription,
+          exportIncludeProjectDescription: exportIncludeProjectDescription ??
+              settings.exportIncludeProjectDescription,
+          exportIncludeStartTime:
+              exportIncludeStartTime ?? settings.exportIncludeStartTime,
+          exportIncludeEndTime:
+              exportIncludeEndTime ?? settings.exportIncludeEndTime,
+          exportIncludeDurationHours:
+              exportIncludeDurationHours ?? settings.exportIncludeDurationHours,
           exportIncludeNotes: exportIncludeNotes ?? settings.exportIncludeNotes,
           groupTimers: groupTimers ?? settings.groupTimers,
           collapseDays: collapseDays ?? settings.collapseDays,
-          autocompleteDescription: autocompleteDescription ?? settings.autocompleteDescription,
-          defaultFilterStartDateToMonday: defaultFilterStartDateToMonday ?? settings.defaultFilterStartDateToMonday,
+          autocompleteDescription:
+              autocompleteDescription ?? settings.autocompleteDescription,
+          defaultFilterStartDateToMonday: defaultFilterStartDateToMonday ??
+              settings.defaultFilterStartDateToMonday,
           oneTimerAtATime: oneTimerAtATime ?? settings.oneTimerAtATime,
           showBadgeCounts: showBadgeCounts ?? settings.showBadgeCounts,
           defaultFilterDays: defaultFilterDays ?? settings.defaultFilterDays,
-          hasAskedNotificationPermissions: hasAskedNotificationPermissions ?? settings.hasAskedNotificationPermissions,
-          showRunningTimersAsNotifications:
-              showRunningTimersAsNotifications ?? settings.showRunningTimersAsNotifications,
-          compactView: compactView ?? settings.compactView,
+          hasAskedNotificationPermissions: hasAskedNotificationPermissions ??
+              settings.hasAskedNotificationPermissions,
+          showRunningTimersAsNotifications: showRunningTimersAsNotifications ??
+              settings.showRunningTimersAsNotifications,
+          showProjectNames: showProjectNames ?? settings.showProjectNames,
         );
 
   @override
@@ -145,6 +154,6 @@ class SettingsState extends Equatable {
         defaultFilterDays,
         hasAskedNotificationPermissions,
         showRunningTimersAsNotifications,
-        compactView,
+        showProjectNames,
       ];
 }

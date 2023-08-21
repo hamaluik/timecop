@@ -53,7 +53,7 @@ class SetBoolValueEvent extends SettingsEvent {
   final bool? oneTimerAtATime;
   final bool? showBadgeCounts;
   final bool? showRunningTimersAsNotifications;
-  final bool? compactView;
+  final bool? showProjectNames;
 
   const SetBoolValueEvent(
       {this.exportGroupTimers,
@@ -72,7 +72,7 @@ class SetBoolValueEvent extends SettingsEvent {
       this.oneTimerAtATime,
       this.showBadgeCounts,
       this.showRunningTimersAsNotifications,
-      this.compactView});
+      this.showProjectNames});
 
   @override
   List<Object?> get props => [
@@ -92,7 +92,7 @@ class SetBoolValueEvent extends SettingsEvent {
         oneTimerAtATime,
         showBadgeCounts,
         showRunningTimersAsNotifications,
-        compactView,
+        showProjectNames,
       ];
 }
 

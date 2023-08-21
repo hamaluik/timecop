@@ -26,11 +26,11 @@ import 'package:timecop/screens/timer/TimerEditor.dart';
 
 import 'package:timecop/timer_utils.dart';
 
-class StoppedTimerRowNarrow extends StatefulWidget {
+class StoppedTimerRowNarrowSimple extends StatefulWidget {
   final TimerEntry timer;
   final Function(BuildContext) resumeTimer;
   final Function(BuildContext) deleteTimer;
-  const StoppedTimerRowNarrow(
+  const StoppedTimerRowNarrowSimple(
       {Key? key,
       required this.timer,
       required this.resumeTimer,
@@ -38,10 +38,12 @@ class StoppedTimerRowNarrow extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<StoppedTimerRowNarrow> createState() => _StoppedTimerRowNarrowState();
+  State<StoppedTimerRowNarrowSimple> createState() =>
+      _StoppedTimerRowNarrowSimpleState();
 }
 
-class _StoppedTimerRowNarrowState extends State<StoppedTimerRowNarrow> {
+class _StoppedTimerRowNarrowSimpleState
+    extends State<StoppedTimerRowNarrowSimple> {
   bool _hovering = false;
 
   @override

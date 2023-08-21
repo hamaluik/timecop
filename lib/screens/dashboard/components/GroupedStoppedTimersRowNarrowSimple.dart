@@ -26,12 +26,12 @@ import 'package:timecop/screens/dashboard/components/StoppedTimerRow.dart';
 
 import 'package:timecop/timer_utils.dart';
 
-class GroupedStoppedTimersRowNarrow extends StatefulWidget {
+class GroupedStoppedTimersRowNarrowSimple extends StatefulWidget {
   final List<TimerEntry> timers;
   final Function(BuildContext) resumeTimer;
   final Duration totalDuration;
 
-  const GroupedStoppedTimersRowNarrow(
+  const GroupedStoppedTimersRowNarrowSimple(
       {Key? key,
       required this.timers,
       required this.resumeTimer,
@@ -40,12 +40,12 @@ class GroupedStoppedTimersRowNarrow extends StatefulWidget {
         super(key: key);
 
   @override
-  State<GroupedStoppedTimersRowNarrow> createState() =>
-      _GroupedStoppedTimersRowNarrowState();
+  State<GroupedStoppedTimersRowNarrowSimple> createState() =>
+      _GroupedStoppedTimersRowNarrowSimpleState();
 }
 
-class _GroupedStoppedTimersRowNarrowState
-    extends State<GroupedStoppedTimersRowNarrow>
+class _GroupedStoppedTimersRowNarrowSimpleState
+    extends State<GroupedStoppedTimersRowNarrowSimple>
     with SingleTickerProviderStateMixin {
   static final Animatable<double> _easeInTween =
       CurveTween(curve: Curves.easeIn);
@@ -131,7 +131,11 @@ class _GroupedStoppedTimersRowNarrowState
               ],
             ),
             children: widget.timers
-                .map((timer) => StoppedTimerRow(timer: timer))
+                .map((timer) => StoppedTimerRow(
+                      timer: timer,
+                      isWidescreen: false,
+                      showProjectName: false,
+                    ))
                 .toList(),
           ),
         ));
