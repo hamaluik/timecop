@@ -17,8 +17,6 @@ import 'package:intl/intl.dart';
 import 'package:timecop/l10n.dart';
 
 class FilterText extends StatelessWidget {
-  static final DateFormat _dateFormat = DateFormat.yMMMd();
-
   final DateTime? filterStart;
   final DateTime? filterEnd;
   const FilterText({Key? key, this.filterStart, this.filterEnd})
@@ -26,15 +24,16 @@ class FilterText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dateFormat = DateFormat.yMMMd();
+
     if (filterStart == null && filterEnd == null) return const SizedBox();
 
     final filterString = (filterStart == null)
-        ? L10N.of(context).tr.filterUntil(_dateFormat.format(filterEnd!))
+        ? L10N.of(context).tr.filterUntil(dateFormat.format(filterEnd!))
         : (filterEnd == null)
-            ? L10N.of(context).tr.filterFrom(_dateFormat.format(filterStart!))
+            ? L10N.of(context).tr.filterFrom(dateFormat.format(filterStart!))
             : L10N.of(context).tr.filterFromUntil(
-                _dateFormat.format(filterStart!),
-                _dateFormat.format(filterEnd!));
+                dateFormat.format(filterStart!), dateFormat.format(filterEnd!));
 
     return Padding(
         padding: const EdgeInsets.fromLTRB(16, 24, 16, 16),

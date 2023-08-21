@@ -26,12 +26,12 @@ import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 
 class FilterSheet extends StatelessWidget {
   final DashboardBloc dashboardBloc;
-  static final DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
   const FilterSheet({Key? key, required this.dashboardBloc}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+    final dateFormat = DateFormat.yMMMEd();
 
     return BlocBuilder<DashboardBloc, DashboardState>(
       bloc: dashboardBloc,
@@ -57,7 +57,7 @@ class FilterSheet extends StatelessWidget {
                             padding: EdgeInsets.symmetric(horizontal: 18),
                             child: Text("--"))
                         : Text(
-                            _dateFormat.format(state.filterStart!),
+                            dateFormat.format(state.filterStart!),
                           ),
                     if (state.filterStart != null)
                       IconButton(
@@ -93,7 +93,7 @@ class FilterSheet extends StatelessWidget {
                         ? const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 18),
                             child: Text("--"))
-                        : Text(_dateFormat.format(state.filterEnd!)),
+                        : Text(dateFormat.format(state.filterEnd!)),
                     if (state.filterEnd != null)
                       IconButton(
                         tooltip: L10N.of(context).tr.remove,

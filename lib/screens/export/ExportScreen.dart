@@ -53,8 +53,6 @@ class _ExportScreenState extends State<ExportScreen> {
   DateTime? _startDate;
   DateTime? _endDate;
   List<Project?> selectedProjects = [];
-  static final DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
-  static final DateFormat _exportDateFormat = DateFormat.yMd();
 
   @override
   void initState() {
@@ -75,13 +73,16 @@ class _ExportScreenState extends State<ExportScreen> {
     final settingsBloc = BlocProvider.of<SettingsBloc>(context);
     final projectsBloc = BlocProvider.of<ProjectsBloc>(context);
 
+    final dateFormat = DateFormat.yMMMEd();
+    final exportDateFormat = DateFormat.yMd();
+
     // TODO: break this into components or something so we don't have such a massively unmanagement build function
 
     return Scaffold(
       appBar: AppBar(
         title: Text(L10N.of(context).tr.exportImport),
         actions: <Widget>[
-          ExportMenu(dateFormat: _dateFormat),
+          ExportMenu(dateFormat: dateFormat),
         ],
       ),
       body: ListView(
@@ -102,7 +103,7 @@ class _ExportScreenState extends State<ExportScreen> {
                           padding: EdgeInsets.symmetric(horizontal: 18),
                           child: Text("--"),
                         )
-                      : Text(_dateFormat.format(_startDate!)),
+                      : Text(dateFormat.format(_startDate!)),
                   if (_startDate != null)
                     IconButton(
                       tooltip: L10N.of(context).tr.remove,
@@ -138,7 +139,7 @@ class _ExportScreenState extends State<ExportScreen> {
                           padding: EdgeInsets.symmetric(horizontal: 18),
                           child: Text("--"),
                         )
-                      : Text(_dateFormat.format(_endDate!)),
+                      : Text(dateFormat.format(_endDate!)),
                   if (_endDate != null)
                     IconButton(
                       tooltip: L10N.of(context).tr.remove,
@@ -396,7 +397,7 @@ class _ExportScreenState extends State<ExportScreen> {
                       LinkedHashMap<ProjectDescriptionPair, List<TimerEntry>>>
                   derp = LinkedHashMap();
               for (TimerEntry timer in filteredTimers) {
-                String date = _exportDateFormat.format(timer.startTime);
+                String date = exportDateFormat.format(timer.startTime);
                 LinkedHashMap<ProjectDescriptionPair, List<TimerEntry>>
                     pairedEntries =
                     derp.putIfAbsent(date, () => LinkedHashMap());
@@ -433,7 +434,7 @@ class _ExportScreenState extends State<ExportScreen> {
                 <List<String>>[headers].followedBy(filteredTimers.map((timer) {
               List<String> row = [];
               if (settingsBloc.state.exportIncludeDate) {
-                row.add(_exportDateFormat.format(timer.startTime));
+                row.add(exportDateFormat.format(timer.startTime));
               }
               if (settingsBloc.state.exportIncludeProject) {
                 row.add(projects.getProjectByID(timer.projectID)?.name ?? "");
@@ -490,7 +491,7 @@ class _ExportScreenState extends State<ExportScreen> {
               await file.writeAsString(csv, flush: true);
               await Share.shareXFiles([XFile(localPath, mimeType: "text/csv")],
                   subject: localizations.tr
-                      .timeCopEntries(_dateFormat.format(DateTime.now())));
+                      .timeCopEntries(dateFormat.format(DateTime.now())));
             }
           }),
     );

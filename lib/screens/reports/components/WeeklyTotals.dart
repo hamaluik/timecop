@@ -45,8 +45,6 @@ class WeeklyTotals extends StatefulWidget {
 }
 
 class _WeeklyTotalsState extends State<WeeklyTotals> {
-  static final DateFormat _dateFormat = DateFormat.MMMd();
-
   static LinkedHashMap<int?, LinkedHashMap<int, double>> calculateData(
       BuildContext context,
       DateTime? startDate,
@@ -87,6 +85,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
   @override
   Widget build(BuildContext context) {
     final projects = BlocProvider.of<ProjectsBloc>(context);
+    final dateFormat = DateFormat.MMMd();
     DateTime? firstDate = widget.startDate;
     if (firstDate == null) {
       final timers = BlocProvider.of<TimersBloc>(context);
@@ -169,7 +168,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                               DateTime date =
                                   firstDate!.add(Duration(days: week * 7));
                               return Text(
-                                _dateFormat.format(date).replaceAll(' ', '\n'),
+                                dateFormat.format(date).replaceAll(' ', '\n'),
                                 style: Theme.of(context).textTheme.caption,
                               );
                             }),

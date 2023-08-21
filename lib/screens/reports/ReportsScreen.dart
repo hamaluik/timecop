@@ -44,7 +44,6 @@ class _ReportsScreenState extends State<ReportsScreen> {
   DateTime? _endDate;
   DateTime? _oldStartDate;
   DateTime? _oldEndDate;
-  static final DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy");
   List<Project?> selectedProjects = [];
 
   @override
@@ -74,6 +73,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
   @override
   Widget build(BuildContext context) {
     final projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+    final dateFormat = DateFormat.yMMMEd();
 
     return Scaffold(
         appBar: AppBar(
@@ -150,7 +150,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                         ? const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 18),
                             child: Text("--"))
-                        : Text(_dateFormat.format(_startDate!)),
+                        : Text(dateFormat.format(_startDate!)),
                     if (_startDate != null)
                       IconButton(
                         icon: const Icon(FontAwesomeIcons.circleMinus),
@@ -197,7 +197,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                         ? const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 18),
                             child: Text("--"))
-                        : Text(_dateFormat.format(_endDate!)),
+                        : Text(dateFormat.format(_endDate!)),
                     if (_endDate != null)
                       IconButton(
                         tooltip: L10N.of(context).tr.remove,
