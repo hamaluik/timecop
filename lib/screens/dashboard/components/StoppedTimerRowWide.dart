@@ -22,6 +22,7 @@ import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/timer_entry.dart';
+import 'package:timecop/screens/dashboard/components/ProjectTag.dart';
 import 'package:timecop/screens/dashboard/components/RowSeparator.dart';
 import 'package:timecop/screens/timer/TimerEditor.dart';
 
@@ -29,16 +30,18 @@ import 'package:timecop/timer_utils.dart';
 
 class StoppedTimerRowWide extends StatelessWidget {
   static const _spaceWidth = 16.0;
-  static final DateFormat _timeFormat = DateFormat("hh:mma");
 
   final TimerEntry timer;
   final Function(BuildContext) resumeTimer;
   final Function(BuildContext) deleteTimer;
+  final bool showProjectName;
+
   const StoppedTimerRowWide(
       {Key? key,
       required this.timer,
       required this.resumeTimer,
-      required this.deleteTimer})
+      required this.deleteTimer,
+      required this.showProjectName})
       : super(key: key);
 
   @override
@@ -49,6 +52,9 @@ class StoppedTimerRowWide extends StatelessWidget {
       color: Theme.of(context).colorScheme.onSurfaceVariant,
       fontFeatures: const [FontFeature.tabularFigures()],
     );
+    final project =
+        BlocProvider.of<ProjectsBloc>(context).getProjectByID(timer.projectID);
+    final timeFormat = DateFormat.jm();
 
     return ListTile(
         key: Key("stoppedTimer-${timer.id}"),
@@ -58,17 +64,26 @@ class StoppedTimerRowWide extends StatelessWidget {
               ),
               fullscreenDialog: true,
             )),
-        leading: ProjectColour(
-            project: BlocProvider.of<ProjectsBloc>(context)
-                .getProjectByID(timer.projectID)),
-        title: Text(TimerUtils.formatDescription(context, timer.description),
-            style: TimerUtils.styleDescription(context, timer.description)),
+        leading: showProjectName ? null : ProjectColour(project: project),
+        title: showProjectName
+            ? Row(children: [
+                Flexible(
+                    child: Text(
+                        TimerUtils.formatDescription(
+                            context, timer.description),
+                        style: TimerUtils.styleDescription(
+                            context, timer.description))),
+                const SizedBox(width: _spaceWidth),
+                ProjectTag(project: project)
+              ])
+            : Text(TimerUtils.formatDescription(context, timer.description),
+                style: TimerUtils.styleDescription(context, timer.description)),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             const SizedBox(width: _spaceWidth),
             Text(
-              _timeFormat.format(timer.startTime),
+              timeFormat.format(timer.startTime),
               style: timeSpanStyle,
             ),
             const SizedBox(
@@ -79,7 +94,7 @@ class StoppedTimerRowWide extends StatelessWidget {
               width: _spaceWidth,
             ),
             Text(
-              _timeFormat.format(timer.endTime!),
+              timeFormat.format(timer.endTime!),
               style: timeSpanStyle,
             ),
             if (duration.inDays > 0)

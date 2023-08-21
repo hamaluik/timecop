@@ -39,7 +39,6 @@ class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping>
       CurveTween(curve: Curves.easeIn);
   static final Animatable<double> _halfTween =
       Tween<double>(begin: 0.0, end: -0.5);
-  static final DateFormat _dateFormat = DateFormat.yMMMMEEEEd();
 
   late bool _expanded;
   late AnimationController _controller;
@@ -66,6 +65,7 @@ class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping>
 
   @override
   Widget build(BuildContext context) {
+    final dateFormat = DateFormat.yMMMMEEEEd();
     return ExpansionTile(
       initiallyExpanded:
           DateTime.now().difference(widget.date).inDays.abs() <= 1,
@@ -79,7 +79,7 @@ class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping>
           }
         });
       },
-      title: Text(_dateFormat.format(widget.date),
+      title: Text(dateFormat.format(widget.date),
           style: TextStyle(
             //color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.w700,

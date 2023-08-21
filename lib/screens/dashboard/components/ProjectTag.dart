@@ -13,34 +13,27 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:timecop/components/ProjectColour.dart';
+import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 
-class ProjectColour extends StatelessWidget {
-  static const double _size = 20;
+class ProjectTag extends StatelessWidget {
   final Project? project;
-  final bool? mini;
-  const ProjectColour({Key? key, this.project, this.mini}) : super(key: key);
+
+  const ProjectTag({super.key, required this.project});
 
   @override
   Widget build(BuildContext context) {
-    bool m = mini ?? false;
-    double scale = m ? 14 / 20 : 1.0;
-
-    return Container(
-      key: Key("pc-${project?.id}-m"),
-      width: _size * scale,
-      height: _size * scale,
-      decoration: BoxDecoration(
-        color: project?.colour ?? Colors.transparent,
-        //borderRadius: BorderRadius.circular(SIZE * 0.5 * scale),
-        border: project == null
-            ? Border.all(
-                color: Theme.of(context).disabledColor,
-                width: m ? 2.5 : 3.0,
-              )
-            : null,
-        shape: BoxShape.circle,
-      ),
-    );
+    return Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+      ProjectColour(mini: true, project: project),
+      const SizedBox(width: 6),
+      Text(
+        project?.name ?? L10N.of(context).tr.noProject,
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: project == null
+                ? Theme.of(context).colorScheme.onSurfaceVariant
+                : Theme.of(context).colorScheme.onBackground),
+      )
+    ]);
   }
 }

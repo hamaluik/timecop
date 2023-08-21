@@ -31,6 +31,7 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final projectsBloc = BlocProvider.of<ProjectsBloc>(context);
     final settingsBloc = BlocProvider.of<SettingsBloc>(context);
+    final screenBorders = MediaQuery.of(context).padding;
 
     return BlocProvider<DashboardBloc>(
         create: (_) => DashboardBloc(projectsBloc, settingsBloc),
@@ -50,11 +51,11 @@ class DashboardScreen extends StatelessWidget {
                 elevation: 8.0,
                 color: Theme.of(context).bottomSheetTheme.backgroundColor,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
+                  padding: EdgeInsets.fromLTRB(8 + screenBorders.left, 8,
+                      8 + screenBorders.right, 8 + screenBorders.bottom),
+                  child: const Row(
                     mainAxisSize: MainAxisSize.max,
-                    //crossAxisAlignment: CrossAxisAlignment.end,
-                    children: const <Widget>[
+                    children: <Widget>[
                       ProjectSelectField(),
                       Expanded(
                         flex: 1,

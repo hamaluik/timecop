@@ -59,8 +59,6 @@ class _TimerEditorState extends State<TimerEditor> {
   late Timer _updateTimer;
   late StreamController<DateTime> _updateTimerStreamController;
 
-  static final DateFormat _dateFormat = DateFormat("EE, MMM d, yyyy h:mma");
-
   late ProjectsBloc _projectsBloc;
 
   @override
@@ -105,6 +103,7 @@ class _TimerEditorState extends State<TimerEditor> {
   Widget build(BuildContext context) {
     final settingsBloc = BlocProvider.of<SettingsBloc>(context);
     final timers = BlocProvider.of<TimersBloc>(context);
+    final dateFormat = DateFormat.yMMMEd().add_jm();
 
     return Scaffold(
       appBar: AppBar(
@@ -260,7 +259,7 @@ class _TimerEditorState extends State<TimerEditor> {
                 Expanded(
                     flex: 3,
                     child: Text(
-                      _dateFormat.format(_startTime),
+                      dateFormat.format(_startTime),
                       textAlign: TextAlign.right,
                       style: Theme.of(context).textTheme.bodyMedium,
                     )),
@@ -313,7 +312,7 @@ class _TimerEditorState extends State<TimerEditor> {
                 Expanded(
                     flex: 3,
                     child: Text(
-                      _endTime == null ? "--" : _dateFormat.format(_endTime!),
+                      _endTime == null ? "--" : dateFormat.format(_endTime!),
                       textAlign: TextAlign.right,
                       style: Theme.of(context).textTheme.bodyMedium,
                     )),

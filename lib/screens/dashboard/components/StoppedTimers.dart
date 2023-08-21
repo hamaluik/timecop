@@ -38,7 +38,6 @@ class _DayGrouping {
 }
 
 class _DayGroupingRows extends StatelessWidget {
-  static final DateFormat _dateFormat = DateFormat.yMMMMEEEEd();
   final _DayGrouping dayGrouping;
 
   const _DayGroupingRows({Key? key, required this.dayGrouping})
@@ -48,6 +47,10 @@ class _DayGroupingRows extends StatelessWidget {
   Widget build(BuildContext context) {
     final isWidescreen = ResponsivenessUtils.isWidescreen(context);
     final settingsBloc = BlocProvider.of<SettingsBloc>(context);
+    final showProjectName = settingsBloc.state.showProjectNames;
+
+    final dateFormat = DateFormat.yMMMEd();
+
     Duration runningTotal = Duration(
         seconds: dayGrouping.entries.fold(
             0,
@@ -69,12 +72,28 @@ class _DayGroupingRows extends StatelessWidget {
     Iterable<Widget> theDaysTimers = pairedEntries.values.map((timers) {
       if (settingsBloc.state.groupTimers) {
         if (timers.length > 1) {
-          return <Widget>[GroupedStoppedTimersRow(timers: timers)];
+          return <Widget>[
+            GroupedStoppedTimersRow(
+              timers: timers,
+              isWidescreen: isWidescreen,
+              showProjectName: showProjectName,
+            )
+          ];
         } else {
-          return <Widget>[StoppedTimerRow(timer: timers[0])];
+          return <Widget>[
+            StoppedTimerRow(
+                timer: timers[0],
+                isWidescreen: isWidescreen,
+                showProjectName: showProjectName)
+          ];
         }
       } else {
-        return timers.map((t) => StoppedTimerRow(timer: t)).toList();
+        return timers
+            .map((t) => StoppedTimerRow(
+                timer: t,
+                isWidescreen: isWidescreen,
+                showProjectName: showProjectName))
+            .toList();
       }
     }).expand((l) => l);
 
@@ -99,7 +118,7 @@ class _DayGroupingRows extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     Expanded(
-                        child: Text(_dateFormat.format(dayGrouping.date),
+                        child: Text(dateFormat.format(dayGrouping.date),
                             style: TextStyle(
                                 color: Theme.of(context).colorScheme.secondary,
                                 fontWeight: FontWeight.w700))),

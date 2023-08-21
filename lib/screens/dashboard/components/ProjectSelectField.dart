@@ -75,26 +75,26 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
                               onPressed: () {
                                 Navigator.of(context).pop(_ProjectChoice(p));
                               },
-                              child: Row(
-                                children: <Widget>[
-                                  ProjectColour(project: p),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
-                                    child: Text(
-                                        p?.name ??
-                                            L10N.of(context).tr.noProject,
-                                        style: TextStyle(
-                                            color: p == null
-                                                ? Theme.of(context)
-                                                    .disabledColor
-                                                : Theme.of(context)
-                                                    .textTheme
-                                                    .bodyText2!
-                                                    .color)),
-                                  ),
-                                ],
-                              )))
+                              child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 12),
+                                  child: Row(
+                                    children: <Widget>[
+                                      ProjectColour(project: p),
+                                      const SizedBox(width: 8),
+                                      Text(
+                                          p?.name ??
+                                              L10N.of(context).tr.noProject,
+                                          style: TextStyle(
+                                              color: p == null
+                                                  ? Theme.of(context)
+                                                      .disabledColor
+                                                  : Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText2!
+                                                      .color)),
+                                    ],
+                                  ))))
                           .toList(),
                     );
                   });
