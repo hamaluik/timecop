@@ -16,24 +16,23 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:numberpicker/numberpicker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:timecop/blocs/locale/locale_bloc.dart';
 import 'package:timecop/blocs/notifications/notifications_bloc.dart';
 import 'package:timecop/blocs/settings/bloc.dart';
 import 'package:timecop/blocs/theme/theme_bloc.dart';
 import 'package:timecop/l10n.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:numberpicker/numberpicker.dart';
 
 import 'components/locale_options.dart';
 import 'components/theme_options.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class SettingsScreen extends StatelessWidget {
   SettingsScreen({Key? key}) : super(key: key);
 
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-  FlutterLocalNotificationsPlugin();
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   // bool _switchValue = false;
   // bool _notificationPermissionGranted = false;
@@ -41,18 +40,16 @@ class SettingsScreen extends StatelessWidget {
   void requestAndroidNotificationPermission(BuildContext context) async {
     var status = await Permission.notification.status;
     bool? result = await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-        AndroidFlutterLocalNotificationsPlugin>()!
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()!
         .requestPermission();
-    if((result != null && !result) && status.isDenied){
-      if(context.mounted) {
+    if ((result != null && !result) && status.isDenied) {
+      if (context.mounted) {
         dialogNotificationPermission(context);
       }
     }
     // else if(status.isGranted || result!){
     //   _notificationPermissionGranted = true;
     // }
-
   }
 
   Future<void> dialogNotificationPermission(BuildContext context) async {
@@ -98,45 +95,46 @@ class SettingsScreen extends StatelessWidget {
             ),
             BlocBuilder<SettingsBloc, SettingsState>(
               bloc: settingsBloc,
-              builder: (BuildContext context, SettingsState settings) =>
-                  SwitchListTile.adaptive(
+              builder: (BuildContext context, SettingsState settings) => SwitchListTile.adaptive(
                 title: Text(L10N.of(context).tr.groupTimers),
                 value: settings.groupTimers,
-                onChanged: (bool value) =>
-                    settingsBloc.add(SetBoolValueEvent(groupTimers: value)),
+                onChanged: (bool value) => settingsBloc.add(SetBoolValueEvent(groupTimers: value)),
                 activeColor: Theme.of(context).colorScheme.secondary,
               ),
             ),
             BlocBuilder<SettingsBloc, SettingsState>(
               bloc: settingsBloc,
-              builder: (BuildContext context, SettingsState settings) =>
-                  SwitchListTile.adaptive(
+              builder: (BuildContext context, SettingsState settings) => SwitchListTile.adaptive(
+                title: Text(L10N.of(context).tr.compactView),
+                value: settings.compactView,
+                onChanged: (bool value) => settingsBloc.add(SetBoolValueEvent(compactView: value)),
+                activeColor: Theme.of(context).colorScheme.secondary,
+              ),
+            ),
+            BlocBuilder<SettingsBloc, SettingsState>(
+              bloc: settingsBloc,
+              builder: (BuildContext context, SettingsState settings) => SwitchListTile.adaptive(
                 title: Text(L10N.of(context).tr.collapseDays),
                 value: settings.collapseDays,
-                onChanged: (bool value) =>
-                    settingsBloc.add(SetBoolValueEvent(collapseDays: value)),
+                onChanged: (bool value) => settingsBloc.add(SetBoolValueEvent(collapseDays: value)),
                 activeColor: Theme.of(context).colorScheme.secondary,
               ),
             ),
             BlocBuilder<SettingsBloc, SettingsState>(
               bloc: settingsBloc,
-              builder: (BuildContext context, SettingsState settings) =>
-                  SwitchListTile.adaptive(
+              builder: (BuildContext context, SettingsState settings) => SwitchListTile.adaptive(
                 title: Text(L10N.of(context).tr.autocompleteDescription),
                 value: settings.autocompleteDescription,
-                onChanged: (bool value) => settingsBloc
-                    .add(SetBoolValueEvent(autocompleteDescription: value)),
+                onChanged: (bool value) => settingsBloc.add(SetBoolValueEvent(autocompleteDescription: value)),
                 activeColor: Theme.of(context).colorScheme.secondary,
               ),
             ),
             BlocBuilder<SettingsBloc, SettingsState>(
               bloc: settingsBloc,
-              builder: (BuildContext context, SettingsState settings) =>
-                  SwitchListTile.adaptive(
+              builder: (BuildContext context, SettingsState settings) => SwitchListTile.adaptive(
                 title: Text(L10N.of(context).tr.defaultFilterStartDateToMonday),
                 value: settings.defaultFilterStartDateToMonday,
-                onChanged: (bool value) => settingsBloc.add(
-                    SetBoolValueEvent(defaultFilterStartDateToMonday: value)),
+                onChanged: (bool value) => settingsBloc.add(SetBoolValueEvent(defaultFilterStartDateToMonday: value)),
                 activeColor: Theme.of(context).colorScheme.secondary,
               ),
             ),
@@ -151,9 +149,7 @@ class SettingsScreen extends StatelessWidget {
                     title: Text(L10N.of(context).tr.defaultFilterDays),
                     trailing: Row(mainAxisSize: MainAxisSize.min, children: [
                       settings.defaultFilterDays == -1
-                          ? const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 18),
-                              child: Text("--"))
+                          ? const Padding(padding: EdgeInsets.symmetric(horizontal: 18), child: Text("--"))
                           : Text(settings.defaultFilterDays.toString()),
                       if (settings.defaultFilterDays != -1)
                         IconButton(
@@ -165,14 +161,11 @@ class SettingsScreen extends StatelessWidget {
                         )
                     ]),
                     onTap: () async {
-                      int tempDays = settings.defaultFilterDays > 0
-                          ? settings.defaultFilterDays
-                          : 30;
+                      int tempDays = settings.defaultFilterDays > 0 ? settings.defaultFilterDays : 30;
                       int? days = await showDialog<int>(
                           context: context,
                           builder: (BuildContext context) {
-                            return StatefulBuilder(
-                                builder: (context, setState) {
+                            return StatefulBuilder(builder: (context, setState) {
                               return AlertDialog(
                                 content: NumberPicker(
                                   minValue: 1,
@@ -184,8 +177,7 @@ class SettingsScreen extends StatelessWidget {
                                   infiniteLoop: true,
                                   haptics: true,
                                 ),
-                                title:
-                                    Text(L10N.of(context).tr.defaultFilterDays),
+                                title: Text(L10N.of(context).tr.defaultFilterDays),
                                 actions: <Widget>[
                                   TextButton(
                                       onPressed: () {
@@ -209,47 +201,38 @@ class SettingsScreen extends StatelessWidget {
                 }),
             BlocBuilder<SettingsBloc, SettingsState>(
               bloc: settingsBloc,
-              builder: (BuildContext context, SettingsState settings) =>
-                  SwitchListTile.adaptive(
+              builder: (BuildContext context, SettingsState settings) => SwitchListTile.adaptive(
                 title: Text(L10N.of(context).tr.oneTimerAtATime),
                 value: settings.oneTimerAtATime,
-                onChanged: (bool value) =>
-                    settingsBloc.add(SetBoolValueEvent(oneTimerAtATime: value)),
+                onChanged: (bool value) => settingsBloc.add(SetBoolValueEvent(oneTimerAtATime: value)),
                 activeColor: Theme.of(context).colorScheme.secondary,
               ),
             ),
             if (Platform.isIOS || Platform.isAndroid)
               BlocBuilder<SettingsBloc, SettingsState>(
                 bloc: settingsBloc,
-                builder: (BuildContext context, SettingsState settings) =>
-                    SwitchListTile.adaptive(
+                builder: (BuildContext context, SettingsState settings) => SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.showBadgeCounts),
                   value: settings.showBadgeCounts,
-                  onChanged: (bool value) => settingsBloc
-                      .add(SetBoolValueEvent(showBadgeCounts: value)),
+                  onChanged: (bool value) => settingsBloc.add(SetBoolValueEvent(showBadgeCounts: value)),
                   activeColor: Theme.of(context).colorScheme.secondary,
                 ),
               ),
             BlocBuilder<SettingsBloc, SettingsState>(
               bloc: settingsBloc,
-              builder: (BuildContext context, SettingsState settings) =>
-                  SwitchListTile.adaptive(
-                title:
-                    Text(L10N.of(context).tr.enableRunningTimersNotification),
+              builder: (BuildContext context, SettingsState settings) => SwitchListTile.adaptive(
+                title: Text(L10N.of(context).tr.enableRunningTimersNotification),
                 value: settings.showRunningTimersAsNotifications,
                 // value: _switchValue,
 
                 onChanged: (bool value) {
                   if (value) {
-                    BlocProvider.of<NotificationsBloc>(context)
-                        .add(const RequestNotificationPermissions());
-                    if(Platform.isAndroid) {
+                    BlocProvider.of<NotificationsBloc>(context).add(const RequestNotificationPermissions());
+                    if (Platform.isAndroid) {
                       requestAndroidNotificationPermission(context);
                     }
-
-                }
-                  settingsBloc.add(SetBoolValueEvent(
-                      showRunningTimersAsNotifications: value));
+                  }
+                  settingsBloc.add(SetBoolValueEvent(showRunningTimersAsNotifications: value));
                 },
                 activeColor: Theme.of(context).colorScheme.secondary,
               ),
@@ -257,5 +240,4 @@ class SettingsScreen extends StatelessWidget {
           ],
         ));
   }
-
 }

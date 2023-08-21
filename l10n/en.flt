@@ -54,6 +54,7 @@ logoSemantics = Time Cop Logo
 noDescription = (no description)
 options = Options
 groupTimers = Group Similar Timers Per Day
+compactView = Show Compact View
 columns = Columns
 date = Date
 combinedProjectDescription = Combined Project & Description
