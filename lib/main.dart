@@ -16,7 +16,6 @@ import 'dart:async';
 
 import 'dart:io';
 import 'package:flutter/foundation.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:timecop/blocs/locale/locale_bloc.dart';

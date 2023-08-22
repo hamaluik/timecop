@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import 'dart:io';
-import 'package:cross_file/cross_file.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
