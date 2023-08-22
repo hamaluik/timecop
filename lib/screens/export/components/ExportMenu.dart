@@ -49,6 +49,7 @@ class ExportMenu extends StatelessWidget {
         final settingsBloc = BlocProvider.of<SettingsBloc>(context);
         final timersBloc = BlocProvider.of<TimersBloc>(context);
         final projectsBloc = BlocProvider.of<ProjectsBloc>(context);
+
         switch (item) {
           case ExportMenuItem.import:
             try {
@@ -90,16 +91,16 @@ class ExportMenu extends StatelessWidget {
               if (e is PlatformException &&
                   e.code == "read_external_storage_denied") {
                 scaffoldMessenger.showSnackBar(SnackBar(
-                  backgroundColor: Theme.of(context).primaryColorDark,
+                  backgroundColor: theme.primaryColorDark,
                   content: Text(
-                    L10N.of(context).tr.storageAccessRequired,
+                    localization.tr.storageAccessRequired,
                     style: const TextStyle(color: Colors.white),
                   ),
                   duration: const Duration(seconds: 5),
                 ));
               } else {
                 scaffoldMessenger.showSnackBar(SnackBar(
-                  backgroundColor: Theme.of(context).colorScheme.error,
+                  backgroundColor: theme.colorScheme.error,
                   content: Text(
                     e.toString(),
                     style: TextStyle(color: theme.colorScheme.onError),
