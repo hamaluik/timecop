@@ -59,7 +59,7 @@ class _ProjectEditorState extends State<ProjectEditor> {
               widget.project == null
                   ? L10N.of(context).tr.createNewProject
                   : L10N.of(context).tr.editProject,
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             TextFormField(
               controller: _nameController,

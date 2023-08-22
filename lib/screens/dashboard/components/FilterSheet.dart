@@ -77,9 +77,9 @@ class FilterSheet extends StatelessWidget {
                             FilterStartChangedEvent(
                                 DateTime(dt.year, dt.month, dt.day))),
                         theme: dt.DatePickerTheme(
-                          cancelStyle: Theme.of(context).textTheme.button!,
-                          doneStyle: Theme.of(context).textTheme.button!,
-                          itemStyle: Theme.of(context).textTheme.bodyText2!,
+                          cancelStyle: Theme.of(context).textTheme.labelLarge!,
+                          doneStyle: Theme.of(context).textTheme.labelLarge!,
+                          itemStyle: Theme.of(context).textTheme.bodyMedium!,
                           backgroundColor:
                               Theme.of(context).colorScheme.surface,
                         ));
@@ -112,9 +112,9 @@ class FilterSheet extends StatelessWidget {
                             FilterEndChangedEvent(DateTime(
                                 dt.year, dt.month, dt.day, 23, 59, 59, 999))),
                         theme: dt.DatePickerTheme(
-                          cancelStyle: Theme.of(context).textTheme.button!,
-                          doneStyle: Theme.of(context).textTheme.button!,
-                          itemStyle: Theme.of(context).textTheme.bodyText2!,
+                          cancelStyle: Theme.of(context).textTheme.labelLarge!,
+                          doneStyle: Theme.of(context).textTheme.labelLarge!,
+                          itemStyle: Theme.of(context).textTheme.bodyMedium!,
                           backgroundColor:
                               Theme.of(context).colorScheme.surface,
                         ));

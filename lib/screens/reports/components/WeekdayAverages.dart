@@ -131,7 +131,7 @@ class WeekdayAverages extends StatelessWidget {
                                       .of(context)
                                       .tr
                                       .nHours(rod.toY.toStringAsFixed(1)),
-                                  Theme.of(context).textTheme.bodyText2!))),
+                                  Theme.of(context).textTheme.bodyMedium!))),
                   borderData: FlBorderData(
                     show: false,
                   ),
@@ -145,7 +145,7 @@ class WeekdayAverages extends StatelessWidget {
                         showTitles: true,
                         getTitlesWidget: (value, meta) => Text(
                           value.toString(),
-                          style: Theme.of(context).textTheme.bodyText2,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       )),
                       bottomTitles: AxisTitles(
@@ -180,7 +180,7 @@ class WeekdayAverages extends StatelessWidget {
                                 }
                                 return Text(
                                   title,
-                                  style: Theme.of(context).textTheme.bodyText2,
+                                  style: Theme.of(context).textTheme.bodyMedium,
                                 );
                               }))),
                   barGroups: List.generate(7, (i) => i)
@@ -209,7 +209,7 @@ class WeekdayAverages extends StatelessWidget {
             ),
             Text(
               L10N.of(context).tr.averageDailyHours,
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
             Legend(

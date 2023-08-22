@@ -83,7 +83,7 @@ class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping>
           style: TextStyle(
             //color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.w700,
-            fontSize: Theme.of(context).textTheme.bodyText2!.fontSize,
+            fontSize: Theme.of(context).textTheme.bodyMedium!.fontSize,
           )),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,

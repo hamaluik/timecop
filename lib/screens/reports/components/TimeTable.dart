@@ -73,19 +73,19 @@ class TimeTable extends StatelessWidget {
               Expanded(
                 flex: 3,
                 child: Text(L10N.of(context).tr.project,
-                    style: Theme.of(context).textTheme.headline6),
+                    style: Theme.of(context).textTheme.titleLarge),
               ),
               Expanded(
                 flex: 1,
                 child: Text(L10N.of(context).tr.hours,
                     textAlign: TextAlign.right,
-                    style: Theme.of(context).textTheme.headline6),
+                    style: Theme.of(context).textTheme.titleLarge),
               ),
             ],
           ),
           Divider(
               thickness: 2.0,
-              color: Theme.of(context).textTheme.bodyText2!.color),
+              color: Theme.of(context).textTheme.bodyMedium!.color),
         ].followedBy(projectHours.entries.map((MapEntry<int?, double> entry) {
           Project? project = projects.state.projects
               .firstWhereOrNull((project) => project.id == entry.key);
@@ -105,7 +105,7 @@ class TimeTable extends StatelessWidget {
                         ),
                         Container(width: 4),
                         Text(project?.name ?? L10N.of(context).tr.noProject,
-                            style: Theme.of(context).textTheme.bodyText2)
+                            style: Theme.of(context).textTheme.bodyMedium)
                       ],
                     ),
                   ),
@@ -113,7 +113,7 @@ class TimeTable extends StatelessWidget {
                     flex: 1,
                     child: Text(entry.value.toStringAsFixed(1),
                         textAlign: TextAlign.right,
-                        style: Theme.of(context).textTheme.bodyText2),
+                        style: Theme.of(context).textTheme.bodyMedium),
                   ),
                 ],
               ));
@@ -122,20 +122,20 @@ class TimeTable extends StatelessWidget {
               ? Container()
               : Divider(
                   thickness: 1.0,
-                  color: Theme.of(context).textTheme.bodyText2!.color),
+                  color: Theme.of(context).textTheme.bodyMedium!.color),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Expanded(
                 flex: 3,
                 child: Text(L10N.of(context).tr.total,
-                    style: Theme.of(context).textTheme.bodyText2),
+                    style: Theme.of(context).textTheme.bodyMedium),
               ),
               Expanded(
                 flex: 1,
                 child: Text(totalHours.toStringAsFixed(1),
                     textAlign: TextAlign.right,
-                    style: Theme.of(context).textTheme.bodyText2),
+                    style: Theme.of(context).textTheme.bodyMedium),
               ),
             ],
           )

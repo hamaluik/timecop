@@ -91,7 +91,7 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
                                                       .disabledColor
                                                   : Theme.of(context)
                                                       .textTheme
-                                                      .bodyText2!
+                                                      .bodyMedium!
                                                       .color)),
                                     ],
                                   ))))

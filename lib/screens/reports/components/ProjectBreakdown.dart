@@ -126,7 +126,7 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
                         title: _touchedIndex == index
                             ? "${L10N.of(context).tr.nHours(entry.value.toStringAsFixed(1))}\n(${(100.0 * entry.value / totalHours).toStringAsFixed(0)} %)"
                             : "",
-                        titleStyle: Theme.of(context).textTheme.bodyText2,
+                        titleStyle: Theme.of(context).textTheme.bodyMedium,
                         radius: _touchedIndex == index ? 80 : 60,
                       );
                     }))),
@@ -137,7 +137,7 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
             ),
             Text(
               L10N.of(context).tr.totalProjectShare,
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
             Legend(

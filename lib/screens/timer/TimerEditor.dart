@@ -290,9 +290,9 @@ class _TimerEditorState extends State<TimerEditor> {
                         onChanged: (DateTime dt) => setStartTime(dt),
                         onConfirm: (DateTime dt) => setStartTime(dt),
                         theme: dt.DatePickerTheme(
-                          cancelStyle: Theme.of(context).textTheme.button!,
-                          doneStyle: Theme.of(context).textTheme.button!,
-                          itemStyle: Theme.of(context).textTheme.bodyText2!,
+                          cancelStyle: Theme.of(context).textTheme.labelLarge!,
+                          doneStyle: Theme.of(context).textTheme.labelLarge!,
+                          itemStyle: Theme.of(context).textTheme.bodyMedium!,
                           backgroundColor:
                               Theme.of(context).colorScheme.surface,
                         ));
@@ -351,9 +351,9 @@ class _TimerEditorState extends State<TimerEditor> {
                     onChanged: (DateTime dt) => setState(() => _endTime = dt),
                     onConfirm: (DateTime dt) => setState(() => _endTime = dt),
                     theme: dt.DatePickerTheme(
-                      cancelStyle: Theme.of(context).textTheme.button!,
-                      doneStyle: Theme.of(context).textTheme.button!,
-                      itemStyle: Theme.of(context).textTheme.bodyText2!,
+                      cancelStyle: Theme.of(context).textTheme.labelLarge!,
+                      doneStyle: Theme.of(context).textTheme.labelLarge!,
+                      itemStyle: Theme.of(context).textTheme.bodyMedium!,
                       backgroundColor: Theme.of(context).colorScheme.surface,
                     ));
 

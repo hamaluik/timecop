@@ -119,10 +119,10 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                       show: true,
                       border: Border(
                         bottom: BorderSide(
-                          color: Theme.of(context).textTheme.bodyText2!.color!,
+                          color: Theme.of(context).textTheme.bodyMedium!.color!,
                         ),
                         left: BorderSide(
-                          color: Theme.of(context).textTheme.bodyText2!.color!,
+                          color: Theme.of(context).textTheme.bodyMedium!.color!,
                         ),
                       )),
                   gridData: FlGridData(
@@ -144,7 +144,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                                     color: spot.bar.color,
                                     fontSize: Theme.of(context)
                                         .textTheme
-                                        .bodyText2!
+                                        .bodyMedium!
                                         .fontSize,
                                   ));
                             }).toList();
@@ -156,7 +156,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                         showTitles: true,
                         getTitlesWidget: (double v, _) => Text(
                           v.toStringAsFixed(1),
-                          style: Theme.of(context).textTheme.caption,
+                          style: Theme.of(context).textTheme.bodySmall,
                         ),
                         interval: 5.0,
                       )),
@@ -169,7 +169,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                                   firstDate!.add(Duration(days: week * 7));
                               return Text(
                                 dateFormat.format(date).replaceAll(' ', '\n'),
-                                style: Theme.of(context).textTheme.caption,
+                                style: Theme.of(context).textTheme.bodySmall,
                               );
                             }),
                       )),
@@ -192,7 +192,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
             ),
             Text(
               L10N.of(context).tr.weeklyHours,
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
             Legend(

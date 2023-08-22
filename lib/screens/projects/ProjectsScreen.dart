@@ -176,8 +176,10 @@ class ProjectsScreen extends StatelessWidget {
                       textAlign: TextAlign.justify,
                       text: TextSpan(
                           style: TextStyle(
-                              color:
-                                  Theme.of(context).textTheme.bodyText2!.color),
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .color),
                           children: <TextSpan>[
                             TextSpan(
                                 text:

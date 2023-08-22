@@ -66,7 +66,7 @@ class _TopBarState extends State<TopBar> {
         child: TextFormField(
           focusNode: _searchFocusNode,
           controller: _searchController,
-          style: Theme.of(context).primaryTextTheme.bodyText1,
+          style: Theme.of(context).primaryTextTheme.bodyLarge,
           onChanged: (search) {
             bloc.add(SearchChangedEvent(search));
           },
