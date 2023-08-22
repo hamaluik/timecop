@@ -125,7 +125,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                           color: Theme.of(context).textTheme.bodyMedium!.color!,
                         ),
                       )),
-                  gridData: FlGridData(
+                  gridData: const FlGridData(
                     show: true,
                     horizontalInterval: 5.0,
                   ),

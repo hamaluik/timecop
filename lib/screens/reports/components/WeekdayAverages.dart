@@ -135,7 +135,7 @@ class WeekdayAverages extends StatelessWidget {
                   borderData: FlBorderData(
                     show: false,
                   ),
-                  gridData: FlGridData(
+                  gridData: const FlGridData(
                     show: true,
                   ),
                   titlesData: FlTitlesData(
