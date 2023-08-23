@@ -170,7 +170,7 @@ class FilterSheet extends StatelessWidget {
                                 hiddenProjects
                                     .removeWhere((p) => p == project?.id);
                               } else {
-                                hiddenProjects.add(project!.id);
+                                hiddenProjects.add(project?.id);
                               }
                               dashboardBloc.add(
                                   FilterProjectsChangedEvent(hiddenProjects));
