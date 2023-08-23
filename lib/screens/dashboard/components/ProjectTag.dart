@@ -24,15 +24,16 @@ class ProjectTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
       ProjectColour(mini: true, project: project),
       const SizedBox(width: 6),
       Text(
         project?.name ?? L10N.of(context).tr.noProject,
-        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+        style: theme.textTheme.bodyMedium?.copyWith(
             color: project == null
-                ? Theme.of(context).colorScheme.onSurfaceVariant
-                : Theme.of(context).colorScheme.onBackground),
+                ? theme.colorScheme.onSurfaceVariant
+                : theme.colorScheme.onBackground),
       )
     ]);
   }
