@@ -42,8 +42,6 @@ class _StartTimerButtonState extends State<StartTimerButton> {
           return FloatingActionButton(
             key: const Key("startTimerButton"),
             tooltip: L10N.of(context).tr.startTimer,
-            backgroundColor: Theme.of(context).colorScheme.secondary,
-            foregroundColor: Theme.of(context).colorScheme.onSecondary,
             onPressed: () {
               final timers = BlocProvider.of<TimersBloc>(context);
               timers.add(CreateTimer(
@@ -70,7 +68,7 @@ class _StartTimerButtonState extends State<StartTimerButton> {
             tooltip: L10N.of(context).tr.stopAllTimers,
             key: const Key("stopAllTimersButton"),
             backgroundColor: Colors.pink[600],
-            foregroundColor: Theme.of(context).colorScheme.onSecondary,
+            foregroundColor: Colors.white,
             onPressed: () {
               final timers = BlocProvider.of<TimersBloc>(context);
               timers.add(const StopAllTimers());

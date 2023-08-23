@@ -64,8 +64,6 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
             tooltip: L10N.of(context).tr.startNewTimer,
             heroTag: null,
             mini: true,
-            backgroundColor: Theme.of(context).colorScheme.secondary,
-            foregroundColor: Theme.of(context).colorScheme.onSecondary,
             onPressed: () {
               _controller.reverse();
               final timers = BlocProvider.of<TimersBloc>(context);
@@ -103,7 +101,7 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
             heroTag: null,
             mini: true,
             backgroundColor: Colors.pink[600],
-            foregroundColor: Theme.of(context).colorScheme.onSecondary,
+            foregroundColor: Colors.white,
             onPressed: () {
               _controller.reverse();
               final timers = BlocProvider.of<TimersBloc>(context);
