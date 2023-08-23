@@ -104,6 +104,7 @@ class _TimerEditorState extends State<TimerEditor> {
     final settingsBloc = BlocProvider.of<SettingsBloc>(context);
     final timers = BlocProvider.of<TimersBloc>(context);
     final dateFormat = DateFormat.yMMMEd().add_jm();
+    final theme = Theme.of(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -174,8 +175,7 @@ class _TimerEditorState extends State<TimerEditor> {
                                       const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
                                   child: Text(L10N.of(context).tr.noProject,
                                       style: TextStyle(
-                                          color:
-                                              Theme.of(context).disabledColor)),
+                                          color: theme.disabledColor)),
                                 ),
                               ],
                             ),
@@ -261,7 +261,7 @@ class _TimerEditorState extends State<TimerEditor> {
                     child: Text(
                       dateFormat.format(_startTime),
                       textAlign: TextAlign.right,
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      style: theme.textTheme.bodyMedium,
                     )),
                 PopupMenuButton<_DateTimeMenuItems>(
                     onSelected: (menuItem) {
@@ -290,11 +290,10 @@ class _TimerEditorState extends State<TimerEditor> {
                         onChanged: (DateTime dt) => setStartTime(dt),
                         onConfirm: (DateTime dt) => setStartTime(dt),
                         theme: dt.DatePickerTheme(
-                          cancelStyle: Theme.of(context).textTheme.labelLarge!,
-                          doneStyle: Theme.of(context).textTheme.labelLarge!,
-                          itemStyle: Theme.of(context).textTheme.bodyMedium!,
-                          backgroundColor:
-                              Theme.of(context).colorScheme.surface,
+                          cancelStyle: theme.textTheme.labelLarge!,
+                          doneStyle: theme.textTheme.labelLarge!,
+                          itemStyle: theme.textTheme.bodyMedium!,
+                          backgroundColor: theme.colorScheme.surface,
                         ));
 
                 // if the user cancelled, this should be null
@@ -314,7 +313,7 @@ class _TimerEditorState extends State<TimerEditor> {
                     child: Text(
                       _endTime == null ? "--" : dateFormat.format(_endTime!),
                       textAlign: TextAlign.right,
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      style: theme.textTheme.bodyMedium,
                     )),
                 if (_endTime != null)
                   IconButton(
@@ -351,10 +350,10 @@ class _TimerEditorState extends State<TimerEditor> {
                     onChanged: (DateTime dt) => setState(() => _endTime = dt),
                     onConfirm: (DateTime dt) => setState(() => _endTime = dt),
                     theme: dt.DatePickerTheme(
-                      cancelStyle: Theme.of(context).textTheme.labelLarge!,
-                      doneStyle: Theme.of(context).textTheme.labelLarge!,
-                      itemStyle: Theme.of(context).textTheme.bodyMedium!,
-                      backgroundColor: Theme.of(context).colorScheme.surface,
+                      cancelStyle: theme.textTheme.labelLarge!,
+                      doneStyle: theme.textTheme.labelLarge!,
+                      itemStyle: theme.textTheme.bodyMedium!,
+                      backgroundColor: theme.colorScheme.surface,
                     ));
 
                 // if the user cancelled, this should be null
@@ -376,8 +375,8 @@ class _TimerEditorState extends State<TimerEditor> {
                   TimerEntry.formatDuration(_endTime == null
                       ? snapshot.data!.difference(_startTime)
                       : _endTime!.difference(_startTime)),
-                  style: const TextStyle(
-                      fontFeatures: [FontFeature.tabularFigures()]),
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                      fontFeatures: [const FontFeature.tabularFigures()]),
                 ),
               ),
             ),

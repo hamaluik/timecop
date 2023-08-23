@@ -47,9 +47,11 @@ class StoppedTimerRowWide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     assert(timer.endTime != null);
+    final theme = Theme.of(context);
+
     final duration = timer.endTime!.difference(timer.startTime);
-    final timeSpanStyle = TextStyle(
-      color: Theme.of(context).colorScheme.onSurfaceVariant,
+    final timeSpanStyle = theme.textTheme.bodyMedium?.copyWith(
+      color: theme.colorScheme.onSurfaceVariant,
       fontFeatures: const [FontFeature.tabularFigures()],
     );
     final project =
@@ -115,8 +117,8 @@ class StoppedTimerRowWide extends StatelessWidget {
               child: Text(
                 timer.formatTime(),
                 textAlign: TextAlign.right,
-                style: const TextStyle(
-                  fontFeatures: [FontFeature.tabularFigures()],
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  fontFeatures: [const FontFeature.tabularFigures()],
                 ),
               ),
             ),

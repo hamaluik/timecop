@@ -170,39 +170,39 @@ class ProjectsScreen extends StatelessWidget {
       BuildContext context, ProjectsBloc projectsBloc, Project project) async {
     bool delete = await (showDialog<bool>(
             context: context,
-            builder: (BuildContext context) => AlertDialog(
-                  title: Text(L10N.of(context).tr.confirmDelete),
-                  content: RichText(
-                      textAlign: TextAlign.justify,
-                      text: TextSpan(
-                          style: TextStyle(
-                              color: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .color),
-                          children: <TextSpan>[
-                            TextSpan(
-                                text:
-                                    "${L10N.of(context).tr.areYouSureYouWantToDelete}\n\n"),
-                            TextSpan(
-                                text: "⬤ ",
-                                style: TextStyle(color: project.colour)),
-                            TextSpan(
-                                text: project.name,
-                                style: const TextStyle(
-                                    fontStyle: FontStyle.italic)),
-                          ])),
-                  actions: <Widget>[
-                    TextButton(
-                      child: Text(L10N.of(context).tr.cancel),
-                      onPressed: () => Navigator.of(context).pop(false),
-                    ),
-                    TextButton(
-                      child: Text(L10N.of(context).tr.delete),
-                      onPressed: () => Navigator.of(context).pop(true),
-                    ),
-                  ],
-                ))) ??
+            builder: (BuildContext context) {
+              final theme = Theme.of(context);
+              return AlertDialog(
+                title: Text(L10N.of(context).tr.confirmDelete),
+                content: RichText(
+                    textAlign: TextAlign.justify,
+                    text: TextSpan(
+                        style: theme.textTheme.bodyMedium,
+                        children: <TextSpan>[
+                          TextSpan(
+                              text:
+                                  "${L10N.of(context).tr.areYouSureYouWantToDelete}\n\n"),
+                          TextSpan(
+                              text: "⬤ ",
+                              style: theme.textTheme.bodyMedium
+                                  ?.copyWith(color: project.colour)),
+                          TextSpan(
+                              text: project.name,
+                              style: theme.textTheme.bodyMedium
+                                  ?.copyWith(fontStyle: FontStyle.italic)),
+                        ])),
+                actions: <Widget>[
+                  TextButton(
+                    child: Text(L10N.of(context).tr.cancel),
+                    onPressed: () => Navigator.of(context).pop(false),
+                  ),
+                  TextButton(
+                    child: Text(L10N.of(context).tr.delete),
+                    onPressed: () => Navigator.of(context).pop(true),
+                  ),
+                ],
+              );
+            })) ??
         false;
     if (delete) {
       projectsBloc.add(DeleteProject(project));

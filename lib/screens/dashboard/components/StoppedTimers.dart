@@ -48,6 +48,7 @@ class _DayGroupingRows extends StatelessWidget {
     final isWidescreen = ResponsivenessUtils.isWidescreen(context);
     final settingsBloc = BlocProvider.of<SettingsBloc>(context);
     final showProjectName = settingsBloc.state.showProjectNames;
+    final theme = Theme.of(context);
 
     final dateFormat = DateFormat.yMMMEd();
 
@@ -119,15 +120,15 @@ class _DayGroupingRows extends StatelessWidget {
                   children: <Widget>[
                     Expanded(
                         child: Text(dateFormat.format(dayGrouping.date),
-                            style: TextStyle(
-                                color: Theme.of(context).colorScheme.secondary,
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                                color: theme.colorScheme.secondary,
                                 fontWeight: FontWeight.w700))),
                     const SizedBox(
                       width: 16,
                     ),
                     Text(TimerEntry.formatDuration(runningTotal),
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: theme.colorScheme.secondary,
                           fontFeatures: const [FontFeature.tabularFigures()],
                         )),
                     if (isWidescreen)
@@ -138,10 +139,7 @@ class _DayGroupingRows extends StatelessWidget {
                       Container(
                         height: 16,
                         width: 1,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onBackground
-                            .withAlpha(31),
+                        color: theme.colorScheme.onBackground.withAlpha(31),
                       ),
                     if (isWidescreen)
                       const SizedBox(

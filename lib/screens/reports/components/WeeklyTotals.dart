@@ -86,6 +86,9 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
   Widget build(BuildContext context) {
     final projects = BlocProvider.of<ProjectsBloc>(context);
     final dateFormat = DateFormat.MMMd();
+
+    final theme = Theme.of(context);
+
     DateTime? firstDate = widget.startDate;
     if (firstDate == null) {
       final timers = BlocProvider.of<TimersBloc>(context);
@@ -119,10 +122,10 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                       show: true,
                       border: Border(
                         bottom: BorderSide(
-                          color: Theme.of(context).textTheme.bodyMedium!.color!,
+                          color: theme.textTheme.bodyMedium!.color!,
                         ),
                         left: BorderSide(
-                          color: Theme.of(context).textTheme.bodyMedium!.color!,
+                          color: theme.textTheme.bodyMedium!.color!,
                         ),
                       )),
                   gridData: const FlGridData(
@@ -132,7 +135,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                   lineTouchData: LineTouchData(
                       enabled: true,
                       touchTooltipData: LineTouchTooltipData(
-                          tooltipBgColor: Theme.of(context).cardColor,
+                          tooltipBgColor: theme.cardColor,
                           getTooltipItems: (List<LineBarSpot> spots) {
                             return spots.map((LineBarSpot spot) {
                               return LineTooltipItem(
@@ -140,12 +143,8 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                                       .of(context)
                                       .tr
                                       .nHours(spot.y.toStringAsFixed(1)),
-                                  TextStyle(
+                                  theme.textTheme.bodyMedium!.copyWith(
                                     color: spot.bar.color,
-                                    fontSize: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .fontSize,
                                   ));
                             }).toList();
                           })),
@@ -156,7 +155,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                         showTitles: true,
                         getTitlesWidget: (double v, _) => Text(
                           v.toStringAsFixed(1),
-                          style: Theme.of(context).textTheme.bodySmall,
+                          style: theme.textTheme.bodySmall,
                         ),
                         interval: 5.0,
                       )),
@@ -169,7 +168,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                                   firstDate!.add(Duration(days: week * 7));
                               return Text(
                                 dateFormat.format(date).replaceAll(' ', '\n'),
-                                style: Theme.of(context).textTheme.bodySmall,
+                                style: theme.textTheme.bodySmall,
                               );
                             }),
                       )),
@@ -177,8 +176,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                     Project? project = projects.state.projects
                         .firstWhereOrNull((project) => project.id == entry.key);
                     return LineChartBarData(
-                        color:
-                            project?.colour ?? Theme.of(context).disabledColor,
+                        color: project?.colour ?? theme.disabledColor,
                         isCurved: true,
                         barWidth: 4,
                         spots: entry.value.entries.map((dataPoint) {
@@ -192,7 +190,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
             ),
             Text(
               L10N.of(context).tr.weeklyHours,
-              style: Theme.of(context).textTheme.titleLarge,
+              style: theme.textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
             Legend(

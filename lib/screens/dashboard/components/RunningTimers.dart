@@ -36,6 +36,8 @@ class RunningTimers extends StatelessWidget {
 
         return BlocBuilder<TimersBloc, TimersState>(
           builder: (BuildContext context, TimersState timersState) {
+            final theme = Theme.of(context);
+
             List<TimerEntry> runningTimers = timersState.timers
                 .where((timer) => timer.endTime == null)
                 .toList();
@@ -52,7 +54,7 @@ class RunningTimers extends StatelessWidget {
 
             return Material(
               elevation: 4,
-              color: Theme.of(context).bottomSheetTheme.backgroundColor,
+              color: theme.bottomSheetTheme.backgroundColor,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.min,
@@ -68,14 +70,12 @@ class RunningTimers extends StatelessWidget {
                           mainAxisSize: MainAxisSize.max,
                           children: <Widget>[
                             Text(L10N.of(context).tr.runningTimers,
-                                style: TextStyle(
-                                    color:
-                                        Theme.of(context).colorScheme.secondary,
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                    color: theme.colorScheme.secondary,
                                     fontWeight: FontWeight.w700)),
                             Text(TimerEntry.formatDuration(runningTotal),
-                                style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.secondary,
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                  color: theme.colorScheme.secondary,
                                   fontFeatures: const [
                                     FontFeature.tabularFigures()
                                   ],

@@ -32,6 +32,7 @@ class TimerDenseTrailing extends StatelessWidget {
         .expansionTileTheme
         .tilePadding
         ?.resolve(directionality);
+    final theme = Theme.of(context);
 
     return InkWell(
         onTap: () => resumeTimer(context),
@@ -55,9 +56,8 @@ class TimerDenseTrailing extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(durationString,
-                              style: TextStyle(
-                                color:
-                                    Theme.of(context).colorScheme.onBackground,
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                color: theme.colorScheme.onBackground,
                                 fontFeatures: const [
                                   FontFeature.tabularFigures()
                                 ],

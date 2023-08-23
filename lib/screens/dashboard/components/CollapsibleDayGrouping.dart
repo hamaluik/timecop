@@ -66,6 +66,7 @@ class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping>
   @override
   Widget build(BuildContext context) {
     final dateFormat = DateFormat.yMMMMEEEEd();
+    final theme = Theme.of(context);
     return ExpansionTile(
       initiallyExpanded:
           DateTime.now().difference(widget.date).inDays.abs() <= 1,
@@ -81,9 +82,9 @@ class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping>
       },
       title: Text(dateFormat.format(widget.date),
           style: TextStyle(
-            //color: Theme.of(context).colorScheme.secondary,
+            //color: theme.colorScheme.secondary,
             fontWeight: FontWeight.w700,
-            fontSize: Theme.of(context).textTheme.bodyMedium!.fontSize,
+            fontSize: theme.textTheme.bodyMedium!.fontSize,
           )),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
@@ -95,9 +96,8 @@ class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping>
           ),
           Container(width: 8),
           Text(TimerEntry.formatDuration(widget.totalTime),
-              style: TextStyle(
-                color:
-                    _expanded ? Theme.of(context).colorScheme.secondary : null,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: _expanded ? theme.colorScheme.secondary : null,
                 fontFeatures: const [FontFeature.tabularFigures()],
               )),
         ],

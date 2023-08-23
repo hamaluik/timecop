@@ -73,9 +73,11 @@ class _GroupedStoppedTimersRowWideState
   @override
   Widget build(BuildContext context) {
     assert(widget.timers.last.endTime != null);
+    final theme = Theme.of(context);
+
     final timeFormat = DateFormat.jm();
-    final timeSpanStyle = TextStyle(
-      color: Theme.of(context).colorScheme.onSurfaceVariant,
+    final timeSpanStyle = theme.textTheme.bodyMedium?.copyWith(
+      color: theme.colorScheme.onSurfaceVariant,
       fontFeatures: const [FontFeature.tabularFigures()],
     );
     final project = BlocProvider.of<ProjectsBloc>(context)
@@ -146,8 +148,8 @@ class _GroupedStoppedTimersRowWideState
             child: Text(
               TimerEntry.formatDuration(widget.totalDuration),
               textAlign: TextAlign.right,
-              style: const TextStyle(
-                fontFeatures: [FontFeature.tabularFigures()],
+              style: theme.textTheme.bodyMedium?.copyWith(
+                fontFeatures: [const FontFeature.tabularFigures()],
               ),
             ),
           ),

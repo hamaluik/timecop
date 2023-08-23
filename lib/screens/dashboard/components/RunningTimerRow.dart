@@ -35,14 +35,15 @@ class RunningTimerRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Slidable(
       startActionPane: ActionPane(
           motion: const DrawerMotion(),
           extentRatio: 0.15,
           children: <Widget>[
             SlidableAction(
-              backgroundColor: Theme.of(context).colorScheme.error,
-              foregroundColor: Theme.of(context).colorScheme.onError,
+              backgroundColor: theme.colorScheme.error,
+              foregroundColor: theme.colorScheme.onError,
               icon: FontAwesomeIcons.trash,
               onPressed: (_) async {
                 final timersBloc = BlocProvider.of<TimersBloc>(context);
@@ -80,8 +81,8 @@ class RunningTimerRow extends StatelessWidget {
               style: TimerUtils.styleDescription(context, timer.description)),
           trailing: Row(mainAxisSize: MainAxisSize.min, children: [
             Text(timer.formatTime(),
-                style: const TextStyle(
-                  fontFeatures: [FontFeature.tabularFigures()],
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  fontFeatures: [const FontFeature.tabularFigures()],
                 )),
             const SizedBox(width: 4),
             IconButton(

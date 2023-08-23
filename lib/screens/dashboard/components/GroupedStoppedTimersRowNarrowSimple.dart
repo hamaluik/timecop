@@ -69,6 +69,7 @@ class _GroupedStoppedTimersRowNarrowSimpleState
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return MouseRegion(
         onEnter: (_) => setState(() {
               _isHovering = true;
@@ -82,8 +83,8 @@ class _GroupedStoppedTimersRowNarrowSimpleState
               extentRatio: 0.15,
               children: <Widget>[
                 SlidableAction(
-                    backgroundColor: Theme.of(context).colorScheme.secondary,
-                    foregroundColor: Theme.of(context).colorScheme.onSecondary,
+                    backgroundColor: theme.colorScheme.secondary,
+                    foregroundColor: theme.colorScheme.onSecondary,
                     icon: FontAwesomeIcons.play,
                     onPressed: (_) => widget.resumeTimer(context))
               ]),
@@ -118,8 +119,8 @@ class _GroupedStoppedTimersRowNarrowSimpleState
                 ),
                 const SizedBox(width: 4),
                 Text(TimerEntry.formatDuration(widget.totalDuration),
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.onBackground,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: theme.colorScheme.onBackground,
                       fontFeatures: const [FontFeature.tabularFigures()],
                     )),
                 if (_isHovering && !_expanded) const SizedBox(width: 4),

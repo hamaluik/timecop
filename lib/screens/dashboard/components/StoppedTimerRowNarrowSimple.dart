@@ -30,6 +30,7 @@ class StoppedTimerRowNarrowSimple extends StatefulWidget {
   final TimerEntry timer;
   final Function(BuildContext) resumeTimer;
   final Function(BuildContext) deleteTimer;
+
   const StoppedTimerRowNarrowSimple(
       {Key? key,
       required this.timer,
@@ -50,6 +51,8 @@ class _StoppedTimerRowNarrowSimpleState
   Widget build(BuildContext context) {
     assert(widget.timer.endTime != null);
 
+    final theme = Theme.of(context);
+
     return MouseRegion(
         onEnter: (_) => setState(() {
               _hovering = true;
@@ -63,8 +66,8 @@ class _StoppedTimerRowNarrowSimpleState
             extentRatio: 0.15,
             children: <Widget>[
               SlidableAction(
-                  backgroundColor: Theme.of(context).colorScheme.error,
-                  foregroundColor: Theme.of(context).colorScheme.onError,
+                  backgroundColor: theme.colorScheme.error,
+                  foregroundColor: theme.colorScheme.onError,
                   icon: FontAwesomeIcons.trash,
                   onPressed: widget.deleteTimer)
             ],
@@ -74,8 +77,8 @@ class _StoppedTimerRowNarrowSimpleState
               extentRatio: 0.15,
               children: <Widget>[
                 SlidableAction(
-                    backgroundColor: Theme.of(context).colorScheme.secondary,
-                    foregroundColor: Theme.of(context).colorScheme.onSecondary,
+                    backgroundColor: theme.colorScheme.secondary,
+                    foregroundColor: theme.colorScheme.onSecondary,
                     icon: FontAwesomeIcons.play,
                     onPressed: (_) => widget.resumeTimer(context))
               ]),
@@ -92,8 +95,8 @@ class _StoppedTimerRowNarrowSimpleState
               trailing: Row(mainAxisSize: MainAxisSize.min, children: [
                 Text(
                   widget.timer.formatTime(),
-                  style: const TextStyle(
-                    fontFeatures: [FontFeature.tabularFigures()],
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    fontFeatures: [const FontFeature.tabularFigures()],
                   ),
                 ),
                 if (_hovering) const SizedBox(width: 4),
