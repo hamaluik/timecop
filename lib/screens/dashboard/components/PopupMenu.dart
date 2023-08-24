@@ -39,6 +39,9 @@ class PopupMenu extends StatelessWidget {
       key: const Key("menuButton"),
       icon: SvgPicture.asset(
         "icon.no-bg.svg",
+        colorFilter: ColorFilter.mode(
+            Theme.of(context).appBarTheme.foregroundColor ?? Colors.white,
+            BlendMode.srcIn),
         height: 30,
         semanticsLabel: L10N.of(context).tr.logoSemantics,
       ),
