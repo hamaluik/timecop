@@ -72,204 +72,102 @@ class ThemeUtil {
   static final _blackAppBarBackground = Colors.grey.shade900;
   static const _blackBottomSheetBackground = Colors.black;
 
-  static final lightTheme = ThemeData(
-      useMaterial3: false,
+  static final lightTheme = getThemeFromColors(
       brightness: Brightness.light,
-      pageTransitionsTheme: _pageTransitionsTheme,
+      colors: _lightColors,
       primarySwatch: _lightPrimarySwatch,
-      scaffoldBackgroundColor: _lightColors.background,
-      appBarTheme: AppBarTheme(
-          elevation: 0,
-          scrolledUnderElevation: 4,
-          shadowColor: Colors.black,
-          backgroundColor: _lightAppBarBackground,
-          foregroundColor: _lightColors.onPrimary,
-          surfaceTintColor: Colors.transparent),
-      fontFamily: _fontFamily,
-      colorScheme: _lightColors,
-      primaryColor: _lightColors.primary,
-      listTileTheme:
-          ListTileThemeData(iconColor: _lightColors.onSurfaceVariant),
-      expansionTileTheme: ExpansionTileThemeData(
-          collapsedBackgroundColor: Colors.transparent,
-          backgroundColor: Colors.transparent,
-          collapsedTextColor: _lightColors.onBackground,
-          textColor: _lightColors.onSurface,
-          iconColor: _lightColors.onSurfaceVariant,
-          collapsedIconColor: _lightColors.onSurfaceVariant),
-      bottomSheetTheme: BottomSheetThemeData(
-        backgroundColor: _lightBottomSheetBackground,
-      ),
-      dividerColor: _lightColors.onBackground.withAlpha(31),
-      dividerTheme:
-          DividerThemeData(color: _lightColors.onBackground.withAlpha(31)),
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
-          shape: const CircleBorder(),
-          backgroundColor: _lightColors.secondary,
-          foregroundColor: _lightColors.onSecondary),
-      textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(foregroundColor: _lightColors.onSurface)),
-      textSelectionTheme:
-          TextSelectionThemeData(cursorColor: _lightColors.secondary),
-      inputDecorationTheme: InputDecorationTheme(
-        focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: _lightColors.onPrimary)),
-      ),
-      switchTheme: SwitchThemeData(
-          thumbColor: MaterialStateProperty.resolveWith<Color?>((states) =>
-              (!states.contains(MaterialState.disabled) &&
-                      states.contains(MaterialState.selected))
-                  ? _lightColors.secondary
-                  : null),
-          trackColor: MaterialStateProperty.resolveWith<Color?>((states) =>
-              (!states.contains(MaterialState.disabled) &&
-                      states.contains(MaterialState.selected))
-                  ? _lightColors.secondary.withAlpha(80)
-                  : null)),
-      radioTheme: RadioThemeData(
-        fillColor: MaterialStateProperty.resolveWith<Color?>((states) =>
-            (!states.contains(MaterialState.disabled) &&
-                    states.contains(MaterialState.selected))
-                ? _lightColors.secondary
-                : null),
-      ),
-      checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateProperty.resolveWith<Color?>((states) =>
-            (!states.contains(MaterialState.disabled) &&
-                    states.contains(MaterialState.selected))
-                ? _lightColors.secondary
-                : null),
-      ));
-
-  static final darkTheme = ThemeData(
-      useMaterial3: false,
+      bottomSheetBackground: _lightBottomSheetBackground,
+      appBarBackground: _lightAppBarBackground,
+      appBarElevation: 0,
+      appBarScrolledUnderElevation: 4);
+  static final darkTheme = getThemeFromColors(
       brightness: Brightness.dark,
-      pageTransitionsTheme: _pageTransitionsTheme,
+      colors: _darkColors,
       primarySwatch: _darkPrimarySwatch,
-      scaffoldBackgroundColor: _darkColors.background,
-      appBarTheme: AppBarTheme(
-          elevation: 2,
-          scrolledUnderElevation: 4,
-          shadowColor: Colors.black,
-          backgroundColor: _darkAppBarBackground,
-          foregroundColor: _darkColors.onPrimary,
-          surfaceTintColor: Colors.transparent),
-      fontFamily: _fontFamily,
-      colorScheme: _darkColors,
-      primaryColor: _darkColors.primary,
-      listTileTheme: ListTileThemeData(iconColor: _darkColors.onSurfaceVariant),
-      expansionTileTheme: ExpansionTileThemeData(
-          collapsedBackgroundColor: Colors.transparent,
-          backgroundColor: Colors.transparent,
-          collapsedTextColor: _darkColors.onBackground,
-          textColor: _darkColors.onSurface,
-          iconColor: _darkColors.onSurfaceVariant,
-          collapsedIconColor: _darkColors.onSurfaceVariant),
-      bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: _darkBottomSheetBackground,
-      ),
-      dividerColor: _darkColors.onBackground.withAlpha(31),
-      dividerTheme:
-          DividerThemeData(color: _darkColors.onBackground.withAlpha(31)),
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
-          shape: const CircleBorder(),
-          backgroundColor: _darkColors.secondary,
-          foregroundColor: _darkColors.onSecondary),
-      textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(foregroundColor: _darkColors.onSurface)),
-      textSelectionTheme:
-          TextSelectionThemeData(cursorColor: _darkColors.secondary),
-      inputDecorationTheme: InputDecorationTheme(
-          focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: _darkColors.onPrimary))),
-      switchTheme: SwitchThemeData(
-          thumbColor: MaterialStateProperty.resolveWith<Color?>((states) =>
-              (!states.contains(MaterialState.disabled) &&
-                      states.contains(MaterialState.selected))
-                  ? _darkColors.secondary
-                  : null),
-          trackColor: MaterialStateProperty.resolveWith<Color?>((states) =>
-              (!states.contains(MaterialState.disabled) &&
-                      states.contains(MaterialState.selected))
-                  ? _darkColors.secondary.withAlpha(80)
-                  : null)),
-      radioTheme: RadioThemeData(
-        fillColor: MaterialStateProperty.resolveWith<Color?>((states) =>
-            (!states.contains(MaterialState.disabled) &&
-                    states.contains(MaterialState.selected))
-                ? _darkColors.secondary
-                : null),
-      ),
-      checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateProperty.resolveWith<Color?>((states) =>
-            (!states.contains(MaterialState.disabled) &&
-                    states.contains(MaterialState.selected))
-                ? _darkColors.secondary
-                : null),
-      ));
-
-  static final blackTheme = ThemeData(
-      useMaterial3: false,
+      bottomSheetBackground: _darkBottomSheetBackground,
+      appBarBackground: _darkAppBarBackground,
+      appBarElevation: 2,
+      appBarScrolledUnderElevation: 4);
+  static final blackTheme = getThemeFromColors(
       brightness: Brightness.dark,
-      pageTransitionsTheme: _pageTransitionsTheme,
+      colors: _blackColors,
       primarySwatch: _blackPrimarySwatch,
-      scaffoldBackgroundColor: _blackColors.background,
-      appBarTheme: AppBarTheme(
-          backgroundColor: _blackAppBarBackground,
-          foregroundColor: _blackColors.onPrimary,
-          surfaceTintColor: Colors.transparent),
-      fontFamily: _fontFamily,
-      colorScheme: _blackColors,
-      primaryColor: _blackColors.primary,
-      listTileTheme:
-          ListTileThemeData(iconColor: _blackColors.onSurfaceVariant),
-      expansionTileTheme: ExpansionTileThemeData(
-          collapsedBackgroundColor: Colors.transparent,
-          backgroundColor: Colors.transparent,
-          collapsedTextColor: _blackColors.onBackground,
-          textColor: _blackColors.onSurface,
-          iconColor: _blackColors.onSurfaceVariant,
-          collapsedIconColor: _blackColors.onSurfaceVariant),
-      bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: _blackBottomSheetBackground,
-      ),
-      dividerColor: _blackColors.onBackground.withAlpha(31),
-      dividerTheme:
-          DividerThemeData(color: _blackColors.onBackground.withAlpha(31)),
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
-          shape: const CircleBorder(),
-          backgroundColor: _blackColors.secondary,
-          foregroundColor: _blackColors.onSecondary),
-      textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(foregroundColor: _blackColors.onSurface)),
-      textSelectionTheme:
-          TextSelectionThemeData(cursorColor: _blackColors.secondary),
-      inputDecorationTheme: InputDecorationTheme(
-          focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: _blackColors.onPrimary))),
-      switchTheme: SwitchThemeData(
-          thumbColor: MaterialStateProperty.resolveWith<Color?>((states) =>
-              (!states.contains(MaterialState.disabled) &&
-                      states.contains(MaterialState.selected))
-                  ? _blackColors.secondary
-                  : null),
-          trackColor: MaterialStateProperty.resolveWith<Color?>((states) =>
-              (!states.contains(MaterialState.disabled) &&
-                      states.contains(MaterialState.selected))
-                  ? _blackColors.secondary.withAlpha(80)
-                  : null)),
-      radioTheme: RadioThemeData(
-        fillColor: MaterialStateProperty.resolveWith<Color?>((states) =>
-            (!states.contains(MaterialState.disabled) &&
-                    states.contains(MaterialState.selected))
-                ? _blackColors.secondary
-                : null),
-      ),
-      checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateProperty.resolveWith<Color?>((states) =>
-            (!states.contains(MaterialState.disabled) &&
-                    states.contains(MaterialState.selected))
-                ? _blackColors.secondary
-                : null),
-      ));
+      bottomSheetBackground: _blackBottomSheetBackground,
+      appBarBackground: _blackAppBarBackground,
+      appBarElevation: 0,
+      appBarScrolledUnderElevation: 0);
+
+  static ThemeData getThemeFromColors(
+          {required Brightness brightness,
+          required ColorScheme colors,
+          required Color bottomSheetBackground,
+          required Color appBarBackground,
+          double appBarElevation = 0,
+          double appBarScrolledUnderElevation = 4,
+          MaterialColor? primarySwatch}) =>
+      ThemeData(
+          useMaterial3: false,
+          brightness: brightness,
+          pageTransitionsTheme: _pageTransitionsTheme,
+          primarySwatch: primarySwatch,
+          scaffoldBackgroundColor: colors.background,
+          appBarTheme: AppBarTheme(
+              elevation: appBarElevation,
+              scrolledUnderElevation: appBarScrolledUnderElevation,
+              shadowColor: Colors.black,
+              backgroundColor: appBarBackground,
+              foregroundColor: colors.onPrimary,
+              surfaceTintColor: Colors.transparent),
+          fontFamily: _fontFamily,
+          colorScheme: colors,
+          primaryColor: colors.primary,
+          listTileTheme: ListTileThemeData(iconColor: colors.onSurfaceVariant),
+          expansionTileTheme: ExpansionTileThemeData(
+              collapsedBackgroundColor: Colors.transparent,
+              backgroundColor: Colors.transparent,
+              collapsedTextColor: colors.onBackground,
+              textColor: colors.onSurface,
+              iconColor: colors.onSurfaceVariant,
+              collapsedIconColor: colors.onSurfaceVariant),
+          bottomSheetTheme: BottomSheetThemeData(
+            backgroundColor: bottomSheetBackground,
+          ),
+          dividerColor: colors.onBackground.withAlpha(31),
+          dividerTheme:
+              DividerThemeData(color: colors.onBackground.withAlpha(31)),
+          floatingActionButtonTheme: FloatingActionButtonThemeData(
+              shape: const CircleBorder(),
+              backgroundColor: colors.secondary,
+              foregroundColor: colors.onSecondary),
+          textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(foregroundColor: colors.onSurface)),
+          textSelectionTheme:
+              TextSelectionThemeData(cursorColor: colors.secondary),
+          inputDecorationTheme: InputDecorationTheme(
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: colors.onPrimary)),
+          ),
+          switchTheme: SwitchThemeData(
+              thumbColor: MaterialStateProperty.resolveWith<Color?>((states) =>
+                  (!states.contains(MaterialState.disabled) && states.contains(MaterialState.selected))
+                      ? colors.secondary
+                      : null),
+              trackColor: MaterialStateProperty.resolveWith<Color?>((states) =>
+                  (!states.contains(MaterialState.disabled) && states.contains(MaterialState.selected))
+                      ? colors.secondary.withAlpha(80)
+                      : null)),
+          radioTheme: RadioThemeData(
+            fillColor: MaterialStateProperty.resolveWith<Color?>((states) =>
+                (!states.contains(MaterialState.disabled) &&
+                        states.contains(MaterialState.selected))
+                    ? colors.secondary
+                    : null),
+          ),
+          checkboxTheme: CheckboxThemeData(
+            fillColor: MaterialStateProperty.resolveWith<Color?>((states) =>
+                (!states.contains(MaterialState.disabled) &&
+                        states.contains(MaterialState.selected))
+                    ? colors.secondary
+                    : null),
+          ));
 }
