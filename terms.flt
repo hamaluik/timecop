@@ -135,12 +135,18 @@ dark = Dark
 
 black = Black
 
+autoMaterialYou = Material You Automatic
+
+lightMaterialYou = Material You Light
+
+darkMaterialYou = Material You Dark
+
 # tt-lang-name
 langName = English
 
 language = Language
 
-automaticLanguage = Automatic ({ $langName })
+automaticLanguage = Automatic
 
 collapseDays = Collapse Days
 
