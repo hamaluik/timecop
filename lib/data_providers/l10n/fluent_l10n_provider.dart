@@ -249,6 +249,15 @@ class FluentL10NProvider extends L10NProvider {
   @override
   String get black => _bundle.format("black", errors: _errors) ?? "black";
   @override
+  String get autoMaterialYou =>
+      _bundle.format("autoMaterialYou", errors: _errors) ?? "autoMaterialYou";
+  @override
+  String get lightMaterialYou =>
+      _bundle.format("lightMaterialYou", errors: _errors) ?? "lightMaterialYou";
+  @override
+  String get darkMaterialYou =>
+      _bundle.format("darkMaterialYou", errors: _errors) ?? "darkMaterialYou";
+  @override
   String get showProjectNames =>
       _bundle.format("showProjectNames", errors: _errors) ?? "showProjectNames";
   @override
@@ -304,13 +313,11 @@ class FluentL10NProvider extends L10NProvider {
   @override
   String get language =>
       _bundle.format("language", errors: _errors) ?? "language";
+
   @override
-  String get automaticLanguage {
-    final langName = _bundle.format("langName", errors: _errors);
-    return _bundle.format("automaticLanguage",
-            args: <String, dynamic>{"langName": langName}, errors: _errors) ??
-        "langName";
-  }
+  String get automaticLanguage =>
+      _bundle.format("automaticLanguage", errors: _errors) ??
+      "automaticLanguage";
 
   @override
   String get collapseDays =>

@@ -15,4 +15,4 @@ hours = Uren
 defaultFilterStartDateToMonday = Begin filterdatum standaard op maandag
 defaultFilterDays = Standaardfilterperiode (dagen)
 collapseDays = Instortings Dagen
-automaticLanguage = Automatisch ({ $langName })
+automaticLanguage = Automatisch

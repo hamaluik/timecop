@@ -87,6 +87,9 @@ abstract class L10NProvider {
   String get light;
   String get dark;
   String get black;
+  String get autoMaterialYou;
+  String get lightMaterialYou;
+  String get darkMaterialYou;
   String langName(Locale locale);
   String get language;
   String get automaticLanguage;
