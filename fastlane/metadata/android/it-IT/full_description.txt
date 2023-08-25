@@ -1,0 +1,11 @@
+Solo offline, mobile-first
+- Per Android, iOS e Linux
+- Completamente privato: non c'è tracciamento / spionaggio / pubblicità / ecc
+- Tieni traccia delle attività con più timer paralleli che possono essere avviati con il semplice tocco di un pulsante
+- Associa i timer ai progetti per raggruppare il tuo lavoro (o non farlo)
+- Avvia, arresta, modifica ed elimina i timer in qualsiasi momento senza problemi
+- Esporta i dati come file .csv, filtrati per periodi e progetti
+- Esporta il database dell'app per un accesso completo a tutti i suoi dati
+- Modalità luce / modalità buio automatiche in base alle impostazioni del dispositivo
+- Localizzato in diverse lingue (grazie a Google Translate): inglese, arabo, tedesco, spagnolo, francese, hindi, indonesiano, giapponese, coreano, portoghese, russo, cinese (semplificato) e cinese (tradizionale), oltre che italiano, ceco, norvegese e indonesiano (tramite contributori)
+- Open source (con licenza Apache-2.0)—fork away (https://github.com/hamaluik/timecop)
