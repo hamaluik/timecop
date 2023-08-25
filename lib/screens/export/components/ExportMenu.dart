@@ -79,11 +79,7 @@ class ExportMenu extends StatelessWidget {
                     ImportDatabaseEvent(resultPath, timersBloc, projectsBloc));
 
                 scaffoldMessenger.showSnackBar(SnackBar(
-                  backgroundColor: theme.primaryColorDark,
-                  content: Text(
-                    localization.tr.databaseImported,
-                    style: const TextStyle(color: Colors.white),
-                  ),
+                  content: Text(localization.tr.databaseImported),
                   duration: const Duration(seconds: 5),
                 ));
               }
@@ -91,11 +87,7 @@ class ExportMenu extends StatelessWidget {
               if (e is PlatformException &&
                   e.code == "read_external_storage_denied") {
                 scaffoldMessenger.showSnackBar(SnackBar(
-                  backgroundColor: theme.primaryColorDark,
-                  content: Text(
-                    localization.tr.storageAccessRequired,
-                    style: const TextStyle(color: Colors.white),
-                  ),
+                  content: Text(localization.tr.storageAccessRequired),
                   duration: const Duration(seconds: 5),
                 ));
               } else {
