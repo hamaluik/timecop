@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class ThemeUtil {
@@ -24,84 +26,75 @@ class ThemeUtil {
   });
   static const _fontFamily = 'PublicSans';
 
-  static final _lightColors = ColorScheme.light(
-      primary: Colors.blueGrey.shade900,
+  static final lightColors = ColorScheme.light(
+      primary: Colors.cyan.shade600,
       onPrimary: Colors.white,
-      secondary: Colors.cyan.shade600,
-      onSecondary: Colors.white,
       background: Colors.white,
       onBackground: Colors.black87,
       surface: Colors.grey.shade50,
       onSurface: Colors.black87,
-      onSurfaceVariant: Colors.black54,
+      surfaceVariant: Colors.blueGrey.shade50,
+      onSurfaceVariant: Colors.black87,
       error: Colors.red,
       onError: Colors.white);
-  static const _lightPrimarySwatch = Colors.blueGrey;
-  static final _lightAppBarBackground = Colors.blueGrey.shade400;
-  static final _lightBottomSheetBackground = Colors.blueGrey.shade50;
 
-  static final _darkColors = ColorScheme.dark(
-      primary: Colors.grey.shade900,
+  static final darkColors = ColorScheme.dark(
+      primary: Colors.cyan.shade600,
       onPrimary: Colors.white,
-      secondary: Colors.cyan.shade600,
-      onSecondary: Colors.white,
       background: Colors.grey.shade800,
       onBackground: Colors.white,
       surface: Colors.grey.shade900,
       onSurface: Colors.white,
-      onSurfaceVariant: Colors.grey.shade400,
+      surfaceVariant: const Color(0xFF303030),
+      onSurfaceVariant: Colors.white,
       error: Colors.red,
       onError: Colors.white);
-  static const _darkPrimarySwatch = Colors.grey;
-  static final _darkAppBarBackground = Colors.grey.shade800;
-  static const _darkBottomSheetBackground = Color(0xFF303030);
 
   static final _blackColors = ColorScheme.dark(
-      primary: Colors.black,
+      primary: Colors.cyan.shade600,
       onPrimary: Colors.white,
-      secondary: Colors.cyan.shade600,
-      onSecondary: Colors.white,
       background: Colors.black,
       onBackground: Colors.white,
       surface: Colors.black,
       onSurface: Colors.white,
-      onSurfaceVariant: Colors.grey.shade400,
+      surfaceVariant: Colors.grey.shade900,
+      onSurfaceVariant: Colors.white,
       error: Colors.red,
       onError: Colors.white);
-  static const _blackPrimarySwatch = Colors.grey;
-  static final _blackAppBarBackground = Colors.grey.shade900;
-  static const _blackBottomSheetBackground = Colors.black;
 
   static final lightTheme = getThemeFromColors(
       brightness: Brightness.light,
-      colors: _lightColors,
-      primarySwatch: _lightPrimarySwatch,
-      bottomSheetBackground: _lightBottomSheetBackground,
-      appBarBackground: _lightAppBarBackground,
+      colors: lightColors,
+      primarySwatch: Colors.blueGrey,
+      appBarBackground: Colors.blueGrey.shade400,
+      appBarForeground: Colors.white,
       appBarElevation: 0,
       appBarScrolledUnderElevation: 4);
   static final darkTheme = getThemeFromColors(
       brightness: Brightness.dark,
-      colors: _darkColors,
-      primarySwatch: _darkPrimarySwatch,
-      bottomSheetBackground: _darkBottomSheetBackground,
-      appBarBackground: _darkAppBarBackground,
+      colors: darkColors,
+      primarySwatch: Colors.grey,
+      appBarBackground: Colors.grey.shade800,
+      appBarForeground: Colors.white,
       appBarElevation: 2,
       appBarScrolledUnderElevation: 4);
   static final blackTheme = getThemeFromColors(
       brightness: Brightness.dark,
       colors: _blackColors,
-      primarySwatch: _blackPrimarySwatch,
-      bottomSheetBackground: _blackBottomSheetBackground,
-      appBarBackground: _blackAppBarBackground,
+      primarySwatch: Colors.grey,
+      appBarBackground: Colors.black,
+      appBarForeground: Colors.white,
       appBarElevation: 0,
-      appBarScrolledUnderElevation: 0);
+      appBarScrolledUnderElevation: 4);
+
+  static Color getOnBackgroundLighter(BuildContext context) =>
+      Theme.of(context).colorScheme.onBackground.withOpacity(0.62);
 
   static ThemeData getThemeFromColors(
           {required Brightness brightness,
           required ColorScheme colors,
-          required Color bottomSheetBackground,
           required Color appBarBackground,
+          required Color appBarForeground,
           double appBarElevation = 0,
           double appBarScrolledUnderElevation = 4,
           MaterialColor? primarySwatch}) =>
@@ -112,11 +105,12 @@ class ThemeUtil {
           primarySwatch: primarySwatch,
           scaffoldBackgroundColor: colors.background,
           appBarTheme: AppBarTheme(
+              centerTitle: !Platform.isAndroid,
               elevation: appBarElevation,
               scrolledUnderElevation: appBarScrolledUnderElevation,
               shadowColor: Colors.black,
               backgroundColor: appBarBackground,
-              foregroundColor: colors.onPrimary,
+              foregroundColor: appBarForeground,
               surfaceTintColor: Colors.transparent),
           fontFamily: _fontFamily,
           colorScheme: colors,
@@ -129,45 +123,43 @@ class ThemeUtil {
               textColor: colors.onSurface,
               iconColor: colors.onSurfaceVariant,
               collapsedIconColor: colors.onSurfaceVariant),
-          bottomSheetTheme: BottomSheetThemeData(
-            backgroundColor: bottomSheetBackground,
-          ),
           dividerColor: colors.onBackground.withAlpha(31),
           dividerTheme:
               DividerThemeData(color: colors.onBackground.withAlpha(31)),
           floatingActionButtonTheme: FloatingActionButtonThemeData(
               shape: const CircleBorder(),
-              backgroundColor: colors.secondary,
-              foregroundColor: colors.onSecondary),
+              backgroundColor: colors.primary,
+              foregroundColor: colors.onPrimary),
           textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(foregroundColor: colors.onSurface)),
           textSelectionTheme:
-              TextSelectionThemeData(cursorColor: colors.secondary),
-          inputDecorationTheme: InputDecorationTheme(
-            focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: colors.onPrimary)),
-          ),
+              TextSelectionThemeData(cursorColor: colors.primary),
           switchTheme: SwitchThemeData(
               thumbColor: MaterialStateProperty.resolveWith<Color?>((states) =>
                   (!states.contains(MaterialState.disabled) && states.contains(MaterialState.selected))
-                      ? colors.secondary
+                      ? colors.primary
                       : null),
               trackColor: MaterialStateProperty.resolveWith<Color?>((states) =>
                   (!states.contains(MaterialState.disabled) && states.contains(MaterialState.selected))
-                      ? colors.secondary.withAlpha(80)
+                      ? colors.primary.withAlpha(80)
                       : null)),
           radioTheme: RadioThemeData(
             fillColor: MaterialStateProperty.resolveWith<Color?>((states) =>
                 (!states.contains(MaterialState.disabled) &&
                         states.contains(MaterialState.selected))
-                    ? colors.secondary
+                    ? colors.primary
                     : null),
           ),
           checkboxTheme: CheckboxThemeData(
             fillColor: MaterialStateProperty.resolveWith<Color?>((states) =>
                 (!states.contains(MaterialState.disabled) &&
                         states.contains(MaterialState.selected))
-                    ? colors.secondary
+                    ? colors.primary
+                    : null),
+            checkColor: MaterialStateProperty.resolveWith<Color?>((states) =>
+                (!states.contains(MaterialState.disabled) &&
+                        states.contains(MaterialState.selected))
+                    ? colors.onPrimary
                     : null),
           ));
 }

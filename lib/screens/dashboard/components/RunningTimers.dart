@@ -54,7 +54,7 @@ class RunningTimers extends StatelessWidget {
 
             return Material(
               elevation: 4,
-              color: theme.bottomSheetTheme.backgroundColor,
+              color: theme.colorScheme.surfaceVariant,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.min,
@@ -71,11 +71,11 @@ class RunningTimers extends StatelessWidget {
                           children: <Widget>[
                             Text(L10N.of(context).tr.runningTimers,
                                 style: theme.textTheme.bodyMedium?.copyWith(
-                                    color: theme.colorScheme.secondary,
+                                    color: theme.colorScheme.primary,
                                     fontWeight: FontWeight.w700)),
                             Text(TimerEntry.formatDuration(runningTotal),
                                 style: theme.textTheme.bodyMedium?.copyWith(
-                                  color: theme.colorScheme.secondary,
+                                  color: theme.colorScheme.primary,
                                   fontFeatures: const [
                                     FontFeature.tabularFigures()
                                   ],

@@ -25,6 +25,7 @@ import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/screens/dashboard/components/ProjectTag.dart';
 import 'package:timecop/screens/dashboard/components/RowSeparator.dart';
 import 'package:timecop/screens/dashboard/components/StoppedTimerRow.dart';
+import 'package:timecop/themes.dart';
 
 import 'package:timecop/timer_utils.dart';
 
@@ -77,7 +78,7 @@ class _GroupedStoppedTimersRowWideState
 
     final timeFormat = DateFormat.jm();
     final timeSpanStyle = theme.textTheme.bodyMedium?.copyWith(
-      color: theme.colorScheme.onSurfaceVariant,
+      color: ThemeUtil.getOnBackgroundLighter(context),
       fontFeatures: const [FontFeature.tabularFigures()],
     );
     final project = BlocProvider.of<ProjectsBloc>(context)

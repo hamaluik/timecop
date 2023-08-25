@@ -14,6 +14,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:timecop/l10n.dart';
+import 'package:timecop/themes.dart';
 
 class TimerUtils {
   static String formatDescription(BuildContext context, String? description) {
@@ -28,7 +29,7 @@ class TimerUtils {
       return Theme.of(context)
           .textTheme
           .titleMedium!
-          .copyWith(color: Theme.of(context).disabledColor);
+          .copyWith(color: ThemeUtil.getOnBackgroundLighter(context));
     } else {
       return Theme.of(context)
           .textTheme

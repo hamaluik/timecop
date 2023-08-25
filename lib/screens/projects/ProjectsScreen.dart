@@ -71,10 +71,10 @@ class ProjectsScreen extends StatelessWidget {
                                     SlidableAction(
                                         backgroundColor: Theme.of(context)
                                             .colorScheme
-                                            .secondary,
+                                            .primary,
                                         foregroundColor: Theme.of(context)
                                             .colorScheme
-                                            .onSecondary,
+                                            .onPrimary,
                                         icon: project.archived
                                             ? FontAwesomeIcons.boxOpen
                                             : FontAwesomeIcons.boxArchive,

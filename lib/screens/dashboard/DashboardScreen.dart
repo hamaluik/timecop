@@ -49,7 +49,7 @@ class DashboardScreen extends StatelessWidget {
               const RunningTimers(),
               Material(
                 elevation: 8.0,
-                color: Theme.of(context).bottomSheetTheme.backgroundColor,
+                color: Theme.of(context).colorScheme.surfaceVariant,
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(8 + screenBorders.left, 8,
                       8 + screenBorders.right, 8 + screenBorders.bottom),

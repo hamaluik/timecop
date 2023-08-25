@@ -24,6 +24,7 @@ import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/models/start_of_week.dart';
+import 'package:timecop/themes.dart';
 import 'dart:math';
 
 import 'Legend.dart';
@@ -187,7 +188,7 @@ class WeekdayAverages extends StatelessWidget {
                       .map((day) =>
                           BarChartGroupData(x: day, barRods: <BarChartRodData>[
                             BarChartRodData(
-                              color: Theme.of(context).disabledColor,
+                              color: ThemeUtil.getOnBackgroundLighter(context),
                               width: 22,
                               toY: _daysData[day]!.entries.fold(
                                   0.0,
@@ -240,7 +241,7 @@ class WeekdayAverages extends StatelessWidget {
       Project? project = entry[0] as Project?;
       double value = entry[1] as double;
       return BarChartRodStackItem(runningY, runningY += value,
-          project?.colour ?? Theme.of(context).disabledColor);
+          project?.colour ?? ThemeUtil.getOnBackgroundLighter(context));
     }).toList();
     return stack;
   }

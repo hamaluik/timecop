@@ -24,6 +24,7 @@ import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/screens/dashboard/components/ProjectTag.dart';
 import 'package:timecop/screens/dashboard/components/TimerDenseTrailing.dart';
 import 'package:timecop/screens/timer/TimerEditor.dart';
+import 'package:timecop/themes.dart';
 
 import 'package:timecop/timer_utils.dart';
 
@@ -49,7 +50,7 @@ class StoppedTimerRowNarrowDense extends StatelessWidget {
     final project =
         BlocProvider.of<ProjectsBloc>(context).getProjectByID(timer.projectID);
     final timeSpanStyle = Theme.of(context).textTheme.bodySmall?.copyWith(
-      color: Theme.of(context).colorScheme.onSurfaceVariant,
+      color: ThemeUtil.getOnBackgroundLighter(context),
       fontFeatures: const [FontFeature.tabularFigures()],
     );
     final timeFormat = intl.DateFormat.jm();

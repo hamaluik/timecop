@@ -82,7 +82,6 @@ class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping>
       },
       title: Text(dateFormat.format(widget.date),
           style: TextStyle(
-            //color: theme.colorScheme.secondary,
             fontWeight: FontWeight.w700,
             fontSize: theme.textTheme.bodyMedium!.fontSize,
           )),
@@ -97,7 +96,7 @@ class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping>
           Container(width: 8),
           Text(TimerEntry.formatDuration(widget.totalTime),
               style: theme.textTheme.bodyMedium?.copyWith(
-                color: _expanded ? theme.colorScheme.secondary : null,
+                color: _expanded ? theme.colorScheme.primary : null,
                 fontFeatures: const [FontFeature.tabularFigures()],
               )),
         ],

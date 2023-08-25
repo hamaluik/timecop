@@ -121,14 +121,14 @@ class _DayGroupingRows extends StatelessWidget {
                     Expanded(
                         child: Text(dateFormat.format(dayGrouping.date),
                             style: theme.textTheme.bodyMedium?.copyWith(
-                                color: theme.colorScheme.secondary,
+                                color: theme.colorScheme.primary,
                                 fontWeight: FontWeight.w700))),
                     const SizedBox(
                       width: 16,
                     ),
                     Text(TimerEntry.formatDuration(runningTotal),
                         style: theme.textTheme.bodyMedium?.copyWith(
-                          color: theme.colorScheme.secondary,
+                          color: theme.colorScheme.primary,
                           fontFeatures: const [FontFeature.tabularFigures()],
                         )),
                     if (isWidescreen)

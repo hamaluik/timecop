@@ -131,8 +131,11 @@ class _StartTimerSpeedDialState extends State<StartTimerSpeedDial>
                 : L10N.of(context).tr.closeMenu,
             heroTag: null,
             backgroundColor: _controller.isDismissed
-                ? Theme.of(context).colorScheme.secondary
-                : Theme.of(context).disabledColor,
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context).colorScheme.surface,
+            foregroundColor: _controller.isDismissed
+                ? Theme.of(context).colorScheme.onPrimary
+                : Theme.of(context).colorScheme.onSurface,
             child: _controller.isDismissed
                 ? const Stack(
                     // shenanigans to properly centre the icon (font awesome glyphs are variable

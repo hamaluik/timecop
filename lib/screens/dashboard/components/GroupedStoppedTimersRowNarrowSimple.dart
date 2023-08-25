@@ -83,8 +83,8 @@ class _GroupedStoppedTimersRowNarrowSimpleState
               extentRatio: 0.15,
               children: <Widget>[
                 SlidableAction(
-                    backgroundColor: theme.colorScheme.secondary,
-                    foregroundColor: theme.colorScheme.onSecondary,
+                    backgroundColor: theme.colorScheme.primary,
+                    foregroundColor: theme.colorScheme.onPrimary,
                     icon: FontAwesomeIcons.play,
                     onPressed: (_) => widget.resumeTimer(context))
               ]),

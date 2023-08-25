@@ -125,7 +125,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                 pagination: SwiperPagination(
                     builder: DotSwiperPaginationBuilder(
                   color: Theme.of(context).disabledColor,
-                  activeColor: Theme.of(context).colorScheme.secondary,
+                  activeColor: Theme.of(context).colorScheme.primary,
                 )),
                 control: Platform.isLinux || Platform.isMacOS
                     ? SwiperControl(
@@ -138,7 +138,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
             ExpansionTile(
               title: Text(L10N.of(context).tr.filter,
                   style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.w700)),
               initiallyExpanded: false,
               children: <Widget>[
@@ -242,7 +242,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
             ExpansionTile(
               title: Text(L10N.of(context).tr.projects,
                   style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.w700)),
               children: <Widget>[
                 Row(
@@ -288,8 +288,6 @@ class _ReportsScreenState extends State<ReportsScreen> {
                                   L10N.of(context).tr.noProject),
                               value: selectedProjects
                                   .any((p) => p?.id == project?.id),
-                              activeColor:
-                                  Theme.of(context).colorScheme.secondary,
                               onChanged: (_) => setState(() {
                                 if (selectedProjects
                                     .any((p) => p?.id == project?.id)) {

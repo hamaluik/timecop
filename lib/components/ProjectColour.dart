@@ -14,6 +14,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:timecop/models/project.dart';
+import 'package:timecop/themes.dart';
 
 class ProjectColour extends StatelessWidget {
   static const double _size = 20;
@@ -35,7 +36,7 @@ class ProjectColour extends StatelessWidget {
         //borderRadius: BorderRadius.circular(SIZE * 0.5 * scale),
         border: project == null
             ? Border.all(
-                color: Theme.of(context).disabledColor,
+                color: ThemeUtil.getOnBackgroundLighter(context),
                 width: m ? 2.5 : 3.0,
               )
             : null,

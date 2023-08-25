@@ -23,6 +23,7 @@ import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
+import 'package:timecop/themes.dart';
 
 import 'Legend.dart';
 
@@ -121,8 +122,8 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
                               (project) => project.id == entry.key);
                       return PieChartSectionData(
                         value: entry.value,
-                        color:
-                            project?.colour ?? Theme.of(context).disabledColor,
+                        color: project?.colour ??
+                            ThemeUtil.getOnBackgroundLighter(context),
                         title: _touchedIndex == index
                             ? "${L10N.of(context).tr.nHours(entry.value.toStringAsFixed(1))}\n(${(100.0 * entry.value / totalHours).toStringAsFixed(0)} %)"
                             : "",

@@ -19,6 +19,7 @@ import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
+import 'package:timecop/themes.dart';
 
 class ProjectSelectField extends StatefulWidget {
   const ProjectSelectField({Key? key}) : super(key: key);
@@ -87,8 +88,9 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
                                               L10N.of(context).tr.noProject,
                                           style: TextStyle(
                                               color: p == null
-                                                  ? Theme.of(context)
-                                                      .disabledColor
+                                                  ? ThemeUtil
+                                                      .getOnBackgroundLighter(
+                                                          context)
                                                   : Theme.of(context)
                                                       .textTheme
                                                       .bodyMedium!

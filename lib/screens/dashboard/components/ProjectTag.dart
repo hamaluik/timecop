@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
+import 'package:timecop/themes.dart';
 
 class ProjectTag extends StatelessWidget {
   final Project? project;
@@ -32,7 +33,7 @@ class ProjectTag extends StatelessWidget {
         project?.name ?? L10N.of(context).tr.noProject,
         style: theme.textTheme.bodyMedium?.copyWith(
             color: project == null
-                ? theme.colorScheme.onSurfaceVariant
+                ? ThemeUtil.getOnBackgroundLighter(context)
                 : theme.colorScheme.onBackground),
       )
     ]);

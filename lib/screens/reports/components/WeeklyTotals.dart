@@ -26,6 +26,7 @@ import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/models/start_of_week.dart';
+import 'package:timecop/themes.dart';
 
 import 'Legend.dart';
 
@@ -176,7 +177,8 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                     Project? project = projects.state.projects
                         .firstWhereOrNull((project) => project.id == entry.key);
                     return LineChartBarData(
-                        color: project?.colour ?? theme.disabledColor,
+                        color: project?.colour ??
+                            ThemeUtil.getOnBackgroundLighter(context),
                         isCurved: true,
                         barWidth: 4,
                         spots: entry.value.entries.map((dataPoint) {

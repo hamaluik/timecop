@@ -31,6 +31,7 @@ import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/models/clone_time.dart';
+import 'package:timecop/themes.dart';
 
 enum _DateTimeMenuItems { now }
 
@@ -175,7 +176,9 @@ class _TimerEditorState extends State<TimerEditor> {
                                       const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
                                   child: Text(L10N.of(context).tr.noProject,
                                       style: TextStyle(
-                                          color: theme.disabledColor)),
+                                          color:
+                                              ThemeUtil.getOnBackgroundLighter(
+                                                  context))),
                                 ),
                               ],
                             ),
@@ -451,7 +454,7 @@ class _TimerEditorState extends State<TimerEditor> {
                   onPressed: () => Navigator.of(context).pop()),
               TextButton(
                   style: TextButton.styleFrom(
-                      foregroundColor: Theme.of(context).colorScheme.secondary),
+                      foregroundColor: Theme.of(context).colorScheme.primary),
                   onPressed: () =>
                       Navigator.of(context).pop(_notesController!.text),
                   child: Text(

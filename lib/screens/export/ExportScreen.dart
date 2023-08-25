@@ -89,7 +89,7 @@ class _ExportScreenState extends State<ExportScreen> {
           ExpansionTile(
             title: Text(L10N.of(context).tr.filter,
                 style: TextStyle(
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.w700)),
             initiallyExpanded: true,
             children: <Widget>[
@@ -174,7 +174,7 @@ class _ExportScreenState extends State<ExportScreen> {
               key: const Key("optionColumns"),
               title: Text(L10N.of(context).tr.columns,
                   style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.w700)),
               children: <Widget>[
                 SwitchListTile.adaptive(
@@ -182,56 +182,56 @@ class _ExportScreenState extends State<ExportScreen> {
                   value: settingsState.exportIncludeDate,
                   onChanged: (bool value) => settingsBloc
                       .add(SetBoolValueEvent(exportIncludeDate: value)),
-                  activeColor: Theme.of(context).colorScheme.secondary,
+                  activeColor: Theme.of(context).colorScheme.primary,
                 ),
                 SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.project),
                   value: settingsState.exportIncludeProject,
                   onChanged: (bool value) => settingsBloc
                       .add(SetBoolValueEvent(exportIncludeProject: value)),
-                  activeColor: Theme.of(context).colorScheme.secondary,
+                  activeColor: Theme.of(context).colorScheme.primary,
                 ),
                 SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.description),
                   value: settingsState.exportIncludeDescription,
                   onChanged: (bool value) => settingsBloc
                       .add(SetBoolValueEvent(exportIncludeDescription: value)),
-                  activeColor: Theme.of(context).colorScheme.secondary,
+                  activeColor: Theme.of(context).colorScheme.primary,
                 ),
                 SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.combinedProjectDescription),
                   value: settingsState.exportIncludeProjectDescription,
                   onChanged: (bool value) => settingsBloc.add(SetBoolValueEvent(
                       exportIncludeProjectDescription: value)),
-                  activeColor: Theme.of(context).colorScheme.secondary,
+                  activeColor: Theme.of(context).colorScheme.primary,
                 ),
                 SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.startTime),
                   value: settingsState.exportIncludeStartTime,
                   onChanged: (bool value) => settingsBloc
                       .add(SetBoolValueEvent(exportIncludeStartTime: value)),
-                  activeColor: Theme.of(context).colorScheme.secondary,
+                  activeColor: Theme.of(context).colorScheme.primary,
                 ),
                 SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.endTime),
                   value: settingsState.exportIncludeEndTime,
                   onChanged: (bool value) => settingsBloc
                       .add(SetBoolValueEvent(exportIncludeEndTime: value)),
-                  activeColor: Theme.of(context).colorScheme.secondary,
+                  activeColor: Theme.of(context).colorScheme.primary,
                 ),
                 SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.timeH),
                   value: settingsState.exportIncludeDurationHours,
                   onChanged: (bool value) => settingsBloc.add(
                       SetBoolValueEvent(exportIncludeDurationHours: value)),
-                  activeColor: Theme.of(context).colorScheme.secondary,
+                  activeColor: Theme.of(context).colorScheme.primary,
                 ),
                 SwitchListTile.adaptive(
                   title: Text(L10N.of(context).tr.notes),
                   value: settingsState.exportIncludeNotes,
                   onChanged: (bool value) => settingsBloc
                       .add(SetBoolValueEvent(exportIncludeNotes: value)),
-                  activeColor: Theme.of(context).colorScheme.secondary,
+                  activeColor: Theme.of(context).colorScheme.primary,
                 ),
               ],
             ),
@@ -239,7 +239,7 @@ class _ExportScreenState extends State<ExportScreen> {
           ExpansionTile(
             title: Text(L10N.of(context).tr.projects,
                 style: TextStyle(
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.w700)),
             children: <Widget>[
               Row(
@@ -281,7 +281,7 @@ class _ExportScreenState extends State<ExportScreen> {
                               project?.name ?? L10N.of(context).tr.noProject),
                           value:
                               selectedProjects.any((p) => p?.id == project?.id),
-                          activeColor: Theme.of(context).colorScheme.secondary,
+                          activeColor: Theme.of(context).colorScheme.primary,
                           onChanged: (_) => setState(() {
                             if (selectedProjects
                                 .any((p) => p?.id == project?.id)) {
@@ -297,7 +297,7 @@ class _ExportScreenState extends State<ExportScreen> {
           ExpansionTile(
             title: Text(L10N.of(context).tr.options,
                 style: TextStyle(
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.w700)),
             children: <Widget>[
               BlocBuilder<SettingsBloc, SettingsState>(
@@ -308,7 +308,7 @@ class _ExportScreenState extends State<ExportScreen> {
                   value: settingsState.exportGroupTimers,
                   onChanged: (bool value) => settingsBloc
                       .add(SetBoolValueEvent(exportGroupTimers: value)),
-                  activeColor: Theme.of(context).colorScheme.secondary,
+                  activeColor: Theme.of(context).colorScheme.primary,
                 ),
               )
             ],
