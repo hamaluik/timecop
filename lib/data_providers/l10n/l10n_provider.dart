@@ -52,6 +52,7 @@ abstract class L10NProvider {
   String get runningTimers;
   String get save;
   String get sourceCode;
+  String get translate;
   String get startTime;
   String get timeH;
   String get to;

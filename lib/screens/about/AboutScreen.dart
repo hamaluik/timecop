@@ -63,6 +63,12 @@ class AboutScreen extends StatelessWidget {
                 icon: const Icon(FontAwesomeIcons.userAstronaut),
               ),
               ListTile(
+                leading: const Icon(FontAwesomeIcons.globe),
+                title: Text(L10N.of(context).tr.translate),
+                onTap: () => launchUrl(
+                    Uri.parse("https://hosted.weblate.org/projects/timecop/")),
+              ),
+              ListTile(
                 leading: const Icon(FontAwesomeIcons.code),
                 title: Text(L10N.of(context).tr.sourceCode),
                 onTap: () =>

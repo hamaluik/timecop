@@ -151,6 +151,9 @@ class FluentL10NProvider extends L10NProvider {
   String get sourceCode =>
       _bundle.format("sourceCode", errors: _errors) ?? "sourceCode";
   @override
+  String get translate =>
+      _bundle.format("translate", errors: _errors) ?? "translate";
+  @override
   String get startTime =>
       _bundle.format("startTime", errors: _errors) ?? "startTime";
   @override
