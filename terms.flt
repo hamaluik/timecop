@@ -10,6 +10,8 @@ changeLog = Changelog
 
 sourceCode = Source Code
 
+translate = Translate
+
 whatAreYouDoing = What are you doing?
 
 projects = Projects
@@ -135,11 +137,11 @@ dark = Dark
 
 black = Black
 
-autoMaterialYou = Material You Automatic
+autoMaterialYou = System Colors – Automatic
 
-lightMaterialYou = Material You Light
+lightMaterialYou = System Colors – Light
 
-darkMaterialYou = Material You Dark
+darkMaterialYou = System Colors – Dark
 
 # tt-lang-name
 langName = English
