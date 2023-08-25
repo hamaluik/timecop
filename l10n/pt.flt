@@ -12,7 +12,6 @@ deleteTimerConfirm = Tem certeza de que deseja excluir este temporizador?
 cancel = Cancelar
 ok = OK
 delete = Excluir
-runningTimers = Temporizadores
 timeCopDatabase = Banco de dados Time Cop ({ $date })
 filter = Filtro
 from = A partir de
