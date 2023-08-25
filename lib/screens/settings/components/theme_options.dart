@@ -31,7 +31,7 @@ class ThemeOptions extends StatelessWidget {
           return ListTile(
             key: const Key("themeOption"),
             title: Text(L10N.of(context).tr.theme),
-            subtitle: Text(state.theme.display(context)!),
+            subtitle: Text(state.theme?.display(context) ?? ""),
             trailing: Icon(L10N.of(context).rtl
                 ? FontAwesomeIcons.chevronLeft
                 : FontAwesomeIcons.chevronRight),
@@ -71,6 +71,30 @@ class ThemeOptions extends StatelessWidget {
                             key: const Key("themeBlack"),
                             title: Text(L10N.of(context).tr.black),
                             value: ThemeType.black,
+                            groupValue: state.theme,
+                            onChanged: (ThemeType? type) =>
+                                Navigator.pop(context, type),
+                          ),
+                          RadioListTile<ThemeType>(
+                            key: const Key("themeAutoMaterialYou"),
+                            title: Text(L10N.of(context).tr.autoMaterialYou),
+                            value: ThemeType.autoMaterialYou,
+                            groupValue: state.theme,
+                            onChanged: (ThemeType? type) =>
+                                Navigator.pop(context, type),
+                          ),
+                          RadioListTile<ThemeType>(
+                            key: const Key("themeLightMaterialYou"),
+                            title: Text(L10N.of(context).tr.lightMaterialYou),
+                            value: ThemeType.lightMaterialYou,
+                            groupValue: state.theme,
+                            onChanged: (ThemeType? type) =>
+                                Navigator.pop(context, type),
+                          ),
+                          RadioListTile<ThemeType>(
+                            key: const Key("themeDarkMaterialYou"),
+                            title: Text(L10N.of(context).tr.darkMaterialYou),
+                            value: ThemeType.darkMaterialYou,
                             groupValue: state.theme,
                             onChanged: (ThemeType? type) =>
                                 Navigator.pop(context, type),

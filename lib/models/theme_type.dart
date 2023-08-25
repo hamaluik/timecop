@@ -15,7 +15,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:timecop/l10n.dart';
 
-enum ThemeType { auto, light, dark, black }
+enum ThemeType {
+  auto,
+  light,
+  dark,
+  black,
+  autoMaterialYou,
+  lightMaterialYou,
+  darkMaterialYou
+}
 
 ThemeType themeFromString(String? type) {
   if (type == null) return ThemeType.auto;
@@ -28,12 +36,18 @@ ThemeType themeFromString(String? type) {
       return ThemeType.dark;
     case "black":
       return ThemeType.black;
+    case "autoMaterialYou":
+      return ThemeType.autoMaterialYou;
+    case "lightMaterialYou":
+      return ThemeType.lightMaterialYou;
+    case "darkMaterialYou":
+      return ThemeType.darkMaterialYou;
     default:
       return ThemeType.auto;
   }
 }
 
-extension ThemeTypeStr on ThemeType? {
+extension ThemeTypeStr on ThemeType {
   String? get stringify {
     switch (this) {
       case ThemeType.auto:
@@ -44,8 +58,12 @@ extension ThemeTypeStr on ThemeType? {
         return "dark";
       case ThemeType.black:
         return "black";
-      default:
-        return null;
+      case ThemeType.autoMaterialYou:
+        return "autoMaterialYou";
+      case ThemeType.lightMaterialYou:
+        return "lightMaterialYou";
+      case ThemeType.darkMaterialYou:
+        return "darkMaterialYou";
     }
   }
 
@@ -59,6 +77,12 @@ extension ThemeTypeStr on ThemeType? {
         return L10N.of(context).tr.dark;
       case ThemeType.black:
         return L10N.of(context).tr.black;
+      case ThemeType.autoMaterialYou:
+        return L10N.of(context).tr.autoMaterialYou;
+      case ThemeType.lightMaterialYou:
+        return L10N.of(context).tr.lightMaterialYou;
+      case ThemeType.darkMaterialYou:
+        return L10N.of(context).tr.darkMaterialYou;
       default:
         return null;
     }

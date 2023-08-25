@@ -15,6 +15,7 @@
 import 'dart:async';
 
 import 'dart:io';
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -33,6 +34,7 @@ import 'package:timecop/data_providers/notifications/notifications_provider.dart
 import 'package:timecop/data_providers/settings/settings_provider.dart';
 import 'package:timecop/fontlicenses.dart';
 import 'package:timecop/l10n.dart';
+import 'package:timecop/models/theme_type.dart';
 import 'package:timecop/screens/dashboard/DashboardScreen.dart';
 import 'package:timecop/themes.dart';
 import 'package:flutter_app_badger/flutter_app_badger.dart';
@@ -195,6 +197,46 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
         () => brightness = WidgetsBinding.instance.window.platformBrightness);
   }
 
+  ThemeData getTheme(
+      ThemeType? type, ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+    if (type == ThemeType.autoMaterialYou) {
+      if (brightness == Brightness.dark) {
+        type = ThemeType.darkMaterialYou;
+      } else {
+        type = ThemeType.lightMaterialYou;
+      }
+    }
+    switch (type) {
+      case ThemeType.light:
+        return ThemeUtil.lightTheme;
+      case ThemeType.dark:
+        return ThemeUtil.darkTheme;
+      case ThemeType.black:
+        return ThemeUtil.blackTheme;
+      case ThemeType.lightMaterialYou:
+        return ThemeUtil.getThemeFromColors(
+            brightness: Brightness.light,
+            colors: lightDynamic ?? ThemeUtil.lightColors,
+            appBarBackground:
+                lightDynamic?.background ?? ThemeUtil.lightColors.background,
+            appBarForeground: lightDynamic?.onBackground ??
+                ThemeUtil.lightColors.onBackground);
+      case ThemeType.darkMaterialYou:
+        return ThemeUtil.getThemeFromColors(
+            brightness: Brightness.dark,
+            colors: darkDynamic ?? ThemeUtil.darkColors,
+            appBarBackground:
+                darkDynamic?.background ?? ThemeUtil.darkColors.background,
+            appBarForeground:
+                darkDynamic?.onBackground ?? ThemeUtil.darkColors.onBackground);
+      case ThemeType.auto:
+      default:
+        return brightness == Brightness.dark
+            ? ThemeUtil.darkTheme
+            : ThemeUtil.lightTheme;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
@@ -204,42 +246,43 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
         child: BlocBuilder<ThemeBloc, ThemeState>(
             builder: (BuildContext context, ThemeState themeState) =>
                 BlocBuilder<LocaleBloc, LocaleState>(
-                  builder: (BuildContext context, LocaleState localeState) =>
-                      MaterialApp(
-                    title: 'Time Cop',
-                    home: const DashboardScreen(),
-                    theme: themeState.themeData ??
-                        (brightness == Brightness.dark
-                            ? ThemeUtil.darkTheme
-                            : ThemeUtil.lightTheme),
-                    localizationsDelegates: const [
-                      L10N.delegate,
-                      GlobalMaterialLocalizations.delegate,
-                      GlobalWidgetsLocalizations.delegate,
-                      GlobalCupertinoLocalizations.delegate,
-                    ],
-                    locale: localeState.locale,
-                    supportedLocales: const [
-                      Locale('en'),
-                      Locale('ar'),
-                      Locale('cs'),
-                      Locale('da'),
-                      Locale('de'),
-                      Locale('es'),
-                      Locale('fr'),
-                      Locale('hi'),
-                      Locale('id'),
-                      Locale('it'),
-                      Locale('ja'),
-                      Locale('ko'),
-                      Locale('nb', 'NO'),
-                      Locale('pt'),
-                      Locale('ru'),
-                      Locale('tr'),
-                      Locale('zh', 'CN'),
-                      Locale('zh', 'TW'),
-                    ],
-                  ),
-                )));
+                    builder: (BuildContext context, LocaleState localeState) =>
+                        DynamicColorBuilder(
+                          builder: (ColorScheme? lightDynamic,
+                                  ColorScheme? darkDynamic) =>
+                              MaterialApp(
+                            title: 'Time Cop',
+                            home: const DashboardScreen(),
+                            theme: getTheme(
+                                themeState.theme, lightDynamic, darkDynamic),
+                            localizationsDelegates: const [
+                              L10N.delegate,
+                              GlobalMaterialLocalizations.delegate,
+                              GlobalWidgetsLocalizations.delegate,
+                              GlobalCupertinoLocalizations.delegate,
+                            ],
+                            locale: localeState.locale,
+                            supportedLocales: const [
+                              Locale('en'),
+                              Locale('ar'),
+                              Locale('cs'),
+                              Locale('da'),
+                              Locale('de'),
+                              Locale('es'),
+                              Locale('fr'),
+                              Locale('hi'),
+                              Locale('id'),
+                              Locale('it'),
+                              Locale('ja'),
+                              Locale('ko'),
+                              Locale('nb', 'NO'),
+                              Locale('pt'),
+                              Locale('ru'),
+                              Locale('tr'),
+                              Locale('zh', 'CN'),
+                              Locale('zh', 'TW'),
+                            ],
+                          ),
+                        ))));
   }
 }
