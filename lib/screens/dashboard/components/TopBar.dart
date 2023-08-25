@@ -14,6 +14,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
@@ -31,11 +32,11 @@ class TopBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _TopBarState extends State<TopBar> {
-  final _searchFormKey = GlobalKey<FormState>();
-  TextEditingController? _searchController;
   late bool _searching;
 
-  FocusNode? _searchFocusNode;
+  final _searchFormKey = GlobalKey<FormState>();
+  late TextEditingController _searchController;
+  late FocusNode _searchFocusNode;
 
   @override
   void initState() {
@@ -47,8 +48,8 @@ class _TopBarState extends State<TopBar> {
 
   @override
   void dispose() {
-    _searchFocusNode!.dispose();
-    _searchController!.dispose();
+    _searchFocusNode.dispose();
+    _searchController.dispose();
     super.dispose();
   }
 
@@ -56,30 +57,6 @@ class _TopBarState extends State<TopBar> {
     setState(() => _searching = false);
     final bloc = BlocProvider.of<DashboardBloc>(context);
     bloc.add(const SearchChangedEvent(null));
-  }
-
-  Widget searchBar(BuildContext context) {
-    final bloc = BlocProvider.of<DashboardBloc>(context);
-
-    return Form(
-        key: _searchFormKey,
-        child: TextFormField(
-          focusNode: _searchFocusNode,
-          controller: _searchController,
-          style: Theme.of(context).primaryTextTheme.bodyLarge,
-          onChanged: (search) {
-            bloc.add(SearchChangedEvent(search));
-          },
-          decoration: InputDecoration(
-              prefixIcon: Icon(FontAwesomeIcons.magnifyingGlass,
-                  color: Theme.of(context).colorScheme.onPrimary),
-              suffixIcon: IconButton(
-                color: Theme.of(context).colorScheme.onPrimary,
-                icon: const Icon(FontAwesomeIcons.circleXmark),
-                onPressed: cancelSearch,
-                tooltip: L10N.of(context).tr.cancel,
-              )),
-        ));
   }
 
   @override
@@ -94,22 +71,82 @@ class _TopBarState extends State<TopBar> {
                 tooltip: L10N.of(context).tr.cancel,
               )
             : const PopupMenu(),
-        title:
-            _searching ? searchBar(context) : Text(L10N.of(context).tr.appName),
+        title: _searching
+            ? _SearchBar(
+                cancelSearch: cancelSearch,
+                searchController: _searchController,
+                searchFocusNode: _searchFocusNode,
+                searchFormKey: _searchFormKey,
+              )
+            : Row(mainAxisSize: MainAxisSize.min, children: [
+                SvgPicture.asset(
+                  "icon.no-bg.svg",
+                  colorFilter: ColorFilter.mode(
+                      Theme.of(context).appBarTheme.foregroundColor ??
+                          Colors.white,
+                      BlendMode.srcIn),
+                  height: 28,
+                  semanticsLabel: L10N.of(context).tr.logoSemantics,
+                ),
+                const SizedBox(width: 8),
+                Text(L10N.of(context).tr.appName)
+              ]),
         actions: !_searching
             ? <Widget>[
                 IconButton(
                   tooltip: L10N.of(context).tr.search,
                   icon: const Icon(FontAwesomeIcons.magnifyingGlass),
                   onPressed: () {
-                    _searchController!.text = "";
+                    _searchController.text = "";
                     bloc.add(const SearchChangedEvent(""));
                     setState(() => _searching = true);
-                    _searchFocusNode!.requestFocus();
+                    _searchFocusNode.requestFocus();
                   },
                 ),
                 const FilterButton(),
               ]
             : <Widget>[]);
+  }
+}
+
+class _SearchBar extends StatelessWidget {
+  final Function() cancelSearch;
+  final GlobalKey<FormState> searchFormKey;
+  final TextEditingController searchController;
+  final FocusNode searchFocusNode;
+
+  const _SearchBar(
+      {required this.cancelSearch,
+      required this.searchFormKey,
+      required this.searchController,
+      required this.searchFocusNode});
+
+  @override
+  Widget build(BuildContext context) {
+    final bloc = BlocProvider.of<DashboardBloc>(context);
+
+    return Form(
+        key: searchFormKey,
+        child: TextFormField(
+          focusNode: searchFocusNode,
+          controller: searchController,
+          textAlignVertical: TextAlignVertical.center,
+          style: Theme.of(context)
+              .primaryTextTheme
+              .bodyLarge
+              ?.copyWith(color: Theme.of(context).appBarTheme.foregroundColor),
+          onChanged: (search) {
+            bloc.add(SearchChangedEvent(search));
+          },
+          decoration: InputDecoration(
+              prefixIcon: Icon(FontAwesomeIcons.magnifyingGlass,
+                  color: Theme.of(context).appBarTheme.foregroundColor),
+              suffixIcon: IconButton(
+                color: Theme.of(context).appBarTheme.foregroundColor,
+                icon: const Icon(FontAwesomeIcons.circleXmark),
+                onPressed: cancelSearch,
+                tooltip: L10N.of(context).tr.cancel,
+              )),
+        ));
   }
 }

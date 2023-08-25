@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/screens/about/AboutScreen.dart';
@@ -37,15 +36,7 @@ class PopupMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopupMenuButton<MenuItem>(
       key: const Key("menuButton"),
-      icon: SvgPicture.asset(
-        "icon.no-bg.svg",
-        colorFilter: ColorFilter.mode(
-            Theme.of(context).appBarTheme.foregroundColor ?? Colors.white,
-            BlendMode.srcIn),
-        height: 30,
-        semanticsLabel: L10N.of(context).tr.logoSemantics,
-      ),
-      color: Theme.of(context).colorScheme.surface,
+      icon: const Icon(FontAwesomeIcons.bars),
       onSelected: (MenuItem item) {
         switch (item) {
           case MenuItem.projects:
@@ -105,7 +96,7 @@ class PopupMenu extends StatelessWidget {
             key: const Key("menuSettings"),
             value: MenuItem.settings,
             child: ListTile(
-              leading: const Icon(FontAwesomeIcons.screwdriverWrench),
+              leading: const Icon(FontAwesomeIcons.gear),
               title: Text(L10N.of(context).tr.settings),
             ),
           ),
