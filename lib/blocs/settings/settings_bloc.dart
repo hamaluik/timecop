@@ -16,6 +16,8 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter_app_badger/flutter_app_badger.dart';
+import 'package:intl/intl.dart';
+
 import 'package:timecop/blocs/projects/projects_event.dart';
 import 'package:timecop/blocs/timers/timers_event.dart';
 import 'package:timecop/data_providers/data/data_provider.dart';
@@ -214,14 +216,20 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     });
   }
   DateTime? getFilterStartDate() {
-    if (state.defaultFilterStartDateToMonday) {
-      var dayOfWeek = 1; // Monday=1, Tuesday=2...
-      DateTime date = DateTime.now();
-      return date.subtract(Duration(days: date.weekday - dayOfWeek));
-    } else if (state.defaultFilterDays > 0) {
-      return DateTime.now().subtract(const Duration(days: 30));
-    } else {
-      return null;
-    }
+    DateTime now = DateTime.now();
+    //String formattedDate = DateFormat('MMM dd, yyyy').format(now.month,now);
+    DateTime date = new DateTime(now.year, now.month, 01);
+
+    return date;
+    // if (state.defaultFilterStartDateToMonday) {
+    //   var dayOfWeek = 1; // Monday=1, Tuesday=2...
+
+    //   // DateTime sent = date.subtract(Duration(days: date.weekday - dayOfWeek));
+    //   return date;
+    // } else if (state.defaultFilterDays > 0) {
+    //   return DateTime.now().subtract(const Duration(days: 30));
+    // } else {
+    //   return null;
+    // }
   }
 }
