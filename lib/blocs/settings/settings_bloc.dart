@@ -217,7 +217,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   }
   DateTime? getFilterStartDate() {
     DateTime now = DateTime.now();
-    //String formattedDate = DateFormat('MMM dd, yyyy').format(now.month,now);
     DateTime date = new DateTime(now.year, now.month, 01);
 
     return date;
