@@ -56,41 +56,48 @@ class RunningTimers extends StatelessWidget {
               elevation: 4,
               color: theme.colorScheme.surfaceVariant,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            Text(L10N.of(context).tr.runningTimers,
-                                style: theme.textTheme.bodyMedium?.copyWith(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisSize: MainAxisSize.max,
+                            children: <Widget>[
+                              Text(L10N.of(context).tr.runningTimers,
+                                  style: theme.textTheme.bodyMedium?.copyWith(
+                                      color: theme.colorScheme.primary,
+                                      fontWeight: FontWeight.w700)),
+                              Text(TimerEntry.formatDuration(runningTotal),
+                                  style: theme.textTheme.bodyMedium?.copyWith(
                                     color: theme.colorScheme.primary,
-                                    fontWeight: FontWeight.w700)),
-                            Text(TimerEntry.formatDuration(runningTotal),
-                                style: theme.textTheme.bodyMedium?.copyWith(
-                                  color: theme.colorScheme.primary,
-                                  fontFeatures: const [
-                                    FontFeature.tabularFigures()
-                                  ],
-                                ))
-                          ],
-                        ),
-                        const Divider(),
-                      ],
+                                    fontFeatures: const [
+                                      FontFeature.tabularFigures()
+                                    ],
+                                  ))
+                            ],
+                          ),
+                          const Divider(),
+                        ],
+                      ),
                     ),
-                  ),
-                ]
-                    .followedBy(runningTimers.map((timer) =>
-                        RunningTimerRow(timer: timer, now: timersState.now)))
-                    .toList(),
-              ),
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                          maxHeight: MediaQuery.sizeOf(context).height / 4),
+                      child: ListView(
+                        shrinkWrap: true,
+                        children: runningTimers
+                            .map((timer) => RunningTimerRow(
+                                timer: timer, now: timersState.now))
+                            .toList(),
+                      ),
+                    ),
+                  ]),
             );
           },
         );
