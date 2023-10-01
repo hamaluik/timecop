@@ -117,7 +117,7 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
         (_) => BlocProvider.of<TimersBloc>(context).add(const UpdateNow()));
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    brightness = WidgetsBinding.instance.window.platformBrightness;
+    brightness = WidgetsBinding.instance.platformDispatcher.platformBrightness;
 
     final settingsBloc = BlocProvider.of<SettingsBloc>(context);
     final timersBloc = BlocProvider.of<TimersBloc>(context);
@@ -192,9 +192,8 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
 
   @override
   void didChangePlatformBrightness() {
-    // print(WidgetsBinding.instance.window.platformBrightness.toString());
-    setState(
-        () => brightness = WidgetsBinding.instance.window.platformBrightness);
+    setState(() => brightness =
+        WidgetsBinding.instance.platformDispatcher.platformBrightness);
   }
 
   ThemeData getTheme(
