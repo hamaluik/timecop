@@ -59,7 +59,6 @@ class SettingsScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          // title: const Text('Notification Permission Required'),
           title: Text(L10N.of(context).tr.notificationPermissionRequired),
           content: Text(L10N.of(context).tr.notificationPermissionDialogBody),
           actions: [
