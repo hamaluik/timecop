@@ -22,6 +22,7 @@ class CollapsibleDayGrouping extends StatefulWidget {
   final DateTime date;
   final Iterable<Widget> children;
   final Duration totalTime;
+
   const CollapsibleDayGrouping(
       {Key? key,
       required this.date,
@@ -93,7 +94,7 @@ class _CollapsibleDayGroupingState extends State<CollapsibleDayGrouping>
             turns: _iconTurns,
             child: const Icon(Icons.expand_more),
           ),
-          Container(width: 8),
+          const SizedBox(width: 8),
           Text(TimerEntry.formatDuration(widget.totalTime),
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: _expanded ? theme.colorScheme.primary : null,

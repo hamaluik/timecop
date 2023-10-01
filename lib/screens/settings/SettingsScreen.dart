@@ -153,7 +153,7 @@ class SettingsScreen extends StatelessWidget {
                 bloc: settingsBloc,
                 builder: (BuildContext context, SettingsState settings) {
                   if (settings.defaultFilterStartDateToMonday) {
-                    return Container();
+                    return const SizedBox();
                   }
 
                   return ListTile(

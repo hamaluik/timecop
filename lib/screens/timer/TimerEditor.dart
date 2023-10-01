@@ -158,8 +158,7 @@ class _TimerEditorState extends State<TimerEditor> {
                       padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                       child: DropdownButton(
                         value: (_project?.archived ?? true) ? null : _project,
-                        underline: Container(),
-                        elevation: 0,
+                        underline: const SizedBox(),
                         onChanged: (Project? newProject) {
                           setState(() {
                             _project = newProject;

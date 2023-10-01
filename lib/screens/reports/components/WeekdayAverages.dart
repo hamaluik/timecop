@@ -205,7 +205,7 @@ class WeekdayAverages extends StatelessWidget {
                           ]))
                       .toList())),
             ),
-            Container(
+            const SizedBox(
               height: 16,
             ),
             Text(

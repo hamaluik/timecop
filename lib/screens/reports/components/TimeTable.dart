@@ -103,7 +103,7 @@ class TimeTable extends StatelessWidget {
                           mini: true,
                           project: project,
                         ),
-                        Container(width: 4),
+                        const SizedBox(width: 4),
                         Text(project?.name ?? L10N.of(context).tr.noProject,
                             style: Theme.of(context).textTheme.bodyMedium)
                       ],
@@ -119,7 +119,7 @@ class TimeTable extends StatelessWidget {
               ));
         })).followedBy(<Widget>[
           projectHours.isEmpty
-              ? Container()
+              ? const SizedBox()
               : Divider(
                   thickness: 1.0,
                   color: Theme.of(context).textTheme.bodyMedium!.color),

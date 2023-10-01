@@ -118,7 +118,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                               selectedProjects: selectedProjects,
                             );
                         }
-                        return Container();
+                        return const SizedBox();
                       }));
                 },
                 itemCount: 4,

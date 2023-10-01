@@ -31,7 +31,7 @@ class RunningTimers extends StatelessWidget {
     return BlocBuilder<DashboardBloc, DashboardState>(
       builder: (BuildContext context, DashboardState dashboardState) {
         if (dashboardState.searchString != null) {
-          return Container();
+          return const SizedBox();
         }
 
         return BlocBuilder<TimersBloc, TimersState>(
@@ -42,7 +42,7 @@ class RunningTimers extends StatelessWidget {
                 .where((timer) => timer.endTime == null)
                 .toList();
             if (runningTimers.isEmpty) {
-              return Container();
+              return const SizedBox();
             }
 
             DateTime now = DateTime.now();

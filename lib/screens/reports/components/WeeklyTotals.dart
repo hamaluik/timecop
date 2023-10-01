@@ -187,7 +187,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                         }).toList());
                   }).toList())),
             ),
-            Container(
+            const SizedBox(
               height: 16,
             ),
             Text(

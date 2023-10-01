@@ -84,7 +84,7 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
     LinkedHashMap<int?, double> projectHours = calculateData(
         context, widget.startDate, widget.endDate, widget.selectedProjects);
     if (projectHours.isEmpty) {
-      return Container();
+      return const SizedBox();
     }
     final double totalHours =
         projectHours.values.fold(0.0, (double sum, double v) => sum + v);
@@ -133,7 +133,7 @@ class _ProjectBreakdownState extends State<ProjectBreakdown> {
                     }))),
               ),
             ),
-            Container(
+            const SizedBox(
               height: 16,
             ),
             Text(
