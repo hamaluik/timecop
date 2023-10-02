@@ -35,7 +35,8 @@ import 'package:timecop/data_providers/settings/settings_provider.dart';
 import 'package:timecop/fontlicenses.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/theme_type.dart';
-import 'package:timecop/screens/dashboard/DashboardScreen.dart';
+
+import 'package:timecop/splashing.dart';
 import 'package:timecop/themes.dart';
 import 'package:flutter_app_badger/flutter_app_badger.dart';
 
@@ -100,6 +101,7 @@ Future<void> runMain(SettingsProvider settings, DataProvider data,
 }
 
 class TimeCopApp extends StatefulWidget {
+
   final SettingsProvider settings;
   const TimeCopApp({Key? key, required this.settings}) : super(key: key);
 
@@ -251,7 +253,8 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
                                   ColorScheme? darkDynamic) =>
                               MaterialApp(
                             title: 'Time Cop',
-                            home: const DashboardScreen(),
+                            home:  Splashing(),
+                            debugShowCheckedModeBanner: false,
                             theme: getTheme(
                                 themeState.theme, lightDynamic, darkDynamic),
                             localizationsDelegates: const [

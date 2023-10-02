@@ -82,6 +82,7 @@ flutter:
     - icon.no-bg.cyan.svg
     - fonts/LICENSE-PublicSans.md
     - l10n/
+    - icon1.png
   fonts:
     - family: PublicSans
       fonts:

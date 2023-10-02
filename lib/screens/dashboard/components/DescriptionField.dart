@@ -65,6 +65,7 @@ class _DescriptionFieldState extends State<DescriptionField> {
         return TypeAheadField<String?>(
           direction: AxisDirection.up,
           textFieldConfiguration: TextFieldConfiguration(
+
               focusNode: _focus,
               controller: _controller,
               autocorrect: true,

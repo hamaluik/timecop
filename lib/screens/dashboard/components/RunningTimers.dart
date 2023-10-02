@@ -86,10 +86,25 @@ class RunningTimers extends StatelessWidget {
                       ],
                     ),
                   ),
-                ]
-                    .followedBy(runningTimers.map((timer) =>
-                        RunningTimerRow(timer: timer, now: timersState.now)))
-                    .toList(),
+           Container(
+            width: 600,
+            height: 600,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
+              // shrinkWrap: true,
+              children: runningTimers
+                  .map((timer) => RunningTimerRow(
+              timer: timer, now: timersState.now))
+                  .toList(),
+
+
+
+                ),
+            ),
+            )
+                ],
+
               ),
             );
           },
