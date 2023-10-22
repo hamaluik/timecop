@@ -167,9 +167,12 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                               int week = dweek.toInt();
                               DateTime date =
                                   firstDate!.add(Duration(days: week * 7));
-                              return Text(
-                                dateFormat.format(date).replaceAll(' ', '\n'),
-                                style: theme.textTheme.bodySmall,
+                              return Container(
+                                padding: const EdgeInsets.only(top: 5),
+                                child: Text(
+                                  dateFormat.format(date),
+                                  style: theme.textTheme.bodySmall,
+                                ),
                               );
                             }),
                       )),
