@@ -14,11 +14,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
+import 'package:timecop/screens/projects/ProjectsScreen.dart';
 import 'package:timecop/themes.dart';
 
 class ProjectSelectField extends StatefulWidget {
@@ -66,39 +68,58 @@ class _ProjectSelectFieldState extends State<ProjectSelectField> {
                   barrierDismissible: true,
                   builder: (BuildContext context) {
                     return SimpleDialog(
-                      title: Text(L10N.of(context).tr.projects),
-                      contentPadding:
-                          const EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 16.0),
-                      children: <Project?>[null]
-                          .followedBy(
-                              projectsState.projects.where((p) => !p.archived))
-                          .map((Project? p) => TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop(_ProjectChoice(p));
-                              },
-                              child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 12),
-                                  child: Row(
-                                    children: <Widget>[
-                                      ProjectColour(project: p),
-                                      const SizedBox(width: 8),
-                                      Text(
-                                          p?.name ??
-                                              L10N.of(context).tr.noProject,
-                                          style: TextStyle(
-                                              color: p == null
-                                                  ? ThemeUtil
-                                                      .getOnBackgroundLighter(
-                                                          context)
-                                                  : Theme.of(context)
-                                                      .textTheme
-                                                      .bodyMedium!
-                                                      .color)),
-                                    ],
-                                  ))))
-                          .toList(),
-                    );
+                        title: Row(children: [
+                          Text(L10N.of(context).tr.projects),
+                          const Spacer(),
+                          Tooltip(
+                              message: L10N.of(context).tr.projects,
+                              child: InkWell(
+                                child: const Icon(
+                                  FontAwesomeIcons.penToSquare,
+                                ),
+                                onTap: () {
+                                  Navigator.of(context).pop();
+                                  Navigator.of(context)
+                                      .push(MaterialPageRoute<ProjectsScreen>(
+                                    builder: (_) => const ProjectsScreen(),
+                                  ));
+                                },
+                              )),
+                        ]),
+                        contentPadding:
+                            const EdgeInsets.fromLTRB(8.0, 12.0, 8.0, 16.0),
+                        children: <Project?>[null]
+                            .followedBy(projectsState.projects
+                                .where((p) => !p.archived))
+                            .map((Project? p) => InkWell(
+                                onTap: () {
+                                  Navigator.of(context).pop(_ProjectChoice(p));
+                                },
+                                child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 12),
+                                    child: Row(
+                                      children: <Widget>[
+                                        ProjectColour(project: p),
+                                        const SizedBox(width: 8),
+                                        Text(
+                                            p?.name ??
+                                                L10N.of(context).tr.noProject,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium
+                                                ?.copyWith(
+                                                    color: p == null
+                                                        ? ThemeUtil
+                                                            .getOnBackgroundLighter(
+                                                                context)
+                                                        : Theme.of(context)
+                                                            .textTheme
+                                                            .bodyMedium!
+                                                            .color)),
+                                      ],
+                                    ))))
+                            .toList());
                   });
 
               if (projectChoice != null) {
