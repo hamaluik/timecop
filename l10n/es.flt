@@ -96,3 +96,7 @@ exportDatabase = Exportar la base de datos
 storageAccessRequired = Se requiere acceso al almacenamiento
 notificationPermissionRequired = Permiso de notificaciónes requerido
 notificationPermissionDialogBody = Habilita el permiso de las notificaciones en la configuración para usar esta función.
+translate = Traducir
+lightMaterialYou = Colores del sistema – Claro
+darkMaterialYou = Colores del sistema – Oscuro
+autoMaterialYou = Colores del sistema - Automático
