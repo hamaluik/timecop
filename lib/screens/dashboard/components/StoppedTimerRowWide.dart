@@ -105,7 +105,7 @@ class StoppedTimerRowWide extends StatelessWidget {
                 offset: const Offset(2, -4),
                 child: Text(
                   "+${duration.inDays}",
-                  textScaleFactor: 0.8,
+                  textScaler: const TextScaler.linear(0.8),
                   style: timeSpanStyle,
                 ),
               ),

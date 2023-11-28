@@ -136,7 +136,7 @@ class _GroupedStoppedTimersRowWideState
               offset: const Offset(2, -4),
               child: Text(
                 "+${widget.totalDuration.inDays}",
-                textScaleFactor: 0.8,
+                textScaler: const TextScaler.linear(0.8),
                 style: timeSpanStyle,
               ),
             ),
