@@ -54,6 +54,7 @@ class StoppedTimerRowNarrowDense extends StatelessWidget {
       fontFeatures: const [FontFeature.tabularFigures()],
     );
     final timeFormat = intl.DateFormat.jm();
+    final duration = timer.endTime!.difference(timer.startTime);
 
     return Slidable(
       startActionPane: ActionPane(
@@ -99,7 +100,16 @@ class StoppedTimerRowNarrowDense extends StatelessWidget {
                           style: timeSpanStyle,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.right,
-                        ))
+                        )),
+                        if (duration.inDays > 0)
+                          Transform.translate(
+                            offset: const Offset(2, -4),
+                            child: Text(
+                              "+${duration.inDays}",
+                              textScaler: const TextScaler.linear(0.8),
+                              style: timeSpanStyle,
+                            ),
+                          )
                       ],
                     )
                   ])),
