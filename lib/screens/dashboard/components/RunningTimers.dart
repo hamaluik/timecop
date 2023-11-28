@@ -86,17 +86,22 @@ class RunningTimers extends StatelessWidget {
                         ],
                       ),
                     ),
-                    ConstrainedBox(
-                      constraints: BoxConstraints(
-                          maxHeight: MediaQuery.sizeOf(context).height / 4),
-                      child: ListView(
-                        shrinkWrap: true,
-                        children: runningTimers
-                            .map((timer) => RunningTimerRow(
-                                timer: timer, now: timersState.now))
-                            .toList(),
-                      ),
-                    ),
+                    Theme(
+                        data: Theme.of(context).copyWith(
+                            scrollbarTheme: ScrollbarThemeData(
+                                thumbVisibility:
+                                    MaterialStateProperty.all<bool>(true))),
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                              maxHeight: MediaQuery.sizeOf(context).height / 4),
+                          child: ListView(
+                            shrinkWrap: true,
+                            children: runningTimers
+                                .map((timer) => RunningTimerRow(
+                                    timer: timer, now: timersState.now))
+                                .toList(),
+                          ),
+                        )),
                   ]),
             );
           },
