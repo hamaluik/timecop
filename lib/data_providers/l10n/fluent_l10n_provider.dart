@@ -407,4 +407,34 @@ class FluentL10NProvider extends L10NProvider {
   String get notificationPermissionRequired =>
       _bundle.format("notificationPermissionRequired", errors: _errors) ??
       "notificationPermissionRequired";
+
+  @override
+  String get thisWeek =>
+      _bundle.format("thisWeek", errors: _errors) ?? "thisWeek";
+  @override
+  String get thisMonth =>
+      _bundle.format("thisMonth", errors: _errors) ?? "thisMonth";
+  @override
+  String get lastMonth =>
+      _bundle.format("lastMonth", errors: _errors) ?? "lastMonth";
+  @override
+  String lastXDays(int days) =>
+      _bundle.format("lastXDays",
+          args: <String, dynamic>{"days": days}, errors: _errors) ??
+      "lastXDays";
+  @override
+  String get exportPDF =>
+      _bundle.format("exportPDF", errors: _errors) ?? "exportPDF";
+  @override
+  String get summaryReport =>
+      _bundle.format("summaryReport", errors: _errors) ?? "summaryReport";
+  @override
+  String get dateRange =>
+      _bundle.format("dateRange", errors: _errors) ?? "dateRange";
+  @override
+  String get totalHours =>
+      _bundle.format("totalHours", errors: _errors) ?? "totalHours";
+  @override
+  String get timetable =>
+      _bundle.format("timetable", errors: _errors) ?? "timetable";
 }
