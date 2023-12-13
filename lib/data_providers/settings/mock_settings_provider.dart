@@ -51,5 +51,5 @@ class MockSettingsProvider extends SettingsProvider {
   Locale? getLocale() => locale;
 
   @override
-  void setLocale(Locale? l) => locale = l;
+  Future<void> setLocale(Locale? l) async => locale = l;
 }
