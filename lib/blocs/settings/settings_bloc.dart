@@ -219,9 +219,13 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       DateTime date = DateTime.now();
       return date.subtract(Duration(days: date.weekday - dayOfWeek));
     } else if (state.defaultFilterDays > 0) {
-      return DateTime.now().subtract(const Duration(days: 30));
+      return DateTime.now().subtract(Duration(days: state.defaultFilterDays));
     } else {
       return null;
     }
+  }
+
+  int getDefaultFilterDays() {
+    return state.defaultFilterDays;
   }
 }
