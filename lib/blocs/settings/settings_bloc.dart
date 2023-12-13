@@ -226,6 +226,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   }
 
   int getDefaultFilterDays() {
-    return state.defaultFilterDays;
+    return state.defaultFilterDays < 0 ? 30 : state.defaultFilterDays;
   }
 }
