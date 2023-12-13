@@ -20,7 +20,7 @@ import 'package:timecop/blocs/timers/timers_bloc.dart';
 import 'package:timecop/blocs/timers/timers_event.dart';
 import 'package:timecop/models/project.dart';
 import 'package:timecop/models/timer_entry.dart';
-import 'package:timecop/responsiveness_utils.dart';
+import 'package:timecop/utils/responsiveness_utils.dart';
 import 'package:timecop/screens/dashboard/components/GroupedStoppedTimersRowNarrowDense.dart';
 import 'package:timecop/screens/dashboard/components/GroupedStoppedTimersRowNarrowSimple.dart';
 import 'package:timecop/screens/dashboard/components/GroupedStoppedTimersRowWide.dart';

@@ -20,7 +20,7 @@ import 'package:timecop/screens/dashboard/components/ProjectTag.dart';
 import 'package:timecop/screens/dashboard/components/StoppedTimerRow.dart';
 import 'package:timecop/screens/dashboard/components/TimerDenseTrailing.dart';
 
-import 'package:timecop/timer_utils.dart';
+import 'package:timecop/utils/timer_utils.dart';
 
 class GroupedStoppedTimersRowNarrowDense extends StatefulWidget {
   final List<TimerEntry> timers;
