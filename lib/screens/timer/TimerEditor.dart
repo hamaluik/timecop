@@ -37,6 +37,7 @@ enum _DateTimeMenuItems { now }
 
 class TimerEditor extends StatefulWidget {
   final TimerEntry timer;
+
   const TimerEditor({Key? key, required this.timer}) : super(key: key);
 
   @override
@@ -146,11 +147,12 @@ class _TimerEditorState extends State<TimerEditor> {
       ),
       body: Form(
         key: _formKey,
-        child: Column(
-          //todo this should include a scrollable area
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: ListView(
+          // todo this should include a scrollable area
+          // mainAxisSize: MainAxisSize.max,
+          // mainAxisAlignment: MainAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.stretch,
+          shrinkWrap: true,
           children: <Widget>[
             BlocBuilder<ProjectsBloc, ProjectsState>(
               builder: (BuildContext context, ProjectsState projectsState) =>
@@ -386,12 +388,16 @@ class _TimerEditorState extends State<TimerEditor> {
               title: Text(L10N.of(context).tr.notes),
               onTap: () async => await _editNotes(context),
             ),
-            Expanded(
+            ConstrainedBox(
+                constraints: const BoxConstraints(minHeight: 250, maxHeight: 880),
                 child: InkWell(
                     onTap: () async => await _editNotes(context),
                     child: Padding(
                         padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-                        child: Markdown(data: _notes!)))),
+                        child: Markdown(
+                            shrinkWrap: true,
+                            physics: const  NeverScrollableScrollPhysics(),
+                            data: _notes!)))),
           ],
         ),
       ),
