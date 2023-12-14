@@ -185,6 +185,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         exportIncludeStartTime: event.exportIncludeStartTime,
         exportIncludeEndTime: event.exportIncludeEndTime,
         exportIncludeDurationHours: event.exportIncludeDurationHours,
+        exportIncludeNotes: event.exportIncludeNotes,
         groupTimers: event.groupTimers,
         collapseDays: event.collapseDays,
         autocompleteDescription: event.autocompleteDescription,
