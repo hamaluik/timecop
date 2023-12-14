@@ -107,3 +107,4 @@ summaryReport = Summary Report
 dateRange = Date range:
 totalHours = Total hours:
 timetable = Timetable
+plusXDays = (+ {$days} d.)

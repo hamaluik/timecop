@@ -423,6 +423,11 @@ class FluentL10NProvider extends L10NProvider {
           args: <String, dynamic>{"days": days}, errors: _errors) ??
       "lastXDays";
   @override
+  String plusXDays(int days) =>
+      _bundle.format("plusXDays",
+          args: <String, dynamic>{"days": days}, errors: _errors) ??
+      "plusXDays";
+  @override
   String get exportPDF =>
       _bundle.format("exportPDF", errors: _errors) ?? "exportPDF";
   @override

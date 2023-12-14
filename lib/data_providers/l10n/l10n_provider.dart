@@ -118,6 +118,7 @@ abstract class L10NProvider {
   String get thisMonth;
   String get lastMonth;
   String lastXDays(int days);
+  String plusXDays(int days);
   String get exportPDF;
   String get summaryReport;
   String get dateRange;
