@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'dart:async';
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -147,7 +148,6 @@ class _TimerEditorState extends State<TimerEditor> {
       body: Form(
         key: _formKey,
         child: Column(
-          //todo this should include a scrollable area
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -370,17 +370,46 @@ class _TimerEditorState extends State<TimerEditor> {
               initialData: DateTime.now(),
               stream: _updateTimerStreamController.stream,
               builder:
-                  (BuildContext context, AsyncSnapshot<DateTime> snapshot) =>
-                      ListTile(
-                title: Text(L10N.of(context).tr.duration),
-                trailing: Text(
-                  TimerEntry.formatDuration(_endTime == null
-                      ? snapshot.data!.difference(_startTime)
-                      : _endTime!.difference(_startTime)),
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                      fontFeatures: [const FontFeature.tabularFigures()]),
-                ),
-              ),
+                  (BuildContext context, AsyncSnapshot<DateTime> snapshot) {
+                final duration = _endTime == null
+                    ? snapshot.data!.difference(_startTime)
+                    : _endTime!.difference(_startTime);
+                return ListTile(
+                  title: Text(L10N.of(context).tr.duration),
+                  trailing: Text(
+                    TimerEntry.formatDuration(duration),
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                        fontFeatures: [const FontFeature.tabularFigures()]),
+                  ),
+                  onTap: _endTime != null
+                      ? () async {
+                          _oldEndTime = _endTime!.clone();
+                          DateTime? newEndTime = await dt.DatePicker.showPicker(
+                              context,
+                              pickerModel: _DurationPickerModel(
+                                  startDateTime: _startTime,
+                                  endTime: _endTime!),
+                              onChanged: (DateTime dt) =>
+                                  setState(() => _endTime = dt),
+                              onConfirm: (DateTime dt) =>
+                                  setState(() => _endTime = dt),
+                              theme: dt.DatePickerTheme(
+                                cancelStyle: theme.textTheme.labelLarge!,
+                                doneStyle: theme.textTheme.labelLarge!,
+                                itemStyle: theme.textTheme.bodyMedium!,
+                                backgroundColor: theme.colorScheme.surface,
+                              ));
+
+                          // if the user cancelled, this should be null
+                          if (newEndTime == null) {
+                            setState(() {
+                              _endTime = _oldEndTime;
+                            });
+                          }
+                        }
+                      : null,
+                );
+              },
             ),
             ListTile(
               title: Text(L10N.of(context).tr.notes),
@@ -468,4 +497,67 @@ class _TimerEditorState extends State<TimerEditor> {
       });
     }
   }
+}
+
+class _DurationPickerModel extends dt.BasePickerModel {
+  final DateTime _startDateTime;
+  late final int _maxHours;
+  int _hours = 0;
+  int _minutes = 0;
+  int _seconds = 0;
+
+  _DurationPickerModel(
+      {required DateTime startDateTime, required DateTime endTime})
+      : _startDateTime = startDateTime {
+    final duration = endTime.difference(startDateTime);
+    _hours = duration.inHours;
+    _minutes = duration.inMinutes % 60;
+    _seconds = duration.inSeconds % 60;
+    _maxHours = max(_hours + 5, 24);
+  }
+
+  @override
+  int currentLeftIndex() => _hours;
+
+  @override
+  int currentMiddleIndex() => _minutes;
+
+  @override
+  int currentRightIndex() => _seconds;
+
+  @override
+  DateTime? finalTime() => _startDateTime
+      .add(Duration(hours: _hours, minutes: _minutes, seconds: _seconds));
+
+  @override
+  List<int> layoutProportions() => [1, 1, 1];
+
+  @override
+  String? leftStringAtIndex(int index) =>
+      (index >= 0 && index <= _maxHours) ? "${index}h" : null;
+
+  @override
+  String? middleStringAtIndex(int index) =>
+      (index >= 0 && index <= 59) ? "${_padLeft(index)}m" : null;
+
+  @override
+  String? rightStringAtIndex(int index) =>
+      (index >= 0 && index <= 59) ? "${_padLeft(index)}s" : null;
+
+  @override
+  String leftDivider() => ":";
+
+  @override
+  String rightDivider() => ":";
+
+  @override
+  void setLeftIndex(int index) => _hours = index;
+
+  @override
+  void setMiddleIndex(int index) => _minutes = index;
+
+  @override
+  void setRightIndex(int index) => _seconds = index;
+
+  String _padLeft(int value) => value.toString().padLeft(2, "0");
 }
