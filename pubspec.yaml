@@ -45,6 +45,7 @@ dependencies:
   fluent: ^2.0.1
   permission_handler: ^11.0.0
   dynamic_color: ^1.6.8
+  pdf: ^3.10.6
 
 dependency_overrides:
   intl: 0.18.1
