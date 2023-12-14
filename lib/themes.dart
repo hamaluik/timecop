@@ -127,7 +127,7 @@ class ThemeUtil {
           dividerTheme:
               DividerThemeData(color: colors.onBackground.withAlpha(31)),
           floatingActionButtonTheme: FloatingActionButtonThemeData(
-              shape: StadiumBorder(),
+              shape: const StadiumBorder(),
               backgroundColor: colors.primary,
               foregroundColor: colors.onPrimary),
           textButtonTheme: TextButtonThemeData(

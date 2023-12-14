@@ -58,7 +58,6 @@ enum FilterPreset {
 
   String display(BuildContext context, int defaultFilterDays) {
     switch (this) {
-      //TODO make translatable
       case FilterPreset.thisWeek:
         return L10N.of(context).tr.thisWeek;
       case FilterPreset.thisMonth:
