@@ -109,3 +109,4 @@ timetable = Horario
 thisMonth = Este mes
 exportPDF = En PDF
 lastMonth = Último mes
+plusXDays = (+ { $days } d.)
