@@ -109,3 +109,4 @@ timetable = Časový rozpis
 thisMonth = Tento měsíc
 exportPDF = Jako PDF
 lastMonth = Minulý měsíc
+plusXDays = (+ { $days } d.)
