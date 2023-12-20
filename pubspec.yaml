@@ -45,6 +45,7 @@ dependencies:
   fluent: ^2.0.1
   permission_handler: ^11.0.0
   dynamic_color: ^1.6.8
+  pdf: ^3.10.6
 
 dependency_overrides:
   intl: 0.18.1
@@ -79,14 +80,11 @@ flutter:
     - icon.no-bg.svg
     - icon.no-bg.cyan.svg
     - fonts/LICENSE-PublicSans.md
+    - fonts/OFL-PublicSans.txt
     - l10n/
   fonts:
     - family: PublicSans
       fonts:
         - asset: fonts/PublicSans-Regular.ttf
-          weight: 400
-        - asset: fonts/PublicSans-Italic.ttf
-          weight: 400
-          style: italic
         - asset: fonts/PublicSans-Bold.ttf
           weight: 700

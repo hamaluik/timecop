@@ -23,7 +23,7 @@ import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/models/project_description_pair.dart';
 import 'package:timecop/models/timer_entry.dart';
-import 'package:timecop/responsiveness_utils.dart';
+import 'package:timecop/utils/responsiveness_utils.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:timecop/screens/dashboard/components/CollapsibleDayGrouping.dart';
 import 'package:timecop/screens/dashboard/components/FilterText.dart';

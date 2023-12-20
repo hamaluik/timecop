@@ -26,7 +26,7 @@ import 'package:timecop/screens/dashboard/components/TimerDenseTrailing.dart';
 import 'package:timecop/screens/timer/TimerEditor.dart';
 import 'package:timecop/themes.dart';
 
-import 'package:timecop/timer_utils.dart';
+import 'package:timecop/utils/timer_utils.dart';
 
 class StoppedTimerRowNarrowDense extends StatelessWidget {
   final TimerEntry timer;

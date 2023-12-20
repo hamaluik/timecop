@@ -24,7 +24,7 @@ import 'package:timecop/components/ProjectColour.dart';
 import 'package:timecop/l10n.dart';
 import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/screens/timer/TimerEditor.dart';
-import 'package:timecop/timer_utils.dart';
+import 'package:timecop/utils/timer_utils.dart';
 
 class RunningTimerRow extends StatelessWidget {
   final TimerEntry timer;

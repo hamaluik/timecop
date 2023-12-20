@@ -188,8 +188,7 @@ class ProjectsScreen extends StatelessWidget {
                                   ?.copyWith(color: project.colour)),
                           TextSpan(
                               text: project.name,
-                              style: theme.textTheme.bodyMedium
-                                  ?.copyWith(fontStyle: FontStyle.italic)),
+                              style: theme.textTheme.bodyMedium),
                         ])),
                 actions: <Widget>[
                   TextButton(

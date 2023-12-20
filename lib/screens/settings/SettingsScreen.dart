@@ -152,10 +152,6 @@ class SettingsScreen extends StatelessWidget {
             BlocBuilder<SettingsBloc, SettingsState>(
                 bloc: settingsBloc,
                 builder: (BuildContext context, SettingsState settings) {
-                  if (settings.defaultFilterStartDateToMonday) {
-                    return const SizedBox();
-                  }
-
                   return ListTile(
                     title: Text(L10N.of(context).tr.defaultFilterDays),
                     trailing: Row(mainAxisSize: MainAxisSize.min, children: [

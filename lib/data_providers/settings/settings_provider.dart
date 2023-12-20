@@ -22,8 +22,8 @@ abstract class SettingsProvider {
   Future<void> setInt(String key, int value);
 
   ThemeType? getTheme();
-  void setTheme(ThemeType? theme);
+  Future<void> setTheme(ThemeType? theme);
 
   Locale? getLocale();
-  void setLocale(Locale? locale);
+  Future<void> setLocale(Locale? locale);
 }
