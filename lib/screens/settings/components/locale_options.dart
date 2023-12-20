@@ -20,7 +20,7 @@ import 'package:timecop/l10n.dart';
 
 class LocaleOptions extends StatelessWidget {
   final LocaleBloc bloc;
-  const LocaleOptions({Key? key, required this.bloc}) : super(key: key);
+  const LocaleOptions({super.key, required this.bloc});
 
   @override
   Widget build(BuildContext context) {

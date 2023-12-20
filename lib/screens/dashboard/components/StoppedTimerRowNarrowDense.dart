@@ -33,11 +33,10 @@ class StoppedTimerRowNarrowDense extends StatelessWidget {
   final Function(BuildContext) resumeTimer;
   final Function(BuildContext) deleteTimer;
   const StoppedTimerRowNarrowDense(
-      {Key? key,
+      {super.key,
       required this.timer,
       required this.resumeTimer,
-      required this.deleteTimer})
-      : super(key: key);
+      required this.deleteTimer});
 
   @override
   Widget build(BuildContext context) {

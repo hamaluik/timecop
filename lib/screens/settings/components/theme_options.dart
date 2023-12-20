@@ -21,7 +21,7 @@ import 'package:timecop/models/theme_type.dart';
 
 class ThemeOptions extends StatelessWidget {
   final ThemeBloc bloc;
-  const ThemeOptions({Key? key, required this.bloc}) : super(key: key);
+  const ThemeOptions({super.key, required this.bloc});
 
   @override
   Widget build(BuildContext context) {

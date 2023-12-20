@@ -91,13 +91,12 @@ class WeekdayAverages extends StatelessWidget {
   }
 
   WeekdayAverages(BuildContext context,
-      {Key? key,
+      {super.key,
       required this.startDate,
       required this.endDate,
       required this.selectedProjects})
       : _daysData =
-            calculateData(context, startDate, endDate, selectedProjects),
-        super(key: key);
+            calculateData(context, startDate, endDate, selectedProjects);
 
   @override
   Widget build(BuildContext context) {

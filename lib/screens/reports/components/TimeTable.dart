@@ -29,11 +29,10 @@ class TimeTable extends StatelessWidget {
   final DateTime? endDate;
   final List<Project?> selectedProjects;
   const TimeTable(
-      {Key? key,
+      {super.key,
       required this.startDate,
       required this.endDate,
-      required this.selectedProjects})
-      : super(key: key);
+      required this.selectedProjects});
 
   @override
   Widget build(BuildContext context) {

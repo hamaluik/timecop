@@ -25,7 +25,7 @@ import 'package:timecop/screens/dashboard/components/StoppedTimers.dart';
 import 'package:timecop/screens/dashboard/components/TopBar.dart';
 
 class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({Key? key}) : super(key: key);
+  const DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

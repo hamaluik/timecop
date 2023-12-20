@@ -101,7 +101,7 @@ Future<void> runMain(SettingsProvider settings, DataProvider data,
 
 class TimeCopApp extends StatefulWidget {
   final SettingsProvider settings;
-  const TimeCopApp({Key? key, required this.settings}) : super(key: key);
+  const TimeCopApp({super.key, required this.settings});
 
   @override
   State<StatefulWidget> createState() => _TimeCopAppState();

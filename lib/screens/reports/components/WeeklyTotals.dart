@@ -35,11 +35,10 @@ class WeeklyTotals extends StatefulWidget {
   final DateTime? endDate;
   final List<Project?> selectedProjects;
   const WeeklyTotals(
-      {Key? key,
+      {super.key,
       required this.startDate,
       required this.endDate,
-      required this.selectedProjects})
-      : super(key: key);
+      required this.selectedProjects});
 
   @override
   State<WeeklyTotals> createState() => _WeeklyTotalsState();

@@ -23,7 +23,7 @@ import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:timecop/screens/dashboard/components/StartTimerSpeedDial.dart';
 
 class StartTimerButton extends StatefulWidget {
-  const StartTimerButton({Key? key}) : super(key: key);
+  const StartTimerButton({super.key});
 
   @override
   State<StartTimerButton> createState() => _StartTimerButtonState();

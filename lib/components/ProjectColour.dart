@@ -20,7 +20,7 @@ class ProjectColour extends StatelessWidget {
   static const double _size = 20;
   final Project? project;
   final bool? mini;
-  const ProjectColour({Key? key, this.project, this.mini}) : super(key: key);
+  const ProjectColour({super.key, this.project, this.mini});
 
   @override
   Widget build(BuildContext context) {

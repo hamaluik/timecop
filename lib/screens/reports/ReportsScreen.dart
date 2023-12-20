@@ -33,7 +33,7 @@ import 'package:timecop/screens/reports/components/WeeklyTotals.dart';
 import 'package:timecop/models/clone_time.dart';
 
 class ReportsScreen extends StatefulWidget {
-  const ReportsScreen({Key? key}) : super(key: key);
+  const ReportsScreen({super.key});
 
   @override
   State<ReportsScreen> createState() => _ReportsScreenState();

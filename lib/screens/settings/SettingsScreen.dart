@@ -30,7 +30,7 @@ import 'components/locale_options.dart';
 import 'components/theme_options.dart';
 
 class SettingsScreen extends StatelessWidget {
-  SettingsScreen({Key? key}) : super(key: key);
+  SettingsScreen({super.key});
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
@@ -44,7 +44,7 @@ class SettingsScreen extends StatelessWidget {
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()!
         .requestPermission();
-    if ((result != null && !result) && status.isDenied) {
+    if ((result==null) && status.isDenied) {
       if (context.mounted) {
         dialogNotificationPermission(context);
       }

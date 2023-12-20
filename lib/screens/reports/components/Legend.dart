@@ -20,7 +20,7 @@ import 'package:timecop/models/project.dart';
 class Legend extends StatelessWidget {
   final Iterable<Project?> projects;
 
-  const Legend({Key? key, required this.projects}) : super(key: key);
+  const Legend({super.key, required this.projects});
 
   @override
   Widget build(BuildContext context) {

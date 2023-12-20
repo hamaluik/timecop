@@ -32,11 +32,10 @@ class ProjectBreakdown extends StatefulWidget {
   final DateTime? endDate;
   final List<Project?> selectedProjects;
   const ProjectBreakdown(
-      {Key? key,
+      {super.key,
       required this.startDate,
       required this.endDate,
-      required this.selectedProjects})
-      : super(key: key);
+      required this.selectedProjects});
 
   @override
   State<ProjectBreakdown> createState() => _ProjectBreakdownState();

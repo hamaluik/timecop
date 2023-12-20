@@ -40,8 +40,7 @@ class _DayGrouping {
 class _DayGroupingRows extends StatelessWidget {
   final _DayGrouping dayGrouping;
 
-  const _DayGroupingRows({Key? key, required this.dayGrouping})
-      : super(key: key);
+  const _DayGroupingRows({required this.dayGrouping});
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +157,7 @@ class _DayGroupingRows extends StatelessWidget {
 }
 
 class StoppedTimers extends StatelessWidget {
-  const StoppedTimers({Key? key}) : super(key: key);
+  const StoppedTimers({super.key});
 
   static List<_DayGrouping> _groupDays(
       List<_DayGrouping> days, TimerEntry timer) {
