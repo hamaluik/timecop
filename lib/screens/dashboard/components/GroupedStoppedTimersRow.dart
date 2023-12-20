@@ -31,11 +31,10 @@ class GroupedStoppedTimersRow extends StatelessWidget {
   final bool showProjectName;
 
   const GroupedStoppedTimersRow(
-      {Key? key,
+      {super.key,
       required this.timers,
       required this.isWidescreen,
-      required this.showProjectName})
-      : super(key: key);
+      required this.showProjectName});
 
   @override
   Widget build(BuildContext context) {

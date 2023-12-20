@@ -22,7 +22,7 @@ import 'package:timecop/screens/dashboard/components/FilterButton.dart';
 import 'package:timecop/screens/dashboard/components/PopupMenu.dart';
 
 class TopBar extends StatefulWidget implements PreferredSizeWidget {
-  const TopBar({Key? key}) : super(key: key);
+  const TopBar({super.key});
 
   @override
   State<TopBar> createState() => _TopBarState();

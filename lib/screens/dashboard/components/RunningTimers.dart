@@ -24,7 +24,7 @@ import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'RunningTimerRow.dart';
 
 class RunningTimers extends StatelessWidget {
-  const RunningTimers({Key? key}) : super(key: key);
+  const RunningTimers({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -28,12 +28,11 @@ class GroupedStoppedTimersRowNarrowDense extends StatefulWidget {
   final Duration totalDuration;
 
   const GroupedStoppedTimersRowNarrowDense(
-      {Key? key,
+      {super.key,
       required this.timers,
       required this.resumeTimer,
       required this.totalDuration})
-      : assert(timers.length > 1),
-        super(key: key);
+      : assert(timers.length > 1);
 
   @override
   State<GroupedStoppedTimersRowNarrowDense> createState() =>

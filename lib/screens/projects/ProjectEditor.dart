@@ -21,7 +21,7 @@ import 'package:timecop/models/project.dart';
 
 class ProjectEditor extends StatefulWidget {
   final Project? project;
-  const ProjectEditor({Key? key, required this.project}) : super(key: key);
+  const ProjectEditor({super.key, required this.project});
 
   @override
   State<ProjectEditor> createState() => _ProjectEditorState();

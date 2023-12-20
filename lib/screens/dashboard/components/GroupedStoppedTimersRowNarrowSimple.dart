@@ -32,12 +32,11 @@ class GroupedStoppedTimersRowNarrowSimple extends StatefulWidget {
   final Duration totalDuration;
 
   const GroupedStoppedTimersRowNarrowSimple(
-      {Key? key,
+      {super.key,
       required this.timers,
       required this.resumeTimer,
       required this.totalDuration})
-      : assert(timers.length > 1),
-        super(key: key);
+      : assert(timers.length > 1);
 
   @override
   State<GroupedStoppedTimersRowNarrowSimple> createState() =>

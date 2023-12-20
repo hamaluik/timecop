@@ -24,11 +24,10 @@ class CollapsibleDayGrouping extends StatefulWidget {
   final Duration totalTime;
 
   const CollapsibleDayGrouping(
-      {Key? key,
+      {super.key,
       required this.date,
       required this.children,
-      required this.totalTime})
-      : super(key: key);
+      required this.totalTime});
 
   @override
   State<CollapsibleDayGrouping> createState() => _CollapsibleDayGroupingState();

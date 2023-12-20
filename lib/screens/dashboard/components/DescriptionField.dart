@@ -22,7 +22,7 @@ import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class DescriptionField extends StatefulWidget {
-  const DescriptionField({Key? key}) : super(key: key);
+  const DescriptionField({super.key});
 
   @override
   State<DescriptionField> createState() => _DescriptionFieldState();

@@ -19,8 +19,7 @@ import 'package:timecop/l10n.dart';
 class FilterText extends StatelessWidget {
   final DateTime? filterStart;
   final DateTime? filterEnd;
-  const FilterText({Key? key, this.filterStart, this.filterEnd})
-      : super(key: key);
+  const FilterText({super.key, this.filterStart, this.filterEnd});
 
   @override
   Widget build(BuildContext context) {

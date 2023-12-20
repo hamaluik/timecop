@@ -38,12 +38,11 @@ class StoppedTimerRowWide extends StatelessWidget {
   final bool showProjectName;
 
   const StoppedTimerRowWide(
-      {Key? key,
+      {super.key,
       required this.timer,
       required this.resumeTimer,
       required this.deleteTimer,
-      required this.showProjectName})
-      : super(key: key);
+      required this.showProjectName});
 
   @override
   Widget build(BuildContext context) {

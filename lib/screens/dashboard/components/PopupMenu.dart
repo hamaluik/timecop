@@ -30,7 +30,7 @@ enum MenuItem {
 }
 
 class PopupMenu extends StatelessWidget {
-  const PopupMenu({Key? key}) : super(key: key);
+  const PopupMenu({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -38,7 +38,7 @@ enum _DateTimeMenuItems { now }
 
 class TimerEditor extends StatefulWidget {
   final TimerEntry timer;
-  const TimerEditor({Key? key, required this.timer}) : super(key: key);
+  const TimerEditor({super.key, required this.timer});
 
   @override
   State<TimerEditor> createState() => _TimerEditorState();

@@ -30,8 +30,7 @@ class RunningTimerRow extends StatelessWidget {
   final TimerEntry timer;
   final DateTime now;
 
-  const RunningTimerRow({Key? key, required this.timer, required this.now})
-      : super(key: key);
+  const RunningTimerRow({super.key, required this.timer, required this.now});
 
   @override
   Widget build(BuildContext context) {

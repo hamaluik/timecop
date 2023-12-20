@@ -1,3 +1,4 @@
 {
-    "licenser.author": "Kenton Hamaluik"
+    "licenser.author": "Kenton Hamaluik",
+    "vscode-corda.isCordaProject": false
 }

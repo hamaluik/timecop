@@ -35,7 +35,7 @@ enum ExportMenuItem {
 
 class ExportMenu extends StatelessWidget {
   final DateFormat? dateFormat;
-  const ExportMenu({Key? key, this.dateFormat}) : super(key: key);
+  const ExportMenu({super.key, this.dateFormat});
 
   @override
   Widget build(BuildContext context) {

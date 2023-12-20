@@ -24,7 +24,7 @@ import 'package:timecop/screens/projects/ProjectsScreen.dart';
 import 'package:timecop/themes.dart';
 
 class ProjectSelectField extends StatefulWidget {
-  const ProjectSelectField({Key? key}) : super(key: key);
+  const ProjectSelectField({super.key});
 
   @override
   State<ProjectSelectField> createState() => _ProjectSelectFieldState();

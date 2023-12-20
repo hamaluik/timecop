@@ -20,7 +20,7 @@ import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:timecop/screens/dashboard/components/FilterSheet.dart';
 
 class FilterButton extends StatelessWidget {
-  const FilterButton({Key? key}) : super(key: key);
+  const FilterButton({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -36,13 +36,12 @@ class GroupedStoppedTimersRowWide extends StatefulWidget {
   final bool showProjectName;
 
   const GroupedStoppedTimersRowWide(
-      {Key? key,
+      {super.key,
       required this.totalDuration,
       required this.timers,
       required this.resumeTimer,
       required this.showProjectName})
-      : assert(timers.length > 1),
-        super(key: key);
+      : assert(timers.length > 1);
 
   @override
   State<GroupedStoppedTimersRowWide> createState() =>

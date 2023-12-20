@@ -32,11 +32,10 @@ class StoppedTimerRowNarrowSimple extends StatefulWidget {
   final Function(BuildContext) deleteTimer;
 
   const StoppedTimerRowNarrowSimple(
-      {Key? key,
+      {super.key,
       required this.timer,
       required this.resumeTimer,
-      required this.deleteTimer})
-      : super(key: key);
+      required this.deleteTimer});
 
   @override
   State<StoppedTimerRowNarrowSimple> createState() =>

@@ -21,7 +21,7 @@ import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 
 class FilterSheet extends StatelessWidget {
   final DashboardBloc dashboardBloc;
-  const FilterSheet({Key? key, required this.dashboardBloc}) : super(key: key);
+  const FilterSheet({super.key, required this.dashboardBloc});
 
   @override
   Widget build(BuildContext context) {

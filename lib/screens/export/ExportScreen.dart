@@ -32,7 +32,7 @@ import 'package:timecop/screens/export/components/ExportMenu.dart';
 import 'package:timecop/utils/export_utils.dart';
 
 class ExportScreen extends StatefulWidget {
-  const ExportScreen({Key? key}) : super(key: key);
+  const ExportScreen({super.key});
 
   @override
   State<ExportScreen> createState() => _ExportScreenState();
