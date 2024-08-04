@@ -32,7 +32,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion 34 // Upgrade to 34 required by Android plugin
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
