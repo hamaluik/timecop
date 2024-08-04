@@ -51,7 +51,7 @@ android {
     defaultConfig {
         applicationId "ca.hamaluik.timecop"
         minSdkVersion 19
-        targetSdkVersion flutter.targetSdkVersion
+        targetSdkVersion 34 // Upgrade to 34 based on new Play Store requirements
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
