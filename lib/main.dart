@@ -217,17 +217,17 @@ class _TimeCopAppState extends State<TimeCopApp> with WidgetsBindingObserver {
             brightness: Brightness.light,
             colors: lightDynamic ?? ThemeUtil.lightColors,
             appBarBackground:
-                lightDynamic?.background ?? ThemeUtil.lightColors.background,
-            appBarForeground: lightDynamic?.onBackground ??
-                ThemeUtil.lightColors.onBackground);
+                lightDynamic?.surface ?? ThemeUtil.lightColors.surface,
+            appBarForeground:
+                lightDynamic?.onSurface ?? ThemeUtil.lightColors.onSurface);
       case ThemeType.darkMaterialYou:
         return ThemeUtil.getThemeFromColors(
             brightness: Brightness.dark,
             colors: darkDynamic ?? ThemeUtil.darkColors,
             appBarBackground:
-                darkDynamic?.background ?? ThemeUtil.darkColors.background,
+                darkDynamic?.surface ?? ThemeUtil.darkColors.surface,
             appBarForeground:
-                darkDynamic?.onBackground ?? ThemeUtil.darkColors.onBackground);
+                darkDynamic?.onSurface ?? ThemeUtil.darkColors.onSurface);
       case ThemeType.auto:
       default:
         return brightness == Brightness.dark

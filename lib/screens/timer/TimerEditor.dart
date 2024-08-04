@@ -14,7 +14,6 @@
 
 import 'dart:async';
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -138,7 +137,7 @@ class _TimerEditorState extends State<TimerEditor> {
                     false;
                 if (delete) {
                   timersBloc.add(DeleteTimer(widget.timer));
-                  if (!mounted) return;
+                  if (!context.mounted) return;
                   Navigator.of(context).pop();
                 }
               },

@@ -14,5 +14,7 @@ Future<void> main() async {
         return true;
       },
     );
-  } catch (e) {}
+  } catch (e) {
+    // Do nothing
+  }
 }

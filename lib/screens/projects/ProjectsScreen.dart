@@ -94,7 +94,7 @@ class ProjectsScreen extends StatelessWidget {
                                             FontAwesomeIcons.boxArchive,
                                             color: Theme.of(context)
                                                 .colorScheme
-                                                .onBackground,
+                                                .onSurface,
                                             size: 20,
                                           ),
                                           const SizedBox(width: 8),
