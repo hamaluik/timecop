@@ -264,6 +264,10 @@ class FluentL10NProvider extends L10NProvider {
   String get showProjectNames =>
       _bundle.format("showProjectNames", errors: _errors) ?? "showProjectNames";
   @override
+  String get nagAboutMissingTimer =>
+      _bundle.format("nagAboutMissingTimer", errors: _errors) ??
+      "nagAboutMissingTimer";
+  @override
   String langName(Locale locale) {
     switch (locale.languageCode) {
       case "ar":

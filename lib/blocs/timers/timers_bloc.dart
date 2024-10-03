@@ -16,13 +16,16 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:timecop/data_providers/data/data_provider.dart';
 import 'package:timecop/data_providers/settings/settings_provider.dart';
+import 'package:timecop/data_providers/notifications/notifications_provider.dart';
 import 'package:timecop/models/timer_entry.dart';
+import 'package:timecop/l10n.dart';
 import './bloc.dart';
 
 class TimersBloc extends Bloc<TimersEvent, TimersState> {
   final DataProvider data;
   final SettingsProvider settings;
-  TimersBloc(this.data, this.settings) : super(TimersState.initial()) {
+  final NotificationsProvider notifications;
+  TimersBloc(this.data, this.settings, this.notifications) : super(TimersState.initial()) {
     on<LoadTimers>((event, emit) async {
       List<TimerEntry> timers = await data.listTimers();
       emit(TimersState(timers, DateTime.now()));
@@ -40,6 +43,17 @@ class TimersBloc extends Bloc<TimersEvent, TimersState> {
 
     on<UpdateNow>((event, emit) {
       emit(TimersState(state.timers, DateTime.now()));
+      List<TimerEntry> activeTimers = state.timers.where((t) => t.endTime == null).toList();
+      var nagAboutMissingTimer = settings.getBool("nagAboutMissingTimer") ?? true;
+      if (nagAboutMissingTimer && activeTimers.length == 0) {
+        var now = DateTime.now();
+        if (now.hour >= 9 && now.hour < 17 && now.second == 37 && now.minute % 10 == 2) {
+          print("Nagging about missing timer");
+          notifications.displayNoRunningTimersNotification(
+            "No Running Timers Detected", "You don't have any timers running right now. Click here to start one.",
+          );
+        }
+      }
     });
 
     on<StopTimer>((event, emit) async {
