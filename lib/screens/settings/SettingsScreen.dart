@@ -43,7 +43,8 @@ class SettingsScreen extends StatelessWidget {
     bool? result = await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()!
-        .requestPermission();
+        .areNotificationsEnabled();
+    //.requestPermission();
     if ((result != null && !result) && status.isDenied) {
       if (context.mounted) {
         dialogNotificationPermission(context);
