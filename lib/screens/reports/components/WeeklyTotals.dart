@@ -162,14 +162,18 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                       )),
                       bottomTitles: AxisTitles(
                         sideTitles: SideTitles(
+                            reservedSize: 35,
                             showTitles: true,
                             getTitlesWidget: (double dweek, _) {
                               int week = dweek.toInt();
                               DateTime date =
                                   firstDate!.add(Duration(days: week * 7));
-                              return Text(
-                                dateFormat.format(date).replaceAll(' ', '\n'),
-                                style: theme.textTheme.bodySmall,
+                              return Padding(
+                                padding: const EdgeInsets.all(1.0),
+                                child: Text(
+                                  dateFormat.format(date).replaceAll(' ', '\n'),
+                                  style: theme.textTheme.bodySmall,
+                                ),
                               );
                             }),
                       )),
