@@ -1,0 +1,19 @@
+services:
+  api:
+    image: ghcr.io/timecopsync/project-api:1.0.1
+    environment:
+      SECRET_KEY_BASE: somesecretvaluethatshoudlntbepublic
+      DATABASE_URL: postgres://postgres:postgres@db:5432/sync
+  db:
+    image: bitnami/postgresql
+    environment:
+      - POSTGRESQL_USERNAME=postgres
+      - POSTGRESQL_PASSWORD=postgres
+      - POSTGRESQL_DATABASE=sync
+    ports:
+      - '5432:5432'
+    volumes:
+      - db_data:/bitnami/postgresql
+
+volumes:
+  db_data:
