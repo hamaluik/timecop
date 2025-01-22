@@ -1,8 +1,8 @@
 ROOT := $(shell git rev-parse --show-toplevel)
 FLUTTER := $(shell which flutter)
+DART := $(shell which dart)
 FLUTTER_BIN_DIR := $(shell dirname $(FLUTTER))
 FLUTTER_DIR := $(FLUTTER_BIN_DIR:/bin=)
-DART := $(FLUTTER_BIN_DIR)/cache/dart-sdk/bin/dart
 CLIENT_DIR := openapi
 
 .PHONY: run
@@ -15,7 +15,12 @@ analyze:
 
 .PHONY: format
 format:
-	$(FLUTTER) format .
+	$(DART) format .
+
+.PHONY: check-format
+check-format:
+	$(DART) format . --set-exit-if-changed
+
 
 .PHONY: test
 test:
@@ -35,3 +40,11 @@ codegen:
 		--minimal-update
 	rm -v $(CLIENT_DIR)/.travis.yml
 	rm -v $(CLIENT_DIR)/git_push.sh
+	$(DART) format $(CLIENT_DIR)
+
+.PHONY: ci
+ci:
+	$(FLUTTER) pub get
+	$(DART) format . -o none --set-exit-if-changed
+	$(FLUTTER) analyze
+	$(FLUTTER) test
