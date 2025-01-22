@@ -62,6 +62,7 @@ dev_dependencies:
     sdk: flutter
   flutter_test:
     sdk: flutter
+  dart_pre_commit: ^5.4.2
 
   #until screenshots updates on the package repo..
   #screenshots: ^2.1.1

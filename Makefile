@@ -42,6 +42,10 @@ codegen:
 	rm -v $(CLIENT_DIR)/git_push.sh
 	$(DART) format $(CLIENT_DIR)
 
+.PHONY: setup
+setup: codegen
+	$(DART) run tool/setup_git_hooks.dart
+
 .PHONY: ci
 ci:
 	$(FLUTTER) pub get
