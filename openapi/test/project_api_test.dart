@@ -11,7 +11,6 @@
 import 'package:openapi/api.dart';
 import 'package:test/test.dart';
 
-
 /// tests for ProjectApi
 void main() {
   // final instance = ProjectApi();
@@ -51,6 +50,5 @@ void main() {
     test('test timecopsyncProjectsApiWebProjectControllerUpdate', () async {
       // TODO
     });
-
   });
 }

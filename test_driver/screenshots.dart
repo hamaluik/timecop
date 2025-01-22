@@ -11,7 +11,8 @@ import 'package:flutter_driver/driver_extension.dart';
 import 'dart:ui' as ui;
 
 Future<void> main() async {
-  enableFlutterDriverExtension(handler: (String? query) async {
+  enableFlutterDriverExtension(
+      handler: (String? query) async {
     if (query == "direction") {
       if (ui.window.locale.languageCode == "ar") {
         return "rtl";
@@ -27,6 +28,7 @@ Future<void> main() async {
   final SettingsProvider settings = MockSettingsProvider();
   await settings.setBool("collapseDays", false);
   final DataProvider data = MockDataProvider(ui.window.locale);
-  final NotificationsProvider notifications = NotificationsProvider(FlutterLocalNotificationsPlugin());
+  final NotificationsProvider notifications =
+      NotificationsProvider(FlutterLocalNotificationsPlugin());
   return runMain(settings, data, notifications);
 }

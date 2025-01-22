@@ -19,20 +19,21 @@ class ProjectInput {
   ProjectInputProject project;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is ProjectInput &&
-    other.project == project;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ProjectInput && other.project == project;
 
   @override
   int get hashCode =>
-    // ignore: unnecessary_parenthesis
-    (project.hashCode);
+      // ignore: unnecessary_parenthesis
+      (project.hashCode);
 
   @override
   String toString() => 'ProjectInput[project=$project]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
-      json[r'project'] = this.project;
+    json[r'project'] = this.project;
     return json;
   }
 
@@ -48,8 +49,10 @@ class ProjectInput {
       // Note 2: this code is stripped in release mode!
       assert(() {
         requiredKeys.forEach((key) {
-          assert(json.containsKey(key), 'Required key "ProjectInput[$key]" is missing from JSON.');
-          assert(json[key] != null, 'Required key "ProjectInput[$key]" has a null value in JSON.');
+          assert(json.containsKey(key),
+              'Required key "ProjectInput[$key]" is missing from JSON.');
+          assert(json[key] != null,
+              'Required key "ProjectInput[$key]" has a null value in JSON.');
         });
         return true;
       }());
@@ -61,7 +64,10 @@ class ProjectInput {
     return null;
   }
 
-  static List<ProjectInput> listFromJson(dynamic json, {bool growable = false,}) {
+  static List<ProjectInput> listFromJson(
+    dynamic json, {
+    bool growable = false,
+  }) {
     final result = <ProjectInput>[];
     if (json is List && json.isNotEmpty) {
       for (final row in json) {
@@ -89,13 +95,19 @@ class ProjectInput {
   }
 
   // maps a json object with a list of ProjectInput-objects as value to a dart map
-  static Map<String, List<ProjectInput>> mapListFromJson(dynamic json, {bool growable = false,}) {
+  static Map<String, List<ProjectInput>> mapListFromJson(
+    dynamic json, {
+    bool growable = false,
+  }) {
     final map = <String, List<ProjectInput>>{};
     if (json is Map && json.isNotEmpty) {
       // ignore: parameter_assignments
       json = json.cast<String, dynamic>();
       for (final entry in json.entries) {
-        map[entry.key] = ProjectInput.listFromJson(entry.value, growable: growable,);
+        map[entry.key] = ProjectInput.listFromJson(
+          entry.value,
+          growable: growable,
+        );
       }
     }
     return map;
@@ -106,4 +118,3 @@ class ProjectInput {
     'project',
   };
 }
-

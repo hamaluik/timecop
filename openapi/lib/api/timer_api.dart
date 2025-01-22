@@ -10,7 +10,6 @@
 
 part of openapi.api;
 
-
 class TimerApi {
   TimerApi([ApiClient? apiClient]) : apiClient = apiClient ?? defaultApiClient;
 
@@ -24,7 +23,9 @@ class TimerApi {
   ///
   /// * [TimerInput] body (required):
   ///   Timer to create
-  Future<Response> timecopsyncProjectsApiWebTimerControllerCreateWithHttpInfo(TimerInput body,) async {
+  Future<Response> timecopsyncProjectsApiWebTimerControllerCreateWithHttpInfo(
+    TimerInput body,
+  ) async {
     // ignore: prefer_const_declarations
     final path = r'/timers';
 
@@ -36,7 +37,6 @@ class TimerApi {
     final formParams = <String, String>{};
 
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -55,17 +55,25 @@ class TimerApi {
   ///
   /// * [TimerInput] body (required):
   ///   Timer to create
-  Future<TimerResponse?> timecopsyncProjectsApiWebTimerControllerCreate(TimerInput body,) async {
-    final response = await timecopsyncProjectsApiWebTimerControllerCreateWithHttpInfo(body,);
+  Future<TimerResponse?> timecopsyncProjectsApiWebTimerControllerCreate(
+    TimerInput body,
+  ) async {
+    final response =
+        await timecopsyncProjectsApiWebTimerControllerCreateWithHttpInfo(
+      body,
+    );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'TimerResponse',) as TimerResponse;
-    
+    if (response.body.isNotEmpty &&
+        response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'TimerResponse',
+      ) as TimerResponse;
     }
     return null;
   }
@@ -78,10 +86,11 @@ class TimerApi {
   ///
   /// * [String] id (required):
   ///   Timer ID
-  Future<Response> timecopsyncProjectsApiWebTimerControllerDeleteWithHttpInfo(String id,) async {
+  Future<Response> timecopsyncProjectsApiWebTimerControllerDeleteWithHttpInfo(
+    String id,
+  ) async {
     // ignore: prefer_const_declarations
-    final path = r'/timers/{id}'
-      .replaceAll('{id}', id);
+    final path = r'/timers/{id}'.replaceAll('{id}', id);
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -91,7 +100,6 @@ class TimerApi {
     final formParams = <String, String>{};
 
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -110,8 +118,13 @@ class TimerApi {
   ///
   /// * [String] id (required):
   ///   Timer ID
-  Future<void> timecopsyncProjectsApiWebTimerControllerDelete(String id,) async {
-    final response = await timecopsyncProjectsApiWebTimerControllerDeleteWithHttpInfo(id,);
+  Future<void> timecopsyncProjectsApiWebTimerControllerDelete(
+    String id,
+  ) async {
+    final response =
+        await timecopsyncProjectsApiWebTimerControllerDeleteWithHttpInfo(
+      id,
+    );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -120,7 +133,8 @@ class TimerApi {
   /// List timers
   ///
   /// Note: This method returns the HTTP [Response].
-  Future<Response> timecopsyncProjectsApiWebTimerControllerIndexWithHttpInfo() async {
+  Future<Response>
+      timecopsyncProjectsApiWebTimerControllerIndexWithHttpInfo() async {
     // ignore: prefer_const_declarations
     final path = r'/timers';
 
@@ -132,7 +146,6 @@ class TimerApi {
     final formParams = <String, String>{};
 
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -147,16 +160,20 @@ class TimerApi {
 
   /// List timers
   Future<Timers?> timecopsyncProjectsApiWebTimerControllerIndex() async {
-    final response = await timecopsyncProjectsApiWebTimerControllerIndexWithHttpInfo();
+    final response =
+        await timecopsyncProjectsApiWebTimerControllerIndexWithHttpInfo();
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Timers',) as Timers;
-    
+    if (response.body.isNotEmpty &&
+        response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'Timers',
+      ) as Timers;
     }
     return null;
   }
@@ -169,10 +186,11 @@ class TimerApi {
   ///
   /// * [String] id (required):
   ///   Timer ID
-  Future<Response> timecopsyncProjectsApiWebTimerControllerShowWithHttpInfo(String id,) async {
+  Future<Response> timecopsyncProjectsApiWebTimerControllerShowWithHttpInfo(
+    String id,
+  ) async {
     // ignore: prefer_const_declarations
-    final path = r'/timers/{id}'
-      .replaceAll('{id}', id);
+    final path = r'/timers/{id}'.replaceAll('{id}', id);
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -182,7 +200,6 @@ class TimerApi {
     final formParams = <String, String>{};
 
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -201,17 +218,25 @@ class TimerApi {
   ///
   /// * [String] id (required):
   ///   Timer ID
-  Future<TimerResponse?> timecopsyncProjectsApiWebTimerControllerShow(String id,) async {
-    final response = await timecopsyncProjectsApiWebTimerControllerShowWithHttpInfo(id,);
+  Future<TimerResponse?> timecopsyncProjectsApiWebTimerControllerShow(
+    String id,
+  ) async {
+    final response =
+        await timecopsyncProjectsApiWebTimerControllerShowWithHttpInfo(
+      id,
+    );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'TimerResponse',) as TimerResponse;
-    
+    if (response.body.isNotEmpty &&
+        response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'TimerResponse',
+      ) as TimerResponse;
     }
     return null;
   }
@@ -227,10 +252,12 @@ class TimerApi {
   ///
   /// * [TimerInput] body (required):
   ///   Timer to update
-  Future<Response> timecopsyncProjectsApiWebTimerControllerUpdateWithHttpInfo(String id, TimerInput body,) async {
+  Future<Response> timecopsyncProjectsApiWebTimerControllerUpdateWithHttpInfo(
+    String id,
+    TimerInput body,
+  ) async {
     // ignore: prefer_const_declarations
-    final path = r'/timers/{id}'
-      .replaceAll('{id}', id);
+    final path = r'/timers/{id}'.replaceAll('{id}', id);
 
     // ignore: prefer_final_locals
     Object? postBody = body;
@@ -240,7 +267,6 @@ class TimerApi {
     final formParams = <String, String>{};
 
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -262,17 +288,27 @@ class TimerApi {
   ///
   /// * [TimerInput] body (required):
   ///   Timer to update
-  Future<TimerResponse?> timecopsyncProjectsApiWebTimerControllerUpdate(String id, TimerInput body,) async {
-    final response = await timecopsyncProjectsApiWebTimerControllerUpdateWithHttpInfo(id, body,);
+  Future<TimerResponse?> timecopsyncProjectsApiWebTimerControllerUpdate(
+    String id,
+    TimerInput body,
+  ) async {
+    final response =
+        await timecopsyncProjectsApiWebTimerControllerUpdateWithHttpInfo(
+      id,
+      body,
+    );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'TimerResponse',) as TimerResponse;
-    
+    if (response.body.isNotEmpty &&
+        response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'TimerResponse',
+      ) as TimerResponse;
     }
     return null;
   }

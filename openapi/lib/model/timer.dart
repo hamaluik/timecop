@@ -70,26 +70,29 @@ class Timer {
   String startTime;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is Timer &&
-    other.description == description &&
-    other.endTime == endTime &&
-    other.id == id &&
-    other.notes == notes &&
-    other.projectId == projectId &&
-    other.startTime == startTime;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Timer &&
+          other.description == description &&
+          other.endTime == endTime &&
+          other.id == id &&
+          other.notes == notes &&
+          other.projectId == projectId &&
+          other.startTime == startTime;
 
   @override
   int get hashCode =>
-    // ignore: unnecessary_parenthesis
-    (description == null ? 0 : description!.hashCode) +
-    (endTime == null ? 0 : endTime!.hashCode) +
-    (id == null ? 0 : id!.hashCode) +
-    (notes == null ? 0 : notes!.hashCode) +
-    (projectId == null ? 0 : projectId!.hashCode) +
-    (startTime.hashCode);
+      // ignore: unnecessary_parenthesis
+      (description == null ? 0 : description!.hashCode) +
+      (endTime == null ? 0 : endTime!.hashCode) +
+      (id == null ? 0 : id!.hashCode) +
+      (notes == null ? 0 : notes!.hashCode) +
+      (projectId == null ? 0 : projectId!.hashCode) +
+      (startTime.hashCode);
 
   @override
-  String toString() => 'Timer[description=$description, endTime=$endTime, id=$id, notes=$notes, projectId=$projectId, startTime=$startTime]';
+  String toString() =>
+      'Timer[description=$description, endTime=$endTime, id=$id, notes=$notes, projectId=$projectId, startTime=$startTime]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -118,7 +121,7 @@ class Timer {
     } else {
       json[r'project_id'] = null;
     }
-      json[r'start_time'] = this.startTime;
+    json[r'start_time'] = this.startTime;
     return json;
   }
 
@@ -134,8 +137,10 @@ class Timer {
       // Note 2: this code is stripped in release mode!
       assert(() {
         requiredKeys.forEach((key) {
-          assert(json.containsKey(key), 'Required key "Timer[$key]" is missing from JSON.');
-          assert(json[key] != null, 'Required key "Timer[$key]" has a null value in JSON.');
+          assert(json.containsKey(key),
+              'Required key "Timer[$key]" is missing from JSON.');
+          assert(json[key] != null,
+              'Required key "Timer[$key]" has a null value in JSON.');
         });
         return true;
       }());
@@ -152,7 +157,10 @@ class Timer {
     return null;
   }
 
-  static List<Timer> listFromJson(dynamic json, {bool growable = false,}) {
+  static List<Timer> listFromJson(
+    dynamic json, {
+    bool growable = false,
+  }) {
     final result = <Timer>[];
     if (json is List && json.isNotEmpty) {
       for (final row in json) {
@@ -180,13 +188,19 @@ class Timer {
   }
 
   // maps a json object with a list of Timer-objects as value to a dart map
-  static Map<String, List<Timer>> mapListFromJson(dynamic json, {bool growable = false,}) {
+  static Map<String, List<Timer>> mapListFromJson(
+    dynamic json, {
+    bool growable = false,
+  }) {
     final map = <String, List<Timer>>{};
     if (json is Map && json.isNotEmpty) {
       // ignore: parameter_assignments
       json = json.cast<String, dynamic>();
       for (final entry in json.entries) {
-        map[entry.key] = Timer.listFromJson(entry.value, growable: growable,);
+        map[entry.key] = Timer.listFromJson(
+          entry.value,
+          growable: growable,
+        );
       }
     }
     return map;
@@ -197,4 +211,3 @@ class Timer {
     'start_time',
   };
 }
-

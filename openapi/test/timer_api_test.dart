@@ -11,7 +11,6 @@
 import 'package:openapi/api.dart';
 import 'package:test/test.dart';
 
-
 /// tests for TimerApi
 void main() {
   // final instance = TimerApi();
@@ -51,6 +50,5 @@ void main() {
     test('test timecopsyncProjectsApiWebTimerControllerUpdate', () async {
       // TODO
     });
-
   });
 }

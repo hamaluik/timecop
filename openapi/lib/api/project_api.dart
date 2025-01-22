@@ -10,9 +10,9 @@
 
 part of openapi.api;
 
-
 class ProjectApi {
-  ProjectApi([ApiClient? apiClient]) : apiClient = apiClient ?? defaultApiClient;
+  ProjectApi([ApiClient? apiClient])
+      : apiClient = apiClient ?? defaultApiClient;
 
   final ApiClient apiClient;
 
@@ -24,7 +24,9 @@ class ProjectApi {
   ///
   /// * [ProjectInput] body (required):
   ///   Project to create
-  Future<Response> timecopsyncProjectsApiWebProjectControllerCreateWithHttpInfo(ProjectInput body,) async {
+  Future<Response> timecopsyncProjectsApiWebProjectControllerCreateWithHttpInfo(
+    ProjectInput body,
+  ) async {
     // ignore: prefer_const_declarations
     final path = r'/projects';
 
@@ -36,7 +38,6 @@ class ProjectApi {
     final formParams = <String, String>{};
 
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -55,17 +56,25 @@ class ProjectApi {
   ///
   /// * [ProjectInput] body (required):
   ///   Project to create
-  Future<ProjectResponse?> timecopsyncProjectsApiWebProjectControllerCreate(ProjectInput body,) async {
-    final response = await timecopsyncProjectsApiWebProjectControllerCreateWithHttpInfo(body,);
+  Future<ProjectResponse?> timecopsyncProjectsApiWebProjectControllerCreate(
+    ProjectInput body,
+  ) async {
+    final response =
+        await timecopsyncProjectsApiWebProjectControllerCreateWithHttpInfo(
+      body,
+    );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ProjectResponse',) as ProjectResponse;
-    
+    if (response.body.isNotEmpty &&
+        response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'ProjectResponse',
+      ) as ProjectResponse;
     }
     return null;
   }
@@ -78,10 +87,11 @@ class ProjectApi {
   ///
   /// * [String] id (required):
   ///   Project ID
-  Future<Response> timecopsyncProjectsApiWebProjectControllerDeleteWithHttpInfo(String id,) async {
+  Future<Response> timecopsyncProjectsApiWebProjectControllerDeleteWithHttpInfo(
+    String id,
+  ) async {
     // ignore: prefer_const_declarations
-    final path = r'/projects/{id}'
-      .replaceAll('{id}', id);
+    final path = r'/projects/{id}'.replaceAll('{id}', id);
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -91,7 +101,6 @@ class ProjectApi {
     final formParams = <String, String>{};
 
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -110,8 +119,13 @@ class ProjectApi {
   ///
   /// * [String] id (required):
   ///   Project ID
-  Future<void> timecopsyncProjectsApiWebProjectControllerDelete(String id,) async {
-    final response = await timecopsyncProjectsApiWebProjectControllerDeleteWithHttpInfo(id,);
+  Future<void> timecopsyncProjectsApiWebProjectControllerDelete(
+    String id,
+  ) async {
+    final response =
+        await timecopsyncProjectsApiWebProjectControllerDeleteWithHttpInfo(
+      id,
+    );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
@@ -128,7 +142,10 @@ class ProjectApi {
   ///
   /// * [int] showArchived:
   ///   if 1 shows archived projects, defaults to 0
-  Future<Response> timecopsyncProjectsApiWebProjectControllerIndexWithHttpInfo({ int? limit, int? showArchived, }) async {
+  Future<Response> timecopsyncProjectsApiWebProjectControllerIndexWithHttpInfo({
+    int? limit,
+    int? showArchived,
+  }) async {
     // ignore: prefer_const_declarations
     final path = r'/projects';
 
@@ -148,7 +165,6 @@ class ProjectApi {
 
     const contentTypes = <String>[];
 
-
     return apiClient.invokeAPI(
       path,
       'GET',
@@ -169,17 +185,27 @@ class ProjectApi {
   ///
   /// * [int] showArchived:
   ///   if 1 shows archived projects, defaults to 0
-  Future<Projects?> timecopsyncProjectsApiWebProjectControllerIndex({ int? limit, int? showArchived, }) async {
-    final response = await timecopsyncProjectsApiWebProjectControllerIndexWithHttpInfo( limit: limit, showArchived: showArchived, );
+  Future<Projects?> timecopsyncProjectsApiWebProjectControllerIndex({
+    int? limit,
+    int? showArchived,
+  }) async {
+    final response =
+        await timecopsyncProjectsApiWebProjectControllerIndexWithHttpInfo(
+      limit: limit,
+      showArchived: showArchived,
+    );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'Projects',) as Projects;
-    
+    if (response.body.isNotEmpty &&
+        response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'Projects',
+      ) as Projects;
     }
     return null;
   }
@@ -192,10 +218,11 @@ class ProjectApi {
   ///
   /// * [String] id (required):
   ///   Project ID
-  Future<Response> timecopsyncProjectsApiWebProjectControllerShowWithHttpInfo(String id,) async {
+  Future<Response> timecopsyncProjectsApiWebProjectControllerShowWithHttpInfo(
+    String id,
+  ) async {
     // ignore: prefer_const_declarations
-    final path = r'/projects/{id}'
-      .replaceAll('{id}', id);
+    final path = r'/projects/{id}'.replaceAll('{id}', id);
 
     // ignore: prefer_final_locals
     Object? postBody;
@@ -205,7 +232,6 @@ class ProjectApi {
     final formParams = <String, String>{};
 
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -224,17 +250,25 @@ class ProjectApi {
   ///
   /// * [String] id (required):
   ///   Project ID
-  Future<ProjectResponse?> timecopsyncProjectsApiWebProjectControllerShow(String id,) async {
-    final response = await timecopsyncProjectsApiWebProjectControllerShowWithHttpInfo(id,);
+  Future<ProjectResponse?> timecopsyncProjectsApiWebProjectControllerShow(
+    String id,
+  ) async {
+    final response =
+        await timecopsyncProjectsApiWebProjectControllerShowWithHttpInfo(
+      id,
+    );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ProjectResponse',) as ProjectResponse;
-    
+    if (response.body.isNotEmpty &&
+        response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'ProjectResponse',
+      ) as ProjectResponse;
     }
     return null;
   }
@@ -250,10 +284,12 @@ class ProjectApi {
   ///
   /// * [ProjectInput] body (required):
   ///   Project to update
-  Future<Response> timecopsyncProjectsApiWebProjectControllerUpdateWithHttpInfo(String id, ProjectInput body,) async {
+  Future<Response> timecopsyncProjectsApiWebProjectControllerUpdateWithHttpInfo(
+    String id,
+    ProjectInput body,
+  ) async {
     // ignore: prefer_const_declarations
-    final path = r'/projects/{id}'
-      .replaceAll('{id}', id);
+    final path = r'/projects/{id}'.replaceAll('{id}', id);
 
     // ignore: prefer_final_locals
     Object? postBody = body;
@@ -263,7 +299,6 @@ class ProjectApi {
     final formParams = <String, String>{};
 
     const contentTypes = <String>[];
-
 
     return apiClient.invokeAPI(
       path,
@@ -285,17 +320,27 @@ class ProjectApi {
   ///
   /// * [ProjectInput] body (required):
   ///   Project to update
-  Future<ProjectResponse?> timecopsyncProjectsApiWebProjectControllerUpdate(String id, ProjectInput body,) async {
-    final response = await timecopsyncProjectsApiWebProjectControllerUpdateWithHttpInfo(id, body,);
+  Future<ProjectResponse?> timecopsyncProjectsApiWebProjectControllerUpdate(
+    String id,
+    ProjectInput body,
+  ) async {
+    final response =
+        await timecopsyncProjectsApiWebProjectControllerUpdateWithHttpInfo(
+      id,
+      body,
+    );
     if (response.statusCode >= HttpStatus.badRequest) {
       throw ApiException(response.statusCode, await _decodeBodyBytes(response));
     }
     // When a remote server returns no body with a status of 204, we shall not decode it.
     // At the time of writing this, `dart:convert` will throw an "Unexpected end of input"
     // FormatException when trying to decode an empty string.
-    if (response.body.isNotEmpty && response.statusCode != HttpStatus.noContent) {
-      return await apiClient.deserializeAsync(await _decodeBodyBytes(response), 'ProjectResponse',) as ProjectResponse;
-    
+    if (response.body.isNotEmpty &&
+        response.statusCode != HttpStatus.noContent) {
+      return await apiClient.deserializeAsync(
+        await _decodeBodyBytes(response),
+        'ProjectResponse',
+      ) as ProjectResponse;
     }
     return null;
   }

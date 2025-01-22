@@ -50,22 +50,25 @@ class Project {
   String name;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is Project &&
-    other.archived == archived &&
-    other.colour == colour &&
-    other.id == id &&
-    other.name == name;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Project &&
+          other.archived == archived &&
+          other.colour == colour &&
+          other.id == id &&
+          other.name == name;
 
   @override
   int get hashCode =>
-    // ignore: unnecessary_parenthesis
-    (archived == null ? 0 : archived!.hashCode) +
-    (colour == null ? 0 : colour!.hashCode) +
-    (id == null ? 0 : id!.hashCode) +
-    (name.hashCode);
+      // ignore: unnecessary_parenthesis
+      (archived == null ? 0 : archived!.hashCode) +
+      (colour == null ? 0 : colour!.hashCode) +
+      (id == null ? 0 : id!.hashCode) +
+      (name.hashCode);
 
   @override
-  String toString() => 'Project[archived=$archived, colour=$colour, id=$id, name=$name]';
+  String toString() =>
+      'Project[archived=$archived, colour=$colour, id=$id, name=$name]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -84,7 +87,7 @@ class Project {
     } else {
       json[r'id'] = null;
     }
-      json[r'name'] = this.name;
+    json[r'name'] = this.name;
     return json;
   }
 
@@ -100,8 +103,10 @@ class Project {
       // Note 2: this code is stripped in release mode!
       assert(() {
         requiredKeys.forEach((key) {
-          assert(json.containsKey(key), 'Required key "Project[$key]" is missing from JSON.');
-          assert(json[key] != null, 'Required key "Project[$key]" has a null value in JSON.');
+          assert(json.containsKey(key),
+              'Required key "Project[$key]" is missing from JSON.');
+          assert(json[key] != null,
+              'Required key "Project[$key]" has a null value in JSON.');
         });
         return true;
       }());
@@ -116,7 +121,10 @@ class Project {
     return null;
   }
 
-  static List<Project> listFromJson(dynamic json, {bool growable = false,}) {
+  static List<Project> listFromJson(
+    dynamic json, {
+    bool growable = false,
+  }) {
     final result = <Project>[];
     if (json is List && json.isNotEmpty) {
       for (final row in json) {
@@ -144,13 +152,19 @@ class Project {
   }
 
   // maps a json object with a list of Project-objects as value to a dart map
-  static Map<String, List<Project>> mapListFromJson(dynamic json, {bool growable = false,}) {
+  static Map<String, List<Project>> mapListFromJson(
+    dynamic json, {
+    bool growable = false,
+  }) {
     final map = <String, List<Project>>{};
     if (json is Map && json.isNotEmpty) {
       // ignore: parameter_assignments
       json = json.cast<String, dynamic>();
       for (final entry in json.entries) {
-        map[entry.key] = Project.listFromJson(entry.value, growable: growable,);
+        map[entry.key] = Project.listFromJson(
+          entry.value,
+          growable: growable,
+        );
       }
     }
     return map;
@@ -161,4 +175,3 @@ class Project {
     'name',
   };
 }
-
