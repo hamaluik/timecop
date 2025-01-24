@@ -23,7 +23,7 @@ class RowSeparator extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 8),
       height: 32,
       width: 1,
-      color: Theme.of(context).colorScheme.onBackground.withAlpha(31),
+      color: Theme.of(context).colorScheme.onSurface.withAlpha(31),
     );
   }
 }

@@ -22,32 +22,8 @@ enum ThemeType {
   black,
   autoMaterialYou,
   lightMaterialYou,
-  darkMaterialYou
-}
+  darkMaterialYou;
 
-ThemeType themeFromString(String? type) {
-  if (type == null) return ThemeType.auto;
-  switch (type) {
-    case "auto":
-      return ThemeType.auto;
-    case "light":
-      return ThemeType.light;
-    case "dark":
-      return ThemeType.dark;
-    case "black":
-      return ThemeType.black;
-    case "autoMaterialYou":
-      return ThemeType.autoMaterialYou;
-    case "lightMaterialYou":
-      return ThemeType.lightMaterialYou;
-    case "darkMaterialYou":
-      return ThemeType.darkMaterialYou;
-    default:
-      return ThemeType.auto;
-  }
-}
-
-extension ThemeTypeStr on ThemeType {
   String? get stringify {
     switch (this) {
       case ThemeType.auto:
@@ -85,6 +61,28 @@ extension ThemeTypeStr on ThemeType {
         return L10N.of(context).tr.darkMaterialYou;
       default:
         return null;
+    }
+  }
+
+  static ThemeType fromString(String? type) {
+    if (type == null) return ThemeType.auto;
+    switch (type) {
+      case "auto":
+        return ThemeType.auto;
+      case "light":
+        return ThemeType.light;
+      case "dark":
+        return ThemeType.dark;
+      case "black":
+        return ThemeType.black;
+      case "autoMaterialYou":
+        return ThemeType.autoMaterialYou;
+      case "lightMaterialYou":
+        return ThemeType.lightMaterialYou;
+      case "darkMaterialYou":
+        return ThemeType.darkMaterialYou;
+      default:
+        return ThemeType.auto;
     }
   }
 }

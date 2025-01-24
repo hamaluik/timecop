@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
@@ -54,43 +52,55 @@ class RunningTimers extends StatelessWidget {
 
             return Material(
               elevation: 4,
-              color: theme.colorScheme.surfaceVariant,
+              color: theme.colorScheme.surfaceContainerHighest,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            Text(L10N.of(context).tr.runningTimers,
-                                style: theme.textTheme.bodyMedium?.copyWith(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisSize: MainAxisSize.max,
+                            children: <Widget>[
+                              Text(L10N.of(context).tr.runningTimers,
+                                  style: theme.textTheme.bodyMedium?.copyWith(
+                                      color: theme.colorScheme.primary,
+                                      fontWeight: FontWeight.w700)),
+                              Text(TimerEntry.formatDuration(runningTotal),
+                                  style: theme.textTheme.bodyMedium?.copyWith(
                                     color: theme.colorScheme.primary,
-                                    fontWeight: FontWeight.w700)),
-                            Text(TimerEntry.formatDuration(runningTotal),
-                                style: theme.textTheme.bodyMedium?.copyWith(
-                                  color: theme.colorScheme.primary,
-                                  fontFeatures: const [
-                                    FontFeature.tabularFigures()
-                                  ],
-                                ))
-                          ],
-                        ),
-                        const Divider(),
-                      ],
+                                    fontFeatures: const [
+                                      FontFeature.tabularFigures()
+                                    ],
+                                  ))
+                            ],
+                          ),
+                          const Divider(),
+                        ],
+                      ),
                     ),
-                  ),
-                ]
-                    .followedBy(runningTimers.map((timer) =>
-                        RunningTimerRow(timer: timer, now: timersState.now)))
-                    .toList(),
-              ),
+                    Theme(
+                        data: Theme.of(context).copyWith(
+                            scrollbarTheme: ScrollbarThemeData(
+                                thumbVisibility:
+                                    WidgetStateProperty.all<bool>(true))),
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                              maxHeight: MediaQuery.sizeOf(context).height / 4),
+                          child: ListView(
+                            shrinkWrap: true,
+                            children: runningTimers
+                                .map((timer) => RunningTimerRow(
+                                    timer: timer, now: timersState.now))
+                                .toList(),
+                          ),
+                        )),
+                  ]),
             );
           },
         );

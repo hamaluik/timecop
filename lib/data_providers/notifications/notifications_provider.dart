@@ -92,6 +92,34 @@ class NotificationsProvider {
 
     await _notif.show(0, title, body, details);
   }
+  
+  Future<void> displayNoRunningTimersNotification(
+    String? title, String? body) async {
+    if (!await requestPermissions()) {
+      return;
+    }
+
+    const darwin = DarwinNotificationDetails(
+      presentAlert: true,
+      presentSound: false,
+      badgeNumber: null,
+    );
+    
+    const android = AndroidNotificationDetails(
+        "ca.hamaluik.timecop.runningtimersnotification", "Running Timers",
+        channelDescription:
+            "Notification indicating that no timers are currently running",
+        priority: Priority.low,
+        importance: Importance.low,
+        showWhen: true);
+
+    const linux = LinuxNotificationDetails();
+
+    NotificationDetails details = const NotificationDetails(
+        iOS: darwin, android: android, macOS: darwin, linux: linux);
+
+    await _notif.show(0, title, body, details);
+  }
 
   Future<void> removeAllNotifications() async {
     await _notif.cancelAll();

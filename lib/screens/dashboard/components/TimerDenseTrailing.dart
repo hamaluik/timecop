@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timecop/screens/dashboard/components/RowSeparator.dart';
@@ -57,7 +55,7 @@ class TimerDenseTrailing extends StatelessWidget {
                         children: <Widget>[
                           Text(durationString,
                               style: theme.textTheme.bodyMedium?.copyWith(
-                                color: theme.colorScheme.onBackground,
+                                color: theme.colorScheme.onSurface,
                                 fontFeatures: const [
                                   FontFeature.tabularFigures()
                                 ],

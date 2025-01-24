@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -27,7 +25,7 @@ import 'package:timecop/screens/dashboard/components/RowSeparator.dart';
 import 'package:timecop/screens/dashboard/components/StoppedTimerRow.dart';
 import 'package:timecop/themes.dart';
 
-import 'package:timecop/timer_utils.dart';
+import 'package:timecop/utils/timer_utils.dart';
 
 class GroupedStoppedTimersRowWide extends StatefulWidget {
   final List<TimerEntry> timers;
@@ -136,7 +134,7 @@ class _GroupedStoppedTimersRowWideState
               offset: const Offset(2, -4),
               child: Text(
                 "+${widget.totalDuration.inDays}",
-                textScaleFactor: 0.8,
+                textScaler: const TextScaler.linear(0.8),
                 style: timeSpanStyle,
               ),
             ),

@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import 'dart:collection';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +22,7 @@ import 'package:timecop/blocs/timers/bloc.dart';
 import 'package:timecop/blocs/projects/bloc.dart';
 import 'package:timecop/models/project_description_pair.dart';
 import 'package:timecop/models/timer_entry.dart';
-import 'package:timecop/responsiveness_utils.dart';
+import 'package:timecop/utils/responsiveness_utils.dart';
 import 'package:timecop/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:timecop/screens/dashboard/components/CollapsibleDayGrouping.dart';
 import 'package:timecop/screens/dashboard/components/FilterText.dart';
@@ -139,7 +138,7 @@ class _DayGroupingRows extends StatelessWidget {
                       Container(
                         height: 16,
                         width: 1,
-                        color: theme.colorScheme.onBackground.withAlpha(31),
+                        color: theme.colorScheme.onSurface.withAlpha(31),
                       ),
                     if (isWidescreen)
                       const SizedBox(

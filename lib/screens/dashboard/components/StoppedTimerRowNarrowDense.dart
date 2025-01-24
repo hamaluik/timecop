@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -26,7 +24,7 @@ import 'package:timecop/screens/dashboard/components/TimerDenseTrailing.dart';
 import 'package:timecop/screens/timer/TimerEditor.dart';
 import 'package:timecop/themes.dart';
 
-import 'package:timecop/timer_utils.dart';
+import 'package:timecop/utils/timer_utils.dart';
 
 class StoppedTimerRowNarrowDense extends StatelessWidget {
   final TimerEntry timer;
@@ -54,6 +52,7 @@ class StoppedTimerRowNarrowDense extends StatelessWidget {
       fontFeatures: const [FontFeature.tabularFigures()],
     );
     final timeFormat = intl.DateFormat.jm();
+    final duration = timer.endTime!.difference(timer.startTime);
 
     return Slidable(
       startActionPane: ActionPane(
@@ -99,7 +98,16 @@ class StoppedTimerRowNarrowDense extends StatelessWidget {
                           style: timeSpanStyle,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.right,
-                        ))
+                        )),
+                        if (duration.inDays > 0)
+                          Transform.translate(
+                            offset: const Offset(2, -4),
+                            child: Text(
+                              "+${duration.inDays}",
+                              textScaler: const TextScaler.linear(0.8),
+                              style: timeSpanStyle,
+                            ),
+                          )
                       ],
                     )
                   ])),

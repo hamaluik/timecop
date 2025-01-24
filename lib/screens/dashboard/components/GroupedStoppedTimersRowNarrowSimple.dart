@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -24,7 +22,7 @@ import 'package:timecop/l10n.dart';
 import 'package:timecop/models/timer_entry.dart';
 import 'package:timecop/screens/dashboard/components/StoppedTimerRow.dart';
 
-import 'package:timecop/timer_utils.dart';
+import 'package:timecop/utils/timer_utils.dart';
 
 class GroupedStoppedTimersRowNarrowSimple extends StatefulWidget {
   final List<TimerEntry> timers;
@@ -120,7 +118,7 @@ class _GroupedStoppedTimersRowNarrowSimpleState
                 const SizedBox(width: 4),
                 Text(TimerEntry.formatDuration(widget.totalDuration),
                     style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.colorScheme.onBackground,
+                      color: theme.colorScheme.onSurface,
                       fontFeatures: const [FontFeature.tabularFigures()],
                     )),
                 if (_isHovering && !_expanded) const SizedBox(width: 4),

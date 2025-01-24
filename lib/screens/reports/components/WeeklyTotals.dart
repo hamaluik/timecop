@@ -162,6 +162,7 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                       )),
                       bottomTitles: AxisTitles(
                         sideTitles: SideTitles(
+                            reservedSize: 35,
                             showTitles: true,
                             getTitlesWidget: (double dweek, _) {
                               int week = dweek.toInt();

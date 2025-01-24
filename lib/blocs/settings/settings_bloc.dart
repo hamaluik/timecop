@@ -73,6 +73,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
               state.showRunningTimersAsNotifications;
       bool showProjectNames =
           settings.getBool("showProjectNames") ?? state.showProjectNames;
+      bool nagAboutMissingTimer =
+          settings.getBool("nagAboutMissingTimer") ?? state.nagAboutMissingTimer;
       emit(SettingsState(
         exportGroupTimers: exportGroupTimers,
         exportIncludeDate: exportIncludeDate,
@@ -93,6 +95,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         hasAskedNotificationPermissions: hasAskedNotificationPermissions,
         showRunningTimersAsNotifications: showRunningTimersAsNotifications,
         showProjectNames: showProjectNames,
+        nagAboutMissingTimer: nagAboutMissingTimer,
       ));
     });
 
@@ -175,6 +178,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       if (event.showProjectNames != null) {
         await settings.setBool("showProjectNames", event.showProjectNames);
       }
+      if (event.nagAboutMissingTimer != null) {
+        await settings.setBool("nagAboutMissingTimer", event.nagAboutMissingTimer);
+      }
       emit(SettingsState.clone(
         state,
         exportGroupTimers: event.exportGroupTimers,
@@ -185,6 +191,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         exportIncludeStartTime: event.exportIncludeStartTime,
         exportIncludeEndTime: event.exportIncludeEndTime,
         exportIncludeDurationHours: event.exportIncludeDurationHours,
+        exportIncludeNotes: event.exportIncludeNotes,
         groupTimers: event.groupTimers,
         collapseDays: event.collapseDays,
         autocompleteDescription: event.autocompleteDescription,
@@ -195,6 +202,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         showRunningTimersAsNotifications:
             event.showRunningTimersAsNotifications,
         showProjectNames: event.showProjectNames,
+        nagAboutMissingTimer: event.nagAboutMissingTimer,
       ));
     });
 
@@ -219,9 +227,13 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       DateTime date = DateTime.now();
       return date.subtract(Duration(days: date.weekday - dayOfWeek));
     } else if (state.defaultFilterDays > 0) {
-      return DateTime.now().subtract(const Duration(days: 30));
+      return DateTime.now().subtract(Duration(days: state.defaultFilterDays));
     } else {
       return null;
     }
+  }
+
+  int getDefaultFilterDays() {
+    return state.defaultFilterDays < 0 ? 30 : state.defaultFilterDays;
   }
 }

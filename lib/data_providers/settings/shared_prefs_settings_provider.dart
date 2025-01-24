@@ -44,7 +44,7 @@ class SharedPrefsSettingsProvider extends SettingsProvider {
   @override
   ThemeType getTheme() {
     String? t = _prefs.getString("theme");
-    return themeFromString(t);
+    return ThemeType.fromString(t);
   }
 
   @override

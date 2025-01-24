@@ -73,6 +73,7 @@ abstract class L10NProvider {
   String get options;
   String get groupTimers;
   String get showProjectNames;
+  String get nagAboutMissingTimer;
   String get columns;
   String get date;
   String get combinedProjectDescription;
@@ -114,6 +115,16 @@ abstract class L10NProvider {
   String get noItemsFound;
   String get notificationPermissionRequired;
   String get notificationPermissionDialogBody;
+  String get thisWeek;
+  String get thisMonth;
+  String get lastMonth;
+  String lastXDays(int days);
+  String plusXDays(int days);
+  String get exportPDF;
+  String get summaryReport;
+  String get dateRange;
+  String get totalHours;
+  String get timetable;
   String filterFrom(String dateFrom);
   String filterUntil(String dateUntil);
   String filterFromUntil(String dateFrom, String dateUntil);

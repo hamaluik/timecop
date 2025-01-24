@@ -34,7 +34,7 @@ class ProjectTag extends StatelessWidget {
         style: theme.textTheme.bodyMedium?.copyWith(
             color: project == null
                 ? ThemeUtil.getOnBackgroundLighter(context)
-                : theme.colorScheme.onBackground),
+                : theme.colorScheme.onSurface),
       )
     ]);
   }
