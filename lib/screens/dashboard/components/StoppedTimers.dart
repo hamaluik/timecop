@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import 'dart:collection';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -139,7 +138,7 @@ class _DayGroupingRows extends StatelessWidget {
                       Container(
                         height: 16,
                         width: 1,
-                        color: theme.colorScheme.onBackground.withAlpha(31),
+                        color: theme.colorScheme.onSurface.withAlpha(31),
                       ),
                     if (isWidescreen)
                       const SizedBox(

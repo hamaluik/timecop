@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:timecop/blocs/timers/bloc.dart';
@@ -54,7 +52,7 @@ class RunningTimers extends StatelessWidget {
 
             return Material(
               elevation: 4,
-              color: theme.colorScheme.surfaceVariant,
+              color: theme.colorScheme.surfaceContainerHighest,
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.min,
@@ -90,7 +88,7 @@ class RunningTimers extends StatelessWidget {
                         data: Theme.of(context).copyWith(
                             scrollbarTheme: ScrollbarThemeData(
                                 thumbVisibility:
-                                    MaterialStateProperty.all<bool>(true))),
+                                    WidgetStateProperty.all<bool>(true))),
                         child: ConstrainedBox(
                           constraints: BoxConstraints(
                               maxHeight: MediaQuery.sizeOf(context).height / 4),

@@ -114,7 +114,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                     ? SwiperControl(
                         iconPrevious: Icons.arrow_back_ios_new,
                         iconNext: Icons.arrow_forward_ios,
-                        color: Theme.of(context).colorScheme.onBackground)
+                        color: Theme.of(context).colorScheme.onSurface)
                     : null,
               ),
             ),

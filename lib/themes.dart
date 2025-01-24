@@ -29,11 +29,9 @@ class ThemeUtil {
   static final lightColors = ColorScheme.light(
       primary: Colors.cyan.shade600,
       onPrimary: Colors.white,
-      background: Colors.white,
-      onBackground: Colors.black87,
       surface: Colors.grey.shade50,
       onSurface: Colors.black87,
-      surfaceVariant: Colors.blueGrey.shade50,
+      surfaceContainerHighest: Colors.blueGrey.shade50,
       onSurfaceVariant: Colors.black87,
       error: Colors.red,
       onError: Colors.white);
@@ -41,11 +39,9 @@ class ThemeUtil {
   static final darkColors = ColorScheme.dark(
       primary: Colors.cyan.shade600,
       onPrimary: Colors.white,
-      background: Colors.grey.shade800,
-      onBackground: Colors.white,
       surface: Colors.grey.shade900,
       onSurface: Colors.white,
-      surfaceVariant: const Color(0xFF303030),
+      surfaceContainerHighest: const Color(0xFF303030),
       onSurfaceVariant: Colors.white,
       error: Colors.red,
       onError: Colors.white);
@@ -53,11 +49,9 @@ class ThemeUtil {
   static final _blackColors = ColorScheme.dark(
       primary: Colors.cyan.shade600,
       onPrimary: Colors.white,
-      background: Colors.black,
-      onBackground: Colors.white,
       surface: Colors.black,
       onSurface: Colors.white,
-      surfaceVariant: Colors.grey.shade900,
+      surfaceContainerHighest: Colors.grey.shade900,
       onSurfaceVariant: Colors.white,
       error: Colors.red,
       onError: Colors.white);
@@ -88,7 +82,7 @@ class ThemeUtil {
       appBarScrolledUnderElevation: 4);
 
   static Color getOnBackgroundLighter(BuildContext context) =>
-      Theme.of(context).colorScheme.onBackground.withOpacity(0.62);
+      Theme.of(context).colorScheme.onSurface.withOpacity(0.62);
 
   static ThemeData getThemeFromColors(
           {required Brightness brightness,
@@ -103,7 +97,7 @@ class ThemeUtil {
           brightness: brightness,
           pageTransitionsTheme: _pageTransitionsTheme,
           primarySwatch: primarySwatch,
-          scaffoldBackgroundColor: colors.background,
+          scaffoldBackgroundColor: colors.surface,
           appBarTheme: AppBarTheme(
               centerTitle: !Platform.isAndroid,
               elevation: appBarElevation,
@@ -119,13 +113,13 @@ class ThemeUtil {
           expansionTileTheme: ExpansionTileThemeData(
               collapsedBackgroundColor: Colors.transparent,
               backgroundColor: Colors.transparent,
-              collapsedTextColor: colors.onBackground,
+              collapsedTextColor: colors.onSurface,
               textColor: colors.onSurface,
               iconColor: colors.onSurfaceVariant,
               collapsedIconColor: colors.onSurfaceVariant),
-          dividerColor: colors.onBackground.withAlpha(31),
+          dividerColor: colors.onSurface.withAlpha(31),
           dividerTheme:
-              DividerThemeData(color: colors.onBackground.withAlpha(31)),
+              DividerThemeData(color: colors.onSurface.withAlpha(31)),
           floatingActionButtonTheme: FloatingActionButtonThemeData(
               shape: const StadiumBorder(),
               backgroundColor: colors.primary,
@@ -135,30 +129,30 @@ class ThemeUtil {
           textSelectionTheme:
               TextSelectionThemeData(cursorColor: colors.primary),
           switchTheme: SwitchThemeData(
-              thumbColor: MaterialStateProperty.resolveWith<Color?>((states) =>
-                  (!states.contains(MaterialState.disabled) && states.contains(MaterialState.selected))
+              thumbColor: WidgetStateProperty.resolveWith<Color?>((states) =>
+                  (!states.contains(WidgetState.disabled) && states.contains(WidgetState.selected))
                       ? colors.primary
                       : null),
-              trackColor: MaterialStateProperty.resolveWith<Color?>((states) =>
-                  (!states.contains(MaterialState.disabled) && states.contains(MaterialState.selected))
+              trackColor: WidgetStateProperty.resolveWith<Color?>((states) =>
+                  (!states.contains(WidgetState.disabled) && states.contains(WidgetState.selected))
                       ? colors.primary.withAlpha(80)
                       : null)),
           radioTheme: RadioThemeData(
-            fillColor: MaterialStateProperty.resolveWith<Color?>((states) =>
-                (!states.contains(MaterialState.disabled) &&
-                        states.contains(MaterialState.selected))
+            fillColor: WidgetStateProperty.resolveWith<Color?>((states) =>
+                (!states.contains(WidgetState.disabled) &&
+                        states.contains(WidgetState.selected))
                     ? colors.primary
                     : null),
           ),
           checkboxTheme: CheckboxThemeData(
-            fillColor: MaterialStateProperty.resolveWith<Color?>((states) =>
-                (!states.contains(MaterialState.disabled) &&
-                        states.contains(MaterialState.selected))
+            fillColor: WidgetStateProperty.resolveWith<Color?>((states) =>
+                (!states.contains(WidgetState.disabled) &&
+                        states.contains(WidgetState.selected))
                     ? colors.primary
                     : null),
-            checkColor: MaterialStateProperty.resolveWith<Color?>((states) =>
-                (!states.contains(MaterialState.disabled) &&
-                        states.contains(MaterialState.selected))
+            checkColor: WidgetStateProperty.resolveWith<Color?>((states) =>
+                (!states.contains(WidgetState.disabled) &&
+                        states.contains(WidgetState.selected))
                     ? colors.onPrimary
                     : null),
           ));
