@@ -168,10 +168,10 @@ class _WeeklyTotalsState extends State<WeeklyTotals> {
                               int week = dweek.toInt();
                               DateTime date =
                                   firstDate!.add(Duration(days: week * 7));
-                              return Padding(
-                                padding: const EdgeInsets.all(2.0),
+                              return Container(
+                                padding: const EdgeInsets.only(top: 5),
                                 child: Text(
-                                  dateFormat.format(date).replaceAll(' ', '\n'),
+                                  dateFormat.format(date),
                                   style: theme.textTheme.bodySmall,
                                 ),
                               );
