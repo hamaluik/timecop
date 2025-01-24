@@ -258,6 +258,29 @@ class SettingsScreen extends StatelessWidget {
                 activeColor: Theme.of(context).colorScheme.primary,
               ),
             ),
+            BlocBuilder<SettingsBloc, SettingsState>(
+              bloc: settingsBloc,
+              builder: (BuildContext context, SettingsState settings) =>
+                  SwitchListTile.adaptive(
+                title:
+                    Text(L10N.of(context).tr.nagAboutMissingTimer),
+                value: settings.nagAboutMissingTimer,
+                // value: _switchValue,
+
+                onChanged: (bool value) {
+                  if (value) {
+                    BlocProvider.of<NotificationsBloc>(context)
+                        .add(const RequestNotificationPermissions());
+                    if (Platform.isAndroid) {
+                      requestAndroidNotificationPermission(context);
+                    }
+                  }
+                  settingsBloc.add(SetBoolValueEvent(
+                      nagAboutMissingTimer: value));
+                },
+                activeColor: Theme.of(context).colorScheme.primary,
+              ),
+            ),
           ],
         ));
   }

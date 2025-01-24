@@ -34,6 +34,7 @@ class SettingsState extends Equatable {
   final bool hasAskedNotificationPermissions;
   final bool showRunningTimersAsNotifications;
   final bool showProjectNames;
+  final bool nagAboutMissingTimer;
 
   const SettingsState({
     required this.exportGroupTimers,
@@ -55,6 +56,7 @@ class SettingsState extends Equatable {
     required this.hasAskedNotificationPermissions,
     required this.showRunningTimersAsNotifications,
     required this.showProjectNames,
+    required this.nagAboutMissingTimer,
   });
 
   static SettingsState initial() {
@@ -78,6 +80,7 @@ class SettingsState extends Equatable {
       hasAskedNotificationPermissions: false,
       showRunningTimersAsNotifications: false,
       showProjectNames: false,
+      nagAboutMissingTimer: false,
     );
   }
 
@@ -102,6 +105,7 @@ class SettingsState extends Equatable {
     bool? hasAskedNotificationPermissions,
     bool? showRunningTimersAsNotifications,
     bool? showProjectNames,
+    bool? nagAboutMissingTimer,
   }) : this(
           exportGroupTimers: exportGroupTimers ?? settings.exportGroupTimers,
           exportIncludeDate: exportIncludeDate ?? settings.exportIncludeDate,
@@ -132,6 +136,7 @@ class SettingsState extends Equatable {
           showRunningTimersAsNotifications: showRunningTimersAsNotifications ??
               settings.showRunningTimersAsNotifications,
           showProjectNames: showProjectNames ?? settings.showProjectNames,
+          nagAboutMissingTimer: nagAboutMissingTimer ?? settings.nagAboutMissingTimer,
         );
 
   @override
@@ -155,5 +160,6 @@ class SettingsState extends Equatable {
         hasAskedNotificationPermissions,
         showRunningTimersAsNotifications,
         showProjectNames,
+        nagAboutMissingTimer,
       ];
 }

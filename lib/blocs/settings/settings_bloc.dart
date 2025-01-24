@@ -73,6 +73,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
               state.showRunningTimersAsNotifications;
       bool showProjectNames =
           settings.getBool("showProjectNames") ?? state.showProjectNames;
+      bool nagAboutMissingTimer =
+          settings.getBool("nagAboutMissingTimer") ?? state.nagAboutMissingTimer;
       emit(SettingsState(
         exportGroupTimers: exportGroupTimers,
         exportIncludeDate: exportIncludeDate,
@@ -93,6 +95,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         hasAskedNotificationPermissions: hasAskedNotificationPermissions,
         showRunningTimersAsNotifications: showRunningTimersAsNotifications,
         showProjectNames: showProjectNames,
+        nagAboutMissingTimer: nagAboutMissingTimer,
       ));
     });
 
@@ -175,6 +178,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       if (event.showProjectNames != null) {
         await settings.setBool("showProjectNames", event.showProjectNames);
       }
+      if (event.nagAboutMissingTimer != null) {
+        await settings.setBool("nagAboutMissingTimer", event.nagAboutMissingTimer);
+      }
       emit(SettingsState.clone(
         state,
         exportGroupTimers: event.exportGroupTimers,
@@ -196,6 +202,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         showRunningTimersAsNotifications:
             event.showRunningTimersAsNotifications,
         showProjectNames: event.showProjectNames,
+        nagAboutMissingTimer: event.nagAboutMissingTimer,
       ));
     });
 

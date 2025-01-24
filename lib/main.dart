@@ -86,7 +86,7 @@ Future<void> runMain(SettingsProvider settings, DataProvider data,
         create: (_) => SettingsBloc(settings, data),
       ),
       BlocProvider<TimersBloc>(
-        create: (_) => TimersBloc(data, settings),
+        create: (_) => TimersBloc(data, settings, notifications),
       ),
       BlocProvider<ProjectsBloc>(
         create: (_) => ProjectsBloc(data),

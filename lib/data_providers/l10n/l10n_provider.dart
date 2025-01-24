@@ -73,6 +73,7 @@ abstract class L10NProvider {
   String get options;
   String get groupTimers;
   String get showProjectNames;
+  String get nagAboutMissingTimer;
   String get columns;
   String get date;
   String get combinedProjectDescription;
