@@ -158,3 +158,4 @@ timetable = Orario
 thisMonth = Questo mese
 exportPDF = Al PDF
 lastMonth = Ultimo mese
+nagAboutMissingTimer = Ricorda di avviare un timer quando non ce n'è nessuno in esecuzione
