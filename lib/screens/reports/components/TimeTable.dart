@@ -86,7 +86,11 @@ class TimeTable extends StatelessWidget {
           Divider(
               thickness: 2.0,
               color: Theme.of(context).textTheme.bodyMedium!.color),
-        ].followedBy(projectHours.entries.map((MapEntry<int?, double> entry) {
+        ].followedBy(projectHours.entries
+              .toList()
+              .sorted(
+                  (entry1, entry2) => entry2.value.compareTo(entry1.value))
+              .map((MapEntry<int?, double> entry) {
           Project? project = projects.state.projects
               .firstWhereOrNull((project) => project.id == entry.key);
           return Padding(
