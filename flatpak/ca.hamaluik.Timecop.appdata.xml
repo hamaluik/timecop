@@ -70,4 +70,9 @@
 	<content_rating type="oars-1.1" />
 
 	<launchable type="desktop-id">ca.hamaluik.Timecop.desktop</launchable>
+	<keywords>
+		<keyword>time tracking</keyword>
+		<keyword>productivity tool</keyword>
+		<keyword>offline time tracker</keyword>
+	</keywords>
 </component>
