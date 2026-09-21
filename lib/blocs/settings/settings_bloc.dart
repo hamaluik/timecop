@@ -222,12 +222,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     });
   }
   DateTime? getFilterStartDate() {
+    // Truncate date to start of day so every entries are pulled when filtering
+    DateTime now = DateTime.now().copyWith(hour: 0, minute: 0, second: 0)
     if (state.defaultFilterStartDateToMonday) {
-      var dayOfWeek = 1; // Monday=1, Tuesday=2...
-      DateTime date = DateTime.now();
-      return date.subtract(Duration(days: date.weekday - dayOfWeek));
+      return now.subtract(Duration(days: date.weekday - DateTime.monday));
     } else if (state.defaultFilterDays > 0) {
-      return DateTime.now().subtract(Duration(days: state.defaultFilterDays));
+      return now.subtract(Duration(days: state.defaultFilterDays));
     } else {
       return null;
     }
