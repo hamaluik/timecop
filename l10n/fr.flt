@@ -110,3 +110,4 @@ totalHours = Total des heures :
 timetable = Horaires
 plusXDays = (+ { $days } j.)
 darkMaterialYou = Couleurs système - foncé
+nagAboutMissingTimer = Rappeler de démarrer un minuteur lorsqu’aucun n’est en cours d’exécution
