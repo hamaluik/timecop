@@ -55,7 +55,7 @@ class StoppedTimerRowWide extends StatelessWidget {
     );
     final project =
         BlocProvider.of<ProjectsBloc>(context).getProjectByID(timer.projectID);
-    final timeFormat = DateFormat.jm();
+    final timeFormat = DateFormat.Hm();
 
     return ListTile(
         key: Key("stoppedTimer-${timer.id}"),

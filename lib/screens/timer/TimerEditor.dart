@@ -104,7 +104,7 @@ class _TimerEditorState extends State<TimerEditor> {
   Widget build(BuildContext context) {
     final settingsBloc = BlocProvider.of<SettingsBloc>(context);
     final timers = BlocProvider.of<TimersBloc>(context);
-    final dateFormat = DateFormat.yMMMEd().add_jm();
+    final dateFormat = DateFormat.yMMMEd().add_Hm();
     final theme = Theme.of(context);
 
     return Scaffold(

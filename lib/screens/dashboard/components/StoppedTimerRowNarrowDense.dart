@@ -51,7 +51,7 @@ class StoppedTimerRowNarrowDense extends StatelessWidget {
       color: ThemeUtil.getOnBackgroundLighter(context),
       fontFeatures: const [FontFeature.tabularFigures()],
     );
-    final timeFormat = intl.DateFormat.jm();
+    final timeFormat = intl.DateFormat.Hm();
     final duration = timer.endTime!.difference(timer.startTime);
 
     return Slidable(

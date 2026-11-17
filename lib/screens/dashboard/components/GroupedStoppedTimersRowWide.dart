@@ -74,7 +74,7 @@ class _GroupedStoppedTimersRowWideState
     assert(widget.timers.last.endTime != null);
     final theme = Theme.of(context);
 
-    final timeFormat = DateFormat.jm();
+    final timeFormat = DateFormat.Hm();
     final timeSpanStyle = theme.textTheme.bodyMedium?.copyWith(
       color: ThemeUtil.getOnBackgroundLighter(context),
       fontFeatures: const [FontFeature.tabularFigures()],
