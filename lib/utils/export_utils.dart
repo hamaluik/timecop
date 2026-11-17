@@ -156,7 +156,7 @@ class ExportUtils {
       }
       if (settingsBloc.state.exportIncludeStartTime) {
         if (compactStartEndTimes) {
-          row.add(DateFormat.jm().format(timer.startTime.toUtc()));
+          row.add(DateFormat.Hm().format(timer.startTime.toUtc()));
         } else {
           row.add(timer.startTime.toUtc().toIso8601String());
         }
@@ -168,7 +168,7 @@ class ExportUtils {
               ? " ${L10N.of(context).tr.plusXDays(duration.inDays)}"
               : "";
           row.add(
-              DateFormat.jm().format(timer.endTime!.toUtc()) + dayIndicator);
+              DateFormat.Hm().format(timer.endTime!.toUtc()) + dayIndicator);
         } else {
           row.add(timer.endTime!.toUtc().toIso8601String());
         }
